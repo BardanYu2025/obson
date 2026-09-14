@@ -1,14 +1,13 @@
 #!/bin/bash
 # AutoDL 一键夜盘信号：增量补内盘K线 → 补外盘日线 → 同步 → GPU出信号
-# 前置：tqsdk 已 pip 安装；模型默认 models/best.pt，
+# 前置：tqsdk 已 pip 安装；模型默认冠军 E3 v1.1 双种子集成（checkpoints/e3v11_s42+s7），
 #       可用 CKPT 环境变量覆盖（支持逗号分隔多种子集成）
 # 用法: ./night_signal_autodl.sh [品种...]   默认 rb sr p
-#       CKPT=checkpoints/q90_softfix_s42/best.pt,checkpoints/q90_softfix_s7/best.pt ./night_signal_autodl.sh
 # 注意：内盘增量只补指定品种；外盘更新是全局的（棕榈/铁矿/银），与品种参数无关
 set -e
 cd "$(dirname "$0")"
 SYMS=${@:-"rb sr p"}
-CKPT=${CKPT:-models/best.pt}
+CKPT=${CKPT:-checkpoints/e3v11_s42/best.pt,checkpoints/e3v11_s7/best.pt}
 # 天勤账号从环境变量读，不写进仓库：export TQ_USER=xxx TQ_PASS=yyy
 : "${TQ_USER:?请先 export TQ_USER=你的天勤账号}"
 : "${TQ_PASS:?请先 export TQ_PASS=你的天勤密码}"

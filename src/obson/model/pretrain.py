@@ -254,3 +254,123 @@ class PretrainTrainer:
         print(f"\n已保存预训练 encoder: {out}")
         print("下一步：probe 门禁（label/path/symbol）通过后再微调；投影头不进微调。")
         return losses
+
+
+# ────────────────────────────────────────────────────────────
+# E7-B：自回归预训练（用前 t 根 bar 预测第 t+1 根）
+# 动机：E7-aug0 对比学习失败（probe 判决 2026-09-14：pretrained 0.350 < random 0.385，
+# 噪声不变性把方向信号当噪声抹掉）。AR 任务与最终"预测未来路径"同源。
+# 目标：位置 t 的表示 → log(x_{t+1} / close_t)（OHLC 4 通道，按窗口波动缩放）。
+# 硬约束：主干必须 causal（bidirectional=True 会未来泄露，直接拒绝运行）。
+# ────────────────────────────────────────────────────────────
+
+
+def ar_next_bar_targets(raw: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+    """raw: [B,S,C] 原始 OHLC(+量/仓)。返回 (target, sigma)：
+    target[B,S-1,4] = log(x_{t+1} / close_t) / σ_w（每窗口每通道归一），
+    sigma[B,1,4] 用于把预测还原成未缩放收益（算方向准确率）。"""
+    n_price = min(4, raw.shape[2])
+    closes = raw[:, :, 3].clamp(min=1e-8)
+    rel = torch.log(raw[:, 1:, :n_price].clamp(min=1e-8)
+                    / closes[:, :-1].unsqueeze(-1))          # [B,S-1,4]
+    sigma = rel.std(dim=1, keepdim=True).clamp(min=1e-6)
+    return rel / sigma, sigma
+
+
+class ARHead(nn.Module):
+    """自回归预测头：hidden → 4 维缩放收益。预训练后丢弃，不进微调。"""
+
+    def __init__(self, hidden: int, n_chan: int = 4):
+        super().__init__()
+        self.mlp = nn.Sequential(
+            nn.Linear(hidden, hidden), nn.SiLU(), nn.Linear(hidden, n_chan),
+        )
+
+    def forward(self, x):
+        return self.mlp(x)
+
+
+class ARPretrainTrainer:
+    """E7-B 预训练循环：全序列前向（hook 抓逐位置表示）→ AR 头 → Huber。
+    诊断指标：close 通道方向准确率（>50% 且稳定 = 存在可学结构；≈50% = 无信号）。"""
+
+    def __init__(self, model, loader, lr: float = 3e-4, weight_decay: float = 0.01,
+                 max_epochs: int = 20, device: str | None = None,
+                 save_dir: str | Path = "./checkpoints_pretrain"):
+        if getattr(model.config, "bidirectional", False):
+            raise ValueError("E7-B 自回归预训练要求 causal 主干（bidirectional=True 会未来泄露），"
+                             "请去掉 --bidirectional 再跑")
+        self.model = model
+        self.loader = loader
+        self.lr = lr
+        self.max_epochs = max_epochs
+        self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
+        self.save_dir = Path(save_dir)
+        self.save_dir.mkdir(parents=True, exist_ok=True)
+        self.model.to(self.device)
+        self.head = ARHead(model.config.hidden_size).to(self.device)
+        self.optimizer = torch.optim.AdamW(
+            list(self.model.parameters()) + list(self.head.parameters()),
+            lr=lr, weight_decay=weight_decay)
+        self._repr: torch.Tensor | None = None
+        self.model.norm.register_forward_hook(self._grab)
+
+    def _grab(self, module, inputs, output):
+        self._repr = output
+
+    def fit(self):
+        print(f"\n== E7-B 自回归预训练 | lr={self.lr} 固定 | epochs={self.max_epochs}")
+        print("诊断: dir_acc=下一根 close 方向准确率，≈50%=无信号，稳定>50%=有可学结构 ==\n")
+        losses = []
+        for epoch in range(1, self.max_epochs + 1):
+            t0 = time.time()
+            ep_loss, ep_dir, n_step = 0.0, 0.0, 0
+            for batch in self.loader:
+                x = batch["seq"].to(self.device)
+                raw = batch["raw_seq"].to(self.device)
+                kw = {}
+                for k in ("temporal_feat", "time_pos", "freq_feat", "symbol_id",
+                          "daily_ctx", "foreign_ctx", "fine_ctx", "cross_ctx", "cross_mask"):
+                    v = batch.get(k)
+                    if v is not None:
+                        kw[k] = v.to(self.device)
+                self.model(**{"kline_seq": x, **kw})
+                h = self._repr                      # [B, T, H]（T=分钟序列长度，含前缀则取尾部）
+                self._repr = None
+                h = h[:, -x.shape[1]:, :]           # 防御：只保留分钟 bar 对应位置
+                pred = self.head(h[:, :-1, :])      # 位置 t 预测 t+1
+                target, sigma = ar_next_bar_targets(raw)
+                loss = F.smooth_l1_loss(pred, target)
+                self.optimizer.zero_grad()
+                loss.backward()
+                torch.nn.utils.clip_grad_norm_(
+                    list(self.model.parameters()) + list(self.head.parameters()), 1.0)
+                self.optimizer.step()
+                # 方向诊断：close 通道（index 3），缩放不影响符号
+                with torch.no_grad():
+                    dir_hit = ((pred[:, :, 3] > 0) == (target[:, :, 3] > 0)).float().mean()
+                ep_loss += loss.item()
+                ep_dir += dir_hit.item()
+                n_step += 1
+            avg = ep_loss / max(n_step, 1)
+            avg_dir = ep_dir / max(n_step, 1)
+            losses.append(avg)
+            print(f"Epoch {epoch:3d}/{self.max_epochs} | Huber={avg:.4f} | "
+                  f"dir_acc={avg_dir:.3f} | time={time.time() - t0:.1f}s")
+            if len(losses) >= 6 and (max(losses[-6:-1]) - losses[-1]) < 0.005:
+                print(f"⏹ 损失平台期，提前停（epoch {epoch}）")
+                break
+        out = self.save_dir / "pretrain_encoder_e7b.pt"
+        torch.save({
+            "model": self.model.state_dict(),
+            "config": self.model.config,
+            "e7_manifest": {
+                "aug": "E7-B autoregressive next-bar (OHLC log-rel, σ-scaled)",
+                "lr": self.lr, "epochs_run": len(losses),
+                "final_huber": losses[-1], "loss_curve": losses,
+                "data_scope": "train split only",
+            },
+        }, out)
+        print(f"\n已保存 E7-B 预训练 encoder: {out}")
+        print("下一步：--probe-e7 对该 ckpt 跑门禁（对照：随机初始化 + 监督冠军）。")
+        return losses

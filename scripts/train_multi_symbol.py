@@ -301,6 +301,8 @@ def main() -> None:
     # E7-A 自监督预训练（协议 v3）
     ap.add_argument("--pretrain-e7", action="store_true",
                     help="只做 E7-A 双视图一致性预训练（训练段无标签窗口），不跑监督训练")
+    ap.add_argument("--pretrain-e7b", action="store_true",
+                    help="只做 E7-B 自回归预训练（预测下一根 bar，要求 causal 主干），不跑监督训练")
     ap.add_argument("--pretrain-epochs", type=int, default=20)
     ap.add_argument("--pretrain-lr", type=float, default=3e-4)
     ap.add_argument("--aug-alpha", type=float, default=0.10,
@@ -664,16 +666,16 @@ def main() -> None:
         _verdict_probe(probes)
         return
 
-    if args.pretrain_e7:
-        # E7-A（协议 v3）：训练段无标签窗口双视图一致性预训练。
-        # 只用 train_dss（训练段），val/test 不进预训练；保存后由 probe 门禁决定能否微调。
-        import numpy as _np2
+    if args.pretrain_e7 or args.pretrain_e7b:
+        # E7 预训练：只用 train_dss（训练段），val/test 不进预训练；保存后由 probe 门禁决定能否微调。
+        # E7-A = 双视图一致性（已判失败，保留作对照）；E7-B = 自回归预测下一根 bar。
         from torch.utils.data import ConcatDataset, DataLoader as _DL
-        from obson.model.pretrain import PretrainViewDataset, PretrainTrainer
+        from obson.model.pretrain import (
+            PretrainViewDataset, PretrainTrainer, ARPretrainTrainer, SeqLenBatchSampler)
 
         wrapped = []
         for key, ds in train_dss.items():
-            ds.return_raw = True  # 增强需要原始价量（raw_data 现已始终保存）
+            ds.return_raw = True  # 增强/AR目标需要原始价量（raw_data 现已始终保存）
             code = key.rsplit("_", 1)[0]
             sym_idx = list(SYMBOLS.keys()).index(code) if code in SYMBOLS else 0
             anchor_bar = ds.valid_indices + ds.seq_len - 1
@@ -682,14 +684,17 @@ def main() -> None:
             print(f"  [E7预训练] {key}: {len(ds)} 窗口（仅训练段）")
         concat = ConcatDataset(wrapped)
         seq_lens = [w.feat_sig for w in wrapped for _ in range(len(w))]
-        g = torch.Generator().manual_seed(args.seed)
-        from obson.model.pretrain import SeqLenBatchSampler
         sampler = SeqLenBatchSampler(seq_lens, args.batch_size, seed=args.seed)
         loader = _DL(concat, batch_sampler=sampler)
-        ptrainer = PretrainTrainer(
-            model, loader, lr=args.pretrain_lr, max_epochs=args.pretrain_epochs,
-            tau=args.tau, alpha=args.aug_alpha, guard_days=args.guard_days,
-            save_dir=args.save_dir)
+        if args.pretrain_e7b:
+            ptrainer = ARPretrainTrainer(
+                model, loader, lr=args.pretrain_lr, max_epochs=args.pretrain_epochs,
+                save_dir=args.save_dir)
+        else:
+            ptrainer = PretrainTrainer(
+                model, loader, lr=args.pretrain_lr, max_epochs=args.pretrain_epochs,
+                tau=args.tau, alpha=args.aug_alpha, guard_days=args.guard_days,
+                save_dir=args.save_dir)
         ptrainer.fit()
         return
 
