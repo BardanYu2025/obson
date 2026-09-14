@@ -604,6 +604,38 @@ def test_exc_loss_side_weights():
     assert drop_w > drop_p, f"加权未放大少数桶梯度: {drop_w} vs {drop_p}"
 
 
+# ── E6' 未来时间 query decoder ──────────────────────────────────
+def test_query_decoder_path_head():
+    """E6'：query decoder 形态正确、梯度贯通 encoder、与 node_emb 头输出不同"""
+    import torch
+    from obson.model.transformer import KLineConfig, KLineTransformer
+    torch.manual_seed(0)
+    B, T, F_in = 2, 30, 8
+    cfg = KLineConfig(task="classify", path_aux=True, query_decoder=True,
+                      hidden_size=64, num_hidden_layers=2, num_attention_heads=4,
+                      intermediate_size=128, kline_dim=F_in)
+    m = KLineTransformer(cfg)
+    x = torch.randn(B, T, F_in)
+    ps = torch.zeros(B, 4, dtype=torch.long); ps[0, 0] = 1
+    out = m(x)
+    assert out["path_logits"].shape == (B, 4, 3), out["path_logits"].shape
+    loss = out["path_logits"].reshape(-1, 3).softmax(-1).log().gather(
+        1, ps.reshape(-1, 1)).neg().mean()
+    loss.backward()
+    # query/cross-attn 收到梯度，且 encoder 层也收到（梯度贯通，不是断头路）
+    assert m.path_queries.grad is not None and m.path_queries.grad.abs().sum() > 0
+    assert m.layers[0].self_attn.q_proj.weight.grad is not None
+    # 与 E3 简易头同输入下输出不同（确认 decoder 真的在干活）
+    cfg2 = KLineConfig(task="classify", path_aux=True, query_decoder=False,
+                       hidden_size=64, num_hidden_layers=2, num_attention_heads=4,
+                       intermediate_size=128, kline_dim=F_in)
+    m2 = KLineTransformer(cfg2)
+    out2 = m2(x)
+    assert not torch.allclose(out["path_logits"], out2["path_logits"])
+    # 老冠军兼容：默认 query_decoder=False → 走 node_emb 头
+    assert hasattr(m2, "path_node_emb") and not hasattr(m2, "path_queries")
+
+
 if __name__ == "__main__":
     import traceback
     fns = [v for k, v in sorted(globals().items()) if k.startswith("test_")]

@@ -86,6 +86,9 @@ class KLineConfig:
                                     # （桶边 [0.25,0.5,0.8,1.0,1.5]×θ，pooled 挂两个头）
     exc_aux_weight: float = 0.1     # excursion 辅助损失权重
     exc_weights: list | None = None  # E4：逐侧类别权重 [2侧×6桶] 展平，训练集桶频率求逆
+    query_decoder: bool = False     # E6'：未来时间 query decoder —— 4 个可学习 query
+                                    # （未来25/50/75/100%时点）cross-attend 历史 encoder 输出，
+                                    # 替代 pooled+node_emb 的简易路径头；encoder 保持单向
 
     def __post_init__(self):
         if self.head_dim is None:
@@ -589,8 +592,19 @@ class KLineTransformer(nn.Module):
             # E3 路径状态辅助头：pooled 共享表示 + 节点 embedding → 4 节点 × 3 态
             # （教师模型建议：4 个节点含义不同，需要 node embedding 区分，不能共用一个裸线性层）
             if getattr(cfg, "path_aux", False):
-                self.path_node_emb = nn.Embedding(4, cfg.hidden_size)
-                self.path_head = nn.Linear(cfg.hidden_size, 3)
+                if getattr(cfg, "query_decoder", False):
+                    # E6'：未来时间 query decoder —— 4 个可学习 query 代表未来 25/50/75/100%，
+                    # cross-attend 全部历史 encoder 输出（历史皆合法，无未来泄漏），
+                    # 残差 + LayerNorm 后逐节点出 3 态；替代 pooled+node_emb 简易头
+                    self.path_queries = nn.Parameter(torch.zeros(4, cfg.hidden_size))
+                    nn.init.normal_(self.path_queries, std=0.02)
+                    self.path_cross_attn = nn.MultiheadAttention(
+                        cfg.hidden_size, cfg.num_attention_heads, batch_first=True)
+                    self.path_query_norm = nn.LayerNorm(cfg.hidden_size)
+                    self.path_head = nn.Linear(cfg.hidden_size, 3)
+                else:
+                    self.path_node_emb = nn.Embedding(4, cfg.hidden_size)
+                    self.path_head = nn.Linear(cfg.hidden_size, 3)
             # E4 excursion 分桶头：pooled → 下行/上行最大偏移各占 θ 的几分（6 桶）
             if getattr(cfg, "exc_aux", False):
                 self.exc_head_dn = nn.Linear(cfg.hidden_size, 6)
@@ -669,10 +683,17 @@ class KLineTransformer(nn.Module):
             logits = self.class_head(pooled)  # [B, 3]
             result = {"logits": logits, "pred_class": logits.argmax(dim=-1)}
             if getattr(self, "path_head", None) is not None:
-                # E3：pooled + 各节点 embedding → 逐节点 3 态 logits [B, 4, 3]
-                # （损失在 trainer 端 masked CE，-1 节点忽略）
-                h_i = pooled.unsqueeze(1) + self.path_node_emb.weight.unsqueeze(0)  # [B,4,H]
-                result["path_logits"] = self.path_head(h_i)  # [B,4,3]
+                # 损失在 trainer 端 masked CE，-1 节点忽略
+                if getattr(self.config, "query_decoder", False):
+                    # E6'：query 提取"这段历史对未来各时点的含义"
+                    q = self.path_queries.unsqueeze(0).expand(x.shape[0], -1, -1)  # [B,4,H]
+                    a, _ = self.path_cross_attn(q, x, x)  # query=未来时点, kv=历史
+                    h_i = self.path_query_norm(q + a)     # 残差 + LN
+                    result["path_logits"] = self.path_head(h_i)  # [B,4,3]
+                else:
+                    # E3：pooled + 各节点 embedding → 逐节点 3 态 logits [B, 4, 3]
+                    h_i = pooled.unsqueeze(1) + self.path_node_emb.weight.unsqueeze(0)  # [B,4,H]
+                    result["path_logits"] = self.path_head(h_i)  # [B,4,3]
             if getattr(self, "exc_head_dn", None) is not None:
                 # E4：excursion 分桶 logits，各 [B, 6]
                 result["exc_logits_dn"] = self.exc_head_dn(pooled)
