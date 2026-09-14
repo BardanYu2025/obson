@@ -84,37 +84,52 @@ def collect_reprs(model, loaders: dict, device: str, max_per_loader: int = 4000)
 
 
 def _fit_probe(Xtr, ytr, Xva, yva, seed=0, classes=(0, 1, 2)):
-    """torch 线性 probe（softmax 回归，固定预算 200 epoch full-batch）。
-    与协议一致：相同划分/预算/种子对照。"""
+    """torch 线性 probe（softmax 回归，固定预算 500 epoch full-batch）。
+    与协议一致：相同划分/预算/种子对照。
+    v2 修复：特征按训练集统计标准化（不标准化时 512 维表示尺度混乱，
+    线性 probe 不收敛，出现冠军=随机的仪器失灵）。"""
     mask_tr = np.isin(ytr, list(classes))
     mask_va = np.isin(yva, list(classes))
     if mask_tr.sum() < 50 or mask_va.sum() < 30:
         return None
+    mu = Xtr[mask_tr].mean(axis=0)
+    sd = Xtr[mask_tr].std(axis=0) + 1e-8
+    Xtr_n = (Xtr[mask_tr] - mu) / sd
+    Xva_n = (Xva[mask_va] - mu) / sd
     cls_list = sorted(set(ytr[mask_tr].tolist()))
     n_classes = len(cls_list)
     remap = {c: i for i, c in enumerate(cls_list)}
     ytr_r = np.vectorize(remap.get)(ytr[mask_tr])
     yva_r = np.vectorize(remap.get)(yva[mask_va])
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    Xt = torch.tensor(Xtr[mask_tr], dtype=torch.float32, device=device)
+    Xt = torch.tensor(Xtr_n, dtype=torch.float32, device=device)
     yt = torch.tensor(ytr_r, dtype=torch.long, device=device)
-    Xv = torch.tensor(Xva[mask_va], dtype=torch.float32, device=device)
+    Xv = torch.tensor(Xva_n, dtype=torch.float32, device=device)
     torch.manual_seed(seed)
     probe = nn.Linear(Xt.shape[1], n_classes).to(device)
-    opt = torch.optim.AdamW(probe.parameters(), lr=1e-2, weight_decay=1e-4)
-    for _ in range(200):
+    # 类别加权：90% 多数类会把不加权的 probe 压成全猜"无"（BA=0.33 地板）
+    cnt = np.bincount(ytr_r, minlength=n_classes).astype(np.float32)
+    w = torch.tensor(cnt.sum() / (n_classes * np.clip(cnt, 1, None)), device=device)
+    opt = torch.optim.AdamW(probe.parameters(), lr=3e-2, weight_decay=1e-4)
+    sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=500)
+    for _ in range(500):
         opt.zero_grad()
-        loss = nn.functional.cross_entropy(probe(Xt), yt)
+        loss = nn.functional.cross_entropy(probe(Xt), yt, weight=w)
         loss.backward()
         opt.step()
+        sched.step()
     with torch.no_grad():
         logits = probe(Xv)
         pred = logits.argmax(-1).cpu().numpy()
         ce = nn.functional.cross_entropy(logits, torch.tensor(yva_r, device=device)).item()
+        # 训练集拟合度：连训练集都拟合不了 = 优化失败（仪器检查）
+        tr_pred = probe(Xt).argmax(-1).cpu().numpy()
+        tr_ba = _balanced_acc(ytr_r, tr_pred, n_classes)
     return dict(
         bal_acc=_balanced_acc(yva_r, pred, n_classes),
         macro_f1=_macro_f1(yva_r, pred, n_classes),
         ce=float(ce),
+        train_ba=tr_ba,
         n_val=int(mask_va.sum()),
     )
 
@@ -147,10 +162,12 @@ def run_probes(reprs: dict, tag: str, seed: int = 0):
     lab = [v["label"]["bal_acc"] for v in results.values() if v["label"]]
     f1 = [v["label"]["macro_f1"] for v in results.values() if v["label"]]
     ce = [v["label"]["ce"] for v in results.values() if v["label"]]
+    trba = [v["label"]["train_ba"] for v in results.values() if v["label"]]
     path = [v["path"]["bal_acc"] for v in results.values() if v["path"]]
     sym = [v["symbol"]["bal_acc"] for v in results.values() if v["symbol"]]
     print(f"\n── probe [{tag}] (seed={seed}) ──")
-    print(f"  label : BA={np.mean(lab):.4f}  macroF1={np.mean(f1):.4f}  CE={np.mean(ce):.4f}")
+    print(f"  label : BA={np.mean(lab):.4f}  macroF1={np.mean(f1):.4f}  CE={np.mean(ce):.4f}"
+          f"  (训练集BA={np.mean(trba):.3f}，≈0.33=优化失败仪器警报)")
     if path:
         print(f"  path  : BA={np.mean(path):.4f}")
     if sym:

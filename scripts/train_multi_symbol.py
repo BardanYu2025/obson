@@ -248,6 +248,9 @@ def _verdict_probe(probes: dict) -> None:
     print(f"  label probe: pretrained={pre:.4f} vs random={rnd:.4f} → Δ={diff:+.4f}")
     if champ is not None:
         print(f"  监督冠军参考: {champ:.4f}")
+        if champ - rnd < 0.02:
+            print("  🚨 仪器警报：监督冠军 vs 随机 < 2%，标签信息可能根本不可线性读出")
+            print("     → 本次 probe 判决无效，不得据此判 E7 表示失败")
     if sym is not None:
         print(f"  symbol probe: {sym:.4f}" +
               ("（偏高，留意品种身份挤占）" if sym > 0.9 and diff <= 0 else ""))
