@@ -46,8 +46,11 @@ export TQ_USER=<天勤账号> TQ_PASS=<天勤密码>
 ```
 q90_softfix → contract → contractfix → E3 v1 → E3 v1.1（现役）
 → E4 excursion ❌弃案（与主任务语义冲突，成本加倍转负）
-→ E5 双向 encoder（进行中）
+→ E5 双向 encoder ❌弃案（生产口径 -11.40%，双向二次死刑）
+→ E6' 未来时间 query decoder（进行中；双向已弃，query 嫁接单向 encoder）
 ```
+
+下阶段方向：E7 自监督对比预训练（分钟窗口 ↔ 日K/外盘双视图，CLIP 式，攻击信息量天花板）。
 
 纪律：一次一变量；选模只看验证 mean_edge；判决看生产口径
 （单仓 v2 / 成本加倍 / p 品种 / 信号不塌缩）；改动前先固化冠军档案。

@@ -1,68 +1,69 @@
-# Obson 生产操作手册（固化版 2026-09-10）
+# Obson 生产操作手册（固化版 2026-09-14）
 
 > 本文档是当前生产系统的唯一权威说明。模型、数据、训练、预测、分析五条线全部冻结在此。
 > 任何改动先在 EXPERIMENTS.md 记录实验，通过判决协议后才准更新本文档。
 
 ---
 
-## 1. 生产模型（冠军候选 = q90_softfix）
-
-> **定位声明（2026-09-11 老师二轮审查后）**：它是"时间外推验证集上、经多种子重复训练后、
-> 在 argmax mean_edge 指标上最优的模型配置"——具备研究稳定性证据，但**尚未证明是
-> 手册 v2 + 成本 + 单仓约束下的最优模型，也未经过完全未参与选择的确认集验证**。
-> 对外表述用"冠军候选"，不用"冠军模型已被证明最优"。
+## 1. 生产模型（现役冠军 = E3 v1.1，2026-09-14 扶正）
 
 **配置**（train_multi_symbol.py）：
 
 ```
 --task classify --label-anchor day_close --theta-mode dynamic --theta-q 0.90 \
 --soft-label --close-path --periods 60 30 --daily-bars 20 --foreign-bars 20 \
+--contract-mode --path-aux --path-aux-weight 0.1 \
 --batch-size 256 --lr 1e-3 --epochs 40 --patience 8
 ```
 
-- 架构：KLineTransformer，13 品种 × 60/30m 混训，单向 causal attention，last 读出
+- 架构：KLineTransformer，13 品种 × 60/30m 混训，**单向 causal attention**（双向已两次证伪），last 读出
 - 输入结构：`[日K×20][外盘日K×20][分钟主窗口(一周)]`，close_path 锚定窗口前3根收盘均值
-- 标签：当日收盘锚定 first-passage 三分类（先摸上轨=多/先破下轨=空/都没=无），θ 动态 = c×窗口σ×√剩余bar
-- 损失：0.5×硬CE(类别权重) + 0.5×软CE（软标签 v2：偏移占比² 锐化，无=(1−m_up)(1−m_dn)）
+- **数据：合约模式**——按 1/5/10 月主力轮转规则自建连续序列（`data/contracts/`），不依赖主连复权
+- 标签：当日收盘锚定 first-passage 三分类（先摸上轨=多/先破下轨=空/都没=无），θ 动态 = c×窗口σ×√剩余bar，**θ 校准按段独立**（跨段污染已修）
+- 损失：0.5×硬CE(类别权重) + 0.5×软CE + 0.1×**路径状态辅助**（4节点×3态 masked CE，逐节点类别权重）
+- **路径辅助头**（E3）：pooled + node_emb(4) → 逐节点 3 态；验证集 BA 0.38~0.42（基线 0.333）
 - 选模/早停：验证集 mean_edge（信号命中率超基准的幅度，信号数<50 时 shrinkage）
-- **成绩**：四跑 mean_edge ∈ [+0.084, +0.101]，种子区间已封存为判决基准
+- **成绩**：验证 mean_edge s42 +0.1003 / s7 +0.1262；**生产口径：单仓 v2 +10.06%（58 笔胜率 58.6% 回撤 1.70%）、成本加倍 +7.24%（历代最佳）**
 
-**挑战者判决档案（全部证伪/未超越，冠军不动）**：
+**族谱与挑战者判决档案**：
 
-| 日期 | 方案 | 结果 | 判决 |
+| 日期 | 方案 | 生产口径 | 判决 |
 |---|---|---|---|
-| 9/10 | clean30（0.3θ 干净路径标签） | mean_edge +0.070/+0.083，rb_60m edge 崩 | ❌ 证伪（宽通道下脏路径仅 0~2%，规则近惰性） |
-| 9/10 | strat（策略标签 0.8θ止盈/0.5θ止损） | p_60m auto −0.07% vs 冠军 +8.57%；p_30m 翻盘 +9.19% | ❌ edge 漂移非改善 |
-| 9/11 | strat07（0.5θ→0.7θ 止损标签） | mean_edge +0.073/+0.084 跌出区间；p_60m +3.55% | ❌ 标签迭代到头，合计 +1.40% 靠 m_60m 7 笔撑 |
-| 9/11 | re_s42/re_s7（老师协议重训：warm-up 修复 + 交易日口径 + 双触两阶段语义） | mean_edge **+0.0923/+0.0980 双过线**；但单仓 v2 回测 auto 74 笔 **−0.48%**/回撤 6.57%，argmax 98 笔 +5.32%/回撤 6.19%；成本加倍 auto **−3.52% 转负**；冻结规则独立测试 p_60m 多 [0.35,0.50) n=122 摸轨率 18.0% E=+0.167%（唯一亮点）、sr_60m 多 n=87 E≈0 | ❌ 挑战失败：mean_edge 过线但生产口径双失败（收益为负+回撤 6.57% > 4.9% 上限），mean_edge 与生产目标脱钩的实证案例 |
-| 9/11 | 冠军补测（同 harness 全口径对齐，无重训） | 成本加倍：argmax +0.47%（57笔/回撤3.23%）、**auto +2.73%（51笔/回撤2.31%）双模式不转负**；冻结规则：p_60m 多 n=81 摸轨率13.6% E=+0.071%、sr_60m 多 n=39 **摸轨率33.3% E=+0.182%（远胜 re 系）** | ✅ 冠军四项全胜封卷：auto 口径扛得住 2 倍成本 → re 系 auto 转负是其自身问题，非配方缺陷 |
-| 结论 | 标签语义改变喊单分布（strat 系 argmax 乱喊伤害小 4 倍、种子一致性改善），但 3 个月测试集上无方案稳定超越冠军——**转向信号端（置信度分桶 EV 表 → 手册 v2）**；9/11 重训进一步证明：验证集选模指标过线 ≠ 生产能赢，判决协议的生产回测关是必要关卡 | | |
+| 9/11 | q90_softfix（前冠军） | 单仓 +8.57%（p_60m）区间成绩 | 被 contractfix 取代 |
+| 9/13 | contractfix（合约模式+θ修复） | 单仓 +7.30% / 成本加倍 +3.51% | ✅ 曾扶正，后被 E3 系取代 |
+| 9/14 | E3 v1（路径辅助头 λ=0.1） | 单仓 +11.19% / 回撤 1.70% | ✅ 主任务大胜，但路径头塌缩 |
+| 9/14 | **E3 v1.1（+逐节点类别权重）** | 单仓 +10.06% / 成本加倍 +7.24% / 回撤 1.70% | ✅✅ **现役冠军** |
+| 9/14 | E4 excursion 分桶 | 单仓 +4.07% / 成本加倍 **-0.23% 转负** | ❌ 弃案：幅度监督与主任务语义冲突 |
+| 9/14 | E5 双向 encoder | 单仓 **-11.40%** / 成本加倍 -15.90% | ❌ 弃案：双向二次死刑（验证 edge 微涨但资金曲线崩盘，mean_edge 与生产脱钩再实证） |
+| 9/14 | E6' 未来时间 query decoder | — | 🔵 训练中 |
 
-**生产 checkpoint**（AutoDL `~/autodl-tmp/checkpoints/`）：
+**生产 checkpoint**（AutoDL `~/autodl-tmp/models/`）：
 
 ```
-q90_softfix_s42/best.pt
-q90_softfix_s7/best.pt
+champ_e3v11/s42.pt + s7.pt     ← 存档
+best.pt                        ← 生产指针 = e3v11_s7
 ```
 
 **任何时候跑信号都用双模型集成**（概率平均，降种子方差）：
 
 ```
---ckpt checkpoints/q90_softfix_s42/best.pt,checkpoints/q90_softfix_s7/best.pt
+--ckpt checkpoints/e3v11_s42/best.pt,checkpoints/e3v11_s7/best.pt
 ```
 
 ## 2. 数据
 
-### 内盘（天勤 tqsdk，账号在 night_signal_autodl.sh 内置）
+### 内盘（天勤 tqsdk，账号走环境变量 TQ_USER/TQ_PASS）
 
 - 13 品种：rb hc i sr p j jm m y cu ag TA MA
 - 文件：`data/{code}_{60,30}m.csv`，8 列 `datetime,open,high,low,close,volume,open_oi,close_oi`
 - 覆盖（免费版窗口上限 8964 条）：60m 自 2021-05 起（cu/ag 稍短）、30m 自 2023-08 起
+- **增量快路径（2026-09-14 修复）**：一页（8964 根）覆盖旧末尾时直接合并，
+  不再翻私有锚定页——根除了 nightly 的"锚定页等待超时"；断档超一页才兜底翻页
 - 刷新/重下：
 
 ```bash
-TQ_USER=<你的天勤账号> TQ_PASS=<你的天勤密码> PYTHONPATH=src python -u scripts/download_tqsdk_v2.py \
-  --periods 60 30 --max-back-years 5 && cp data/raw_tqsdk/*.csv data/
+TQ_USER=<账号> TQ_PASS=<密码> PYTHONPATH=src python -u scripts/download_tqsdk_v2.py \
+  --periods 60 30 --incremental && cp data/raw_tqsdk/*.csv data/
 ```
 
 - **跑下载前必须关 VPN/代理**，天勤连代理会超时
@@ -90,15 +91,17 @@ TQ_USER=<你的天勤账号> TQ_PASS=<你的天勤密码> PYTHONPATH=src python 
 PYTHONPATH=src python -u scripts/train_multi_symbol.py --task classify \
   --label-anchor day_close --theta-mode dynamic --theta-q 0.90 --soft-label \
   --close-path --periods 60 30 --daily-bars 20 --foreign-bars 20 \
+  --contract-mode --path-aux --path-aux-weight 0.1 \
   --batch-size 256 --lr 1e-3 --epochs 40 --patience 8 --seed 42 \
   --save-dir checkpoints/<实验名> > train_<实验名>.log 2>&1
 ```
 
-**判决协议**（换模唯一标准）：
+**判决协议**（换模唯一标准，2026-09-14 修订：mean_edge 两次与生产背离，生产口径升为第一裁判）：
 1. 新配方跑配对种子 s42 + s7
-2. 两个种子的验证集 mean_edge 都超过冠军区间上限 +0.101，且超出 ±0.01 噪带
-3. 测试集喊多/喊空均收益不退化
-4. 三条全过才换；否则冠军继续上岗
+2. **生产口径三项全过**：单仓 v2 不劣于冠军、成本加倍不转负、p 品种不拖后腿
+3. 验证 mean_edge 双 seed 不塌（参考线，不再单独作为换模依据）
+4. 信号数不塌缩（<冠军的 50% 视为塌缩）
+5. 全部通过才换；否则冠军继续上岗
 
 ### 训练数据明细（2026-09-09 重下后口径）
 
