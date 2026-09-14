@@ -28,6 +28,8 @@ class PretrainViewDataset(Dataset):
         self.base = base
         self.sym_idx = sym_idx
         self.seq_len = base.seq_len
+        # 特征签名：batch 分组键，避免有/无外盘的样本混进同一 batch 导致 collate KeyError
+        self.feat_sig = (base.seq_len, base.foreign_feat is not None)
         self.anchor_days = anchor_days.astype(np.int64)
         self.mean = torch.from_numpy(np.asarray(base.mean, dtype=np.float32))
         self.std = torch.from_numpy(np.asarray(base.std, dtype=np.float32))

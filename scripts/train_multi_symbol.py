@@ -678,7 +678,7 @@ def main() -> None:
             wrapped.append(PretrainViewDataset(ds, sym_idx, anchor_days))
             print(f"  [E7预训练] {key}: {len(ds)} 窗口（仅训练段）")
         concat = ConcatDataset(wrapped)
-        seq_lens = [w.seq_len for w in wrapped for _ in range(len(w))]
+        seq_lens = [w.feat_sig for w in wrapped for _ in range(len(w))]
         g = torch.Generator().manual_seed(args.seed)
         from obson.model.pretrain import SeqLenBatchSampler
         sampler = SeqLenBatchSampler(seq_lens, args.batch_size, seed=args.seed)
