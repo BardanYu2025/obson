@@ -220,6 +220,48 @@ def _label_counts(ds) -> "np.ndarray":
     return counts
 
 
+def _probe_loaders(train_loaders: dict, val_loaders: dict) -> dict:
+    """probe 用：把 train/val 合并成 key_train / key_val 命名的 loader 字典。"""
+    from torch.utils.data import DataLoader
+    out = {}
+    for k, ld in train_loaders.items():
+        out[f"{k}_train"] = DataLoader(ld.dataset, batch_size=256)
+    for k, ld in val_loaders.items():
+        out[f"{k}_val"] = DataLoader(ld.dataset, batch_size=256)
+    return out
+
+
+def _verdict_probe(probes: dict) -> None:
+    """协议 v3 §6.2 判决：pretrained vs random-init 的 label probe。
+    5% 是告警线；硬暂停需双 seed 同向 + CI 不重叠（需第二次 seed 的结果）。"""
+    pre = probes.get("pretrained", {}).get("label_ba")
+    rnd = probes.get("random", {}).get("label_ba")
+    champ = probes.get("supervised_champ", {}).get("label_ba")
+    sym = probes.get("pretrained", {}).get("symbol_ba")
+    path = probes.get("pretrained", {}).get("path_ba")
+    print("\n" + "=" * 50)
+    print("== E7-A probe 门禁判决 ==")
+    if pre is None or rnd is None:
+        print("  数据不足，无法判决")
+        return
+    diff = pre - rnd
+    print(f"  label probe: pretrained={pre:.4f} vs random={rnd:.4f} → Δ={diff:+.4f}")
+    if champ is not None:
+        print(f"  监督冠军参考: {champ:.4f}")
+    if sym is not None:
+        print(f"  symbol probe: {sym:.4f}" +
+              ("（偏高，留意品种身份挤占）" if sym > 0.9 and diff <= 0 else ""))
+    if path is not None:
+        print(f"  path probe: {path:.4f}")
+    if diff <= 0:
+        print("  ⚠️ 预训练表示 label probe 不优于随机初始化 → 告警（5% 线）")
+        print("  按协议：需另一 seed 复跑确认同向 + CI 不重叠，才判表示失败")
+    elif diff < 0.05:
+        print("  🔶 略优于随机（<5%）：告警线内，建议跑第二 seed 确认噪声带")
+    else:
+        print("  ✅ label probe 明显优于随机初始化 → 门禁通过，可进入微调对照")
+
+
 def main() -> None:
     import argparse
     ap = argparse.ArgumentParser()
@@ -263,6 +305,8 @@ def main() -> None:
     ap.add_argument("--guard-days", type=int, default=30,
                     help="负样本保护区：同品种锚定日距离 ≤ 此值的样本对不得互为负样本")
     ap.add_argument("--tau", type=float, default=0.1, help="NT-Xent 温度")
+    ap.add_argument("--probe-e7", default=None, metavar="CKPT",
+                    help="对指定 E7 预训练 ckpt 跑 probe 门禁（对照：随机初始化 + models/best.pt）")
     ap.add_argument("--hidden", type=int, default=512, help="模型 hidden 维度")
     ap.add_argument("--layers", type=int, default=8, help="attention 层数")
     ap.add_argument("--heads", type=int, default=16, help="attention 头数")
@@ -588,6 +632,34 @@ def main() -> None:
         print(f"\n任务=classify | 锚点={horizon_desc} | θ分位数={args.theta_q} | "
               f"类别权重={model_config.class_weights}")
     print(f"模型参数量: {model.count_parameters():,} | 品种数: {len(SYMBOLS)} | 组合数: {len(train_loaders)}")
+
+    if args.probe_e7:
+        # E7-A probe 门禁（协议 v3 §6.2）：只用 train/val，测试段不参与。
+        from obson.model.probe import collect_reprs, run_probes
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        probes = {}
+        # 1) 预训练 encoder
+        ckpt = torch.load(args.probe_e7, map_location="cpu", weights_only=False)
+        model.load_state_dict(ckpt["model"])
+        probes["pretrained"] = run_probes(collect_reprs(model, _probe_loaders(train_loaders, val_loaders), device), "pretrained", seed=args.seed)
+        # 2) 随机初始化对照（同架构同预算，估计噪声/下界）
+        import copy as _copy
+        torch.manual_seed(args.seed + 1000)
+        model_rand = KLineTransformer(model_config)
+        probes["random"] = run_probes(collect_reprs(model_rand, _probe_loaders(train_loaders, val_loaders), device), "random-init", seed=args.seed)
+        del model_rand
+        # 3) 冠军监督上界（若本地有 models/best.pt）
+        from pathlib import Path as _P
+        champ = _P("models/best.pt")
+        if champ.exists():
+            c2 = torch.load(champ, map_location="cpu", weights_only=False)
+            missing, unexpected = model.load_state_dict(c2["model"], strict=False)
+            if missing or unexpected:
+                print(f"  ⚠️ 冠军 ckpt 与当前配置不完全同构（probe 只用主干表示，"
+                      f"头部差异不影响）：missing={len(missing)} unexpected={len(unexpected)}")
+            probes["supervised_champ"] = run_probes(collect_reprs(model, _probe_loaders(train_loaders, val_loaders), device), "supervised-champ", seed=args.seed)
+        _verdict_probe(probes)
+        return
 
     if args.pretrain_e7:
         # E7-A（协议 v3）：训练段无标签窗口双视图一致性预训练。
