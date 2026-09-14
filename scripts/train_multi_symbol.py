@@ -312,6 +312,8 @@ def main() -> None:
     ap.add_argument("--tau", type=float, default=0.1, help="NT-Xent 温度")
     ap.add_argument("--probe-e7", default=None, metavar="CKPT",
                     help="对指定 E7 预训练 ckpt 跑 probe 门禁（对照：随机初始化 + models/best.pt）")
+    ap.add_argument("--init-ckpt", default=None, metavar="CKPT",
+                    help="从指定 ckpt（如 E7 预训练 encoder）初始化主干再监督训练（微调对照）")
     ap.add_argument("--hidden", type=int, default=512, help="模型 hidden 维度")
     ap.add_argument("--layers", type=int, default=8, help="attention 层数")
     ap.add_argument("--heads", type=int, default=16, help="attention 头数")
@@ -629,6 +631,12 @@ def main() -> None:
         query_decoder=args.query_decoder,  # E6' 未来时间 query decoder
     )
     model = KLineTransformer(model_config)
+    if args.init_ckpt:
+        # E7 微调对照：从预训练 encoder 初始化主干（头部权重即使加载也是预训练时的随机值，
+        # 等价于全新头部；strict=False 容忍未来头部结构差异）
+        _ck = torch.load(args.init_ckpt, map_location="cpu", weights_only=False)
+        _miss, _unexp = model.load_state_dict(_ck["model"], strict=False)
+        print(f"[init-ckpt] 从 {args.init_ckpt} 初始化：missing={len(_miss)} unexpected={len(_unexp)}")
     if args.task == "classify":
         if args.label_anchor == "day_close":
             horizon_desc = f"当日收盘 (θ={args.theta_mode})"
