@@ -13,7 +13,9 @@
 | 成本加倍 | **+7.24%** |
 | 路径辅助头 | 节点 BA 0.38~0.42（存活，非塌缩） |
 
-模型权重见 [Releases](../../releases)（`champ_e3v11_20260914.tar.gz`，含 s42/s7 双种子）。
+模型权重不进本仓库（387MB）。获取方式：训练复现（命令见
+[archive/champ_e3v11_20260914/RECIPE.md](archive/champ_e3v11_20260914/RECIPE.md)），
+或从已有部署环境拷贝 `checkpoints/e3v11_s42/best.pt` + `checkpoints/e3v11_s7/best.pt`。
 
 ## 结构
 
