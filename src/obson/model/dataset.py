@@ -110,6 +110,7 @@ class KLineDataset(Dataset):
         extra_breaks: np.ndarray | None = None,
         sample_mask: np.ndarray | None = None,
         day_ids_override: np.ndarray | None = None,
+        anchor_days_ahead: int = 0,
     ):
         """
         :param df: 主频率DataFrame（如5分钟线），需包含 OHLCV + datetime 列
@@ -152,6 +153,11 @@ class KLineDataset(Dataset):
         self.strategy_label = bool(strategy_label) and label_mode == "day_close"
         self.tp_frac = float(tp_frac)
         self.stop_frac = float(stop_frac)
+        # T+N 锚（仅 day_close 语义族）：0=当日收盘（默认），1=次日收盘（next_close）。
+        # 锚日必须落在本数据段内：段末 N 天样本无锚自然剔除（防跨段泄露的第一道闸，
+        # 第二道闸 = 合约模式 _restrict_samples_by_dayset 的锚日过滤）
+        self.anchor_days_ahead = int(anchor_days_ahead) if label_mode == "day_close" else 0
+        self.anchor_days: np.ndarray | None = None  # [N] 每样本锚交易日 id
         self.soft_targets: np.ndarray | None = None  # [N, 2] = (m_dn, m_up)，对 θ 归一
         self.path_states: np.ndarray | None = None  # E3: [N, 4] int64，-1=歧义 mask
         self.exc_labels: np.ndarray | None = None  # E4: [N, 2] int64 (dn桶, up桶)，
@@ -426,18 +432,28 @@ class KLineDataset(Dataset):
             day_lens = np.unique(day_ids, return_counts=True)[1]
             min_day_bars = max(int(np.median(day_lens) * 0.5), 3)
             n_double_touch = 0  # 同根双触计数（训练侧记"无"，执行侧记止损；两阶段语义）
+            anchor_day_all = np.full(len(vi), -1, dtype=np.int64)  # 每样本锚交易日 id
+            # 先筛出完整交易日清单，再按 anchor_days_ahead 取锚日：
+            # 0=当日收盘（原 day_close），1=次日收盘（next_close，T+1 信息量实验）
+            ok_days = []
             for d in np.unique(day_ids):
                 rows_d = np.flatnonzero(day_ids == d)
-                a = rows_d[-1]  # 收盘锚 = 本交易日最后一根 bar
+                a = rows_d[-1]
                 # 截断的交易日（跨切分边界/缺日盘数据）：锚不在 13-15 点，整天剔除
-                if not (13.0 <= hours[a] <= 15.0) or len(rows_d) < min_day_bars:
-                    continue
+                if (13.0 <= hours[a] <= 15.0) and len(rows_d) >= min_day_bars:
+                    ok_days.append(d)
+            for i, d in enumerate(ok_days):
+                ia = i + self.anchor_days_ahead
+                if ia >= len(ok_days):
+                    break  # 锚日超出本段（T+1 时段末样本无锚，自然剔除防泄露）
+                rows_d = np.flatnonzero(day_ids == d)
+                a = np.flatnonzero(day_ids == ok_days[ia])[-1]  # 收盘锚 = 锚日最后一根 bar
                 deltas = np.diff(ts[rows_d]).astype("timedelta64[s]").astype(float) / 60.0
                 step = float(np.median(deltas)) if len(deltas) > 0 else 5.0
                 full = a - rows_d[0]  # 全日 bar 数（夜盘+日盘）
                 # 当日内的断链点（换月跳空等）：标签路径跨过断点的样本剔除
                 brk = break_pos[(break_pos > rows_d[0]) & (break_pos <= a)]
-                sel = np.flatnonzero((base_i_all >= rows_d[0]) & (base_i_all < a))
+                sel = np.flatnonzero((base_i_all >= rows_d[0]) & (base_i_all <= rows_d[-1]) & (base_i_all < a))
                 for s in sel:
                     j = int(base_i_all[s])
                     rem = a - j
@@ -447,6 +463,7 @@ class KLineDataset(Dataset):
                         bi = int(np.searchsorted(brk, j, side="right"))
                         if bi < len(brk) and brk[bi] <= a:
                             continue
+                    anchor_day_all[s] = ok_days[ia]
                     base = max(cl[j], 1e-8)
                     if sigma_w is not None:
                         sw = sigma_w[j]
@@ -527,8 +544,9 @@ class KLineDataset(Dataset):
             keep = labels_all >= 0
             n_dropped = int((~keep).sum())
             n_kept = int(keep.sum())
+            _anchor_tag = "day_close" if self.anchor_days_ahead == 0 else f"day_close+{self.anchor_days_ahead}"
             print(
-                f"  [day_close] 剔除 {n_dropped} 个样本"
+                f"  [{_anchor_tag}] 剔除 {n_dropped} 个样本"
                 f"（尾盘{min_remaining_minutes}min内/截断日/日内断链）"
                 f" | 有效 {n_kept} | 标签分布 空/无/多="
                 f"{int((labels_all[keep] == 0).sum())}/{int((labels_all[keep] == 1).sum())}/"
@@ -536,6 +554,7 @@ class KLineDataset(Dataset):
                 f" | 同根双触 {n_double_touch}（{n_double_touch / max(n_kept, 1):.2%}）"
             )
             self.labels = labels_all[keep]
+            self.anchor_days = anchor_day_all[keep]  # T+N 泄露防护：每样本锚交易日 id
             self.fwd_rets = fwd_all[keep].astype(np.float32)  # 持有到收盘的实际收益(%)
             self.touch_minutes = touch_min_all[keep].astype(np.float32)
             self.thetas = theta_all[keep].astype(np.float32)
@@ -787,7 +806,7 @@ def _restrict_samples(ds, min_base_bar: int, max_label_bar: int | None = None) -
         keep &= (base + ds.target_offset) <= max_label_bar
     ds.valid_indices = ds.valid_indices[keep]
     ds.n_samples = len(ds.valid_indices)
-    for attr in ("labels", "fwd_rets", "touch_minutes", "thetas", "soft_targets", "path_states", "exc_labels"):
+    for attr in ("labels", "fwd_rets", "touch_minutes", "thetas", "soft_targets", "path_states", "exc_labels", "anchor_days"):
         arr = getattr(ds, attr, None)
         if arr is not None:
             setattr(ds, attr, arr[keep])
@@ -872,13 +891,18 @@ def build_datasets(
 
 def _restrict_samples_by_dayset(ds, day_set: set[int], tag: str) -> None:
     """按"窗口末 bar 所属交易日 id ∈ day_set"截样本（合约模式切分用）。
-    labels/fwd_rets/touch_minutes/thetas/soft_targets 与 valid_indices 同步过滤。"""
+    labels/fwd_rets/touch_minutes/thetas/soft_targets 与 valid_indices 同步过滤。
+    T+N 锚（next_close）：锚日也必须在 day_set 内——否则段末样本的标签
+    偷看下一段的收盘价（第二道泄露闸，第一道是构造时锚日超段自然剔除）。"""
     base = ds.valid_indices + ds.seq_len - 1
     dayord = ds.day_ids_global[base]
     keep = np.array([int(d) in day_set for d in dayord], dtype=bool)
+    ad = getattr(ds, "anchor_days", None)
+    if ad is not None:
+        keep &= np.array([int(x) in day_set for x in ad], dtype=bool)
     ds.valid_indices = ds.valid_indices[keep]
     ds.n_samples = len(ds.valid_indices)
-    for attr in ("labels", "fwd_rets", "touch_minutes", "thetas", "soft_targets", "path_states", "exc_labels"):
+    for attr in ("labels", "fwd_rets", "touch_minutes", "thetas", "soft_targets", "path_states", "exc_labels", "anchor_days"):
         arr = getattr(ds, attr, None)
         if arr is not None:
             setattr(ds, attr, arr[keep])

@@ -284,7 +284,7 @@ def main() -> None:
                          "rsi/macd/boll_squeeze/roc20 置零）")
     ap.add_argument("--task", default="regress", choices=["regress", "classify"],
                     help="regress=预测涨跌幅（原路径）；classify=三分类信号（正/无/负，first-passage 标注）")
-    ap.add_argument("--label-anchor", default="day_close", choices=["horizon", "day_close"],
+    ap.add_argument("--label-anchor", default="day_close", choices=["horizon", "day_close", "next_close"],
                     help="classify 标签锚点：horizon=固定视野（--horizon-min 根内 first-passage）；"
                          "day_close=当日收盘（θ 随剩余时间√缩放，尾盘30min样本剔除）")
     ap.add_argument("--horizon-min", type=int, default=60,
@@ -388,11 +388,14 @@ def main() -> None:
     if args.task == "classify" and args.label_anchor == "horizon":
         assert args.horizon_min % min(args.periods) == 0, "horizon-min 需能被最小频率整除"
     if args.contract_mode:
-        assert args.task == "classify" and args.label_anchor == "day_close", \
-            "--contract-mode v1 仅支持 --task classify --label-anchor day_close"
+        assert args.task == "classify" and args.label_anchor in ("day_close", "next_close"), \
+            "--contract-mode v1 仅支持 --task classify --label-anchor day_close/next_close"
         assert args.theta_mode == "dynamic", "--contract-mode v1 仅支持 --theta-mode dynamic"
-    if args.label_anchor == "day_close" and args.task != "classify":
-        print("  提示: --label-anchor day_close 只在 --task classify 下生效，忽略")
+    if args.label_anchor in ("day_close", "next_close") and args.task != "classify":
+        print(f"  提示: --label-anchor {args.label_anchor} 只在 --task classify 下生效，忽略")
+
+    # T+1 锚（next_close）：day_close 语义族 + anchor_days_ahead=1，泄露双闸在 dataset.py
+    _anchor_ahead = 1 if args.label_anchor == "next_close" else 0
 
     batch_size = args.batch_size
     hidden_size = args.hidden
@@ -407,8 +410,12 @@ def main() -> None:
     periods = args.periods
 
     print("=" * 64)
-    anchor_desc = "当日收盘" if (args.task == "classify" and args.label_anchor == "day_close") \
-        else f"未来{args.horizon_min}分钟"
+    if args.task == "classify" and args.label_anchor == "day_close":
+        anchor_desc = "当日收盘"
+    elif args.task == "classify" and args.label_anchor == "next_close":
+        anchor_desc = "次日收盘(T+1)"
+    else:
+        anchor_desc = f"未来{args.horizon_min}分钟"
     print(f"多品种多频率训练 | 品种={args.symbols} × {args.periods}m | 周窗口 | 预测{anchor_desc} | {args.split}切分")
     print("=" * 64)
 
@@ -449,7 +456,8 @@ def main() -> None:
                     continue
                 theta = float(np.quantile(ms_all, args.theta_q))
                 extra_kwargs = {"label_mode": "day_close", "label_threshold": theta,
-                                "theta_mode": "dynamic", "soft_label": args.soft_label}
+                                "theta_mode": "dynamic", "soft_label": args.soft_label,
+                                "anchor_days_ahead": _anchor_ahead}
                 try:
                     train_ds, val_ds, test_ds = build_datasets_contract(
                         code, period, seq_len=seq_len,
@@ -480,16 +488,18 @@ def main() -> None:
                 theta = None
                 if args.task == "classify":
                     n_train = int(len(df) * 0.7)
-                    if args.label_anchor == "day_close":
-                        offset = 1  # day_close 无固定视野，offset 仅用于窗口切片
+                    if args.label_anchor in ("day_close", "next_close"):
+                        offset = 1  # day_close/next_close 无固定视野，offset 仅用于窗口切片
                         if args.theta_mode == "dynamic":
                             theta = _theta_c_dynamic(df.iloc[:n_train], seq_len, args.theta_q)
                             extra_kwargs = {"label_mode": "day_close", "label_threshold": theta,
-                                            "theta_mode": "dynamic", "soft_label": args.soft_label}
+                                            "theta_mode": "dynamic", "soft_label": args.soft_label,
+                                            "anchor_days_ahead": _anchor_ahead}
                         else:
                             theta = _day_theta_base(df.iloc[:n_train], args.theta_q)
                             extra_kwargs = {"label_mode": "day_close", "label_threshold": theta,
-                                            "soft_label": args.soft_label}
+                                            "soft_label": args.soft_label,
+                                            "anchor_days_ahead": _anchor_ahead}
                     else:
                         offset = args.horizon_min // period
                         theta = _theta_from_quantile(df.iloc[:n_train], offset, args.theta_q)
@@ -640,6 +650,8 @@ def main() -> None:
     if args.task == "classify":
         if args.label_anchor == "day_close":
             horizon_desc = f"当日收盘 (θ={args.theta_mode})"
+        elif args.label_anchor == "next_close":
+            horizon_desc = f"次日收盘T+1 (θ={args.theta_mode})"
         else:
             horizon_desc = f"{args.horizon_min}min"
         print(f"\n任务=classify | 锚点={horizon_desc} | θ分位数={args.theta_q} | "
