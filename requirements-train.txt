@@ -1,0 +1,4 @@
+# AutoDL 训练最小依赖（PyTorch 建议用 AutoDL 镜像自带的，或按下面命令装 cu121 版）
+torch>=2.2
+pandas>=2.1
+numpy>=1.26

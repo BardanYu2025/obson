@@ -1,0 +1,66 @@
+[project]
+name = "obson"
+version = "0.1.0"
+description = "量化交易策略框架"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [
+    { name = "obson" },
+]
+dependencies = [
+    "requests>=2.31",
+    "pandas>=2.1",
+    "numpy>=1.26",
+    "ipykernel>=7.3.0",
+    "transformers>=5.16.1",
+]
+
+[project.optional-dependencies]
+akshare = ["akshare>=1.15"]
+# ifind extra 原依赖 agent-gw（本地/私有包），该包不在 PyPI 上，
+# 因此从可选依赖中移除。如需使用 iFinD 数据源，请手动安装：
+#   uv pip install agent-gw
+# ifind = ["agent-gw"]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.4",
+    "mypy>=1.9",
+]
+# 显式展开所有依赖，避免自引用 obson[...] 导致 uv 解析器循环挂起
+all = [
+    "akshare>=1.15",
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.4",
+    "mypy>=1.9",
+]
+
+[project.scripts]
+obson = "obson.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/obson"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "C4", "SIM"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_return_any = true
+warn_unused_ignores = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

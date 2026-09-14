@@ -1,9 +1,20 @@
+# 数据与模型（留在本地/AutoDL）
+data/
+models/
+checkpoints/
+# 环境与缓存
+.venv/
 __pycache__/
 *.pyc
-.venv/
-data/
-checkpoints/
-models/
+.DS_Store
+# 运行产物
 *.log
 *.bak_*.csv
-.DS_Store
+nohup.out
+# 本地工具与其他
+skills/
+github_export/
+.idea/
+reports/
+*.tar.gz
+obson_e6_patch_20260914/
