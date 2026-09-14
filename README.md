@@ -40,6 +40,7 @@ export TQ_USER=<天勤账号> TQ_PASS=<天勤密码>
 
 训练、回测、判决口径详见 [docs/PRODUCTION.md](docs/PRODUCTION.md) 与
 [archive/champ_e3v11_20260914/RECIPE.md](archive/champ_e3v11_20260914/RECIPE.md)。
+前向实盘考核规程见 [docs/FORWARD_TEST.md](docs/FORWARD_TEST.md)。
 
 ## 实验族谱
 

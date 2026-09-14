@@ -1,0 +1,2 @@
+date,signal_time,symbol,period,contract,direction,p_up,p_down,p_none,path_state,theta,foreign_freshness,acted,entry_price,exit_price,exit_reason,slippage_ticks,pnl_pct,notes
+2026-09-14,21:05,p,60m,,,,,,,,,,,,,,,示例行：今晚第一笔填这里
