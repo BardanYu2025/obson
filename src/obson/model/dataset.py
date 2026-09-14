@@ -191,6 +191,9 @@ class KLineDataset(Dataset):
             self.std = np.ones(raw.shape[1], dtype=np.float32)
             self.data = raw
 
+        # 原始（未标准化）序列始终保留：return_raw 取样本与 E7-A 预训练增强要用
+        self.raw_data = raw
+
         # 交易日边界信息（用于 intra_day 位置编码和 rem_ratio）
         # day_ids_override：合约拼接模式下由外部按"合约段×交易日"预分配，
         # 防止拼接帧时间戳非单调导致 np.unique 把不同合约段的同名交易日合并

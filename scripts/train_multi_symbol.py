@@ -253,6 +253,16 @@ def main() -> None:
     ap.add_argument("--lr", type=float, default=3e-3, help="OneCycle 峰值学习率")
     ap.add_argument("--lr-sched", default="onecycle", choices=["onecycle", "constant"],
                     help="学习率调度：onecycle=冠军配方默认；constant=固定 lr（P1 诊断用）")
+    # E7-A 自监督预训练（协议 v3）
+    ap.add_argument("--pretrain-e7", action="store_true",
+                    help="只做 E7-A 双视图一致性预训练（训练段无标签窗口），不跑监督训练")
+    ap.add_argument("--pretrain-epochs", type=int, default=20)
+    ap.add_argument("--pretrain-lr", type=float, default=3e-4)
+    ap.add_argument("--aug-alpha", type=float, default=0.10,
+                    help="E7-aug0 窗口级噪声强度（累计噪声标准差占窗口波动比例，审计口径）")
+    ap.add_argument("--guard-days", type=int, default=30,
+                    help="负样本保护区：同品种锚定日距离 ≤ 此值的样本对不得互为负样本")
+    ap.add_argument("--tau", type=float, default=0.1, help="NT-Xent 温度")
     ap.add_argument("--hidden", type=int, default=512, help="模型 hidden 维度")
     ap.add_argument("--layers", type=int, default=8, help="attention 层数")
     ap.add_argument("--heads", type=int, default=16, help="attention 头数")
@@ -352,6 +362,7 @@ def main() -> None:
     print("=" * 64)
 
     train_loaders, val_loaders, test_loaders = {}, {}, {}
+    train_dss: dict = {}
     total_counts = None
     if args.contract_mode:
         from obson.contract_series import build_contract_frame, load_calendar
@@ -462,6 +473,7 @@ def main() -> None:
                 continue
             g = torch.Generator().manual_seed(args.seed)
             train_loaders[key] = DataLoader(train_ds, batch_size=batch_size, shuffle=True, generator=g)
+            train_dss[key] = train_ds
             val_loaders[key] = DataLoader(val_ds, batch_size=batch_size)
             test_loaders[key] = DataLoader(test_ds, batch_size=batch_size)
             msg = f"  [{key}] 窗口={seq_len} | 训练: {len(train_ds)} | 验证: {len(val_ds)}"
@@ -576,6 +588,33 @@ def main() -> None:
         print(f"\n任务=classify | 锚点={horizon_desc} | θ分位数={args.theta_q} | "
               f"类别权重={model_config.class_weights}")
     print(f"模型参数量: {model.count_parameters():,} | 品种数: {len(SYMBOLS)} | 组合数: {len(train_loaders)}")
+
+    if args.pretrain_e7:
+        # E7-A（协议 v3）：训练段无标签窗口双视图一致性预训练。
+        # 只用 train_dss（训练段），val/test 不进预训练；保存后由 probe 门禁决定能否微调。
+        import numpy as _np2
+        from torch.utils.data import ConcatDataset, DataLoader as _DL
+        from obson.model.pretrain import PretrainViewDataset, PretrainTrainer
+
+        wrapped = []
+        for key, ds in train_dss.items():
+            ds.return_raw = True  # 增强需要原始价量（raw_data 现已始终保存）
+            code = key.rsplit("_", 1)[0]
+            sym_idx = list(SYMBOLS.keys()).index(code) if code in SYMBOLS else 0
+            anchor_bar = ds.valid_indices + ds.seq_len - 1
+            anchor_days = ds.day_ids_global[anchor_bar]
+            wrapped.append(PretrainViewDataset(ds, sym_idx, anchor_days))
+            print(f"  [E7预训练] {key}: {len(ds)} 窗口（仅训练段）")
+        concat = ConcatDataset(wrapped)
+        g = torch.Generator().manual_seed(args.seed)
+        loader = _DL(concat, batch_size=args.batch_size, shuffle=True,
+                     generator=g, drop_last=True)
+        ptrainer = PretrainTrainer(
+            model, loader, lr=args.pretrain_lr, max_epochs=args.pretrain_epochs,
+            tau=args.tau, alpha=args.aug_alpha, guard_days=args.guard_days,
+            save_dir=args.save_dir)
+        ptrainer.fit()
+        return
 
     if args.eval_ckpt:
         # 只评估不训练：复现训练时的数据集构造，加载指定 checkpoint 跑测试集
