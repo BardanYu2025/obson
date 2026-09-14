@@ -27,6 +27,7 @@ class PretrainViewDataset(Dataset):
     def __init__(self, base: Dataset, sym_idx: int, anchor_days: np.ndarray):
         self.base = base
         self.sym_idx = sym_idx
+        self.seq_len = base.seq_len
         self.anchor_days = anchor_days.astype(np.int64)
         self.mean = torch.from_numpy(np.asarray(base.mean, dtype=np.float32))
         self.std = torch.from_numpy(np.asarray(base.std, dtype=np.float32))
@@ -41,6 +42,44 @@ class PretrainViewDataset(Dataset):
         item["norm_mean"] = self.mean
         item["norm_std"] = self.std
         return item
+
+
+class SeqLenBatchSampler:
+    """按窗口长度分组的 BatchSampler：同一 batch 内 seq_len 相同（可 stack），
+    组内随机、组间随机。seq_len 相同的不同品种可同 batch（保留跨品种负样本的可能）。"""
+
+    def __init__(self, seq_lens: list[int], batch_size: int, seed: int = 0,
+                 drop_last: bool = True):
+        self.seq_lens = seq_lens
+        self.batch_size = batch_size
+        self.seed = seed
+        self.drop_last = drop_last
+
+    def __iter__(self):
+        rng = np.random.default_rng(self.seed)
+        groups: dict[int, list[int]] = {}
+        for i, s in enumerate(self.seq_lens):
+            groups.setdefault(s, []).append(i)
+        batches = []
+        for s, idxs in groups.items():
+            idxs = np.array(idxs)
+            rng.shuffle(idxs)
+            for st in range(0, len(idxs), self.batch_size):
+                b = idxs[st:st + self.batch_size]
+                if len(b) < self.batch_size and self.drop_last:
+                    continue
+                batches.append(b.tolist())
+        rng.shuffle(batches)
+        return iter(batches)
+
+    def __len__(self):
+        n = 0
+        groups: dict[int, int] = {}
+        for s in self.seq_lens:
+            groups[s] = groups.get(s, 0) + 1
+        for c in groups.values():
+            n += c // self.batch_size if self.drop_last else -(-c // self.batch_size)
+        return n
 
 
 def return_space_jitter(seq: torch.Tensor, raw: torch.Tensor,
