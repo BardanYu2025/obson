@@ -330,15 +330,29 @@ class MixedFrequencyTrainer:
                     pt = torch.cat(path_true_l).numpy().astype(int)
                     valid_rows = (pt != -1).any(axis=1)
                     pp, pt = pp[valid_rows], pt[valid_rows]
-                    node_ba, node_acc = [], []
+                    node_ba, node_acc, node_f1, node_true_dist, node_rec = [], [], [], [], []
                     for k in range(4):
                         mk = pt[:, k] != -1
                         if mk.sum() == 0:
-                            node_ba.append(float("nan")); node_acc.append(float("nan")); continue
+                            node_ba.append(float("nan")); node_acc.append(float("nan"))
+                            node_f1.append(float("nan")); node_true_dist.append([float("nan")]*3)
+                            node_rec.append([float("nan")]*3); continue
                         p_k, t_k = pp[mk, k], pt[mk, k]
-                        rc = [float(((p_k == c) & (t_k == c)).sum()) / max(float((t_k == c).sum()), 1.0) for c in (0, 1, 2)]
+                        rc, f1s = [], []
+                        for c in (0, 1, 2):
+                            tp = float(((p_k == c) & (t_k == c)).sum())
+                            fn = float(((p_k != c) & (t_k == c)).sum())
+                            fp = float(((p_k == c) & (t_k != c)).sum())
+                            r = tp / max(tp + fn, 1.0)
+                            pr = tp / max(tp + fp, 1.0)
+                            rc.append(r)
+                            f1s.append(2 * pr * r / max(pr + r, 1e-12))
+                        node_rec.append(rc)
                         node_ba.append(float(np.mean(rc)))
+                        node_f1.append(float(np.mean(f1s)))  # macro F1（教师模型要求）
                         node_acc.append(float((p_k == t_k).mean()))
+                        # 真实标签分布：判断 BA 增益必须对照多数类规模
+                        node_true_dist.append([float((t_k == c).mean()) for c in (0, 1, 2)])
                     # 单调性违规：预测序列出现 触轨(1/2)后又回到未触轨(0)，或两侧互跳
                     viol = 0
                     for row in pp:
@@ -352,6 +366,9 @@ class MixedFrequencyTrainer:
                                 viol += 1; break
                     cls_metrics[freq]["path_node_ba"] = node_ba
                     cls_metrics[freq]["path_node_acc"] = node_acc
+                    cls_metrics[freq]["path_node_f1"] = node_f1
+                    cls_metrics[freq]["path_node_true_dist"] = node_true_dist
+                    cls_metrics[freq]["path_node_recall"] = node_rec
                     cls_metrics[freq]["path_mono_viol"] = viol / max(len(pp), 1)
                     # 塌缩检测：预测状态分布（全押"未触轨"或复制主标签都属于塌缩）
                     cls_metrics[freq]["path_pred_dist"] = [float((pp == c).mean()) for c in (0, 1, 2)]
@@ -510,18 +527,24 @@ class MixedFrequencyTrainer:
                 if pol:
                     extra_str += "\n  policy_edge(每100根喊5次+手册v1+近似结算, 不参与选模): " + " ".join(
                         f"{f}={v:+.4f}%" for f, v in pol.items())
-                # E3 路径辅助头指标（教师模型 §8）：只打印不参选模
+                # E3 路径辅助头指标（教师模型 §8 + 中期评审）：只打印不参选模
                 pm = [m for m in self._last_val_cls.values() if "path_node_ba" in m]
                 if pm:
                     nba = np.nanmean([m["path_node_ba"] for m in pm], axis=0)
                     nacc = np.nanmean([m["path_node_acc"] for m in pm], axis=0)
+                    nf1 = np.nanmean([m["path_node_f1"] for m in pm], axis=0)
+                    td = np.nanmean([m["path_node_true_dist"] for m in pm], axis=0)
+                    rcl = np.nanmean([m["path_node_recall"] for m in pm], axis=0)
                     viol = float(np.mean([m["path_mono_viol"] for m in pm]))
                     dist = np.mean([m["path_pred_dist"] for m in pm], axis=0)
                     extra_str += (
                         "\n  path_aux(辅助头, 不参与选模): "
                         + "节点BA=[" + "/".join(f"{v:.3f}" for v in nba) + "]"
+                        + " F1=[" + "/".join(f"{v:.2f}" for v in nf1) + "]"
                         + " acc=[" + "/".join(f"{v:.2f}" for v in nacc) + "]"
                         + f" 单调违规={viol:.1%} 预测分布(未/上/下)=[{dist[0]:.2f}/{dist[1]:.2f}/{dist[2]:.2f}]"
+                        + "\n    真实分布=[" + "/".join(f"({r[0]:.2f},{r[1]:.2f},{r[2]:.2f})" for r in td) + "]"
+                        + " recall上/下=[" + "/".join(f"({r[1]:.2f},{r[2]:.2f})" for r in rcl) + "]"
                     )
                 # E4 excursion 指标：只打印不参选模
                 em = [m for m in self._last_val_cls.values() if "exc_ba" in m]
