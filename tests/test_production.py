@@ -155,17 +155,20 @@ def test_ev_table_protocol_val_only():
 # ── 6b. 手册规则唯一权威（防止脚本重新自维护 PLAYBOOK 副本）─────
 def test_playbook_single_source_of_truth():
     import re
-    for name in ("backtest_signals.py", "backtest_playbook.py", "signal_live.py"):
+    for name in ("backtest_playbook.py", "signal_live.py"):
         src = (ROOT / "scripts" / name).read_text(encoding="utf-8")
         assert "from obson.playbook import" in src, f"{name} 必须从 obson.playbook 导入手册"
         # 禁止本地再定义规则字典（PLAYBOOK = { / RULES = {）
         assert not re.search(r"^\s*(PLAYBOOK|RULES)\s*=\s*\{", src, re.M), \
             f"{name} 不得自维护手册副本"
-    # signal_mask 必须被两个回测脚本真正使用（v2 接线）
-    for name in ("backtest_signals.py", "backtest_playbook.py"):
+    # signal_mask 必须被回测脚本真正使用（v2 接线）；
+    # backtest_signals.py 已于 2026-09-14 随清理删除，此后再引入须同样接线 v2
+    for name in ("backtest_playbook.py",):
         src = (ROOT / "scripts" / name).read_text(encoding="utf-8")
         assert "signal_mask(" in src, f"{name} 未接入 signal_mask（手册 v2）"
         assert "--playbook-v2" in src, f"{name} 缺 --playbook-v2 入口"
+    assert not (ROOT / "scripts" / "backtest_signals.py").exists(), \
+        "backtest_signals.py（v1 残留）不得复活"
 
 
 # ── 7. 外盘严格因果 ─────────────────────────────────────────────
