@@ -251,6 +251,8 @@ def main() -> None:
                     help="day_close 的 θ 口径：frozen=训练段冻结 θ_base 随√时间缩放；"
                          "dynamic=c × 窗口σ × √剩余bar（波动自适应，c 仅在训练段校准一次）")
     ap.add_argument("--lr", type=float, default=3e-3, help="OneCycle 峰值学习率")
+    ap.add_argument("--lr-sched", default="onecycle", choices=["onecycle", "constant"],
+                    help="学习率调度：onecycle=冠军配方默认；constant=固定 lr（P1 诊断用）")
     ap.add_argument("--hidden", type=int, default=512, help="模型 hidden 维度")
     ap.add_argument("--layers", type=int, default=8, help="attention 层数")
     ap.add_argument("--heads", type=int, default=16, help="attention 头数")
@@ -594,6 +596,7 @@ def main() -> None:
         patience=patience,
         save_dir=args.save_dir,
         log_interval=args.log_interval,
+        lr_sched=args.lr_sched,
     )
     # 完整数据/标签配置清单（老师审查二轮 #5）：ckpt 必须能自解释训练口径，
     # 不靠命令行记忆复现

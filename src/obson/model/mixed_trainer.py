@@ -42,6 +42,7 @@ class MixedFrequencyTrainer:
         ),
         save_dir: str | Path = "./checkpoints",
         log_interval: int = 10,
+        lr_sched: str = "onecycle",
     ):
         self.model = model.to(device)
         self.loaders = loaders
@@ -56,16 +57,20 @@ class MixedFrequencyTrainer:
         # 优化器
         self.optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
 
-        # OneCycleLR
+        # OneCycleLR（默认，冠军配方）；lr_sched="constant" 时禁用调度器（P1 诊断用）
         # 以最大 loader 的步数为一个 epoch（小 loader 循环复用），
         # 保证长历史频率每个 epoch 被完整训练一遍
         self.steps_per_epoch = max(len(ld) for ld in loaders.values())
         # 每个 step 内对每个频率各更新一次，实际步数 = steps_per_epoch × 频率数
         total_steps = max_epochs * self.steps_per_epoch * len(loaders)
-        self.scheduler = OneCycleLR(
-            self.optimizer, max_lr=lr, total_steps=total_steps,
-            pct_start=0.1, div_factor=25, final_div_factor=1e4,
-        )
+        self.lr_sched = lr_sched
+        if lr_sched == "onecycle":
+            self.scheduler = OneCycleLR(
+                self.optimizer, max_lr=lr, total_steps=total_steps,
+                pct_start=0.1, div_factor=25, final_div_factor=1e4,
+            )
+        else:  # constant：固定 lr，不调度
+            self.scheduler = None
 
         self.global_step = 0
         self.best_val_loss = float("inf")
@@ -181,7 +186,8 @@ class MixedFrequencyTrainer:
 
                 torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
                 self.optimizer.step()
-                self.scheduler.step()
+                if self.scheduler is not None:
+                    self.scheduler.step()
 
                 l_val = loss.item()
                 losses[freq] += l_val
@@ -473,7 +479,7 @@ class MixedFrequencyTrainer:
         self.val_baselines = self._compute_val_baselines() if task == "regress" else self._compute_cls_baselines()
         print(f"开始混频训练 | device={self.device} | params={self.model.count_parameters():,}")
         print(f"  frequencies={freqs}")
-        print(f"  epochs={self.max_epochs} | patience={self.patience}")
+        print(f"  epochs={self.max_epochs} | patience={self.patience} | lr_sched={self.lr_sched}")
         bl_str = " ".join(f"{f}={self.val_baselines.get(f, 0):.4f}" for f in freqs)
         print(f"  {'零预测基线 val loss' if task == 'regress' else '先验分布基线 CE'}: {bl_str}")
         print("-" * 70)
@@ -603,7 +609,7 @@ class MixedFrequencyTrainer:
         torch.save({
             "model": self.model.state_dict(),
             "optimizer": self.optimizer.state_dict(),
-            "scheduler": self.scheduler.state_dict(),
+            "scheduler": self.scheduler.state_dict() if self.scheduler is not None else None,
             "global_step": self.global_step,
             "best_val_loss": self.best_val_loss,
             "config": self.model.config,
@@ -619,7 +625,8 @@ class MixedFrequencyTrainer:
         ckpt = torch.load(path, map_location=self.device, weights_only=False)
         self.model.load_state_dict(ckpt["model"])
         self.optimizer.load_state_dict(ckpt["optimizer"])
-        self.scheduler.load_state_dict(ckpt["scheduler"])
+        if self.scheduler is not None and ckpt.get("scheduler") is not None:
+            self.scheduler.load_state_dict(ckpt["scheduler"])
         self.global_step = ckpt["global_step"]
         self.best_val_loss = ckpt["best_val_loss"]
         print(f"已加载检查点: {path}")
