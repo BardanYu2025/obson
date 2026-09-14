@@ -9,7 +9,9 @@ set -e
 cd "$(dirname "$0")"
 SYMS=${@:-"rb sr p"}
 CKPT=${CKPT:-models/best.pt}
-export TQ_USER=bardan TQ_PASS=667657
+# 天勤账号从环境变量读，不写进仓库：export TQ_USER=xxx TQ_PASS=yyy
+: "${TQ_USER:?请先 export TQ_USER=你的天勤账号}"
+: "${TQ_PASS:?请先 export TQ_PASS=你的天勤密码}"
 
 echo "==> 增量补天勤K线: $SYMS"
 python -u scripts/download_tqsdk_v2.py --symbols $SYMS --periods 60 30 --incremental 2>&1 \
