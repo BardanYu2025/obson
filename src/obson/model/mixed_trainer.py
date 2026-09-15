@@ -187,6 +187,9 @@ class MixedFrequencyTrainer:
                 # E3 路径状态辅助损失（masked CE，-1=同根双触歧义样本整行忽略）
                 # 教师模型要求：分项记录 L_main / L_path / λ·L_path，不能只看加权和
                 l_main_val = loss.item()
+                if "loss_gate" in out:
+                    self._last_l_gate = float(out["loss_gate"].detach().item())
+                    self._last_l_direction = float(out["loss_direction"].detach().item())
                 l_path_val = float("nan")
                 if "path_logits" in out and batch.get("path_states") is not None:
                     ps = batch["path_states"].to(self.device)  # [B, 4] long
@@ -653,6 +656,11 @@ class MixedFrequencyTrainer:
                     f"r-={self._last_val_cls.get(f, {}).get('ret_neg', 0):+.3f}%"
                     for f in freqs
                 )
+                if getattr(self.model.config, "hierarchical_task", False):
+                    print(
+                        f"  hierarchical_loss: gate={getattr(self, '_last_l_gate', float('nan')):.4f} "
+                        f"direction={getattr(self, '_last_l_direction', float('nan')):.4f}"
+                    )
                 if getattr(self.model.config, "hierarchical_task", False):
                     hier_str = " ".join(
                         f"{f}:gate={self._last_val_cls.get(f, {}).get('hier_gate_rate', float('nan')):.1%}/"
