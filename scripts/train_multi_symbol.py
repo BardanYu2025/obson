@@ -379,7 +379,18 @@ def main() -> None:
                     help="excursion 辅助损失权重，默认 0.1")
     ap.add_argument("--query-decoder", action="store_true",
                     help="E6'：未来时间 query decoder 替代简易路径头（encoder 保持单向）")
+    ap.add_argument("--teacher", action="store_true",
+                    help="Teacher 训练线：E3 主任务/路径头 + 生产效用辅助头与复合选模")
+    ap.add_argument("--teacher-loss-weight", type=float, default=0.15)
+    ap.add_argument("--teacher-logit-weight", type=float, default=0.10)
+    ap.add_argument("--teacher-selection-weight", type=float, default=0.10)
     args = ap.parse_args()
+    if args.teacher:
+        if args.task != "classify" or args.label_anchor != "day_close" or args.theta_mode != "dynamic":
+            raise SystemExit(
+                "--teacher 只支持生产语义：--task classify --label-anchor day_close "
+                "--theta-mode dynamic"
+            )
     import random
     random.seed(args.seed)
     np.random.seed(args.seed)
@@ -639,6 +650,10 @@ def main() -> None:
         exc_aux_weight=args.exc_aux_weight,
         exc_weights=exc_weights,           # E4 逐侧类别权重（None=不加权）
         query_decoder=args.query_decoder,  # E6' 未来时间 query decoder
+        utility_head=args.teacher,
+        utility_loss_weight=args.teacher_loss_weight,
+        utility_logit_weight=args.teacher_logit_weight if args.teacher else 0.0,
+        utility_selection_weight=args.teacher_selection_weight if args.teacher else 0.0,
     )
     model = KLineTransformer(model_config)
     if args.init_ckpt:
@@ -764,6 +779,10 @@ def main() -> None:
         "symbols": args.symbols,
         "periods": args.periods,
         "seed": args.seed,
+        "teacher": args.teacher,
+        "teacher_loss_weight": args.teacher_loss_weight,
+        "teacher_logit_weight": args.teacher_logit_weight if args.teacher else 0.0,
+        "teacher_selection_weight": args.teacher_selection_weight if args.teacher else 0.0,
     }
     trainer.fit()
 

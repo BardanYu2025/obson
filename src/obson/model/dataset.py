@@ -641,6 +641,18 @@ class KLineDataset(Dataset):
         if self.labels is not None:
             item["label"] = torch.tensor(self.labels[pos], dtype=torch.long)
             item["fwd_ret"] = torch.tensor(self.fwd_rets[pos], dtype=torch.float32)
+            # Teacher utility target：与生产止盈/止损语义一致，单位为 theta 倍数。
+            # 命中方向=+0.8，反向先触=−0.5，未触轨保留持有到锚点的实际收益。
+            # 这是现有标签和事实收益的确定性派生，不引入新标签或未来信息。
+            if self.thetas is not None:
+                th = max(float(self.thetas[pos]), 1e-6)
+                fwd_theta = float(self.fwd_rets[pos]) / th
+                label = int(self.labels[pos])
+                short_u = 0.8 if label == 0 else (-0.5 if label == 2 else -fwd_theta)
+                long_u = 0.8 if label == 2 else (-0.5 if label == 0 else fwd_theta)
+                item["utility_target"] = torch.tensor(
+                    np.clip([short_u, long_u], -2.0, 2.0), dtype=torch.float32
+                )
             if self.exc_labels is not None:
                 item["exc_labels"] = torch.from_numpy(self.exc_labels[pos])  # [2] long (dn,up)
             base_ts = self.timestamps.iloc[idx + self.seq_len - 1]

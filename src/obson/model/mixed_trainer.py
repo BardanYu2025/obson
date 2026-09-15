@@ -160,8 +160,11 @@ class MixedFrequencyTrainer:
                     if cross_ctx is not None:
                         cross_ctx = cross_ctx.to(self.device)
                         cross_mask = cross_mask.to(self.device)
+                    utility_targets = batch.get("utility_target")
+                    if utility_targets is not None:
+                        utility_targets = utility_targets.to(self.device)
                     # targets 一并传入：dense_loss_weight>0 时分类模式附带逐bar密集监督（表征学习）
-                    out = self.model(x, labels=labels, soft_labels=soft, targets=y, temporal_feat=temporal, time_pos=time_pos, freq_feat=freq_feat, symbol_id=symbol_id, daily_ctx=daily_ctx, foreign_ctx=foreign_ctx, cross_ctx=cross_ctx, cross_mask=cross_mask, fine_ctx=fine_ctx)
+                    out = self.model(x, labels=labels, soft_labels=soft, targets=y, temporal_feat=temporal, time_pos=time_pos, freq_feat=freq_feat, symbol_id=symbol_id, daily_ctx=daily_ctx, foreign_ctx=foreign_ctx, cross_ctx=cross_ctx, cross_mask=cross_mask, fine_ctx=fine_ctx, utility_targets=utility_targets)
                 else:
                     out = self.model(x, targets=y, temporal_feat=temporal, time_pos=time_pos, freq_feat=freq_feat, symbol_id=symbol_id, daily_ctx=daily_ctx, foreign_ctx=foreign_ctx, fine_ctx=fine_ctx)
                 loss = out["loss"]
@@ -232,6 +235,7 @@ class MixedFrequencyTrainer:
             logits_l, thetas_l = [], []
             path_pred_l, path_true_l = [], []  # E3：验证集路径状态逐节点指标
             exc_pred_l, exc_true_l = [], []    # E4：验证集 excursion 分桶指标
+            utility_l, utility_target_l = [], []
             for batch in loader:
                 x = batch["seq"].to(self.device)
                 y = batch["target"].to(self.device)
@@ -266,8 +270,14 @@ class MixedFrequencyTrainer:
                     if cross_ctx is not None:
                         cross_ctx = cross_ctx.to(self.device)
                         cross_mask = cross_mask.to(self.device)
-                    out = self.model(x, labels=labels, temporal_feat=temporal, time_pos=time_pos, freq_feat=freq_feat, symbol_id=symbol_id, daily_ctx=daily_ctx, foreign_ctx=foreign_ctx, cross_ctx=cross_ctx, cross_mask=cross_mask, fine_ctx=fine_ctx)
+                    utility_targets = batch.get("utility_target")
+                    if utility_targets is not None:
+                        utility_targets = utility_targets.to(self.device)
+                    out = self.model(x, labels=labels, temporal_feat=temporal, time_pos=time_pos, freq_feat=freq_feat, symbol_id=symbol_id, daily_ctx=daily_ctx, foreign_ctx=foreign_ctx, cross_ctx=cross_ctx, cross_mask=cross_mask, fine_ctx=fine_ctx, utility_targets=utility_targets)
                     v_loss = out["loss"]
+                    if "loss_utility" in out:
+                        utility_l.append(out["utility_scores"].float().cpu())
+                        utility_target_l.append(utility_targets.float().cpu())
                     # E3：验证集同样计入路径辅助损失，保持 train/val 损失口径一致
                     if "path_logits" in out and batch.get("path_states") is not None:
                         ps = batch["path_states"].to(self.device)
@@ -434,6 +444,18 @@ class MixedFrequencyTrainer:
                         pp = np.concatenate(pol_pnls)
                         cls_metrics[freq]["policy_edge"] = float(pp.mean())
                         cls_metrics[freq]["policy_n"] = int(pol_n)
+                if utility_l and utility_target_l:
+                    us = torch.cat(utility_l).numpy()
+                    ut = torch.cat(utility_target_l).numpy()
+                    chosen = us.argmax(axis=1)
+                    chosen_score = us[np.arange(len(us)), chosen]
+                    # 只评价高置信效用排序的 top 5%，避免效用头靠全量噪声取平均。
+                    k = max(int(len(us) * 0.05), 5)
+                    keep = np.argsort(chosen_score)[-min(k, len(us)):]
+                    cls_metrics[freq]["utility_edge"] = float(
+                        ut[keep, chosen[keep]].mean()
+                    ) if len(keep) else float("nan")
+                    cls_metrics[freq]["utility_cover"] = float(len(keep) / max(len(us), 1))
             else:
                 ics[freq] = float(np.corrcoef(p, t)[0, 1]) if len(p) > 2 else float("nan")
         self._last_val_ics = ics
@@ -503,6 +525,15 @@ class MixedFrequencyTrainer:
                 score_vals = [m["edge"] for m in self._last_val_cls.values()]
                 selection_score = float(np.mean(score_vals)) if score_vals else float("-inf")
                 score_name = "mean_edge"
+                if getattr(self.model.config, "utility_head", False):
+                    utility_vals = [m.get("utility_edge") for m in self._last_val_cls.values()
+                                    if m.get("utility_edge") is not None]
+                    if utility_vals:
+                        utility_score = float(np.nanmean(utility_vals))
+                        uw = float(getattr(self.model.config, "utility_selection_weight", 0.10))
+                        selection_score += uw * utility_score
+                        score_name = "teacher_score"
+                        print(f"  teacher utility_edge={utility_score:+.4f} weight={uw:.3f}")
             else:
                 ic_vals = [v for v in self._last_val_ics.values() if not np.isnan(v)]
                 selection_score = float(np.mean(ic_vals)) if ic_vals else float("-inf")

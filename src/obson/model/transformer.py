@@ -89,6 +89,10 @@ class KLineConfig:
     query_decoder: bool = False     # E6'：未来时间 query decoder —— 4 个可学习 query
                                     # （未来25/50/75/100%时点）cross-attend 历史 encoder 输出，
                                     # 替代 pooled+node_emb 的简易路径头；encoder 保持单向
+    utility_head: bool = False      # Teacher：预测多/空按生产止盈止损规则的归一化效用
+    utility_loss_weight: float = 0.15
+    utility_logit_weight: float = 0.10  # 小权重帮助方向排序；默认关闭以兼容旧模型
+    utility_selection_weight: float = 0.10
 
     def __post_init__(self):
         if self.head_dim is None:
@@ -609,6 +613,9 @@ class KLineTransformer(nn.Module):
             if getattr(cfg, "exc_aux", False):
                 self.exc_head_dn = nn.Linear(cfg.hidden_size, 6)
                 self.exc_head_up = nn.Linear(cfg.hidden_size, 6)
+            if getattr(cfg, "utility_head", False):
+                # 维度顺序固定为 [short, long]，与 labels [0, 1, 2] 对齐。
+                self.utility_head = nn.Linear(cfg.hidden_size, 2)
             # ViT 式读出：last=最后位置（单向标配）；mean=全局平均；cls=可学习 [CLS] token
             self.readout = getattr(cfg, "readout", "last")
             if self.readout == "cls":
@@ -622,7 +629,7 @@ class KLineTransformer(nn.Module):
             if module.bias is not None:
                 torch.nn.init.zeros_(module.bias)
 
-    def forward(self, kline_seq, targets=None, temporal_feat=None, hourly_ctx=None, time_pos=None, freq_feat=None, symbol_id=None, labels=None, daily_ctx=None, foreign_ctx=None, soft_labels=None, cross_ctx=None, cross_mask=None, fine_ctx=None):
+    def forward(self, kline_seq, targets=None, temporal_feat=None, hourly_ctx=None, time_pos=None, freq_feat=None, symbol_id=None, labels=None, daily_ctx=None, foreign_ctx=None, soft_labels=None, cross_ctx=None, cross_mask=None, fine_ctx=None, utility_targets=None):
         bsz, seq_len, _ = kline_seq.shape
         x = self.input_encoder(kline_seq, temporal_feat=temporal_feat, freq_feat=freq_feat, symbol_id=symbol_id)
         # 日线金字塔：完整日K编码为前缀token，拼在分钟序列前（因果注意力下分钟token可 attend 日线背景）
@@ -682,6 +689,22 @@ class KLineTransformer(nn.Module):
                 pooled = x[:, -1, :]         # 现状：最后位置（单向标配）
             logits = self.class_head(pooled)  # [B, 3]
             result = {"logits": logits, "pred_class": logits.argmax(dim=-1)}
+            if getattr(self, "utility_head", None) is not None:
+                utility_scores = self.utility_head(pooled)
+                result["utility_scores"] = utility_scores
+                if utility_targets is not None:
+                    result["loss_utility"] = F.smooth_l1_loss(
+                        utility_scores, utility_targets, beta=0.25
+                    )
+                # 只在显式启用时融合，且保留分类头作为概率主来源。
+                uw = float(getattr(self.config, "utility_logit_weight", 0.0))
+                if uw:
+                    fused = logits.clone()
+                    fused[:, 0] = fused[:, 0] + uw * utility_scores[:, 0]
+                    fused[:, 2] = fused[:, 2] + uw * utility_scores[:, 1]
+                    logits = fused
+                    result["logits"] = fused
+                    result["pred_class"] = fused.argmax(dim=-1)
             if getattr(self, "path_head", None) is not None:
                 # 损失在 trainer 端 masked CE，-1 节点忽略
                 if getattr(self.config, "query_decoder", False):
@@ -709,6 +732,10 @@ class KLineTransformer(nn.Module):
                     result["loss"] = 0.5 * hard_loss + 0.5 * soft_loss
                 else:
                     result["loss"] = F.cross_entropy(logits, labels, weight=self.ce_weights)
+                if "loss_utility" in result:
+                    result["loss"] = result["loss"] + float(
+                        getattr(self.config, "utility_loss_weight", 0.15)
+                    ) * result["loss_utility"]
                 # 方向间隔损失：真实有方向的样本，要求赢家 logit 领先输家 ≥ margin，
                 # 惩罚"多≈空"的骑墙输出；软标签的方向证据强度 |t多−t空| 做权重调制，
                 # 冲到 92% 的样本要求大分离，纯震荡样本不罚骑墙；"无"样本不参与
