@@ -406,6 +406,8 @@ def main() -> None:
                     help="机会门控正例 BCE 权重，0=按训练集正例率自动计算")
     ap.add_argument("--hier-stage", choices=["joint", "gate", "direction", "direction_ft"], default="joint",
                     help="层级训练阶段：gate只训机会塔，direction只训方向塔，direction_ft解冻末层微调，joint联合")
+    ap.add_argument("--direction-label-mode", choices=["utility", "close_return"], default="utility",
+                    help="方向标签：utility=生产效用最优方向；close_return=gate样本按收盘收益方向")
     ap.add_argument("--hier-unfreeze-layers", type=int, default=2,
                     help="direction_ft 解冻 Transformer 最后几层，默认2")
     ap.add_argument("--dual-tower-task", action="store_true",
@@ -498,7 +500,8 @@ def main() -> None:
                                 "theta_mode": "dynamic", "soft_label": args.soft_label,
                                 "anchor_days_ahead": _anchor_ahead,
                                 "hierarchical_task": args.hierarchical_task,
-                                "gate_threshold": args.gate_threshold}
+                                "gate_threshold": args.gate_threshold,
+                                "direction_label_mode": args.direction_label_mode}
                 try:
                     train_ds, val_ds, test_ds = build_datasets_contract(
                         code, period, seq_len=seq_len,
@@ -537,14 +540,16 @@ def main() -> None:
                                             "theta_mode": "dynamic", "soft_label": args.soft_label,
                                             "anchor_days_ahead": _anchor_ahead,
                                             "hierarchical_task": args.hierarchical_task,
-                                            "gate_threshold": args.gate_threshold}
+                                            "gate_threshold": args.gate_threshold,
+                                            "direction_label_mode": args.direction_label_mode}
                         else:
                             theta = _day_theta_base(df.iloc[:n_train], args.theta_q)
                             extra_kwargs = {"label_mode": "day_close", "label_threshold": theta,
                                             "soft_label": args.soft_label,
                                             "anchor_days_ahead": _anchor_ahead,
                                             "hierarchical_task": args.hierarchical_task,
-                                            "gate_threshold": args.gate_threshold}
+                                            "gate_threshold": args.gate_threshold,
+                                            "direction_label_mode": args.direction_label_mode}
                     else:
                         offset = args.horizon_min // period
                         theta = _theta_from_quantile(df.iloc[:n_train], offset, args.theta_q)
@@ -888,6 +893,7 @@ def main() -> None:
         "klm_reg_loss_weight": args.klm_reg_loss_weight,
         "hierarchical_task": args.hierarchical_task,
         "gate_threshold": args.gate_threshold,
+        "direction_label_mode": args.direction_label_mode,
         "gate_pos_weight": gate_pos_weight,
         "hier_stage": args.hier_stage,
         "hier_unfreeze_layers": args.hier_unfreeze_layers,

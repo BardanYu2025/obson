@@ -113,6 +113,7 @@ class KLineDataset(Dataset):
         anchor_days_ahead: int = 0,
         hierarchical_task: bool = False,
         gate_threshold: float = 0.05,
+        direction_label_mode: str = "utility",
     ):
         """
         :param df: 主频率DataFrame（如5分钟线），需包含 OHLCV + datetime 列
@@ -161,6 +162,9 @@ class KLineDataset(Dataset):
         self.anchor_days_ahead = int(anchor_days_ahead) if label_mode == "day_close" else 0
         self.hierarchical_task = bool(hierarchical_task) and label_mode == "day_close"
         self.gate_threshold = float(gate_threshold)
+        if direction_label_mode not in ("utility", "close_return"):
+            raise ValueError("direction_label_mode must be utility or close_return")
+        self.direction_label_mode = direction_label_mode
         self.anchor_days: np.ndarray | None = None  # [N] 每样本锚交易日 id
         self.soft_targets: np.ndarray | None = None  # [N, 2] = (m_dn, m_up)，对 θ 归一
         self.path_states: np.ndarray | None = None  # E3: [N, 4] int64，-1=歧义 mask
@@ -624,7 +628,13 @@ class KLineDataset(Dataset):
                                   np.where(labels_kept == 0, -0.5, fwd_theta))
                 utilities = np.stack([short_u, long_u], axis=1)
                 self.gate_targets = (utilities.max(axis=1) >= self.gate_threshold).astype(np.float32)
-                self.direction_targets = utilities.argmax(axis=1).astype(np.int64)
+                if self.direction_label_mode == "close_return":
+                    # Alternative direction target: close displacement after
+                    # the gate has identified an actionable opportunity.
+                    # Ties are deterministic short (0); gate remains unchanged.
+                    self.direction_targets = (self.fwd_rets >= 0.0).astype(np.int64)
+                else:
+                    self.direction_targets = utilities.argmax(axis=1).astype(np.int64)
             self.path_states = path_state_all[keep]  # E3：int64 [N, 4]，-1=歧义 mask
             self.hazard_states = hazard_state_all[keep]
             self.serial_path_states = serial_state_all[keep]
