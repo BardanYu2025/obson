@@ -769,6 +769,9 @@ class KLineTransformer(nn.Module):
             logits = self.class_head(pooled)  # [B, 3]
             result = {"logits": logits, "pred_class": logits.argmax(dim=-1)}
             if getattr(self.config, "hierarchical_task", False):
+                # Kept in the output only for the short direction diagnostic;
+                # callers that do not inspect it pay no extra computation.
+                result["pooled_repr"] = pooled
                 gate_repr = self.opportunity_tower(pooled)
                 direction_repr = self.direction_tower(pooled)
                 gate_logit = self.gate_head(gate_repr).squeeze(-1)

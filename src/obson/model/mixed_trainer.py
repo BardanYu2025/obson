@@ -76,6 +76,7 @@ class MixedFrequencyTrainer:
         self.best_val_loss = float("inf")
         self.patience_counter = 0
         self.best_state = None
+        self._direction_diag_printed = False
 
     def _path_loss(self, pl: torch.Tensor, ps: torch.Tensor) -> torch.Tensor:
         """E3 路径状态 masked CE。v1.1：config.path_state_weights 存在时
@@ -141,6 +142,14 @@ class MixedFrequencyTrainer:
                     symbol_id = symbol_id.to(self.device)
 
                 self.optimizer.zero_grad()
+                direction_param_before = None
+                if (getattr(self.model.config, "hierarchical_task", False)
+                        and not self._direction_diag_printed):
+                    direction_param_before = {
+                        name: param.detach().clone()
+                        for name, param in self.model.named_parameters()
+                        if name.startswith("direction_tower") or name.startswith("direction_head")
+                    }
                 daily_ctx = batch.get("daily_ctx")
                 if daily_ctx is not None:
                     daily_ctx = daily_ctx.to(self.device)
@@ -206,8 +215,53 @@ class MixedFrequencyTrainer:
                 self._last_l_main, self._last_l_path = l_main_val, l_path_val
                 loss.backward()
 
+                # Direction-stage guardrail: inspect only the conditional task
+                # before the optimizer can alter the parameters.  A collapsed
+                # public prediction is not enough to diagnose this branch,
+                # because most rows are intentionally non-tradeable.
+                if (getattr(self.model.config, "hierarchical_task", False)
+                        and not self._direction_diag_printed
+                        and "direction_logits" in out
+                        and direction_targets is not None):
+                    active = gate_targets > 0.5
+                    if active.any():
+                        dlog = out["direction_logits"][active].detach()
+                        dprob = torch.softmax(dlog, dim=-1)[:, 1]
+                        pooled = out.get("pooled_repr")
+                        grad_sq = 0.0
+                        grad_n = 0
+                        for name, param in self.model.named_parameters():
+                            if (name.startswith("direction_tower")
+                                    or name.startswith("direction_head")
+                                    or name.startswith("layers.")) and param.grad is not None:
+                                grad_sq += float(param.grad.detach().float().pow(2).sum())
+                                grad_n += int(param.grad.numel())
+                        print(
+                            "  [direction_diag:first_batch] "
+                            f"active={int(active.sum())}/{len(active)} "
+                            f"target0={(direction_targets[active] == 0).sum().item()} "
+                            f"target1={(direction_targets[active] == 1).sum().item()} "
+                            f"pooled_std={(pooled[active].float().std().item() if pooled is not None else float('nan')):.8f} "
+                            f"logit_std={dlog.float().std(dim=0).cpu().tolist()} "
+                            f"pLong_mean={dprob.float().mean().item():.8f} "
+                            f"pLong_std={dprob.float().std().item():.8f} "
+                            f"grad_l2={(grad_sq ** 0.5):.8e} grad_params={grad_n}"
+                        )
+                        self._direction_diag_printed = True
+
                 torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
                 self.optimizer.step()
+                if direction_param_before is not None:
+                    delta_sq = 0.0
+                    delta_n = 0
+                    for name, before in direction_param_before.items():
+                        after = dict(self.model.named_parameters())[name].detach()
+                        delta_sq += float((after.float() - before.float()).pow(2).sum())
+                        delta_n += int(before.numel())
+                    print(
+                        f"  [direction_diag:first_step] param_delta_l2={delta_sq ** 0.5:.8e} "
+                        f"param_count={delta_n}"
+                    )
                 if self.scheduler is not None:
                     self.scheduler.step()
 
@@ -401,11 +455,23 @@ class MixedFrequencyTrainer:
                             direction_loss_sum / max(direction_loss_count, 1)
                         )
                         if direction_prob_l:
+                            # Conditional direction is defined only for true
+                            # opportunities.  The old all-row statistic was
+                            # diluted by ~88% non-tradeable rows.
                             dp_long = torch.cat(direction_prob_l).numpy()
-                            cls_metrics[freq]["hier_direction_prob_mean"] = float(dp_long.mean())
-                            cls_metrics[freq]["hier_direction_prob_std"] = float(dp_long.std())
+                            active_np = gt.astype(bool)
+                            dp_long_active = dp_long[active_np]
+                            if len(dp_long_active) == 0:
+                                dp_long_active = dp_long
+                            cls_metrics[freq]["hier_direction_prob_mean"] = float(dp_long_active.mean())
+                            cls_metrics[freq]["hier_direction_prob_std"] = float(dp_long_active.std())
                             cls_metrics[freq]["hier_direction_prob_q"] = np.quantile(
-                                dp_long, [0.1, 0.5, 0.9]
+                                dp_long_active, [0.1, 0.5, 0.9]
+                            ).tolist()
+                            cls_metrics[freq]["hier_direction_prob_mean_active"] = float(dp_long_active.mean())
+                            cls_metrics[freq]["hier_direction_prob_std_active"] = float(dp_long_active.std())
+                            cls_metrics[freq]["hier_direction_prob_q_active"] = np.quantile(
+                                dp_long_active, [0.1, 0.5, 0.9]
                             ).tolist()
                 # balanced accuracy + 信号类精确率/覆盖率
                 recalls, precs = [], {}
@@ -697,6 +763,7 @@ class MixedFrequencyTrainer:
                             f"{f}:loss={self._last_val_cls.get(f, {}).get('hier_direction_loss', float('nan')):.4f}/"
                             f"pLong={self._last_val_cls.get(f, {}).get('hier_direction_prob_mean', float('nan')):.3f}/"
                             f"std={self._last_val_cls.get(f, {}).get('hier_direction_prob_std', float('nan')):.3f}/"
+                            f"activeStd={self._last_val_cls.get(f, {}).get('hier_direction_prob_std_active', float('nan')):.3f}/"
                             f"q={self._last_val_cls.get(f, {}).get('hier_direction_prob_q', [])}"
                             for f in freqs
                         ))
