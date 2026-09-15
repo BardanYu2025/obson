@@ -785,6 +785,27 @@ def test_klm_masked_nan_target_does_not_poison_loss():
     assert torch.isfinite(out["loss"])
 
 
+def test_klm_starts_from_classifier_head():
+    """KLM must not replace the champion classifier with a random head."""
+    import torch
+    from obson.model.transformer import KLineConfig, KLineTransformer
+    cfg = KLineConfig(task="classify", klm_task=True,
+                      hidden_size=32, num_hidden_layers=1,
+                      num_attention_heads=2, head_dim=16,
+                      intermediate_size=64, kline_dim=4)
+    model = KLineTransformer(cfg)
+    model.eval()
+    x = torch.randn(2, 20, 4)
+    out = model(x, labels=torch.tensor([1, 2]))
+    # With zero KLM fusion, the public logits are independent of query values.
+    assert torch.count_nonzero(model.klm_trade_fusion.weight) == 0
+    assert torch.count_nonzero(model.klm_trade_fusion.bias) == 0
+    with torch.no_grad():
+        model.klm_queries.add_(10.0)
+    out_changed_query = model(x, labels=torch.tensor([1, 2]))
+    assert torch.allclose(out["logits"], out_changed_query["logits"], atol=1e-5)
+
+
 if __name__ == "__main__":
     import traceback
     fns = [v for k, v in sorted(globals().items()) if k.startswith("test_")]

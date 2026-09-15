@@ -646,7 +646,9 @@ class KLineTransformer(nn.Module):
                     cfg.hidden_size, cfg.num_attention_heads, batch_first=True)
                 self.klm_query_norm = nn.LayerNorm(cfg.hidden_size)
                 self.klm_reg_head = nn.Linear(cfg.hidden_size, 9)
-                self.klm_trade_head = nn.Linear(cfg.hidden_size, cfg.num_classes)
+                self.klm_trade_fusion = nn.Linear(cfg.hidden_size, cfg.num_classes)
+                nn.init.zeros_(self.klm_trade_fusion.weight)
+                nn.init.zeros_(self.klm_trade_fusion.bias)
             if getattr(cfg, "exc_aux", False):
                 self.exc_head_dn = nn.Linear(cfg.hidden_size, 6)
                 self.exc_head_up = nn.Linear(cfg.hidden_size, 6)
@@ -664,6 +666,11 @@ class KLineTransformer(nn.Module):
             # initially a zero residual, then learns its contribution.
             nn.init.zeros_(self.serial_fusion.weight)
             nn.init.zeros_(self.serial_fusion.bias)
+        if getattr(cfg, "klm_task", False):
+            # Preserve the champion classifier at initialization. KLM learns
+            # only a residual decision contribution from query representations.
+            nn.init.zeros_(self.klm_trade_fusion.weight)
+            nn.init.zeros_(self.klm_trade_fusion.bias)
 
     def _init_weights(self, module: nn.Module) -> None:
         if isinstance(module, nn.Linear):
@@ -739,10 +746,13 @@ class KLineTransformer(nn.Module):
                 result["klm_quantiles"] = self.klm_reg_head(qh).view(
                     x.shape[0], qh.shape[1], 3, 3
                 )
-                # The trade query consumes the predicted-market representation,
-                # while labels are used only by losses below.
-                trade_repr = pooled + qh.mean(dim=1)
-                result["logits"] = self.klm_trade_head(trade_repr)
+                # The trade query contributes a zero-initialized residual;
+                # labels are used only by losses below. This keeps KLM
+                # comparable to the champion from the first optimizer step.
+                trade_repr = qh.mean(dim=1)
+                result["logits"] = logits + float(
+                    getattr(self.config, "klm_reg_loss_weight", 0.10)
+                ) * self.klm_trade_fusion(trade_repr)
                 result["pred_class"] = result["logits"].argmax(dim=-1)
             if getattr(self.config, "serial_path", False):
                 q = self.serial_queries.unsqueeze(0).expand(x.shape[0], -1, -1)
