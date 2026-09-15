@@ -370,9 +370,11 @@ def main() -> None:
                     help="合约模式：按合约段拼接训练（data/contracts/），零跨合约污染；"
                          "仅支持 --task classify --label-anchor day_close")
     ap.add_argument("--hazard-task", action="store_true",
-                    help="teacher-level competing-risk hazard 主任务（实验开关，默认关闭）")
-    ap.add_argument("--hazard-event-weight", type=float, default=5.0,
-                    help="hazard 首触事件损失权重，默认5.0，避免全survival塌缩")
+                    help="teacher-level competing-risk hazard 辅助监督（生产分类头仍为主任务）")
+    ap.add_argument("--hazard-event-weight", type=float, default=1.0,
+                    help="hazard 首触事件的 NLL 权重，默认1.0")
+    ap.add_argument("--hazard-loss-weight", type=float, default=0.10,
+                    help="hazard 辅助损失相对分类损失的权重，默认0.10")
     ap.add_argument("--path-aux", action="store_true",
                     help="E3 路径状态辅助任务：4节点×3态辅助头（教师模型方案）")
     ap.add_argument("--path-aux-weight", type=float, default=0.1,
@@ -661,6 +663,7 @@ def main() -> None:
         hazard_task=args.hazard_task,
         hazard_bins=4,
         hazard_event_weight=args.hazard_event_weight,
+        hazard_loss_weight=args.hazard_loss_weight,
     )
     model = KLineTransformer(model_config)
     if args.init_ckpt:
@@ -789,6 +792,7 @@ def main() -> None:
         "hazard_task": args.hazard_task,
         "hazard_bins": 4,
         "hazard_event_weight": args.hazard_event_weight,
+        "hazard_loss_weight": args.hazard_loss_weight,
         "teacher": args.teacher,
         "teacher_loss_weight": args.teacher_loss_weight,
         "teacher_logit_weight": args.teacher_logit_weight if args.teacher else 0.0,

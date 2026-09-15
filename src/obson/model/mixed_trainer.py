@@ -286,9 +286,9 @@ class MixedFrequencyTrainer:
                     if "hazard_logits" in out and hazard_targets is not None:
                         hazard_prob_l.append(out["hazard_logits"].softmax(-1).float().cpu())
                         hazard_target_l.append(hazard_targets.float().cpu())
-                        # Public trading probabilities are the aggregated
-                        # [down, none, up] distribution, not per-bin hazards.
-                        hazard_agg_l.append(out["logits"].exp().float().cpu())
+                        # Diagnostic only: public logits remain the classifier head.
+                        from obson.model.hazard import hazard_to_probs
+                        hazard_agg_l.append(hazard_to_probs(out["hazard_logits"]).float().cpu())
                     if "loss_utility" in out:
                         utility_l.append(out["utility_scores"].float().cpu())
                         utility_target_l.append(utility_targets.float().cpu())

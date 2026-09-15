@@ -95,7 +95,8 @@ class KLineConfig:
     utility_selection_weight: float = 0.10
     hazard_task: bool = False       # competing-risk hazard experiment, disabled by default
     hazard_bins: int = 4
-    hazard_event_weight: float = 5.0
+    hazard_event_weight: float = 1.0
+    hazard_loss_weight: float = 0.10
 
     def __post_init__(self):
         if self.head_dim is None:
@@ -698,10 +699,7 @@ class KLineTransformer(nn.Module):
                 hazard_logits = self.hazard_head(pooled).view(
                     x.shape[0], int(self.config.hazard_bins), 3
                 )
-                from obson.model.hazard import hazard_to_class_logits
                 result["hazard_logits"] = hazard_logits
-                result["logits"] = hazard_to_class_logits(hazard_logits)
-                result["pred_class"] = result["logits"].argmax(dim=-1)
             if getattr(self, "utility_head", None) is not None:
                 utility_scores = self.utility_head(pooled)
                 result["utility_scores"] = utility_scores
@@ -735,16 +733,7 @@ class KLineTransformer(nn.Module):
                 result["exc_logits_dn"] = self.exc_head_dn(pooled)
                 result["exc_logits_up"] = self.exc_head_up(pooled)
             if labels is not None:
-                if getattr(self.config, "hazard_task", False):
-                    if hazard_targets is None:
-                        result["loss"] = result["logits"].sum() * 0.0
-                    else:
-                        from obson.model.hazard import hazard_nll
-                        result["loss"] = hazard_nll(
-                            result["hazard_logits"], hazard_targets,
-                            event_weight=float(getattr(self.config, "hazard_event_weight", 5.0)),
-                        )
-                elif soft_labels is not None:
+                if soft_labels is not None:
                     # 软标签 v2：混合损失 = 0.5×硬CE（带类别权重，保底 argmax 语义）
                     #           + 0.5×软CE（不带类别权重——软目标本身已是逐样本分布，
                     #             再乘方向类权重会怂恿模型永远选方向，v1 的坑）
@@ -754,6 +743,15 @@ class KLineTransformer(nn.Module):
                     result["loss"] = 0.5 * hard_loss + 0.5 * soft_loss
                 else:
                     result["loss"] = F.cross_entropy(logits, labels, weight=self.ce_weights)
+                if getattr(self.config, "hazard_task", False) and hazard_targets is not None:
+                    from obson.model.hazard import hazard_nll
+                    result["loss_hazard"] = hazard_nll(
+                        result["hazard_logits"], hazard_targets,
+                        event_weight=float(getattr(self.config, "hazard_event_weight", 1.0)),
+                    )
+                    result["loss"] = result["loss"] + float(
+                        getattr(self.config, "hazard_loss_weight", 0.10)
+                    ) * result["loss_hazard"]
                 if "loss_utility" in result:
                     result["loss"] = result["loss"] + float(
                         getattr(self.config, "utility_loss_weight", 0.15)

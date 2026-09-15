@@ -544,6 +544,7 @@ def test_path_loss_per_node_class_weights():
     from obson.model.transformer import KLineConfig, KLineTransformer
     cfg = KLineConfig(task="classify", path_aux=True)
     model = KLineTransformer(cfg)
+    model.eval()
     tr = MixedFrequencyTrainer.__new__(MixedFrequencyTrainer)
     tr.model, tr.device = model, "cpu"
     torch.manual_seed(0)
@@ -697,7 +698,7 @@ def test_dataset_hazard_states_follow_first_event():
 
 
 def test_hazard_task_model_output():
-    """Hazard mode keeps the public class interface while exposing hazards."""
+    """Hazard mode keeps the classifier public and exposes hazards as auxiliary output."""
     import torch
     from obson.model.transformer import KLineConfig, KLineTransformer
     cfg = KLineConfig(task="classify", hazard_task=True, hazard_bins=4,
@@ -705,13 +706,19 @@ def test_hazard_task_model_output():
                       num_attention_heads=2, head_dim=16,
                       intermediate_size=64, kline_dim=4)
     model = KLineTransformer(cfg)
+    model.eval()
     x = torch.randn(2, 20, 4)
     targets = torch.zeros(2, 4, dtype=torch.long)
     out = model(x, labels=torch.tensor([1, 1]), hazard_targets=targets)
     assert out["hazard_logits"].shape == (2, 4, 3)
     assert out["logits"].shape == (2, 3)
-    assert torch.allclose(out["logits"].exp().sum(-1), torch.ones(2), atol=1e-5)
     assert torch.isfinite(out["loss"])
+    assert torch.isfinite(out["loss_hazard"])
+    with torch.no_grad():
+        model.hazard_head.weight.zero_()
+        model.hazard_head.bias.zero_()
+    out_zero = model(x, labels=torch.tensor([1, 1]), hazard_targets=targets)
+    assert torch.allclose(out["logits"], out_zero["logits"])
 
 
 if __name__ == "__main__":
