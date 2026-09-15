@@ -249,6 +249,7 @@ class MixedFrequencyTrainer:
             n_batches = len(loader)
             preds, trues, fwds = [], [], []
             logits_l, thetas_l = [], []
+            gate_score_l, gate_true_l, direction_pred_l, direction_true_l = [], [], [], []
             path_pred_l, path_true_l = [], []  # E3：验证集路径状态逐节点指标
             exc_pred_l, exc_true_l = [], []    # E4：验证集 excursion 分桶指标
             utility_l, utility_target_l = [], []
@@ -337,6 +338,12 @@ class MixedFrequencyTrainer:
                     preds.append(out["pred_class"].float().cpu())
                     logits_l.append(out["logits"].float().cpu())
                     trues.append(labels.float().cpu())
+                    if getattr(self.model.config, "hierarchical_task", False):
+                        gate_score_l.append(out["gate_logit"].detach().float().cpu())
+                        direction_pred_l.append(out["direction_logits"].argmax(-1).float().cpu())
+                        if gate_targets is not None:
+                            gate_true_l.append(gate_targets.float().cpu())
+                            direction_true_l.append(direction_targets.float().cpu())
                     fwd = batch.get("fwd_ret")
                     if fwd is not None:
                         fwds.append(fwd.float().cpu())
@@ -357,6 +364,29 @@ class MixedFrequencyTrainer:
             t = torch.cat(trues).numpy()
             import numpy as np
             if task == "classify":
+                if getattr(self.model.config, "hierarchical_task", False) and gate_score_l:
+                    # Cascaded evaluation: freeze a pre-registered 10% gate
+                    # coverage per frequency; only selected rows receive a
+                    # conditional direction, all others are [none].
+                    gs = torch.cat(gate_score_l).numpy()
+                    dp = torch.cat(direction_pred_l).numpy().astype(int)
+                    n_select = max(1, int(np.ceil(len(gs) * 0.10)))
+                    chosen = np.zeros(len(gs), dtype=bool)
+                    chosen[np.argsort(gs)[-n_select:]] = True
+                    p = np.ones(len(gs), dtype=np.int64)
+                    p[chosen] = np.where(dp[chosen] == 1, 2, 0)
+                    cls_metrics[freq] = {"hier_gate_cover": float(chosen.mean()),
+                                         "hier_gate_score_mean": float(gs[chosen].mean()),
+                                         "hier_direction_cover": float(chosen.mean())}
+                    if gate_true_l:
+                        gt = torch.cat(gate_true_l).numpy().astype(int)
+                        dt = torch.cat(direction_true_l).numpy().astype(int)
+                        cls_metrics[freq]["hier_gate_rate"] = float(gt.mean())
+                        cls_metrics[freq]["hier_gate_precision10"] = float(gt[chosen].mean())
+                        dm = gt.astype(bool) & (dt >= 0)
+                        cls_metrics[freq]["hier_direction_ba"] = float(
+                            np.mean([((dp[dm] == c) & (dt[dm] == c)).sum() / max((dt[dm] == c).sum(), 1) for c in (0, 1)])
+                        ) if dm.any() else float("nan")
                 # balanced accuracy + 信号类精确率/覆盖率
                 recalls, precs = [], {}
                 for c in (0, 1, 2):
@@ -365,12 +395,15 @@ class MixedFrequencyTrainer:
                     fp = float(((p == c) & (t != c)).sum())
                     recalls.append(tp / max(tp + fn, 1.0))
                     precs[c] = tp / max(tp + fp, 1.0)
-                cls_metrics[freq] = {
+                base_metrics = {
                     "bal_acc": float(np.mean(recalls)),
                     "recall_neg": recalls[0], "recall_none": recalls[1], "recall_pos": recalls[2],
                     "prec_pos": precs[2], "prec_neg": precs[0],
                     "cover": float((p != 1).mean()),
                 }
+                if getattr(self.model.config, "hierarchical_task", False) and gate_score_l:
+                    base_metrics.update(cls_metrics.get(freq, {}))
+                cls_metrics[freq] = base_metrics
                 # 实战 edge：喊开命中率超出"乱喊基准"的幅度，按信号数做 shrinkage，
                 # 防止"只喊 1 次碰巧喊对"拿到虚高 edge。选模与早停的唯一裁判。
                 base_pos = float((t == 2).mean())
@@ -620,6 +653,14 @@ class MixedFrequencyTrainer:
                     f"r-={self._last_val_cls.get(f, {}).get('ret_neg', 0):+.3f}%"
                     for f in freqs
                 )
+                if getattr(self.model.config, "hierarchical_task", False):
+                    hier_str = " ".join(
+                        f"{f}:gate={self._last_val_cls.get(f, {}).get('hier_gate_rate', float('nan')):.1%}/"
+                        f"top10={self._last_val_cls.get(f, {}).get('hier_gate_precision10', float('nan')):.1%}/"
+                        f"dirBA={self._last_val_cls.get(f, {}).get('hier_direction_ba', float('nan')):.3f}"
+                        for f in freqs
+                    )
+                    print(f"  hierarchical(cascade top10%): {hier_str}")
                 # 生产口径辅助指标（policy_edge）：只打印不参选模
                 pol = {f: self._last_val_cls.get(f, {}).get("policy_edge") for f in freqs}
                 pol = {f: v for f, v in pol.items() if v is not None}

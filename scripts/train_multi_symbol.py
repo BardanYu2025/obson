@@ -864,6 +864,7 @@ def _evaluate_test(args, model, test_loaders, device, ckpt_name: str = "best.pt"
     model.eval()
     for key, loader in test_loaders.items():
         preds, trues, fwd, tods, logits, touch = [], [], [], [], [], []
+        gate_scores, direction_preds = [], []
         has_touch = False
         with torch.no_grad():
             for batch in loader:
@@ -897,6 +898,9 @@ def _evaluate_test(args, model, test_loaders, device, ckpt_name: str = "best.pt"
                     )
                     preds.append(out["pred_class"].cpu().numpy())
                     logits.append(out["logits"].cpu().numpy())
+                    if args.hierarchical_task:
+                        gate_scores.append(out["gate_logit"].cpu().numpy())
+                        direction_preds.append(out["direction_logits"].argmax(-1).cpu().numpy())
                     trues.append(batch["label"].numpy())
                     fwd.append(batch["fwd_ret"].numpy())
                     tods.append(batch["tod_minutes"].numpy())
@@ -932,6 +936,16 @@ def _evaluate_test(args, model, test_loaders, device, ckpt_name: str = "best.pt"
         p, t = np.concatenate(preds), np.concatenate(trues)
         if args.task == "classify":
             fwd = np.concatenate(fwd)
+            if args.hierarchical_task and gate_scores:
+                gs = np.concatenate(gate_scores)
+                dp = np.concatenate(direction_preds).astype(int)
+                n_select = max(1, int(np.ceil(len(gs) * 0.10)))
+                chosen = np.zeros(len(gs), dtype=bool)
+                chosen[np.argsort(gs)[-n_select:]] = True
+                p = np.ones(len(gs), dtype=np.int64)
+                p[chosen] = np.where(dp[chosen] == 1, 2, 0)
+                print(f"  [hier-cascade] 固定 gate top10%: {chosen.mean():.1%} | "
+                      f"方向多/空={int((p == 2).sum())}/{int((p == 0).sum())}")
             n = len(p)
             cm = np.zeros((3, 3), dtype=np.int64)
             for ti, pi in zip(t.astype(np.int64), p.astype(np.int64)):
