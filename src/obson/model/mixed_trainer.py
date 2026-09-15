@@ -253,6 +253,9 @@ class MixedFrequencyTrainer:
             preds, trues, fwds = [], [], []
             logits_l, thetas_l = [], []
             gate_score_l, gate_true_l, direction_pred_l, direction_true_l = [], [], [], []
+            direction_prob_l = []
+            direction_loss_sum = 0.0
+            direction_loss_count = 0
             path_pred_l, path_true_l = [], []  # E3：验证集路径状态逐节点指标
             exc_pred_l, exc_true_l = [], []    # E4：验证集 excursion 分桶指标
             utility_l, utility_target_l = [], []
@@ -313,6 +316,9 @@ class MixedFrequencyTrainer:
                         direction_targets = direction_targets.to(self.device)
                     out = self.model(x, labels=labels, temporal_feat=temporal, time_pos=time_pos, freq_feat=freq_feat, symbol_id=symbol_id, daily_ctx=daily_ctx, foreign_ctx=foreign_ctx, cross_ctx=cross_ctx, cross_mask=cross_mask, fine_ctx=fine_ctx, utility_targets=utility_targets, hazard_targets=hazard_targets, serial_path_targets=serial_path_targets, klm_targets=klm_targets, klm_mask=klm_mask, gate_targets=gate_targets, direction_targets=direction_targets)
                     v_loss = out["loss"]
+                    if "loss_direction" in out:
+                        direction_loss_sum += float(out["loss_direction"].detach().item())
+                        direction_loss_count += 1
                     if "hazard_logits" in out and hazard_targets is not None:
                         hazard_prob_l.append(out["hazard_logits"].softmax(-1).float().cpu())
                         hazard_target_l.append(hazard_targets.float().cpu())
@@ -344,6 +350,7 @@ class MixedFrequencyTrainer:
                     if getattr(self.model.config, "hierarchical_task", False):
                         gate_score_l.append(out["gate_logit"].detach().float().cpu())
                         direction_pred_l.append(out["direction_logits"].argmax(-1).float().cpu())
+                        direction_prob_l.append(torch.softmax(out["direction_logits"], dim=-1)[:, 1].detach().float().cpu())
                         if gate_targets is not None:
                             gate_true_l.append(gate_targets.float().cpu())
                             direction_true_l.append(direction_targets.float().cpu())
@@ -390,6 +397,16 @@ class MixedFrequencyTrainer:
                         cls_metrics[freq]["hier_direction_ba"] = float(
                             np.mean([((dp[dm] == c) & (dt[dm] == c)).sum() / max((dt[dm] == c).sum(), 1) for c in (0, 1)])
                         ) if dm.any() else float("nan")
+                        cls_metrics[freq]["hier_direction_loss"] = (
+                            direction_loss_sum / max(direction_loss_count, 1)
+                        )
+                        if direction_prob_l:
+                            dp_long = torch.cat(direction_prob_l).numpy()
+                            cls_metrics[freq]["hier_direction_prob_mean"] = float(dp_long.mean())
+                            cls_metrics[freq]["hier_direction_prob_std"] = float(dp_long.std())
+                            cls_metrics[freq]["hier_direction_prob_q"] = np.quantile(
+                                dp_long, [0.1, 0.5, 0.9]
+                            ).tolist()
                 # balanced accuracy + 信号类精确率/覆盖率
                 recalls, precs = [], {}
                 for c in (0, 1, 2):
@@ -620,9 +637,15 @@ class MixedFrequencyTrainer:
             # 按信号数 shrinkage）。选模与早停共用此分数。
             import numpy as np
             if task == "classify":
-                score_vals = [m["edge"] for m in self._last_val_cls.values()]
-                selection_score = float(np.mean(score_vals)) if score_vals else float("-inf")
-                score_name = "mean_edge"
+                if getattr(self.model.config, "hier_stage", "joint") == "direction":
+                    loss_vals = [m["hier_direction_loss"] for m in self._last_val_cls.values()
+                                 if np.isfinite(m.get("hier_direction_loss", np.nan))]
+                    selection_score = -float(np.mean(loss_vals)) if loss_vals else float("-inf")
+                    score_name = "-direction_loss"
+                else:
+                    score_vals = [m["edge"] for m in self._last_val_cls.values()]
+                    selection_score = float(np.mean(score_vals)) if score_vals else float("-inf")
+                    score_name = "mean_edge"
                 if getattr(self.model.config, "utility_head", False):
                     utility_vals = [m.get("utility_edge") for m in self._last_val_cls.values()
                                     if m.get("utility_edge") is not None]
@@ -669,6 +692,14 @@ class MixedFrequencyTrainer:
                         for f in freqs
                     )
                     print(f"  hierarchical(cascade top10%): {hier_str}")
+                    if getattr(self.model.config, "hier_stage", "joint") == "direction":
+                        print("  direction_diag: " + " ".join(
+                            f"{f}:loss={self._last_val_cls.get(f, {}).get('hier_direction_loss', float('nan')):.4f}/"
+                            f"pLong={self._last_val_cls.get(f, {}).get('hier_direction_prob_mean', float('nan')):.3f}/"
+                            f"std={self._last_val_cls.get(f, {}).get('hier_direction_prob_std', float('nan')):.3f}/"
+                            f"q={self._last_val_cls.get(f, {}).get('hier_direction_prob_q', [])}"
+                            for f in freqs
+                        ))
                 # 生产口径辅助指标（policy_edge）：只打印不参选模
                 pol = {f: self._last_val_cls.get(f, {}).get("policy_edge") for f in freqs}
                 pol = {f: v for f, v in pol.items() if v is not None}
