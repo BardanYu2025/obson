@@ -404,8 +404,10 @@ def main() -> None:
                     help="机会门控标签的最小生产效用（theta倍数），默认0.80（完整止盈级别）")
     ap.add_argument("--gate-pos-weight", type=float, default=0.0,
                     help="机会门控正例 BCE 权重，0=按训练集正例率自动计算")
-    ap.add_argument("--hier-stage", choices=["joint", "gate", "direction"], default="joint",
-                    help="层级训练阶段：gate只训机会塔，direction只训方向塔，joint联合")
+    ap.add_argument("--hier-stage", choices=["joint", "gate", "direction", "direction_ft"], default="joint",
+                    help="层级训练阶段：gate只训机会塔，direction只训方向塔，direction_ft解冻末层微调，joint联合")
+    ap.add_argument("--hier-unfreeze-layers", type=int, default=2,
+                    help="direction_ft 解冻 Transformer 最后几层，默认2")
     ap.add_argument("--dual-tower-task", action="store_true",
                     help="双塔+结果回归：机会塔/方向塔/效用结果塔（回归不参与交易输出）")
     ap.add_argument("--outcome-loss-weight", type=float, default=0.10)
@@ -725,6 +727,7 @@ def main() -> None:
         gate_threshold=args.gate_threshold,
         gate_pos_weight=gate_pos_weight,
         hier_stage=args.hier_stage,
+        hier_unfreeze_layers=args.hier_unfreeze_layers,
         dual_tower_task=args.dual_tower_task,
         outcome_loss_weight=args.outcome_loss_weight,
     )
@@ -735,15 +738,21 @@ def main() -> None:
         _ck = torch.load(args.init_ckpt, map_location="cpu", weights_only=False)
         _miss, _unexp = model.load_state_dict(_ck["model"], strict=False)
         print(f"[init-ckpt] 从 {args.init_ckpt} 初始化：missing={len(_miss)} unexpected={len(_unexp)}")
-    if args.hierarchical_task and args.hier_stage == "direction":
+    if args.hierarchical_task and args.hier_stage in ("direction", "direction_ft"):
         frozen = 0
+        n_layers = max(0, min(args.hier_unfreeze_layers, len(model.layers)))
+        train_layer_names = {f"layers.{i}." for i in range(len(model.layers) - n_layers, len(model.layers))}
         for name, param in model.named_parameters():
-            if name.startswith("direction_tower") or name.startswith("direction_head"):
+            layer_train = any(name.startswith(prefix) for prefix in train_layer_names)
+            if name.startswith("direction_tower") or name.startswith("direction_head") or (
+                args.hier_stage == "direction_ft" and layer_train
+            ):
                 param.requires_grad = True
             else:
                 param.requires_grad = False
                 frozen += param.numel()
-        print(f"[hier] direction阶段：冻结参数={frozen:,}，仅训练 direction_tower/direction_head")
+        suffix = " + 最后%d层encoder" % n_layers if args.hier_stage == "direction_ft" else ""
+        print(f"[hier] direction阶段：冻结参数={frozen:,}，训练 direction_tower/direction_head{suffix}")
     elif args.hierarchical_task and args.hier_stage == "gate":
         for name, param in model.named_parameters():
             if name.startswith("direction_tower") or name.startswith("direction_head"):
@@ -881,6 +890,7 @@ def main() -> None:
         "gate_threshold": args.gate_threshold,
         "gate_pos_weight": gate_pos_weight,
         "hier_stage": args.hier_stage,
+        "hier_unfreeze_layers": args.hier_unfreeze_layers,
         "dual_tower_task": args.dual_tower_task,
         "outcome_loss_weight": args.outcome_loss_weight,
         "teacher": args.teacher,

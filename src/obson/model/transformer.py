@@ -110,6 +110,7 @@ class KLineConfig:
     direction_loss_weight: float = 1.0
     gate_pos_weight: float = 0.0
     hier_stage: str = "joint"
+    hier_unfreeze_layers: int = 2
     dual_tower_task: bool = False
     outcome_loss_weight: float = 0.10
 
@@ -873,7 +874,7 @@ class KLineTransformer(nn.Module):
                     stage = getattr(self.config, "hier_stage", "joint")
                     if stage == "gate":
                         result["loss"] = float(getattr(self.config, "gate_loss_weight", 1.0)) * gate_loss
-                    elif stage == "direction":
+                    elif stage in ("direction", "direction_ft"):
                         result["loss"] = float(getattr(self.config, "direction_loss_weight", 1.0)) * direction_loss
                     else:
                         result["loss"] = (
