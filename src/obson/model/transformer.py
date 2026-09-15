@@ -95,6 +95,7 @@ class KLineConfig:
     utility_selection_weight: float = 0.10
     hazard_task: bool = False       # competing-risk hazard experiment, disabled by default
     hazard_bins: int = 4
+    hazard_event_weight: float = 5.0
 
     def __post_init__(self):
         if self.head_dim is None:
@@ -739,7 +740,10 @@ class KLineTransformer(nn.Module):
                         result["loss"] = result["logits"].sum() * 0.0
                     else:
                         from obson.model.hazard import hazard_nll
-                        result["loss"] = hazard_nll(result["hazard_logits"], hazard_targets)
+                        result["loss"] = hazard_nll(
+                            result["hazard_logits"], hazard_targets,
+                            event_weight=float(getattr(self.config, "hazard_event_weight", 5.0)),
+                        )
                 elif soft_labels is not None:
                     # 软标签 v2：混合损失 = 0.5×硬CE（带类别权重，保底 argmax 语义）
                     #           + 0.5×软CE（不带类别权重——软目标本身已是逐样本分布，

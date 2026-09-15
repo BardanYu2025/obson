@@ -239,6 +239,7 @@ class MixedFrequencyTrainer:
             path_pred_l, path_true_l = [], []  # E3：验证集路径状态逐节点指标
             exc_pred_l, exc_true_l = [], []    # E4：验证集 excursion 分桶指标
             utility_l, utility_target_l = [], []
+            hazard_prob_l, hazard_target_l = [], []
             for batch in loader:
                 x = batch["seq"].to(self.device)
                 y = batch["target"].to(self.device)
@@ -281,6 +282,9 @@ class MixedFrequencyTrainer:
                         hazard_targets = hazard_targets.to(self.device)
                     out = self.model(x, labels=labels, temporal_feat=temporal, time_pos=time_pos, freq_feat=freq_feat, symbol_id=symbol_id, daily_ctx=daily_ctx, foreign_ctx=foreign_ctx, cross_ctx=cross_ctx, cross_mask=cross_mask, fine_ctx=fine_ctx, utility_targets=utility_targets, hazard_targets=hazard_targets)
                     v_loss = out["loss"]
+                    if "hazard_logits" in out and hazard_targets is not None:
+                        hazard_prob_l.append(out["hazard_logits"].softmax(-1).float().cpu())
+                        hazard_target_l.append(hazard_targets.float().cpu())
                     if "loss_utility" in out:
                         utility_l.append(out["utility_scores"].float().cpu())
                         utility_target_l.append(utility_targets.float().cpu())
@@ -346,6 +350,17 @@ class MixedFrequencyTrainer:
                 edge = (precs[2] - base_pos) * min(1.0, n_pos / 50.0) \
                      + (precs[0] - base_neg) * min(1.0, n_neg / 50.0)
                 cls_metrics[freq]["edge"] = float(edge)
+                if hazard_prob_l and hazard_target_l:
+                    hp = torch.cat(hazard_prob_l).numpy()
+                    ht = torch.cat(hazard_target_l).numpy().astype(int)
+                    valid_h = ht >= 0
+                    cls_metrics[freq]["hazard_survival_mass"] = float(hp[..., 0].mean())
+                    cls_metrics[freq]["hazard_up_mass"] = float(hp[..., 1].mean())
+                    cls_metrics[freq]["hazard_down_mass"] = float(hp[..., 2].mean())
+                    cls_metrics[freq]["hazard_event_rate"] = float(
+                        ((ht == 1) | (ht == 2)).sum() / max(valid_h.sum(), 1)
+                    )
+                    cls_metrics[freq]["hazard_event_mass"] = float(hp[..., 1:].sum(-1).mean())
                 # E3 路径辅助头验证指标（教师模型 §8）：逐节点 BA + 单调性违规率 + 塌缩检测
                 if path_pred_l:
                     pp = torch.cat(path_pred_l).numpy().astype(int)   # [N,4]
@@ -601,6 +616,14 @@ class MixedFrequencyTrainer:
                         f" acc=[{eacc[0]:.2f}/{eacc[1]:.2f}]"
                         f" 分布dn=[" + "/".join(f"{v:.2f}" for v in edn) + "]"
                         f" up=[" + "/".join(f"{v:.2f}" for v in eup) + "]"
+                    )
+                hm = [m for m in self._last_val_cls.values() if "hazard_event_mass" in m]
+                if hm:
+                    extra_str += (
+                        "\n  hazard(不参与选模): "
+                        f"survival={np.mean([m['hazard_survival_mass'] for m in hm]):.3f} "
+                        f"event_mass={np.mean([m['hazard_event_mass'] for m in hm]):.3f} "
+                        f"true_event={np.mean([m['hazard_event_rate'] for m in hm]):.3f}"
                     )
             else:
                 ic_str = " ".join(f"{f}={self._last_val_ics.get(f, float('nan')):+.3f}" for f in freqs)

@@ -35,7 +35,9 @@ sample has survival labels through the event bin and one upper/lower event label
 in that bin; later bins are inactive. A same-bar double touch is ambiguous and
 is masked for the hazard loss.
 
-The loss is discrete competing-risk negative log likelihood. No future value is
+The loss is discrete competing-risk negative log likelihood. First-touch bins
+use an event weight (default `5.0`) so that the abundant censored/survival
+examples cannot make an all-survival predictor look good. No future value is
 fed as an input feature, and contract segment boundaries remain enforced by the
 existing dataset path.
 
@@ -49,6 +51,7 @@ PYTHONPATH=src python -u scripts/train_multi_symbol.py \
   --task classify --label-anchor day_close --theta-mode dynamic --theta-q 0.90 \
   --contract-mode --hazard-task --periods 60 30 \
   --daily-bars 20 --foreign-bars 20 --batch-size 256 --lr 1e-3 \
+  --hazard-event-weight 5.0 \
   --epochs 40 --patience 8 --seed 42 \
   --save-dir checkpoints/hazard_s42
 ```

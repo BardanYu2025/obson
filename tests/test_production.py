@@ -658,6 +658,15 @@ def test_hazard_probability_aggregation_and_nll():
     assert probs.shape == (2, 3)
     assert torch.allclose(probs.sum(-1), torch.ones(2), atol=1e-6)
 
+    # An event-weighted objective must react more strongly to an event-bin
+    # mistake than the unweighted objective.
+    wrong = torch.zeros(1, 2, 3)
+    targets_event = torch.tensor([[0, 1]])
+    wrong[0, 1] = torch.tensor([8.0, -8.0, -8.0])
+    plain = hazard_nll(wrong, targets_event, event_weight=1.0)
+    weighted = hazard_nll(wrong, targets_event, event_weight=5.0)
+    assert weighted > plain
+
 
 def test_dataset_hazard_states_follow_first_event():
     """Dataset hazard labels are survival until one absorbing first event."""
