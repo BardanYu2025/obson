@@ -163,8 +163,11 @@ class MixedFrequencyTrainer:
                     utility_targets = batch.get("utility_target")
                     if utility_targets is not None:
                         utility_targets = utility_targets.to(self.device)
+                    hazard_targets = batch.get("hazard_states")
+                    if hazard_targets is not None:
+                        hazard_targets = hazard_targets.to(self.device)
                     # targets 一并传入：dense_loss_weight>0 时分类模式附带逐bar密集监督（表征学习）
-                    out = self.model(x, labels=labels, soft_labels=soft, targets=y, temporal_feat=temporal, time_pos=time_pos, freq_feat=freq_feat, symbol_id=symbol_id, daily_ctx=daily_ctx, foreign_ctx=foreign_ctx, cross_ctx=cross_ctx, cross_mask=cross_mask, fine_ctx=fine_ctx, utility_targets=utility_targets)
+                    out = self.model(x, labels=labels, soft_labels=soft, targets=y, temporal_feat=temporal, time_pos=time_pos, freq_feat=freq_feat, symbol_id=symbol_id, daily_ctx=daily_ctx, foreign_ctx=foreign_ctx, cross_ctx=cross_ctx, cross_mask=cross_mask, fine_ctx=fine_ctx, utility_targets=utility_targets, hazard_targets=hazard_targets)
                 else:
                     out = self.model(x, targets=y, temporal_feat=temporal, time_pos=time_pos, freq_feat=freq_feat, symbol_id=symbol_id, daily_ctx=daily_ctx, foreign_ctx=foreign_ctx, fine_ctx=fine_ctx)
                 loss = out["loss"]
@@ -273,7 +276,10 @@ class MixedFrequencyTrainer:
                     utility_targets = batch.get("utility_target")
                     if utility_targets is not None:
                         utility_targets = utility_targets.to(self.device)
-                    out = self.model(x, labels=labels, temporal_feat=temporal, time_pos=time_pos, freq_feat=freq_feat, symbol_id=symbol_id, daily_ctx=daily_ctx, foreign_ctx=foreign_ctx, cross_ctx=cross_ctx, cross_mask=cross_mask, fine_ctx=fine_ctx, utility_targets=utility_targets)
+                    hazard_targets = batch.get("hazard_states")
+                    if hazard_targets is not None:
+                        hazard_targets = hazard_targets.to(self.device)
+                    out = self.model(x, labels=labels, temporal_feat=temporal, time_pos=time_pos, freq_feat=freq_feat, symbol_id=symbol_id, daily_ctx=daily_ctx, foreign_ctx=foreign_ctx, cross_ctx=cross_ctx, cross_mask=cross_mask, fine_ctx=fine_ctx, utility_targets=utility_targets, hazard_targets=hazard_targets)
                     v_loss = out["loss"]
                     if "loss_utility" in out:
                         utility_l.append(out["utility_scores"].float().cpu())

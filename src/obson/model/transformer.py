@@ -93,6 +93,8 @@ class KLineConfig:
     utility_loss_weight: float = 0.15
     utility_logit_weight: float = 0.10  # 小权重帮助方向排序；默认关闭以兼容旧模型
     utility_selection_weight: float = 0.10
+    hazard_task: bool = False       # competing-risk hazard experiment, disabled by default
+    hazard_bins: int = 4
 
     def __post_init__(self):
         if self.head_dim is None:
@@ -610,6 +612,8 @@ class KLineTransformer(nn.Module):
                     self.path_node_emb = nn.Embedding(4, cfg.hidden_size)
                     self.path_head = nn.Linear(cfg.hidden_size, 3)
             # E4 excursion 分桶头：pooled → 下行/上行最大偏移各占 θ 的几分（6 桶）
+            if getattr(cfg, "hazard_task", False):
+                self.hazard_head = nn.Linear(cfg.hidden_size, 3 * int(cfg.hazard_bins))
             if getattr(cfg, "exc_aux", False):
                 self.exc_head_dn = nn.Linear(cfg.hidden_size, 6)
                 self.exc_head_up = nn.Linear(cfg.hidden_size, 6)
@@ -629,7 +633,7 @@ class KLineTransformer(nn.Module):
             if module.bias is not None:
                 torch.nn.init.zeros_(module.bias)
 
-    def forward(self, kline_seq, targets=None, temporal_feat=None, hourly_ctx=None, time_pos=None, freq_feat=None, symbol_id=None, labels=None, daily_ctx=None, foreign_ctx=None, soft_labels=None, cross_ctx=None, cross_mask=None, fine_ctx=None, utility_targets=None):
+    def forward(self, kline_seq, targets=None, temporal_feat=None, hourly_ctx=None, time_pos=None, freq_feat=None, symbol_id=None, labels=None, daily_ctx=None, foreign_ctx=None, soft_labels=None, cross_ctx=None, cross_mask=None, fine_ctx=None, utility_targets=None, hazard_targets=None):
         bsz, seq_len, _ = kline_seq.shape
         x = self.input_encoder(kline_seq, temporal_feat=temporal_feat, freq_feat=freq_feat, symbol_id=symbol_id)
         # 日线金字塔：完整日K编码为前缀token，拼在分钟序列前（因果注意力下分钟token可 attend 日线背景）
@@ -689,6 +693,14 @@ class KLineTransformer(nn.Module):
                 pooled = x[:, -1, :]         # 现状：最后位置（单向标配）
             logits = self.class_head(pooled)  # [B, 3]
             result = {"logits": logits, "pred_class": logits.argmax(dim=-1)}
+            if getattr(self.config, "hazard_task", False):
+                hazard_logits = self.hazard_head(pooled).view(
+                    x.shape[0], int(self.config.hazard_bins), 3
+                )
+                from obson.model.hazard import hazard_to_class_logits
+                result["hazard_logits"] = hazard_logits
+                result["logits"] = hazard_to_class_logits(hazard_logits)
+                result["pred_class"] = result["logits"].argmax(dim=-1)
             if getattr(self, "utility_head", None) is not None:
                 utility_scores = self.utility_head(pooled)
                 result["utility_scores"] = utility_scores
@@ -722,7 +734,13 @@ class KLineTransformer(nn.Module):
                 result["exc_logits_dn"] = self.exc_head_dn(pooled)
                 result["exc_logits_up"] = self.exc_head_up(pooled)
             if labels is not None:
-                if soft_labels is not None:
+                if getattr(self.config, "hazard_task", False):
+                    if hazard_targets is None:
+                        result["loss"] = result["logits"].sum() * 0.0
+                    else:
+                        from obson.model.hazard import hazard_nll
+                        result["loss"] = hazard_nll(result["hazard_logits"], hazard_targets)
+                elif soft_labels is not None:
                     # 软标签 v2：混合损失 = 0.5×硬CE（带类别权重，保底 argmax 语义）
                     #           + 0.5×软CE（不带类别权重——软目标本身已是逐样本分布，
                     #             再乘方向类权重会怂恿模型永远选方向，v1 的坑）

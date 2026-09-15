@@ -369,6 +369,8 @@ def main() -> None:
     ap.add_argument("--contract-mode", action="store_true",
                     help="合约模式：按合约段拼接训练（data/contracts/），零跨合约污染；"
                          "仅支持 --task classify --label-anchor day_close")
+    ap.add_argument("--hazard-task", action="store_true",
+                    help="teacher-level competing-risk hazard 主任务（实验开关，默认关闭）")
     ap.add_argument("--path-aux", action="store_true",
                     help="E3 路径状态辅助任务：4节点×3态辅助头（教师模型方案）")
     ap.add_argument("--path-aux-weight", type=float, default=0.1,
@@ -654,6 +656,8 @@ def main() -> None:
         utility_loss_weight=args.teacher_loss_weight,
         utility_logit_weight=args.teacher_logit_weight if args.teacher else 0.0,
         utility_selection_weight=args.teacher_selection_weight if args.teacher else 0.0,
+        hazard_task=args.hazard_task,
+        hazard_bins=4,
     )
     model = KLineTransformer(model_config)
     if args.init_ckpt:
@@ -779,6 +783,8 @@ def main() -> None:
         "symbols": args.symbols,
         "periods": args.periods,
         "seed": args.seed,
+        "hazard_task": args.hazard_task,
+        "hazard_bins": 4,
         "teacher": args.teacher,
         "teacher_loss_weight": args.teacher_loss_weight,
         "teacher_logit_weight": args.teacher_logit_weight if args.teacher else 0.0,

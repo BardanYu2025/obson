@@ -639,6 +639,72 @@ def test_query_decoder_path_head():
     assert hasattr(m2, "path_node_emb") and not hasattr(m2, "path_queries")
 
 
+# ── Teacher-level competing-risk hazard ──────────────────────────
+def test_hazard_probability_aggregation_and_nll():
+    """Hazards must aggregate to [down, none, up] probabilities summing to one."""
+    import torch
+    from obson.model.hazard import hazard_nll, hazard_to_probs
+
+    logits = torch.zeros(2, 4, 3, requires_grad=True)
+    targets = torch.tensor([
+        [0, 1, -1, -1],  # first upper event in bin 1
+        [0, 0, 0, 0],    # censored through the final bin
+    ])
+    loss = hazard_nll(logits, targets)
+    assert torch.isfinite(loss)
+    loss.backward()
+    assert logits.grad is not None
+    probs = hazard_to_probs(logits.detach())
+    assert probs.shape == (2, 3)
+    assert torch.allclose(probs.sum(-1), torch.ones(2), atol=1e-6)
+
+
+def test_dataset_hazard_states_follow_first_event():
+    """Dataset hazard labels are survival until one absorbing first event."""
+    from obson.model.dataset import KLineDataset
+    ts = pd.to_datetime([
+        "2026-09-08 09:00", "2026-09-08 10:00", "2026-09-08 11:00",
+        "2026-09-08 13:00", "2026-09-08 14:00", "2026-09-08 15:00",
+    ])
+    close = np.full(6, 100.0)
+    high = np.array([100.1, 100.1, 100.1, 101.5, 101.0, 100.1])
+    low = np.array([99.9, 99.9, 99.9, 99.8, 99.8, 99.8])
+    df = pd.DataFrame({"datetime": ts, "open": close, "high": high,
+                       "low": low, "close": close})
+    ds = KLineDataset(df, seq_len=3, target_offset=1, normalize=False,
+                      jump_break_pct=None, label_mode="day_close",
+                      label_threshold=1.0, theta_mode="frozen")
+    states = ds.hazard_states
+    assert states is not None and len(states) > 0
+    for row in states:
+        events = np.flatnonzero((row == 1) | (row == 2))
+        if len(events):
+            first = int(events[0])
+            assert np.all(row[:first] == 0)
+            assert row[first] in (1, 2)
+            assert np.all(row[first + 1:] == -1)
+        else:
+            assert np.all(row == 0) or np.all(row == -1)
+
+
+def test_hazard_task_model_output():
+    """Hazard mode keeps the public class interface while exposing hazards."""
+    import torch
+    from obson.model.transformer import KLineConfig, KLineTransformer
+    cfg = KLineConfig(task="classify", hazard_task=True, hazard_bins=4,
+                      hidden_size=32, num_hidden_layers=1,
+                      num_attention_heads=2, head_dim=16,
+                      intermediate_size=64, kline_dim=4)
+    model = KLineTransformer(cfg)
+    x = torch.randn(2, 20, 4)
+    targets = torch.zeros(2, 4, dtype=torch.long)
+    out = model(x, labels=torch.tensor([1, 1]), hazard_targets=targets)
+    assert out["hazard_logits"].shape == (2, 4, 3)
+    assert out["logits"].shape == (2, 3)
+    assert torch.allclose(out["logits"].exp().sum(-1), torch.ones(2), atol=1e-5)
+    assert torch.isfinite(out["loss"])
+
+
 if __name__ == "__main__":
     import traceback
     fns = [v for k, v in sorted(globals().items()) if k.startswith("test_")]

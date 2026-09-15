@@ -160,6 +160,9 @@ class KLineDataset(Dataset):
         self.anchor_days: np.ndarray | None = None  # [N] 每样本锚交易日 id
         self.soft_targets: np.ndarray | None = None  # [N, 2] = (m_dn, m_up)，对 θ 归一
         self.path_states: np.ndarray | None = None  # E3: [N, 4] int64，-1=歧义 mask
+        self.quant_targets: np.ndarray | None = None  # E11: [N, 2节点, 2方向] float32，
+        # m=M/θ 非负单侧（节点=剩余50%/100%，方向=[dn, up]，只含 T0 之后 bar）
+        self.hazard_states: np.ndarray | None = None  # [N, 4]: 0=survive,1=up,2=down,-1=ambiguous
         self.exc_labels: np.ndarray | None = None  # E4: [N, 2] int64 (dn桶, up桶)，
         # 桶边 [0.25,0.5,0.8,1.0,1.5]×θ → 6 桶；excursion 是事实量，双触样本不 mask
 
@@ -423,9 +426,12 @@ class KLineDataset(Dataset):
             # E3 路径状态：4 节点(剩余25/50/75/100%，ceil 离散索引) × 3 态(0=未触轨/1=已上轨/2=已下轨)，
             # -1=整行 mask（同根双触歧义样本，masked CE 忽略）。吸收态：首次触轨后保持该状态
             path_state_all = np.full((len(vi), 4), -1, dtype=np.int64)
+            hazard_state_all = np.full((len(vi), 4), -1, dtype=np.int64)
             # E4 excursion 分桶标签：(m_dn桶, m_up桶)，偏移占 θ 比例 digitize 到
             # [0.25,0.5,0.8,1.0,1.5] 六桶（0.8/1.0 对齐止盈轨，0.5 对齐止损轨）
             exc_all = np.full((len(vi), 2), -1, dtype=np.int64)
+            # E11 分位数回归目标：[节点(50%/100%剩余), 方向(dn/up)]，m=M/θ 非负单侧
+            quant_all = np.full((len(vi), 2, 2), np.nan, dtype=np.float64)
             ts = self.timestamps.to_numpy()
             # 完整交易日的最小 bar 数：按本频率日长度的中位数定（5m≈69, 60m≈7），
             # 写死阈值会把 60m，整天误杀
@@ -487,6 +493,12 @@ class KLineDataset(Dataset):
                     # E4：excursion 分桶（与软标签同素材，标准 θ 轨、strategy_label 覆盖前）
                     exc_all[s, 0] = np.digitize(soft_all[s, 0], _EXC_EDGES)  # dn 桶
                     exc_all[s, 1] = np.digitize(soft_all[s, 1], _EXC_EDGES)  # up 桶
+                    # E11：分节点最大偏移（θ 归一、非负单侧、只含 T0 后 bar；事实量不受
+                    # strategy_label/clean_path 语义覆盖影响——幅度目标是路径本身）
+                    for k, frac in enumerate((0.5, 1.0)):
+                        n_k = max(1, math.ceil(rem * frac))
+                        quant_all[s, k, 0] = max(1.0 - lo[j + 1 : j + n_k + 1].min() / base, 0.0) / th
+                        quant_all[s, k, 1] = max(hi[j + 1 : j + n_k + 1].max() / base - 1.0, 0.0) / th
                     # E3 路径状态（用标准 θ 轨的 fu/fd，strategy_label 覆盖前）：
                     # 节点 k = 剩余 bar 的 25/50/75/100% 处，离散索引 n_k = max(1, ceil(frac*rem))
                     # 状态由"首次触轨"决定（吸收态）；同根双触(fu==fd 且可达)时整行 mask：
@@ -500,6 +512,17 @@ class KLineDataset(Dataset):
                                 path_state_all[s, k] = 2   # 已下轨（吸收态）
                             else:
                                 path_state_all[s, k] = 0   # 未触轨
+                        H = max(rem, 1)
+                        if fu < fd and fu < 10**9:
+                            b = min(3, max(0, math.ceil(fu * 4 / H) - 1))
+                            hazard_state_all[s, :b + 1] = 0
+                            hazard_state_all[s, b] = 1
+                        elif fd < fu and fd < 10**9:
+                            b = min(3, max(0, math.ceil(fd * 4 / H) - 1))
+                            hazard_state_all[s, :b + 1] = 0
+                            hazard_state_all[s, b] = 2
+                        else:
+                            hazard_state_all[s, :] = 0
                     if self.strategy_label:
                         # 策略对齐标签：止盈轨 ±tp_frac×θ，止损轨 ∓stop_frac×θ
                         # 多 = 先摸 +tp×θ 且此前未破 −stop×θ（先止损再到位 → 无）
@@ -559,7 +582,9 @@ class KLineDataset(Dataset):
             self.touch_minutes = touch_min_all[keep].astype(np.float32)
             self.thetas = theta_all[keep].astype(np.float32)
             self.path_states = path_state_all[keep]  # E3：int64 [N, 4]，-1=歧义 mask
+            self.hazard_states = hazard_state_all[keep]
             self.exc_labels = exc_all[keep]          # E4：int64 [N, 2] (dn桶, up桶)
+            self.quant_targets = quant_all[keep].astype(np.float32)  # E11：[N,2,2] float32
             if self.soft_label:
                 self.soft_targets = soft_all[keep].astype(np.float32)
             self.valid_indices = vi[keep]
@@ -655,6 +680,8 @@ class KLineDataset(Dataset):
                 )
             if self.exc_labels is not None:
                 item["exc_labels"] = torch.from_numpy(self.exc_labels[pos])  # [2] long (dn,up)
+            if self.quant_targets is not None:
+                item["quant_targets"] = torch.from_numpy(self.quant_targets[pos])  # E11 [2,2] float
             base_ts = self.timestamps.iloc[idx + self.seq_len - 1]
             item["tod_minutes"] = torch.tensor(
                 base_ts.hour * 60 + base_ts.minute, dtype=torch.long
@@ -667,6 +694,8 @@ class KLineDataset(Dataset):
                 item["theta"] = torch.tensor(self.thetas[pos], dtype=torch.float32)
             if self.path_states is not None:
                 item["path_states"] = torch.from_numpy(self.path_states[pos])  # [4] long
+            if self.hazard_states is not None:
+                item["hazard_states"] = torch.from_numpy(self.hazard_states[pos])  # [4] long
             if self.soft_targets is not None:
                 # 软目标 v2（修正版）：
                 # - 方向权重 = 偏移占比²（锐化：摸到≈one-hot，冲一半仍有重赏）
@@ -818,7 +847,7 @@ def _restrict_samples(ds, min_base_bar: int, max_label_bar: int | None = None) -
         keep &= (base + ds.target_offset) <= max_label_bar
     ds.valid_indices = ds.valid_indices[keep]
     ds.n_samples = len(ds.valid_indices)
-    for attr in ("labels", "fwd_rets", "touch_minutes", "thetas", "soft_targets", "path_states", "exc_labels", "anchor_days"):
+    for attr in ("labels", "fwd_rets", "touch_minutes", "thetas", "soft_targets", "path_states", "hazard_states", "exc_labels", "anchor_days"):
         arr = getattr(ds, attr, None)
         if arr is not None:
             setattr(ds, attr, arr[keep])
@@ -914,7 +943,7 @@ def _restrict_samples_by_dayset(ds, day_set: set[int], tag: str) -> None:
         keep &= np.array([int(x) in day_set for x in ad], dtype=bool)
     ds.valid_indices = ds.valid_indices[keep]
     ds.n_samples = len(ds.valid_indices)
-    for attr in ("labels", "fwd_rets", "touch_minutes", "thetas", "soft_targets", "path_states", "exc_labels", "anchor_days"):
+    for attr in ("labels", "fwd_rets", "touch_minutes", "thetas", "soft_targets", "path_states", "hazard_states", "exc_labels", "anchor_days"):
         arr = getattr(ds, attr, None)
         if arr is not None:
             setattr(ds, attr, arr[keep])
