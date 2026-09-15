@@ -104,6 +104,11 @@ class KLineConfig:
     klm_task: bool = False
     klm_reg_loss_weight: float = 0.10
     klm_horizons: tuple = (1, 2, 4, -1)
+    hierarchical_task: bool = False
+    gate_threshold: float = 0.05
+    gate_loss_weight: float = 1.0
+    direction_loss_weight: float = 1.0
+    gate_pos_weight: float = 3.0
 
     def __post_init__(self):
         if self.head_dim is None:
@@ -627,6 +632,9 @@ class KLineTransformer(nn.Module):
             # E4 excursion 分桶头：pooled → 下行/上行最大偏移各占 θ 的几分（6 桶）
             if getattr(cfg, "hazard_task", False):
                 self.hazard_head = nn.Linear(cfg.hidden_size, 3 * int(cfg.hazard_bins))
+            if getattr(cfg, "hierarchical_task", False):
+                self.gate_head = nn.Linear(cfg.hidden_size, 1)
+                self.direction_head = nn.Linear(cfg.hidden_size, 2)
             if getattr(cfg, "serial_path", False):
                 n_h = len(getattr(cfg, "serial_path_horizons", (1, 2, 4, 8)))
                 self.serial_queries = nn.Parameter(torch.zeros(n_h, cfg.hidden_size))
@@ -678,7 +686,7 @@ class KLineTransformer(nn.Module):
             if module.bias is not None:
                 torch.nn.init.zeros_(module.bias)
 
-    def forward(self, kline_seq, targets=None, temporal_feat=None, hourly_ctx=None, time_pos=None, freq_feat=None, symbol_id=None, labels=None, daily_ctx=None, foreign_ctx=None, soft_labels=None, cross_ctx=None, cross_mask=None, fine_ctx=None, utility_targets=None, hazard_targets=None, serial_path_targets=None, klm_targets=None, klm_mask=None):
+    def forward(self, kline_seq, targets=None, temporal_feat=None, hourly_ctx=None, time_pos=None, freq_feat=None, symbol_id=None, labels=None, daily_ctx=None, foreign_ctx=None, soft_labels=None, cross_ctx=None, cross_mask=None, fine_ctx=None, utility_targets=None, hazard_targets=None, serial_path_targets=None, klm_targets=None, klm_mask=None, gate_targets=None, direction_targets=None):
         bsz, seq_len, _ = kline_seq.shape
         x = self.input_encoder(kline_seq, temporal_feat=temporal_feat, freq_feat=freq_feat, symbol_id=symbol_id)
         # 日线金字塔：完整日K编码为前缀token，拼在分钟序列前（因果注意力下分钟token可 attend 日线背景）
@@ -738,6 +746,23 @@ class KLineTransformer(nn.Module):
                 pooled = x[:, -1, :]         # 现状：最后位置（单向标配）
             logits = self.class_head(pooled)  # [B, 3]
             result = {"logits": logits, "pred_class": logits.argmax(dim=-1)}
+            if getattr(self.config, "hierarchical_task", False):
+                gate_logit = self.gate_head(pooled).squeeze(-1)
+                direction_logits = self.direction_head(pooled)
+                gate_prob = torch.sigmoid(gate_logit)
+                direction_prob = torch.softmax(direction_logits, dim=-1)
+                # Public class order remains [down, none, up]. Direction order
+                # is [short, long], and gate is P(any actionable opportunity).
+                probs = torch.stack([
+                    gate_prob * direction_prob[:, 0],
+                    1.0 - gate_prob,
+                    gate_prob * direction_prob[:, 1],
+                ], dim=-1).clamp_min(1e-8)
+                result["gate_logit"] = gate_logit
+                result["direction_logits"] = direction_logits
+                result["hierarchical_probs"] = probs
+                result["logits"] = probs.log()
+                result["pred_class"] = result["logits"].argmax(dim=-1)
             if getattr(self.config, "klm_task", False):
                 q = self.klm_queries.unsqueeze(0).expand(x.shape[0], -1, -1)
                 a, _ = self.klm_cross_attn(q, x, x)
@@ -801,7 +826,25 @@ class KLineTransformer(nn.Module):
                 result["exc_logits_dn"] = self.exc_head_dn(pooled)
                 result["exc_logits_up"] = self.exc_head_up(pooled)
             if labels is not None:
-                if soft_labels is not None:
+                if getattr(self.config, "hierarchical_task", False):
+                    if gate_targets is None or direction_targets is None:
+                        raise ValueError("hierarchical task requires gate and direction targets")
+                    gate_loss = F.binary_cross_entropy_with_logits(
+                        result["gate_logit"], gate_targets.float(),
+                        pos_weight=result["gate_logit"].new_tensor(
+                            float(getattr(self.config, "gate_pos_weight", 3.0))
+                        ),
+                    )
+                    direction_loss = F.cross_entropy(
+                        result["direction_logits"], direction_targets.long(),
+                    )
+                    result["loss_gate"] = gate_loss
+                    result["loss_direction"] = direction_loss
+                    result["loss"] = (
+                        float(getattr(self.config, "gate_loss_weight", 1.0)) * gate_loss
+                        + float(getattr(self.config, "direction_loss_weight", 1.0)) * direction_loss
+                    )
+                elif soft_labels is not None:
                     # 软标签 v2：混合损失 = 0.5×硬CE（带类别权重，保底 argmax 语义）
                     #           + 0.5×软CE（不带类别权重——软目标本身已是逐样本分布，
                     #             再乘方向类权重会怂恿模型永远选方向，v1 的坑）

@@ -398,6 +398,12 @@ def main() -> None:
     ap.add_argument("--teacher-loss-weight", type=float, default=0.15)
     ap.add_argument("--teacher-logit-weight", type=float, default=0.10)
     ap.add_argument("--teacher-selection-weight", type=float, default=0.10)
+    ap.add_argument("--hierarchical-task", action="store_true",
+                    help="H1 层级任务：先预测是否值得交易，再预测条件方向")
+    ap.add_argument("--gate-threshold", type=float, default=0.05,
+                    help="机会门控标签的最小生产效用（theta倍数），默认0.05")
+    ap.add_argument("--gate-pos-weight", type=float, default=3.0,
+                    help="机会门控正例 BCE 权重，默认3.0")
     args = ap.parse_args()
     if args.teacher:
         if args.task != "classify" or args.label_anchor != "day_close" or args.theta_mode != "dynamic":
@@ -482,7 +488,9 @@ def main() -> None:
                 theta = float(np.quantile(ms_all, args.theta_q))
                 extra_kwargs = {"label_mode": "day_close", "label_threshold": theta,
                                 "theta_mode": "dynamic", "soft_label": args.soft_label,
-                                "anchor_days_ahead": _anchor_ahead}
+                                "anchor_days_ahead": _anchor_ahead,
+                                "hierarchical_task": args.hierarchical_task,
+                                "gate_threshold": args.gate_threshold}
                 try:
                     train_ds, val_ds, test_ds = build_datasets_contract(
                         code, period, seq_len=seq_len,
@@ -519,12 +527,16 @@ def main() -> None:
                             theta = _theta_c_dynamic(df.iloc[:n_train], seq_len, args.theta_q)
                             extra_kwargs = {"label_mode": "day_close", "label_threshold": theta,
                                             "theta_mode": "dynamic", "soft_label": args.soft_label,
-                                            "anchor_days_ahead": _anchor_ahead}
+                                            "anchor_days_ahead": _anchor_ahead,
+                                            "hierarchical_task": args.hierarchical_task,
+                                            "gate_threshold": args.gate_threshold}
                         else:
                             theta = _day_theta_base(df.iloc[:n_train], args.theta_q)
                             extra_kwargs = {"label_mode": "day_close", "label_threshold": theta,
                                             "soft_label": args.soft_label,
-                                            "anchor_days_ahead": _anchor_ahead}
+                                            "anchor_days_ahead": _anchor_ahead,
+                                            "hierarchical_task": args.hierarchical_task,
+                                            "gate_threshold": args.gate_threshold}
                     else:
                         offset = args.horizon_min // period
                         theta = _theta_from_quantile(df.iloc[:n_train], offset, args.theta_q)
@@ -677,6 +689,9 @@ def main() -> None:
         serial_path_fusion_weight=args.serial_path_fusion_weight,
         klm_task=args.klm_task,
         klm_reg_loss_weight=args.klm_reg_loss_weight,
+        hierarchical_task=args.hierarchical_task,
+        gate_threshold=args.gate_threshold,
+        gate_pos_weight=args.gate_pos_weight,
     )
     model = KLineTransformer(model_config)
     if args.init_ckpt:
@@ -813,6 +828,9 @@ def main() -> None:
         "klm_task": args.klm_task,
         "klm_horizons": [1, 2, 4, -1],
         "klm_reg_loss_weight": args.klm_reg_loss_weight,
+        "hierarchical_task": args.hierarchical_task,
+        "gate_threshold": args.gate_threshold,
+        "gate_pos_weight": args.gate_pos_weight,
         "teacher": args.teacher,
         "teacher_loss_weight": args.teacher_loss_weight,
         "teacher_logit_weight": args.teacher_logit_weight if args.teacher else 0.0,

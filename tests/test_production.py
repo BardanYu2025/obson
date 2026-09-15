@@ -806,6 +806,31 @@ def test_klm_starts_from_classifier_head():
     assert torch.allclose(out["logits"], out_changed_query["logits"], atol=1e-5)
 
 
+def test_hierarchical_head_composes_trade_probabilities():
+    """Gate and conditional direction must compose to the public 3 classes."""
+    import torch
+    from obson.model.transformer import KLineConfig, KLineTransformer
+    cfg = KLineConfig(task="classify", hierarchical_task=True,
+                      hidden_size=32, num_hidden_layers=1,
+                      num_attention_heads=2, head_dim=16,
+                      intermediate_size=64, kline_dim=4)
+    model = KLineTransformer(cfg)
+    model.eval()
+    x = torch.randn(4, 20, 4)
+    out = model(
+        x,
+        labels=torch.tensor([1, 1, 2, 0]),
+        gate_targets=torch.tensor([0., 1., 1., 0.]),
+        direction_targets=torch.tensor([0, 1, 1, 0]),
+    )
+    probs = out["hierarchical_probs"]
+    assert probs.shape == (4, 3)
+    assert torch.allclose(probs.sum(-1), torch.ones(4), atol=1e-6)
+    assert torch.isfinite(out["loss_gate"])
+    assert torch.isfinite(out["loss_direction"])
+    assert torch.isfinite(out["loss"])
+
+
 if __name__ == "__main__":
     import traceback
     fns = [v for k, v in sorted(globals().items()) if k.startswith("test_")]

@@ -111,6 +111,8 @@ class KLineDataset(Dataset):
         sample_mask: np.ndarray | None = None,
         day_ids_override: np.ndarray | None = None,
         anchor_days_ahead: int = 0,
+        hierarchical_task: bool = False,
+        gate_threshold: float = 0.05,
     ):
         """
         :param df: 主频率DataFrame（如5分钟线），需包含 OHLCV + datetime 列
@@ -157,6 +159,8 @@ class KLineDataset(Dataset):
         # 锚日必须落在本数据段内：段末 N 天样本无锚自然剔除（防跨段泄露的第一道闸，
         # 第二道闸 = 合约模式 _restrict_samples_by_dayset 的锚日过滤）
         self.anchor_days_ahead = int(anchor_days_ahead) if label_mode == "day_close" else 0
+        self.hierarchical_task = bool(hierarchical_task) and label_mode == "day_close"
+        self.gate_threshold = float(gate_threshold)
         self.anchor_days: np.ndarray | None = None  # [N] 每样本锚交易日 id
         self.soft_targets: np.ndarray | None = None  # [N, 2] = (m_dn, m_up)，对 θ 归一
         self.path_states: np.ndarray | None = None  # E3: [N, 4] int64，-1=歧义 mask
@@ -709,6 +713,14 @@ class KLineDataset(Dataset):
                 item["utility_target"] = torch.tensor(
                     np.clip([short_u, long_u], -2.0, 2.0), dtype=torch.float32
                 )
+                if self.hierarchical_task:
+                    utilities = np.asarray([short_u, long_u], dtype=np.float32)
+                    item["gate_target"] = torch.tensor(
+                        float(np.max(utilities) > self.gate_threshold), dtype=torch.float32
+                    )
+                    item["direction_target"] = torch.tensor(
+                        int(np.argmax(utilities)), dtype=torch.long
+                    )
             if self.exc_labels is not None:
                 item["exc_labels"] = torch.from_numpy(self.exc_labels[pos])  # [2] long (dn,up)
             if self.quant_targets is not None:
