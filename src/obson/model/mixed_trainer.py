@@ -169,8 +169,13 @@ class MixedFrequencyTrainer:
                     serial_path_targets = batch.get("serial_path_states")
                     if serial_path_targets is not None:
                         serial_path_targets = serial_path_targets.to(self.device)
+                    klm_targets = batch.get("klm_targets")
+                    klm_mask = batch.get("klm_mask")
+                    if klm_targets is not None:
+                        klm_targets = klm_targets.to(self.device)
+                        klm_mask = klm_mask.to(self.device)
                     # targets 一并传入：dense_loss_weight>0 时分类模式附带逐bar密集监督（表征学习）
-                    out = self.model(x, labels=labels, soft_labels=soft, targets=y, temporal_feat=temporal, time_pos=time_pos, freq_feat=freq_feat, symbol_id=symbol_id, daily_ctx=daily_ctx, foreign_ctx=foreign_ctx, cross_ctx=cross_ctx, cross_mask=cross_mask, fine_ctx=fine_ctx, utility_targets=utility_targets, hazard_targets=hazard_targets, serial_path_targets=serial_path_targets)
+                    out = self.model(x, labels=labels, soft_labels=soft, targets=y, temporal_feat=temporal, time_pos=time_pos, freq_feat=freq_feat, symbol_id=symbol_id, daily_ctx=daily_ctx, foreign_ctx=foreign_ctx, cross_ctx=cross_ctx, cross_mask=cross_mask, fine_ctx=fine_ctx, utility_targets=utility_targets, hazard_targets=hazard_targets, serial_path_targets=serial_path_targets, klm_targets=klm_targets, klm_mask=klm_mask)
                 else:
                     out = self.model(x, targets=y, temporal_feat=temporal, time_pos=time_pos, freq_feat=freq_feat, symbol_id=symbol_id, daily_ctx=daily_ctx, foreign_ctx=foreign_ctx, fine_ctx=fine_ctx)
                 loss = out["loss"]
@@ -287,7 +292,12 @@ class MixedFrequencyTrainer:
                     serial_path_targets = batch.get("serial_path_states")
                     if serial_path_targets is not None:
                         serial_path_targets = serial_path_targets.to(self.device)
-                    out = self.model(x, labels=labels, temporal_feat=temporal, time_pos=time_pos, freq_feat=freq_feat, symbol_id=symbol_id, daily_ctx=daily_ctx, foreign_ctx=foreign_ctx, cross_ctx=cross_ctx, cross_mask=cross_mask, fine_ctx=fine_ctx, utility_targets=utility_targets, hazard_targets=hazard_targets, serial_path_targets=serial_path_targets)
+                    klm_targets = batch.get("klm_targets")
+                    klm_mask = batch.get("klm_mask")
+                    if klm_targets is not None:
+                        klm_targets = klm_targets.to(self.device)
+                        klm_mask = klm_mask.to(self.device)
+                    out = self.model(x, labels=labels, temporal_feat=temporal, time_pos=time_pos, freq_feat=freq_feat, symbol_id=symbol_id, daily_ctx=daily_ctx, foreign_ctx=foreign_ctx, cross_ctx=cross_ctx, cross_mask=cross_mask, fine_ctx=fine_ctx, utility_targets=utility_targets, hazard_targets=hazard_targets, serial_path_targets=serial_path_targets, klm_targets=klm_targets, klm_mask=klm_mask)
                     v_loss = out["loss"]
                     if "hazard_logits" in out and hazard_targets is not None:
                         hazard_prob_l.append(out["hazard_logits"].softmax(-1).float().cpu())

@@ -742,6 +742,30 @@ def test_serial_path_model_is_prediction_only():
     assert torch.isfinite(out_a["loss_serial_path"])
 
 
+def test_klm_query_regression_contract():
+    """KLM uses a bidirectional memory and finite masked quantile regression."""
+    import torch
+    from obson.model.transformer import KLineConfig, KLineTransformer
+    cfg = KLineConfig(task="classify", klm_task=True,
+                      hidden_size=32, num_hidden_layers=1,
+                      num_attention_heads=2, head_dim=16,
+                      intermediate_size=64, kline_dim=4)
+    model = KLineTransformer(cfg)
+    model.eval()
+    assert model.config.bidirectional is True
+    x = torch.randn(2, 20, 4)
+    y = torch.tensor([[0.1, 0.2, 0.3], [0.0, 0.1, 0.2]])
+    targets = y.unsqueeze(1).expand(2, 4, 3).contiguous()
+    mask = torch.tensor([[1, 1, 1, 1], [1, 1, 0, 0]], dtype=torch.float32)
+    out = model(x, labels=torch.tensor([1, 2]),
+                klm_targets=targets, klm_mask=mask)
+    assert out["klm_quantiles"].shape == (2, 4, 3, 3)
+    assert torch.isfinite(out["loss_klm_reg"])
+    q = out["klm_quantiles"]
+    assert torch.all(q[..., 0] <= q[..., 1])
+    assert torch.all(q[..., 1] <= q[..., 2])
+
+
 if __name__ == "__main__":
     import traceback
     fns = [v for k, v in sorted(globals().items()) if k.startswith("test_")]

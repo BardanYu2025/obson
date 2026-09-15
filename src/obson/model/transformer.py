@@ -101,6 +101,9 @@ class KLineConfig:
     serial_path_horizons: tuple = (1, 2, 4, 8)
     serial_path_loss_weight: float = 0.10
     serial_path_fusion_weight: float = 0.10
+    klm_task: bool = False
+    klm_reg_loss_weight: float = 0.10
+    klm_horizons: tuple = (1, 2, 4, -1)
 
     def __post_init__(self):
         if self.head_dim is None:
@@ -542,6 +545,10 @@ class KLineTransformer(nn.Module):
         super().__init__()
         self.config = config or KLineConfig()
         cfg = self.config
+        if getattr(cfg, "klm_task", False):
+            # KLM's encoder is a bidirectional memory over the fully observed
+            # history window; the query decoder supplies the causal forecast.
+            cfg.bidirectional = True
 
         self.input_encoder = KLineFeatureEncoder(
             cfg.hidden_size, dropout=cfg.dropout, num_symbols=cfg.num_symbols,
@@ -631,6 +638,15 @@ class KLineTransformer(nn.Module):
                 self.serial_fusion = nn.Linear(cfg.hidden_size, cfg.num_classes)
                 nn.init.zeros_(self.serial_fusion.weight)
                 nn.init.zeros_(self.serial_fusion.bias)
+            if getattr(cfg, "klm_task", False):
+                n_h = len(getattr(cfg, "klm_horizons", (1, 2, 4, -1)))
+                self.klm_queries = nn.Parameter(torch.zeros(n_h, cfg.hidden_size))
+                nn.init.normal_(self.klm_queries, std=0.02)
+                self.klm_cross_attn = nn.MultiheadAttention(
+                    cfg.hidden_size, cfg.num_attention_heads, batch_first=True)
+                self.klm_query_norm = nn.LayerNorm(cfg.hidden_size)
+                self.klm_reg_head = nn.Linear(cfg.hidden_size, 9)
+                self.klm_trade_head = nn.Linear(cfg.hidden_size, cfg.num_classes)
             if getattr(cfg, "exc_aux", False):
                 self.exc_head_dn = nn.Linear(cfg.hidden_size, 6)
                 self.exc_head_up = nn.Linear(cfg.hidden_size, 6)
@@ -655,7 +671,7 @@ class KLineTransformer(nn.Module):
             if module.bias is not None:
                 torch.nn.init.zeros_(module.bias)
 
-    def forward(self, kline_seq, targets=None, temporal_feat=None, hourly_ctx=None, time_pos=None, freq_feat=None, symbol_id=None, labels=None, daily_ctx=None, foreign_ctx=None, soft_labels=None, cross_ctx=None, cross_mask=None, fine_ctx=None, utility_targets=None, hazard_targets=None, serial_path_targets=None):
+    def forward(self, kline_seq, targets=None, temporal_feat=None, hourly_ctx=None, time_pos=None, freq_feat=None, symbol_id=None, labels=None, daily_ctx=None, foreign_ctx=None, soft_labels=None, cross_ctx=None, cross_mask=None, fine_ctx=None, utility_targets=None, hazard_targets=None, serial_path_targets=None, klm_targets=None, klm_mask=None):
         bsz, seq_len, _ = kline_seq.shape
         x = self.input_encoder(kline_seq, temporal_feat=temporal_feat, freq_feat=freq_feat, symbol_id=symbol_id)
         # 日线金字塔：完整日K编码为前缀token，拼在分钟序列前（因果注意力下分钟token可 attend 日线背景）
@@ -715,6 +731,19 @@ class KLineTransformer(nn.Module):
                 pooled = x[:, -1, :]         # 现状：最后位置（单向标配）
             logits = self.class_head(pooled)  # [B, 3]
             result = {"logits": logits, "pred_class": logits.argmax(dim=-1)}
+            if getattr(self.config, "klm_task", False):
+                q = self.klm_queries.unsqueeze(0).expand(x.shape[0], -1, -1)
+                a, _ = self.klm_cross_attn(q, x, x)
+                qh = self.klm_query_norm(q + a)
+                result["klm_repr"] = qh
+                result["klm_quantiles"] = self.klm_reg_head(qh).view(
+                    x.shape[0], qh.shape[1], 3, 3
+                )
+                # The trade query consumes the predicted-market representation,
+                # while labels are used only by losses below.
+                trade_repr = pooled + qh.mean(dim=1)
+                result["logits"] = self.klm_trade_head(trade_repr)
+                result["pred_class"] = result["logits"].argmax(dim=-1)
             if getattr(self.config, "serial_path", False):
                 q = self.serial_queries.unsqueeze(0).expand(x.shape[0], -1, -1)
                 a, _ = self.serial_cross_attn(q, x, x)
@@ -794,6 +823,26 @@ class KLineTransformer(nn.Module):
                     result["loss"] = result["loss"] + float(
                         getattr(self.config, "serial_path_loss_weight", 0.10)
                     ) * result["loss_serial_path"]
+                if getattr(self.config, "klm_task", False) and klm_targets is not None:
+                    # Quantile order: q10, q50, q90; target order: return, MFE, MAE.
+                    pred_raw = result["klm_quantiles"]
+                    # Monotone parameterization guarantees q10 <= q50 <= q90.
+                    pred = torch.stack([
+                        pred_raw[..., 1] - F.softplus(pred_raw[..., 0]),
+                        pred_raw[..., 1],
+                        pred_raw[..., 1] + F.softplus(pred_raw[..., 2]),
+                    ], dim=-1)
+                    result["klm_quantiles"] = pred
+                    target = klm_targets.unsqueeze(-1)
+                    mask = klm_mask.unsqueeze(-1).unsqueeze(-1).to(pred.dtype)
+                    taus = pred.new_tensor([0.10, 0.50, 0.90]).view(1, 1, 1, 3)
+                    err = target - pred
+                    pin = torch.maximum(taus * err, (taus - 1.0) * err)
+                    denom = mask.sum().clamp_min(1.0) * pred.shape[2] * pred.shape[3]
+                    result["loss_klm_reg"] = (pin * mask).sum() / denom
+                    result["loss"] = result["loss"] + float(
+                        getattr(self.config, "klm_reg_loss_weight", 0.10)
+                    ) * result["loss_klm_reg"]
                 if "loss_utility" in result:
                     result["loss"] = result["loss"] + float(
                         getattr(self.config, "utility_loss_weight", 0.15)

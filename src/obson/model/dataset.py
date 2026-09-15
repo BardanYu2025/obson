@@ -164,6 +164,8 @@ class KLineDataset(Dataset):
         # m=M/θ 非负单侧（节点=剩余50%/100%，方向=[dn, up]，只含 T0 之后 bar）
         self.hazard_states: np.ndarray | None = None  # [N, 4]: 0=survive,1=up,2=down,-1=ambiguous
         self.serial_path_states: np.ndarray | None = None  # [N,4] fixed horizons [1,2,4,8]
+        self.klm_targets: np.ndarray | None = None  # [N,4,3]: ret, mfe_up, mae_dn / theta
+        self.klm_mask: np.ndarray | None = None  # [N,4] horizon exists mask
         self.exc_labels: np.ndarray | None = None  # E4: [N, 2] int64 (dn桶, up桶)，
         # 桶边 [0.25,0.5,0.8,1.0,1.5]×θ → 6 桶；excursion 是事实量，双触样本不 mask
 
@@ -429,6 +431,8 @@ class KLineDataset(Dataset):
             path_state_all = np.full((len(vi), 4), -1, dtype=np.int64)
             hazard_state_all = np.full((len(vi), 4), -1, dtype=np.int64)
             serial_state_all = np.full((len(vi), 4), -1, dtype=np.int64)
+            klm_target_all = np.full((len(vi), 4, 3), np.nan, dtype=np.float64)
+            klm_mask_all = np.zeros((len(vi), 4), dtype=np.float32)
             # E4 excursion 分桶标签：(m_dn桶, m_up桶)，偏移占 θ 比例 digitize 到
             # [0.25,0.5,0.8,1.0,1.5] 六桶（0.8/1.0 对齐止盈轨，0.5 对齐止损轨）
             exc_all = np.full((len(vi), 2), -1, dtype=np.int64)
@@ -535,6 +539,18 @@ class KLineDataset(Dataset):
                                     serial_state_all[s, k] = 2
                                 else:
                                     serial_state_all[s, k] = 0
+                    # KLM continuous path bundle. The last horizon is the
+                    # actual close anchor; earlier horizons are fixed future
+                    # bars and are masked when they do not exist.
+                    for k, horizon in enumerate((1, 2, 4, rem)):
+                        h = int(horizon)
+                        if h <= 0 or h > rem:
+                            continue
+                        sl = slice(j + 1, j + h + 1)
+                        klm_target_all[s, k, 0] = (cl[j + h] / base - 1.0) / th
+                        klm_target_all[s, k, 1] = max(hi[sl].max() / base - 1.0, 0.0) / th
+                        klm_target_all[s, k, 2] = max(1.0 - lo[sl].min() / base, 0.0) / th
+                        klm_mask_all[s, k] = 1.0
                     if self.strategy_label:
                         # 策略对齐标签：止盈轨 ±tp_frac×θ，止损轨 ∓stop_frac×θ
                         # 多 = 先摸 +tp×θ 且此前未破 −stop×θ（先止损再到位 → 无）
@@ -596,6 +612,8 @@ class KLineDataset(Dataset):
             self.path_states = path_state_all[keep]  # E3：int64 [N, 4]，-1=歧义 mask
             self.hazard_states = hazard_state_all[keep]
             self.serial_path_states = serial_state_all[keep]
+            self.klm_targets = klm_target_all[keep].astype(np.float32)
+            self.klm_mask = klm_mask_all[keep].astype(np.float32)
             self.exc_labels = exc_all[keep]          # E4：int64 [N, 2] (dn桶, up桶)
             self.quant_targets = quant_all[keep].astype(np.float32)  # E11：[N,2,2] float32
             if self.soft_label:
@@ -711,6 +729,9 @@ class KLineDataset(Dataset):
                 item["hazard_states"] = torch.from_numpy(self.hazard_states[pos])  # [4] long
             if self.serial_path_states is not None:
                 item["serial_path_states"] = torch.from_numpy(self.serial_path_states[pos])  # [4] long
+            if self.klm_targets is not None:
+                item["klm_targets"] = torch.from_numpy(self.klm_targets[pos])  # [4,3]
+                item["klm_mask"] = torch.from_numpy(self.klm_mask[pos])  # [4]
             if self.soft_targets is not None:
                 # 软目标 v2（修正版）：
                 # - 方向权重 = 偏移占比²（锐化：摸到≈one-hot，冲一半仍有重赏）
@@ -862,7 +883,7 @@ def _restrict_samples(ds, min_base_bar: int, max_label_bar: int | None = None) -
         keep &= (base + ds.target_offset) <= max_label_bar
     ds.valid_indices = ds.valid_indices[keep]
     ds.n_samples = len(ds.valid_indices)
-    for attr in ("labels", "fwd_rets", "touch_minutes", "thetas", "soft_targets", "path_states", "hazard_states", "serial_path_states", "exc_labels", "anchor_days"):
+    for attr in ("labels", "fwd_rets", "touch_minutes", "thetas", "soft_targets", "path_states", "hazard_states", "serial_path_states", "klm_targets", "klm_mask", "exc_labels", "anchor_days"):
         arr = getattr(ds, attr, None)
         if arr is not None:
             setattr(ds, attr, arr[keep])
@@ -958,7 +979,7 @@ def _restrict_samples_by_dayset(ds, day_set: set[int], tag: str) -> None:
         keep &= np.array([int(x) in day_set for x in ad], dtype=bool)
     ds.valid_indices = ds.valid_indices[keep]
     ds.n_samples = len(ds.valid_indices)
-    for attr in ("labels", "fwd_rets", "touch_minutes", "thetas", "soft_targets", "path_states", "hazard_states", "serial_path_states", "exc_labels", "anchor_days"):
+    for attr in ("labels", "fwd_rets", "touch_minutes", "thetas", "soft_targets", "path_states", "hazard_states", "serial_path_states", "klm_targets", "klm_mask", "exc_labels", "anchor_days"):
         arr = getattr(ds, attr, None)
         if arr is not None:
             setattr(ds, attr, arr[keep])

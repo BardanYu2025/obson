@@ -379,6 +379,10 @@ def main() -> None:
                     help="串联路径任务：固定[1,2,4,8]根bar路径表示接入交易分类")
     ap.add_argument("--serial-path-loss-weight", type=float, default=0.10)
     ap.add_argument("--serial-path-fusion-weight", type=float, default=0.10)
+    ap.add_argument("--klm-task", action="store_true",
+                    help="KLM：双向K线记忆 + future query 分位数路径回归 + trade query")
+    ap.add_argument("--klm-reg-loss-weight", type=float, default=0.10,
+                    help="KLM 路径分位数回归损失权重，默认0.10")
     ap.add_argument("--path-aux", action="store_true",
                     help="E3 路径状态辅助任务：4节点×3态辅助头（教师模型方案）")
     ap.add_argument("--path-aux-weight", type=float, default=0.1,
@@ -671,6 +675,8 @@ def main() -> None:
         serial_path=args.serial_path,
         serial_path_loss_weight=args.serial_path_loss_weight,
         serial_path_fusion_weight=args.serial_path_fusion_weight,
+        klm_task=args.klm_task,
+        klm_reg_loss_weight=args.klm_reg_loss_weight,
     )
     model = KLineTransformer(model_config)
     if args.init_ckpt:
@@ -804,6 +810,9 @@ def main() -> None:
         "serial_path_horizons": [1, 2, 4, 8],
         "serial_path_loss_weight": args.serial_path_loss_weight,
         "serial_path_fusion_weight": args.serial_path_fusion_weight,
+        "klm_task": args.klm_task,
+        "klm_horizons": [1, 2, 4, -1],
+        "klm_reg_loss_weight": args.klm_reg_loss_weight,
         "teacher": args.teacher,
         "teacher_loss_weight": args.teacher_loss_weight,
         "teacher_logit_weight": args.teacher_logit_weight if args.teacher else 0.0,
