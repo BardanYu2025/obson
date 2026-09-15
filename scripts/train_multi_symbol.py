@@ -13,7 +13,7 @@ import numpy as np
 import pandas as pd
 import torch
 from pathlib import Path
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, Subset
 
 from obson.model import KLineConfig, KLineTransformer, build_datasets, weekly_seq_len
 from obson.model.mixed_trainer import MixedFrequencyTrainer
@@ -410,6 +410,8 @@ def main() -> None:
                     help="方向标签：utility=生产效用最优方向；close_return=gate样本按收盘收益方向")
     ap.add_argument("--hier-unfreeze-layers", type=int, default=2,
                     help="direction_ft 解冻 Transformer 最后几层，默认2")
+    ap.add_argument("--hier-direction-active-only", action="store_true",
+                    help="方向阶段训练只采样 gate=1 样本；用于可学习性诊断，不改变验证/生产口径")
     ap.add_argument("--dual-tower-task", action="store_true",
                     help="双塔+结果回归：机会塔/方向塔/效用结果塔（回归不参与交易输出）")
     ap.add_argument("--outcome-loss-weight", type=float, default=0.10)
@@ -758,6 +760,23 @@ def main() -> None:
                 frozen += param.numel()
         suffix = " + 最后%d层encoder" % n_layers if args.hier_stage == "direction_ft" else ""
         print(f"[hier] direction阶段：冻结参数={frozen:,}，训练 direction_tower/direction_head{suffix}")
+        if args.hier_direction_active_only:
+            active_loaders = {}
+            for key, loader in train_loaders.items():
+                ds = loader.dataset
+                gate = getattr(ds, "gate_targets", None)
+                if gate is None:
+                    raise ValueError(f"{key}: active-only 采样要求数据集提供 gate_targets")
+                indices = np.flatnonzero(np.asarray(gate) > 0.5).tolist()
+                if not indices:
+                    raise ValueError(f"{key}: 没有 gate-positive 方向样本")
+                gen = torch.Generator().manual_seed(args.seed)
+                active_loaders[key] = DataLoader(
+                    Subset(ds, indices), batch_size=batch_size, shuffle=True, generator=gen
+                )
+                print(f"[hier] active-only {key}: {len(ds)} -> {len(indices)} samples "
+                      f"({len(indices) / max(len(ds), 1):.1%})")
+            train_loaders = active_loaders
     elif args.hierarchical_task and args.hier_stage == "gate":
         for name, param in model.named_parameters():
             if name.startswith("direction_tower") or name.startswith("direction_head"):
