@@ -831,6 +831,28 @@ def test_hierarchical_head_composes_trade_probabilities():
     assert torch.isfinite(out["loss"])
 
 
+def test_hierarchical_direction_loss_ignores_non_tradeable_rows():
+    """Conditional direction is supervised only on true gate-positive rows."""
+    import torch
+    from obson.model.transformer import KLineConfig, KLineTransformer
+    cfg = KLineConfig(task="classify", hierarchical_task=True,
+                      hidden_size=32, num_hidden_layers=1,
+                      num_attention_heads=2, head_dim=16,
+                      intermediate_size=64, kline_dim=4)
+    model = KLineTransformer(cfg)
+    model.eval()
+    x = torch.randn(3, 20, 4)
+    out = model(
+        x, labels=torch.tensor([1, 1, 1]),
+        gate_targets=torch.tensor([0., 0., 1.]),
+        direction_targets=torch.tensor([1, 0, 1]),
+    )
+    expected = torch.nn.functional.cross_entropy(
+        out["direction_logits"][2:3], torch.tensor([1])
+    )
+    assert torch.allclose(out["loss_direction"], expected)
+
+
 if __name__ == "__main__":
     import traceback
     fns = [v for k, v in sorted(globals().items()) if k.startswith("test_")]

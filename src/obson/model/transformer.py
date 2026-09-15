@@ -105,7 +105,7 @@ class KLineConfig:
     klm_reg_loss_weight: float = 0.10
     klm_horizons: tuple = (1, 2, 4, -1)
     hierarchical_task: bool = False
-    gate_threshold: float = 0.05
+    gate_threshold: float = 0.80
     gate_loss_weight: float = 1.0
     direction_loss_weight: float = 1.0
     gate_pos_weight: float = 3.0
@@ -835,9 +835,14 @@ class KLineTransformer(nn.Module):
                             float(getattr(self.config, "gate_pos_weight", 3.0))
                         ),
                     )
-                    direction_loss = F.cross_entropy(
-                        result["direction_logits"], direction_targets.long(),
-                    )
+                    active_direction = gate_targets > 0.5
+                    if active_direction.any():
+                        direction_loss = F.cross_entropy(
+                            result["direction_logits"][active_direction],
+                            direction_targets.long()[active_direction],
+                        )
+                    else:
+                        direction_loss = result["direction_logits"].sum() * 0.0
                     result["loss_gate"] = gate_loss
                     result["loss_direction"] = direction_loss
                     result["loss"] = (

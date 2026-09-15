@@ -400,8 +400,8 @@ def main() -> None:
     ap.add_argument("--teacher-selection-weight", type=float, default=0.10)
     ap.add_argument("--hierarchical-task", action="store_true",
                     help="H1 层级任务：先预测是否值得交易，再预测条件方向")
-    ap.add_argument("--gate-threshold", type=float, default=0.05,
-                    help="机会门控标签的最小生产效用（theta倍数），默认0.05")
+    ap.add_argument("--gate-threshold", type=float, default=0.80,
+                    help="机会门控标签的最小生产效用（theta倍数），默认0.80（完整止盈级别）")
     ap.add_argument("--gate-pos-weight", type=float, default=3.0,
                     help="机会门控正例 BCE 权重，默认3.0")
     args = ap.parse_args()
