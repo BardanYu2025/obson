@@ -109,6 +109,8 @@ class KLineConfig:
     gate_loss_weight: float = 1.0
     direction_loss_weight: float = 1.0
     gate_pos_weight: float = 0.0
+    dual_tower_task: bool = False
+    outcome_loss_weight: float = 0.10
 
     def __post_init__(self):
         if self.head_dim is None:
@@ -633,8 +635,26 @@ class KLineTransformer(nn.Module):
             if getattr(cfg, "hazard_task", False):
                 self.hazard_head = nn.Linear(cfg.hidden_size, 3 * int(cfg.hazard_bins))
             if getattr(cfg, "hierarchical_task", False):
-                self.gate_head = nn.Linear(cfg.hidden_size, 1)
-                self.direction_head = nn.Linear(cfg.hidden_size, 2)
+                tower_hidden = max(cfg.hidden_size // 2, 32)
+                self.opportunity_tower = nn.Sequential(
+                    nn.LayerNorm(cfg.hidden_size),
+                    nn.Linear(cfg.hidden_size, tower_hidden), nn.GELU(),
+                    nn.Dropout(cfg.dropout),
+                )
+                self.direction_tower = nn.Sequential(
+                    nn.LayerNorm(cfg.hidden_size),
+                    nn.Linear(cfg.hidden_size, tower_hidden), nn.GELU(),
+                    nn.Dropout(cfg.dropout),
+                )
+                self.gate_head = nn.Linear(tower_hidden, 1)
+                self.direction_head = nn.Linear(tower_hidden, 2)
+                if getattr(cfg, "dual_tower_task", False):
+                    self.outcome_tower = nn.Sequential(
+                        nn.LayerNorm(cfg.hidden_size),
+                        nn.Linear(cfg.hidden_size, tower_hidden), nn.GELU(),
+                        nn.Dropout(cfg.dropout),
+                    )
+                    self.outcome_head = nn.Linear(tower_hidden, 2)
             if getattr(cfg, "serial_path", False):
                 n_h = len(getattr(cfg, "serial_path_horizons", (1, 2, 4, 8)))
                 self.serial_queries = nn.Parameter(torch.zeros(n_h, cfg.hidden_size))
@@ -747,8 +767,10 @@ class KLineTransformer(nn.Module):
             logits = self.class_head(pooled)  # [B, 3]
             result = {"logits": logits, "pred_class": logits.argmax(dim=-1)}
             if getattr(self.config, "hierarchical_task", False):
-                gate_logit = self.gate_head(pooled).squeeze(-1)
-                direction_logits = self.direction_head(pooled)
+                gate_repr = self.opportunity_tower(pooled)
+                direction_repr = self.direction_tower(pooled)
+                gate_logit = self.gate_head(gate_repr).squeeze(-1)
+                direction_logits = self.direction_head(direction_repr)
                 gate_prob = torch.sigmoid(gate_logit)
                 direction_prob = torch.softmax(direction_logits, dim=-1)
                 # Public class order remains [down, none, up]. Direction order
@@ -763,6 +785,8 @@ class KLineTransformer(nn.Module):
                 result["hierarchical_probs"] = probs
                 result["logits"] = probs.log()
                 result["pred_class"] = result["logits"].argmax(dim=-1)
+                if getattr(self.config, "dual_tower_task", False):
+                    result["outcome_scores"] = self.outcome_head(self.outcome_tower(pooled))
             if getattr(self.config, "klm_task", False):
                 q = self.klm_queries.unsqueeze(0).expand(x.shape[0], -1, -1)
                 a, _ = self.klm_cross_attn(q, x, x)
@@ -849,6 +873,16 @@ class KLineTransformer(nn.Module):
                         float(getattr(self.config, "gate_loss_weight", 1.0)) * gate_loss
                         + float(getattr(self.config, "direction_loss_weight", 1.0)) * direction_loss
                     )
+                    if getattr(self.config, "dual_tower_task", False):
+                        if utility_targets is None:
+                            raise ValueError("dual tower requires utility targets")
+                        outcome_loss = F.smooth_l1_loss(
+                            result["outcome_scores"], utility_targets.float(), beta=0.25
+                        )
+                        result["loss_outcome"] = outcome_loss
+                        result["loss"] = result["loss"] + float(
+                            getattr(self.config, "outcome_loss_weight", 0.10)
+                        ) * outcome_loss
                 elif soft_labels is not None:
                     # 软标签 v2：混合损失 = 0.5×硬CE（带类别权重，保底 argmax 语义）
                     #           + 0.5×软CE（不带类别权重——软目标本身已是逐样本分布，

@@ -404,6 +404,9 @@ def main() -> None:
                     help="机会门控标签的最小生产效用（theta倍数），默认0.80（完整止盈级别）")
     ap.add_argument("--gate-pos-weight", type=float, default=0.0,
                     help="机会门控正例 BCE 权重，0=按训练集正例率自动计算")
+    ap.add_argument("--dual-tower-task", action="store_true",
+                    help="双塔+结果回归：机会塔/方向塔/效用结果塔（回归不参与交易输出）")
+    ap.add_argument("--outcome-loss-weight", type=float, default=0.10)
     args = ap.parse_args()
     if args.teacher:
         if args.task != "classify" or args.label_anchor != "day_close" or args.theta_mode != "dynamic":
@@ -703,6 +706,8 @@ def main() -> None:
         hierarchical_task=args.hierarchical_task,
         gate_threshold=args.gate_threshold,
         gate_pos_weight=gate_pos_weight,
+        dual_tower_task=args.dual_tower_task,
+        outcome_loss_weight=args.outcome_loss_weight,
     )
     model = KLineTransformer(model_config)
     if args.init_ckpt:
@@ -842,6 +847,8 @@ def main() -> None:
         "hierarchical_task": args.hierarchical_task,
         "gate_threshold": args.gate_threshold,
         "gate_pos_weight": gate_pos_weight,
+        "dual_tower_task": args.dual_tower_task,
+        "outcome_loss_weight": args.outcome_loss_weight,
         "teacher": args.teacher,
         "teacher_loss_weight": args.teacher_loss_weight,
         "teacher_logit_weight": args.teacher_logit_weight if args.teacher else 0.0,

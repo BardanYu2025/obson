@@ -853,6 +853,27 @@ def test_hierarchical_direction_loss_ignores_non_tradeable_rows():
     assert torch.allclose(out["loss_direction"], expected)
 
 
+def test_dual_tower_outcome_is_auxiliary_and_finite():
+    """Outcome tower predicts both direction utilities without replacing output."""
+    import torch
+    from obson.model.transformer import KLineConfig, KLineTransformer
+    cfg = KLineConfig(task="classify", hierarchical_task=True,
+                      dual_tower_task=True, hidden_size=32,
+                      num_hidden_layers=1, num_attention_heads=2,
+                      head_dim=16, intermediate_size=64, kline_dim=4)
+    model = KLineTransformer(cfg)
+    model.eval()
+    out = model(
+        torch.randn(3, 20, 4), labels=torch.tensor([1, 1, 2]),
+        gate_targets=torch.tensor([0., 1., 1.]),
+        direction_targets=torch.tensor([0, 1, 1]),
+        utility_targets=torch.tensor([[0.0, 0.0], [-0.5, 0.8], [0.8, -0.5]]),
+    )
+    assert out["outcome_scores"].shape == (3, 2)
+    assert torch.isfinite(out["loss_outcome"])
+    assert torch.isfinite(out["loss"])
+
+
 def test_hierarchical_gate_includes_exact_production_win():
     """The production win utility is exactly +0.8 and must pass a 0.8 gate."""
     import torch
