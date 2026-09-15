@@ -721,6 +721,27 @@ def test_hazard_task_model_output():
     assert torch.allclose(out["logits"], out_zero["logits"])
 
 
+def test_serial_path_model_is_prediction_only():
+    """Serial path fusion uses predicted representations, never path labels."""
+    import torch
+    from obson.model.transformer import KLineConfig, KLineTransformer
+    cfg = KLineConfig(task="classify", serial_path=True,
+                      hidden_size=32, num_hidden_layers=1,
+                      num_attention_heads=2, head_dim=16,
+                      intermediate_size=64, kline_dim=4)
+    model = KLineTransformer(cfg)
+    model.eval()
+    x = torch.randn(2, 20, 4)
+    labels = torch.tensor([1, 2])
+    out_a = model(x, labels=labels,
+                  serial_path_targets=torch.tensor([[0, 0, -1, -1], [1, 1, 1, -1]]))
+    out_b = model(x, labels=labels,
+                  serial_path_targets=torch.tensor([[2, 2, 2, 2], [0, 0, 0, 0]]))
+    assert out_a["serial_path_logits"].shape == (2, 4, 3)
+    assert torch.allclose(out_a["logits"], out_b["logits"])
+    assert torch.isfinite(out_a["loss_serial_path"])
+
+
 if __name__ == "__main__":
     import traceback
     fns = [v for k, v in sorted(globals().items()) if k.startswith("test_")]

@@ -375,6 +375,10 @@ def main() -> None:
                     help="hazard 首触事件的 NLL 权重，默认1.0")
     ap.add_argument("--hazard-loss-weight", type=float, default=0.10,
                     help="hazard 辅助损失相对分类损失的权重，默认0.10")
+    ap.add_argument("--serial-path", action="store_true",
+                    help="串联路径任务：固定[1,2,4,8]根bar路径表示接入交易分类")
+    ap.add_argument("--serial-path-loss-weight", type=float, default=0.10)
+    ap.add_argument("--serial-path-fusion-weight", type=float, default=0.10)
     ap.add_argument("--path-aux", action="store_true",
                     help="E3 路径状态辅助任务：4节点×3态辅助头（教师模型方案）")
     ap.add_argument("--path-aux-weight", type=float, default=0.1,
@@ -664,6 +668,9 @@ def main() -> None:
         hazard_bins=4,
         hazard_event_weight=args.hazard_event_weight,
         hazard_loss_weight=args.hazard_loss_weight,
+        serial_path=args.serial_path,
+        serial_path_loss_weight=args.serial_path_loss_weight,
+        serial_path_fusion_weight=args.serial_path_fusion_weight,
     )
     model = KLineTransformer(model_config)
     if args.init_ckpt:
@@ -793,6 +800,10 @@ def main() -> None:
         "hazard_bins": 4,
         "hazard_event_weight": args.hazard_event_weight,
         "hazard_loss_weight": args.hazard_loss_weight,
+        "serial_path": args.serial_path,
+        "serial_path_horizons": [1, 2, 4, 8],
+        "serial_path_loss_weight": args.serial_path_loss_weight,
+        "serial_path_fusion_weight": args.serial_path_fusion_weight,
         "teacher": args.teacher,
         "teacher_loss_weight": args.teacher_loss_weight,
         "teacher_logit_weight": args.teacher_logit_weight if args.teacher else 0.0,

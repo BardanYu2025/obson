@@ -97,6 +97,10 @@ class KLineConfig:
     hazard_bins: int = 4
     hazard_event_weight: float = 1.0
     hazard_loss_weight: float = 0.10
+    serial_path: bool = False
+    serial_path_horizons: tuple = (1, 2, 4, 8)
+    serial_path_loss_weight: float = 0.10
+    serial_path_fusion_weight: float = 0.10
 
     def __post_init__(self):
         if self.head_dim is None:
@@ -616,6 +620,17 @@ class KLineTransformer(nn.Module):
             # E4 excursion 分桶头：pooled → 下行/上行最大偏移各占 θ 的几分（6 桶）
             if getattr(cfg, "hazard_task", False):
                 self.hazard_head = nn.Linear(cfg.hidden_size, 3 * int(cfg.hazard_bins))
+            if getattr(cfg, "serial_path", False):
+                n_h = len(getattr(cfg, "serial_path_horizons", (1, 2, 4, 8)))
+                self.serial_queries = nn.Parameter(torch.zeros(n_h, cfg.hidden_size))
+                nn.init.normal_(self.serial_queries, std=0.02)
+                self.serial_cross_attn = nn.MultiheadAttention(
+                    cfg.hidden_size, cfg.num_attention_heads, batch_first=True)
+                self.serial_path_norm = nn.LayerNorm(cfg.hidden_size)
+                self.serial_path_head = nn.Linear(cfg.hidden_size, 3)
+                self.serial_fusion = nn.Linear(cfg.hidden_size, cfg.num_classes)
+                nn.init.zeros_(self.serial_fusion.weight)
+                nn.init.zeros_(self.serial_fusion.bias)
             if getattr(cfg, "exc_aux", False):
                 self.exc_head_dn = nn.Linear(cfg.hidden_size, 6)
                 self.exc_head_up = nn.Linear(cfg.hidden_size, 6)
@@ -628,6 +643,11 @@ class KLineTransformer(nn.Module):
                 self.cls_token = nn.Parameter(torch.zeros(1, 1, cfg.hidden_size))
                 nn.init.normal_(self.cls_token, std=0.02)
         self.apply(self._init_weights)
+        if getattr(cfg, "serial_path", False):
+            # Exact champion-compatible initialization: the serial branch is
+            # initially a zero residual, then learns its contribution.
+            nn.init.zeros_(self.serial_fusion.weight)
+            nn.init.zeros_(self.serial_fusion.bias)
 
     def _init_weights(self, module: nn.Module) -> None:
         if isinstance(module, nn.Linear):
@@ -635,7 +655,7 @@ class KLineTransformer(nn.Module):
             if module.bias is not None:
                 torch.nn.init.zeros_(module.bias)
 
-    def forward(self, kline_seq, targets=None, temporal_feat=None, hourly_ctx=None, time_pos=None, freq_feat=None, symbol_id=None, labels=None, daily_ctx=None, foreign_ctx=None, soft_labels=None, cross_ctx=None, cross_mask=None, fine_ctx=None, utility_targets=None, hazard_targets=None):
+    def forward(self, kline_seq, targets=None, temporal_feat=None, hourly_ctx=None, time_pos=None, freq_feat=None, symbol_id=None, labels=None, daily_ctx=None, foreign_ctx=None, soft_labels=None, cross_ctx=None, cross_mask=None, fine_ctx=None, utility_targets=None, hazard_targets=None, serial_path_targets=None):
         bsz, seq_len, _ = kline_seq.shape
         x = self.input_encoder(kline_seq, temporal_feat=temporal_feat, freq_feat=freq_feat, symbol_id=symbol_id)
         # 日线金字塔：完整日K编码为前缀token，拼在分钟序列前（因果注意力下分钟token可 attend 日线背景）
@@ -695,6 +715,15 @@ class KLineTransformer(nn.Module):
                 pooled = x[:, -1, :]         # 现状：最后位置（单向标配）
             logits = self.class_head(pooled)  # [B, 3]
             result = {"logits": logits, "pred_class": logits.argmax(dim=-1)}
+            if getattr(self.config, "serial_path", False):
+                q = self.serial_queries.unsqueeze(0).expand(x.shape[0], -1, -1)
+                a, _ = self.serial_cross_attn(q, x, x)
+                serial_repr = self.serial_path_norm(q + a)
+                result["serial_path_logits"] = self.serial_path_head(serial_repr)
+                path_repr = serial_repr.mean(dim=1)
+                logits = logits + float(getattr(self.config, "serial_path_fusion_weight", 0.10)) * self.serial_fusion(path_repr)
+                result["logits"] = logits
+                result["pred_class"] = logits.argmax(dim=-1)
             if getattr(self.config, "hazard_task", False):
                 hazard_logits = self.hazard_head(pooled).view(
                     x.shape[0], int(self.config.hazard_bins), 3
@@ -752,6 +781,19 @@ class KLineTransformer(nn.Module):
                     result["loss"] = result["loss"] + float(
                         getattr(self.config, "hazard_loss_weight", 0.10)
                     ) * result["loss_hazard"]
+                if getattr(self.config, "serial_path", False) and serial_path_targets is not None:
+                    serial_logits = result["serial_path_logits"].reshape(-1, 3)
+                    serial_targets = serial_path_targets.reshape(-1)
+                    valid_serial = serial_targets >= 0
+                    if valid_serial.any():
+                        result["loss_serial_path"] = F.cross_entropy(
+                            serial_logits[valid_serial], serial_targets[valid_serial]
+                        )
+                    else:
+                        result["loss_serial_path"] = serial_logits.sum() * 0.0
+                    result["loss"] = result["loss"] + float(
+                        getattr(self.config, "serial_path_loss_weight", 0.10)
+                    ) * result["loss_serial_path"]
                 if "loss_utility" in result:
                     result["loss"] = result["loss"] + float(
                         getattr(self.config, "utility_loss_weight", 0.15)
