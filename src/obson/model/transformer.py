@@ -109,6 +109,7 @@ class KLineConfig:
     gate_loss_weight: float = 1.0
     direction_loss_weight: float = 1.0
     gate_pos_weight: float = 0.0
+    hier_stage: str = "joint"
     dual_tower_task: bool = False
     outcome_loss_weight: float = 0.10
 
@@ -869,10 +870,16 @@ class KLineTransformer(nn.Module):
                         direction_loss = result["direction_logits"].sum() * 0.0
                     result["loss_gate"] = gate_loss
                     result["loss_direction"] = direction_loss
-                    result["loss"] = (
-                        float(getattr(self.config, "gate_loss_weight", 1.0)) * gate_loss
-                        + float(getattr(self.config, "direction_loss_weight", 1.0)) * direction_loss
-                    )
+                    stage = getattr(self.config, "hier_stage", "joint")
+                    if stage == "gate":
+                        result["loss"] = float(getattr(self.config, "gate_loss_weight", 1.0)) * gate_loss
+                    elif stage == "direction":
+                        result["loss"] = float(getattr(self.config, "direction_loss_weight", 1.0)) * direction_loss
+                    else:
+                        result["loss"] = (
+                            float(getattr(self.config, "gate_loss_weight", 1.0)) * gate_loss
+                            + float(getattr(self.config, "direction_loss_weight", 1.0)) * direction_loss
+                        )
                     if getattr(self.config, "dual_tower_task", False):
                         if utility_targets is None:
                             raise ValueError("dual tower requires utility targets")

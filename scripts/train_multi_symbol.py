@@ -404,6 +404,8 @@ def main() -> None:
                     help="机会门控标签的最小生产效用（theta倍数），默认0.80（完整止盈级别）")
     ap.add_argument("--gate-pos-weight", type=float, default=0.0,
                     help="机会门控正例 BCE 权重，0=按训练集正例率自动计算")
+    ap.add_argument("--hier-stage", choices=["joint", "gate", "direction"], default="joint",
+                    help="层级训练阶段：gate只训机会塔，direction只训方向塔，joint联合")
     ap.add_argument("--dual-tower-task", action="store_true",
                     help="双塔+结果回归：机会塔/方向塔/效用结果塔（回归不参与交易输出）")
     ap.add_argument("--outcome-loss-weight", type=float, default=0.10)
@@ -722,6 +724,7 @@ def main() -> None:
         hierarchical_task=args.hierarchical_task,
         gate_threshold=args.gate_threshold,
         gate_pos_weight=gate_pos_weight,
+        hier_stage=args.hier_stage,
         dual_tower_task=args.dual_tower_task,
         outcome_loss_weight=args.outcome_loss_weight,
     )
@@ -732,6 +735,20 @@ def main() -> None:
         _ck = torch.load(args.init_ckpt, map_location="cpu", weights_only=False)
         _miss, _unexp = model.load_state_dict(_ck["model"], strict=False)
         print(f"[init-ckpt] 从 {args.init_ckpt} 初始化：missing={len(_miss)} unexpected={len(_unexp)}")
+    if args.hierarchical_task and args.hier_stage == "direction":
+        frozen = 0
+        for name, param in model.named_parameters():
+            if name.startswith("direction_tower") or name.startswith("direction_head"):
+                param.requires_grad = True
+            else:
+                param.requires_grad = False
+                frozen += param.numel()
+        print(f"[hier] direction阶段：冻结参数={frozen:,}，仅训练 direction_tower/direction_head")
+    elif args.hierarchical_task and args.hier_stage == "gate":
+        for name, param in model.named_parameters():
+            if name.startswith("direction_tower") or name.startswith("direction_head"):
+                param.requires_grad = False
+        print("[hier] gate阶段：只训练 gate loss，方向参数冻结")
     if args.task == "classify":
         if args.label_anchor == "day_close":
             horizon_desc = f"当日收盘 (θ={args.theta_mode})"
@@ -863,6 +880,7 @@ def main() -> None:
         "hierarchical_task": args.hierarchical_task,
         "gate_threshold": args.gate_threshold,
         "gate_pos_weight": gate_pos_weight,
+        "hier_stage": args.hier_stage,
         "dual_tower_task": args.dual_tower_task,
         "outcome_loss_weight": args.outcome_loss_weight,
         "teacher": args.teacher,
