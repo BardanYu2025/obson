@@ -766,6 +766,25 @@ def test_klm_query_regression_contract():
     assert torch.all(q[..., 1] <= q[..., 2])
 
 
+def test_klm_masked_nan_target_does_not_poison_loss():
+    """Non-existent horizons are NaN-sentinel targets but must be harmless."""
+    import torch
+    from obson.model.transformer import KLineConfig, KLineTransformer
+    cfg = KLineConfig(task="classify", klm_task=True,
+                      hidden_size=32, num_hidden_layers=1,
+                      num_attention_heads=2, head_dim=16,
+                      intermediate_size=64, kline_dim=4)
+    model = KLineTransformer(cfg)
+    model.eval()
+    x = torch.randn(2, 20, 4)
+    targets = torch.zeros(2, 4, 3)
+    targets[:, 2:, :] = float("nan")
+    mask = torch.tensor([[1, 1, 0, 0], [1, 1, 0, 0]], dtype=torch.float32)
+    out = model(x, labels=torch.tensor([1, 1]), klm_targets=targets, klm_mask=mask)
+    assert torch.isfinite(out["loss_klm_reg"])
+    assert torch.isfinite(out["loss"])
+
+
 if __name__ == "__main__":
     import traceback
     fns = [v for k, v in sorted(globals().items()) if k.startswith("test_")]

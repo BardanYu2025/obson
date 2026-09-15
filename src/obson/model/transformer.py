@@ -835,6 +835,12 @@ class KLineTransformer(nn.Module):
                     result["klm_quantiles"] = pred
                     target = klm_targets.unsqueeze(-1)
                     mask = klm_mask.unsqueeze(-1).unsqueeze(-1).to(pred.dtype)
+                    if torch.isnan(target).logical_and(mask > 0).any():
+                        raise ValueError("KLM valid target contains NaN")
+                    # Dataset uses NaN as the sentinel for a non-existent
+                    # horizon. Do not rely on NaN * 0: IEEE arithmetic keeps
+                    # it NaN and would poison the whole training step.
+                    target = torch.nan_to_num(target, nan=0.0)
                     taus = pred.new_tensor([0.10, 0.50, 0.90]).view(1, 1, 1, 3)
                     err = target - pred
                     pin = torch.maximum(taus * err, (taus - 1.0) * err)
