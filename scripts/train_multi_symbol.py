@@ -585,7 +585,23 @@ def main() -> None:
                 frac = counts / counts.sum()
                 theta_desc = f"c={theta:.3f}" if args.theta_mode == "dynamic" else f"θ={theta:.3f}%"
                 msg += f" | {theta_desc} | 标签分布 负/无/正={frac[0]:.1%}/{frac[1]:.1%}/{frac[2]:.1%}"
-                print(msg)
+                if args.hierarchical_task:
+                    g = getattr(train_ds, "gate_targets", None)
+                    d = getattr(train_ds, "direction_targets", None)
+                    if g is not None and d is not None:
+                        active = g > 0.5
+                        msg += (
+                            f" | hier gate={active.mean():.1%}"
+                            f" active空/多={(d[active] == 0).mean() if active.any() else float('nan'):.1%}/"
+                            f"{(d[active] == 1).mean() if active.any() else float('nan'):.1%}"
+                        )
+                        # The gate is derived from the same production utility
+                        # convention as __getitem__; verify one sampled row.
+                        if len(train_ds) > 0:
+                            sample = train_ds[0]
+                            if int(sample["direction_target"]) != int(d[0]) or float(sample["gate_target"]) != float(g[0]):
+                                raise ValueError(f"{key}: hierarchical array/item label mismatch")
+            print(msg)
 
     if not train_loaders:
         print("没有可用数据，请先运行 download_tqsdk.py")
