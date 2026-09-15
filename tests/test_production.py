@@ -853,6 +853,29 @@ def test_hierarchical_direction_loss_ignores_non_tradeable_rows():
     assert torch.allclose(out["loss_direction"], expected)
 
 
+def test_hierarchical_gate_includes_exact_production_win():
+    """The production win utility is exactly +0.8 and must pass a 0.8 gate."""
+    import torch
+    from obson.model.dataset import KLineDataset
+    ts = pd.to_datetime([
+        "2026-09-08 09:00", "2026-09-08 10:00", "2026-09-08 11:00",
+        "2026-09-08 13:00", "2026-09-08 14:00", "2026-09-08 15:00",
+    ])
+    close = np.full(6, 100.0)
+    df = pd.DataFrame({"datetime": ts, "open": close,
+                       "high": np.array([100.1, 100.1, 100.1, 101.5, 101.0, 100.1]),
+                       "low": np.array([99.9, 99.9, 99.9, 99.8, 99.8, 99.8]),
+                       "close": close})
+    ds = KLineDataset(
+        df, seq_len=3, target_offset=1, normalize=False,
+        jump_break_pct=None, label_mode="day_close", label_threshold=1.0,
+        theta_mode="frozen", hierarchical_task=True, gate_threshold=0.8,
+    )
+    assert ds.labels is not None and ds.gate_targets is not None
+    assert np.any(ds.labels == 2)
+    assert np.all(ds.gate_targets[ds.labels == 2] == 1.0)
+
+
 if __name__ == "__main__":
     import traceback
     fns = [v for k, v in sorted(globals().items()) if k.startswith("test_")]

@@ -171,6 +171,8 @@ class KLineDataset(Dataset):
         self.klm_targets: np.ndarray | None = None  # [N,4,3]: ret, mfe_up, mae_dn / theta
         self.klm_mask: np.ndarray | None = None  # [N,4] horizon exists mask
         self.exc_labels: np.ndarray | None = None  # E4: [N, 2] int64 (dn桶, up桶)，
+        self.gate_targets: np.ndarray | None = None
+        self.direction_targets: np.ndarray | None = None
         # 桶边 [0.25,0.5,0.8,1.0,1.5]×θ → 6 桶；excursion 是事实量，双触样本不 mask
 
         # 保存时间戳
@@ -613,6 +615,16 @@ class KLineDataset(Dataset):
             self.fwd_rets = fwd_all[keep].astype(np.float32)  # 持有到收盘的实际收益(%)
             self.touch_minutes = touch_min_all[keep].astype(np.float32)
             self.thetas = theta_all[keep].astype(np.float32)
+            if self.hierarchical_task:
+                fwd_theta = self.fwd_rets / np.maximum(self.thetas, 1e-6)
+                labels_kept = self.labels
+                short_u = np.where(labels_kept == 0, 0.8,
+                                   np.where(labels_kept == 2, -0.5, -fwd_theta))
+                long_u = np.where(labels_kept == 2, 0.8,
+                                  np.where(labels_kept == 0, -0.5, fwd_theta))
+                utilities = np.stack([short_u, long_u], axis=1)
+                self.gate_targets = (utilities.max(axis=1) >= self.gate_threshold).astype(np.float32)
+                self.direction_targets = utilities.argmax(axis=1).astype(np.int64)
             self.path_states = path_state_all[keep]  # E3：int64 [N, 4]，-1=歧义 mask
             self.hazard_states = hazard_state_all[keep]
             self.serial_path_states = serial_state_all[keep]
@@ -716,7 +728,7 @@ class KLineDataset(Dataset):
                 if self.hierarchical_task:
                     utilities = np.asarray([short_u, long_u], dtype=np.float32)
                     item["gate_target"] = torch.tensor(
-                        float(np.max(utilities) > self.gate_threshold), dtype=torch.float32
+                        float(np.max(utilities) >= self.gate_threshold), dtype=torch.float32
                     )
                     item["direction_target"] = torch.tensor(
                         int(np.argmax(utilities)), dtype=torch.long
@@ -739,6 +751,9 @@ class KLineDataset(Dataset):
                 item["path_states"] = torch.from_numpy(self.path_states[pos])  # [4] long
             if self.hazard_states is not None:
                 item["hazard_states"] = torch.from_numpy(self.hazard_states[pos])  # [4] long
+            if self.gate_targets is not None:
+                item["gate_target"] = torch.tensor(self.gate_targets[pos], dtype=torch.float32)
+                item["direction_target"] = torch.tensor(self.direction_targets[pos], dtype=torch.long)
             if self.serial_path_states is not None:
                 item["serial_path_states"] = torch.from_numpy(self.serial_path_states[pos])  # [4] long
             if self.klm_targets is not None:
@@ -895,7 +910,7 @@ def _restrict_samples(ds, min_base_bar: int, max_label_bar: int | None = None) -
         keep &= (base + ds.target_offset) <= max_label_bar
     ds.valid_indices = ds.valid_indices[keep]
     ds.n_samples = len(ds.valid_indices)
-    for attr in ("labels", "fwd_rets", "touch_minutes", "thetas", "soft_targets", "path_states", "hazard_states", "serial_path_states", "klm_targets", "klm_mask", "exc_labels", "anchor_days"):
+    for attr in ("labels", "fwd_rets", "touch_minutes", "thetas", "soft_targets", "path_states", "hazard_states", "serial_path_states", "klm_targets", "klm_mask", "exc_labels", "gate_targets", "direction_targets", "anchor_days"):
         arr = getattr(ds, attr, None)
         if arr is not None:
             setattr(ds, attr, arr[keep])
@@ -991,7 +1006,7 @@ def _restrict_samples_by_dayset(ds, day_set: set[int], tag: str) -> None:
         keep &= np.array([int(x) in day_set for x in ad], dtype=bool)
     ds.valid_indices = ds.valid_indices[keep]
     ds.n_samples = len(ds.valid_indices)
-    for attr in ("labels", "fwd_rets", "touch_minutes", "thetas", "soft_targets", "path_states", "hazard_states", "serial_path_states", "klm_targets", "klm_mask", "exc_labels", "anchor_days"):
+    for attr in ("labels", "fwd_rets", "touch_minutes", "thetas", "soft_targets", "path_states", "hazard_states", "serial_path_states", "klm_targets", "klm_mask", "exc_labels", "gate_targets", "direction_targets", "anchor_days"):
         arr = getattr(ds, attr, None)
         if arr is not None:
             setattr(ds, attr, arr[keep])
