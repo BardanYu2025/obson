@@ -402,8 +402,8 @@ def main() -> None:
                     help="H1 层级任务：先预测是否值得交易，再预测条件方向")
     ap.add_argument("--gate-threshold", type=float, default=0.80,
                     help="机会门控标签的最小生产效用（theta倍数），默认0.80（完整止盈级别）")
-    ap.add_argument("--gate-pos-weight", type=float, default=3.0,
-                    help="机会门控正例 BCE 权重，默认3.0")
+    ap.add_argument("--gate-pos-weight", type=float, default=0.0,
+                    help="机会门控正例 BCE 权重，0=按训练集正例率自动计算")
     args = ap.parse_args()
     if args.teacher:
         if args.task != "classify" or args.label_anchor != "day_close" or args.theta_mode != "dynamic":
@@ -453,6 +453,7 @@ def main() -> None:
     train_loaders, val_loaders, test_loaders = {}, {}, {}
     train_dss: dict = {}
     total_counts = None
+    gate_pos_weight = args.gate_pos_weight
     if args.contract_mode:
         from obson.contract_series import build_contract_frame, load_calendar
         from obson.model.dataset import build_datasets_contract
@@ -581,11 +582,21 @@ def main() -> None:
                 frac = counts / counts.sum()
                 theta_desc = f"c={theta:.3f}" if args.theta_mode == "dynamic" else f"θ={theta:.3f}%"
                 msg += f" | {theta_desc} | 标签分布 负/无/正={frac[0]:.1%}/{frac[1]:.1%}/{frac[2]:.1%}"
-            print(msg)
+                print(msg)
 
     if not train_loaders:
         print("没有可用数据，请先运行 download_tqsdk.py")
         return
+
+    if args.hierarchical_task and gate_pos_weight <= 0:
+        gate_pos = sum(float(getattr(ds, "gate_targets", np.array([])).sum())
+                       for ds in train_dss.values())
+        gate_total = sum(float(len(getattr(ds, "gate_targets", [])))
+                         for ds in train_dss.values())
+        gate_neg = gate_total - gate_pos
+        gate_pos_weight = gate_neg / max(gate_pos, 1.0)
+        print(f"  [hier] gate训练标签正例率={gate_pos / max(gate_total, 1.0):.2%} "
+              f"pos_weight={gate_pos_weight:.3f}")
 
     # E3 v1.1：逐节点类别权重 = 训练集状态频率求逆（均值归一到 1），
     # 治 90%+ "未触轨"多数类把 masked CE 淹没导致的辅助头塌缩
@@ -691,7 +702,7 @@ def main() -> None:
         klm_reg_loss_weight=args.klm_reg_loss_weight,
         hierarchical_task=args.hierarchical_task,
         gate_threshold=args.gate_threshold,
-        gate_pos_weight=args.gate_pos_weight,
+        gate_pos_weight=gate_pos_weight,
     )
     model = KLineTransformer(model_config)
     if args.init_ckpt:
@@ -830,7 +841,7 @@ def main() -> None:
         "klm_reg_loss_weight": args.klm_reg_loss_weight,
         "hierarchical_task": args.hierarchical_task,
         "gate_threshold": args.gate_threshold,
-        "gate_pos_weight": args.gate_pos_weight,
+        "gate_pos_weight": gate_pos_weight,
         "teacher": args.teacher,
         "teacher_loss_weight": args.teacher_loss_weight,
         "teacher_logit_weight": args.teacher_logit_weight if args.teacher else 0.0,

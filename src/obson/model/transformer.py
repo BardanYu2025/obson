@@ -108,7 +108,7 @@ class KLineConfig:
     gate_threshold: float = 0.80
     gate_loss_weight: float = 1.0
     direction_loss_weight: float = 1.0
-    gate_pos_weight: float = 3.0
+    gate_pos_weight: float = 0.0
 
     def __post_init__(self):
         if self.head_dim is None:
