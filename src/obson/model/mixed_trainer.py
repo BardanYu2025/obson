@@ -448,6 +448,11 @@ class MixedFrequencyTrainer:
                         cls_metrics[freq]["hier_gate_rate"] = float(gt.mean())
                         cls_metrics[freq]["hier_gate_precision10"] = float(gt[chosen].mean())
                         dm = gt.astype(bool) & (dt >= 0)
+                        valid_all = dt >= 0
+                        cls_metrics[freq]["hier_direction_ba_all"] = float(
+                            np.mean([((dp[valid_all] == c) & (dt[valid_all] == c)).sum()
+                                     / max((dt[valid_all] == c).sum(), 1) for c in (0, 1)])
+                        ) if valid_all.any() else float("nan")
                         cls_metrics[freq]["hier_direction_ba"] = float(
                             np.mean([((dp[dm] == c) & (dt[dm] == c)).sum() / max((dt[dm] == c).sum(), 1) for c in (0, 1)])
                         ) if dm.any() else float("nan")
@@ -760,7 +765,8 @@ class MixedFrequencyTrainer:
                     print(f"  hierarchical(cascade top10%): {hier_str}")
                     if getattr(self.model.config, "hier_stage", "joint") == "direction":
                         print("  direction_diag: " + " ".join(
-                            f"{f}:loss={self._last_val_cls.get(f, {}).get('hier_direction_loss', float('nan')):.4f}/"
+                        f"{f}:loss={self._last_val_cls.get(f, {}).get('hier_direction_loss', float('nan')):.4f}/"
+                            f"allBA={self._last_val_cls.get(f, {}).get('hier_direction_ba_all', float('nan')):.3f}/"
                             f"pLong={self._last_val_cls.get(f, {}).get('hier_direction_prob_mean', float('nan')):.3f}/"
                             f"std={self._last_val_cls.get(f, {}).get('hier_direction_prob_std', float('nan')):.3f}/"
                             f"activeStd={self._last_val_cls.get(f, {}).get('hier_direction_prob_std_active', float('nan')):.3f}/"

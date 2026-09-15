@@ -412,6 +412,10 @@ def main() -> None:
                     help="direction_ft 解冻 Transformer 最后几层，默认2")
     ap.add_argument("--hier-direction-active-only", action="store_true",
                     help="方向阶段训练只采样 gate=1 样本；用于可学习性诊断，不改变验证/生产口径")
+    ap.add_argument("--hier-direction-all", action="store_true",
+                    help="方向头对全样本训练；gate=0 行按 --hier-direction-none-weight 弱监督")
+    ap.add_argument("--hier-direction-none-weight", type=float, default=0.2,
+                    help="全样本方向训练时 gate=0 行的损失权重，默认0.2")
     ap.add_argument("--dual-tower-task", action="store_true",
                     help="双塔+结果回归：机会塔/方向塔/效用结果塔（回归不参与交易输出）")
     ap.add_argument("--outcome-loss-weight", type=float, default=0.10)
@@ -735,6 +739,8 @@ def main() -> None:
         gate_pos_weight=gate_pos_weight,
         hier_stage=args.hier_stage,
         hier_unfreeze_layers=args.hier_unfreeze_layers,
+        direction_all=args.hier_direction_all,
+        direction_none_weight=args.hier_direction_none_weight,
         dual_tower_task=args.dual_tower_task,
         outcome_loss_weight=args.outcome_loss_weight,
     )

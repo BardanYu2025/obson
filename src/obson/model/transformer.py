@@ -111,6 +111,8 @@ class KLineConfig:
     gate_pos_weight: float = 0.0
     hier_stage: str = "joint"
     hier_unfreeze_layers: int = 2
+    direction_all: bool = False
+    direction_none_weight: float = 0.2
     dual_tower_task: bool = False
     outcome_loss_weight: float = 0.10
 
@@ -865,7 +867,22 @@ class KLineTransformer(nn.Module):
                         ),
                     )
                     active_direction = gate_targets > 0.5
-                    if active_direction.any():
+                    if getattr(self.config, "direction_all", False):
+                        # All rows have a close-return direction label, but
+                        # non-tradeable rows are a weak auxiliary target.
+                        per_row = F.cross_entropy(
+                            result["direction_logits"],
+                            direction_targets.long(), reduction="none",
+                        )
+                        row_weight = torch.where(
+                            active_direction,
+                            per_row.new_ones(per_row.shape),
+                            per_row.new_full(per_row.shape, float(
+                                getattr(self.config, "direction_none_weight", 0.2)
+                            )),
+                        )
+                        direction_loss = (per_row * row_weight).sum() / row_weight.sum().clamp_min(1e-8)
+                    elif active_direction.any():
                         direction_loss = F.cross_entropy(
                             result["direction_logits"][active_direction],
                             direction_targets.long()[active_direction],
