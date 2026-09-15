@@ -310,6 +310,8 @@ class MixedFrequencyTrainer:
             direction_prob_l = []
             direction_loss_sum = 0.0
             direction_loss_count = 0
+            gate_loss_sum = 0.0
+            gate_loss_count = 0
             path_pred_l, path_true_l = [], []  # E3：验证集路径状态逐节点指标
             exc_pred_l, exc_true_l = [], []    # E4：验证集 excursion 分桶指标
             utility_l, utility_target_l = [], []
@@ -373,6 +375,9 @@ class MixedFrequencyTrainer:
                     if "loss_direction" in out:
                         direction_loss_sum += float(out["loss_direction"].detach().item())
                         direction_loss_count += 1
+                    if "loss_gate" in out:
+                        gate_loss_sum += float(out["loss_gate"].detach().item())
+                        gate_loss_count += 1
                     if "hazard_logits" in out and hazard_targets is not None:
                         hazard_prob_l.append(out["hazard_logits"].softmax(-1).float().cpu())
                         hazard_target_l.append(hazard_targets.float().cpu())
@@ -445,6 +450,21 @@ class MixedFrequencyTrainer:
                     if gate_true_l:
                         gt = torch.cat(gate_true_l).numpy().astype(int)
                         dt = torch.cat(direction_true_l).numpy().astype(int)
+                        gate_pred = (gs >= 0.0).astype(int)
+                        gate_cm = np.array([
+                            [((gt == 0) & (gate_pred == 0)).sum(),
+                             ((gt == 0) & (gate_pred == 1)).sum()],
+                            [((gt == 1) & (gate_pred == 0)).sum(),
+                             ((gt == 1) & (gate_pred == 1)).sum()],
+                        ], dtype=np.int64)
+                        gate_recalls = [
+                            gate_cm[c, c] / max(gate_cm[c].sum(), 1)
+                            for c in (0, 1)
+                        ]
+                        cls_metrics[freq]["hier_gate_acc"] = float((gate_pred == gt).mean())
+                        cls_metrics[freq]["hier_gate_bal_acc"] = float(np.mean(gate_recalls))
+                        cls_metrics[freq]["hier_gate_pred_rate"] = float(gate_pred.mean())
+                        cls_metrics[freq]["hier_gate_loss"] = gate_loss_sum / max(gate_loss_count, 1)
                         cls_metrics[freq]["hier_gate_rate"] = float(gt.mean())
                         cls_metrics[freq]["hier_gate_precision10"] = float(gt[chosen].mean())
                         dm = gt.astype(bool) & (dt >= 0)
@@ -713,6 +733,11 @@ class MixedFrequencyTrainer:
                                  if np.isfinite(m.get("hier_direction_loss", np.nan))]
                     selection_score = -float(np.mean(loss_vals)) if loss_vals else float("-inf")
                     score_name = "-direction_loss"
+                elif getattr(self.model.config, "hier_stage", "joint") == "gate":
+                    loss_vals = [m["hier_gate_loss"] for m in self._last_val_cls.values()
+                                 if np.isfinite(m.get("hier_gate_loss", np.nan))]
+                    selection_score = -float(np.mean(loss_vals)) if loss_vals else float("-inf")
+                    score_name = "-gate_loss"
                 else:
                     score_vals = [m["edge"] for m in self._last_val_cls.values()]
                     selection_score = float(np.mean(score_vals)) if score_vals else float("-inf")
@@ -758,6 +783,8 @@ class MixedFrequencyTrainer:
                 if getattr(self.model.config, "hierarchical_task", False):
                     hier_str = " ".join(
                         f"{f}:gate={self._last_val_cls.get(f, {}).get('hier_gate_rate', float('nan')):.1%}/"
+                        f"acc={self._last_val_cls.get(f, {}).get('hier_gate_acc', float('nan')):.3f}/"
+                        f"bal={self._last_val_cls.get(f, {}).get('hier_gate_bal_acc', float('nan')):.3f}/"
                         f"top10={self._last_val_cls.get(f, {}).get('hier_gate_precision10', float('nan')):.1%}/"
                         f"dirBA={self._last_val_cls.get(f, {}).get('hier_direction_ba', float('nan')):.3f}"
                         for f in freqs
