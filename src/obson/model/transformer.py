@@ -86,6 +86,10 @@ class KLineConfig:
                                     # （桶边 [0.25,0.5,0.8,1.0,1.5]×θ，pooled 挂两个头）
     exc_aux_weight: float = 0.1     # excursion 辅助损失权重
     exc_weights: list | None = None  # E4：逐侧类别权重 [2侧×6桶] 展平，训练集桶频率求逆
+    quant_aux: bool = False         # E11 路径幅度分位数头：2 节点(50%/100%剩余) ×
+                                    # 2 方向(dn/up 非负单侧, θ归一) × 5 分位数，
+                                    # 与三分类主头双头分工（幅度/顺序），pooled+node_emb
+    quant_aux_weight: float = 0.1   # pinball+交叉+时间排序惩罚的辅助损失权重
     query_decoder: bool = False     # E6'：未来时间 query decoder —— 4 个可学习 query
                                     # （未来25/50/75/100%时点）cross-attend 历史 encoder 输出，
                                     # 替代 pooled+node_emb 的简易路径头；encoder 保持单向
@@ -613,6 +617,10 @@ class KLineTransformer(nn.Module):
             if getattr(cfg, "exc_aux", False):
                 self.exc_head_dn = nn.Linear(cfg.hidden_size, 6)
                 self.exc_head_up = nn.Linear(cfg.hidden_size, 6)
+            # E11 分位数头：pooled + 节点 embedding → [B, 2节点, 10]（2方向×5分位）
+            if getattr(cfg, "quant_aux", False):
+                self.quant_node_emb = nn.Embedding(2, cfg.hidden_size)
+                self.quant_head = nn.Linear(cfg.hidden_size, 10)
             if getattr(cfg, "utility_head", False):
                 # 维度顺序固定为 [short, long]，与 labels [0, 1, 2] 对齐。
                 self.utility_head = nn.Linear(cfg.hidden_size, 2)
@@ -721,6 +729,10 @@ class KLineTransformer(nn.Module):
                 # E4：excursion 分桶 logits，各 [B, 6]
                 result["exc_logits_dn"] = self.exc_head_dn(pooled)
                 result["exc_logits_up"] = self.exc_head_up(pooled)
+            if getattr(self, "quant_head", None) is not None:
+                # E11：pooled + 节点 embedding → [B, 2节点, 2方向(dn/up), 5分位]
+                h_q = pooled.unsqueeze(1) + self.quant_node_emb.weight.unsqueeze(0)  # [B,2,H]
+                result["quant_preds"] = self.quant_head(h_q).view(x.shape[0], 2, 2, 5)
             if labels is not None:
                 if soft_labels is not None:
                     # 软标签 v2：混合损失 = 0.5×硬CE（带类别权重，保底 argmax 语义）

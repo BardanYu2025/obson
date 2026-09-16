@@ -103,6 +103,25 @@ class MixedFrequencyTrainer:
                     + F.cross_entropy(lg_up, el[:, 1], weight=w[1])) / 2
         return (F.cross_entropy(lg_dn, el[:, 0]) + F.cross_entropy(lg_up, el[:, 1])) / 2
 
+    _QUANT_TAUS = (0.1, 0.25, 0.5, 0.75, 0.9)
+
+    def _quant_loss(self, pred: torch.Tensor, target: torch.Tensor) -> torch.Tensor:
+        """E11 分位数损失：pinball + 分位数交叉惩罚 + 时间排序惩罚（教师 v2 修正案）。
+
+        pred: [B, 2节点, 2方向, 5分位]；target: [B, 2节点, 2方向]（θ归一非负单侧）。
+        - pinball：标准分位数损失
+        - 交叉惩罚：同节点同方向 q10≤q25≤q50≤q75≤q90（soft relu）
+        - 时间排序惩罚：同方向同分位 q_50%节点 ≤ q_100%节点（margin=0.01，relu）
+          真实 M 随节点单调递增，有理论依据
+        """
+        import torch.nn.functional as F
+        taus = torch.tensor(self._QUANT_TAUS, dtype=pred.dtype, device=pred.device)
+        err = target.unsqueeze(-1) - pred                    # [B,2,2,5]
+        pin = torch.maximum(taus * err, (taus - 1) * err).mean()
+        cross = F.relu(pred[..., :-1] - pred[..., 1:]).mean()          # 分位数单调
+        time_pen = F.relu(pred[:, 0] - pred[:, 1] + 0.01).mean()       # 节点 50%≤100%
+        return pin + cross + time_pen
+
     def train_epoch(self) -> dict[str, float]:
         """训练一个 epoch，轮流从各种频率取 batch"""
         self.model.train()
@@ -184,6 +203,12 @@ class MixedFrequencyTrainer:
                     l_exc = self._exc_loss(out["exc_logits_dn"], out["exc_logits_up"], el)
                     self._last_l_exc = l_exc.item()
                     loss = loss + float(getattr(self.model.config, "exc_aux_weight", 0.1)) * l_exc
+                # E11 路径幅度分位数辅助损失（pinball+双单调，与三分类主头双头分工）
+                if "quant_preds" in out and batch.get("quant_targets") is not None:
+                    qt = batch["quant_targets"].to(self.device)  # [B, 2节点, 2方向]
+                    l_quant = self._quant_loss(out["quant_preds"], qt)
+                    self._last_l_quant = l_quant.item()
+                    loss = loss + float(getattr(self.model.config, "quant_aux_weight", 0.1)) * l_quant
                 self._last_l_main, self._last_l_path = l_main_val, l_path_val
                 loss.backward()
 
@@ -293,6 +318,11 @@ class MixedFrequencyTrainer:
                         exc_pred_l.append(torch.stack([out["exc_logits_dn"].argmax(-1),
                                                        out["exc_logits_up"].argmax(-1)], dim=1).float().cpu())
                         exc_true_l.append(el.float().cpu())
+                    # E11：验证集同样计入分位数辅助损失，保持口径一致
+                    if "quant_preds" in out and batch.get("quant_targets") is not None:
+                        qt = batch["quant_targets"].to(self.device)
+                        v_loss = v_loss + float(getattr(self.model.config, "quant_aux_weight", 0.1)) * self._quant_loss(
+                            out["quant_preds"], qt)
                     total_loss += v_loss.item()
                     preds.append(out["pred_class"].float().cpu())
                     logits_l.append(out["logits"].float().cpu())

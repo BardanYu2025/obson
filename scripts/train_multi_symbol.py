@@ -377,6 +377,11 @@ def main() -> None:
                     help="E4 excursion 分桶辅助任务：m_dn/m_up 最大偏移占 θ 比例各 6 桶")
     ap.add_argument("--exc-aux-weight", type=float, default=0.1,
                     help="excursion 辅助损失权重，默认 0.1")
+    ap.add_argument("--quant-aux", action="store_true",
+                    help="E11 路径幅度分位数头：2节点(50/100%%剩余)×2方向(dn/up,θ归一)×5分位，"
+                         "pinball+双单调惩罚；与三分类主头双头分工（幅度/顺序）")
+    ap.add_argument("--quant-aux-weight", type=float, default=0.1,
+                    help="E11 分位数辅助损失权重，默认 0.1")
     ap.add_argument("--query-decoder", action="store_true",
                     help="E6'：未来时间 query decoder 替代简易路径头（encoder 保持单向）")
     ap.add_argument("--teacher", action="store_true",
@@ -648,6 +653,8 @@ def main() -> None:
         path_state_weights=path_state_weights,  # E3 v1.1 逐节点类别权重（None=不加权）
         exc_aux=args.exc_aux,              # E4 excursion 分桶辅助头
         exc_aux_weight=args.exc_aux_weight,
+        quant_aux=args.quant_aux,          # E11 路径幅度分位数头（双头分工：幅度/顺序）
+        quant_aux_weight=args.quant_aux_weight,
         exc_weights=exc_weights,           # E4 逐侧类别权重（None=不加权）
         query_decoder=args.query_decoder,  # E6' 未来时间 query decoder
         utility_head=args.teacher,
