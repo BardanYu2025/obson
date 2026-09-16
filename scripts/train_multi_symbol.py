@@ -946,7 +946,7 @@ def _evaluate_test(args, model, test_loaders, device, ckpt_name: str = "best.pt"
     model.eval()
     for key, loader in test_loaders.items():
         preds, trues, fwd, tods, logits, touch = [], [], [], [], [], []
-        gate_scores, direction_preds = [], []
+        gate_scores, gate_trues, direction_preds = [], [], []
         has_touch = False
         with torch.no_grad():
             for batch in loader:
@@ -983,6 +983,8 @@ def _evaluate_test(args, model, test_loaders, device, ckpt_name: str = "best.pt"
                     if args.hierarchical_task:
                         gate_scores.append(out["gate_logit"].cpu().numpy())
                         direction_preds.append(out["direction_logits"].argmax(-1).cpu().numpy())
+                        if "gate_target" in batch:
+                            gate_trues.append(batch["gate_target"].numpy())
                     trues.append(batch["label"].numpy())
                     fwd.append(batch["fwd_ret"].numpy())
                     tods.append(batch["tod_minutes"].numpy())
@@ -1020,6 +1022,21 @@ def _evaluate_test(args, model, test_loaders, device, ckpt_name: str = "best.pt"
             fwd = np.concatenate(fwd)
             if args.hierarchical_task and gate_scores:
                 gs = np.concatenate(gate_scores)
+                if gate_trues:
+                    gt = np.concatenate(gate_trues).astype(int)
+                    gate_pred = (gs >= 0.0).astype(int)
+                    gate_cm = np.array([
+                        [((gt == 0) & (gate_pred == 0)).sum(),
+                         ((gt == 0) & (gate_pred == 1)).sum()],
+                        [((gt == 1) & (gate_pred == 0)).sum(),
+                         ((gt == 1) & (gate_pred == 1)).sum()],
+                    ], dtype=np.int64)
+                    gate_rec = [gate_cm[c, c] / max(gate_cm[c].sum(), 1) for c in (0, 1)]
+                    n10 = max(1, int(np.ceil(len(gs) * 0.10)))
+                    top10 = np.argsort(gs)[-n10:]
+                    print(f"  [gate-only] rate={gt.mean():.1%} | acc={(gate_pred == gt).mean():.3f} "
+                          f"| bal_acc={np.mean(gate_rec):.3f} | top10_precision={gt[top10].mean():.1%} "
+                          f"| top10_n={n10}")
                 dp = np.concatenate(direction_preds).astype(int)
                 n_select = max(1, int(np.ceil(len(gs) * 0.10)))
                 chosen = np.zeros(len(gs), dtype=bool)
