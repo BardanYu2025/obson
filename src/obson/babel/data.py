@@ -1,12 +1,14 @@
 """Independent Babel data contract: validated contracts, causal features, global splits."""
 
 import hashlib
+import time
 from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
+from .progress import progress
 from .structure import annotate
 
 FEATURES = (
@@ -141,7 +143,10 @@ def load_series(root="data/contracts", symbols=None, periods=(60, 30), asof=None
     root = Path(root)
     symbols = sorted(set(symbols or [p.name for p in root.iterdir() if p.is_dir()]))
     periods = sorted(set(periods))
+    started = time.monotonic()
+    progress(f"data: reading {root}; symbols={symbols}, periods={periods}")
     raw, diagnostics = [], []
+    bars = 0
     for code in symbols:
         for period in periods:
             for f in sorted((root / code).glob(f"*_{period}m.csv")):
@@ -157,8 +162,16 @@ def load_series(root="data/contracts", symbols=None, periods=(60, 30), asof=None
                     pd.util.hash_pandas_object(df, index=False).values.tobytes()
                 ).hexdigest()
                 raw.append((code, period, contract, df, digest))
+                bars += len(df)
+                if len(raw) == 1 or len(raw) % 50 == 0:
+                    progress(
+                        f"data: read {len(raw)} files / {bars:,} bars; elapsed={time.monotonic() - started:.0f}s"
+                    )
     if not raw:
         raise ValueError("No valid contract data found")
+    progress(
+        f"data: read complete, {len(raw)} files / {bars:,} bars; building sessions and lagged contract selection"
+    )
     calendar = np.unique(
         np.concatenate(
             [
@@ -194,6 +207,10 @@ def load_series(root="data/contracts", symbols=None, periods=(60, 30), asof=None
         winners = table.fillna(0).idxmax(axis=1).shift(1)
         active[code] = dict(zip(winners.index.to_numpy("datetime64[D]"), winners, strict=True))
     result = []
+    progress(
+        "data: generating causal labels and features on CPU (GPU may be idle during this stage)"
+    )
+    last_report = time.monotonic()
     for (code, period, contract, df, digest), sess in zip(raw, sessions, strict=True):
         labels = annotate(df)
         main = np.array([active[code].get(day) == contract for day in sess], dtype=bool)
@@ -214,11 +231,19 @@ def load_series(root="data/contracts", symbols=None, periods=(60, 30), asof=None
             diagnostics.append(
                 f"{code}/{contract}/{period}: OI absent, explicit availability flag is 0"
             )
+        if len(result) == 1 or len(result) == len(raw) or time.monotonic() - last_report >= 10:
+            progress(
+                f"data: labels/features {len(result)}/{len(raw)} contracts; current={code}/{period}/{contract}; elapsed={time.monotonic() - started:.0f}s"
+            )
+            last_report = time.monotonic()
     diagnostics.append(
         "Contract selection uses previous-session volume among local files; coverage is not guaranteed complete."
     )
     diagnostics.append(
         "Session calendar inferred from observed daytime bars; trailing nights without a daytime session are excluded."
+    )
+    progress(
+        f"data: ready, eligible anchors={sum(int(s.main.sum()) for s in result):,}; elapsed={time.monotonic() - started:.0f}s"
     )
     return result, diagnostics
 

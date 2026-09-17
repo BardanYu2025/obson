@@ -4,6 +4,7 @@ import hashlib
 import json
 import math
 import random
+import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
@@ -15,6 +16,7 @@ from torch.utils.data import DataLoader, Dataset
 from . import SCHEMA
 from .data import FEATURES, manifest, split_boundaries, split_mask
 from .metrics import balanced_accuracy, event_f1
+from .progress import progress
 from .structure import AMP_EDGES, TIME_EDGES
 
 HEADS = {
@@ -164,13 +166,21 @@ def evaluate(model, ds, device, batch_size=64):
     model.eval()
     preds, truths = {k: [] for k in HEADS}, {k: [] for k in HEADS}
     ids, rows = [], []
-    for batch in DataLoader(ds, batch_size=batch_size):
+    loader = DataLoader(ds, batch_size=batch_size)
+    started = last_report = time.monotonic()
+    progress(f"evaluate: endpoint samples={len(ds):,}, batches={len(loader)}, device={device}")
+    for bi, batch in enumerate(loader, 1):
         out = model(batch["x"].to(device))
         for k in HEADS:
             preds[k].append(out[k][:, -1].argmax(-1).cpu().numpy())
             truths[k].append(batch[k][:, -1].numpy())
         ids.extend(batch["series"].tolist())
         rows.extend(batch["row"].tolist())
+        if bi == 1 or bi == len(loader) or time.monotonic() - last_report >= 10:
+            progress(
+                f"evaluate: batch={bi}/{len(loader)}, elapsed={time.monotonic() - started:.1f}s"
+            )
+            last_report = time.monotonic()
     p, g = (
         {k: np.concatenate(v) for k, v in preds.items()},
         {k: np.concatenate(v) for k, v in truths.items()},
@@ -233,9 +243,13 @@ def train(
     torch.manual_seed(seed)
     device = device_for(device)
     bounds = boundaries or split_boundaries(series)
+    progress(f"train: preparing window datasets; device={device}; boundaries={bounds}")
     tr = Windows(series, bounds, "train", cfg, stride)
     va = Windows(series, bounds, "val", cfg, stride)
     model = Encoder(cfg).to(device)
+    progress(
+        f"train: parameters={sum(p.numel() for p in model.parameters()):,}; train_windows={len(tr):,}; val_windows={len(va):,}; batch_size={batch_size}; lengths={cfg.trained_windows}"
+    )
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=0.01)
     run = {
         "schema": SCHEMA,
@@ -255,7 +269,10 @@ def train(
     for epoch in range(1, epochs + 1):
         model.train()
         sums, count = dict.fromkeys(HEADS, 0.0), 0
-        for batch in DataLoader(tr, batch_size=batch_size, shuffle=True):
+        loader = DataLoader(tr, batch_size=batch_size, shuffle=True)
+        started = last_report = time.monotonic()
+        progress(f"train: epoch={epoch}/{epochs}, batches={len(loader)}")
+        for batch in loader:
             length = random.choice(cfg.trained_windows)
             for k in ("x", "valid", *HEADS):
                 batch[k] = batch[k][:, -length:]
@@ -269,6 +286,17 @@ def train(
             for k, loss in parts.items():
                 sums[k] += loss.item()
             count += 1
+            if count == 1 or count == len(loader) or time.monotonic() - last_report >= 10:
+                elapsed = time.monotonic() - started
+                memory = (
+                    f", cuda_peak_allocated={torch.cuda.max_memory_allocated(device) / 2**20:.0f}MiB"
+                    if device.type == "cuda"
+                    else ""
+                )
+                progress(
+                    f"train: epoch={epoch}/{epochs}, batch={count}/{len(loader)}, elapsed={elapsed:.1f}s{memory}"
+                )
+                last_report = time.monotonic()
         metrics = evaluate(model, va, device, batch_size)
         score = float(np.mean([metrics[k]["ba"] for k in HEADS if k != "event"]))
         record = {
