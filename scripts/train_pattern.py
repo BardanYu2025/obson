@@ -68,6 +68,7 @@ def main():
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--bidir", action="store_true", help="双向版（仅离线研究用）")
     ap.add_argument("--mask-ratio", type=float, default=0.15)
+    ap.add_argument("--contract", action="store_true", help="合约段帧模式（全量历史，需先跑 build_bar_labels.py --contract）")
     ap.add_argument("--save-dir", required=True)
     args = ap.parse_args()
 
@@ -79,12 +80,15 @@ def main():
     trains, vals, tests = [], [], []
     for code in args.symbols:
         for period in args.periods:
-            if not Path(f"data/{code}_{period}m.csv").exists():
-                print(f"  [{code}_{period}m] 缺数据，跳过")
+            ok = Path(f"data/labels/{code}_{period}m_contract_labels.pkl").exists() if args.contract \
+                else Path(f"data/{code}_{period}m.csv").exists()
+            if not ok:
+                print(f"  [{code}_{period}m] 缺{'合约标签' if args.contract else '数据'}，跳过")
                 continue
             tr, va, te = build_pattern_datasets(
                 code, period, args.window, args.stride,
-                symbol_id=SYMBOLS.get(code, 0), freq_id=FREQ_IDS.get(period, 7))
+                symbol_id=SYMBOLS.get(code, 0), freq_id=FREQ_IDS.get(period, 7),
+                contract=args.contract)
             trains.append(tr); vals.append(va); tests.append(te)
     if not trains:
         raise SystemExit("无可用数据")
@@ -128,7 +132,7 @@ def main():
               f"U1={m['U1_pivF1']:.3f} U2={m['U2_segBA']:.3f} U3={m['U3_coordR2']:.3f} "
               f"A1(tolF1)={m['A1_pivF1_tol']:.3f} A2conf(BA)={m['A2_segBA_conf']:.3f} "
               f"| {time.time()-t0:.0f}s")
-        if m["val_loss"] < best - 1e-4:
+        if math.isfinite(m["val_loss"]) and m["val_loss"] < best - 1e-4:
             best, bad = m["val_loss"], 0
             torch.save({"config": cfg, "model": model.state_dict(),
                         "metrics": m, "epoch": ep, "mode": mode}, save / "best.pt")
@@ -139,6 +143,9 @@ def main():
                 break
 
     # 测试段 + 门禁判决（v1.1 双轨：bidir 走 U 线，causal 走 A 线仅报告不判死刑）
+    if not (save / "best.pt").exists():
+        print("⚠️ 训练全程 val_loss 非有限，无 best.pt；请先看分量日志定位 NaN 源")
+        return
     ck = torch.load(save / "best.pt", map_location=device, weights_only=False)
     model.load_state_dict(ck["model"])
     test_dl = DataLoader(ConcatDataset(tests), batch_size=args.batch_size)

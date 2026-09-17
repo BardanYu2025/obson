@@ -96,22 +96,40 @@ class PatternWindowDataset(Dataset):
 def build_pattern_datasets(code: str, period: int, window: int, stride: int,
                            symbol_id: int, freq_id: int,
                            train_ratio: float = 0.7, val_ratio: float = 0.15,
-                           data_dir: str = "data"):
-    """按交易日切分 train/val/test（窗口末根落在段内）。返回三个 Dataset。"""
-    f = Path(data_dir) / f"{code}_{period}m.csv"
-    lab_f = Path(data_dir) / "labels" / f"{code}_{period}m_labels.pkl"
-    df = pd.read_csv(f, parse_dates=["datetime"])
-    labels = pd.read_pickle(lab_f)
-    assert len(df) == len(labels), f"{code}_{period}m 行情与标签行数不一致"
-    ends = np.arange(window - 1, len(df), stride)          # 窗口末根候选
-    days = pd.Series(df["datetime"].dt.date).unique()
+                           data_dir: str = "data", contract: bool = False):
+    """按交易日切分 train/val/test（窗口末根落在段内）。返回三个 Dataset。
+
+    contract=True：合约段帧（全量历史）。窗口不许跨 seg 断点，
+    末根必须是主力任期 bar（main_mask）——与历史项目合约模式口径一致。
+    """
+    if contract:
+        from obson.contract_series import build_contract_frame
+        cframe, _, cmask, _ = build_contract_frame(code, period, data_dir=f"{data_dir}/contracts")
+        labels = pd.read_pickle(Path(data_dir) / "labels" / f"{code}_{period}m_contract_labels.pkl")
+        parts = [g.reset_index(drop=True) for _, g in cframe.groupby("seg") if len(g) >= 200]
+        df = pd.concat(parts, ignore_index=True)
+        assert len(df) == len(labels), f"{code}_{period}m 合约帧与标签行数不一致"
+        seg = labels["seg"].to_numpy()
+        ends_all = np.arange(window - 1, len(df), stride)
+        same_seg = seg[ends_all] == seg[ends_all - window + 1]
+        ends = ends_all[same_seg & labels["main_mask"].to_numpy()[ends_all]]
+    else:
+        f = Path(data_dir) / f"{code}_{period}m.csv"
+        lab_f = Path(data_dir) / "labels" / f"{code}_{period}m_labels.pkl"
+        df = pd.read_csv(f, parse_dates=["datetime"])
+        labels = pd.read_pickle(lab_f)
+        assert len(df) == len(labels), f"{code}_{period}m 行情与标签行数不一致"
+        ends = np.arange(window - 1, len(df), stride)      # 窗口末根候选
+    if "datetime" not in df.columns and "datetime" in labels.columns:
+        df = df.copy(); df["datetime"] = labels["datetime"].to_numpy()
+    days = pd.Series(pd.to_datetime(df["datetime"]).dt.date).unique()
     n_tr, n_va = int(len(days) * train_ratio), int(len(days) * (train_ratio + val_ratio))
     tr_days, va_days, te_days = set(days[:n_tr]), set(days[n_tr:n_va]), set(days[n_va:])
-    end_day = df["datetime"].dt.date.to_numpy()[ends]
+    end_day = pd.to_datetime(df["datetime"]).dt.date.to_numpy()[ends]
     splits = []
     for dayset in (tr_days, va_days, te_days):
         idx = ends[np.isin(end_day, list(dayset))]
         splits.append(PatternWindowDataset(df, labels, window, idx, symbol_id, freq_id))
-    print(f"  [{code}_{period}m] window={window} 样本 train/val/test="
+    print(f"  [{code}_{period}m{'|合约' if contract else ''}] window={window} 样本 train/val/test="
           f"{len(splits[0])}/{len(splits[1])}/{len(splits[2])}")
     return tuple(splits)

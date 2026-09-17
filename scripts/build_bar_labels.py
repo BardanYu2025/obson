@@ -21,6 +21,45 @@ OUT = Path("data/labels")
 OUT.mkdir(parents=True, exist_ok=True)
 
 rows = []
+
+if "--contract" in sys.argv:
+    # 合约模式：逐段打标（断点不跨越），拼接帧 + seg/main_mask 一并存
+    from obson.contract_series import build_contract_frame
+    for cal in sorted((DATA / "contracts").glob("*_roll_calendar.csv")):
+        code = cal.stem.replace("_roll_calendar", "")
+        for period in (60, 30, 15, 5):
+            try:
+                cframe, cbreaks, cmask, cday_ids = build_contract_frame(code, period)
+            except (FileNotFoundError, ValueError):
+                continue
+            parts = []
+            for seg_id, g in cframe.groupby("seg"):
+                g = g.reset_index(drop=True)
+                if len(g) < 200:
+                    continue
+                lg = label_frame(g)
+                lg["seg"] = seg_id
+                parts.append(lg)
+            lab = pd.concat(parts, ignore_index=True)
+            # main_mask 与 cframe 行对齐（label_frame 逐段 reset， concat 顺序一致）
+            lab["main_mask"] = False
+            pos = 0
+            for seg_id, g in cframe.groupby("seg"):
+                n = len(g)
+                if n < 200:
+                    continue
+                lab.iloc[pos:pos + n, lab.columns.get_loc("main_mask")] = \
+                    cmask[cframe["seg"].to_numpy() == seg_id]
+                pos += n
+            key = f"{code}_{period}m_contract"
+            lab.to_pickle(OUT / f"{key}_labels.pkl")
+            n_piv = int(lab["is_piv_high_s1"].sum() + lab["is_piv_low_s1"].sum())
+            print(f"[{key}] {len(lab)} bar（{lab['seg'].nunique()} 段）→ 标签落盘 | 中尺度枢轴 {n_piv}")
+            rows.append({"file": key, "bars": len(lab)})
+    pd.DataFrame(rows).to_csv(OUT / "_manifest_contract.csv", index=False)
+    print(f"\n共 {len(rows)} 个合约标签文件")
+    sys.exit(0)
+
 for f in sorted(DATA.glob("*_*.csv")):
     code_period = f.stem
     df = pd.read_csv(f, parse_dates=["datetime"])

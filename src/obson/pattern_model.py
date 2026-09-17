@@ -51,7 +51,8 @@ class PatternEncoder(nn.Module):
         self.norm = nn.LayerNorm(H)
         # ── 稠密监督头（全部 per-bar）──
         self.seg_dir_head = nn.Linear(H, N_SCALES * 3)   # [B,T,3尺度,3类]
-        self.time_head = nn.Linear(H, N_SCALES)          # bars_since_piv
+        # 时间坐标头直接输出 log1p(bars_since)（值域全实数，避免 log1p(负输出)=NaN）
+        self.time_head = nn.Linear(H, N_SCALES)          # log1p(bars_since_piv)
         self.amp_head = nn.Linear(H, N_SCALES)           # amp_since_piv
         self.piv_head = nn.Linear(H, N_SCALES * 3)       # 0无/1高/2低
         self.quality_head = nn.Linear(H, N_SCALES)       # piv_amp（仅枢轴 bar 计损）
@@ -97,9 +98,9 @@ def pattern_losses(out: dict, batch: dict, mask: torch.Tensor | None,
     cw = torch.tensor([1.0, piv_weight, piv_weight], device=device)
     l_piv = nn.functional.cross_entropy(
         out["piv_cls"].reshape(-1, 3), piv_cls.reshape(-1), weight=cw)
-    # 坐标回归：log1p 压缩时间坐标的长尾
+    # 坐标回归：时间头输出即 log1p 空间（防 NaN；R² 报告时 expm1 还原）
     l_time = nn.functional.smooth_l1_loss(
-        torch.log1p(out["bars_since"]), torch.log1p(bars_since))
+        out["bars_since"], torch.log1p(bars_since))
     l_amp = nn.functional.smooth_l1_loss(out["amp_since"], amp_since)
     # 成色：只在真枢轴 bar 上计损
     is_piv = piv_cls > 0
@@ -161,6 +162,8 @@ def gate_metrics(out: dict, batch: dict, tol: int = 3) -> dict[str, float]:
     r2_all, r2_conf = [], []
     for name in ("bars_since", "amp_since"):
         pred = out[name].cpu().reshape(-1, N_SCALES)
+        if name == "bars_since":
+            pred = torch.expm1(pred.clamp(min=0))  # log1p 空间还原
         true = batch[name].reshape(-1, N_SCALES)
         cm = conf.reshape(-1, N_SCALES)
         for s in range(N_SCALES):
