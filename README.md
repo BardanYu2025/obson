@@ -1,4 +1,26 @@
-# obson · K 线形态理解骨干（E12）
+# obson · Babel 结构看盘与表示学习
+
+`features/babel` 当前入口是 **Babel**：因果结构标签、量仓输入、逐根回放、
+结构/价格/模型三种历史检索、可训练 per-bar 表示，以及独立的评估与人工盲评。
+
+**训练在 AutoDL GPU 上进行。完整命令和数据契约见 [docs/BABEL.md](docs/BABEL.md)。**
+
+```bash
+python -m pip install -r requirements-babel.txt  # 使用 AutoDL 镜像已有 CUDA PyTorch
+bash scripts/babel_autodl.sh audit
+bash scripts/babel_autodl.sh train
+# 训练完成、方案冻结后：
+bash scripts/babel_autodl.sh evaluate
+bash scripts/babel_autodl.sh index
+bash scripts/babel_autodl.sh benchmark
+```
+
+代码位于 `src/obson/babel/`，测试命令：
+`PYTHONPATH=src python -m unittest discover -s tests/babel -v`。
+
+以下保留 E12 历史说明。其毕业与容量归因需要重新复核，不代表 Babel 的判决。
+
+## E12 历史快照（2026-09-17）
 
 训练"看懂 K 线"的表示模型：per-bar 因果 Transformer，稠密监督结构身份
 （段方向/枢轴/坐标/成色），每根 bar 输出上下文 embedding，作为下游任务

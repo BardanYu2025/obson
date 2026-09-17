@@ -1,0 +1,4 @@
+# AutoDL: keep the CUDA-enabled torch supplied by the PyTorch image.
+# Install torch separately only if the image does not supply it.
+numpy>=1.26
+pandas>=2.1
