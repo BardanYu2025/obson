@@ -101,6 +101,46 @@ PYTHONPATH=src python -m obson.babel score-blind \
 
 数据、权重、索引、运行报告不进入 Git。保留与索引完全一致的合约数据快照，回到本地查看时同步必要产物。
 
+## 两图对照评估（推荐的下一轮）
+
+第一轮20例单人0/1/2盲评中，模型未展示人工感知优势，评分者也报告不确定。
+因此保留原权重与第一轮结果，新增评估工具，不据此扩容或改训练目标。
+
+```bash
+cd ~/autodl-tmp/obson
+git pull --ff-only origin features/babel
+export BABEL_DATA=/root/autodl-tmp/data/contracts
+export BABEL_RUN=checkpoints/babel_r1_s42
+export BABEL_INDEX=data/babel/babel_r1_s42.npz
+bash scripts/babel_autodl.sh blind-pairs
+```
+
+直接使用已有权重和索引，无需训练或重建索引。生成目录为
+`checkpoints/babel_r1_s42/blind_pairs_v1/`，已有目录不会被覆盖。
+下载其中的 `review.html` 到本地浏览器打开，无需联网或运行Python。
+
+- 默认抽6个不同测试周的查询，比较模型与两条基线，共12组主要对照。
+- 加3组隐藏重复，共15组；重复置于后段、左右互换，与原例隔开至少6组。
+- 每组分别选**整体走势、转折顺序、右端位置**：左图更像／右图更像／差不多／无法判断。
+- 不要求选择总冠军；不强制填满，不把空白和“无法判断”当作平局。
+- 页面尝试在浏览器保存进度，失败时提示及时下载；全空文件不能导出。
+- 下载按钮导出 `pair_ratings_<packet_id>.csv`，不会生成一个容易与真实评分混淆的空白CSV模板。
+- 方法映射只在同目录 `answer_key.json` 中；不交给评分者。每份评分携带packet ID，防止文件混用。
+
+```bash
+PYTHONPATH=src python -m obson.babel score-pairs \
+  --ratings /path/to/pair_ratings_PACKET.csv \
+  --answer-key checkpoints/babel_r1_s42/blind_pairs_v1/answer_key.json \
+  --out checkpoints/babel_r1_s42/pair_metrics.json
+```
+
+统计按三个维度分别报告胜／平／负、未判断数量、按查询周分块的偏好差值区间。
+重复只检查同一评分者的稳定性，不计入方法成绩两次；比较时校正左右互换。
+一致性高不等于正确，一致性低也不是评分者“做错了”；它帮助识别含糊题目。
+6个查询与3个重复属于低负担试点，不足以支持强显著性、跨评分者泛化或毕业。
+这是在已有测试历史上开展的新探索性评估，不能重新包装成一次完全未使用过的最终确认集。
+统计区间反映查询抽样变化，不包含人工评分误差；不要把三个维度合成未经定义的总分。
+
 ## 查看工作台
 
 ```bash

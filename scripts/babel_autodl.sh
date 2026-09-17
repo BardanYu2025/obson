@@ -17,8 +17,8 @@ case "$stage" in
   train|evaluate|index)
     "$python_bin" -c 'import torch; assert torch.cuda.is_available(), "CUDA unavailable: use an AutoDL PyTorch GPU image; no CPU fallback"; print("GPU:", torch.cuda.get_device_name(0), "PyTorch:", torch.__version__)'
     ;;
-  audit|benchmark|blind) ;;
-  *) echo "Usage: bash scripts/babel_autodl.sh {audit|train|evaluate|index|benchmark|blind}" >&2; exit 2 ;;
+  audit|benchmark|blind|blind-pairs) ;;
+  *) echo "Usage: bash scripts/babel_autodl.sh {audit|train|evaluate|index|benchmark|blind|blind-pairs}" >&2; exit 2 ;;
 esac
 
 if [[ "$stage" == train || "$stage" == audit || "$stage" == index ]]; then
@@ -57,5 +57,9 @@ case "$stage" in
   blind)
     "$python_bin" -m obson.babel blind --root "$data_root" --index "$index_file" \
       --checkpoint "$run_dir/best.pt" --count 20 --out "$run_dir/blind"
+    ;;
+  blind-pairs)
+    "$python_bin" -m obson.babel blind-pairs --root "$data_root" --index "$index_file" \
+      --checkpoint "$run_dir/best.pt" --count 6 --repeats 3 --out "$run_dir/blind_pairs_v1"
     ;;
 esac

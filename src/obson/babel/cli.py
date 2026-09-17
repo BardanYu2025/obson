@@ -60,7 +60,7 @@ def main(argv=None):
                 "--boundaries",
                 help="JSON with train_until/val_until/test_until, shared across runs",
             )
-    for command in ("query", "serve", "benchmark", "blind"):
+    for command in ("query", "serve", "benchmark", "blind", "blind-pairs"):
         p = sub.add_parser(command)
         p.add_argument("--root", default="data/contracts")
         p.add_argument("--index", required=True)
@@ -74,6 +74,11 @@ def main(argv=None):
             p.add_argument("--out")
         elif command == "serve":
             p.add_argument("--port", type=int, default=8765)
+        elif command == "blind-pairs":
+            p.add_argument("--count", type=int, default=6, help="One query per sampled week")
+            p.add_argument("--repeats", type=int, default=3)
+            p.add_argument("--seed", type=int, default=20260918)
+            p.add_argument("--out", required=True)
         else:
             p.add_argument("--count", type=int, default=50 if command == "benchmark" else 20)
             p.add_argument("--seed", type=int, default=42)
@@ -84,6 +89,10 @@ def main(argv=None):
     p.add_argument("--split", choices=["val", "test"], default="test")
     p.add_argument("--device", default="cpu")
     p.add_argument("--stride", type=int, default=1)
+    p.add_argument("--out", required=True)
+    p = sub.add_parser("score-pairs", help="Score dimensional preferences and repeat stability")
+    p.add_argument("--ratings", required=True)
+    p.add_argument("--answer-key", required=True)
     p.add_argument("--out", required=True)
     p = sub.add_parser(
         "score-blind", help="Evaluate human relevance ratings without inventing labels"
@@ -146,6 +155,10 @@ def main(argv=None):
                 "Events evaluated only at sampled endpoints, not all stream events."
             )
         write_json(args.out, result)
+    elif args.command == "score-pairs":
+        from .pair_review import score_pairs
+
+        write_json(args.out, score_pairs(args.ratings, args.answer_key))
     elif args.command == "score-blind":
         from .retrieval import score_blind
 
@@ -164,6 +177,10 @@ def main(argv=None):
             from .retrieval import evaluate_retrieval
 
             write_json(args.out, evaluate_retrieval(engine, args.count, args.seed))
+        elif args.command == "blind-pairs":
+            from .pair_review import export_pairs
+
+            write_json(None, export_pairs(engine, args.out, args.count, args.repeats, args.seed))
         else:
             from .retrieval import blind_packet
 
