@@ -43,6 +43,8 @@ class PatternWindowDataset(Dataset):
         self.atr = atr(df).astype(np.float32)
         self.tod = _tod_feats(df["datetime"])
         self.day = df["datetime"].dt.date.to_numpy()
+        # 纳秒时间戳（检索库时间掩码用；防泄漏纪律的一部分）
+        self.dt_ns = pd.to_datetime(df["datetime"]).to_numpy(dtype="datetime64[ns]").astype(np.int64)
         L = labels
         self.seg_dir = np.stack([L[f"seg_dir_s{s}"] for s in range(N_SCALES)], 1).astype(np.int64) + 1  # →0/1/2
         self.bars_since = np.stack([L[f"bars_since_piv_s{s}"] for s in range(N_SCALES)], 1).astype(np.float32)
