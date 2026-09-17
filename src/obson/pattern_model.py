@@ -17,6 +17,22 @@ import torch
 import torch.nn as nn
 
 N_SCALES = 3
+N_TIME_BINS = 7   # log1p(bars_since) 分桶边界见下
+N_AMP_BINS = 7    # amp（ATR 单位，带符号）分桶边界见下
+
+# 桶边界（同一坐标系内等距递增，跨 regime 稳健）
+TIME_EDGES = (0.7, 1.4, 2.1, 2.8, 3.5, 4.2)          # log1p(bar 数) ≈ 2/4/8/16/33/66 bar
+AMP_EDGES = (-2.0, -1.0, -0.3, 0.3, 1.0, 2.0)        # ATR 单位
+
+
+def time_to_bin(bars: torch.Tensor) -> torch.Tensor:
+    e = torch.tensor(TIME_EDGES, device=bars.device)
+    return torch.bucketize(torch.log1p(bars.clamp(min=0)), e)
+
+
+def amp_to_bin(amp: torch.Tensor) -> torch.Tensor:
+    e = torch.tensor(AMP_EDGES, device=amp.device)
+    return torch.bucketize(amp, e)
 
 
 @dataclass
@@ -51,9 +67,9 @@ class PatternEncoder(nn.Module):
         self.norm = nn.LayerNorm(H)
         # ── 稠密监督头（全部 per-bar）──
         self.seg_dir_head = nn.Linear(H, N_SCALES * 3)   # [B,T,3尺度,3类]
-        # 时间坐标头直接输出 log1p(bars_since)（值域全实数，避免 log1p(负输出)=NaN）
-        self.time_head = nn.Linear(H, N_SCALES)          # log1p(bars_since_piv)
-        self.amp_head = nn.Linear(H, N_SCALES)           # amp_since_piv
+        # R1：坐标头回归改分桶分类（MSE 回归向均值收缩，首轮实测 R²≈0 半躺平）
+        self.time_head = nn.Linear(H, N_SCALES * N_TIME_BINS)   # log1p(bars) 分桶
+        self.amp_head = nn.Linear(H, N_SCALES * N_AMP_BINS)     # amp 分桶
         self.piv_head = nn.Linear(H, N_SCALES * 3)       # 0无/1高/2低
         self.quality_head = nn.Linear(H, N_SCALES)       # piv_amp（仅枢轴 bar 计损）
         self.recon_head = nn.Linear(H, 4)                # 掩码重构 OHLC
@@ -74,8 +90,8 @@ class PatternEncoder(nn.Module):
         return {
             "h": h,
             "seg_dir": self.seg_dir_head(h).view(B, T, N_SCALES, 3),
-            "bars_since": self.time_head(h),
-            "amp_since": self.amp_head(h),
+            "bars_since": self.time_head(h).view(B, T, N_SCALES, N_TIME_BINS),
+            "amp_since": self.amp_head(h).view(B, T, N_SCALES, N_AMP_BINS),
             "piv_cls": self.piv_head(h).view(B, T, N_SCALES, 3),
             "piv_amp": self.quality_head(h),
             "recon": self.recon_head(h),
@@ -98,10 +114,11 @@ def pattern_losses(out: dict, batch: dict, mask: torch.Tensor | None,
     cw = torch.tensor([1.0, piv_weight, piv_weight], device=device)
     l_piv = nn.functional.cross_entropy(
         out["piv_cls"].reshape(-1, 3), piv_cls.reshape(-1), weight=cw)
-    # 坐标回归：时间头输出即 log1p 空间（防 NaN；R² 报告时 expm1 还原）
-    l_time = nn.functional.smooth_l1_loss(
-        out["bars_since"], torch.log1p(bars_since))
-    l_amp = nn.functional.smooth_l1_loss(out["amp_since"], amp_since)
+    # R1：坐标头改分桶分类（回归向均值收缩，首轮 R²≈0）
+    l_time = nn.functional.cross_entropy(
+        out["bars_since"].reshape(-1, N_TIME_BINS), time_to_bin(bars_since).reshape(-1))
+    l_amp = nn.functional.cross_entropy(
+        out["amp_since"].reshape(-1, N_AMP_BINS), amp_to_bin(amp_since).reshape(-1))
     # 成色：只在真枢轴 bar 上计损
     is_piv = piv_cls > 0
     if is_piv.any():
@@ -159,24 +176,25 @@ def gate_metrics(out: dict, batch: dict, tol: int = 3) -> dict[str, float]:
                 mc = m & conf[..., s]
                 if mc.sum() > 0:
                     bas_conf.append((seg[..., s][mc] == c).float().mean().item())
-    r2_all, r2_conf = [], []
-    for name in ("bars_since", "amp_since"):
-        pred = out[name].cpu().reshape(-1, N_SCALES)
-        if name == "bars_since":
-            pred = torch.expm1(pred.clamp(min=0))  # log1p 空间还原
-        true = batch[name].reshape(-1, N_SCALES)
+    # R1：坐标头改分桶分类 → 门禁指标从 R² 改分桶 BA（全样本/已确认段两口径）
+    coord_ba, coord_ba_conf = [], []
+    for name, to_bin in (("bars_since", time_to_bin), ("amp_since", amp_to_bin)):
+        pred = out[name].argmax(-1).cpu().reshape(-1, N_SCALES)
+        true = to_bin(batch[name]).reshape(-1, N_SCALES)
         cm = conf.reshape(-1, N_SCALES)
         for s in range(N_SCALES):
-            for bucket, mm in ((r2_all, None), (r2_conf, cm[:, s])):
-                t, p = (true[:, s], pred[:, s]) if mm is None else (true[mm, s], pred[mm, s])
-                if len(t) < 10:
-                    continue
-                ss_res = ((t - p) ** 2).sum().item()
-                ss_tot = ((t - t.mean()) ** 2).sum().item()
-                bucket.append(1 - ss_res / max(ss_tot, 1e-9))
+            for c in true[:, s].unique().tolist():
+                m = true[:, s] == c
+                if m.sum() >= 20:
+                    coord_ba.append((pred[:, s][m] == c).float().mean().item())
+                    mc = m & cm[:, s]
+                    if mc.sum() >= 20:
+                        coord_ba_conf.append((pred[:, s][mc] == c).float().mean().item())
+    u3 = sum(coord_ba) / max(len(coord_ba), 1)
+    a2c = sum(coord_ba_conf) / max(len(coord_ba_conf), 1)
     return {"U1_pivF1": sum(f1s) / len(f1s),
             "U2_segBA": sum(bas_all) / len(bas_all),
-            "U3_coordR2": sum(r2_all) / len(r2_all),
+            "U3_coordBA": u3,
             "A1_pivF1_tol": sum(f1t) / len(f1t),
             "A2_segBA_conf": sum(bas_conf) / max(len(bas_conf), 1),
-            "A2_coordR2_conf": sum(r2_conf) / max(len(r2_conf), 1)}
+            "A2_coordBA_conf": a2c}

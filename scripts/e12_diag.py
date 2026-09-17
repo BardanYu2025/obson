@@ -27,7 +27,7 @@ sys.path.insert(0, "src")
 sys.path.insert(0, "scripts")
 
 from obson.pattern_data import N_SCALES, build_pattern_datasets
-from obson.pattern_model import PatternEncoder, gate_metrics
+from obson.pattern_model import PatternEncoder, amp_to_bin, gate_metrics, time_to_bin
 
 FREQ_IDS = {5: 1, 15: 2, 30: 3, 60: 4}
 TOL = 3
@@ -58,7 +58,8 @@ def tol_f1(piv_pred: torch.Tensor, piv_gt: torch.Tensor) -> float:
 @torch.no_grad()
 def eval_model(model, loader, device):
     model.eval()
-    preds, gts, t_pred, t_true, a_pred, a_true = [], [], [], [], [], []
+    preds, gts = [], []
+    t_bins_p, t_bins_t, a_bins_p, a_bins_t = [], [], [], []
     ms = []
     for batch in loader:
         out = model(batch["x"].to(device), batch["symbol_id"].to(device),
@@ -66,16 +67,17 @@ def eval_model(model, loader, device):
         ms.append(gate_metrics(out, batch))
         preds.append(out["piv_cls"].argmax(-1).cpu())
         gts.append(batch["piv_cls"])
-        t_pred.append(torch.expm1(out["bars_since"].cpu().clamp(min=0)))
-        t_true.append(batch["bars_since"])
-        a_pred.append(out["amp_since"].cpu())
-        a_true.append(batch["amp_since"])
+        t_bins_p.append(out["bars_since"].argmax(-1).cpu().float())
+        t_bins_t.append(time_to_bin(batch["bars_since"]).float())
+        a_bins_p.append(out["amp_since"].argmax(-1).float())
+        a_bins_t.append(amp_to_bin(batch["amp_since"]).float())
     agg = {k: float(np.mean([m[k] for m in ms])) for k in ms[0]}
     agg["A1_tolF1"] = tol_f1(torch.cat(preds), torch.cat(gts))
-    tp_, tt = torch.cat(t_pred), torch.cat(t_true)
-    ap_, at = torch.cat(a_pred), torch.cat(a_true)
-    agg["time_pred_std"] = float(tp_.std()); agg["time_true_std"] = float(tt.std())
-    agg["amp_pred_std"] = float(ap_.std());  agg["amp_true_std"] = float(at.std())
+    # Q3 解剖：桶序号 std（R1 后坐标是分桶分类，std≈0 说明只预测单一桶）
+    agg["time_pred_std"] = float(torch.cat(t_bins_p).std())
+    agg["time_true_std"] = float(torch.cat(t_bins_t).std())
+    agg["amp_pred_std"] = float(torch.cat(a_bins_p).std())
+    agg["amp_true_std"] = float(torch.cat(a_bins_t).std())
     return agg
 
 
