@@ -61,11 +61,20 @@ def collect_h(model, loader, device, max_batches: int = 30):
 
 
 def ridge_probe_f1(H_tr, y_tr, H_va, y_va) -> float:
-    """闭式岭回归线性 probe → 0/1 → F1。"""
+    """岭回归线性 probe → 拟合集上搜 F1 最优阈值 → val 上测 F1。
+    （不平衡数据用 0.5 固定阈值会全灭——v1 探针自杀事故的修复）"""
     X = np.concatenate([H_tr, np.ones((len(H_tr), 1), np.float32)], 1)
     W = np.linalg.solve(X.T @ X + 1.0 * np.eye(X.shape[1]), X.T @ y_tr.astype(np.float32))
+    s_tr = X @ W
+    best_t, best_f1 = 0.5, 0.0
+    for t in np.quantile(s_tr, np.linspace(0.5, 0.999, 60)):
+        p = s_tr > t
+        tp = int((p & y_tr).sum()); fp = int((p & ~y_tr).sum()); fn = int((~p & y_tr).sum())
+        f1 = 2 * tp / max(2 * tp + fp + fn, 1)
+        if f1 > best_f1:
+            best_f1, best_t = f1, t
     Xv = np.concatenate([H_va, np.ones((len(H_va), 1), np.float32)], 1)
-    p = (Xv @ W) > 0.5
+    p = (Xv @ W) > best_t
     tp = int((p & y_va).sum()); fp = int((p & ~y_va).sum()); fn = int((~p & y_va).sum())
     return 2 * tp / max(2 * tp + fp + fn, 1)
 
