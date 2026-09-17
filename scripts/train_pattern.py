@@ -125,7 +125,8 @@ def main():
         m = evaluate(model, val_dl, device)
         comp_str = " ".join(f"{k}={v/nb:.3f}" for k, v in comp_sum.items())
         print(f"Ep{ep:02d} | {comp_str} | val_loss={m['val_loss']:.4f} "
-              f"G1(F1)={m['G1_pivF1']:.3f} G2(BA)={m['G2_segBA']:.3f} G3(R²)={m['G3_coordR2']:.3f} "
+              f"U1={m['U1_pivF1']:.3f} U2={m['U2_segBA']:.3f} U3={m['U3_coordR2']:.3f} "
+              f"A1(tolF1)={m['A1_pivF1_tol']:.3f} A2conf(BA)={m['A2_segBA_conf']:.3f} "
               f"| {time.time()-t0:.0f}s")
         if m["val_loss"] < best - 1e-4:
             best, bad = m["val_loss"], 0
@@ -137,18 +138,26 @@ def main():
                 print(f"Early Stopping @ep{ep}")
                 break
 
-    # 测试段 + 门禁判决
+    # 测试段 + 门禁判决（v1.1 双轨：bidir 走 U 线，causal 走 A 线仅报告不判死刑）
     ck = torch.load(save / "best.pt", map_location=device, weights_only=False)
     model.load_state_dict(ck["model"])
     test_dl = DataLoader(ConcatDataset(tests), batch_size=args.batch_size)
     tm = evaluate(model, test_dl, device)
-    gate = {"G1": tm["G1_pivF1"] >= 0.6, "G2": tm["G2_segBA"] >= 0.7, "G3": tm["G3_coordR2"] > 0.5}
-    print(f"\n== 测试段门禁 == G1(F1)={tm['G1_pivF1']:.3f}({'✅' if gate['G1'] else '❌'}) "
-          f"G2(BA)={tm['G2_segBA']:.3f}({'✅' if gate['G2'] else '❌'}) "
-          f"G3(R²)={tm['G3_coordR2']:.3f}({'✅' if gate['G3'] else '❌'})")
-    print(f"判决: {'✅ G1-G3 全过，可跑 G4-G6' if all(gate.values()) else '❌ 未过，按分量定位死因'}")
+    if args.bidir:
+        gate = {"U1": tm["U1_pivF1"] >= 0.6, "U2": tm["U2_segBA"] >= 0.7, "U3": tm["U3_coordR2"] > 0.5}
+        print(f"\n== 理解轨门禁（双向版）== U1(F1)={tm['U1_pivF1']:.3f}({'✅' if gate['U1'] else '❌'}) "
+              f"U2(BA)={tm['U2_segBA']:.3f}({'✅' if gate['U2'] else '❌'}) "
+              f"U3(R²)={tm['U3_coordR2']:.3f}({'✅' if gate['U3'] else '❌'})")
+        print(f"判决: {'✅ U1-U3 全过，可跑 U4-U6' if all(gate.values()) else '❌ 未过，按分量定位死因'}")
+    else:
+        print(f"\n== 前瞻轨指标（因果版，只报告；margin 待预注册）== "
+              f"A1(±3bar tolF1)={tm['A1_pivF1_tol']:.3f} "
+              f"A2确认段(BA)={tm['A2_segBA_conf']:.3f} A2确认段(R²)={tm['A2_coordR2_conf']:.3f}")
+        print("对照指标（理解轨口径，因果版预期低，不作判决）: "
+              f"U1={tm['U1_pivF1']:.3f} U2={tm['U2_segBA']:.3f}")
+        gate = {}
     (save / "gate_result.json").write_text(json.dumps(
-        {"test": tm, "gate_G123": gate, "mode": mode}, ensure_ascii=False, indent=2))
+        {"test": tm, "gate": gate, "mode": mode}, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":

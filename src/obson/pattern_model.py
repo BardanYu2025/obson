@@ -116,35 +116,64 @@ def pattern_losses(out: dict, batch: dict, mask: torch.Tensor | None,
 
 
 @torch.no_grad()
-def gate_metrics(out: dict, batch: dict) -> dict[str, float]:
-    """G1 枢轴检测 F1 / G2 段方向 BA / G3 坐标 R²（逐尺度汇总后平均）。"""
+def gate_metrics(out: dict, batch: dict, tol: int = 3) -> dict[str, float]:
+    """v1.1 双轨门禁指标：
+    - 理解轨（双向版用）：U1 枢轴 F1（精确位置）/ U2 段方向 BA / U3 坐标 R²
+    - 前瞻轨（因果版用）：A1 容差事件 F1（预测落在真枢轴 ±tol bar 内算命中）、
+      A2 段方向 BA 与坐标 R² 只在 confirmed 掩码（当时可知）样本上评估
+    返回两种口径全套指标，由调用方按模型模式取用。
+    """
     piv = out["piv_cls"].argmax(-1).cpu()            # [B,T,3]
     gt = batch["piv_cls"]
-    f1s = []
+    conf = batch["confirmed"]                        # [B,T,3] bool
+    f1s, f1t = [], []
     for s in range(N_SCALES):
         for c in (1, 2):
             p, g = (piv[..., s] == c), (gt[..., s] == c)
+            # 精确口径（理解轨）
             tp = (p & g).sum().item()
             fp = (p & ~g).sum().item()
             fn = (~p & g).sum().item()
             f1s.append(2 * tp / max(2 * tp + fp + fn, 1))
+            # 容差事件口径（前瞻轨）：真枢轴 ±tol 内有同类预测 = 命中
+            gi = g.reshape(-1).nonzero().flatten()
+            pi = p.reshape(-1).nonzero().flatten()
+            hit_g = torch.zeros(len(gi), dtype=torch.bool)
+            hit_p = torch.zeros(len(pi), dtype=torch.bool)
+            for ii, x in enumerate(gi):
+                m = (pi >= x - tol) & (pi <= x + tol)
+                if m.any():
+                    hit_g[ii] = True
+                    hit_p |= m
+            tp2 = hit_g.sum().item()
+            f1t.append(2 * tp2 / max(2 * tp2 + (~hit_p).sum().item() + (len(gi) - tp2), 1))
     seg = out["seg_dir"].argmax(-1).cpu()
     sg = batch["seg_dir"]
-    bas = []
+    bas_all, bas_conf = [], []
     for s in range(N_SCALES):
         for c in (0, 1, 2):
             m = sg[..., s] == c
             if m.sum() > 0:
-                bas.append((seg[..., s][m] == c).float().mean().item())
-    r2s = []
-    for name, pred_key in (("bars_since", "bars_since"), ("amp_since", "amp_since")):
-        pred = out[pred_key].cpu().reshape(-1, N_SCALES)
+                bas_all.append((seg[..., s][m] == c).float().mean().item())
+                mc = m & conf[..., s]
+                if mc.sum() > 0:
+                    bas_conf.append((seg[..., s][mc] == c).float().mean().item())
+    r2_all, r2_conf = [], []
+    for name in ("bars_since", "amp_since"):
+        pred = out[name].cpu().reshape(-1, N_SCALES)
         true = batch[name].reshape(-1, N_SCALES)
+        cm = conf.reshape(-1, N_SCALES)
         for s in range(N_SCALES):
-            t, p = true[:, s], pred[:, s]
-            ss_res = ((t - p) ** 2).sum().item()
-            ss_tot = ((t - t.mean()) ** 2).sum().item()
-            r2s.append(1 - ss_res / max(ss_tot, 1e-9))
-    return {"G1_pivF1": sum(f1s) / len(f1s),
-            "G2_segBA": sum(bas) / len(bas),
-            "G3_coordR2": sum(r2s) / len(r2s)}
+            for bucket, mm in ((r2_all, None), (r2_conf, cm[:, s])):
+                t, p = (true[:, s], pred[:, s]) if mm is None else (true[mm, s], pred[mm, s])
+                if len(t) < 10:
+                    continue
+                ss_res = ((t - p) ** 2).sum().item()
+                ss_tot = ((t - t.mean()) ** 2).sum().item()
+                bucket.append(1 - ss_res / max(ss_tot, 1e-9))
+    return {"U1_pivF1": sum(f1s) / len(f1s),
+            "U2_segBA": sum(bas_all) / len(bas_all),
+            "U3_coordR2": sum(r2_all) / len(r2_all),
+            "A1_pivF1_tol": sum(f1t) / len(f1t),
+            "A2_segBA_conf": sum(bas_conf) / max(len(bas_conf), 1),
+            "A2_coordR2_conf": sum(r2_conf) / max(len(r2_conf), 1)}

@@ -51,6 +51,16 @@ class PatternWindowDataset(Dataset):
         piv_l = np.stack([L[f"is_piv_low_s{s}"] for s in range(N_SCALES)], 1)
         self.piv_cls = (piv_h.astype(np.int64) + 2 * piv_l.astype(np.int64))  # 0无/1高/2低
         self.piv_amp = np.stack([L[f"piv_amp_s{s}"] for s in range(N_SCALES)], 1).astype(np.float32)
+        # 前瞻轨"当时可知"掩码：第 t 根距上枢轴 d 根，该枢轴确认延迟 delay，
+        # d >= delay 时这段结构在 t 时刻已可确认（v1.1 A2：只在已确认段评估因果版）
+        conf = np.stack([L[f"confirm_delay_s{s}"] for s in range(N_SCALES)], 1).astype(np.float32)
+        self.confirmed = np.zeros((len(L), N_SCALES), bool)
+        for t in range(len(L)):
+            for s in range(N_SCALES):
+                d = int(self.bars_since[t, s])
+                p = t - d
+                if d > 0 and p >= 0 and conf[p, s] <= d:
+                    self.confirmed[t, s] = True
         self.indices = indices  # 窗口末根的行号
 
     def __len__(self):
@@ -76,6 +86,7 @@ class PatternWindowDataset(Dataset):
             "amp_since": torch.from_numpy(self.amp_since[lo:j + 1]),     # [w,3]
             "piv_cls": torch.from_numpy(self.piv_cls[lo:j + 1]),         # [w,3]
             "piv_amp": torch.from_numpy(self.piv_amp[lo:j + 1]),         # [w,3]
+            "confirmed": torch.from_numpy(self.confirmed[lo:j + 1]),     # [w,3] 当时可知掩码
             "symbol_id": torch.tensor(self.symbol_id),
             "freq_id": torch.tensor(self.freq_id),
         }
