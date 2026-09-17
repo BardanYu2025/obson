@@ -168,3 +168,14 @@ PYTHONPATH=src python -m unittest discover -s tests/babel -v
 
 旧 `tests/test_*.py` 仍对应已归档模块，本分支未改写它们；Babel 使用独立测试目录。
 旧 E12 代码和历史判决保留作档案，新特征与 checkpoint 不兼容旧 E12；不要混用旧训练、标签或检索脚本。
+# 盲测图形数据追溯
+
+完成评分后，可运行 `bash scripts/babel_autodl.sh audit-pairs`，输出当前
+`BABEL_RUN/pair_quality.json`。沿用训练时的 `BABEL_DATA`、`BABEL_RUN`、
+`BABEL_INDEX`。此步骤只使用 CPU，不加载模型、不重新训练、不修改数据或题包。
+
+审计通过题包编号、模型指纹、源文件指纹及逐根 OHLC 匹配，将盲测图追溯到
+具体合约与时间。输出每个窗口最大的五次价格跳空、相邻记录时间间隔、成交量、
+零成交量和一字 K 线数量。超过一个周期的间隔可能来自正常休市或节假日，
+不能直接当成缺失 K 线；跳空/窗口振幅中位数仅作描述，不是删除数据的阈值。
+该报告也不替代交易日历校验或成为主力前的流动性审计。

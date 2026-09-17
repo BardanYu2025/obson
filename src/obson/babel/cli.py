@@ -90,6 +90,12 @@ def main(argv=None):
     p.add_argument("--device", default="cpu")
     p.add_argument("--stride", type=int, default=1)
     p.add_argument("--out", required=True)
+    p = sub.add_parser("audit-pairs", help="Trace blind charts to verified raw contract records; CPU only")
+    p.add_argument("--root", default="data/contracts")
+    p.add_argument("--index", required=True)
+    p.add_argument("--pairs", required=True)
+    p.add_argument("--answer-key", required=True)
+    p.add_argument("--out", required=True)
     p = sub.add_parser("score-pairs", help="Score dimensional preferences and repeat stability")
     p.add_argument("--ratings", required=True)
     p.add_argument("--answer-key", required=True)
@@ -101,7 +107,11 @@ def main(argv=None):
     p.add_argument("--answer-key", required=True)
     p.add_argument("--out", required=True)
     args = parser.parse_args(argv)
-    if args.command in ("audit", "train", "index"):
+    if args.command == "audit-pairs":
+        from .quality import audit_pairs
+
+        write_json(args.out, audit_pairs(args.root, args.index, args.pairs, args.answer_key))
+    elif args.command in ("audit", "train", "index"):
         series, notes = load_series(args.root, args.symbols, args.periods)
         if args.command == "audit":
             result = manifest(series, split_boundaries(series))

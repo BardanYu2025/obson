@@ -17,8 +17,8 @@ case "$stage" in
   train|evaluate|index)
     "$python_bin" -c 'import torch; assert torch.cuda.is_available(), "CUDA unavailable: use an AutoDL PyTorch GPU image; no CPU fallback"; print("GPU:", torch.cuda.get_device_name(0), "PyTorch:", torch.__version__)'
     ;;
-  audit|benchmark|blind|blind-pairs) ;;
-  *) echo "Usage: bash scripts/babel_autodl.sh {audit|train|evaluate|index|benchmark|blind|blind-pairs}" >&2; exit 2 ;;
+  audit|audit-pairs|benchmark|blind|blind-pairs) ;;
+  *) echo "Usage: bash scripts/babel_autodl.sh {audit|audit-pairs|train|evaluate|index|benchmark|blind|blind-pairs}" >&2; exit 2 ;;
 esac
 
 if [[ "$stage" == train || "$stage" == audit || "$stage" == index ]]; then
@@ -33,6 +33,11 @@ if [[ "$stage" == train || "$stage" == audit || "$stage" == index ]]; then
 fi
 
 case "$stage" in
+  audit-pairs)
+    "$python_bin" -m obson.babel audit-pairs --root "$data_root" --index "$index_file" \
+      --pairs "$run_dir/blind_pairs_v1/pairs.json" --answer-key "$run_dir/blind_pairs_v1/answer_key.json" \
+      --out "$run_dir/pair_quality.json"
+    ;;
   audit)
     "$python_bin" -m obson.babel audit --root "$data_root" --symbols "${symbols[@]}" --periods "${periods[@]}" --out "${run_dir}_audit.json"
     ;;
