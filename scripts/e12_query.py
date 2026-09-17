@@ -33,8 +33,12 @@ DIR_NAME = {0: "下降", 1: "无段", 2: "上升"}
 def load_index(path):
     z = np.load(path, allow_pickle=False)
     emb = z["emb"].astype(np.float32)
+    # v1.1 均值中心化：全部向量共享一个强公共方向（实测 Top-20 余弦挤在
+    # 0.994+），减掉库均值再归一化，相似度才反映结构差异而非"市场一般状态"
+    mean = emb.mean(0)
+    emb = emb - mean
     emb /= np.linalg.norm(emb, axis=1, keepdims=True) + 1e-9
-    return emb, {k: z[k] for k in ("code", "period", "row", "dt_ns", "seg_dir", "fwd", "horizons")}
+    return emb, mean, {k: z[k] for k in ("code", "period", "row", "dt_ns", "seg_dir", "fwd", "horizons")}
 
 
 @torch.no_grad()
@@ -58,7 +62,7 @@ def embed_query(model, code, period, window, dt_ns, device):
     h = model(x, torch.tensor([ds.symbol_id], device=device),
               torch.tensor([ds.freq_id], device=device))["h"][0, -1].float().cpu().numpy()
     j = int(ds.indices[pos])
-    return h / (np.linalg.norm(h) + 1e-9), ds, j
+    return h, ds, j
 
 
 def report(hits, meta, k, horizons):
@@ -104,7 +108,7 @@ def main():
     model = PatternEncoder(ck["config"]).to(device)
     model.load_state_dict(ck["model"])
     model.eval()
-    emb, meta = load_index(args.index)
+    emb, lib_mean, meta = load_index(args.index)
     horizons = meta["horizons"]
     print(f"[load] 索引 {len(emb)} 条 | ckpt → {device}")
 
@@ -114,23 +118,37 @@ def main():
     if args.self_test > 0:
         n = min(args.self_test, len(emb))
         pick = rng.choice(len(emb), n, replace=False)
-        r1_hits = consist = consist_shuf = 0
+        r1_hits = 0
+        consist = np.zeros(3)        # 三尺度分别统计
+        consist_shuf = 0.0
         for i in pick:
-            order = np.argsort(-(emb @ emb[i]))
+            sim = emb @ emb[i]
+            order = np.argsort(-sim)
             if order[0] == i:
                 r1_hits += 1
-            top = order[1:args.topk + 1]                     # 去掉自身
-            consist += (meta["seg_dir"][top, 0] == meta["seg_dir"][i, 0]).mean()
+            # v1.1 与查询模式同规则：屏蔽自身 + 同组合重叠窗口（|Δrow|<window）
+            invalid = ((meta["code"] == meta["code"][i])
+                       & (meta["period"] == meta["period"][i])
+                       & (np.abs(meta["row"] - meta["row"][i]) < args.window))
+            sim[invalid] = -np.inf
+            top = np.argsort(-sim)[:args.topk]
+            for s in range(3):
+                consist[s] += (meta["seg_dir"][top, s] == meta["seg_dir"][i, s]).mean()
             sh = emb.copy()
             for c in range(sh.shape[1]):                     # R3 打乱对照
                 sh[:, c] = sh[rng.permutation(len(sh)), c]
             order_s = np.argsort(-(sh @ sh[i]))
             top_s = order_s[order_s != i][:args.topk]
             consist_shuf += (meta["seg_dir"][top_s, 0] == meta["seg_dir"][i, 0]).mean()
-        r1, r2, r2s = r1_hits / n, consist / n, consist_shuf / n
-        print(f"\n══ 检索门禁自检（n={n}）══")
+        consist /= n
+        r1, r2s = r1_hits / n, consist_shuf / n
+        r2 = float(consist[0])
+        r2m = float(consist.mean())
+        print(f"\n══ 检索门禁自检（n={n}，均值中心化后）══")
         print(f"  R1 自一致性 Top-1 = {r1:.3f}（线 1.00）{'✅' if r1 == 1.0 else '❌'}")
-        print(f"  R2 段方向一致率(s0) = {r2:.3f}（线 0.70）{'✅' if r2 >= 0.70 else '❌'}")
+        print(f"  R2 段方向一致率 s0={consist[0]:.3f} s1={consist[1]:.3f} "
+              f"s2={consist[2]:.3f} 均={r2m:.3f}（线 s0≥0.70）"
+              f"{'✅' if r2 >= 0.70 else '❌'}")
         print(f"  R3 打乱对照一致率 = {r2s:.3f}（Δ={r2 - r2s:+.3f}，线 ≥0.15）"
               f"{'✅' if r2 - r2s >= 0.15 else '❌'}")
         return
@@ -138,12 +156,19 @@ def main():
     # ═══ 查询模式 ═══
     dt_ns = np.datetime64(args.datetime, "ns").astype(np.int64) if args.datetime else None
     q, ds, j = embed_query(model, args.code, args.period, args.window, dt_ns, device)
+    q = q - lib_mean                                     # 与库同口径中心化
+    q /= np.linalg.norm(q) + 1e-9
     q_dt = int(ds.dt_ns[j])
     print(f"[query] {args.code}_{args.period}m "
           f"{str(np.datetime64(q_dt, 'ns'))[:16]} | 段标签 "
           + " ".join(f"s{s}:{DIR_NAME[ds.seg_dir[j, s]]}" for s in range(3)))
 
     mask = meta["dt_ns"] < q_dt          # 防泄漏：只看查询时点之前
+    # v1.1 重叠屏蔽：同品种同周期且行距 < window 的条目与查询窗口
+    # 共享超过一半 bar，本质是"查到自己"，屏蔽
+    overlap = (meta["code"] == args.code) & (meta["period"] == args.period) & \
+              (np.abs(meta["row"] - j) < args.window)
+    mask &= ~overlap
     sims = emb[mask] @ q
     lib_idx = np.where(mask)[0]
     order = np.argsort(-sims)
