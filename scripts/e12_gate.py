@@ -96,7 +96,7 @@ def main():
     model.eval()
     model_rand = PatternEncoder(cfg).to(device).eval()   # U6 随机骨干对照
 
-    from train_multi_symbol import SYMBOLS
+    from obson.symbols import SYMBOLS
     FREQ_IDS = {5: 1, 15: 2, 30: 3, 60: 4}
 
     report = {"ckpt": args.ckpt, "mode": ck.get("mode"), "combos": {}}

@@ -51,7 +51,7 @@ def main():
     model.eval()
     print(f"[load] {args.ckpt} → {device}")
 
-    from train_multi_symbol import SYMBOLS
+    from obson.symbols import SYMBOLS
 
     embs, metas = [], {k: [] for k in
                        ("code", "period", "row", "dt_ns", "seg_dir", "fwd")}

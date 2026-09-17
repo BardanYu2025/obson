@@ -44,7 +44,7 @@ def load_index(path):
 @torch.no_grad()
 def embed_query(model, code, period, window, dt_ns, device):
     """查询 embedding：取 code_period 合约帧中 dt<=dt_ns 的最后一根为窗口末根。"""
-    from train_multi_symbol import SYMBOLS
+    from obson.symbols import SYMBOLS
     tr, va, te = build_pattern_datasets(
         code, period, window, 1, SYMBOLS.get(code, 0),
         FREQ_IDS.get(period, 7), contract=True)

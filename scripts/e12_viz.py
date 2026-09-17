@@ -47,7 +47,7 @@ def main():
     model.load_state_dict(ck["model"])
     model.eval()
 
-    from train_multi_symbol import SYMBOLS
+    from obson.symbols import SYMBOLS
     H_all, seg_all, amp_all, sym_all = [], [], [], []
     for code in args.symbols:
         for period in args.periods:

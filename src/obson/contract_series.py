@@ -18,7 +18,20 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from obson.model.dataset import trading_day_ids
+def trading_day_ids(timestamps: pd.Series) -> np.ndarray:
+    """交易日归属：夜盘 bar（18:00 后）算下一个工作日，日盘算当天。
+    国内期货的"交易日"从前一晚夜盘开始（如周五 21:00 的夜盘算周一交易日）。
+    返回每天一个从 0 递增的整数 id。
+    （自旧 obson.model.dataset 内联——旧范式归档后本模块自包含）"""
+    d = pd.to_datetime(timestamps)
+    bset = pd.bdate_range(
+        d.min().normalize(), d.max().normalize() + pd.Timedelta(days=10)
+    ).values
+    idx = np.searchsorted(bset, d.dt.normalize().values) + (
+        d.dt.hour >= 18
+    ).to_numpy().astype(int)
+    _, ids = np.unique(bset[idx], return_inverse=True)
+    return ids
 
 CONTRACT_DIR = Path(__file__).parent.parent.parent / "data" / "contracts"
 

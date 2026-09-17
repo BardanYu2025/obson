@@ -77,7 +77,7 @@ def main():
     np.random.seed(args.seed)
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
-    from train_multi_symbol import SYMBOLS
+    from obson.symbols import SYMBOLS
     trains, vals, tests = [], [], []
     for code in args.symbols:
         for period in args.periods:

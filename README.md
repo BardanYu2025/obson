@@ -1,57 +1,45 @@
-# obson · 期货 K 线 Transformer 交易信号模型
+# obson · K 线形态理解骨干（E12）
 
-基于 Transformer 的商品期货盘中信号模型：13 品种 × 60/30m 混训，
-当日收盘锚定 first-passage 三分类（先摸上轨=多 / 先破下轨=空 / 都没=无），
-路径状态 + excursion 辅助监督，双种子集成，合约模式数据管线。
+训练"看懂 K 线"的表示模型：per-bar 因果 Transformer，稠密监督结构身份
+（段方向/枢轴/坐标/成色），每根 bar 输出上下文 embedding，作为下游任务
+（形态检索、gate、复盘工具）的预训练骨干。**不做未来 K 线的点预测**——
+该范式已证伪封存（分支 `archive/e3v11-champion`，档案见 archive/）。
 
-## 现役冠军：E3 v1.1（2026-09-14）
+## 当前状态（2026-09-17）
 
-| 指标 | 成绩 |
-|---|---|
-| 验证 mean_edge | s42 +0.1003 / s7 +0.1262 |
-| 单仓 v2 回测 | **+10.06%**（58 笔，胜率 58.6%，回撤 1.70%） |
-| 成本加倍 | **+7.24%** |
-| 路径辅助头 | 节点 BA 0.38~0.42（存活，非塌缩） |
-
-模型权重不进本仓库（387MB）。获取方式：训练复现（命令见
-[archive/champ_e3v11_20260914/RECIPE.md](archive/champ_e3v11_20260914/RECIPE.md)），
-或从已有部署环境拷贝 `checkpoints/e3v11_s42/best.pt` + `checkpoints/e3v11_s7/best.pt`。
-
-## 结构
-
-```
-src/obson/            模型与数据管线（dataset / transformer / mixed_trainer / playbook）
-scripts/              训练 / 回测 / 实盘信号 / 数据下载
-tests/                生产回归测试（26 条）
-docs/                 生产文档（PRODUCTION.md 为总文档）
-archive/              历代冠军档案（代码快照 + 配方 + 判决成绩）
-```
+- **E12-R1 骨干已毕业**：A1 枢轴容差 F1=0.630（margin +0.084）、
+  A2 段方向 BA=0.792、U4-U6 全过（判决档案 docs/PRODUCTION.md）
+- **M4 形态检索两轮未过门禁**（R2=0.662 < 0.70 线）→ 瓶颈在骨干容量，
+  下一步 E12-R2 扩容（hidden 256 / 6 层 / +15m 数据）
 
 ## 快速开始
 
 ```bash
 pip install torch pandas numpy tqsdk
-python tests/test_production.py        # 26/26 应通过
 
-# 夜盘一键信号（数据增量 + 外盘 + 出信号）
-export TQ_USER=<天勤账号> TQ_PASS=<天勤密码>
-./night_signal_autodl.sh rb sr p
+# 1. 数据（天勤账号）→ 2. 打标签 → 3. 训练
+export TQ_USER=<账号> TQ_PASS=<密码>
+PYTHONPATH=src python -u scripts/download_tqsdk_v2.py --symbols rb --periods 60
+PYTHONPATH=src python -u scripts/build_bar_labels.py --contract
+PYTHONPATH=src python -u scripts/train_pattern.py --contract \
+  --symbols rb hc i sr p j jm m y cu ag TA MA --periods 60 30 \
+  --window 256 --stride 25 --batch-size 64 --lr 3e-4 \
+  --epochs 30 --patience 6 --seed 42 --save-dir checkpoints/e12_s42
+
+# 4. 检索：建库 → 查询
+PYTHONPATH=src python -u scripts/e12_index.py --ckpt checkpoints/e12_s42/best.pt \
+  --symbols rb hc i sr p j jm m y cu ag TA MA --periods 60 30
+PYTHONPATH=src python -u scripts/e12_query.py --ckpt checkpoints/e12_s42/best.pt \
+  --index data/index/e12_index.npz --code rb --period 60
 ```
 
-训练、回测、判决口径详见 [docs/PRODUCTION.md](docs/PRODUCTION.md) 与
-[archive/champ_e3v11_20260914/RECIPE.md](archive/champ_e3v11_20260914/RECIPE.md)。
-前向实盘考核规程见 [docs/FORWARD_TEST.md](docs/FORWARD_TEST.md)。
+## 文档地图
 
-## 实验族谱
+- [docs/PROJECT_OVERVIEW.md](docs/PROJECT_OVERVIEW.md) —— 项目总览（架构/数据/训练/评价/证伪清单）
+- [docs/STATUS_REPORT.md](docs/STATUS_REPORT.md) —— 阶段任务汇报
+- [docs/E12_PATTERN_BACKBONE_DESIGN.md](docs/E12_PATTERN_BACKBONE_DESIGN.md) —— 骨干设计稿
+- [docs/BAR_LABELS.md](docs/BAR_LABELS.md) —— 标签宪法
+- [docs/E12_M4_RETRIEVAL_DESIGN.md](docs/E12_M4_RETRIEVAL_DESIGN.md) —— 检索设计稿
+- [docs/PRODUCTION.md](docs/PRODUCTION.md) —— 判决档案
 
-```
-q90_softfix → contract → contractfix → E3 v1 → E3 v1.1（现役）
-→ E4 excursion ❌弃案（与主任务语义冲突，成本加倍转负）
-→ E5 双向 encoder ❌弃案（生产口径 -11.40%，双向二次死刑）
-→ E6' 未来时间 query decoder（进行中；双向已弃，query 嫁接单向 encoder）
-```
-
-下阶段方向：E7 自监督对比预训练（分钟窗口 ↔ 日K/外盘双视图，CLIP 式，攻击信息量天花板）。
-
-纪律：一次一变量；选模只看验证 mean_edge；判决看生产口径
-（单仓 v2 / 成本加倍 / p 品种 / 信号不塌缩）；改动前先固化冠军档案。
+纪律：一次一变量；先承诺门禁线再跑数；改动前固化档案；archive/ 只增不删。

@@ -122,7 +122,7 @@ def main():
     args = ap.parse_args()
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    from train_multi_symbol import SYMBOLS
+    from obson.symbols import SYMBOLS
 
     vals = []
     for code in args.symbols:
