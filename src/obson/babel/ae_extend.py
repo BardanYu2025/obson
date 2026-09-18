@@ -3,6 +3,7 @@
 import copy
 import json
 import random
+import time
 from pathlib import Path
 
 import numpy as np
@@ -76,7 +77,8 @@ def check_source(ck, data_manifest, context, batch_size, seed):
 def publish(state, directory):
     """last.pt is authoritative; reconstruct derivative files after an interrupted write."""
     atomic_json(state["metadata"], directory / "manifest.json")
-    atomic_json(state["initial_validation"], directory / "warm_start_validation.json")
+    initial_name = "initial_validation.json" if state["metadata"].get("training_family") == "capacity" else "warm_start_validation.json"
+    atomic_json(state["initial_validation"], directory / initial_name)
     atomic_save({**state["metadata"], "epoch": state["best_epoch"], "model": state["best_model"]}, directory / "best.pt")
     path = directory / "history.jsonl"
     temp = path.with_name(path.name + ".tmp")
@@ -168,7 +170,13 @@ def extend(series, encoded, bounds, directory, epochs, batch_size, seed, device,
         publish(state, directory)
         progress(f"Warm start from checkpoint epoch {ck['epoch']}; source spent {completed} epochs; "
                  f"{epochs - completed} additional epochs; AdamW reset; initial val={initial['loss']:.6f}")
+    run_epochs(model, optimizer, tr, va, device, batch_size, state, directory, epochs)
+
+
+def run_epochs(model, optimizer, tr, va, device, batch_size, state, directory, epochs):
+    """Shared loop for warm starts and controlled fresh capacity experiments."""
     for epoch in range(state["epoch"] + 1, epochs + 1):
+        started = time.perf_counter()
         model.train()
         total, count = 0., 0
         loader = DataLoader(tr, batch_size=batch_size, shuffle=True)
@@ -186,12 +194,17 @@ def extend(series, encoded, bounds, directory, epochs, batch_size, seed, device,
             count += size
             if step == 1 or step % 25 == 0 or step == len(loader):
                 progress(f"epoch={epoch}/{epochs} batch={step}/{len(loader)} loss={total/count:.6f}")
+        trained_at = time.perf_counter()
         validation = validation_report(model, va, device, batch_size)
+        evaluated_at = time.perf_counter()
         if validation["loss"] < state["best_loss"]:
             state.update(best_loss=validation["loss"], best_epoch=epoch,
                          best_model=copy.deepcopy(model.state_dict()))
         state["history"].append({"epoch": epoch, "train_loss": total/count,
-                                  "validation_loss": validation["loss"], "validation": validation})
+                                  "validation_loss": validation["loss"], "validation": validation,
+                                  "train_seconds": trained_at - started,
+                                  "validation_seconds": evaluated_at - trained_at,
+                                  "train_validation_seconds": evaluated_at - started})
         state.update(epoch=epoch, model=model.state_dict(), optimizer=optimizer.state_dict(), rng=rng_state())
         atomic_save(state, directory / "last.pt")
         publish(state, directory)

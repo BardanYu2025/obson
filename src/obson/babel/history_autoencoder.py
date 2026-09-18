@@ -352,6 +352,7 @@ def main():
     recovery.add_argument("--warm-start")
     recovery.add_argument("--resume", action="store_true")
     recovery.add_argument("--continue-from")
+    p.add_argument("--capacity-latent", type=int, choices=(128, 256))
     args = p.parse_args()
     if not torch.cuda.is_available():
         raise ValueError("CUDA required; no local training fallback")
@@ -367,6 +368,14 @@ def main():
     if args.stage == "train":
         context = args.context or "none"
         encoded = [encode_context(s.frame, s.period, context) for s in series]
+        if args.capacity_latent is not None:
+            from .ae_capacity import train_capacity
+
+            if context != "ema8_32" or args.warm_start or args.continue_from:
+                raise ValueError("Capacity experiments require EMA context and fresh training or resume")
+            train_capacity(series, encoded, bounds, directory, args.epochs, args.batch_size, args.seed,
+                           "cuda", args.capacity_latent, args.baseline_run, args.resume)
+            return
         if args.warm_start or args.resume or args.continue_from:
             from .ae_extend import extend
 
@@ -377,6 +386,11 @@ def main():
         return
     ck = torch.load(directory / "best.pt", map_location="cpu", weights_only=True)
     context = ck["config"].get("context", "none")
+    if args.capacity_latent is not None:
+        from .ae_capacity import config
+
+        if ck.get("training_family") != "capacity" or ck["config"] != config(args.capacity_latent):
+            raise ValueError("Capacity checkpoint profile mismatch")
     if args.context is not None and args.context != context:
         raise ValueError("Requested context differs from checkpoint")
     if ck["schema"] != SCHEMA or ck["manifest"] != manifest(series, bounds) or list(ck["features"]) != list(feature_names(context)):
@@ -397,7 +411,12 @@ def main():
     for name, column in (("pretrained", 0), ("raw_last16", 1)):
         report["current_structure_probe"][name] = probe(*(v for row in values for v in (row[column], row[2])), 4)
     torch.manual_seed(ck["seed"])
-    random_model = HistoryAE(**ck["config"]).to("cuda").eval()
+    if ck.get("training_family") == "capacity":
+        from .ae_capacity import build_model
+
+        random_model = build_model(ck["config"]["latent"], ck["seed"]).to("cuda").eval()
+    else:
+        random_model = HistoryAE(**ck["config"]).to("cuda").eval()
     values = [frozen_features(random_model, ds, "cuda", args.batch_size) for ds in datasets]
     report["current_structure_probe"]["random"] = probe(*(v for row in values for v in (row[0], row[2])), 4)
     report["interpretation"] = "Causal bounded-history lossy compression, not encryption or forecasting. Decoder only receives last z and fixed position queries. PCA has the same nominal latent width but is fitted to reconstruction coordinates. Test windows overlap; one seed and previously inspected dates do not establish generality. Current structure is a rule-readout diagnostic, not semantic truth. Zero-latent is out-of-distribution ablation, not a competitive compression baseline."
