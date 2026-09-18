@@ -18,7 +18,8 @@ export_reports() {
     if [[ "$stage" == diagnose ]]; then log_name="diagnostics.log"; fi
     cp "$log_file" "$download_dir/$log_name" || return
   fi
-  cp docs/BABEL_HISTORY_AE.md "$download_dir/experiment_notes.md"
+  cp docs/BABEL_HISTORY_AE.md "$download_dir/experiment_notes.md" || return
+  if [[ "${BABEL_AE_CONTEXT:-none}" == ema8_32 ]]; then cp docs/BABEL_STAGE2.md "$download_dir/stage2_notes.md" || return; fi
 }
 
 finish() {
@@ -33,14 +34,17 @@ finish() {
 case "$stage" in all|train|evaluate|diagnose|export) ;; *) echo 'Usage: bash scripts/babel_ae_autodl.sh {all|train|evaluate|diagnose|export}' >&2; exit 2 ;; esac
 trap finish EXIT
 run_stage() {
+  extra=()
+  if [[ -n "${BABEL_AE_CONTEXT:-}" ]]; then extra+=(--context "$BABEL_AE_CONTEXT"); fi
+  if [[ -n "${BABEL_AE_BASELINE_RUN:-}" ]]; then extra+=(--baseline-run "$BABEL_AE_BASELINE_RUN"); fi
   "${PYTHON_BIN:-python}" -m obson.babel.history_autoencoder "$1" \
     --root "${BABEL_DATA:-/root/autodl-tmp/data/contracts}" \
     --reference "${BABEL_REFERENCE:-checkpoints/babel_r1_s42/manifest.json}" \
     --out "$run_dir" --epochs "${BABEL_EPOCHS:-30}" \
-    --batch-size "${BABEL_BATCH_SIZE:-32}" --seed "${BABEL_SEED:-42}"
+    --batch-size "${BABEL_BATCH_SIZE:-32}" --seed "${BABEL_SEED:-42}" "${extra[@]}"
 }
 case "$stage" in
-  all) run_stage train; run_stage evaluate ;;
+  all) run_stage train; run_stage evaluate; run_stage diagnose ;;
   train|evaluate|diagnose) run_stage "$stage" ;;
   export) : ;;
 esac

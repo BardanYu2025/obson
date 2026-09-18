@@ -11,7 +11,8 @@ import torch
 from torch import nn
 from torch.utils.data import DataLoader, Dataset
 
-from .ar_codec import FEATURES, encode_frame
+from .ar_codec import FEATURES
+from .ae_context import CONTEXT, encode_context, feature_names
 from .autoregressive import probe
 from .data import load_series, manifest, split_mask
 from .progress import progress
@@ -78,9 +79,10 @@ def positions(t, hidden, device, dtype):
 
 
 class HistoryAE(nn.Module):
-    def __init__(self, hidden=128, layers=4, heads=4, latent=LATENT, window=WINDOW, dropout=.1):
+    def __init__(self, hidden=128, layers=4, heads=4, latent=LATENT, window=WINDOW, dropout=.1, context="none"):
         super().__init__()
-        self.config = dict(hidden=hidden, layers=layers, heads=heads, latent=latent, window=window, dropout=dropout)
+        feature_names(context)
+        self.config = dict(hidden=hidden, layers=layers, heads=heads, latent=latent, window=window, dropout=dropout, context=context)
         self.input = nn.Linear(len(FEATURES), hidden)
         layer = nn.TransformerEncoderLayer(hidden, heads, hidden * 4, dropout=dropout, batch_first=True, norm_first=True)
         self.encoder = nn.TransformerEncoder(layer, layers, enable_nested_tensor=False)
@@ -89,11 +91,22 @@ class HistoryAE(nn.Module):
         decoder_layer = nn.TransformerEncoderLayer(hidden, heads, hidden * 4, dropout=dropout, batch_first=True, norm_first=True)
         self.decoder = nn.TransformerEncoder(decoder_layer, 2, enable_nested_tensor=False)
         self.output = nn.Sequential(nn.LayerNorm(hidden), nn.Linear(hidden, 7))
+        if context != "none":
+            # Preserve baseline backbone initialization AND subsequent RNG state.
+            rng = torch.get_rng_state()
+            self.context_input = nn.Linear(len(CONTEXT), hidden, bias=False)
+            nn.init.zeros_(self.context_input.weight)
+            torch.set_rng_state(rng)
 
     def encode(self, x):
         t = x.shape[1]
         mask = torch.ones(t, t, device=x.device, dtype=torch.bool).triu(1)
-        h = self.encoder(self.input(x) + positions(t, self.config["hidden"], x.device, x.dtype), mask=mask)
+        if x.shape[-1] != len(feature_names(self.config["context"])):
+            raise ValueError("History input feature schema mismatch")
+        embedded = self.input(x[..., :len(FEATURES)])
+        if self.config["context"] != "none":
+            embedded = embedded + self.context_input(x[..., len(FEATURES):])
+        h = self.encoder(embedded + positions(t, self.config["hidden"], x.device, x.dtype), mask=mask)
         return self.compress(h)
 
     def decode(self, z):
@@ -141,16 +154,35 @@ def validate(model, ds, device, batch_size):
     return float(np.mean(values))
 
 
-def train(series, encoded, bounds, directory, epochs, batch_size, seed, device):
+def train(series, encoded, bounds, directory, epochs, batch_size, seed, device, context="none", baseline_run=None):
+    baseline_hashes = {}
+    if context != "none":
+        from .ae_diagnostics import fingerprint
+
+        if baseline_run is None:
+            raise ValueError("Stage 2 requires --baseline-run to freeze the reference experiment")
+        baseline_run = Path(baseline_run)
+        baseline = json.loads((baseline_run / "manifest.json").read_text())
+        expected = HistoryAE().config
+        if baseline["schema"] != SCHEMA or any(baseline["config"].get(k, "none" if k == "context" else None) != v for k, v in expected.items()):
+            raise ValueError("Baseline architecture is not the fixed stage-1 configuration")
+        if baseline["manifest"] != manifest(series, bounds) or any(baseline[k] != v for k, v in
+                (("epochs", epochs), ("batch_size", batch_size), ("seed", seed), ("stride", 16))):
+            raise ValueError("Stage-2 data, seed, epochs, batch size and stride must match baseline")
+        if tuple(baseline["weights"]) != WEIGHTS or baseline["delta_loss_weight"] != .5:
+            raise ValueError("Baseline objective mismatch")
+        baseline_hashes = {name: fingerprint(baseline_run / name) for name in
+                           ("manifest.json", "history.jsonl", "ae_metrics.json", "best.pt")}
     directory.mkdir(parents=True, exist_ok=True)
     if any(directory.iterdir()):
         raise ValueError("Run directory must be empty; preserve previous experiments")
     np.random.seed(seed)
     torch.manual_seed(seed)
     tr, va = (HistoryWindows(series, encoded, bounds, name) for name in ("train", "val"))
-    model = HistoryAE().to(device)
+    model = HistoryAE(context=context).to(device)
     opt = torch.optim.AdamW(model.parameters(), lr=3e-4, weight_decay=.01)
-    metadata = {"schema": SCHEMA, "config": model.config, "features": FEATURES, "channels": CHANNELS,
+    metadata = {"schema": SCHEMA, "config": model.config, "features": feature_names(context), "channels": CHANNELS,
+                "context": context, "baseline_artifacts_sha256": baseline_hashes,
                 "weights": WEIGHTS, "delta_loss_weight": .5, "manifest": manifest(series, bounds),
                 "seed": seed, "epochs": epochs, "batch_size": batch_size, "stride": 16,
                 "parameters": sum(p.numel() for p in model.parameters()),
@@ -296,7 +328,8 @@ def frozen_features(model, ds, device, batch_size):
     for step, b in enumerate(loader, 1):
         x = b["x"].to(device)
         latent.append(model.encode(x)[:, -1].cpu().numpy())
-        raw.append(x[:, -16:].flatten(1).cpu().numpy())
+        # Keep the raw comparison identical to stage 1, not silently add indicators.
+        raw.append(x[:, -16:, :len(FEATURES)].flatten(1).cpu().numpy())
         for i, row in zip(b["series"].tolist(), b["row"].tolist(), strict=True):
             labels.append(int(ds.series[i].labels["state"][row, 1]))
         if step == 1 or step % 100 == 0 or step == len(loader):
@@ -313,6 +346,8 @@ def main():
     p.add_argument("--epochs", type=int, default=30)
     p.add_argument("--batch-size", type=int, default=32)
     p.add_argument("--seed", type=int, default=42)
+    p.add_argument("--context", choices=("none", "ema8_32"))
+    p.add_argument("--baseline-run")
     args = p.parse_args()
     if not torch.cuda.is_available():
         raise ValueError("CUDA required; no local training fallback")
@@ -324,14 +359,19 @@ def main():
     series, _ = load_series(args.root, sorted({k[0] for k in keys}), sorted({int(k[1]) for k in keys}))
     if manifest(series)["sources"] != ref["sources"]:
         raise ValueError("Reference/source mismatch")
-    encoded = [encode_frame(s.frame, s.period) for s in series]
     bounds = ref["boundaries"]
     if args.stage == "train":
-        train(series, encoded, bounds, directory, args.epochs, args.batch_size, args.seed, "cuda")
+        context = args.context or "none"
+        encoded = [encode_context(s.frame, s.period, context) for s in series]
+        train(series, encoded, bounds, directory, args.epochs, args.batch_size, args.seed, "cuda", context, args.baseline_run)
         return
     ck = torch.load(directory / "best.pt", map_location="cpu", weights_only=True)
-    if ck["schema"] != SCHEMA or ck["manifest"] != manifest(series, bounds) or list(ck["features"]) != list(FEATURES):
+    context = ck["config"].get("context", "none")
+    if args.context is not None and args.context != context:
+        raise ValueError("Requested context differs from checkpoint")
+    if ck["schema"] != SCHEMA or ck["manifest"] != manifest(series, bounds) or list(ck["features"]) != list(feature_names(context)):
         raise ValueError("History checkpoint/data mismatch")
+    encoded = [encode_context(s.frame, s.period, context) for s in series]
     model = HistoryAE(**ck["config"]).to("cuda").eval()
     model.load_state_dict(ck["model"])
     datasets = [HistoryWindows(series, encoded, bounds, split, window=ck["config"]["window"]) for split in ("train", "val", "test")]
