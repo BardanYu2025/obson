@@ -170,6 +170,8 @@ PYTHONPATH=src python -m unittest discover -s tests/babel -v
 旧 E12 代码和历史判决保留作档案，新特征与 checkpoint 不兼容旧 E12；不要混用旧训练、标签或检索脚本。
 # 盲测图形数据追溯
 
+新的因果 bar 编码与自回归实验见 [BABEL_AR.md](BABEL_AR.md)，与下述旧版规则/检索流程分开运行。
+
 完成评分后，可运行 `bash scripts/babel_autodl.sh audit-pairs`，输出当前
 `BABEL_RUN/pair_quality.json`。沿用训练时的 `BABEL_DATA`、`BABEL_RUN`、
 `BABEL_INDEX`。此步骤只使用 CPU，不加载模型、不重新训练、不修改数据或题包。
