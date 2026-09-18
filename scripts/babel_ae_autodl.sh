@@ -40,6 +40,7 @@ run_stage() {
   if [[ -n "${BABEL_AE_BASELINE_RUN:-}" ]]; then extra+=(--baseline-run "$BABEL_AE_BASELINE_RUN"); fi
   if [[ "$1" == train ]]; then
     if [[ "${BABEL_AE_RESUME:-0}" == 1 ]]; then extra+=(--resume)
+    elif [[ -n "${BABEL_AE_CONTINUE_FROM:-}" ]]; then extra+=(--continue-from "$BABEL_AE_CONTINUE_FROM")
     elif [[ -n "${BABEL_AE_WARM_START:-}" ]]; then extra+=(--warm-start "$BABEL_AE_WARM_START"); fi
   fi
   "${PYTHON_BIN:-python}" -m obson.babel.history_autoencoder "$1" \

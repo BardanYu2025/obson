@@ -12,12 +12,44 @@ import torch
 
 from test_babel import series
 from obson.babel.ae_context import encode_context
-from obson.babel.ae_extend import atomic_save, check_source, extend, publish, restore_rng, rng_state, validation_report
+from obson.babel.ae_extend import atomic_save, check_source, continuation_state, extend, publish, restore_rng, rng_state, validation_report
 from obson.babel.history_autoencoder import HistoryAE, HistoryWindows, SCHEMA, WEIGHTS, validate
 from obson.babel.data import manifest, split_boundaries
 
 
 class AEExtendTests(unittest.TestCase):
+    def test_continuation_preserves_full_state_and_source(self):
+        state = dict(resume_schema="babel-ae-resume-v1", epoch=100,
+                     metadata={"epochs":100, "source_checkpoint_epoch":29},
+                     model={"w":torch.tensor([1.])}, optimizer={"step":1000},
+                     rng=rng_state(), history=[{"epoch":100}], best_epoch=98,
+                     best_model={"w":torch.tensor([2.])}, best_loss=.05)
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            source=root / "last.pt"
+            atomic_save(state, source)
+            before=source.read_bytes()
+            result=continuation_state(source, root / "new", 200)
+            self.assertEqual(result["metadata"]["epochs"],200)
+            self.assertFalse(result["metadata"]["continuations"][0]["optimizer_reset"])
+            for k in ("epoch", "optimizer", "history", "best_epoch", "best_loss"):
+                self.assertEqual(result[k],state[k])
+            for k in ("model", "best_model"):
+                torch.testing.assert_close(result[k]["w"],state[k]["w"])
+            torch.testing.assert_close(result["rng"]["torch"],state["rng"]["torch"])
+            self.assertEqual(source.read_bytes(),before)
+            with self.assertRaisesRegex(ValueError,"empty"):
+                continuation_state(source,root,200)
+            with self.assertRaisesRegex(ValueError,"larger"):
+                continuation_state(source,root / "new",100)
+            state["epoch"]=99
+            atomic_save(state,source)
+            with self.assertRaisesRegex(ValueError,"completed"):
+                continuation_state(source,root / "new",200)
+            atomic_save({"model":{}},source)
+            with self.assertRaisesRegex(ValueError,"full last.pt"):
+                continuation_state(source,root / "new",200)
+
     def test_checkpoint_roundtrip_rng_and_optimizer_state(self):
         model = HistoryAE(hidden=16, layers=1, latent=8, window=32)
         optimizer = torch.optim.AdamW(model.parameters(), lr=3e-4, weight_decay=.01)

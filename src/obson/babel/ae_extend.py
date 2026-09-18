@@ -84,14 +84,36 @@ def publish(state, directory):
     temp.replace(path)
 
 
+def continuation_state(source, directory, epochs):
+    """Fork a completed full checkpoint into a new, larger-budget experiment."""
+    source, directory = Path(source), Path(directory)
+    if directory.exists() and any(directory.iterdir()):
+        raise ValueError("Continuation destination must be empty; preserve source run")
+    state = torch.load(source, map_location="cpu", weights_only=True)
+    if state.get("resume_schema") != "babel-ae-resume-v1":
+        raise ValueError("Continuation requires full last.pt, not best.pt")
+    previous = state["metadata"]["epochs"]
+    if state["epoch"] != previous or epochs <= previous:
+        raise ValueError("Continuation requires a completed source budget and a larger new budget")
+    metadata = state["metadata"]
+    lineage = list(metadata.get("continuations", []))
+    lineage.append({"source_last_sha256": fingerprint(source), "from_epoch": previous,
+                    "to_epoch": epochs, "optimizer_reset": False})
+    metadata.update(epochs=epochs, continuations=lineage,
+                    training_mode="full_state_continuation",
+                    additional_epochs=epochs - previous)
+    return state
+
+
 def extend(series, encoded, bounds, directory, epochs, batch_size, seed, device, context,
-           warm_start=None, resume=False):
-    if bool(warm_start) == bool(resume):
-        raise ValueError("Choose exactly one of warm-start or resume")
+           warm_start=None, resume=False, continue_from=None):
+    if sum(map(bool, (warm_start, resume, continue_from))) != 1:
+        raise ValueError("Choose exactly one of warm-start, resume or continue-from")
     directory = Path(directory)
     data_manifest = manifest(series, bounds)
-    if resume:
-        state = torch.load(directory / "last.pt", map_location="cpu", weights_only=True)
+    if resume or continue_from:
+        state = (continuation_state(continue_from, directory, epochs) if continue_from else
+                 torch.load(directory / "last.pt", map_location="cpu", weights_only=True))
         if state.get("resume_schema") != "babel-ae-resume-v1":
             raise ValueError("Not a full AE recovery checkpoint")
         metadata = state["metadata"]
@@ -123,11 +145,15 @@ def extend(series, encoded, bounds, directory, epochs, batch_size, seed, device,
     tr, va = (HistoryWindows(series, encoded, bounds, name) for name in ("train", "val"))
     model = HistoryAE(**metadata["config"]).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=3e-4, weight_decay=.01)
-    if resume:
+    if resume or continue_from:
         model.load_state_dict(state["model"])
         optimizer.load_state_dict(state["optimizer"])
         restore_rng(state["rng"])
+        if continue_from:
+            directory.mkdir(parents=True, exist_ok=True)
+            atomic_save(state, directory / "last.pt")
         publish(state, directory)
+        progress(f"Full-state recovery at epoch {state['epoch']}; continuing to {epochs}; AdamW preserved")
         # publish does not consume random numbers.
     else:
         model.load_state_dict(ck["model"])

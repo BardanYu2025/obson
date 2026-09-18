@@ -1,5 +1,37 @@
 # EMA 模型延长训练：先判断是否训练不足
 
+## 从 100 轮完整续训到 200 轮
+
+使用 `--continue-from` 加载已完成预算的 last.pt，在空的新目录建立后续实验。
+完整保留当前权重、优化器、随机状态、历史记录和最佳候选；只扩展预算，
+不重置学习率或优化器，不覆盖源目录。manifest 的 continuations 记录源 checkpoint
+SHA256、起止轮次和 optimizer_reset=false。仍保留最初第 29 轮热启动的来源记录。
+history.jsonl 包含继承的 31–100 轮和新增的 101–200 轮；warm_start_validation.json
+仍是最初第 29 轮权重的验证结果，不是第 100 轮。100 轮结果留在原目录。
+同一实验中断后的 `--resume` 仍不允许改变预算。
+
+```bash
+cd /root/autodl-tmp/obson
+git switch features/babel
+git pull --ff-only origin features/babel
+export BABEL_DATA=/root/autodl-tmp/data/contracts
+export BABEL_REFERENCE=checkpoints/babel_r1_s42/manifest.json
+export BABEL_AE_CONTINUE_FROM=checkpoints/babel_ae_ema_long_s42/last.pt
+export BABEL_AE_RUN=checkpoints/babel_ae_ema_200_s42
+export BABEL_AE_LOG=logs/babel_ae_ema_200_s42.log
+export BABEL_DOWNLOAD_DIR=/root/autodl-tmp/download
+export BABEL_EPOCHS=200 BABEL_BATCH_SIZE=32 BABEL_SEED=42 BABEL_AE_RESUME=0
+mkdir -p logs
+nohup bash scripts/babel_ae_200_autodl.sh all > "$BABEL_AE_LOG" 2>&1 &
+tail -f "$BABEL_AE_LOG"
+```
+
+自动导出到 `download/babel_ae_ema_200_s42/`。训练后再评价测试集。
+中断时确认旧进程结束，保留环境变量，设 `BABEL_AE_RESUME=1`，将上述 nohup
+命令的 `>` 改为 `>>` 后重新执行，从新目录最近完整轮次恢复。
+
+## 原 30 → 100 轮实验说明
+
 阶段 2 综合测试损失从 0.12446 降至 0.09956，收盘误差从 33.62 降至
 27.17 bp，但单根变化误差只下降约 1.3%。30 轮尚无明确平台证据。
 本轮保持模型、128 维瓶颈、输入、目标、损失和学习率不变，不加入新损失。

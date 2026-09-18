@@ -351,6 +351,7 @@ def main():
     recovery = p.add_mutually_exclusive_group()
     recovery.add_argument("--warm-start")
     recovery.add_argument("--resume", action="store_true")
+    recovery.add_argument("--continue-from")
     args = p.parse_args()
     if not torch.cuda.is_available():
         raise ValueError("CUDA required; no local training fallback")
@@ -366,11 +367,11 @@ def main():
     if args.stage == "train":
         context = args.context or "none"
         encoded = [encode_context(s.frame, s.period, context) for s in series]
-        if args.warm_start or args.resume:
+        if args.warm_start or args.resume or args.continue_from:
             from .ae_extend import extend
 
             extend(series, encoded, bounds, directory, args.epochs, args.batch_size, args.seed,
-                   "cuda", context, args.warm_start, args.resume)
+                   "cuda", context, args.warm_start, args.resume, args.continue_from)
             return
         train(series, encoded, bounds, directory, args.epochs, args.batch_size, args.seed, "cuda", context, args.baseline_run)
         return
