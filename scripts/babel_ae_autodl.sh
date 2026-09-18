@@ -10,7 +10,7 @@ log_file="${BABEL_AE_LOG:-logs/babel_ae_r1_s42.log}"
 
 export_reports() {
   mkdir -p "$download_dir" || return
-  for report in manifest.json history.jsonl ae_metrics.json reconstruction_examples.json reconstruction_examples.html ae_diagnostics.json ae_diagnostics.md; do
+  for report in manifest.json history.jsonl warm_start_validation.json ae_metrics.json reconstruction_examples.json reconstruction_examples.html ae_diagnostics.json ae_diagnostics.md; do
     if [[ -f "$run_dir/$report" ]]; then cp "$run_dir/$report" "$download_dir/$report" || return; fi
   done
   if [[ -f "$log_file" ]]; then
@@ -20,6 +20,7 @@ export_reports() {
   fi
   cp docs/BABEL_HISTORY_AE.md "$download_dir/experiment_notes.md" || return
   if [[ "${BABEL_AE_CONTEXT:-none}" == ema8_32 ]]; then cp docs/BABEL_STAGE2.md "$download_dir/stage2_notes.md" || return; fi
+  if [[ "${BABEL_AE_EXTEND:-0}" == 1 ]]; then cp docs/BABEL_EXTEND.md "$download_dir/extension_notes.md" || return; fi
 }
 
 finish() {
@@ -37,6 +38,10 @@ run_stage() {
   extra=()
   if [[ -n "${BABEL_AE_CONTEXT:-}" ]]; then extra+=(--context "$BABEL_AE_CONTEXT"); fi
   if [[ -n "${BABEL_AE_BASELINE_RUN:-}" ]]; then extra+=(--baseline-run "$BABEL_AE_BASELINE_RUN"); fi
+  if [[ "$1" == train ]]; then
+    if [[ "${BABEL_AE_RESUME:-0}" == 1 ]]; then extra+=(--resume)
+    elif [[ -n "${BABEL_AE_WARM_START:-}" ]]; then extra+=(--warm-start "$BABEL_AE_WARM_START"); fi
+  fi
   "${PYTHON_BIN:-python}" -m obson.babel.history_autoencoder "$1" \
     --root "${BABEL_DATA:-/root/autodl-tmp/data/contracts}" \
     --reference "${BABEL_REFERENCE:-checkpoints/babel_r1_s42/manifest.json}" \

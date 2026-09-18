@@ -348,6 +348,9 @@ def main():
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--context", choices=("none", "ema8_32"))
     p.add_argument("--baseline-run")
+    recovery = p.add_mutually_exclusive_group()
+    recovery.add_argument("--warm-start")
+    recovery.add_argument("--resume", action="store_true")
     args = p.parse_args()
     if not torch.cuda.is_available():
         raise ValueError("CUDA required; no local training fallback")
@@ -363,6 +366,12 @@ def main():
     if args.stage == "train":
         context = args.context or "none"
         encoded = [encode_context(s.frame, s.period, context) for s in series]
+        if args.warm_start or args.resume:
+            from .ae_extend import extend
+
+            extend(series, encoded, bounds, directory, args.epochs, args.batch_size, args.seed,
+                   "cuda", context, args.warm_start, args.resume)
+            return
         train(series, encoded, bounds, directory, args.epochs, args.batch_size, args.seed, "cuda", context, args.baseline_run)
         return
     ck = torch.load(directory / "best.pt", map_location="cpu", weights_only=True)
