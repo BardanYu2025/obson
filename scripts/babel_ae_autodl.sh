@@ -10,10 +10,14 @@ log_file="${BABEL_AE_LOG:-logs/babel_ae_r1_s42.log}"
 
 export_reports() {
   mkdir -p "$download_dir" || return
-  for report in manifest.json history.jsonl ae_metrics.json reconstruction_examples.json reconstruction_examples.html; do
+  for report in manifest.json history.jsonl ae_metrics.json reconstruction_examples.json reconstruction_examples.html ae_diagnostics.json ae_diagnostics.md; do
     if [[ -f "$run_dir/$report" ]]; then cp "$run_dir/$report" "$download_dir/$report" || return; fi
   done
-  if [[ -f "$log_file" ]]; then cp "$log_file" "$download_dir/training.log" || return; fi
+  if [[ -f "$log_file" ]]; then
+    log_name="training.log"
+    if [[ "$stage" == diagnose ]]; then log_name="diagnostics.log"; fi
+    cp "$log_file" "$download_dir/$log_name" || return
+  fi
   cp docs/BABEL_HISTORY_AE.md "$download_dir/experiment_notes.md"
 }
 
@@ -26,7 +30,7 @@ finish() {
   exit "$status"
 }
 
-case "$stage" in all|train|evaluate|export) ;; *) echo 'Usage: bash scripts/babel_ae_autodl.sh {all|train|evaluate|export}' >&2; exit 2 ;; esac
+case "$stage" in all|train|evaluate|diagnose|export) ;; *) echo 'Usage: bash scripts/babel_ae_autodl.sh {all|train|evaluate|diagnose|export}' >&2; exit 2 ;; esac
 trap finish EXIT
 run_stage() {
   "${PYTHON_BIN:-python}" -m obson.babel.history_autoencoder "$1" \
@@ -37,6 +41,6 @@ run_stage() {
 }
 case "$stage" in
   all) run_stage train; run_stage evaluate ;;
-  train|evaluate) run_stage "$stage" ;;
+  train|evaluate|diagnose) run_stage "$stage" ;;
   export) : ;;
 esac

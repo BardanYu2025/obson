@@ -306,7 +306,7 @@ def frozen_features(model, ds, device, batch_size):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("stage", choices=("train", "evaluate"))
+    p.add_argument("stage", choices=("train", "evaluate", "diagnose"))
     p.add_argument("--root", required=True)
     p.add_argument("--reference", required=True)
     p.add_argument("--out", required=True)
@@ -335,6 +335,11 @@ def main():
     model = HistoryAE(**ck["config"]).to("cuda").eval()
     model.load_state_dict(ck["model"])
     datasets = [HistoryWindows(series, encoded, bounds, split, window=ck["config"]["window"]) for split in ("train", "val", "test")]
+    if args.stage == "diagnose":
+        from .ae_diagnostics import diagnose
+
+        diagnose(model, datasets, "cuda", args.batch_size, ck["seed"], directory)
+        return
     report, examples = evaluate(model, datasets, "cuda", args.batch_size, ck["seed"])
     report.update(schema=SCHEMA, selected_epoch=ck["epoch"])
     values = [frozen_features(model, ds, "cuda", args.batch_size) for ds in datasets]
