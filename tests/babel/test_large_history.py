@@ -11,7 +11,7 @@ from test_babel import series
 from obson.babel.ae_context import encode_context
 from obson.babel.data import split_boundaries
 from obson.babel.history_autoencoder import HistoryAE,HistoryWindows
-from obson.babel.large_history import CheckpointLocal,HierWindows,LargeHistory,objective,publish,set_stage,train_stage,write_global_review
+from obson.babel.large_history import CheckpointLocal,HierWindows,LargeHistory,objective,preflight_batch,publish,set_stage,train_stage,write_global_review
 from obson.babel.ae_extend import atomic_save,rng_state
 from obson.babel.representation import time_mask
 
@@ -19,6 +19,16 @@ SMALL=dict(hidden=16,layers=1,heads=4,latent=16,window=128,dropout=0.,context="e
 
 
 class LargeHistoryTests(unittest.TestCase):
+    def test_preflight_batch_device(self):
+        # Meta catches accidental CPU allocations even on hosts without CUDA.
+        devices=["cpu","meta"]+(["cuda"] if torch.cuda.is_available() else [])
+        for device in devices:
+            batch=preflight_batch(2,device)
+            for name,value in batch.items():
+                self.assertEqual(value.device.type,device,name)
+            self.assertEqual(batch["valid"].dtype,torch.bool)
+            self.assertEqual(batch["valid"].shape,(2,16))
+
     def test_checkpoint_local_equivalent_and_causal(self):
         a=HistoryAE(**SMALL).eval();b=CheckpointLocal(**SMALL).eval();b.load_state_dict(a.state_dict())
         x=torch.randn(2,128,18)

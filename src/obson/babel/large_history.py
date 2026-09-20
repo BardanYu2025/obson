@@ -246,6 +246,15 @@ def target_stats(dataset):
     return y.mean(0).tolist(),y.std(0).clip(.01).tolist()
 
 
+def preflight_batch(n,device):
+    """Keep synthetic inputs and attention masks on the requested device."""
+    x=torch.randn(n,16,128,18,device=device)
+    y=torch.randn(n,16,128,7,device=device);y[...,2:]=y[...,2:].abs()
+    return dict(x=x,y=y,mask=torch.ones_like(y,dtype=torch.bool),teacher=torch.randn(n,16,512,device=device),
+                offsets=torch.zeros(n,16,device=device),valid=torch.ones(n,16,dtype=torch.bool,device=device),
+                targets=torch.randn(n,3,device=device))
+
+
 def preflight(path,settings):
     """Disposable synthetic GPU workload including optimizer allocations; no real-data updates."""
     model=LargeHistory().cuda();report={"gpu":torch.cuda.get_device_name(),"stages":{},"completed":False}
@@ -253,18 +262,15 @@ def preflight(path,settings):
         report["running_stage"]=stage;atomic_json(report,path/"preflight.json")
         torch.cuda.empty_cache();torch.cuda.reset_peak_memory_stats();set_stage(model,stage,True)
         opt=torch.optim.AdamW((p for p in model.parameters() if p.requires_grad),lr=3e-4)
-        n=settings[stage]["micro"];x=torch.randn(n,16,128,18,device="cuda")
-        y=torch.randn(n,16,128,7,device="cuda");y[...,2:]=y[...,2:].abs()
-        b=dict(x=x,y=y,mask=torch.ones_like(y,dtype=torch.bool),teacher=torch.randn(n,16,512,device="cuda"),
-               offsets=torch.zeros(n,16,device="cuda"),valid=torch.ones(n,16,dtype=torch.bool),targets=torch.randn(n,3,device="cuda"))
-        if stage=="local":loss=reconstruction_loss(model.local(x[:,-1])["reconstruction"],y[:,-1],b["mask"][:,-1]).mean()
+        n=settings[stage]["micro"];b=preflight_batch(n,"cuda")
+        if stage=="local":loss=reconstruction_loss(model.local(b["x"][:,-1])["reconstruction"],b["y"][:,-1],b["mask"][:,-1]).mean()
         else:loss,_=objective(model,b,model(b,joint=stage=="joint"),torch.zeros(3,device="cuda"),torch.ones(3,device="cuda"),stage=="joint")
         if not torch.isfinite(loss):raise ValueError("Preflight loss is not finite")
         loss.backward();opt.step();torch.cuda.synchronize()
         report["stages"][stage]={"micro":n,"peak_allocated_gib":torch.cuda.max_memory_allocated()/2**30,
                                  "peak_reserved_gib":torch.cuda.max_memory_reserved()/2**30}
         atomic_json(report,path/"preflight.json")
-        model.zero_grad(set_to_none=True);del loss,opt,b,x,y
+        model.zero_grad(set_to_none=True);del loss,opt,b
         progress(f"512 preflight {stage}: {report['stages'][stage]}")
     report.update(completed=True,running_stage=None);atomic_json(report,path/"preflight.json")
 
