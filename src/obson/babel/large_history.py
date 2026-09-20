@@ -276,9 +276,9 @@ def preflight(path,settings):
 
 
 @torch.no_grad()
-def evaluate_large(model,local_sets,hier_sets,out,mean,scale,micro):
+def evaluate_large(model,local_sets,hier_sets,out,mean,scale,micro,local_micro=None):
     model.eval()
-    report,local_examples=evaluate(model.local,local_sets,"cuda",max(micro,4),42)
+    report,local_examples=evaluate(model.local,local_sets,"cuda",local_micro or max(micro,4),42)
     atomic_json(report,out/"local_metrics.json");write_review(out/"local_examples.html",local_examples)
     records={};predictions=[];truth=[];features=[];cards=[]
     chosen=set(np.linspace(0,len(hier_sets[-1])-1,min(6,len(hier_sets[-1])),dtype=int).tolist())

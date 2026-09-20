@@ -28,7 +28,7 @@ if [[ "${1:-all}" != export ]]; then
   "${PYTHON_BIN:-python}" -m obson.babel.large_history "${1:-all}" \
     --root "${BABEL_DATA:-/root/autodl-tmp/data/contracts}" \
     --reference "${BABEL_REFERENCE:-checkpoints/babel_r1_s42/manifest.json}" --out "$run" \
-    --local-epochs "${BABEL_LARGE_LOCAL_EPOCHS:-200}" --local-micro "${BABEL_LARGE_LOCAL_MICRO:-16}" --local-effective 32 \
-    --aggregate-epochs "${BABEL_LARGE_AGG_EPOCHS:-30}" --aggregate-micro "${BABEL_LARGE_AGG_MICRO:-2}" --aggregate-effective 16 \
-    --joint-epochs "${BABEL_LARGE_JOINT_EPOCHS:-20}" --joint-micro "${BABEL_LARGE_JOINT_MICRO:-1}" --joint-effective 8
+    --local-epochs "${BABEL_LARGE_LOCAL_EPOCHS:-200}" --local-micro "${BABEL_LARGE_LOCAL_MICRO:-16}" --local-effective "${BABEL_LARGE_LOCAL_EFFECTIVE:-32}" \
+    --aggregate-epochs "${BABEL_LARGE_AGG_EPOCHS:-30}" --aggregate-micro "${BABEL_LARGE_AGG_MICRO:-2}" --aggregate-effective "${BABEL_LARGE_AGG_EFFECTIVE:-16}" \
+    --joint-epochs "${BABEL_LARGE_JOINT_EPOCHS:-20}" --joint-micro "${BABEL_LARGE_JOINT_MICRO:-1}" --joint-effective "${BABEL_LARGE_JOINT_EFFECTIVE:-8}"
 fi
