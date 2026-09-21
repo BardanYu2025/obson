@@ -179,6 +179,15 @@ class StreamingTests(unittest.TestCase):
             self.assertEqual(report['windows'],len(keys)); self.assertEqual(len(report['stream_replays']),2)
             self.assertTrue(all(x['checks']['long']['passed'] and x['checks']['short']['passed'] for x in report['stream_replays']))
             self.assertTrue((p/'summary.md').exists())
+            # A numerical failure is recorded for every selected endpoint before the audit exits.
+            with patch('obson.babel.stream_audit.load_cache',return_value=(values,'testhash')),patch('obson.babel.stream_audit.load_bundle',return_value=stream), \
+                 patch('obson.babel.stream_audit.load_data',return_value=({'boundaries':bounds},data,encoded,sets)), \
+                 patch('obson.babel.stream_audit.short_numerics',return_value=dict(passed=False,checks=dict(decoder_price=dict(passed=False)))):
+                with self.assertRaisesRegex(ValueError,'full diagnostics saved'):
+                    audit(p/'bundle.pt',p,p,p,'unused',p,batch=2,replays=2,device='cpu')
+            failed=json.loads((p/'stream_metrics.json').read_text())
+            self.assertFalse(failed['passed']); self.assertEqual(len(failed['stream_replays']),2)
+            self.assertTrue(all(not x['passed'] for x in failed['stream_replays']))
 
     def test_reports_exclude_bundle_and_report_failures(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -207,3 +216,26 @@ class StreamingTests(unittest.TestCase):
         torch.testing.assert_close(stream.long,reference,atol=2e-5,rtol=2e-5)
         self.assertEqual(result['metadata']['history_anchor'],float(df.close.iloc[383]))
         self.assertEqual(result['metadata']['recent_anchor'],float(df.close.iloc[447]))
+
+    def test_short_numerics_controls_and_effect_limits(self):
+        from obson.babel.stream_audit import bounded_difference, short_numerics
+        # Sparse near-zero coordinate drift can fail old allclose but satisfy the declared RMS budget.
+        ref=np.zeros(512,np.float32); delta=ref.copy(); delta[0]=.000666
+        self.assertFalse(comparison(delta,ref)['passed'])
+        self.assertTrue(bounded_difference(delta,ref)['passed'])
+        self.assertFalse(bounded_difference(ref+.0003,ref)['passed'])  # RMS catches widespread drift.
+        delta[0]=.0021; self.assertFalse(bounded_difference(delta,ref)['passed'])
+        stream=engine(); x=np.random.default_rng(9).normal(size=(260,18)).astype(np.float32)
+        with torch.no_grad():
+            h=None
+            for row in x: z,h=stream.short_model(torch.tensor(row)[None,None],h)
+            state=z[0,-1].numpy(); decoded=stream.recent_decoder.decode_recent(z[:,-1]).numpy()
+        result=short_numerics(stream,x,state,state,decoded,decoded)
+        self.assertTrue(result['passed'])
+        wrong_state=state.copy(); wrong_state[0]+=.001
+        self.assertFalse(short_numerics(stream,x,wrong_state,state,decoded,decoded)['checks']['stream_vs_cached_input_step']['passed'])
+        wrong_price=decoded.copy(); wrong_price[...,1]+=.0003
+        result=short_numerics(stream,x,state,state,wrong_price,decoded)
+        self.assertFalse(result['checks']['decoder_price']['passed'])  # .03bp mean exceeds .02bp.
+        wrong_price=decoded.copy(); wrong_price[0,0,1]+=.0011
+        self.assertFalse(short_numerics(stream,x,state,state,wrong_price,decoded)['checks']['decoder_price']['passed'])
