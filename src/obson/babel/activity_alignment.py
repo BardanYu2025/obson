@@ -269,8 +269,8 @@ def paired_errors(a, b, weeks, clean):
 def evaluate(out, device):
     meta = json.loads((out/'manifest.json').read_text()); cache = out/'cache'
     da.evaluate(out, device, model_factory=initial_model, streams_factory=aa.ActivityStreams, contrasts=CONTRASTS,
-        schema=SCHEMA, report_name='alignment_metrics.json', title='量仓历史保留：训练目标对齐', scope=GOAL['stage'])
-    report = json.loads((out/'alignment_metrics.json').read_text()); report['goal'] = GOAL
+        schema=SCHEMA, report_name='alignment_metrics.json', title='量仓历史保留：训练目标对齐', scope=meta.get('goal',GOAL)['stage'])
+    report = json.loads((out/'alignment_metrics.json').read_text()); report['goal'] = meta.get('goal',GOAL)
     ys = [np.load(cache/f'{s}_activity.npy') for s in da.SPLITS]; masks = [np.load(cache/f'{s}_activity_mask.npy') for s in da.SPLITS]
     clean = np.load(cache/'test_clean.npy'); weeks = np.array([r['week'] for r in json.loads((cache/'test_inventory.json').read_text())])
     stats = json.loads((cache/'statistics.json').read_text()); astats = json.loads((cache/'activity_statistics.json').read_text())
@@ -327,7 +327,7 @@ def evaluate(out, device):
             interpretation='Research evidence screen only, not automatic promotion. Both seeds, linear+nonlinear past-only paired upper bounds<0 versus control AND current inputs, clean sensitivity, price/detail<=1.02 of control and state BA drop<=1 percentage point.')
     atomic_json(report,out/'alignment_metrics.json')
     with (out/'summary.md').open('a') as f:
-        f.write('\n## Stage goal\n'+json.dumps(GOAL,ensure_ascii=False,indent=2)+'\n\n## Evidence screen\n'+json.dumps(report['stage_decisions'],indent=2)+'\n')
+        f.write('\n## Stage goal\n'+json.dumps(meta.get('goal',GOAL),ensure_ascii=False,indent=2)+'\n\n## Evidence screen\n'+json.dumps(report['stage_decisions'],indent=2)+'\n')
 
 
 def source_identity(activity_run, fusion_run):
