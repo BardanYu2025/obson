@@ -7,7 +7,7 @@ run="${BABEL_EXTEND_RUN:-checkpoints/babel_activity_alignment100}"
 log="${BABEL_EXTEND_LOG:-logs/babel_activity_alignment100.log}"
 download="${BABEL_DOWNLOAD_DIR:-/root/autodl-tmp/download}"
 mode="${1:-all}"
-case "$mode" in all|evaluate|export) ;; *) echo 'Usage: bash scripts/babel_activity_extend_autodl.sh [all|evaluate|export]' >&2; exit 2 ;; esac
+case "$mode" in all|evaluate|diagnose-last|export) ;; *) echo 'Usage: bash scripts/babel_activity_extend_autodl.sh [all|evaluate|diagnose-last|export]' >&2; exit 2 ;; esac
 finish() {
   status=$?
   trap - EXIT
@@ -27,6 +27,10 @@ finish() {
   cp docs/BABEL_RESEARCH_GOAL.md "$stage/$name/research_goal.md"
   run_status=partial
   if [[ -f "$run/completion.json" ]]; then run_status=complete; fi
+  if [[ "$mode" == diagnose-last ]]; then
+    run_status=partial
+    if [[ -f "$run/last_diagnostic/completion.json" ]]; then run_status=complete; fi
+  fi
   if [[ "$status" != 0 ]]; then run_status=failed; fi
   printf 'command=%s\ncommand_exit_code=%s\nrun_status=%s\n' "$mode" "$status" "$run_status" > "$stage/$name/run_status.txt"
   archive="$download/${name}_reports.tar.gz"

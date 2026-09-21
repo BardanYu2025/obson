@@ -236,6 +236,67 @@ def verify_finished(out,meta):
             raise ValueError(f'Continuation incomplete: {job["name"]}')
 
 
+def diagnose_last(out, device='cuda'):
+    """Evaluate every fixed final state, including gate failures; never select/promote."""
+    meta=json.loads((out/'manifest.json').read_text())
+    if meta['schema']!=SCHEMA:raise ValueError('Not an activity continuation run')
+    verify_finished(out,meta)
+    parent=Path(meta['parent_run'])
+    if parent_identity(parent)[1]!=meta['parent_identity']:raise ValueError('Parent artifacts changed')
+    prepare(meta,out)
+    # Guard all existing reports and checkpoint files outside this diagnostic view.
+    view=out/'last_diagnostic'
+    protected={p:sha256(p) for p in out.rglob('*') if p.is_file() and view not in p.parents
+               and p.suffix in ('.pt','.json','.jsonl','.md','.html')}
+    view.mkdir(exist_ok=True);(view/'completion.json').unlink(missing_ok=True)
+    atomic_json(meta,view/'manifest.json')
+    if not (view/'cache').exists():(view/'cache').symlink_to((out/'cache').resolve(),target_is_directory=True)
+    if (view/'cache').resolve()!=(out/'cache').resolve():raise ValueError('Wrong diagnostic cache link')
+    qualification={}
+    for job in meta['experiments']:
+        name=job['name'];state=torch.load(out/name/'last.pt',map_location='cpu',weights_only=True)
+        score=state['history'][-1]['validation'];reference=state['activity_reference']
+        qualification[name]=dict(epoch=state['epoch'],price_retained=activity_eligible(score,reference),
+            validation=score,reference=reference,
+            ratios={k:score[k]/reference[k] if reference[k] else None for k in ('close_bps','base','change16_mse','detail')})
+        folder=view/name;folder.mkdir(exist_ok=True)
+        # Shared evaluator expects best.pt; this private copy is ALWAYS the last state.
+        atomic_save(dict(metadata=state['metadata'],epoch=state['epoch'],model=state['model'],
+            validation=score,selection_role='fixed_final_epoch_diagnostic'),folder/'best.pt')
+    atomic_json(dict(epoch=meta['epochs'],qualification=qualification,automatic_promotion=False),view/'diagnostic_protocol.json')
+    progress(f'Fixed epoch {meta["epochs"]} diagnostic: all candidates, encoder frozen; fitting readout heads only')
+    al.evaluate(view,device)
+    report=json.loads((view/'alignment_metrics.json').read_text())
+    report.update(diagnostic_only=True,automatic_promotion=False,
+        scope='All fixed final-epoch states, including failed validation gates. Frozen encoder, same readout protocol. Descriptive reused-test diagnosis; no test selection or change to either existing selector.',
+        diagnostic_stage_screen=report.pop('stage_decisions'))
+    for job in meta['experiments']:
+        name=job['name'];row=report['variants'][name]
+        row.update(diagnostic_only=True,selection_role='fixed_final_epoch_diagnostic',selection_qualified=qualification[name]['price_retained'])
+        atomic_json(row,view/name/'metrics.json')
+    for mode,screen in report['diagnostic_stage_screen'].items():
+        screen['all_validation_qualified']=all(qualification[f'{m}_s{s}']['price_retained']
+            for s in meta['seeds'] for m in ('control',mode))
+        if not screen['all_validation_qualified']:screen['evidence_pass']=False
+    atomic_json(report,view/'alignment_metrics.json')
+    (view/'summary.md').write_text(f'# Fixed epoch {meta["epochs"]} diagnostic\n\n'+report['scope']+
+        '\n\nNo candidate promotion. Main and secondary reports remain unchanged.\n\n'+
+        '| variant | price validation qualified | close bp | past linear MSE | past MLP MSE | state BA |\n'+
+        '|---|---|---:|---:|---:|---:|\n'+''.join(
+            f'| {name} | {v["selection_qualified"]} | {v["test_objectives"]["close_bps"]:.3f} | '+
+            f'{v["linear_activity_readout"]["normalized_error_summary"]["all"]["past_only"]:.4f} | '+
+            f'{v["nonlinear_activity_readout"]["normalized_error_summary"]["all"]["past_only"]:.4f} | '+
+            f'{v["state_probe"]["test"]["ba"]:.2%} |\n'
+            for name,v in report['variants'].items() if name!='original')+
+        '\n## Diagnostic screen (not promotion)\n'+json.dumps(report['diagnostic_stage_screen'],indent=2)+'\n')
+    if any(sha256(p)!=digest for p,digest in protected.items()):raise ValueError('Source artifacts changed during diagnostic')
+    if parent_identity(parent)[1]!=meta['parent_identity']:raise ValueError('Parent artifacts changed during diagnostic')
+    atomic_json(dict(status='complete',epoch=meta['epochs'],experiments=len(meta['experiments']),
+        diagnostic_only=True,automatic_promotion=False,source_unchanged=True),view/'completion.json')
+    progress('Fixed-final diagnostic complete; existing model selection unchanged')
+    return report
+
+
 def budget_report(out):
     meta=json.loads((out/'manifest.json').read_text());parent=Path(meta['parent_run'])
     reports=[json.loads((p/'alignment_metrics.json').read_text()) for p in (parent,out,out/'activity_selection')]
@@ -266,7 +327,7 @@ def budget_report(out):
 
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('action',choices=('all','worker','evaluate'));p.add_argument('--out',required=True)
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('action',choices=('all','worker','evaluate','diagnose-last'));p.add_argument('--out',required=True)
     p.add_argument('--parent');p.add_argument('--name');p.add_argument('--epochs',type=int,default=100);p.add_argument('--selection-every',type=int,default=10);p.add_argument('--jobs',type=int,default=2)
     a=p.parse_args();out=Path(a.out).resolve()
     if not torch.cuda.is_available():raise ValueError('Formal continuation/readout training requires CUDA')
@@ -274,6 +335,8 @@ def main():
     if a.action=='worker':
         if not a.name:p.error('--name required')
         worker(out,a.name);return
+    if a.action=='diagnose-last':
+        diagnose_last(out);return
     if not a.parent:p.error('--parent required')
     if not 1<=a.jobs<=4:raise ValueError('jobs must be1..4')
     parent=Path(a.parent).resolve();old,identity=parent_identity(parent)
@@ -290,6 +353,7 @@ def main():
     verify_finished(out,meta)
     al.evaluate(out,'cuda')
     view=build_activity_view(out);al.evaluate(view,'cuda');annotate_activity_view(out);budget_report(out)
+    diagnose_last(out)
     if parent_identity(parent)[1]!=identity:raise ValueError('Parent artifacts changed during continuation')
     atomic_json(dict(status='complete',experiments=len(meta['experiments']),parent_unchanged=True,from_epoch=old['epochs'],to_epoch=a.epochs,goal=GOAL),out/'completion.json')
     progress('Budget audit complete; both selectors reported, no automatic replacement')

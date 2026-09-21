@@ -144,8 +144,44 @@ class ActivityExtendTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);run=root/'run';(run/'activity_selection').mkdir(parents=True);(run/'activity_selection/metrics.json').write_text('{}');(run/'last.pt').write_bytes(b'x')
             env=dict(os.environ,BABEL_EXTEND_RUN=str(run),BABEL_EXTEND_LOG=str(root/'none'),BABEL_DOWNLOAD_DIR=str(root/'download'),PYTHON_BIN='/usr/bin/false')
-            for mode,code in [('export',0),('all',1)]:
+            for mode,code in [('export',0),('all',1),('diagnose-last',1)]:
                 p=subprocess.run(['bash','scripts/babel_activity_extend_autodl.sh',mode],env=env,capture_output=True,text=True);self.assertEqual(p.returncode,code,p.stderr)
                 with tarfile.open(root/'download/run_reports.tar.gz') as t:
                     self.assertIn('run/activity_selection/metrics.json',t.getnames());self.assertFalse(any(n.endswith('.pt') for n in t.getnames()))
                     self.assertIn(f'command_exit_code={code}',t.extractfile('run/run_status.txt').read().decode())
+
+    def test_fixed_final_diagnostic_includes_failed_states_without_mutation(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            old,parent,meta,out=fixture(Path(tmp))
+            with self.assertRaisesRegex(FileNotFoundError,'last.pt'):ex.verify_finished(out,meta)
+            for job in meta['experiments']:
+                state=ex.import_state(meta,job)
+                score=state['history'][-1]['validation']
+                state.update(epoch=100,history=[dict(epoch=e,validation=score,train=score) for e in range(1,101)],
+                    activity_reference=dict(score,close_bps=score['close_bps']/2),selectors_initialized=True)
+                key=next(iter(state['best_model']))
+                state['best_model'][key]=state['best_model'][key]+1
+                (out/job['name']).mkdir()
+                ex.publish(state,out/job['name'])
+            (out/'alignment_metrics.json').write_text('{"original_report":true}')
+            hashes={p:sha256(p) for p in out.rglob('*') if p.is_file()}
+            with patch.object(al,'source_identity',return_value=({},old['upstream'])),\
+                 patch.object(al,'nonlinear_probe',side_effect=lambda z,y,m,*args:al.ridge_probe(z,y,m)),\
+                 patch.object(torch.optim.AdamW,'step',side_effect=AssertionError('No local training')):
+                report=ex.diagnose_last(out,'cpu')
+            self.assertTrue(report['diagnostic_only']);self.assertFalse(report['automatic_promotion'])
+            self.assertNotIn('stage_decisions',report)
+            for job in meta['experiments']:
+                name=job['name'];row=report['variants'][name]
+                self.assertEqual(row['selected_epoch'],100);self.assertFalse(row['selection_qualified'])
+                self.assertEqual(row['selection_role'],'fixed_final_epoch_diagnostic')
+                src=torch.load(out/name/'last.pt',weights_only=True)
+                evaluated=torch.load(out/'last_diagnostic'/name/'best.pt',weights_only=True)
+                assert_tree(self,src['model'],evaluated['model'])
+                self.assertFalse(torch.equal(src['best_model'][key],evaluated['model'][key]))
+                self.assertEqual(torch.load(out/name/'best.pt',weights_only=True)['epoch'],22)
+            for p,digest in hashes.items():self.assertEqual(sha256(p),digest,str(p))
+            self.assertTrue(all(not s['evidence_pass'] for s in report['diagnostic_stage_screen'].values()))
+            self.assertEqual(json.loads((out/'last_diagnostic/completion.json').read_text())['epoch'],100)
+            state['epoch']=99;atomic_save(state,out/job['name']/'last.pt')
+            with self.assertRaisesRegex(ValueError,'incomplete'):ex.diagnose_last(out,'cpu')

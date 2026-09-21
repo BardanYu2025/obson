@@ -42,6 +42,28 @@ budget_comparison.json和budget_summary.md汇总父30轮价格最佳、本轮100
 
 这些仍是共享预训练、两个微调种子、反复使用的研究测试集证据。辅助监督目标的读出改善不等于新任务迁移或市场机制理解。不会自动替换主模型。
 
+## 固定末轮诊断（100轮结果复核后新增）
+
+历史选择器的价格门槛会排除信息读出仍改善的晚期候选。为完整展示这种取舍，新增diagnose-last：读取manifest中固定总轮数，对全部六组last.pt统一评价，包括未通过价格门槛的状态。不会运行编码器训练循环；冻结编码器后仍按原协议拟合线性/MLP读出头（MLP在AutoDL）。不增加测试选模，不改原门槛。
+
+last_diagnostic目录保存完整重建、状态、量仓读出、当前输入对照、周配对结果及diagnostic_protocol.json。明确diagnostic_only=true、automatic_promotion=false，阶段筛选仅名为diagnostic_stage_screen；同种子验证价格资格也纳入筛选。共享评价器使用该目录私有best.pt副本，但其内容固定来自末轮last，绝非验证选出的best。根目录和activity_selection产物通过hash核对保持不变，来源与缓存继续校验。
+
+新增代码的all/evaluate结束后也包含此诊断，避免只看到通过选择器的候选。已有完整100轮结果只执行下列命令，无需重跑all：
+
+```bash
+cd /root/autodl-tmp/obson
+git switch features/babel
+git pull --ff-only origin features/babel
+export BABEL_EXTEND_RUN=checkpoints/babel_activity_alignment100
+export BABEL_EXTEND_LOG=logs/babel_activity_alignment100_last.log
+export BABEL_DOWNLOAD_DIR=/root/autodl-tmp/download
+mkdir -p logs
+nohup bash scripts/babel_activity_extend_autodl.sh diagnose-last > "$BABEL_EXTEND_LOG" 2>&1 &
+tail -f "$BABEL_EXTEND_LOG"
+```
+
+结束自动更新同名download/babel_activity_alignment100_reports.tar.gz，包含原报告及新增last_diagnostic。源权重/优化器不变，不打包.pt/.npy。此前两套选择器的结论不会被这份固定末轮诊断覆盖。
+
 ## AutoDL
 
 ```bash
