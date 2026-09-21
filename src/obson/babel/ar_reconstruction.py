@@ -192,7 +192,7 @@ def worker(out, name, device='cuda'):
     publish(state, path)
 
 
-def run_jobs(out, jobs):
+def run_jobs(out, jobs, module='obson.babel.ar_reconstruction'):
     pending = list(json.loads((out/'manifest.json').read_text())['experiments']); active = {}; previous = {}
     def stop(signum, frame): raise SystemExit(128+signum)
     handler = signal.signal(signal.SIGTERM, stop)
@@ -202,7 +202,7 @@ def run_jobs(out, jobs):
                 job = pending.pop(0); name = job['name']; (out/name).mkdir(exist_ok=True)
                 log = (out/name/'run.log').open('a')
                 try:
-                    proc = subprocess.Popen([sys.executable, '-m', 'obson.babel.ar_reconstruction', 'worker',
+                    proc = subprocess.Popen([sys.executable, '-m', module, 'worker',
                                              '--out', str(out), '--name', name], stdout=log, stderr=subprocess.STDOUT)
                 except BaseException:
                     log.close(); raise
