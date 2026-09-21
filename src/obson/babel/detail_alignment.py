@@ -59,13 +59,14 @@ def eligible(score, reference):
 
 
 def improves(score, best, reference):
-    return eligible(score, reference) and (score['detail'], score['base']) < (best['detail'], best['base'])
+    return eligible(score, reference) and (not eligible(best, reference) or
+            (score['detail'], score['base']) < (best['detail'], best['base']))
 
 
 class DetailModel(nn.Module):
-    def __init__(self, width=512, decoder_width=256):
+    def __init__(self, width=512, decoder_width=256, input_dim=18):
         super().__init__()
-        self.encoder = ShortState(width, 2)
+        self.encoder = ShortState(width, 2, input_dim)
         # Its original small decoder is kept in the state dict but never trained/used.
         self.head = ReconstructionFusion('short', width, decoder_width)
 
@@ -114,7 +115,7 @@ class PackedStreams:
         for group in groups:
             seqs = [self.specs[i] for i in group]
             for left in range(0, max(s['length'] for s in seqs), 128):
-                x = np.zeros((len(group), 128, 18), np.float32) if inputs else None
+                x = np.zeros((len(group), 128, self.x.shape[-1]), np.float32) if inputs else None
                 pick = []
                 for lane, s in enumerate(seqs):
                     right = min(left+128, s['length'])
@@ -170,17 +171,19 @@ def run_epoch(model, data, streams, joint, detail, scales, batch, opt=None, seed
     return score, zs, ps
 
 
-def worker(out, name, device='cuda'):
+def worker(out, name, device='cuda', *, model_factory=None, streams_factory=None, allow_initial_regression=False):
     meta = json.loads((out/'manifest.json').read_text()); aux = json.loads((out/'cache/statistics.json').read_text())
     job = next(j for j in meta['experiments'] if j['name'] == name); joint = job['mode'].startswith('joint')
     detail = job['mode'].endswith('detail'); path = out/name; path.mkdir(exist_ok=True)
     random.seed(job['seed']); np.random.seed(job['seed']); torch.manual_seed(job['seed'])
-    model = initial_model(meta, device); model.configure(joint)
+    model = model_factory(meta, device, job) if model_factory else initial_model(meta, device)
+    model.configure(joint)
     groups = [dict(params=model.head.parameters(), lr=meta['decoder_lr'])]
     if joint: groups.append(dict(params=[p for p in model.encoder.parameters() if p.requires_grad], lr=meta['encoder_lr']))
     opt = torch.optim.AdamW(groups, weight_decay=.01)
     arrays = {s: device_arrays(read_arrays(meta['source'], s), device) for s in ('train', 'val')}
-    streams = {s: PackedStreams(out/'cache', s) for s in ('train', 'val')}
+    streams = {s: (streams_factory(out/'cache', s, job) if streams_factory else PackedStreams(out/'cache', s))
+               for s in ('train', 'val')}
     metadata = dict(manifest=meta, job=job)
     if (path/'last.pt').exists():
         state = torch.load(path/'last.pt', map_location='cpu', weights_only=True)
@@ -188,7 +191,8 @@ def worker(out, name, device='cuda'):
         model.load_state_dict(state['model']); opt.load_state_dict(state['optimizer']); restore_rng(state['rng'])
     else:
         initial = run_epoch(model, arrays['val'], streams['val'], joint, detail, aux['scales'], meta['streams'])[0]
-        if not eligible(initial, aux['reference']): raise ValueError('Warm start fails baseline retention')
+        if not eligible(initial, aux['reference']) and not allow_initial_regression:
+            raise ValueError('Warm start fails baseline retention')
         state = dict(metadata=metadata, epoch=0, best_epoch=0, history=[], best_validation=initial,
                      best_model={k: v.detach().cpu().clone() for k, v in model.state_dict().items()})
     for epoch in range(state['epoch']+1, meta['epochs']+1):
@@ -263,7 +267,8 @@ def preflight(meta, out, device='cuda'):
 
 
 @torch.no_grad()
-def evaluate(out, device):
+def evaluate(out, device, *, model_factory=None, streams_factory=None, contrasts=None, schema=SCHEMA,
+             report_name='detail_metrics.json', title='局部细节：编码器与损失2×2实验', scope=None):
     meta = json.loads((out/'manifest.json').read_text()); source = Path(meta['source'])
     aux = json.loads((out/'cache/statistics.json').read_text()); inventory = json.loads((out/'cache/test_inventory.json').read_text())
     arrays = {s: device_arrays(read_arrays(source, s), device) for s in SPLITS}
@@ -271,13 +276,14 @@ def evaluate(out, device):
     labels = {s: np.load(source/f'target_cache/{s}_labels.npy', allow_pickle=False) for s in SPLITS}
     old = initial_model(meta, device).eval(); frozen_zs = [arrays[s]['z'].cpu().numpy() for s in SPLITS]
     frozen_probe = probe(*(v for z, s in zip(frozen_zs, SPLITS) for v in (z, labels[s])), 4)
-    report = dict(schema=SCHEMA, variants={}, paired={}, reference=aux['reference'], scales=aux['scales'],
-                  scope='Two-by-two warm-start encoder/loss experiment; same architecture and endpoints. Reused research test period. Selected by validation detail with base/price/change16 retention gates.',
+    report = dict(schema=schema, variants={}, paired={}, reference=aux['reference'], scales=aux['scales'],
+                  scope=scope or 'Two-by-two warm-start encoder/loss experiment; same architecture and endpoints. Reused research test period. Selected by validation detail with base/price/change16 retention gates.',
                   limits='Failure of a frozen head does not prove information absent from z. Joint improvement indicates trainable information preservation, not an information-theoretic capacity bound.')
     per_windows = {}; chosen = set(np.linspace(0, len(inventory)-1, min(6, len(inventory)), dtype=int))
     for job in [dict(name='original', mode='frozen_base')] + meta['experiments']:
         name = job['name']; path = out/name; path.mkdir(exist_ok=True); joint = job['mode'].startswith('joint')
-        model = initial_model(meta, device).eval(); epoch = 0
+        model = (model_factory(meta, device, job) if model_factory else initial_model(meta, device)).eval(); epoch = 0
+        if streams_factory: streams = {s: streams_factory(out/'cache', s, job) for s in SPLITS}
         if name != 'original':
             ck = torch.load(path/'best.pt', map_location='cpu', weights_only=True)
             if ck['metadata'] != dict(manifest=meta, job=job): raise ValueError('Checkpoint identity mismatch')
@@ -310,10 +316,10 @@ def evaluate(out, device):
         page = path/'examples.html'; page.write_text(page.read_text().replace('单个512维综合向量重建历史', name+'：局部细节重建对照').replace('全局向量解码', '短状态解码'))
         atomic_json(result, path/'metrics.json'); atomic_json(rows, path/'per_window_metrics.json')
         per_windows[name] = rows; report['variants'][name] = result
-        atomic_json(report, out/'detail_metrics.json')
+        atomic_json(report, out/report_name)
     weeks = np.array([r['week'] for r in inventory])
     for seed in meta['seeds']:
-        for a, b in (('frozen_detail', 'frozen_base'), ('joint_base', 'frozen_base'), ('joint_detail', 'joint_base'), ('joint_detail', 'frozen_detail')):
+        for a, b in (contrasts if contrasts is not None else (('frozen_detail', 'frozen_base'), ('joint_base', 'frozen_base'), ('joint_detail', 'joint_base'), ('joint_detail', 'frozen_detail'))):
             an, bn = f'{a}_s{seed}', f'{b}_s{seed}'
             compared = {}
             for metric in ('normalized_detail', 'close_mae_bps', 'change_1_mae_bps', 'change_1_correlation', 'change_1_std_ratio'):
@@ -327,13 +333,13 @@ def evaluate(out, device):
                 item.update(supported_windows=int(valid.sum()), interpretation='Candidate minus reference; lower error or higher correlation is better. Std-ratio must be interpreted relative to1, not blindly maximized. Paired weekly research bootstrap.')
                 compared[metric] = item
             report['paired'][an+'_minus_'+bn] = compared
-    atomic_json(report, out/'detail_metrics.json')
-    lines = ['# 局部细节：编码器与损失2×2实验', '', '所有组从同一最佳编码器/并行头开始；按验证集细节误差选轮，同时限制原重建退步。', '',
-             '| 组 | 轮次 | 收盘MAE bp | 1根相关性 | 1根标准差比 | 16根相关性 | 状态BA |', '|---|---:|---:|---:|---:|---:|---:|']
+    atomic_json(report, out/report_name)
+    lines = ['# '+title, '', report['scope'], '',
+             '| 组 | 轮次 | 验证保留门槛 | 收盘MAE bp | 1根相关性 | 1根标准差比 | 16根相关性 | 状态BA |', '|---|---:|---|---:|---:|---:|---:|---:|']
     for name, r in report['variants'].items():
         m = r['groups']['all']['metrics']
         fmt = lambda v: '—' if v is None else f'{v:.3f}'
-        lines.append(f'| {name} | {r["selected_epoch"]} | '+ ' | '.join(fmt(m[k]['mean']) for k in ('close_mae_bps','change_1_correlation','change_1_std_ratio','change_16_correlation'))+f' | {r["state_probe"]["test"]["ba"]:.2%} |')
+        lines.append(f'| {name} | {r["selected_epoch"]} | {r["validation_retained"]} | '+ ' | '.join(fmt(m[k]['mean']) for k in ('close_mae_bps','change_1_correlation','change_1_std_ratio','change_16_correlation'))+f' | {r["state_probe"]["test"]["ba"]:.2%} |')
     (out/'summary.md').write_text('\n'.join(lines)+'\n')
 
 

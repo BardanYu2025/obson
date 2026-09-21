@@ -20,9 +20,9 @@ from .stage_audit import load_data
 
 
 class ShortState(nn.Module):
-    def __init__(self,width=512,layers=2):
+    def __init__(self,width=512,layers=2,input_dim=18):
         super().__init__();self.width=width;self.layers=layers
-        self.input=nn.Sequential(nn.Linear(18,width),nn.LayerNorm(width),nn.GELU())
+        self.input=nn.Sequential(nn.Linear(input_dim,width),nn.LayerNorm(width),nn.GELU())
         self.rnn=nn.GRU(width,width,layers,batch_first=True)
         self.norm=nn.LayerNorm(width)
         self.decoder=nn.Sequential(nn.Linear(width,width),nn.GELU(),nn.Linear(width,7))
