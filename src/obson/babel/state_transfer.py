@@ -195,7 +195,7 @@ def mlp_trial(xs,ys,masks,path,metadata,seed,decay,epochs,batch,hidden,lr,device
     x=[torch.tensor((v-xm)/xscl,dtype=torch.float32,device=device) for v in xs[:2]]
     y=[torch.tensor((v-ym)/yscl,dtype=torch.float32,device=device) for v in ys[:2]]
     mask=[torch.tensor(v&active,device=device) for v in masks[:2]]
-    model=nn.Sequential(nn.Linear(x[0].shape[1],hidden),nn.GELU(),nn.Linear(hidden,len(NAMES))).to(device)
+    model=nn.Sequential(nn.Linear(x[0].shape[1],hidden),nn.GELU(),nn.Linear(hidden,y[0].shape[1])).to(device)
     opt=torch.optim.AdamW(model.parameters(),lr=lr,weight_decay=decay)
     def validate():
         model.eval()
