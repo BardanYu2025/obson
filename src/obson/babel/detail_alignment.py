@@ -173,7 +173,7 @@ def run_epoch(model, data, streams, joint, detail, scales, batch, opt=None, seed
     return score, zs, ps
 
 
-def worker(out, name, device='cuda', *, model_factory=None, streams_factory=None, allow_initial_regression=False):
+def worker(out, name, device='cuda', *, model_factory=None, streams_factory=None, allow_initial_regression=False, track_diagnostic=False):
     meta = json.loads((out/'manifest.json').read_text()); aux = json.loads((out/'cache/statistics.json').read_text())
     job = next(j for j in meta['experiments'] if j['name'] == name); joint = job['mode'].startswith('joint')
     detail = job['mode'].endswith('detail'); path = out/name; path.mkdir(exist_ok=True)
@@ -197,6 +197,15 @@ def worker(out, name, device='cuda', *, model_factory=None, streams_factory=None
             raise ValueError('Warm start fails baseline retention')
         state = dict(metadata=metadata, epoch=0, best_epoch=0, history=[], best_validation=initial,
                      best_model={k: v.detach().cpu().clone() for k, v in model.state_dict().items()})
+    if track_diagnostic and 'diagnostic_model' not in state:
+        state.update(diagnostic_epoch=state['best_epoch'], diagnostic_validation=state['best_validation'],
+                     diagnostic_model=state['best_model'])
+    def save_state():
+        publish(state, path)
+        if track_diagnostic:
+            atomic_save(dict(metadata=state['metadata'], epoch=state['diagnostic_epoch'],
+                             validation=state['diagnostic_validation'], model=state['diagnostic_model']),
+                        path/'diagnostic_best.pt')
     for epoch in range(state['epoch']+1, meta['epochs']+1):
         started = time.perf_counter()
         if device == 'cuda': torch.cuda.reset_peak_memory_stats()
@@ -206,13 +215,16 @@ def worker(out, name, device='cuda', *, model_factory=None, streams_factory=None
         if improves(score, state['best_validation'], aux['reference']):
             state.update(best_epoch=epoch, best_validation=score,
                          best_model={k: v.detach().cpu().clone() for k, v in model.state_dict().items()})
+        if track_diagnostic and (score['detail'], score['base']) < (state['diagnostic_validation']['detail'], state['diagnostic_validation']['base']):
+            state.update(diagnostic_epoch=epoch, diagnostic_validation=score,
+                         diagnostic_model={k: v.detach().cpu().clone() for k, v in model.state_dict().items()})
         seconds = time.perf_counter()-started
         state['history'].append(dict(epoch=epoch, train=train, validation=score, eligible=eligible(score, aux['reference']),
                                     seconds=seconds, remaining_minutes=seconds*(meta['epochs']-epoch)/60,
                                     peak_allocated_gib=torch.cuda.max_memory_allocated()/2**30 if device == 'cuda' else None))
-        state.update(epoch=epoch, model=model.state_dict(), optimizer=opt.state_dict(), rng=rng_state()); publish(state, path)
+        state.update(epoch=epoch, model=model.state_dict(), optimizer=opt.state_dict(), rng=rng_state()); save_state()
         progress(f'{name} epoch={epoch}/{meta["epochs"]} detail={score["detail"]:.5f} close={score["close_bps"]:.2f}bp eligible={eligible(score,aux["reference"])} best={state["best_epoch"]} seconds={seconds:.1f}')
-    publish(state, path)
+    save_state()
 
 
 def prepare(meta, out, device, *, extra_builder=None):
