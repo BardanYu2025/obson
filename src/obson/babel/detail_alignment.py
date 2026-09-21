@@ -136,7 +136,7 @@ def publish(state, path):
                      seconds=row.get('seconds'), remaining_minutes=row.get('remaining_minutes')), path/'progress.json')
 
 
-def run_epoch(model, data, streams, joint, detail, scales, batch, opt=None, seed=None, collect=False, detail_weight=.25):
+def run_epoch(model, data, streams, joint, detail, scales, batch, opt=None, seed=None, collect=False, detail_weight=.25, objective_fn=None):
     """Same scored endpoints and optimizer grouping in all four cells."""
     model.train(opt is not None)
     if not joint: model.encoder.eval()
@@ -157,8 +157,10 @@ def run_epoch(model, data, streams, joint, detail, scales, batch, opt=None, seed
             z = h[list(lanes), list(steps)] if joint else data['z'][ids]
             b = {k: v[ids] for k, v in data.items()}
             pred = model.head.decode_recent(z); parts = values(pred, b, scales)
-            loss = parts['base'] + (detail_weight*parts['detail'] if detail else 0)
+            loss = (objective_fn(pred, b, parts) if objective_fn else
+                    parts['base'] + (detail_weight*parts['detail'] if detail else 0))
             if not torch.isfinite(loss).all(): raise ValueError('Nonfinite detail objective')
+            if objective_fn: parts['optimized_objective'] = loss
             if opt is not None:
                 opt.zero_grad(set_to_none=True); loss.mean().backward()
                 nn.utils.clip_grad_norm_(model.parameters(), 1., error_if_nonfinite=True); opt.step()
@@ -213,7 +215,7 @@ def worker(out, name, device='cuda', *, model_factory=None, streams_factory=None
     publish(state, path)
 
 
-def prepare(meta, out, device):
+def prepare(meta, out, device, *, extra_builder=None):
     cache = out/'cache'; cache.mkdir(exist_ok=True); index = cache/'index.json'
     if index.exists():
         info = json.loads(index.read_text())
@@ -223,6 +225,7 @@ def prepare(meta, out, device):
     source = Path(meta['source']); files = {}; coverage = {}
     for split in SPLITS:
         keys = np.load(source/f'target_cache/{split}_keys.npy', allow_pickle=False)
+        if extra_builder: files.update(extra_builder(cache, split, keys, encoded))
         x, specs = sequence_specs(series, encoded, ref['boundaries'], split, keys)
         with (cache/f'{split}_x.tmp').open('wb') as f: np.save(f, x, allow_pickle=False)
         (cache/f'{split}_x.tmp').replace(cache/f'{split}_x.npy')
