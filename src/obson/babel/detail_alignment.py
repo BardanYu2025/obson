@@ -136,7 +136,7 @@ def publish(state, path):
                      seconds=row.get('seconds'), remaining_minutes=row.get('remaining_minutes')), path/'progress.json')
 
 
-def run_epoch(model, data, streams, joint, detail, scales, batch, opt=None, seed=None, collect=False, detail_weight=.25, objective_fn=None):
+def run_epoch(model, data, streams, joint, detail, scales, batch, opt=None, seed=None, collect=False, detail_weight=.25, objective_fn=None, latent_objective_fn=None):
     """Same scored endpoints and optimizer grouping in all four cells."""
     model.train(opt is not None)
     if not joint: model.encoder.eval()
@@ -159,6 +159,8 @@ def run_epoch(model, data, streams, joint, detail, scales, batch, opt=None, seed
             pred = model.head.decode_recent(z); parts = values(pred, b, scales)
             loss = (objective_fn(pred, b, parts) if objective_fn else
                     parts['base'] + (detail_weight*parts['detail'] if detail else 0))
+            if latent_objective_fn:
+                loss = loss + latent_objective_fn(z, b, parts)
             if not torch.isfinite(loss).all(): raise ValueError('Nonfinite detail objective')
             if objective_fn: parts['optimized_objective'] = loss
             if opt is not None:
