@@ -2,6 +2,8 @@
 
 这轮不训练。固定512_endpoint、768_joint，各seed42/43及原best/last，共八个检查点；同时使用旧训练集拟合的PCA512/768参考。只回答新时间段上历史回读的综合收益和价格路径代价是否保持，不补训768趋势读出，不改变原晋升失败结论。
 
+
+运行修复记录：首次真实报告因旧来源扫描器漏枚举`audit_manifest.json`而阻断，尚未评价模型。已新增独立扫描器并完成真实祖先图离线回放，详见[本轮报告复核](BABEL_TIME_CONFIRMATION_REVIEW.md)。从该blocked状态重跑应使用新的输出目录，例如`BABEL_TIME_RUN=checkpoints/babel_time_confirmation_v2`，并设置`BABEL_TIME_LOG=logs/babel_time_confirmation_v2.log`；归档相应为`babel_time_confirmation_v2_reports.tar.gz`。
 ## 数据资格先于评分
 
 1. 验证完整`babel_bar_alignment`及上游来源，扫描checkpoint注册清单和既往跨品种raw_audit。取已记录原始行情最晚**收盘时间**为全局边界，不用旧训练截止日冒充研究截止日。

@@ -17,7 +17,8 @@ from . import endpoint_readout_audit as ea, endpoint_readout as er
 from . import ae_context, activity_ablation as aa, architecture as ar, data as raw
 from .ae_extend import atomic_json
 from .dual_state import sha256
-from .holdout_audit import read_json, scan_lineage, strict_frame
+from .holdout_audit import read_json, strict_frame
+from . import time_lineage
 from .progress import progress
 
 SCHEMA = 'babel-time-confirmation-v1'
@@ -33,8 +34,7 @@ def timestamp(value):
 
 
 def registry_snapshot(registry, out):
-    return {str(p.resolve()): sha256(p) for p in sorted(registry.rglob('manifest.json'))
-            if out not in p.resolve().parents}
+    return {str(p):sha256(p) for p in time_lineage.manifest_paths(registry,out)}
 
 
 def past_records(lineage):
@@ -157,7 +157,8 @@ def guard_inputs(meta, out):
 
 
 def code_identity():
-    return ea.code_identity() | {Path(__file__).name:sha256(__file__)}
+    return ea.code_identity() | {Path(__file__).name:sha256(__file__),
+                                 Path(time_lineage.__file__).name:sha256(time_lineage.__file__)}
 
 
 def comparison_checks(errors, inventory):
@@ -333,9 +334,10 @@ def run(source, registry, root, out, device='cuda', batch=128, asof=None):
         atomic_json(dict(status='running'),out/'run_state.json')
         progress('Checking immutable model sources and registered data history; no GPU work yet')
         identity = ea.source_identity(source)
-        lineage = scan_lineage(registry, source, out)
+        lineage = time_lineage.scan_lineage(registry, source, out)
         atomic_json(lineage, out/'lineage.json')
         if not lineage['verified']:
+            progress(f'Source lineage blocked: {len(lineage["issues"])} issues; see lineage.json')
             atomic_json(dict(status='blocked',reason='unresolved_registry_lineage'),out/'run_state.json'); return 3
         history, extra = past_records(lineage); cutoff = cutoff_from_records(history)
         now = pd.Timestamp.now(tz='Asia/Shanghai').tz_localize(None)

@@ -14,7 +14,7 @@ import numpy as np
 import pandas as pd
 import torch
 
-from obson.babel import time_confirmation as tc
+from obson.babel import time_confirmation as tc, time_lineage as tl
 from obson.babel.ae_extend import atomic_json
 from obson.babel.data import validate_frame
 from obson.babel.dual_state import sha256
@@ -34,6 +34,41 @@ def make_raw(root, n=1100, old=200):
 
 
 class TimeConfirmationTests(unittest.TestCase):
+    def test_named_audit_manifest_resolves_by_hash_and_is_guarded(self):
+        with tempfile.TemporaryDirectory() as td:
+            registry=Path(td).resolve();base=registry/'base';audit=registry/'coverage';run=registry/'run';out=registry/'out'
+            for path in (base,audit,run,out):path.mkdir()
+            atomic_json(dict(sources=[dict(key='X/15/C',start='2024-01-01',end='2024-02-01',sha256='a'*64)]),base/'manifest.json')
+            atomic_json(dict(paths=dict(source=str(base)),long_manifest_sha256=sha256(base/'manifest.json')),audit/'audit_manifest.json')
+            atomic_json(dict(source=str(base),coverage_identity=dict(files={'audit_manifest.json':sha256(audit/'audit_manifest.json')})),run/'manifest.json')
+            # Neither the current attempt nor its nested files enter the registry.
+            atomic_json(dict(bad='current attempt'),out/'audit_manifest.json')
+            result=tl.scan_lineage(registry,run,out)
+            self.assertTrue(result['verified'],result['issues'])
+            self.assertIn(str(audit/'audit_manifest.json'),result['ancestors'])
+            before=tc.registry_snapshot(registry,out)
+            self.assertEqual(set(before),set(result['manifests']))
+            self.assertNotIn(str(out/'audit_manifest.json'),before)
+            atomic_json(dict(paths=dict(source=str(base)),long_manifest_sha256='b'*64),audit/'audit_manifest.json')
+            changed=tl.scan_lineage(registry,run,out)
+            self.assertFalse(changed['verified'])
+            self.assertIn('unresolved_manifest_hash',[r['reason'] for r in changed['issues']])
+            self.assertNotEqual(before,tc.registry_snapshot(registry,out))
+
+    def test_named_audit_ancestor_must_reach_data_and_unreadable_audit_blocks(self):
+        with tempfile.TemporaryDirectory() as td:
+            registry=Path(td).resolve();base=registry/'base';audit=registry/'coverage';run=registry/'run'
+            for path in (base,audit,run):path.mkdir()
+            atomic_json(dict(sources=[dict(key='X/15/C',start='2024',end='2025',sha256='a'*64)]),base/'manifest.json')
+            atomic_json(dict(note='no verifiable ancestry'),audit/'audit_manifest.json')
+            atomic_json(dict(source=str(base),audit_manifest_sha256=sha256(audit/'audit_manifest.json')),run/'manifest.json')
+            result=tl.scan_lineage(registry,run,registry/'out')
+            self.assertFalse(result['verified'])
+            self.assertIn('ancestor_has_no_resolved_dataset_path',[r['reason'] for r in result['issues']])
+            (audit/'audit_manifest.json').write_text('not JSON')
+            result=tl.scan_lineage(registry,run,registry/'out')
+            self.assertIn('unreadable_registered_manifest',[r['reason'] for r in result['issues']])
+
     def test_source_close_cutoff_all128_inputs_and_warmup(self):
         t=pd.date_range('2024-01-01',periods=900,freq='15min')
         s=SimpleNamespace(frame=pd.DataFrame(dict(datetime=t)), ends=(t+pd.Timedelta(minutes=15)).to_numpy(),
