@@ -1,5 +1,7 @@
 # 新时间段确认报告：来源扫描阻断，尚未评分
 
+最新状态：v2来源检查通过，但1251份文件在旧边界之后没有新行情，正确返回`no_later_raw_history`。未评价512/768，停止重复运行，详见文末v2复核。
+
 收到`babel_time_confirmation_reports.tar.gz`，SHA256：`85d7e04b9b485ed82ce6a11f0ab0f0f66be8985a05ad8faa74ef81fa4755d412`。报告仅含运行状态、来源图、日志和说明；退出码3，`blocked / unresolved_registry_lineage`。未生成raw_audit、coverage、模型评分或decision，不能据此断言没有新数据或判断512/768优劣。
 
 ## 原因与修复
@@ -19,3 +21,14 @@
 ## 下一步
 
 更新代码后使用`BABEL_TIME_RUN=checkpoints/babel_time_confirmation_v2`与对应日志，避免旧无manifest的blocked状态直接返回。既有blocked归档保留。完整命令和导出路径见[BABEL_TIME_CONFIRMATION.md](BABEL_TIME_CONFIRMATION.md)。若数据仍截至旧边界，之后应返回`no_later_raw_history`；目前尚未到该步骤，不能提前写成已确认无新数据。
+
+
+## v2复核：来源通过，数据未更新
+
+归档`babel_time_confirmation_v2_reports.tar.gz`，SHA256：`0c7d9c2cf2ab2a4be1819d62b45731a352ea14fd0b892990cd3b590ca138500b`。退出码3，`blocked / no_later_raw_history`，不是未处理异常。51份注册清单、18个可达祖先的来源检查通过，issues为空；原始数据审计issues也为空。此前具名audit清单问题在AutoDL实际注册表上已解决。
+
+1251份单合约/周期CSV，共4360913行，最晚bar开始时间2026-09-12 02:15，全局已见收盘边界2026-09-12 03:00，边界之后0行。数据目录仍为`/root/autodl-tmp/data/contracts`。报告不含coverage、评价manifest或模型评分，说明未进入新窗口生成及冻结模型推理。
+
+独立本地核验：1251个唯一key及文件哈希与当前本地CSV全部匹配；各文件行数、新增行数、起止时间和规范化内容哈希与先前本地原始数据审计一致。逐文件新增行数加总为0，分别从登记source_records和本次raw sources重算最晚收盘边界，都精确得到03:00。不是仅复述run_state。未重新运行真实模型。
+
+阶段决定：现有512基线与768联合候选及其既有收益/代价保持不变；本次没有产生模型胜负的新证据。当前数据不足以执行新时间段确认，停止重复提交同一批文件、重复运行入口或为此补开训练。下一条件是补充确实未参与研究、晚于边界的单合约行情快照，保留旧历史和来源；快照更新后需使用新运行目录。少于50窗口或5个周分组时只能作描述，不降低判据以宣布确认成功。
