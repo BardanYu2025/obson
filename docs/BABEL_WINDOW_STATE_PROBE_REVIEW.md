@@ -1,5 +1,7 @@
 # 冻结状态的当前行情读出：方向可读，完整增量验收未通过
 
+后续阶段决定：见[主线阶段判断](BABEL_MAINLINE_DECISION.md)。下文保留当时复核与建议；离线展示已不作为下一优先研究任务。
+
 2026-09-24复核 `babel_window_state_probe_reports.tar.gz`，SHA256：`9d92c3dac4924b8b0ae8a0646b078088efd2173a9ab202d080b7490184206a4b`。实现提交 `58aae7f`，固定协议见[BABEL_WINDOW_STATE_PROBE.md](BABEL_WINDOW_STATE_PROBE.md)。
 
 结论：512维冻结表示保留了容易被线性读出的历史方向和波动信息；本轮定义的趋势强度（历史log路径的直线拟合R²）读出很弱。综合均值有改善，但原品种集、方向任务族及局部分组未满足完整条件，最终 `no_uniform_incremental_evidence` 正确。不能改写为“模型没有信息”，也不能改写为“已全面超过PCA或完整输入”。不更换主模型、不挑选新种子、不扩展读出/模型/正则网格。
