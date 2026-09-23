@@ -292,13 +292,30 @@ def execute_locked(meta, out, device):
     return 0
 
 
-def run(source, registry, root, out, device='cuda', batch=128, asof=None):
-    source, registry, root, out = (p.resolve() for p in (source,registry,root,out))
+def check_inputs(source, registry, root, out, batch):
+    """Report actual resolved paths before expensive provenance or GPU work."""
+    progress(f'Input paths: raw={root}; source={source}; registry={registry}; output={out}; batch={batch}')
     for dep in (source,root,registry):
         if out == dep or out in dep.parents or (dep != registry and dep in out.parents):
-            raise ValueError('Use an independent output directory')
-    if batch < 1 or not root.is_dir() or source == registry or registry not in source.parents:
-        raise ValueError('Invalid batch, raw root or registry/source relationship')
+            raise ValueError(f'Output directory overlaps an input: output={out}, input={dep}; set BABEL_TIME_RUN to a separate directory')
+    if batch < 1:
+        raise ValueError(f'BABEL_TIME_BATCH must be positive; received {batch}')
+    if not root.is_dir():
+        raise ValueError(f'Raw data directory does not exist: {root}; set BABEL_TIME_ROOT to the actual contract-data directory (usual AutoDL path: /root/autodl-tmp/data/contracts)')
+    if not registry.is_dir():
+        raise ValueError(f'Research registry directory does not exist: {registry}; check BABEL_TIME_REGISTRY')
+    if source == registry or registry not in source.parents:
+        raise ValueError(f'Model source must be inside the research registry after resolving symlinks: source={source}, registry={registry}; check BABEL_TIME_SOURCE and BABEL_TIME_REGISTRY')
+    if not source.is_dir():
+        raise ValueError(f'Model source directory does not exist: {source}; check BABEL_TIME_SOURCE (expected completed babel_bar_alignment run)')
+    for name in ('manifest.json','completion.json','selection_lock.json'):
+        if not (source/name).is_file():
+            raise ValueError(f'Incomplete model source: missing {source/name}; restore the completed alignment run')
+
+
+def run(source, registry, root, out, device='cuda', batch=128, asof=None):
+    source, registry, root, out = (p.resolve() for p in (source,registry,root,out))
+    check_inputs(source,registry,root,out,batch)
     out.mkdir(parents=True,exist_ok=True)
     # Resume only the exact frozen attempt; a new data snapshot needs a new path.
     if any(out.iterdir()):

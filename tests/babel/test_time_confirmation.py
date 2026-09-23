@@ -72,6 +72,7 @@ class TimeConfirmationTests(unittest.TestCase):
             base=Path(td);root,path,row=make_raw(base,n=200,old=200)
             registry=base/'checkpoints';source=registry/'alignment';source.mkdir(parents=True)
             atomic_json(dict(sources=[row]),source/'manifest.json');out=registry/'new'
+            for name in ('completion.json','selection_lock.json'):atomic_json({},source/name)
             with patch.object(tc.ea,'source_identity',return_value={}),patch.object(tc,'evaluate',side_effect=AssertionError('No inference')):
                 self.assertEqual(tc.run(source,registry,root,out),3)
                 self.assertEqual(tc.run(source,registry,root,out),3)
@@ -103,6 +104,7 @@ class TimeConfirmationTests(unittest.TestCase):
             jobs=[dict(name=n,joint='_joint_' in n) for n in tc.JOBS]
             sm=dict(sources=[row],experiments=jobs)
             atomic_json(sm,source/'manifest.json');atomic_json(stats,source/'cache/statistics.json')
+            for name in ('completion.json','selection_lock.json'):atomic_json({},source/name)
             atomic_json(local,source/'cache/local_scales.json');atomic_json(dict(status='retain_baseline_and_stop'),source/'decision.json')
             atomic_json(dict(torch=str(torch.__version__),numpy=np.__version__),source/'runtime.json')
             for w in (512,768):
@@ -163,6 +165,36 @@ class TimeConfirmationTests(unittest.TestCase):
             self.assertNotEqual(result.returncode,0)
             with tarfile.open(root/'download/attempt_reports.tar.gz') as archive:
                 self.assertIn(b'run_status=failed',archive.extractfile('attempt/run_status.txt').read())
+
+    def test_input_errors_identify_missing_directory_and_relationship(self):
+        with tempfile.TemporaryDirectory() as td:
+            base=Path(td).resolve();registry=base/'registry';registry.mkdir()
+            source=registry/'alignment';source.mkdir();root=base/'raw';out=registry/'attempt'
+            with self.assertRaisesRegex(ValueError,f'Raw data directory does not exist: {root}'):
+                tc.check_inputs(source,registry,root,out,128)
+            root.mkdir()
+            with self.assertRaisesRegex(ValueError,'BABEL_TIME_BATCH must be positive'):
+                tc.check_inputs(source,registry,root,out,0)
+            with self.assertRaisesRegex(ValueError,'source=.*outside.*registry='):
+                tc.check_inputs(base/'outside',registry,root,out,128)
+            with self.assertRaisesRegex(ValueError,'Incomplete model source: missing .*manifest.json'):
+                tc.check_inputs(source,registry,root,out,128)
+            self.assertFalse(out.exists())
+
+    def test_autodl_wrapper_uses_original_external_raw_root_and_honors_override(self):
+        with tempfile.TemporaryDirectory() as td:
+            base=Path(td);fake=base/'capture.sh';args=base/'args.txt'
+            fake.write_text('#!/bin/sh\nprintf "%s\\n" "$@" > "$ARGS_FILE"\n')
+            fake.chmod(0o755)
+            env=os.environ|dict(PYTHON_BIN=str(fake),ARGS_FILE=str(args),BABEL_TIME_RUN=str(base/'run'),
+                BABEL_DOWNLOAD_DIR=str(base/'download'),BABEL_TIME_LOG=str(base/'missing.log'))
+            env.pop('BABEL_TIME_ROOT',None)
+            for override,expected in ((None,'/root/autodl-tmp/data/contracts'),('/explicit/new snapshot','/explicit/new snapshot')):
+                if override is not None:env['BABEL_TIME_ROOT']=override
+                result=subprocess.run(['bash','scripts/babel_time_confirmation_autodl.sh','all'],env=env,capture_output=True,text=True)
+                self.assertEqual(result.returncode,0,result.stderr)
+                values=args.read_text().splitlines()
+                self.assertEqual(values[values.index('--root')+1],expected)
 
 
 if __name__=='__main__':

@@ -37,7 +37,9 @@ nohup bash scripts/babel_time_confirmation_autodl.sh all \
 tail -f logs/babel_time_confirmation.log
 ```
 
-如只需检查AutoDL现有`data/contracts`是否已更新，省略`BABEL_TIME_ROOT`即可；与本地相同就会阻断，没有必要为已知未更新数据启动GPU实例。
+AutoDL脚本默认数据目录为`/root/autodl-tmp/data/contracts`，与之前窗口交付脚本一致，位于仓库外。省略`BABEL_TIME_ROOT`即检查该目录；若此前设置过其他值，应显式覆盖或`unset BABEL_TIME_ROOT`。命令行Python模块自身的相对路径默认值仍供本地使用。与本地数据相同就会阻断，没有必要为已知未更新数据启动GPU实例。
+
+2026-09-24修复：首版AutoDL脚本误用仓库内`data/contracts`，可能在加载模型前报`Invalid batch, raw root or registry/source relationship`。已纠正脚本默认目录，启动时打印全部解析后路径，并将缺目录、batch、来源范围和缺来源文件分别报错。该入口错误发生在创建运行manifest前，修正后可直接使用原输出目录；原模型和数据均未修改。
 
 成功、无新数据或失败都会导出：
 

@@ -40,7 +40,7 @@ trap finish EXIT
 if [[ "$mode" == all ]]; then
   args=(--source "${BABEL_TIME_SOURCE:-checkpoints/babel_bar_alignment}"
         --registry "${BABEL_TIME_REGISTRY:-checkpoints}"
-        --root "${BABEL_TIME_ROOT:-data/contracts}" --out "$run"
+        --root "${BABEL_TIME_ROOT:-/root/autodl-tmp/data/contracts}" --out "$run"
         --batch "${BABEL_TIME_BATCH:-128}" --device "${BABEL_TIME_DEVICE:-cuda}")
   if [[ -n "${BABEL_TIME_ASOF:-}" ]]; then args+=(--asof "$BABEL_TIME_ASOF"); fi
   "${PYTHON_BIN:-python}" -m obson.babel.time_confirmation "${args[@]}"
