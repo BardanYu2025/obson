@@ -1,5 +1,7 @@
 # AutoDL覆盖审计复核
 
+后续更新：固定预算采样实验现已实现，运行方式及验证边界见[BABEL_WINDOW_SAMPLING.md](BABEL_WINDOW_SAMPLING.md)。本文件保留当时的审计结论和预先约定协议。
+
 ## 结论
 
 `babel_coverage512_reports.tar.gz`完成严格审计：`command_exit_code=0`、`status=complete`、`reports_only=false`。四分区的x/y/mask共12份数组均从原始数据精确重建，源文件与重建文件SHA256一致，逐元素最大差0；原训练统计六个字段最大差也全部为0。此前本地x指纹不同的问题没有在实际训练环境复现，本轮输入缓存核验门槛通过。

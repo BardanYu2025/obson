@@ -1,6 +1,6 @@
 # 固定窗口覆盖与分布审计
 
-更新：AutoDL严格核验已完成，12份x/y/mask数组的重建指纹与源缓存一致、最大数值差均为0。下面保留本地审计时的证据边界与操作说明；最新结论及下一轮协议见[BABEL_COVERAGE_REVIEW.md](BABEL_COVERAGE_REVIEW.md)。训练实验尚未实现。
+更新：AutoDL严格核验已完成，12份x/y/mask数组的重建指纹与源缓存一致、最大数值差均为0。下面保留本地审计时的证据边界与操作说明；审计结论见[BABEL_COVERAGE_REVIEW.md](BABEL_COVERAGE_REVIEW.md)。后续训练实现及运行命令见[BABEL_WINDOW_SAMPLING.md](BABEL_WINDOW_SAMPLING.md)。
 
 ## 研究目的和范围
 
