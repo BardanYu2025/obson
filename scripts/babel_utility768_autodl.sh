@@ -3,8 +3,8 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 export PYTHONPATH="$PWD/src${PYTHONPATH:+:$PYTHONPATH}" PYTHONUNBUFFERED=1
 export OMP_NUM_THREADS="${OMP_NUM_THREADS:-4}" OPENBLAS_NUM_THREADS="${OPENBLAS_NUM_THREADS:-4}"
-run="${BABEL_UTILITY_RUN:-checkpoints/babel_utility768}"
-log="${BABEL_UTILITY_LOG:-logs/babel_utility768.log}"
+run="${BABEL_UTILITY_RUN:-checkpoints/babel_utility768_v2}"
+log="${BABEL_UTILITY_LOG:-logs/babel_utility768_v2.log}"
 download="${BABEL_DOWNLOAD_DIR:-/root/autodl-tmp/download}"
 mode="${1:-all}"
 case "$mode" in all|export) ;; *) echo 'Usage: bash scripts/babel_utility768_autodl.sh [all|export]' >&2; exit 2 ;; esac

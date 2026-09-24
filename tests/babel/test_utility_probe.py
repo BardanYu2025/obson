@@ -196,11 +196,38 @@ class PipelineTests(unittest.TestCase):
             source=root/'alignment';coverage=root/'coverage';source.mkdir();coverage.mkdir();rows=inventories(dict(train=3,val=2,test=2,cross_research=2))
             # Actual alignment inventories additionally contain an anchor field.
             for split,v in rows.items():
-                normalized=[dict(x,week=str(run.pd.Timestamp(x['end']).to_period('W'))) for x in v]
+                normalized=[dict(x,session=x['end'][:10],week=str(run.pd.Timestamp(x['end']).to_period('W-SUN'))) for x in v]
                 atomic_json(normalized,coverage/f'{split}_windows.json')
                 if split in run.SPLITS[2:]:atomic_json([dict(x,anchor=100.) for x in normalized],source/f'{split}_inventory.json')
             result=run.inventories(dict(identity=dict(coverage=str(coverage),manifest=dict(source=str(source)))))
             self.assertEqual(len(result['test']),2)
+
+    def test_session_week_boundary_and_strict_inventory_identity(self):
+        # Real report boundary: Friday night belongs to the Monday trading session.
+        samples=[dict(key='MA/15/CZCE.MA601',symbol='MA',period=15,row=3967,
+                      end='2025-10-09 22:15:00',month='2025-10',session='2025-10-10',week='2025-10-06/2025-10-12'),
+                 dict(key='ag/15/SHFE.ag2612',symbol='ag',period=15,row=5000,
+                      end='2026-07-03 22:30:00',month='2026-07',session='2026-07-06',week='2026-07-06/2026-07-12')]
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);source=root/'alignment';coverage=root/'coverage';source.mkdir();coverage.mkdir()
+            expected=[{k:v for k,v in x.items() if k!='session'}|dict(anchor=100.) for x in samples]
+            for split in run.SPLITS:
+                atomic_json(samples,coverage/f'{split}_windows.json')
+                if split in run.SPLITS[2:]:atomic_json(expected,source/f'{split}_inventory.json')
+            meta=dict(identity=dict(coverage=str(coverage),manifest=dict(source=str(source))))
+            result=run.inventories(meta)
+            self.assertEqual(result['test'][1]['week'],'2026-07-06/2026-07-12')
+            for field,value in [('week','wrong'),('row',5001),('end','2026-07-03 22:45:00'),('key','other')]:
+                bad=copy.deepcopy(expected);bad[1][field]=value
+                atomic_json(bad,source/'test_inventory.json')
+                with self.assertRaisesRegex(ValueError,rf'test\[1\] {field}'):run.inventories(meta)
+            for bad in (expected[::-1],expected[:1]):
+                atomic_json(bad,source/'test_inventory.json')
+                with self.assertRaises(ValueError):run.inventories(meta)
+            atomic_json(expected,source/'test_inventory.json')
+            missing=copy.deepcopy(samples);missing[1].pop('session')
+            atomic_json(missing,coverage/'test_windows.json')
+            with self.assertRaises(KeyError):run.inventories(meta)
 
     def test_failure_and_repeat_export(self):
         with tempfile.TemporaryDirectory() as td:

@@ -15,7 +15,7 @@ from .holdout_audit import read_json
 from .progress import progress
 
 bb=pf.bb
-SCHEMA='babel-frozen-utility768-v1'
+SCHEMA='babel-frozen-utility768-v2'
 SPLITS=old.SPLITS
 
 
@@ -71,6 +71,7 @@ def make_manifest(source,identity,batch=128):
         current='7 current observed input features: asinh log-percent gap/body plus5 activity features. Preserve source availability/suspect masks. Independent target scalers/heads; excluded from primary utility.',
         decision=dict(raw_retention=.05,family_retention=.10,baseline_gain=.05,minimum_utility_r2=.50,current_nmse=.10,current_r2=.80,min_windows=50,min_weeks=5,
             rule='Both seeds AND both research sets. Utility: candidate/raw R2>=0.50 on all4 targets; upper paired weekly interval for primary <=1.05 raw, each direction/volatility family <=1.10 raw, primary <=0.95 PCA/current. Current: all7 targets >=50 windows/5 weeks, positive raw R2, candidate R2>=0.80 and upper weekly NMSE bound<=0.10. No automatic replacement or general representation claim.'),
+        week_grouping='Verified coverage session date, W-SUN; identical to alignment research inventories',
         encoder_updates=0,neural_reader_updates=0,scope='Reused research data; exploratory intervals uncorrected for multiplicity. Current-feature copy is an information-retention test, not novel utility. No decoder/encoder training, grid expansion or new-data prerequisite.')
 
 
@@ -78,12 +79,17 @@ def inventories(meta):
     result={}
     for split in SPLITS:
         rows=read_json(Path(meta['identity']['coverage'])/f'{split}_windows.json')
-        result[split]=[{k:r[k] for k in ('key','symbol','period','row','end','month')}|dict(week=str(pd.Timestamp(r['end']).to_period('W'))) for r in rows]
+        # Friday night may belong to Monday's session: preserve the upstream trading-week grouping.
+        result[split]=[{k:r[k] for k in ('key','symbol','period','row','end','month')}|dict(week=str(pd.Timestamp(r['session']).to_period('W-SUN'))) for r in rows]
     source=Path(meta['identity']['manifest']['source'])
     for split in SPLITS[2:]:
         previous=read_json(source/f'{split}_inventory.json')
         keys=('key','symbol','period','row','end','month','week')
-        if result[split]!=[{k:r[k] for k in keys} for r in previous]:raise ValueError('Research row identities differ from alignment')
+        if len(result[split])!=len(previous):raise ValueError(f'Research row count differs from alignment: {split}')
+        for index,(actual,expected) in enumerate(zip(result[split],previous)):
+            for key in keys:
+                if actual[key]!=expected[key]:
+                    raise ValueError(f'Research row identity differs from alignment: {split}[{index}] {key}: {actual[key]!r} != {expected[key]!r}')
     return result
 
 
@@ -265,7 +271,7 @@ def run(source,out,batch=128,device='cuda'):
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--source',type=Path,default=Path('checkpoints/babel_path768'))
-    p.add_argument('--out',type=Path,default=Path('checkpoints/babel_utility768'));p.add_argument('--batch',type=int,default=128)
+    p.add_argument('--out',type=Path,default=Path('checkpoints/babel_utility768_v2'));p.add_argument('--batch',type=int,default=128)
     a=p.parse_args();bb.ab.configure_runtime()
     if not torch.cuda.is_available():raise ValueError('Formal frozen extraction/readout fits run on AutoDL CUDA')
     a.out.parent.mkdir(parents=True,exist_ok=True)
