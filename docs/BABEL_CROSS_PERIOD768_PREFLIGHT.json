@@ -1,0 +1,84 @@
+{
+  "scope": "CPU raw geometry + deterministic causal feature/target calculations only; no real model inference, training or readout fitting.",
+  "source": "babel_growth768_reports.tar.gz",
+  "source_report_sha256": {
+    "train_plan.json": "9722ed59bc35e88f633ad3255f1e7ae08cceb20cf475f5fa0d0ec533b2e9135d",
+    "train_inventory.json": "22865f6e945f40dc3f01a5db4d5c959f32c9a07433427caca4345c488cc00617",
+    "test_inventory.json": "3d7c04223d5cdd4d5df158cecf739e5c09c21bd08782db1f7c61a7613939eb28",
+    "cross_research_inventory.json": "867a70217611a022fee99e3b122044e78e7d05f83f7c5343f44550b383ce9f88",
+    "evaluation_scales.json": "c3dd4cc0e8e518ec5d5dc708c6ff902ead18c579bb2c0b33cbcfdc1ec5d0cbe4"
+  },
+  "raw_inventory_sha256": "8d285d5e2cd6da2b85ab38dcc5872941e3cf22722e93186efd67365763476f37",
+  "packed_partition_method": "Reconstructed from original inventories and original split boundaries; reconstructed original eligible train plan exactly equals exported source train_plan. Actual remote packed binaries will be hash-checked/replayed in prepare; not available locally.",
+  "candidate_cohorts": {
+    "train": {
+      "count": 9909,
+      "groups": {
+        "15->30": 9277,
+        "15->60": 632
+      },
+      "weeks": {
+        "15->60": 216,
+        "15->30": 241
+      },
+      "excluded": {
+        "no_simultaneous_close": 26034,
+        "main_contract_session_or_512_partition_warmup": 373,
+        "current_interval_not_strict": 1402,
+        "insufficient_common_changes": 2393,
+        "packed_context_boundary": 1086,
+        "no_coarse_packed_partition": 35
+      },
+      "min_links": 9,
+      "encoded_target_max_abs_log_percent": 7.033348083496094e-06
+    },
+    "test": {
+      "count": 3185,
+      "groups": {
+        "15->30": 1794,
+        "30->60": 1268,
+        "15->60": 123
+      },
+      "weeks": {
+        "15->60": 42,
+        "30->60": 43,
+        "15->30": 48
+      },
+      "excluded": {
+        "main_contract_session_or_512_partition_warmup": 352,
+        "no_simultaneous_close": 5428,
+        "packed_context_boundary": 455,
+        "insufficient_common_changes": 403,
+        "current_interval_not_strict": 245,
+        "no_coarse_packed_partition": 733
+      },
+      "min_links": 9,
+      "encoded_target_max_abs_log_percent": 7.152557373046875e-06
+    },
+    "cross_research": {
+      "count": 1309,
+      "groups": {
+        "15->30": 767,
+        "30->60": 449,
+        "15->60": 93
+      },
+      "weeks": {
+        "15->60": 42,
+        "30->60": 43,
+        "15->30": 47
+      },
+      "excluded": {
+        "main_contract_session_or_512_partition_warmup": 234,
+        "no_simultaneous_close": 2515,
+        "packed_context_boundary": 151,
+        "insufficient_common_changes": 147,
+        "current_interval_not_strict": 125
+      },
+      "min_links": 11,
+      "encoded_target_max_abs_log_percent": 3.546476364135742e-06
+    }
+  },
+  "tests_passed": 42,
+  "bound_source_files_unchanged": 50,
+  "limits": "New cross-period evaluation only uses fixed stride16; all old capability cohorts unchanged. Model benefit untested; GPU run required."
+}
