@@ -432,5 +432,22 @@
     "report_hashes_verified": true,
     "synthetic_tests_passed": 23,
     "previously_bound_python_modules_unchanged": 50
+  },
+  "autodl_confirmation": {
+    "archive": "babel_cross_period_audit_reports.tar.gz",
+    "archive_sha256": "0523cef31dbc2be2de3720441b9c7b66f47f6a4db23071cdccc686c9ffd89434",
+    "remote_elapsed_seconds": 25.867046715691686,
+    "remote_raw_root": "/root/autodl-tmp/data/contracts",
+    "raw_inventory_sha256": "8d285d5e2cd6da2b85ab38dcc5872941e3cf22722e93186efd67365763476f37",
+    "report_hash_checks": 4,
+    "raw_file_hash_checks_against_local": 1251,
+    "code_hash_verified": true,
+    "contract_records_exact_match": true,
+    "all_summary_statistics_recomputed": true,
+    "all_metrics_match_local_except_elapsed_seconds": true,
+    "model_updates": 0,
+    "model_inference": false,
+    "training_pairs_certified": false,
+    "decision": "raw_alignment_confirmed_proceed_to_controlled_training_design"
   }
 }
