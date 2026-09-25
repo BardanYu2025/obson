@@ -1,0 +1,238 @@
+{
+  "archive_sha256": "25e05cfcc9e54899299a26dc34910b627412a61227632eb6af2c9e2fcf56a13a",
+  "source_code_hashes": 48,
+  "exported_hash_checks": 91,
+  "omitted_binary_files": [
+    "base_s42/best.pt",
+    "base_s42/last.pt",
+    "base_s43/best.pt",
+    "base_s43/last.pt",
+    "cache/cross_research.npz",
+    "cache/test.npz",
+    "cache/train.npz",
+    "cache/val.npz",
+    "deep_s42/best.pt",
+    "deep_s42/last.pt",
+    "deep_s43/best.pt",
+    "deep_s43/last.pt",
+    "heads.npz",
+    "wide_s42/best.pt",
+    "wide_s42/last.pt",
+    "wide_s43/best.pt",
+    "wide_s43/last.pt"
+  ],
+  "eligible": 36106,
+  "budgets": {
+    "base_s42": {
+      "selected_epoch": 99,
+      "pairs": 478900,
+      "views": 957800,
+      "encoder_steps": 3800,
+      "head_steps": 3800
+    },
+    "wide_s42": {
+      "selected_epoch": 99,
+      "pairs": 478900,
+      "views": 957800,
+      "encoder_steps": 3800,
+      "head_steps": 3800
+    },
+    "deep_s42": {
+      "selected_epoch": 100,
+      "pairs": 478900,
+      "views": 957800,
+      "encoder_steps": 3800,
+      "head_steps": 3800
+    },
+    "base_s43": {
+      "selected_epoch": 98,
+      "pairs": 478900,
+      "views": 957800,
+      "encoder_steps": 3800,
+      "head_steps": 3800
+    },
+    "wide_s43": {
+      "selected_epoch": 98,
+      "pairs": 478900,
+      "views": 957800,
+      "encoder_steps": 3800,
+      "head_steps": 3800
+    },
+    "deep_s43": {
+      "selected_epoch": 100,
+      "pairs": 478900,
+      "views": 957800,
+      "encoder_steps": 3800,
+      "head_steps": 3800
+    }
+  },
+  "decision_recomputed": true,
+  "checks": 1536,
+  "passed": 1502,
+  "status": "no_capacity_upgrade",
+  "summary": {
+    "test": {
+      "42": {
+        "wide_global_vs_base_pct": -0.8770645175801284,
+        "deep_global_vs_base_pct": -25.403898531888057,
+        "deep_global_vs_wide_pct": -24.743853574290007,
+        "deep_recent_vs_base_pct": -55.24524463358209,
+        "deep_held_vs_base_pct": 6.606803024423336,
+        "deep_utility_vs_base_pct": -0.8865619223430432,
+        "deep_utility_vs_raw_pct": 15.072357062147535,
+        "gap_vs_base_pct": {
+          "1": -27.544939214150233,
+          "16": -34.14471933808827,
+          "64": -52.61614953921612
+        }
+      },
+      "43": {
+        "wide_global_vs_base_pct": -0.500848364307005,
+        "deep_global_vs_base_pct": -20.954468475874975,
+        "deep_global_vs_wide_pct": -20.556577393199316,
+        "deep_recent_vs_base_pct": -58.06989929779349,
+        "deep_held_vs_base_pct": -1.5467535792424658,
+        "deep_utility_vs_base_pct": -0.3080370469182081,
+        "deep_utility_vs_raw_pct": 0.435874544421333,
+        "gap_vs_base_pct": {
+          "1": -23.31742710141611,
+          "16": -31.293407382567562,
+          "64": -40.427230439197956
+        }
+      }
+    },
+    "cross_research": {
+      "42": {
+        "wide_global_vs_base_pct": -0.9062353659535116,
+        "deep_global_vs_base_pct": -32.77347072146091,
+        "deep_global_vs_wide_pct": -32.15866858343021,
+        "deep_recent_vs_base_pct": -57.365222040841054,
+        "deep_held_vs_base_pct": 0.21151186944043943,
+        "deep_utility_vs_base_pct": -0.4369576231847305,
+        "deep_utility_vs_raw_pct": 8.081566542315954,
+        "gap_vs_base_pct": {
+          "1": -30.92194805954305,
+          "16": -39.052817422064415,
+          "64": -53.684626926895284
+        }
+      },
+      "43": {
+        "wide_global_vs_base_pct": -0.5723010010901253,
+        "deep_global_vs_base_pct": -27.797450212580486,
+        "deep_global_vs_wide_pct": -27.38185584661762,
+        "deep_recent_vs_base_pct": -58.95765649192681,
+        "deep_held_vs_base_pct": -4.932472606459715,
+        "deep_utility_vs_base_pct": 2.047489294907523,
+        "deep_utility_vs_raw_pct": 16.4115003407709,
+        "gap_vs_base_pct": {
+          "1": -30.685021989527616,
+          "16": -37.090382472850926,
+          "64": -43.51932899161214
+        }
+      }
+    }
+  },
+  "absolute": {
+    "test": {
+      "base_s42_best": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "base_s42_last": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "wide_s42_best": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "wide_s42_last": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "deep_s42_best": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "deep_s42_last": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "base_s43_best": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "base_s43_last": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "wide_s43_best": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "wide_s43_last": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "deep_s43_best": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "deep_s43_last": {
+        "current_passed": true,
+        "utility_passed": false
+      }
+    },
+    "cross_research": {
+      "base_s42_best": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "base_s42_last": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "wide_s42_best": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "wide_s42_last": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "deep_s42_best": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "deep_s42_last": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "base_s43_best": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "base_s43_last": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "wide_s43_best": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "wide_s43_last": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "deep_s43_best": {
+        "current_passed": true,
+        "utility_passed": false
+      },
+      "deep_s43_last": {
+        "current_passed": true,
+        "utility_passed": false
+      }
+    }
+  },
+  "scope": "Exported report hashes, history/sampling schedules and metrics recomputed; omitted model/cache/head binaries not verified locally. No model inference, training or readout fitting."
+}
