@@ -1,0 +1,436 @@
+{
+  "scope": "Local CPU raw-data audit only; no model inference/fitting/training",
+  "raw_audit_manifest": {
+    "protocol": "raw_cross_period_v1",
+    "root": "/Users/bardan/private/obson/data/contracts",
+    "timestamp_semantics": "nominal_bar_start",
+    "timezone_for_naive_timestamps": "Asia/Shanghai",
+    "pairs": [
+      [
+        15,
+        30
+      ],
+      [
+        15,
+        60
+      ],
+      [
+        30,
+        60
+      ]
+    ],
+    "atol": 1e-06,
+    "rtol": 0,
+    "strict_coverage": "exact nominal grid; no straddled bars",
+    "code_sha256": "0fb169d3096519ac3a7d0d4aad9861c7ebf5a8d4904bbadd77945882eefc7476",
+    "numpy_version": "2.5.2",
+    "pandas_version": "3.0.5",
+    "model_updates": 0,
+    "model_inference": false,
+    "eligibility_scope": "Raw geometry only; NO split, main-contract, warmup or model-source certification"
+  },
+  "metrics": {
+    "protocol": "raw_cross_period_v1",
+    "file_count": 1251,
+    "contract_count": 421,
+    "valid_bar_rows": 4360913,
+    "raw_inventory_sha256": "8d285d5e2cd6da2b85ab38dcc5872941e3cf22722e93186efd67365763476f37",
+    "comparisons": {
+      "15->30": {
+        "counts": {
+          "coarse_rows": 1244176,
+          "full_coverage": 1145387,
+          "partial_coverage": 95223,
+          "empty_coverage": 3566,
+          "straddled_intervals": 0,
+          "contained_ohlcv_match": 1238116,
+          "partial_ohlcv_match_not_eligible": 95218,
+          "full_price_match": 1142898,
+          "full_price_mismatch": 2489,
+          "full_ohlcv_match": 1142898,
+          "full_ohlcv_mismatch": 2489,
+          "full_mismatch_first_child_zero_volume": 2489,
+          "full_mismatch_all_children_zero_volume": 199,
+          "full_mismatch_active_only_prices_match_diagnostic": 2290,
+          "full_oi_comparable": 1145387,
+          "full_oi_match": 1145387,
+          "full_oi_mismatch": 0,
+          "full_ohlcv_and_oi_match": 1142898,
+          "price_matches_with_128_rows_each": 1095534,
+          "ohlcv_matches_with_128_rows_each": 1095534
+        },
+        "child_count_histogram": {
+          "1": 95223,
+          "2": 1145387,
+          "0": 3566
+        },
+        "partial_start_clock_histogram": {
+          "10:00": 95143,
+          "09:00": 5,
+          "21:00": 30,
+          "21:30": 8,
+          "02:00": 5,
+          "14:30": 15,
+          "10:30": 4,
+          "09:30": 4,
+          "14:00": 1,
+          "13:30": 1,
+          "11:00": 2,
+          "22:30": 4,
+          "22:00": 1
+        },
+        "fields": {
+          "open": {
+            "full_comparable": 1145387,
+            "full_mismatches": 2489,
+            "full_max_abs_difference": 1680.0
+          },
+          "high": {
+            "full_comparable": 1145387,
+            "full_mismatches": 1158,
+            "full_max_abs_difference": 1680.0
+          },
+          "low": {
+            "full_comparable": 1145387,
+            "full_mismatches": 1192,
+            "full_max_abs_difference": 1460.0
+          },
+          "close": {
+            "full_comparable": 1145387,
+            "full_mismatches": 0,
+            "full_max_abs_difference": 0
+          },
+          "volume": {
+            "full_comparable": 1145387,
+            "full_mismatches": 0,
+            "full_max_abs_difference": 0
+          },
+          "open_oi": {
+            "full_comparable": 1145387,
+            "full_mismatches": 0,
+            "full_max_abs_difference": 0
+          },
+          "close_oi": {
+            "full_comparable": 1145387,
+            "full_mismatches": 0,
+            "full_max_abs_difference": 0
+          }
+        },
+        "contracts": 415
+      },
+      "15->60": {
+        "counts": {
+          "coarse_rows": 720621,
+          "full_coverage": 426870,
+          "partial_coverage": 291690,
+          "empty_coverage": 2061,
+          "straddled_intervals": 0,
+          "contained_ohlcv_match": 715160,
+          "partial_ohlcv_match_not_eligible": 291501,
+          "full_price_match": 423659,
+          "full_price_mismatch": 3211,
+          "full_ohlcv_match": 423659,
+          "full_ohlcv_mismatch": 3211,
+          "full_mismatch_first_child_zero_volume": 3211,
+          "full_mismatch_all_children_zero_volume": 199,
+          "full_mismatch_active_only_prices_match_diagnostic": 3012,
+          "full_oi_comparable": 426870,
+          "full_oi_match": 426870,
+          "full_oi_mismatch": 0,
+          "full_ohlcv_and_oi_match": 423659,
+          "price_matches_with_128_rows_each": 394086,
+          "ohlcv_matches_with_128_rows_each": 394086
+        },
+        "child_count_histogram": {
+          "2": 196467,
+          "3": 95180,
+          "4": 426870,
+          "1": 43,
+          "0": 2061
+        },
+        "partial_start_clock_histogram": {
+          "10:00": 95150,
+          "11:00": 95155,
+          "13:00": 95158,
+          "09:00": 14,
+          "21:00": 51,
+          "02:00": 6123,
+          "22:00": 21,
+          "14:00": 16,
+          "00:00": 1,
+          "23:00": 1
+        },
+        "fields": {
+          "open": {
+            "full_comparable": 426870,
+            "full_mismatches": 3211,
+            "full_max_abs_difference": 1930.0
+          },
+          "high": {
+            "full_comparable": 426870,
+            "full_mismatches": 1405,
+            "full_max_abs_difference": 1930.0
+          },
+          "low": {
+            "full_comparable": 426870,
+            "full_mismatches": 1415,
+            "full_max_abs_difference": 1260.0
+          },
+          "close": {
+            "full_comparable": 426870,
+            "full_mismatches": 0,
+            "full_max_abs_difference": 0
+          },
+          "volume": {
+            "full_comparable": 426870,
+            "full_mismatches": 0,
+            "full_max_abs_difference": 0
+          },
+          "open_oi": {
+            "full_comparable": 426870,
+            "full_mismatches": 0,
+            "full_max_abs_difference": 0
+          },
+          "close_oi": {
+            "full_comparable": 426870,
+            "full_mismatches": 0,
+            "full_max_abs_difference": 0
+          }
+        },
+        "contracts": 415
+      },
+      "30->60": {
+        "counts": {
+          "coarse_rows": 720621,
+          "full_coverage": 523555,
+          "partial_coverage": 197066,
+          "empty_coverage": 0,
+          "straddled_intervals": 0,
+          "contained_ohlcv_match": 718819,
+          "partial_ohlcv_match_not_eligible": 197066,
+          "full_price_match": 521753,
+          "full_price_mismatch": 1802,
+          "full_ohlcv_match": 521753,
+          "full_ohlcv_mismatch": 1802,
+          "full_mismatch_first_child_zero_volume": 1802,
+          "full_mismatch_all_children_zero_volume": 199,
+          "full_mismatch_active_only_prices_match_diagnostic": 1603,
+          "full_oi_comparable": 523555,
+          "full_oi_match": 523555,
+          "full_oi_mismatch": 0,
+          "full_ohlcv_and_oi_match": 521753,
+          "price_matches_with_128_rows_each": 484035,
+          "ohlcv_matches_with_128_rows_each": 484035
+        },
+        "child_count_histogram": {
+          "1": 197066,
+          "2": 523555
+        },
+        "partial_start_clock_histogram": {
+          "11:00": 95341,
+          "13:00": 95344,
+          "02:00": 6307,
+          "22:00": 19,
+          "21:00": 22,
+          "14:00": 15,
+          "09:00": 10,
+          "10:00": 6,
+          "00:00": 1,
+          "23:00": 1
+        },
+        "fields": {
+          "open": {
+            "full_comparable": 523555,
+            "full_mismatches": 1802,
+            "full_max_abs_difference": 1930.0
+          },
+          "high": {
+            "full_comparable": 523555,
+            "full_mismatches": 847,
+            "full_max_abs_difference": 1930.0
+          },
+          "low": {
+            "full_comparable": 523555,
+            "full_mismatches": 841,
+            "full_max_abs_difference": 1460.0
+          },
+          "close": {
+            "full_comparable": 523555,
+            "full_mismatches": 0,
+            "full_max_abs_difference": 0
+          },
+          "volume": {
+            "full_comparable": 523555,
+            "full_mismatches": 0,
+            "full_max_abs_difference": 0
+          },
+          "open_oi": {
+            "full_comparable": 523555,
+            "full_mismatches": 0,
+            "full_max_abs_difference": 0
+          },
+          "close_oi": {
+            "full_comparable": 523555,
+            "full_mismatches": 0,
+            "full_max_abs_difference": 0
+          }
+        },
+        "contracts": 415
+      }
+    },
+    "invalid_files": [],
+    "unavailable_comparisons": [
+      {
+        "symbol": "rb",
+        "contract": "SHFE.rb2602",
+        "pair": "15->30",
+        "reason": "missing_or_invalid_counterpart"
+      },
+      {
+        "symbol": "rb",
+        "contract": "SHFE.rb2602",
+        "pair": "15->60",
+        "reason": "missing_or_invalid_counterpart"
+      },
+      {
+        "symbol": "rb",
+        "contract": "SHFE.rb2602",
+        "pair": "30->60",
+        "reason": "missing_or_invalid_counterpart"
+      },
+      {
+        "symbol": "rb",
+        "contract": "SHFE.rb2603",
+        "pair": "15->30",
+        "reason": "missing_or_invalid_counterpart"
+      },
+      {
+        "symbol": "rb",
+        "contract": "SHFE.rb2603",
+        "pair": "15->60",
+        "reason": "missing_or_invalid_counterpart"
+      },
+      {
+        "symbol": "rb",
+        "contract": "SHFE.rb2603",
+        "pair": "30->60",
+        "reason": "missing_or_invalid_counterpart"
+      },
+      {
+        "symbol": "rb",
+        "contract": "SHFE.rb2604",
+        "pair": "15->30",
+        "reason": "missing_or_invalid_counterpart"
+      },
+      {
+        "symbol": "rb",
+        "contract": "SHFE.rb2604",
+        "pair": "15->60",
+        "reason": "missing_or_invalid_counterpart"
+      },
+      {
+        "symbol": "rb",
+        "contract": "SHFE.rb2604",
+        "pair": "30->60",
+        "reason": "missing_or_invalid_counterpart"
+      },
+      {
+        "symbol": "rb",
+        "contract": "SHFE.rb2606",
+        "pair": "15->30",
+        "reason": "missing_or_invalid_counterpart"
+      },
+      {
+        "symbol": "rb",
+        "contract": "SHFE.rb2606",
+        "pair": "15->60",
+        "reason": "missing_or_invalid_counterpart"
+      },
+      {
+        "symbol": "rb",
+        "contract": "SHFE.rb2606",
+        "pair": "30->60",
+        "reason": "missing_or_invalid_counterpart"
+      },
+      {
+        "symbol": "rb",
+        "contract": "SHFE.rb2607",
+        "pair": "15->30",
+        "reason": "missing_or_invalid_counterpart"
+      },
+      {
+        "symbol": "rb",
+        "contract": "SHFE.rb2607",
+        "pair": "15->60",
+        "reason": "missing_or_invalid_counterpart"
+      },
+      {
+        "symbol": "rb",
+        "contract": "SHFE.rb2607",
+        "pair": "30->60",
+        "reason": "missing_or_invalid_counterpart"
+      },
+      {
+        "symbol": "rb",
+        "contract": "SHFE.rb2608",
+        "pair": "15->30",
+        "reason": "missing_or_invalid_counterpart"
+      },
+      {
+        "symbol": "rb",
+        "contract": "SHFE.rb2608",
+        "pair": "15->60",
+        "reason": "missing_or_invalid_counterpart"
+      },
+      {
+        "symbol": "rb",
+        "contract": "SHFE.rb2608",
+        "pair": "30->60",
+        "reason": "missing_or_invalid_counterpart"
+      }
+    ],
+    "ignored_files": [
+      "MA_roll_calendar.csv",
+      "RM_roll_calendar.csv",
+      "TA_roll_calendar.csv",
+      "ag_roll_calendar.csv",
+      "au_roll_calendar.csv",
+      "c_roll_calendar.csv",
+      "cs_roll_calendar.csv",
+      "cu_roll_calendar.csv",
+      "hc_roll_calendar.csv",
+      "i_roll_calendar.csv",
+      "j_roll_calendar.csv",
+      "jm_roll_calendar.csv",
+      "m_roll_calendar.csv",
+      "p_roll_calendar.csv",
+      "rb_roll_calendar.csv",
+      "ru_roll_calendar.csv",
+      "sr_roll_calendar.csv",
+      "y_roll_calendar.csv"
+    ],
+    "elapsed_seconds": 5.139168542009429,
+    "status": "raw_audit_complete",
+    "training_pairs_certified": false,
+    "limitations": [
+      "Nominal bar-start semantics are an assumption checked for numerical consistency, not vendor provenance.",
+      "Partial coverage can reflect sessions or missing records; no exchange calendar was supplied.",
+      "128-row counts certify row availability only, not unbroken calendar time or split eligibility.",
+      "Raw snapshot validity cannot identify historical revisions or certify as-of availability.",
+      "All raw files were audited, including research periods; no model loss or parameters were selected.",
+      "No embeddings, normalized features, EMA or future forecasts were compared."
+    ]
+  },
+  "report_sha256": {
+    "manifest.json": "9be99393d356aee4dde58faaec3feb6966f76d1d57a1530e7572c9aea242fd2b",
+    "files.json": "3587c0bc2f1538286a08bc1b19e5713b5b7bde0f6fb21abeb85a3abf78caec5b",
+    "contracts.json": "497fe5b1ee893fee975b8927d4b4d6d1cf8917362ed6dcb024d35a52369413c8",
+    "alignment_metrics.json": "e9762e9d086ff8d5fadef68d15680ef8ca91d42cad12060412b44b553ee2ffae"
+  },
+  "checks": {
+    "contract_totals_recomputed": true,
+    "report_hashes_verified": true,
+    "synthetic_tests_passed": 23,
+    "previously_bound_python_modules_unchanged": 50
+  }
+}
