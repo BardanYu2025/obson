@@ -1,0 +1,65 @@
+{
+  "archive_sha256": "83f7d658e2a05602a6eb7a5a1d5acada7ce70232dfe0137c194cf6acea1a6699",
+  "completion": "complete",
+  "decision": "no_cross_period_upgrade",
+  "recomputed_checks": 648,
+  "checks_passed": 552,
+  "best_equals_last_reports": true,
+  "epochs_verified": 400,
+  "readout_predictions_remeasured": 20118,
+  "cross_group_means_recomputed": 180,
+  "numeric_replay": {
+    "cross_research_parent_s43_numeric_replay.json": {
+      "status": "source_batch_replay_and_batch_controls_passed",
+      "batch64_failed_leaves": 74,
+      "batch128_failed_leaves": 0,
+      "max_state_abs": 1.1444091796875e-05,
+      "max_normalized_prediction_abs": 1.6570091247558594e-05
+    },
+    "cross_research_parent_s42_numeric_replay.json": {
+      "status": "source_batch_replay_and_batch_controls_passed",
+      "batch64_failed_leaves": 79,
+      "batch128_failed_leaves": 0,
+      "max_state_abs": 7.748603820800781e-06,
+      "max_normalized_prediction_abs": 1.621246337890625e-05
+    },
+    "test_parent_s43_numeric_replay.json": {
+      "status": "source_batch_replay_and_batch_controls_passed",
+      "batch64_failed_leaves": 139,
+      "batch128_failed_leaves": 0,
+      "max_state_abs": 1.71661376953125e-05,
+      "max_normalized_prediction_abs": 3.647804260253906e-05
+    },
+    "test_parent_s42_numeric_replay.json": {
+      "status": "source_batch_replay_and_batch_controls_passed",
+      "batch64_failed_leaves": 158,
+      "batch128_failed_leaves": 0,
+      "max_state_abs": 1.239776611328125e-05,
+      "max_normalized_prediction_abs": 3.2246112823375306e-05
+    }
+  },
+  "failed_check_categories": {
+    "cross": 14,
+    "global": 16,
+    "held": 8,
+    "recent": 8,
+    "overlap64": 16,
+    "utility": 2,
+    "volatility": 2,
+    "overlap1": 14,
+    "overlap16": 16
+  },
+  "failure_evidence": {
+    "interval_entirely_above_bound": 40,
+    "not_confirmed_within_bound": 56
+  },
+  "report_files_verified": 35,
+  "exported_source_files_verified": 45,
+  "source_files_registered": 58,
+  "bound_modules_unchanged": 55,
+  "evaluator_hash_matched": true,
+  "omitted_files": "8 checkpoints, heads.npz, 4 cache npz files; not independently reloaded locally",
+  "local_model_inference": 0,
+  "local_training_updates": 0,
+  "local_reader_fits": 0
+}
