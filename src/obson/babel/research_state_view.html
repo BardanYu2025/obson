@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Babel · 当前模型能力</title>
+<style>
+:root{color-scheme:light dark;--bg:light-dark(#fafaf8,#171b20);--fg:light-dark(#18232b,#e9edef);--muted:light-dark(#59656e,#b7c1c7);--line:light-dark(#d8dedf,#414b54);--actual:light-dark(#14765a,#68d9b3);--model:light-dark(#ad5823,#ffb879)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,sans-serif}main{max-width:1080px;margin:auto;padding:32px 24px}h1{font-size:30px;margin:8px 0}h2{font-size:20px;margin:26px 0 6px}.muted,small{color:var(--muted)}.controls{display:flex;flex-wrap:wrap;gap:16px;margin:22px 0}label{display:flex;flex-direction:column;gap:4px}select,button{font:inherit;padding:8px 12px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:6px}button{cursor:pointer}.legend{display:flex;gap:24px}.legend span:before{content:'━';margin-right:8px}.truth:before{color:var(--actual)}.prediction:before{color:var(--model)}svg{width:100%;height:auto;display:block}svg text{fill:var(--muted);font-size:13px}.grid{stroke:var(--line);stroke-width:.7}.actual{stroke:var(--actual);stroke-width:2;fill:none}.model{stroke:var(--model);stroke-width:2;stroke-dasharray:6 3;fill:none}.charts{display:grid;grid-template-columns:1fr 1fr;gap:20px}.charts>div:first-child{grid-column:1/-1}table{border-collapse:collapse;width:100%}td,th{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}hr{border:0;border-top:1px solid var(--line);margin:26px 0}#detail{min-height:2em}button:focus-visible,select:focus-visible{outline:2px solid var(--model)}@media(max-width:650px){main{padding:18px 12px}.charts{display:block}h1{font-size:25px}td,th{padding:8px 4px;font-size:14px}}
+</style>
+<main><small>BABEL / 阶段能力检查</small><h1>历史压缩已经有进步，逐根细节仍有损失</h1>
+<p>固定版本：control600 · 768维 · 4层 / 8头 · 原局部头。绿色实线是真实历史，橙色虚线是<strong>同一个窗口末端向量一次解码</strong>的历史，不是逐根预测未来。</p>
+<p class="muted">每组展示原报告等距选取的4个窗口，未按效果挑图。评分覆盖原品种984个、跨品种453个窗口；这些研究数据已经反复使用，不能充当新的独立测试。当前第128根参与编码，但不作为这张图的已验证重建目标。</p>
+<div class="controls"><label>数据与种子<select id="group"><option value="test/42">原品种 · 种子42</option><option value="test/43">原品种 · 种子43</option><option value="cross_research/42">跨品种 · 种子42</option><option value="cross_research/43">跨品种 · 种子43</option></select></label><label>固定窗口<select id="sample"></select></label><label>历史范围<select id="range"><option value="127">前127根完整历史</option><option value="16">前16根近期历史</option></select></label><label>活动通道<select id="activity"><option value="2">成交量相对历史水平</option><option value="3">成交量变化</option><option value="4">持仓变化</option><option value="5">持仓变化 / 成交量</option><option value="6">换手活动</option></select></label></div>
+<p id="identity"></p><div class="legend"><span class="truth">真实历史</span><span class="prediction">模型重建</span></div>
+<div class="charts"><div><h2>收盘路径</h2><svg id="path" viewBox="0 0 920 265" role="img" aria-label="真实与重建收盘路径"></svg></div><div><h2>逐根收盘变化</h2><svg id="delta" viewBox="0 0 450 250" role="img" aria-label="真实与重建逐根变化"></svg></div><div><h2>成交与持仓活动</h2><svg id="activity-chart" viewBox="0 0 450 250" role="img" aria-label="真实与重建活动特征"></svg></div></div>
+<p id="detail" class="muted" aria-live="polite"></p><p class="muted">完整路径单位为相对窗口前收盘的 log 基点；近期路径分别以真实/模型各自第111根收盘重新归零，不借真实价格修正模型。逐根变化更容易暴露平滑和幅度丢失；缺失的活动数据不连线。</p>
+<hr><h2>当前选择对应的完整研究集</h2><div style="overflow:auto"><table><thead><tr><th>检查对象</th><th>综合误差 ↓</th><th>含义</th></tr></thead><tbody id="metrics"></tbody></table></div>
+<p>误差是固定归一化尺度上的指标，不是准确率。全局、近期和中间位置的目标与尺度不同，不能把数值横向排序为能力高低。</p>
+<h2>已经成立 / 仍未成立</h2><p><strong>已经成立：</strong>能从当前向量读回相当部分历史结构；加深到4层及继续训练确有重建收益。<br><strong>仍未成立：</strong>中间位置表达同样充分、完整用途统一超越原始特征、未来走势预测与交易收益。</p>
+<p>本轮固定版本并检查接口，不新增训练，不因打包通过自动替换原512交付基线。下一次核心实验需要验证信息如何在整体历史与局部变化之间分配。</p><small id="source"></small>
+</main>
+<script>
+const report=__REPORT_DATA__;
+const $=id=>document.getElementById(id);
+let current=[];
+function chart(id,a,b,indices,unit){
+ const svg=$(id),w=id==='path'?920:450,h=id==='path'?265:250,L=62,R=15,T=20,B=42;
+ const finite=[...a,...b].filter(Number.isFinite);if(!finite.length){svg.innerHTML='<text x="62" y="100">此通道没有可用观测</text>';return;}
+ let lo=Math.min(...finite),hi=Math.max(...finite),pad=Math.max((hi-lo)*.12,.001);lo-=pad;hi+=pad;
+ const x=i=>L+i*(w-L-R)/Math.max(1,a.length-1),y=v=>T+(hi-v)*(h-T-B)/(hi-lo);
+ let html=`<title>${unit}；真实历史与模型重建</title>`;
+ for(let i=0;i<5;i++){let v=lo+(hi-lo)*i/4,yy=y(v);html+=`<line class="grid" x1="${L}" x2="${w-R}" y1="${yy}" y2="${yy}"/><text x="${L-8}" y="${yy+4}" text-anchor="end">${v.toFixed(2)}</text>`;}
+ for(let i of [...new Set([0,Math.floor((a.length-1)/2),a.length-1])])html+=`<text x="${x(i)}" y="${h-17}" text-anchor="middle">${indices[i]}</text>`;
+ html+=`<text x="${L}" y="13">${unit}</text><text x="${w-R}" y="${h-1}" text-anchor="end">窗口内 bar 序号</text>`;
+ function line(values,cls){let d='',active=false;values.forEach((v,i)=>{if(!Number.isFinite(v)){active=false;return;}d+=`${active?'L':'M'}${x(i)},${y(v)} `;active=true;});return `<path class="${cls}" d="${d}"/>`;}
+ html+=line(a,'actual')+line(b,'model');
+ a.forEach((v,i)=>{if(Number.isFinite(v))html+=`<circle cx="${x(i)}" cy="${y(v)}" r="5" fill="transparent"><title>bar ${indices[i]}：真实 ${v.toFixed(4)}；重建 ${Number.isFinite(b[i])?b[i].toFixed(4):'缺失'}</title></circle>`;});svg.innerHTML=html;
+}
+function refill(){const [split,seed]=$('group').value.split('/');current=report.cases.filter(c=>c.split===split&&c.seed===Number(seed));$('sample').replaceChildren(...current.map((c,i)=>new Option(`${i+1} · ${c.row.key}`,i)));draw();}
+function draw(){const c=current[Number($('sample').value)];const n=Number($('range').value),start=127-n,channel=Number($('activity').value);$('identity').textContent=`${c.row.key} · 编码末端bar开始时间 ${c.row.end} · 样本序号 ${c.index}`;
+ const ta=start?c.true[start-1][0]:0,pa=start?c.pred[start-1][0]:0,ix=Array.from({length:n},(_,i)=>start+i+1);
+ chart('path',c.true.slice(start).map(v=>(v[0]-ta)*100),c.pred.slice(start).map(v=>(v[0]-pa)*100),ix,'log 基点');
+ const ds=Math.max(1,start),dx=Array.from({length:127-ds},(_,i)=>ds+i+1);
+ chart('delta',c.true.slice(ds).map((v,i)=>(v[0]-c.true[ds+i-1][0])*100),c.pred.slice(ds).map((v,i)=>(v[0]-c.pred[ds+i-1][0])*100),dx,'log 基点 / bar');
+ chart('activity-chart',c.true.slice(start).map((v,i)=>c.mask[start+i][channel]?v[channel]:null),c.pred.slice(start).map((v,i)=>c.mask[start+i][channel]?v[channel]:null),ix,'特征值（变换后）');
+ const mae=c.true.slice(start).reduce((s,v,i)=>s+Math.abs(v[0]-ta-(c.pred[start+i][0]-pa))*100,0)/n;$('detail').textContent=`当前展示路径平均绝对误差：${mae.toFixed(2)} log 基点。单个示例不代表总体性能。`;
+ const s=report.summary.find(s=>s.split===c.split&&s.seed===c.seed).scores;
+ const specs=[['全局127根','global','窗口末端向量，固定全局解码器'],['近期16根','recent','同一全局输出裁切，使用自身预测锚点'],['原局部头 · 末端','p128','同一末端向量，原局部头回读16根'],['中间位置48/80/112','held','不同前缀长度，各自回读16根']];
+ $('metrics').replaceChildren(...specs.map(([label,key,help])=>{let tr=document.createElement('tr');const metric=s[key].metrics?s[key].metrics.primary:s[key].primary;[label,Number(metric).toFixed(6),help].forEach(v=>{let td=document.createElement('td');td.textContent=v;tr.append(td);});return tr;}));}
+$('group').addEventListener('change',refill);['sample','range','activity'].forEach(id=>$(id).addEventListener('change',draw));$('source').textContent=`来源 manifest SHA256：${report.source_manifest_sha256}`;refill();
+</script></html>
