@@ -8,6 +8,7 @@ import torch
 
 from . import bar_alignment as ba
 from . import local_warmstart_run as warm
+from . import path_feature as pf
 from . import utility_probe as up
 from . import window_state as ws
 from .ae_extend import atomic_json
@@ -42,6 +43,16 @@ def restore_model(checkpoint):
     model = ba.AlignedStudent(
         config, checkpoint["seed"], pca, scales, hidden=state["local_head.0.weight"].shape[0]
     )
+    adapter = checkpoint["input_adapter"]
+    if adapter == "causal_path_v1":
+        enabled = state["core.encoder.backbone.input.enabled"]
+        if enabled.ndim != 0 or enabled.item() not in (0.0, 1.0):
+            raise ValueError("Invalid pinned path-input switch")
+        pf.install(model, checkpoint["statistics"], bool(enabled.item()))
+    elif adapter != "linear28":
+        raise ValueError("Unknown pinned input adapter")
+    # Preserve the wrapper even when disabled: its buffers and original input
+    # weights are part of the inherited architecture and checkpoint identity.
     model.load_state_dict(state, strict=True)
     return model.eval().requires_grad_(False)
 

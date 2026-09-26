@@ -54,6 +54,15 @@ def build_bundle(meta, out):
             model, _ = xe.load(tm, root, job, "best", "cpu")
             if model.core.decoder.residual_enabled:
                 raise ValueError("Expected fixed original PCA decoder")
+            input_layer = model.core.encoder.backbone.input
+            if type(input_layer) is rs.pf.PathInput:
+                input_adapter = "causal_path_v1"
+            elif type(input_layer) is torch.nn.Linear:
+                input_adapter = "linear28"
+            else:
+                raise ValueError(
+                    f"Unsupported source input architecture: {type(input_layer).__name__}"
+                )
             state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
             config = dict(
                 rs.ba.pt.CONFIG,
@@ -68,6 +77,7 @@ def build_bundle(meta, out):
                 "schema": rs.SCHEMA,
                 "seed": seed,
                 "config": config,
+                "input_adapter": input_adapter,
                 "model": state,
                 "statistics": stats,
                 "local": local,

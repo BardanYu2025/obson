@@ -43,17 +43,17 @@
 cd /root/autodl-tmp/obson
 git pull --ff-only origin features/babel
 mkdir -p logs /root/autodl-tmp/download
-nohup bash scripts/babel_control600_autodl.sh all > logs/babel_control600.log 2>&1 &
-tail -f logs/babel_control600.log
+nohup bash scripts/babel_control600_autodl.sh all > logs/babel_control600_v2.log 2>&1 &
+tail -f logs/babel_control600_v2.log
 ```
 
-来源目录不同时，设置`BABEL_CONTROL600_SOURCE`。输出默认`checkpoints/babel_control600`。原Torch2.8.0+cu128、NumPy2.3.2环境需保持；CPU数据核验时GPU空闲属于正常阶段。这不是训练，不需要跑100轮。
+来源目录不同时，设置`BABEL_CONTROL600_SOURCE`。输出默认`checkpoints/babel_control600_v2`。原Torch2.8.0+cu128、NumPy2.3.2环境需保持；CPU数据核验时GPU空闲属于正常阶段。这不是训练，不需要跑100轮。
 
 成功自动导出：
 
-- `/root/autodl-tmp/download/babel_control600_reports.tar.gz`：发回审查，排除权重与大型数组。
-- `/root/autodl-tmp/download/babel_control600_bundle.tar.gz`：自用模型包，含权重；仍需仓库源码，暂不需要上传。
-- `/root/autodl-tmp/download/babel_control600_review.html`：下载后本地浏览器打开，无需AutoDL打开HTML。
+- `/root/autodl-tmp/download/babel_control600_v2_reports.tar.gz`：发回审查，排除权重与大型数组。
+- `/root/autodl-tmp/download/babel_control600_v2_bundle.tar.gz`：自用模型包，含权重；仍需仓库源码，暂不需要上传。
+- `/root/autodl-tmp/download/babel_control600_v2_review.html`：下载后本地浏览器打开，无需AutoDL打开HTML。
 
 失败也自动打包报告并保留非零退出码，不导出本次模型包。需要重打包时：
 
@@ -70,7 +70,7 @@ bash scripts/babel_control600_autodl.sh export
 from obson.babel.research_state import load_bundle
 from obson.babel.window_state import MarketBar
 
-engine = load_bundle("checkpoints/babel_control600/bundle", 42,
+engine = load_bundle("checkpoints/babel_control600_v2/bundle", 42,
                      "MA/15/CZCE.MA601", 15, device="cuda")
 # 使用真实单合约已收盘历史，先warm预热，再push逐根输出。
 # bar = MarketBar(key, period, datetime, open, high, low, close,
@@ -84,7 +84,7 @@ CSV调用（示例合约文件需真实存在，截止时间按自己的数据�
 
 ```bash
 PYTHONPATH=src python -m obson.babel.research_state_cli \
-  --bundle checkpoints/babel_control600/bundle --seed 42 \
+  --bundle checkpoints/babel_control600_v2/bundle --seed 42 \
   --key MA/15/CZCE.MA601 --period 15 \
   --csv /root/autodl-tmp/data/contracts/MA/CZCE.MA601_15m.csv \
   --as-of '2025-10-09 22:30:00' --device cuda --last-only \
@@ -93,3 +93,12 @@ PYTHONPATH=src python -m obson.babel.research_state_cli \
 ```
 
 去掉`--last-only`可逐根输出；快照续跑要求只提供新的bar。文件输出拒绝覆盖已有文件。推理API支持CPU，但正式数值回放使用原CUDA环境。实际运行时所需原始数据列遵循`data.validate_frame`，尤其持仓通常为`close_oi`，不要假定任意CSV字段名都可接受。
+
+
+## 2026-09-26 输入结构恢复修复
+
+首次打包在strict load报错，原因是control600继承了`PathInput`包装器，构造便携模型时却使用普通Linear输入。检查点没有损坏；失败发生在打包中，不涉及训练。即使control的路径开关为0，也必须恢复包装器及其original/projection权重、float64归一化buffer和enabled状态，不能删除字段、忽略strict检查或擅自打开开关。
+
+模型包现在显式记录input_adapter，恢复时先构造相同结构，再严格加载全部状态并保留参数签名/原结果回放。合成测试覆盖普通输入、关闭/打开路径包装器的四层模型完整打包，以及768维4层8头FFN3072真实规格的合成参数前向一致性、float64保留和残缺状态拒绝。没有在本地运行真实模型。
+
+修复后默认输出切换为`checkpoints/babel_control600_v2`与同名日志/下载文件，保留第一次失败目录，避免旧manifest源码哈希冲突；继续使用原训练来源，不重新训练。

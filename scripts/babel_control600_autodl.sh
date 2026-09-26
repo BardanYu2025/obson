@@ -3,8 +3,8 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 export PYTHONPATH="$PWD/src${PYTHONPATH:+:$PYTHONPATH}" PYTHONUNBUFFERED=1
 export OMP_NUM_THREADS="${OMP_NUM_THREADS:-4}" OPENBLAS_NUM_THREADS="${OPENBLAS_NUM_THREADS:-4}"
-run="${BABEL_CONTROL600_RUN:-checkpoints/babel_control600}"
-log="${BABEL_CONTROL600_LOG:-logs/babel_control600.log}"
+run="${BABEL_CONTROL600_RUN:-checkpoints/babel_control600_v2}"
+log="${BABEL_CONTROL600_LOG:-logs/babel_control600_v2.log}"
 download="${BABEL_DOWNLOAD_DIR:-/root/autodl-tmp/download}"
 mode="${1:-all}"
 case "$mode" in all|export) ;; *) echo 'Usage: bash scripts/babel_control600_autodl.sh [all|export]' >&2; exit 2 ;; esac

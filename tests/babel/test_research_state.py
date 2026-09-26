@@ -59,8 +59,13 @@ def engine():
     )
 
 
-def prepare(root, stack):
+def prepare(root, stack, adapter=None):
     model, data, stats, local = small()
+    if adapter is not None:
+        rs.pf.install(model, stats, adapter)
+        delivery.xr.growth.install(model, 4, 32, 42)
+        with torch.no_grad():
+            model.core.encoder.backbone.input.projection.weight.fill_(0.125)
     model.eval().requires_grad_(False)
     source, training, out = (root / p for p in ("source", "training", "out"))
     for p in (source, training, out):
@@ -130,9 +135,10 @@ def prepare(root, stack):
     return meta, out, model, data
 
 
-def test_bundle_keeps_original_functions_and_does_not_need_old_checkpoints(tmp_path):
+@pytest.mark.parametrize("adapter", [None, False, True])
+def test_bundle_keeps_original_functions_and_does_not_need_old_checkpoints(tmp_path, adapter):
     with ExitStack() as stack:
-        meta, out, model, data = prepare(tmp_path, stack)
+        meta, out, model, data = prepare(tmp_path, stack, adapter)
         bundle = delivery.build_bundle(meta, out)
         with pytest.raises(FileNotFoundError):
             rs.load_bundle(bundle, 42, "A/15/contract", 15)
@@ -349,3 +355,55 @@ def test_failed_delivery_revokes_certificate_and_completion(tmp_path):
     ):
         delivery.run(source, out, "cpu")
     assert not (out / "bundle/validation.json").exists() and not (out / "completion.json").exists()
+
+
+def test_full_768_four_layer_wrapped_architecture_roundtrip():
+    """Match the real topology with synthetic weights, including float64 buffers."""
+    config = dict(rs.ba.pt.CONFIG, latent=768, attention_layers=4, attention_ff=3072, heads=8)
+    pca = {
+        "components": np.zeros((768, 128 * 7), np.float32),
+        "mean": np.zeros(128 * 7, np.float32),
+    }
+    coordinates = {"mean": [0.0] * 768, "scale": [1.0] * 768}
+    stats = {
+        "x_mean": [0.123456789012345] * 28,
+        "x_scale": [1.23456789012345] * 28,
+        "y_scale": [0.987654321098765] * 7,
+    }
+    model = rs.ba.AlignedStudent(config, 42, pca, coordinates).eval().requires_grad_(False)
+    rs.pf.install(model, stats, True)
+    with torch.no_grad():
+        model.core.encoder.backbone.input.projection.weight.fill_(0.03)
+        model.core.decoder.basis[:, :127].fill_(0.002)
+    ck = {
+        "config": config,
+        "seed": 42,
+        "statistics": stats,
+        "input_adapter": "causal_path_v1",
+        "model": model.state_dict(),
+    }
+    restored = rs.restore_model(ck)
+    assert isinstance(restored.core.encoder.backbone.input, rs.pf.PathInput)
+    assert restored.core.encoder.backbone.input.mean.dtype == torch.float64
+    assert restored.core.encoder.backbone.input.mean.tolist() == stats["x_mean"][:2]
+    assert delivery.warm.ur.bb.state_signature(model) == delivery.warm.ur.bb.state_signature(
+        restored
+    )
+    x = torch.randn(1, 128, 28, generator=torch.Generator().manual_seed(41)) * 0.02
+    prefixes = torch.tensor([[32, 64, 96, 128]])
+    with torch.inference_mode():
+        torch.testing.assert_close(model.core.encoder(x), restored.core.encoder(x), atol=0, rtol=0)
+        expected, expected_local = model(x, prefixes, True)
+        actual, actual_local = restored(x, prefixes, True)
+    torch.testing.assert_close(actual, expected, atol=0, rtol=0)
+    torch.testing.assert_close(actual_local, expected_local, atol=0, rtol=0)
+    with pytest.raises(ValueError, match="Unknown pinned"):
+        rs.restore_model(dict(ck, input_adapter="unrecognized"))
+    invalid = dict(ck, model=dict(ck["model"]))
+    invalid["model"]["core.encoder.backbone.input.enabled"] = torch.tensor(2.0)
+    with pytest.raises(ValueError, match="Invalid pinned"):
+        rs.restore_model(invalid)
+    incomplete = dict(ck, model=dict(ck["model"]))
+    del incomplete["model"]["core.encoder.backbone.input.projection.weight"]
+    with pytest.raises(RuntimeError, match="Missing key"):
+        rs.restore_model(incomplete)
