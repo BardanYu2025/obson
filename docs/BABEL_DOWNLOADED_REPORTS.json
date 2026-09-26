@@ -1,0 +1,237 @@
+{
+  "schema": "babel-downloaded-reports-v1",
+  "verified_on": "2026-09-27",
+  "purpose": "Exact hashes of existing local downloaded archives; remote cleanup deletes only matching report bytes.",
+  "archives": [
+    {
+      "name": "babel_activity512_reports.tar.gz",
+      "bytes": 1851886,
+      "sha256": "bb47060510893386da50ba279ae2b4c32daad367f107e0727c3b5591d7db15cd"
+    },
+    {
+      "name": "babel_activity_alignment100_reports (1).tar.gz",
+      "bytes": 5265302,
+      "sha256": "2369314baf2fbea5728747001dbc902cdcd718dd592ca1a98cd488896bde6c6d"
+    },
+    {
+      "name": "babel_activity_alignment100_reports.tar.gz",
+      "bytes": 3617222,
+      "sha256": "adf0fbc9b243feff3fad4b49b291919cbbc15dc652ca8c57672f7f39fc7b71c6"
+    },
+    {
+      "name": "babel_activity_alignment512_reports.tar.gz",
+      "bytes": 1818117,
+      "sha256": "b41189696184e53c90419b88036f24a1154ae6205f56aa125589f2b6dda8c004"
+    },
+    {
+      "name": "babel_architecture512_reports.tar.gz",
+      "bytes": 3511733,
+      "sha256": "7f475ab81f4f86fddbf974b98ca9af0c03de68b31c728599e489b8793bc5edca"
+    },
+    {
+      "name": "babel_ardec512_reports.tar.gz",
+      "bytes": 2003778,
+      "sha256": "30b55a02a3b97b8df1a522d7dfa1eb9b408641dbe4423ba2f2e08a350a909209"
+    },
+    {
+      "name": "babel_bar_alignment_reports.tar.gz",
+      "bytes": 19014235,
+      "sha256": "13a6c20c8b66a18c32ca8aa1b7fdb4acdc9cefdc12c0949e0df84f847e1f77fd"
+    },
+    {
+      "name": "babel_capacity512_reports.tar.gz",
+      "bytes": 5967695,
+      "sha256": "ae6f519c98bdf613422cb430ab3db6ddbfc0f69b94ebfe2896a54365c1f2213f"
+    },
+    {
+      "name": "babel_consistency768_reports.tar.gz",
+      "bytes": 27660484,
+      "sha256": "8459dda3dfce739261f770d0e35ff4f0e00aef47c26cc9e499e891270ede8e44"
+    },
+    {
+      "name": "babel_consistency_readout768_reports.tar.gz",
+      "bytes": 8616094,
+      "sha256": "59b710f9da2cd3ee30da3d4e8d952612ad2f2d5bc665a9382e333064068bb659"
+    },
+    {
+      "name": "babel_control600_v2_reports.tar.gz",
+      "bytes": 1120239,
+      "sha256": "8b7121039ff70d9e0b8d0a389ab8ef6f942008d760315c4aaa4c45aa57d8a3c0"
+    },
+    {
+      "name": "babel_coverage512_reports.tar.gz",
+      "bytes": 876576,
+      "sha256": "c6a1ce420ba6463794d807eec6819e3bc69db6f1a6328558d52932eaa69bd5f5"
+    },
+    {
+      "name": "babel_cross_period768_v2_recheck_reports.tar.gz",
+      "bytes": 38430047,
+      "sha256": "83f7d658e2a05602a6eb7a5a1d5acada7ce70232dfe0137c194cf6acea1a6699"
+    },
+    {
+      "name": "babel_cross_period_audit_reports.tar.gz",
+      "bytes": 405574,
+      "sha256": "0523cef31dbc2be2de3720441b9c7b66f47f6a4db23071cdccc686c9ffd89434"
+    },
+    {
+      "name": "babel_decoder_parity768_v2_reports.tar.gz",
+      "bytes": 6430381,
+      "sha256": "95128c32f7348f3c50edcd1dbddeb0c42dbbd6420a5c6285e6baf0d2c69257eb"
+    },
+    {
+      "name": "babel_detail512_reports.tar.gz",
+      "bytes": 2179704,
+      "sha256": "8179193a7f4d58dd6130406071cb6cc1a113731599f9d674969965c96cfa1ba4"
+    },
+    {
+      "name": "babel_dual_state512_reports.tar.gz",
+      "bytes": 6328529,
+      "sha256": "6d537c1947a38ada18798840f1ce2757e7e6e57de5f62328ce7f5b98b227fb18"
+    },
+    {
+      "name": "babel_ema512_reports.tar.gz",
+      "bytes": 2185999,
+      "sha256": "949e58c16516c88c296d845466ed624928930e9b7b4edb6f38b1de25b5bf3d2f"
+    },
+    {
+      "name": "babel_endpoint_readout_reports.tar.gz",
+      "bytes": 6153135,
+      "sha256": "2d51595b99dac20258b1694c5518a270acd2071bc0508dc695413a91e7be61c7"
+    },
+    {
+      "name": "babel_fusion512_reports.tar.gz",
+      "bytes": 2512446,
+      "sha256": "6d1419babb0d52ae361fa0d59383055e25683aabc6397db51f536e8daa59d7f6"
+    },
+    {
+      "name": "babel_growth768_reports.tar.gz",
+      "bytes": 48922076,
+      "sha256": "25e05cfcc9e54899299a26dc34910b627412a61227632eb6af2c9e2fcf56a13a"
+    },
+    {
+      "name": "babel_history_query768_reports.tar.gz",
+      "bytes": 73442676,
+      "sha256": "c18a0a5894c66673646d460fb1014a839601abc3e481422fb64c952d8770ac05"
+    },
+    {
+      "name": "babel_large512_reports.tar.gz",
+      "bytes": 795870,
+      "sha256": "ceb8367484294f9a4b923417d27293b9af9419d2a6df8a204bdf2a1d61a29ddb"
+    },
+    {
+      "name": "babel_local_readapt768_reports.tar.gz",
+      "bytes": 11498593,
+      "sha256": "2c2695130864df1fe40cc31cdff60daf61295f9523c68ea59aa860418c5453e7"
+    },
+    {
+      "name": "babel_local_warmstart768_reports.tar.gz",
+      "bytes": 6394330,
+      "sha256": "a2f7114442fc5cbe8542f5557e688aa7401cf23c3b0e770d6146f5c7c3c9a747"
+    },
+    {
+      "name": "babel_overlap768_reports.tar.gz",
+      "bytes": 4428956,
+      "sha256": "4d8db23221e5e8768dff8eddb9479db24327d5399d045b487e081fbd52d83e97"
+    },
+    {
+      "name": "babel_path768_reports.tar.gz",
+      "bytes": 18958387,
+      "sha256": "50946bafd2426f8634342c900ba50ea35756b4a67cf20e5d082b825ca2cb813c"
+    },
+    {
+      "name": "babel_pca_anneal512_reports.tar.gz",
+      "bytes": 2800514,
+      "sha256": "23a52c86323d65e75693644cb7df57f56a2a84a400866e6df1cf450a30e76469"
+    },
+    {
+      "name": "babel_pca_teacher512_reports.tar.gz",
+      "bytes": 5939679,
+      "sha256": "acd4402dfb0f7a41f316a8a63b42e70b9f2e926e1207e62c2ea620b6d6e1f86b"
+    },
+    {
+      "name": "babel_prefix_readout512_reports.tar.gz",
+      "bytes": 10754742,
+      "sha256": "af89ba1c349ba233992acca13b7fbe6adf7a35ce736ce6a0a564430c77282edc"
+    },
+    {
+      "name": "babel_price_readapt512_reports.tar.gz",
+      "bytes": 2023112,
+      "sha256": "5e3246c5a64baa4e292217bea3bf5891cf6f460668f97af8bcdec4e7c1fba6c9"
+    },
+    {
+      "name": "babel_recon_fusion512_s42_reports.tar.gz",
+      "bytes": 1345913,
+      "sha256": "da9b313ad92ccd66844854857eea26a03bcd7ffa774c2ecbde666ecac70de366"
+    },
+    {
+      "name": "babel_sampling512_reports.tar.gz",
+      "bytes": 4464629,
+      "sha256": "fbed2874d39095467e09ae510b5bb43bba81a0bf969abb6fe3ba67e979df1816"
+    },
+    {
+      "name": "babel_shared_readout512_reports.tar.gz",
+      "bytes": 21125806,
+      "sha256": "898a43155b333562f86589ef2f8813fb362b4149d0a9a80eb0fab8493761d8b1"
+    },
+    {
+      "name": "babel_short512_b128_reports.tar.gz",
+      "bytes": 39130,
+      "sha256": "e5bb8ffccfb19aeaa94565524f3b7e0723764ebcc51391bb1bb8ff08d77646de"
+    },
+    {
+      "name": "babel_state_combination1024_reports.tar.gz",
+      "bytes": 36612582,
+      "sha256": "0698f4f45c0704340203e84fb2a6ed37cb4c6cc6364cb25873da12b1deabbb48"
+    },
+    {
+      "name": "babel_state_holdout512_reports.tar.gz",
+      "bytes": 6201123,
+      "sha256": "bd2834d93b6ef398f68102d7c9296e1e9262b37c8a994bb7ab8932ab32f87c01"
+    },
+    {
+      "name": "babel_state_readout1024_reports.tar.gz",
+      "bytes": 290712,
+      "sha256": "98611a73b45be94e3a1c535df7417fcedf163a50012f8f2d7729a7f1469f3c71"
+    },
+    {
+      "name": "babel_state_transfer512_reports.tar.gz",
+      "bytes": 3700616,
+      "sha256": "0b55f07d7bc58577ca8d29c1c906353f8434120133fdf906dd7cbc334d8e8c97"
+    },
+    {
+      "name": "babel_stream1024_numeric_reports.tar.gz",
+      "bytes": 677343,
+      "sha256": "742a6bc2e6c6e3879953d4ccda1f9408c378fd6ef66762891e4a8727ea3d391d"
+    },
+    {
+      "name": "babel_time_confirmation_reports.tar.gz",
+      "bytes": 559572,
+      "sha256": "85d7e04b9b485ed82ce6a11f0ab0f0f66be8985a05ad8faa74ef81fa4755d412"
+    },
+    {
+      "name": "babel_time_confirmation_v2_reports.tar.gz",
+      "bytes": 799318,
+      "sha256": "0c7d9c2cf2ab2a4be1819d62b45731a352ea14fd0b892990cd3b590ca138500b"
+    },
+    {
+      "name": "babel_utility768_v2_reports.tar.gz",
+      "bytes": 5694907,
+      "sha256": "19a92ce5c52059e63c1cae4db3a55f34972d3d8c15242b683bb99236284bed3f"
+    },
+    {
+      "name": "babel_wick512_reports.tar.gz",
+      "bytes": 2459760,
+      "sha256": "01b126f6b21b40ec1a187008e476dd346b32557190b1b2f1a3052afb366e929d"
+    },
+    {
+      "name": "babel_window_state_probe_reports.tar.gz",
+      "bytes": 1727384,
+      "sha256": "9d92c3dac4924b8b0ae8a0646b078088efd2173a9ab202d080b7490184206a4b"
+    },
+    {
+      "name": "babel_window_state_reports.tar.gz",
+      "bytes": 597830,
+      "sha256": "46d5f9a21d5d33f459ca2863d73666a62ce61a6df36a896863f947316dc9e552"
+    }
+  ]
+}
