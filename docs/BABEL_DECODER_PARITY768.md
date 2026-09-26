@@ -1,5 +1,13 @@
 # 原解码器同目标对照：一次零训练澄清
 
+## v2数值路径修复（2026-09-26）
+
+首次AutoDL运行通过来源校验，在test/s42原评分回放时失败，未完成正式判断。已确认v1没有完整保持原数值路径：原局部头一次接收B×7×D，新入口拆成7次B×D；原全局预测的价格锚点转换在CPU执行，新入口改为GPU。计算公式相同不保证CUDA矩阵形状/设备变化后的逐样本结果相同。尚未收到该次差异明细，不能据此断言远端失败仅由舍入导致。
+
+v2恢复原局部头批布局及联合目标转换、原CPU预测坐标转换与no_grad执行方式。既有容差、权重、样本、目标、门槛均不变。回放前先保存完整评分；失败日志直接展示差异数、首个指标与actual/expected/allowed，方便定位，不再只给笼统错误。
+
+36项合成/回归检查通过；新增断言原联合调用布局，原7个位置/末端近期/全局逐样本评分与旧评分器在CPU合成样本上逐值完全一致，并覆盖不足整批、回放失败保留证据。原65份绑定代码哈希未变。CPU测试不替代真实CUDA回放，远端通过仍待确认。默认使用新目录`babel_decoder_parity768_v2`，保留v1失败记录。
+
 ## 为什么做
 
 此前把“原全局头、原局部头、新查询头”的成绩混在一起解释，容易造成“128根能重建，80根就不能”的误解。已有结果不支持这个结论。
@@ -44,15 +52,15 @@
 cd /root/autodl-tmp/obson
 git pull --ff-only origin features/babel
 mkdir -p logs
-nohup bash scripts/babel_decoder_parity768_autodl.sh all > logs/babel_decoder_parity768.log 2>&1 &
-tail -f logs/babel_decoder_parity768.log
+nohup bash scripts/babel_decoder_parity768_autodl.sh all > logs/babel_decoder_parity768_v2.log 2>&1 &
+tail -f logs/babel_decoder_parity768_v2.log
 ```
 
 这是4组冻结推理和来源校验，没有训练epoch；工作量远小于此前训练矩阵。实际耗时取决于磁盘校验和GPU，不事先承诺分钟数。重复已完成命令只校验产物，不再次推理。
 
 无论成功失败，脚本自动导出到：
 
-`/root/autodl-tmp/download/babel_decoder_parity768_reports.tar.gz`
+`/root/autodl-tmp/download/babel_decoder_parity768_v2_reports.tar.gz`
 
 如需手动重新打包：
 

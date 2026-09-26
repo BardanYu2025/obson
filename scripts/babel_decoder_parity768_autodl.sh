@@ -3,8 +3,8 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 export PYTHONPATH="$PWD/src${PYTHONPATH:+:$PYTHONPATH}" PYTHONUNBUFFERED=1
 export OMP_NUM_THREADS="${OMP_NUM_THREADS:-4}" OPENBLAS_NUM_THREADS="${OPENBLAS_NUM_THREADS:-4}"
-run="${BABEL_DECODER_PARITY_RUN:-checkpoints/babel_decoder_parity768}"
-log="${BABEL_DECODER_PARITY_LOG:-logs/babel_decoder_parity768.log}"
+run="${BABEL_DECODER_PARITY_RUN:-checkpoints/babel_decoder_parity768_v2}"
+log="${BABEL_DECODER_PARITY_LOG:-logs/babel_decoder_parity768_v2.log}"
 download="${BABEL_DOWNLOAD_DIR:-/root/autodl-tmp/download}"
 mode="${1:-all}"
 case "$mode" in all|export) ;; *) echo 'Usage: bash scripts/babel_decoder_parity768_autodl.sh [all|export]' >&2; exit 2 ;; esac

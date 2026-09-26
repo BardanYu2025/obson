@@ -14,7 +14,7 @@ from .dual_state import sha256
 from .holdout_audit import read_json
 from .progress import progress
 
-SCHEMA = "babel-decoder-parity768-v1"
+SCHEMA = "babel-decoder-parity768-v2"
 PREFIXES = (32, 48, 64, 80, 96, 112, 128)
 LENGTHS = (32, 64, 80, 128)
 SPLITS = ("test", "cross_research")
@@ -32,6 +32,7 @@ def make_manifest(source, identity):
         "identity": identity,
         "code_sha256": code_identity(),
         "batch": 64,
+        "numeric_protocol": "Original joint7-prefix local-head GEMM and target conversion; predicted path crops on CPU as in path_feature_benchmark.score. Original replay tolerances unchanged.",
         "seeds": [42, 43],
         "prefixes": list(PREFIXES),
         "lengths": list(LENGTHS),
@@ -87,7 +88,7 @@ def native_rows(prediction, batch, prefix, statistics):
     )
 
 
-@torch.inference_mode()
+@torch.no_grad()
 def evaluate_model(engine, d, batch_size, device):
     model, statistics, local = engine.aligned, engine.statistics, engine.local
     model.eval().requires_grad_(False)
@@ -103,6 +104,12 @@ def evaluate_model(engine, d, batch_size, device):
             for k in ("x", "y", "mask")
         }
         full = model.core.encoder(b["x"])
+        # Preserve the source's Bx7xD head call, rather than seven BxD calls.
+        # Mathematically equivalent GEMMs need not select identical CUDA kernels.
+        ps = torch.tensor(PREFIXES, device=device)[None].expand(len(full), -1)
+        chosen_states = full[torch.arange(len(full), device=device)[:, None], ps - 1]
+        local_predictions = model.local_head(chosen_states).reshape(len(full), len(PREFIXES), 16, 7)
+        targets, masks = ba.local_targets(b["y"], b["mask"], ps, statistics, local)
         for kind, positions in [("prefix", PREFIXES), ("context", LENGTHS)]:
             for p in positions:
                 if kind == "prefix":
@@ -110,11 +117,15 @@ def evaluate_model(engine, d, batch_size, device):
                 else:
                     z = full[:, -1] if p == 128 else model.core.encoder(b["x"][:, -p:])[:, -1]
                 decoded = model.core.decoder(z)
-                shared = shared_crop(decoded, p, statistics, local)
-                conventional = model.local_head(z).reshape(-1, 16, 7)
-                target, mask = observed_targets(
-                    b, p if kind == "prefix" else 128, statistics, local
+                # The pinned source rebases predictions on CPU after inference.
+                shared = shared_crop(decoded.cpu(), p, statistics, local)
+                index = PREFIXES.index(p) if kind == "prefix" else len(PREFIXES) - 1
+                conventional = (
+                    local_predictions[:, index]
+                    if kind == "prefix" or p == 128
+                    else model.local_head(z).reshape(-1, 16, 7)
                 )
+                target, mask = targets[:, index], masks[:, index]
                 row = banks[f"{kind}{p}"]
                 for k, v in [
                     ("shared", shared),
@@ -183,7 +194,11 @@ def replay(records, expected, out, label):
         {"passed": not differences, "differences": differences}, out / f"{label}_replay.json"
     )
     if differences:
-        raise ValueError(f"{label}: original source replay differs; see saved numeric diagnostic")
+        first = differences[0]
+        raise ValueError(
+            f"{label}: original source replay differs ({len(differences)} differences); "
+            f"first={first}; see {out / (label + '_replay.json')}"
+        )
 
 
 def decide(records, inventories):
@@ -327,6 +342,8 @@ def run(source, out, device="cuda"):
             if causal["status"] == "failed":
                 raise ValueError("Source causality failed")
             record = evaluate_model(engine, d, meta["batch"], device)
+            # Keep complete evidence even when the strict source replay rejects it.
+            atomic_json(record, out / f"{split}_s{seed}.json")
             replay(
                 record,
                 read_json(reference / f"{split}_control_s{seed}_best.json"),
@@ -334,7 +351,6 @@ def run(source, out, device="cuda"):
                 f"{split}_s{seed}",
             )
             records[f"{split}/s{seed}"] = record
-            atomic_json(record, out / f"{split}_s{seed}.json")
             del engine
     result = decide(records, inventories)
     atomic_json(result, out / "decision.json")

@@ -105,6 +105,34 @@ def test_same_endpoint_short_context_has_identical_truth():
         torch.testing.assert_close(p[mask], truth[mask], atol=5e-4, rtol=5e-4)
 
 
+def test_replay_preserves_original_head_layout_and_exact_cpu_scores():
+    engine, d = fixture()
+    seen = []
+    handle = engine.aligned.local_head.register_forward_pre_hook(
+        lambda module, args: seen.append(tuple(args[0].shape))
+    )
+    try:
+        records = audit.evaluate_model(engine, d, 5, "cpu")
+    finally:
+        handle.remove()
+    # Each full-window batch has one joint seven-position call, followed by
+    # three short-context endpoint calls. The incomplete final batch is retained.
+    expected_batches = [min(5, len(d["x"]) - i) for i in range(0, len(d["x"]), 5)]
+    assert [s[:2] for s in seen if len(s) == 3] == [(n, 7) for n in expected_batches]
+    assert len(seen) == 4 * len(expected_batches)
+    with torch.no_grad():
+        _, errors, _, _ = audit.ur.pf.score(
+            engine.aligned, d, engine.statistics, engine.local, 5, "cpu"
+        )
+    for p in audit.PREFIXES:
+        for k, expected in errors[f"p{p}"].items():
+            np.testing.assert_array_equal(records[f"prefix{p}"]["errors"]["local"][k], expected)
+    for k, expected in errors["recent"].items():
+        np.testing.assert_array_equal(records["prefix128"]["errors"]["shared"][k], expected)
+    for k, actual in records["prefix128"]["native"]["errors"].items():
+        np.testing.assert_array_equal(actual, errors["global"][k])
+
+
 def test_complete_frozen_pipeline_replay_resume_and_tamper(tmp_path):
     engine, d = fixture()
     source, reference, training, out = [
@@ -153,6 +181,14 @@ def test_complete_frozen_pipeline_replay_resume_and_tamper(tmp_path):
         patch.object(audit, "data", return_value=d),
         patch.object(audit, "load_engine", side_effect=lambda *a: copy.deepcopy(engine)),
     ):
+        failed_out = tmp_path / "failed_out"
+        with (
+            patch.object(audit, "replay", side_effect=ValueError("synthetic replay failure")),
+            pytest.raises(ValueError, match="synthetic replay failure"),
+        ):
+            audit.run(source, failed_out, "cpu")
+        assert (failed_out / "test_s42.json").is_file()
+        assert not (failed_out / "completion.json").exists()
         audit.run(source, out, "cpu")
         done = audit.read_json(out / "completion.json")
         assert (
