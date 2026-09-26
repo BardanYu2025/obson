@@ -1,0 +1,652 @@
+"""Locked relative-state evaluation with matched endpoints and utility gates."""
+
+from pathlib import Path
+
+import numpy as np
+import torch
+
+from . import bar_semantics_run as run
+from . import history_query as hq
+from .ae_extend import atomic_json
+from .dual_state import sha256
+from .holdout_audit import read_json
+from .progress import progress
+
+ur, xr = run.ur, run.xr
+up = ur.up
+SPLITS = ("test", "cross_research")
+PREFIXES = tuple(sorted(hq.ba.VAL_PREFIXES + hq.ba.HELD_PREFIXES))
+
+
+def entries(meta):
+    return [(f"{j['name']}_{k}", j, k) for j in meta["experiments"] for k in ("best", "last")]
+
+
+def check_models(meta, out):
+    lock = read_json(out / "model_selection_lock.json")
+    if lock["manifest_sha256"] != sha256(out / "manifest.json") or set(lock["weights"]) != {
+        j["name"] for j in meta["experiments"]
+    }:
+        raise ValueError("All model selections must be locked")
+    for name, weights in lock["weights"].items():
+        if set(weights) != {"best", "last"}:
+            raise ValueError("Missing best/last")
+        for k, h in weights.items():
+            if sha256(out / name / f"{k}.pt") != h:
+                raise ValueError("Selected weights changed")
+    return lock
+
+
+def load(meta, out, job, kind, device):
+    model, query = run.construct(meta, job["seed"], device)
+    ck = torch.load(out / job["name"] / f"{kind}.pt", map_location="cpu", weights_only=True)
+    expected = {"manifest_sha256": sha256(out / "manifest.json"), "job": job, "phase": "main"}
+    if ck["metadata"] != expected:
+        raise ValueError("Selected checkpoint metadata differs")
+    lock = read_json(out / "model_selection_lock.json")["trials"][job["name"]]
+    if ck["epoch"] != (lock["selected_epoch"] if kind == "best" else meta["epochs"]):
+        raise ValueError("Selected epoch differs")
+    model.load_state_dict(ck["model"])
+    query.load_state_dict(ck["query"])
+    return model.eval().requires_grad_(False), query.eval().requires_grad_(False)
+
+
+def bank(meta, split):
+    with np.load(run.root(meta) / f"cache/{split}.npz", allow_pickle=False) as f:
+        return {k: f[k] for k in ("targets", "mask")}
+
+
+@torch.inference_mode()
+def states(model, d, batch, device):
+    return np.concatenate(
+        [
+            model.core.encoder(torch.tensor(np.asarray(d["x"][i : i + batch]), device=device))[
+                :, -1
+            ]
+            .cpu()
+            .numpy()
+            for i in range(0, len(d["x"]), batch)
+        ]
+    )
+
+
+def check_readouts(meta, out):
+    check_models(meta, out)
+    lock = read_json(out / "readout_selection_lock.json")
+    if lock["manifest_sha256"] != sha256(out / "manifest.json") or lock[
+        "model_lock_sha256"
+    ] != sha256(out / "model_selection_lock.json"):
+        raise ValueError("Reader/model binding differs")
+    run.verify_files(out, lock["files"])
+    return lock
+
+
+@torch.inference_mode()
+def fit_readouts(meta, out, device):
+    check_models(meta, out)
+    if (out / "readout_selection_lock.json").exists():
+        check_readouts(meta, out)
+        return
+    d = {s: run.data(meta, s) for s in ("train", "val")}
+    b = {s: bank(meta, s) for s in d}
+    statistics = run.stats(meta)[0]
+    for s in d:
+        y, m = up.targets(up.restore_raw(d[s]["x"], statistics))
+        if not np.array_equal(m, b[s]["mask"]) or not np.allclose(
+            y, b[s]["targets"], atol=1e-6, rtol=2e-5
+        ):
+            raise ValueError("Reader target/input lineage mismatch")
+    target_stats = read_json(run.root(meta) / "fit.json")["target_stats"]
+    heads = {}
+    arrays = {}
+    inputs = {}
+    for name, job, kind in entries(meta):
+        model, _ = load(meta, out, job, kind, device)
+        z = {s: states(model, d[s], meta["evaluation_batch"], device) for s in d}
+        heads[name], w, bias = up.fit_heads(
+            z["train"],
+            b["train"]["targets"],
+            b["train"]["mask"],
+            z["val"],
+            b["val"]["targets"],
+            b["val"]["mask"],
+            target_stats,
+            device,
+        )
+        arrays[name + "_weights"] = w
+        arrays[name + "_intercepts"] = bias
+        inputs[name] = {s: ur.bb.cov.ndarray_hash(z[s]) for s in z}
+        progress(f"{name}: calibrated13 readouts, fixed original5 alphas")
+    np.savez(out / "heads.npz", **arrays)
+    atomic_json(
+        {
+            "heads": heads,
+            "target_stats": target_stats,
+            "input_hashes": inputs,
+            "candidates": len(heads) * 13 * 5,
+            "selection": "Original train/validation only; all models locked first",
+        },
+        out / "fit.json",
+    )
+    atomic_json(
+        {
+            "manifest_sha256": sha256(out / "manifest.json"),
+            "model_lock_sha256": sha256(out / "model_selection_lock.json"),
+            "files": {n: sha256(out / n) for n in ("heads.npz", "fit.json")},
+        },
+        out / "readout_selection_lock.json",
+    )
+
+
+@torch.inference_mode()
+def query_scores(meta, model, query, d, device):
+    stats, local = run.stats(meta)
+    result = {}
+    recent = {}
+    oldest = []
+    zs = []
+    examples = []
+    chosen = set(np.linspace(0, len(d["x"]) - 1, 4, dtype=int).tolist())
+    for start in range(0, len(d["x"]), meta["evaluation_batch"]):
+        b = run.batch_tensors(
+            {
+                k: v[start : start + meta["evaluation_batch"]]
+                for k, v in d.items()
+                if k in ("x", "y", "mask")
+            },
+            device,
+        )
+        ps = torch.tensor([PREFIXES] * len(b["x"]), device=device)
+        z, p = hq.predict_states(model, query, b["x"], ps)
+        y, mask = hq.targets(b, ps, stats)
+        measures = hq.metrics(p, y, mask, stats)
+        oldest_mask = mask[:, -1:].clone()
+        oldest_mask[..., :64, :] = False
+        oldest.append(
+            {
+                k: v[:, 0].cpu().numpy()
+                for k, v in hq.metrics(p[:, -1:], y[:, -1:], oldest_mask, stats).items()
+            }
+        )
+        zs.append(z[:, -1].cpu().numpy())
+        old_y, old_mask = hq.ba.local_targets(b["y"], b["mask"], ps, stats, local)
+        r = hq.recent_prediction(p, stats, local)
+        for j, prefix in enumerate(PREFIXES):
+            dst = result.setdefault(f"p{prefix}", {k: [] for k in measures})
+            for k, v in measures.items():
+                dst[k].append(v[:, j].cpu().numpy())
+            _, err = ur.bb.pr.measure(
+                r[:, j].cpu().numpy(),
+                old_y[:, j].cpu().numpy(),
+                old_mask[:, j].cpu().numpy(),
+                local,
+            )
+            dst = recent.setdefault(f"p{prefix}", {k: [] for k in err})
+            for k, v in err.items():
+                dst[k].append(v)
+        for i in chosen:
+            if start <= i < start + len(ps):
+                j = i - start
+                examples.append(
+                    {
+                        "index": i,
+                        "prefixes": list(PREFIXES),
+                        "ages": list(hq.AGES),
+                        "prediction": hq.physical(p[j], stats).cpu().tolist(),
+                        "target": hq.physical(y[j], stats).cpu().tolist(),
+                        "mask": mask[j].cpu().tolist(),
+                        "semantics": "Historical close log-percent relative to observed current close; ages increase into past. No target values are decoder inputs.",
+                    }
+                )
+
+    def finish(bank):
+        bank = {
+            k: {m: np.concatenate(v) for m, v in metrics.items()} for k, metrics in bank.items()
+        }
+        for name, positions in (("held", hq.ba.HELD_PREFIXES), ("trained", hq.ba.VAL_PREFIXES)):
+            bank[name] = {
+                k: np.mean([bank[f"p{p}"][k] for p in positions], axis=0) for k in bank["p128"]
+            }
+        return {
+            "scores": {k: {m: float(v.mean()) for m, v in e.items()} for k, e in bank.items()},
+            "errors": {k: {m: v.tolist() for m, v in e.items()} for k, e in bank.items()},
+        }
+
+    return {
+        "oldest_endpoint": {k: np.concatenate([r[k] for r in oldest]).tolist() for k in oldest[0]},
+        "native": finish(result),
+        "recent": finish(recent),
+        "examples": examples,
+    }, np.concatenate(zs)
+
+
+@torch.inference_mode()
+def query_overlap(meta, model, query, paired, device):
+    stats, _ = run.stats(meta)
+    predictions = {}
+    for shift, view in paired["views"].items():
+        arrays = []
+        for start in range(0, len(view["x"]), meta["evaluation_batch"]):
+            x = torch.tensor(
+                np.asarray(view["x"][start : start + meta["evaluation_batch"]]), device=device
+            )
+            z = model.core.encoder(x)[:, -1]
+            values = hq.physical(query(z), stats).flip(1)
+            # Common price CHANGES cancel the different current-close origins.
+            full = torch.cat((values, values.new_zeros(len(values), 1, 7)), 1)
+            full = (full - full.new_tensor(stats["y_mean"])) / full.new_tensor(stats["y_scale"])
+            arrays.append(full.float().cpu())
+        predictions[shift] = torch.cat(arrays)
+    result = {}
+    for shift in (1, 16, 64):
+        a, b = paired["views"][shift], paired["views"][0]
+        gap = xr.xp.oc.consistency_rows(
+            predictions[shift],
+            predictions[0],
+            torch.tensor(a["mask"]),
+            torch.tensor(b["mask"]),
+            torch.full((len(a["x"]),), shift),
+            stats,
+            False,
+        )
+        result[str(shift)] = {"combined_gap": gap.tolist(), "mean": float(gap.mean())}
+    return result
+
+
+@torch.inference_mode()
+def matched_scores(meta, model, query, data, device):
+    """Identical endpoint and previous16 truth across direct lengths32/64/80/128."""
+    statistics, local = run.stats(meta)
+    lengths = (32, 64, 80, 128)
+    predictions = {n: [] for n in lengths}
+    truth, masks = [], []
+    for start in range(0, len(data["x"]), meta["evaluation_batch"]):
+        b = run.batch_tensors(
+            {
+                k: v[start : start + meta["evaluation_batch"]]
+                for k, v in data.items()
+                if k in ("x", "y", "mask")
+            },
+            device,
+        )
+        ps = torch.full((len(b["x"]), 1), 128, device=device)
+        target, mask = hq.ba.local_targets(b["y"], b["mask"], ps, statistics, local)
+        truth.append(target[:, 0].cpu().numpy())
+        masks.append(mask[:, 0].cpu().numpy())
+        full_y, full_mask = hq.targets(b, ps, statistics)
+        for length in lengths:
+            short = {k: v[:, -length:] for k, v in b.items()}
+            short_ps = torch.full_like(ps, length)
+            short_y, short_mask = hq.targets(short, short_ps, statistics)
+            # Only labels are compared here; observed history never feeds the decoder.
+            if not torch.equal(full_y[:, :, :17], short_y[:, :, :17]) or not torch.equal(
+                full_mask[:, :, :17], short_mask[:, :, :17]
+            ):
+                raise ValueError("Matched endpoint changed recent history labels")
+            z = model.core.encoder(short["x"])[:, -1]
+            predictions[length].append(
+                hq.recent_prediction(query(z), statistics, local).cpu().numpy()
+            )
+    y, mask = np.concatenate(truth), np.concatenate(masks)
+    arrays = {n: np.concatenate(v) for n, v in predictions.items()}
+    records = {}
+    for n in lengths:
+        scores, errors = ur.bb.pr.measure(arrays[n], y, mask, local)
+        records[str(n)] = {"scores": scores, "errors": {k: v.tolist() for k, v in errors.items()}}
+    _, gap = ur.bb.pr.measure(arrays[80], arrays[128], mask, local)
+    combined = {
+        k: (
+            (np.array(records["80"]["errors"][k]) + np.array(records["128"]["errors"][k])) / 2
+        ).tolist()
+        for k in gap
+    }
+    ids = np.linspace(0, len(y) - 1, min(4, len(y)), dtype=int)
+    return {
+        "lengths": records,
+        "paired80_128": {"gap": {k: v.tolist() for k, v in gap.items()}, "actual_error": combined},
+        "target_sha256": ur.bb.cov.ndarray_hash(y),
+        "mask_sha256": ur.bb.cov.ndarray_hash(mask),
+        "examples": [
+            {
+                "index": int(i),
+                "target": y[i].tolist(),
+                "mask": mask[i].tolist(),
+                "predictions": {str(n): arrays[n][i].tolist() for n in lengths},
+            }
+            for i in ids
+        ],
+        "scope": "Same endpoint/previous16, different direct context AND position; retained causal EMA features.80 held from training/selection. Not pure position causality.",
+    }
+
+
+def decision(meta, records, inventories, overlap_rows, masks, absolute):
+    expected = {f"parent_s{s}" for s in (42, 43)} | {n for n, _, _ in entries(meta)}
+    if set(records) != set(SPLITS) or any(set(bank) != expected for bank in records.values()):
+        raise ValueError("Both cohorts and all locked states required")
+    checks = []
+    for split, bank_ in records.items():
+        rows = inventories[split]
+        for seed in (42, 43):
+            for kind in ("best", "last"):
+                a = bank_[f"uniform_s{seed}_{kind}"]
+
+                def check(
+                    group,
+                    label,
+                    x,
+                    y,
+                    factor,
+                    cohort=rows,
+                    extra=True,
+                    split=split,
+                    seed=seed,
+                    kind=kind,
+                ):
+                    x, y = np.asarray(x), np.asarray(y)
+                    if (
+                        x.shape != y.shape
+                        or x.shape != (len(cohort),)
+                        or not np.isfinite(x).all()
+                        or not np.isfinite(y).all()
+                    ):
+                        raise ValueError("Invalid paired semantics decision arrays")
+                    ci = ur.interval(x, factor * y, cohort)
+                    checks.append(
+                        {
+                            "dataset": split,
+                            "seed": seed,
+                            "checkpoint": kind,
+                            "group": group,
+                            "metric": label,
+                            "factor": factor,
+                            "interval": ci,
+                            "passed": bool(
+                                extra
+                                and ci["supported"]
+                                and ci["high"] is not None
+                                and ci["high"] <= 0
+                            ),
+                        }
+                    )
+
+                b = bank_[f"additive_s{seed}_{kind}"]
+                for what, factor in (("gap", 0.90), ("actual_error", 0.95)):
+                    check(
+                        "interface_gain",
+                        f"matched80_128/{what}",
+                        a["matched"]["paired80_128"][what]["primary"],
+                        b["matched"]["paired80_128"][what]["primary"],
+                        factor,
+                    )
+                for task in ("held", "p128"):
+                    for field in ("primary", "path", "body", "activity", "change1"):
+                        check(
+                            "retention",
+                            f"query_native/{task}/{field}",
+                            a["query"]["native"]["errors"][task][field],
+                            b["query"]["native"]["errors"][task][field],
+                            1.05 if field == "primary" else 1.10,
+                        )
+                for field in ("primary", "path", "body", "activity", "change1"):
+                    check(
+                        "retention",
+                        "oldest65_127/" + field,
+                        a["query"]["oldest_endpoint"][field],
+                        b["query"]["oldest_endpoint"][field],
+                        1.05 if field == "primary" else 1.10,
+                    )
+                for shift in (1, 16, 64):
+                    check(
+                        "retention",
+                        f"query_overlap/{shift}",
+                        a["query_overlap"][str(shift)]["combined_gap"],
+                        b["query_overlap"][str(shift)]["combined_gap"],
+                        1.05,
+                        overlap_rows[split],
+                    )
+                for ref in (
+                    f"control_s{seed}_{kind}",
+                    f"additive_s{seed}_{kind}",
+                    f"parent_s{seed}",
+                ):
+                    b = bank_[ref]
+                    for group in ("utility", "direction", "volatility"):
+                        check(
+                            "retention",
+                            f"utility/{group} vs {ref}",
+                            a["utility"]["errors"][group],
+                            b["utility"]["errors"][group],
+                            1.05 if group == "utility" else 1.10,
+                        )
+                    if not ref.startswith("parent"):
+                        check(
+                            "utility_gain",
+                            f"utility vs {ref}",
+                            a["utility"]["errors"]["utility"],
+                            b["utility"]["errors"]["utility"],
+                            0.95,
+                        )
+                for i, target in enumerate(up.NAMES[6:], 6):
+                    ids = np.flatnonzero(masks[split][:, i])
+                    r2 = a["utility"]["scores"]["targets"][i]["r2"]
+                    check(
+                        "retention",
+                        target,
+                        np.asarray(a["utility"]["errors"][target])[ids],
+                        np.full(len(ids), 0.1),
+                        1.0,
+                        [rows[j] for j in ids],
+                        r2 is not None and r2 >= 0.8,
+                    )
+    passed = {
+        group: all(c["passed"] for c in checks if c["group"] == group)
+        for group in ("interface_gain", "retention", "utility_gain")
+    }
+    status = (
+        "representation_candidate"
+        if all(passed.values())
+        else "interface_gain_only"
+        if passed["interface_gain"] and passed["retention"]
+        else "interface_gain_with_tradeoffs"
+        if passed["interface_gain"]
+        else "no_uniform_interface_gain"
+    )
+    return {
+        "status": status,
+        "groups": passed,
+        "checks": checks,
+        "original_utility_protocol": absolute,
+        "automatic_promotion": False,
+        "scope": "Finite objective ablation on reused research sets, all seeds/best+last. Old fixed-slot interface measured as migration cost, not a gate on intentionally replaced coordinates. Utility gain remains necessary for representation candidate; not proof of universal representation.",
+    }
+
+
+@torch.inference_mode()
+def evaluate(meta, out, device):
+    check_readouts(meta, out)
+    cm = xr.parent_meta(run.tm(meta))
+    odr = xr.cr.odr
+    om = odr.make_manifest(
+        Path(cm["source"]),
+        cm["identity"],
+        {s: cm["packed"][s] for s in odr.SPLITS},
+        meta["evaluation_batch"],
+    )
+    paired, _ = odr.prepare(om, out)
+    fit = read_json(out / "fit.json")
+    with np.load(out / "heads.npz", allow_pickle=False) as f:
+        heads = dict(f)
+    source = Path(meta["identity"]["manifest"]["source"])
+    records = {}
+    inventories = {}
+    masks = {}
+    absolute = {}
+    all_entries = [(f"parent_s{s}", None, None, s) for s in (42, 43)] + [
+        (n, j, k, j["seed"]) for n, j, k in entries(meta)
+    ]
+    for split in SPLITS:
+        d = run.data(meta, split)
+        rows = read_json(run.root(meta) / f"{split}_inventory.json")
+        b = bank(meta, split)
+        inventories[split] = rows
+        masks[split] = b["mask"]
+        records[split] = {}
+        truth, valid = up.targets(up.restore_raw(d["x"], run.stats(meta)[0]))
+        if not np.array_equal(valid, b["mask"]) or not np.allclose(
+            truth, b["targets"], atol=1e-6, rtol=2e-5
+        ):
+            raise ValueError("Research target identity changed")
+        scores = {}
+        errors = {}
+        predictions = {}
+        oldpred = read_json(source / f"{split}_predictions.json")
+        for baseline in ("raw3584", "pca768", "current28"):
+            prediction = np.array(oldpred["predictions"][baseline])
+            scores[baseline], errors[baseline] = up.measure(
+                prediction, b["targets"], b["mask"], fit["target_stats"]
+            )
+            xr.ce.require_nested(
+                scores[baseline],
+                read_json(source / "readout_metrics.json")["datasets"][split]["scores"][baseline],
+                baseline + " reuse",
+            )
+            predictions[baseline] = prediction.tolist()
+        for name, job, kind, seed in all_entries:
+            if job is None:
+                engine = run.rs.load_bundle(
+                    Path(meta["source"]) / "bundle", seed, "MA/15/CZCE.MA601", 15, device
+                )
+                model = engine.aligned
+                query = None
+                z = states(model, d, meta["evaluation_batch"], device)
+                u = engine.utility
+                pred = up.predict(
+                    u["heads"],
+                    np.asarray(u["weights"]),
+                    np.asarray(u["intercepts"]),
+                    z,
+                    u["target_stats"],
+                )
+            else:
+                model, query = load(meta, out, job, kind, device)
+                causal = ur.pf.er.trained_causality(
+                    model, torch.tensor(np.asarray(run.data(meta, "val")["x"][:4]), device=device)
+                )
+                if causal["status"] == "failed":
+                    raise ValueError("Trained encoder causality failed")
+                atomic_json(causal, out / f"{name}_causality.json")
+                qresult, z = query_scores(meta, model, query, d, device)
+                pred = up.predict(
+                    fit["heads"][name],
+                    heads[name + "_weights"],
+                    heads[name + "_intercepts"],
+                    z,
+                    fit["target_stats"],
+                )
+            before = ur.bb.state_signature(model)
+            original, err, _, _ = ur.pf.score(
+                model, d, *run.stats(meta), meta["evaluation_batch"], device
+            )
+            scores[name], errors[name] = up.measure(
+                pred, b["targets"], b["mask"], fit["target_stats"]
+            )
+            predictions[name] = pred.tolist()
+            record = {
+                "original": {
+                    "scores": original,
+                    "errors": {k: {m: v.tolist() for m, v in e.items()} for k, e in err.items()},
+                },
+                "utility": {
+                    "scores": scores[name],
+                    "errors": {k: v.tolist() for k, v in errors[name].items()},
+                    "predictions": pred.tolist(),
+                },
+                "overlap": xr.ce.overlap(
+                    model, paired[split], run.stats(meta)[0], meta["evaluation_batch"], device
+                ),
+            }
+            if query is not None:
+                record.update(
+                    matched=matched_scores(meta, model, query, d, device),
+                    query=qresult,
+                    query_overlap=query_overlap(meta, model, query, paired[split], device),
+                )
+            else:
+                previous = read_json(source / f"{split}_control_s{seed}_best.json")
+                replay = {
+                    "reconstruction": record["original"],
+                    "utility": record["utility"],
+                    "overlap": record["overlap"],
+                }
+                expected = {
+                    "reconstruction": {
+                        k: previous["reconstruction"][k] for k in ("scores", "errors")
+                    },
+                    "utility": previous["utility"],
+                    "overlap": previous["overlap"],
+                }
+                differences = run.warm.recheck.mismatches(replay, expected)
+                atomic_json(
+                    {"passed": not differences, "differences": differences},
+                    out / f"{split}_{name}_replay.json",
+                )
+                if differences:
+                    raise ValueError("Original source replay differs; see numeric diagnostic")
+            if before != ur.bb.state_signature(model):
+                raise ValueError("Evaluation changed model")
+            atomic_json(record, out / f"{split}_{name}.json")
+            records[split][name] = record
+            progress(f"Locked evaluation: {split}/{name}")
+        absolute[split] = ur.decide(
+            {
+                "models": list(records[split]),
+                "pca_rank": 768,
+                "decision": cm["reader"]["manifest"]["decision"],
+            },
+            scores,
+            errors,
+            b["mask"],
+            rows,
+        )
+        atomic_json(
+            {
+                "scores": scores,
+                "targets": b["targets"].tolist(),
+                "mask": b["mask"].tolist(),
+                "predictions": predictions,
+                "errors": {n: {k: v.tolist() for k, v in e.items()} for n, e in errors.items()},
+            },
+            out / f"{split}_readouts.json",
+        )
+    decided = decision(
+        meta, records, inventories, {s: paired[s]["rows"] for s in SPLITS}, masks, absolute
+    )
+    atomic_json(decided, out / "decision.json")
+    summary = {
+        s: {
+            n: {
+                "old_global": r["original"]["scores"]["global"]["metrics"]["primary"],
+                "utility": r["utility"]["scores"]["groups"]["utility"],
+                "matched80_128_error": None
+                if "matched" not in r
+                else float(np.mean(r["matched"]["paired80_128"]["actual_error"]["primary"])),
+                "matched80_128_gap": None
+                if "matched" not in r
+                else float(np.mean(r["matched"]["paired80_128"]["gap"]["primary"])),
+                "query_held": None
+                if "query" not in r
+                else r["query"]["native"]["scores"]["held"]["primary"],
+                "query_recent_held": None
+                if "query" not in r
+                else r["query"]["recent"]["scores"]["held"]["primary"],
+            }
+            for n, r in b.items()
+        }
+        for s, b in records.items()
+    }
+    atomic_json(summary, out / "metrics.json")
+    (out / "summary.md").write_text(
+        "# Uniform bar semantics objective ablation\n\n"
+        + decided["status"]
+        + "\n\nAll selections locked before research; full absolute utility protocol is separate. No automatic promotion.\n"
+    )
