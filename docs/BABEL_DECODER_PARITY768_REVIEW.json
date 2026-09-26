@@ -1,0 +1,65 @@
+{
+  "status": "frozen_shared_readout_not_established",
+  "archive_sha256": "95128c32f7348f3c50edcd1dbddeb0c42dbbd6420a5c6285e6baf0d2c69257eb",
+  "verified_report_files": 18,
+  "verified_code_files": 66,
+  "score_values_checked": 560430,
+  "causal_checks": 140,
+  "checks": 140,
+  "checks_passed": 20,
+  "by_prefix": {
+    "32": {
+      "passed": 0,
+      "total": 20
+    },
+    "48": {
+      "passed": 0,
+      "total": 20
+    },
+    "64": {
+      "passed": 0,
+      "total": 20
+    },
+    "80": {
+      "passed": 0,
+      "total": 20
+    },
+    "96": {
+      "passed": 0,
+      "total": 20
+    },
+    "112": {
+      "passed": 0,
+      "total": 20
+    },
+    "128": {
+      "passed": 20,
+      "total": 20
+    }
+  },
+  "reported_seconds": 128.44602923747152,
+  "source_unchanged": true,
+  "context80_comparisons": {
+    "test/s42": {
+      "local80_vs_local128_pct": -95.829237913142,
+      "local80_vs_global128_pct": -82.530060859841
+    },
+    "test/s43": {
+      "local80_vs_local128_pct": -96.10012928703495,
+      "local80_vs_global128_pct": -82.24345142823472
+    },
+    "cross_research/s42": {
+      "local80_vs_local128_pct": -96.70185224632417,
+      "local80_vs_global128_pct": -82.98165284747718
+    },
+    "cross_research/s43": {
+      "local80_vs_local128_pct": -98.33753141458502,
+      "local80_vs_global128_pct": -90.7115792405524
+    }
+  },
+  "archived_source_replay": true,
+  "archived_inventories_match": true,
+  "delivery_manifest_matches_archive": true,
+  "wall_log_seconds": 237,
+  "local_real_inference": false
+}
