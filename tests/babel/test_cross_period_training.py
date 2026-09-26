@@ -20,6 +20,7 @@ from test_overlap_diagnostic import fixture_data
 from obson.babel import cross_period_consistency as xp
 from obson.babel import cross_period_data as xd
 from obson.babel import cross_period_evaluate as ev
+from obson.babel import cross_period_recheck as recheck
 from obson.babel import cross_period_run as r
 from obson.babel.ae_extend import atomic_json
 from obson.babel.dual_state import sha256
@@ -425,7 +426,8 @@ def test_audit_manifest_tamper_and_missing_source(tmp_path):
         xd.audit_identity(out, raw)
 
 
-def test_full_evaluation_locks_eight_readouts_and_replays_frozen_parent(tmp_path):
+@pytest.mark.parametrize("recovery", [False, True])
+def test_full_evaluation_locks_eight_readouts_and_replays_frozen_parent(tmp_path, recovery):
     import test_consistency_readout as reader_tests
 
     oldmeta, parent, rows, banks = reader_tests.ReadoutTests().fixture(tmp_path)
@@ -450,7 +452,10 @@ def test_full_evaluation_locks_eight_readouts_and_replays_frozen_parent(tmp_path
     cm = copy.deepcopy(oldmeta["identity"]["manifest"])
     cm.update(source="unused", identity={}, packed={s: {} for s in ("test", "cross_research")})
     jobs = [{"name": f"{v}_s{s}", "seed": s} for s in (42, 43) for v in ("control", "cross")]
-    gm = {"experiments": [{"name": f"deep_s{s}", "seed": s} for s in (42, 43)]}
+    gm = {
+        "experiments": [{"name": f"deep_s{s}", "seed": s} for s in (42, 43)],
+        "evaluation_batch": 128,
+    }
     out = tmp_path / "trial"
     (out / "cache").mkdir(parents=True)
     meta = {
@@ -585,15 +590,33 @@ def test_full_evaluation_locks_eight_readouts_and_replays_frozen_parent(tmp_path
         stack.enter_context(patch.object(ev.ce, "overlap", side_effect=overlap))
         stack.enter_context(patch.object(xd, "evaluation_data", side_effect=cross_data))
         stack.enter_context(patch.object(ev, "cross_scores", side_effect=cross_scores))
-        ev.evaluate(meta, out, "cpu")
-        report = r.read_json(out / "cross_period_metrics.json")
+        destination = tmp_path / "recheck" if recovery else out
+        destination.mkdir(exist_ok=True)
+        source_hashes = {str(p.relative_to(out)): sha256(p) for p in out.rglob("*") if p.is_file()}
+
+        def evaluate_now():
+            if recovery:
+                recheck.evaluate(meta, out, destination, "cpu")
+            else:
+                ev.evaluate(meta, out, "cpu")
+
+        with (
+            patch.object(ev.up, "fit_heads", side_effect=AssertionError("No repeated fit")),
+            patch.object(r, "worker", side_effect=AssertionError("No training")),
+        ):
+            evaluate_now()
+        if recovery:
+            assert source_hashes == {
+                str(p.relative_to(out)): sha256(p) for p in out.rglob("*") if p.is_file()
+            }
+        report = r.read_json(destination / "cross_period_metrics.json")
         assert len(report["summary"]["test"]) == 10
         assert report["decision"]["status"] == "cross_period_stability_candidate"
         prior = r.read_json(parent / "readout_metrics.json")
         prior["datasets"]["test"]["scores"]["deep_s42_best"]["groups"]["utility"] += 1
         atomic_json(prior, parent / "readout_metrics.json")
         with pytest.raises(ValueError):
-            ev.evaluate(meta, out, "cpu")
+            evaluate_now()
     (out / "cache/train.npz").write_bytes(b"tamper")
     with pytest.raises(ValueError):
         ev.check_readouts(out)
