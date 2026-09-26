@@ -543,3 +543,94 @@ def test_script_exports_failure_status_and_excludes_weights(tmp_path):
 def test_empty_or_partial_research_cannot_pass():
     with pytest.raises(ValueError, match="Both fixed research"):
         ev.decision({"experiments": []}, {}, {}, {}, {}, {})
+
+
+def test_nested_inventory_checks_bytes_and_rejects_path_escapes(tmp_path):
+    root = tmp_path / "delivery"
+    (root / "bundle").mkdir(parents=True)
+    weight = root / "bundle/control_s42_best.pt"
+    weight.write_bytes(b"synthetic checkpoint")
+    files = {"bundle/control_s42_best.pt": run.sha256(weight)}
+    run.verify_files(root, files)
+    weight.write_bytes(b"changed checkpoint")
+    with pytest.raises(ValueError, match="SHA256 mismatch"):
+        run.verify_files(root, files)
+    weight.unlink()
+    with pytest.raises(ValueError, match="file missing"):
+        run.verify_files(root, files)
+    external = tmp_path / "external.pt"
+    external.write_bytes(b"external")
+    for name in ("../external.pt", str(external), "bundle/../../external.pt"):
+        with pytest.raises(ValueError, match="Invalid inventory path"):
+            run.verify_files(root, {name: run.sha256(external)})
+    weight.symlink_to(external)
+    with pytest.raises(ValueError, match="escapes root"):
+        run.verify_files(root, {"bundle/control_s42_best.pt": run.sha256(external)})
+    with pytest.raises(ValueError, match="Empty file inventory"):
+        run.verify_files(root, {})
+
+
+def test_delivery_source_identity_accepts_nested_bundle_and_still_rejects_tampering(tmp_path):
+    source = tmp_path / "delivery"
+    (source / "bundle").mkdir(parents=True)
+    zero = dict.fromkeys(("encoder_updates", "head_updates", "reader_fits", "statistics_fits"), 0)
+    identity = {"synthetic": True}
+    meta = {
+        "schema": run.delivery.SCHEMA,
+        "code_sha256": run.delivery.code_identity(),
+        "source": str(tmp_path / "upstream"),
+        "identity": identity,
+        **zero,
+    }
+    atomic_json(meta, source / "manifest.json")
+    weight = source / "bundle/control_s42_best.pt"
+    weight.write_bytes(b"synthetic checkpoint bytes; never loaded")
+    atomic_json(
+        {"source_manifest": run.sha256(source / "manifest.json")}, source / "bundle/index.json"
+    )
+    atomic_json(
+        {"status": "passed", "index_sha256": run.sha256(source / "bundle/index.json")},
+        source / "bundle/validation.json",
+    )
+    files = {str(p.relative_to(source)): run.sha256(p) for p in source.rglob("*") if p.is_file()}
+    atomic_json(
+        {"status": "complete", "source_unchanged": True, "files": files, **zero},
+        source / "completion.json",
+    )
+    with patch.object(run.warm, "source_identity", return_value=identity):
+        result = run.source_identity(source)
+        assert result["manifest"] == meta
+        assert result["files"]["bundle/control_s42_best.pt"] == files["bundle/control_s42_best.pt"]
+        weight.write_bytes(b"corrupted")
+        with pytest.raises(ValueError, match="SHA256 mismatch"):
+            run.source_identity(source)
+
+
+def test_completed_run_checks_nested_outputs_without_training(tmp_path):
+    source, out = tmp_path / "source", tmp_path / "experiment"
+    source.mkdir()
+    out.mkdir()
+    identity = {"manifest": {"source": str(source), "identity": {}}}
+    atomic_json({"torch": str(torch.__version__), "numpy": np.__version__}, source / "runtime.json")
+    meta = run.make_manifest(source, identity)
+    atomic_json(meta, out / "manifest.json")
+    (out / "joint_s42").mkdir()
+    checkpoint = out / "joint_s42/best.pt"
+    checkpoint.write_bytes(b"synthetic")
+    atomic_json(
+        {
+            "status": "complete",
+            "source_unchanged": True,
+            "files": {"joint_s42/best.pt": run.sha256(checkpoint)},
+        },
+        out / "completion.json",
+    )
+    with (
+        patch.object(run, "source_identity", return_value=identity),
+        patch.object(run.warm, "check_output"),
+        patch.object(run, "dispatch", side_effect=AssertionError("Must not train")),
+    ):
+        run.run(source, out, device="cpu")
+        checkpoint.write_bytes(b"changed")
+        with pytest.raises(ValueError, match="SHA256 mismatch"):
+            run.run(source, out, device="cpu")

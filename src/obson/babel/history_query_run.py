@@ -15,7 +15,7 @@ from . import history_query as hq
 from . import research_state as rs
 from . import research_state_delivery as delivery
 from .ae_extend import atomic_json, atomic_save, restore_rng, rng_state
-from .dual_state import sha256, verify_files
+from .dual_state import sha256
 from .holdout_audit import read_json
 from .progress import progress
 
@@ -32,6 +32,30 @@ def code_identity():
         | {Path(m.__file__).name: sha256(m.__file__) for m in (hq, ev)}
         | {Path(__file__).name: sha256(__file__)}
     )
+
+
+def verify_files(directory, files):
+    """Verify a relative-path tree without accepting traversal or symlink escapes.
+
+    The inherited dual_state verifier deliberately accepts direct children only.
+    Delivery and experiment completion inventories include nested bundle/workers.
+    Keep their recorded digests unchanged; validate both containment and bytes.
+    """
+    directory = Path(directory).resolve()
+    if not files:
+        raise ValueError("Empty file inventory")
+    for name, digest in files.items():
+        relative = Path(name)
+        if relative.is_absolute() or ".." in relative.parts or relative == Path("."):
+            raise ValueError(f"Invalid inventory path: {name}")
+        path = (directory / relative).resolve()
+        if not path.is_relative_to(directory):
+            raise ValueError(f"Inventory path escapes root: {name}")
+        if not path.is_file():
+            raise ValueError(f"Inventory file missing: {name}")
+        actual = sha256(path)
+        if actual != digest:
+            raise ValueError(f"File SHA256 mismatch: {name}; expected={digest}, actual={actual}")
 
 
 def source_identity(source):

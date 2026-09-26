@@ -8,7 +8,7 @@ import torch
 from . import history_query as hq
 from . import history_query_run as run
 from .ae_extend import atomic_json
-from .dual_state import sha256, verify_files
+from .dual_state import sha256
 from .holdout_audit import read_json
 from .progress import progress
 
@@ -77,7 +77,7 @@ def check_readouts(meta, out):
         "model_lock_sha256"
     ] != sha256(out / "model_selection_lock.json"):
         raise ValueError("Reader/model binding differs")
-    verify_files(out, lock["files"])
+    run.verify_files(out, lock["files"])
     return lock
 
 
