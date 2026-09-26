@@ -1,0 +1,36 @@
+{
+  "status": "verified_report",
+  "archive_sha256": "8b7121039ff70d9e0b8d0a389ab8ef6f942008d760315c4aaa4c45aa57d8a3c0",
+  "seconds": 263.5245575904846,
+  "verified_report_files": 25,
+  "omitted_weight_files": [
+    "bundle/control_s42_best.pt",
+    "bundle/control_s43_best.pt"
+  ],
+  "delivery_code_files": 62,
+  "bundle_code_files": 59,
+  "source_identity_verified": true,
+  "certificate_verified": true,
+  "compared_numeric_leaves": 29576,
+  "source_example_comparisons": 16,
+  "raw_states": 72,
+  "raw_state_max_abs": 0.0,
+  "raw_output_examples": 8,
+  "utility_batch1_vs_source_max_abs": 8.764138599737237e-06,
+  "viewer_exact": true,
+  "means": {
+    "test": {
+      "global_close_mae_log_bps": 11.828973886519586,
+      "recent_close_mae_log_bps": 9.37594985961914,
+      "recent_change_correlation_mean": 0.9354705546201265,
+      "recent_change_std_ratio_mean": 0.8924128848593893
+    },
+    "cross_research": {
+      "global_close_mae_log_bps": 7.092153215824338,
+      "recent_close_mae_log_bps": 6.126155376434326,
+      "recent_change_correlation_mean": 0.9339176950509722,
+      "recent_change_std_ratio_mean": 0.9069185208996833
+    }
+  },
+  "limitations": "No model weights in archive; real inference not rerun locally. These are source research cohorts, not fresh holdouts. Packaging success does not change full utility failure or promote over512 baseline."
+}
