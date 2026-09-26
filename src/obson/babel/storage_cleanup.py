@@ -165,22 +165,58 @@ def assert_no_active_jobs(selected, proc=Path("/proc")):
         except (OSError, ValueError, IndexError):
             break
     selected_paths = {r["path"] for r in selected}
+    checked, inaccessible_fds = 0, set()
     for entry in proc.iterdir():
         if not entry.name.isdigit() or int(entry.name) in ancestors:
             continue
         try:
             args = (entry / "cmdline").read_bytes().replace(b"\x00", b" ").decode(errors="replace")
-        except FileNotFoundError:
+        except (FileNotFoundError, ProcessLookupError):
             continue
+        except PermissionError as exc:
+            raise ValueError(
+                f"Cannot inspect process command line, pid={entry.name}; cleanup stopped"
+            ) from exc
+        checked += 1
         if "obson.babel" in args or "/obson/babel/" in args:
             raise ValueError(f"Babel process still running, pid={entry.name}: {args[:220]}")
-        for fd in (entry / "fd").glob("*"):
+        # No targets exist during the initial active-job check. Scanning every
+        # process's stdin/stdout then serves no purpose and can hit container ACLs.
+        if not selected_paths:
+            continue
+        try:
+            descriptors = list((entry / "fd").iterdir())
+        except (FileNotFoundError, ProcessLookupError):
+            continue
+        except PermissionError:
+            inaccessible_fds.add(entry.name)
+            continue
+        for fd in descriptors:
             try:
                 target = os.readlink(fd)
-            except FileNotFoundError:
+            except (FileNotFoundError, ProcessLookupError):
+                continue
+            except PermissionError:
+                # Container root can read cmdline yet cannot inspect some /proc
+                # descriptors. This supplementary check is explicitly best effort;
+                # still inspect other accessible descriptors of the same process.
+                inaccessible_fds.add(entry.name)
                 continue
             if target in selected_paths:
                 raise ValueError(f"Planned file is open in pid={entry.name}: {target}")
+    result = {
+        "command_lines_checked": checked,
+        "fd_scan_requested": bool(selected_paths),
+        "fd_permission_denied_pids": sorted(inaccessible_fds, key=int),
+        "fd_visibility": "partial" if inaccessible_fds else "no_permission_errors_observed",
+    }
+    if inaccessible_fds:
+        print(
+            f"Process command-line checks passed; FD inspection restricted for "
+            f"{len(inaccessible_fds)} processes by container permissions (recorded in receipt).",
+            flush=True,
+        )
+    return result
 
 
 def verify_record(record):
@@ -199,7 +235,7 @@ def verify_record(record):
 
 
 def apply_plan(report, receipt, check_processes, verify_source):
-    check_processes()
+    initial_process_check = check_processes()
     for record in report["files"]:
         verify_record(record)
     verify_source()
@@ -207,11 +243,14 @@ def apply_plan(report, receipt, check_processes, verify_source):
         report,
         status="deleting",
         deleted=[],
+        process_checks=[initial_process_check] if initial_process_check is not None else [],
         started_utc=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     )
     atomic_json(journal, receipt)  # If even this write cannot finish, delete nothing.
     try:
-        check_processes()
+        final_process_check = check_processes()
+        if final_process_check is not None:
+            journal["process_checks"].append(final_process_check)
         for record in report["files"]:
             verify_record(record)
             Path(record["path"]).unlink()

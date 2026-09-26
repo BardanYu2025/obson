@@ -132,6 +132,82 @@ def test_process_guard_and_open_file_guard(tmp_path):
         c.assert_no_active_jobs([{"path": str(target)}], proc)
 
 
+def test_initial_process_check_does_not_inspect_descriptors(tmp_path, monkeypatch):
+    proc = tmp_path / "proc"
+    write(proc / "99999999/cmdline", "unrelated")
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("Preflight has no files to check")
+
+    monkeypatch.setattr(c.os, "readlink", forbidden)
+    result = c.assert_no_active_jobs([], proc)
+    assert result["command_lines_checked"] == 1 and not result["fd_scan_requested"]
+
+
+@pytest.mark.parametrize("denied", ["descriptor", "directory"])
+def test_container_fd_permissions_are_recorded_without_deleting_unknown_files(
+    tmp_path, monkeypatch, denied
+):
+    proc = tmp_path / "proc"
+    entry = proc / "99999999"
+    write(entry / "cmdline", "unrelated")
+    (entry / "fd").mkdir()
+    restricted = entry / "fd/0"
+    restricted.symlink_to("/dev/null")
+    original_readlink, original_iterdir = c.os.readlink, Path.iterdir
+
+    def readlink(path, *args, **kwargs):
+        if Path(path) == restricted:
+            raise PermissionError("container denied descriptor")
+        return original_readlink(path, *args, **kwargs)
+
+    def iterdir(path):
+        if path == entry / "fd":
+            raise PermissionError("container denied fd directory")
+        return original_iterdir(path)
+
+    if denied == "descriptor":
+        monkeypatch.setattr(c.os, "readlink", readlink)
+    else:
+        monkeypatch.setattr(Path, "iterdir", iterdir)
+    selected = [{"path": str(tmp_path / "last.pt")}]
+    result = c.assert_no_active_jobs(selected, proc)
+    assert result["fd_visibility"] == "partial"
+    assert result["fd_permission_denied_pids"] == [entry.name]
+    if denied == "descriptor":
+        (entry / "fd/3").symlink_to(selected[0]["path"])
+        with pytest.raises(ValueError, match="file is open"):
+            c.assert_no_active_jobs(selected, proc)
+    write(entry / "cmdline", "python -m obson.babel.history_query_run")
+    with pytest.raises(ValueError, match="Babel process"):
+        c.assert_no_active_jobs(selected, proc)
+
+
+def test_unreadable_command_line_still_blocks_cleanup(tmp_path, monkeypatch):
+    proc = tmp_path / "proc"
+    entry = proc / "99999999"
+    command = write(entry / "cmdline", "unreadable")
+    original = Path.read_bytes
+
+    def denied(path):
+        if path == command:
+            raise PermissionError("denied")
+        return original(path)
+
+    monkeypatch.setattr(Path, "read_bytes", denied)
+    with pytest.raises(ValueError, match="Cannot inspect process command line"):
+        c.assert_no_active_jobs([], proc)
+
+
+def test_process_visibility_is_saved_in_cleanup_receipt(tmp_path):
+    cp, down, root, _, _, _, _, cat, *_ = fixture(tmp_path)
+    report = c.plan(cp, down, {root}, cat)
+    visibility = {"fd_visibility": "partial", "fd_permission_denied_pids": ["99999999"]}
+    receipt = tmp_path / "receipt.json"
+    c.apply_plan(report, receipt, lambda: visibility, lambda: None)
+    assert c.read(receipt)["process_checks"] == [visibility, visibility]
+
+
 def test_dependency_paths_protect_whole_root_without_escape(tmp_path):
     cp = tmp_path / "checkpoints"
     identity = {
