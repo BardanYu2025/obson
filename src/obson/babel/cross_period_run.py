@@ -2,6 +2,7 @@
 
 import argparse
 import fcntl
+import gc
 import shutil
 import subprocess
 import sys
@@ -59,7 +60,7 @@ def train_plan(meta):
     return read_json(Path(meta["source"]) / "train_plan.json")
 
 
-def make_manifest(source, identity, raw_root, audit, audit_id, micro=64):
+def make_manifest(source, identity, raw_root, audit, audit_id, micro=16):
     if micro not in (8, 16, 32, 64):
         raise ValueError("Microbatch must be8/16/32/64 triplets")
     gm = identity["manifest"]
@@ -512,7 +513,18 @@ def run_jobs(out, jobs):
                     log.close()
                     del active[name]
                     if p.returncode:
-                        raise RuntimeError(f"{name} failed with exit{p.returncode}; see worker log")
+                        path = out / name / "run.log"
+                        with path.open("rb") as failure_log:
+                            failure_log.seek(0, 2)
+                            failure_log.seek(max(0, failure_log.tell() - 65536))
+                            tail = "\n".join(
+                                failure_log.read()
+                                .decode("utf-8", errors="replace")
+                                .splitlines()[-80:]
+                            )
+                        raise RuntimeError(
+                            f"{name} failed with exit{p.returncode}; worker log: {path}\n{tail}"
+                        )
                     progress(f"Completed {name}")
             if active:
                 time.sleep(1)
@@ -528,11 +540,38 @@ def run_jobs(out, jobs):
             log.close()
 
 
+def release_preflight_cuda(out, jobs, micro, device):
+    """Release unused parent allocations before child CUDA contexts start."""
+    if not str(device).startswith("cuda"):
+        return
+    gc.collect()
+    with torch.cuda.device(device):
+        torch.cuda.empty_cache()
+        free, total = torch.cuda.mem_get_info()
+        report = {
+            "gpu": torch.cuda.get_device_name(),
+            "total_bytes": total,
+            "free_bytes": free,
+            "manager_allocated_bytes": torch.cuda.memory_allocated(),
+            "manager_reserved_bytes": torch.cuda.memory_reserved(),
+            "jobs": jobs,
+            "micro_triplets": micro,
+            "windows_per_forward": 3 * micro,
+            "effective_batch": 128,
+        }
+    atomic_json(report, out / "gpu_launch.json")
+    progress(
+        f"GPU {report['gpu']}: total={total / 2**30:.2f} GiB, free={free / 2**30:.2f} GiB; "
+        f"workers={jobs}, micro={micro} triplets ({3 * micro} windows), effective batch=128. "
+        "Unused preflight cache released; available memory does not guarantee peak fit."
+    )
+
+
 def check_output(source, out, identity=None):
     lr.check_output(source, out, identity)
 
 
-def run(source, out, raw_root, audit, jobs=2, micro=64, device="cuda"):
+def run(source, out, raw_root, audit, jobs=1, micro=16, device="cuda"):
     from . import cross_period_evaluate as ev
 
     source, out, raw_root, audit = (p.resolve() for p in (source, out, raw_root, audit))
@@ -579,6 +618,7 @@ def run(source, out, raw_root, audit, jobs=2, micro=64, device="cuda"):
         )
         xd.prepare(meta, out)
         preflight(meta, out, device)
+        release_preflight_cuda(out, jobs, micro, device)
         run_jobs(out, jobs)
         lock_selection(meta, out)
         for split in ("train", "val"):
@@ -628,8 +668,8 @@ def main():
     p.add_argument("--raw-root", type=Path, default=Path("/root/autodl-tmp/data/contracts"))
     p.add_argument("--audit", type=Path, default=Path("checkpoints/babel_cross_period_audit"))
     p.add_argument("--name")
-    p.add_argument("--jobs", type=int, default=2)
-    p.add_argument("--micro", type=int, default=64)
+    p.add_argument("--jobs", type=int, default=1)
+    p.add_argument("--micro", type=int, default=16)
     a = p.parse_args()
     ur.bb.ab.configure_runtime()
     if not torch.cuda.is_available():

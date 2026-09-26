@@ -11,7 +11,7 @@
 | 四组 | 两种子，各control / cross权重0.10 |
 | 预算 | 各追加100轮；每轮4789个三视图样本，38次编码器和局部头更新 |
 | 曝光 | 每组478900个三视图样本、1436700窗口视图、5746800局部位置曝光；两组顺序和位置完全相同 |
-| batch | 有效128个三视图样本；默认micro64（一次192个窗口），两进程并行 |
+| batch | 有效128个三视图样本；默认micro16（一次48个窗口），单进程顺序完成四组 |
 | 优化器 | 两组均重置两个AdamW；5轮预热，编码器峰值1e-5、局部头3e-5，余下余弦下降至峰值0.1倍 |
 | 选模 | 原完整验证集global MSE＋0.25local MSE，第0轮可回退；只用32/64/96/128选模 |
 | 收尾 | 四组预算全部完成，锁定8份best/last，再统一校准用途读出及研究评分 |
@@ -83,9 +83,38 @@ tail -f logs/babel_cross_period768.log
 
 中断后用相同命令续跑，恢复最后完整轮的模型、两个优化器和随机状态；已完成组校验后跳过。不要同时启动两个管理进程。配置和来源受锁定，修改micro或jobs以外的实验定义必须新目录；micro也写入manifest，不能中途更改micro后直接覆盖续训。可以用`BABEL_CROSS_PERIOD_JOBS=1`以同一micro串行恢复，jobs不改变训练协议。
 
-默认两进程、micro64适配此前32GB机器；若首轮显存不足，尚未正式训练时使用新目录和`BABEL_CROSS_PERIOD_MICRO=32`重新启动，不改变有效batch128及更新数，不忽略失败。不要为了占满显存任意改有效batch或学习率。
+默认单进程、micro16，每个完整有效batch累积8次梯度后更新（末尾不足128条按实际条数归一化）。保持有效batch128、每轮4789条与38次更新，四组使用相同micro；微批次改变可能带来浮点舍入差异，不保证逐位相同。大显存机器可显式设置jobs/micro，但不根据此前机器配置推断当前机器容量。不要为了占满显存任意改有效batch或学习率。
 
-结束或失败都会自动打包到：
+管理进程在预检返回后回收无引用对象、释放未使用CUDA缓存，再记录GPU名称、总量/空闲显存和执行参数到`gpu_launch.json`并启动子进程；CUDA上下文本身仍可能占显存。子进程失败时主日志直接包含其末尾最多80行（读取上限64KiB），并停止其他工作进程。
+
+### 2026-09-26 显存失败及重启
+
+原bca79fa运行实际GPU总量11.63GiB，管理进程908MiB、两个子进程分别约5.47/5.25GiB。cross前向报CUDA OOM；control反向报cuBLAS句柄分配失败。两组只保存第0轮，没有完成第1轮，不能视作实验结果。此前默认沿用32GB设备的两进程micro64，不适合本次设备。
+
+此修复不修改目标函数、数据、模型、选模或评估门槛。代码指纹和micro变化均要求新目录，保留失败目录，不绕过来源校验：
+
+```bash
+cd /root/autodl-tmp/obson
+git pull --ff-only origin features/babel
+mkdir -p logs
+BABEL_CROSS_PERIOD_RUN=checkpoints/babel_cross_period768_v2 \
+BABEL_CROSS_PERIOD_LOG=logs/babel_cross_period768_v2.log \
+BABEL_CROSS_PERIOD_JOBS=1 BABEL_CROSS_PERIOD_MICRO=16 \
+nohup bash scripts/babel_cross_period768_autodl.sh all > logs/babel_cross_period768_v2.log 2>&1 &
+tail -f logs/babel_cross_period768_v2.log
+```
+
+成功或失败均自动导出`/root/autodl-tmp/download/babel_cross_period768_v2_reports.tar.gz`；需要手动导出：
+
+```bash
+BABEL_CROSS_PERIOD_RUN=checkpoints/babel_cross_period768_v2 \
+BABEL_CROSS_PERIOD_LOG=logs/babel_cross_period768_v2.log \
+bash scripts/babel_cross_period768_autodl.sh export
+```
+
+本地仅合成数据反向/累积与管理进程测试，优化器step为no-op；未在本地训练、推理真实模型或拟合真实读出，未声称已实测该GPU峰值。
+
+以下为未设置输出目录变量时的默认导出位置；本次v2重启使用上面的v2路径。结束或失败都会自动打包到：
 
 `/root/autodl-tmp/download/babel_cross_period768_reports.tar.gz`
 

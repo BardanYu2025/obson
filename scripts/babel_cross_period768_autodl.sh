@@ -41,5 +41,5 @@ if [[ "$mode" == all ]]; then
     --source "${BABEL_CROSS_PERIOD_SOURCE:-checkpoints/babel_growth768}" --out "$run" \
     --raw-root "${BABEL_DATA_ROOT:-/root/autodl-tmp/data/contracts}" \
     --audit "${BABEL_CROSS_PERIOD_AUDIT:-checkpoints/babel_cross_period_audit}" \
-    --jobs "${BABEL_CROSS_PERIOD_JOBS:-2}" --micro "${BABEL_CROSS_PERIOD_MICRO:-64}"
+    --jobs "${BABEL_CROSS_PERIOD_JOBS:-1}" --micro "${BABEL_CROSS_PERIOD_MICRO:-16}"
 fi

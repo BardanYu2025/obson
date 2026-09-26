@@ -1,6 +1,7 @@
 """Synthetic alignment, gradients, fair budgets and recovery; no optimizer updates."""
 
 import copy
+import inspect
 import os
 import subprocess
 import tarfile
@@ -197,27 +198,44 @@ def synthetic_builder(stats):
     return Builder
 
 
-def test_microbatch_gradient_accumulation_with_noop_steps():
+@pytest.mark.parametrize("count,batch,micros", [(3, 4, (1, 4)), (17, 16, (2, 16))])
+def test_microbatch_gradient_accumulation_with_noop_steps(count, batch, micros):
     model, data, stats, local = small()
     builder = synthetic_builder(stats)()
-    ids = np.arange(3)
-    ds = np.array([1, 16, 1])
-    ps = np.array([[32, 64, 96, 128]] * 3)
+    ids = np.arange(count)
+    ds = np.array([1, 16])[ids % 2]
+    ps = np.array([[32, 64, 96, 128]] * count)
     grads = []
-    for micro in (1, 4):
+    scores = []
+    for micro in micros:
         m = copy.deepcopy(model)
         enc = torch.optim.AdamW(m.core.encoder.parameters())
         head = torch.optim.AdamW(m.local_head.parameters())
-        with patch.object(torch.optim.AdamW, "step", return_value=None):
-            score, steps = xp.run_epoch(
-                m, builder, ids, ds, ps, stats, local, 4, micro, "cpu", 0.1, enc, head
+        captures = []
+
+        def record_noop_step(captures=captures, m=m):
+            captures.append(
+                {k: p.grad.clone() for k, p in m.named_parameters() if p.grad is not None}
             )
-        assert steps == 1 and np.isfinite(list(score.values())).all()
-        grads.append({k: p.grad.clone() for k, p in m.named_parameters() if p.grad is not None})
+
+        with (
+            patch.object(enc, "step", side_effect=record_noop_step),
+            patch.object(head, "step", return_value=None),
+        ):
+            score, steps = xp.run_epoch(
+                m, builder, ids, ds, ps, stats, local, batch, micro, "cpu", 0.1, enc, head
+            )
+        assert steps == (count + batch - 1) // batch
+        assert np.isfinite(list(score.values())).all()
+        assert len(captures) == steps
+        grads.append(captures)
+        scores.append(list(score.values()))
         for k, v in model.state_dict().items():
             torch.testing.assert_close(m.state_dict()[k], v)
-    for k in grads[0]:
-        torch.testing.assert_close(grads[0][k], grads[1][k], atol=1e-5, rtol=1e-4)
+    for left, right in zip(grads[0], grads[1], strict=True):
+        for k in left:
+            torch.testing.assert_close(left[k], right[k], atol=1e-5, rtol=1e-4)
+    np.testing.assert_allclose(scores[0], scores[1], atol=1e-5, rtol=1e-4)
 
 
 def worker_fixture(tmp_path):
@@ -593,6 +611,9 @@ def test_evaluation_anchors_are_fixed_dense_and_inside_packed_bounds():
 
 def test_manager_failure_stops_other_worker(tmp_path):
     _, _, _, _, meta, out = worker_fixture(tmp_path)
+    failure_path = out / "control_s42/run.log"
+    failure_path.parent.mkdir()
+    failure_path.write_text("old output\n" * 10000 + "torch.OutOfMemoryError: CUDA out of memory\n")
     failed = MagicMock()
     failed.poll.return_value = 1
     failed.returncode = 1
@@ -600,9 +621,12 @@ def test_manager_failure_stops_other_worker(tmp_path):
     running.poll.return_value = None
     with (
         patch.object(r.subprocess, "Popen", side_effect=[failed, running]),
-        pytest.raises(RuntimeError, match="exit1"),
+        pytest.raises(RuntimeError, match="exit1") as error,
     ):
         r.run_jobs(out, 2)
+    assert "torch.OutOfMemoryError: CUDA out of memory" in str(error.value)
+    assert str(failure_path) in str(error.value)
+    assert len(str(error.value).splitlines()) <= 81
     running.terminate.assert_called_once()
     running.wait.assert_called_once()
 
@@ -629,3 +653,54 @@ def test_failure_export_contains_reports_but_no_weights(tmp_path):
         assert "run/cross_s42/history.json" in tar.getnames()
         assert "run/cross_s42/best.pt" not in tar.getnames()
         assert "run_status=failed" in tar.extractfile("run/run_status.txt").read().decode()
+
+
+def test_release_preflight_memory_before_launch(tmp_path):
+    with (
+        patch.object(r.gc, "collect") as collect,
+        patch.object(r.torch.cuda, "device") as device,
+        patch.object(r.torch.cuda, "empty_cache") as empty,
+        patch.object(r.torch.cuda, "mem_get_info", return_value=(11 * 2**30, 12 * 2**30)),
+        patch.object(r.torch.cuda, "get_device_name", return_value="Synthetic GPU"),
+        patch.object(r.torch.cuda, "memory_allocated", return_value=0),
+        patch.object(r.torch.cuda, "memory_reserved", return_value=0),
+    ):
+        r.release_preflight_cuda(tmp_path, 1, 16, "cuda")
+        collect.assert_called_once()
+        device.assert_called_once_with("cuda")
+        empty.assert_called_once()
+    report = r.read_json(tmp_path / "gpu_launch.json")
+    assert report["jobs"] == 1 and report["micro_triplets"] == 16
+    assert report["windows_per_forward"] == 48 and report["effective_batch"] == 128
+    assert report["manager_reserved_bytes"] == 0
+
+
+def test_conservative_defaults_and_shell_overrides(tmp_path):
+    assert inspect.signature(r.run).parameters["jobs"].default == 1
+    assert inspect.signature(r.run).parameters["micro"].default == 16
+    assert inspect.signature(r.make_manifest).parameters["micro"].default == 16
+    executable = tmp_path / "capture.sh"
+    executable.write_text('#!/usr/bin/env bash\nprintf "%s\\n" "$@" > "$CAPTURE_ARGS"\n')
+    executable.chmod(0o755)
+    env = os.environ.copy()
+    for name in ("BABEL_CROSS_PERIOD_JOBS", "BABEL_CROSS_PERIOD_MICRO"):
+        env.pop(name, None)
+    env.update(
+        BABEL_CROSS_PERIOD_RUN=str(tmp_path / "run"),
+        BABEL_CROSS_PERIOD_LOG=str(tmp_path / "missing.log"),
+        BABEL_DOWNLOAD_DIR=str(tmp_path / "download"),
+        PYTHON_BIN=str(executable),
+        CAPTURE_ARGS=str(tmp_path / "args.txt"),
+    )
+    for overrides, expected in (
+        ({}, ["1", "16"]),
+        ({"BABEL_CROSS_PERIOD_JOBS": "2", "BABEL_CROSS_PERIOD_MICRO": "32"}, ["2", "32"]),
+    ):
+        subprocess.run(
+            ["bash", "scripts/babel_cross_period768_autodl.sh", "all"],
+            env=env | overrides,
+            check=True,
+            capture_output=True,
+        )
+        args = (tmp_path / "args.txt").read_text().splitlines()
+        assert [args[args.index("--jobs") + 1], args[args.index("--micro") + 1]] == expected
