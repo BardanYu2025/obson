@@ -1,6 +1,6 @@
 {
   "schema": "babel-downloaded-reports-v1",
-  "verified_on": "2026-09-28",
+  "verified_on": "2026-09-29",
   "purpose": "Exact hashes of existing local downloaded archives; remote cleanup deletes only matching report bytes.",
   "archives": [
     {
@@ -82,6 +82,11 @@
       "name": "babel_decoder_parity768_v2_reports.tar.gz",
       "bytes": 6430381,
       "sha256": "95128c32f7348f3c50edcd1dbddeb0c42dbbd6420a5c6285e6baf0d2c69257eb"
+    },
+    {
+      "name": "babel_depth768_reports.tar.gz",
+      "bytes": 147426318,
+      "sha256": "b41a370399daeb1cea4a1be2c8ef5594cd6a01a65d4d8a46b3f4c551a6327d49"
     },
     {
       "name": "babel_detail512_reports.tar.gz",
