@@ -1,0 +1,58 @@
+{
+  "schema": "babel-macro-history768-local-validation-v1",
+  "date": "2026-10-01",
+  "tests_passed": 58,
+  "test_seconds": 72.54,
+  "test_command": ".venv/bin/pytest -q tests/babel/test_macro_history.py tests/babel/test_grounded_readout_audit.py tests/babel/test_grounded_history.py tests/babel/test_history_structure.py",
+  "ruff": "passed",
+  "shell_syntax": "passed",
+  "old_bound_modules_unchanged": 90,
+  "new_bound_modules": 94,
+  "new_module_sha256": {
+    "macro_history.py": "35426f6687395eb72278a1b9676c3b81c5f8facd4e4d07e40fec302fec69b027",
+    "macro_history_data.py": "e6db6c21d1946e360f46eb966f48e9865692cb1b8e28aa722e0b7667c2af7cbd",
+    "macro_history_evaluate.py": "c42365c8ffa9399c561e2311587ad2f2793fb00d88259a4a70ac42f2bf1fa092",
+    "macro_history_run.py": "57d2460f384547c39c5aa64c2ef389e169f9300bbbb4d2f88e51684621882e37"
+  },
+  "geometry_only_downloaded_report_support": {
+    "train": {
+      "raw": 9909,
+      "retained": 9277,
+      "pairs": {
+        "15->30": 9277
+      },
+      "contracts": {
+        "15->30": 192
+      }
+    },
+    "test": {
+      "raw": 3185,
+      "retained": 3010,
+      "pairs": {
+        "15->30": 1794,
+        "30->60": 1216
+      },
+      "contracts": {
+        "15->30": 56,
+        "30->60": 39
+      }
+    },
+    "cross_research": {
+      "raw": 1309,
+      "retained": 1197,
+      "pairs": {
+        "15->30": 767,
+        "30->60": 430
+      },
+      "contracts": {
+        "15->30": 19,
+        "30->60": 13
+      }
+    }
+  },
+  "validation_rows": 1424,
+  "validation_contracts": 41,
+  "local_real_model_training": false,
+  "local_real_model_inference": false,
+  "gpu_verification": "pending AutoDL preflight and complete fixed matrix; synthetic optimizer steps mocked"
+}
