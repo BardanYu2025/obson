@@ -1,0 +1,252 @@
+{
+  "42": {
+    "rows": 1424,
+    "informative_rows": 1266,
+    "contracts": 41,
+    "pairs": [
+      "15->30"
+    ],
+    "all": {
+      "earlier_fine": {
+        "new_mse": 0.4487729778499352,
+        "original_mse": 0.016692528002720156,
+        "new_mae_log_bps": 19.335793184614424,
+        "original_mae_log_bps": 4.004838010513042,
+        "mse_gain_percent": 96.28040705955742,
+        "mae_gain_percent": 79.28795590501191
+      },
+      "fine": {
+        "new_mse": 0.40869728661022486,
+        "original_mse": 0.023591385767224558,
+        "new_mae_log_bps": 18.485484382114514,
+        "original_mae_log_bps": 4.710448801152156,
+        "mse_gain_percent": 94.2276627371584,
+        "mae_gain_percent": 74.51812079260571
+      },
+      "coarse": {
+        "new_mse": 0.42765830591688037,
+        "original_mse": 0.015013648203303982,
+        "new_mae_log_bps": 18.794521534484325,
+        "original_mae_log_bps": 3.729514419220564,
+        "mse_gain_percent": 96.48933552895333,
+        "mae_gain_percent": 80.15637475858259
+      }
+    }
+  },
+  "43": {
+    "rows": 1424,
+    "informative_rows": 1257,
+    "contracts": 41,
+    "pairs": [
+      "15->30"
+    ],
+    "all": {
+      "earlier_fine": {
+        "new_mse": 0.431173419450273,
+        "original_mse": 0.005373829167899145,
+        "new_mae_log_bps": 19.405447429649,
+        "original_mae_log_bps": 2.194326180119806,
+        "mse_gain_percent": 98.75367336540583,
+        "mae_gain_percent": 88.6922154818901
+      },
+      "fine": {
+        "new_mse": 0.3854925198184953,
+        "original_mse": 0.009493593942681778,
+        "new_mae_log_bps": 18.4646053378216,
+        "original_mae_log_bps": 2.9288768919107784,
+        "mse_gain_percent": 97.53728193035971,
+        "mae_gain_percent": 84.13788522242892
+      },
+      "coarse": {
+        "new_mse": 0.42326002883461367,
+        "original_mse": 0.006557021966412161,
+        "new_mae_log_bps": 19.35538766463584,
+        "original_mae_log_bps": 2.25435165953947,
+        "mse_gain_percent": 98.45082891846273,
+        "mae_gain_percent": 88.35284677010945
+      }
+    }
+  },
+  "verification": {
+    "completion_files": 7,
+    "code_files": 90,
+    "available_source_files": [
+      "manifest.json",
+      "runtime.json",
+      "grounded_data_lock.json",
+      "val_grounded_plan.json",
+      "audit_status.json",
+      "qualification_s42/cache_lock.json",
+      "qualification_s42/query_only_history.json",
+      "qualification_s42/state_only_history.json",
+      "qualification_s42/qualification.json",
+      "qualification_s42/completion.json",
+      "qualification_s42/target_stats.json",
+      "qualification_s42/none_history.json",
+      "qualification_s43/cache_lock.json",
+      "qualification_s43/query_only_history.json",
+      "qualification_s43/state_only_history.json",
+      "qualification_s43/qualification.json",
+      "qualification_s43/completion.json",
+      "qualification_s43/target_stats.json",
+      "qualification_s43/none_history.json"
+    ],
+    "unavailable_source_files": [
+      "qualification_s42/cache.pt",
+      "qualification_s42/selected.pt",
+      "qualification_s42/state_only_resume.pt",
+      "qualification_s42/query_only_resume.pt",
+      "qualification_s43/cache.pt",
+      "qualification_s43/selected.pt",
+      "qualification_s43/state_only_resume.pt",
+      "qualification_s43/query_only_resume.pt"
+    ],
+    "paired_intervals_recomputed": 84,
+    "score_scalars_recomputed": 120,
+    "qualification_checks": 24,
+    "qualification_passed": 2,
+    "numeric_values_compared": 115257,
+    "max_abs_difference": 2.9802322387695312e-08,
+    "mse_gain_percent_range_all": [
+      94.2276627371584,
+      98.75367336540583
+    ],
+    "mae_gain_percent_range_all": [
+      74.51812079260571,
+      88.6922154818901
+    ]
+  },
+  "archive_sha256": "bae377a85962debd41f05bc5c4ad6fe1de1cf0a89a98774ff5f818c92689ebd1",
+  "scope": "Exported prediction and report arithmetic independently reproduced; no local checkpoint inference, cache reconstruction, training or fitting. Reused validation, not independent generalization or equal-budget architecture comparison.",
+  "schema": "babel-grounded-readout768-review-v1",
+  "reviewed_on": "2026-10-01",
+  "source_code_commit": "18a5034",
+  "run_status": "complete",
+  "optimizer_updates": 0,
+  "fits": 0,
+  "encoder_forwards": 0,
+  "logged_elapsed_seconds": 40,
+  "original_vs_new_intervals": {
+    "42": {
+      "all": {
+        "earlier_fine": {
+          "supported": true,
+          "rows": 1424,
+          "contracts": 41,
+          "delta": -0.432080449847215,
+          "low": -0.5406812327523864,
+          "high": -0.3373395217436571,
+          "factor": 1.0
+        },
+        "fine": {
+          "supported": true,
+          "rows": 1424,
+          "contracts": 41,
+          "delta": -0.3851059008430004,
+          "low": -0.4783814400485481,
+          "high": -0.3019087052967297,
+          "factor": 1.0
+        },
+        "coarse": {
+          "supported": true,
+          "rows": 1424,
+          "contracts": 41,
+          "delta": -0.4126446577135764,
+          "low": -0.5073630679436648,
+          "high": -0.3284750367987619,
+          "factor": 1.0
+        }
+      },
+      "informative": {
+        "earlier_fine": {
+          "supported": true,
+          "rows": 1266,
+          "contracts": 41,
+          "delta": -0.4739485656106363,
+          "low": -0.5861787213084942,
+          "high": -0.3736948797610957,
+          "factor": 1.0
+        },
+        "fine": {
+          "supported": true,
+          "rows": 1266,
+          "contracts": 41,
+          "delta": -0.42203898351926517,
+          "low": -0.5186195776881607,
+          "high": -0.33459817879594905,
+          "factor": 1.0
+        },
+        "coarse": {
+          "supported": true,
+          "rows": 1266,
+          "contracts": 41,
+          "delta": -0.4542388642282276,
+          "low": -0.5558365927999864,
+          "high": -0.36543947372065494,
+          "factor": 1.0
+        }
+      }
+    },
+    "43": {
+      "all": {
+        "earlier_fine": {
+          "supported": true,
+          "rows": 1424,
+          "contracts": 41,
+          "delta": -0.42579959028237374,
+          "low": -0.5306223581568249,
+          "high": -0.33175619598985145,
+          "factor": 1.0
+        },
+        "fine": {
+          "supported": true,
+          "rows": 1424,
+          "contracts": 41,
+          "delta": -0.37599892587581346,
+          "low": -0.46318159111500495,
+          "high": -0.3004624536152078,
+          "factor": 1.0
+        },
+        "coarse": {
+          "supported": true,
+          "rows": 1424,
+          "contracts": 41,
+          "delta": -0.4167030068682015,
+          "low": -0.5164621312601095,
+          "high": -0.3295812463157777,
+          "factor": 1.0
+        }
+      },
+      "informative": {
+        "earlier_fine": {
+          "supported": true,
+          "rows": 1257,
+          "contracts": 41,
+          "delta": -0.46843582852779847,
+          "low": -0.5812838765431199,
+          "high": -0.3693642739657859,
+          "factor": 1.0
+        },
+        "fine": {
+          "supported": true,
+          "rows": 1257,
+          "contracts": 41,
+          "delta": -0.41410864809418446,
+          "low": -0.5054274681500512,
+          "high": -0.33386523129833684,
+          "factor": 1.0
+        },
+        "coarse": {
+          "supported": true,
+          "rows": 1257,
+          "contracts": 41,
+          "delta": -0.4549941274401308,
+          "low": -0.5563490953757003,
+          "high": -0.36459834851779666,
+          "factor": 1.0
+        }
+      }
+    }
+  },
+  "decision": "Retain existing control research checkpoints and original query readout. Stop failed grounded auxiliary-head recipe; no joint-training restart, model promotion or new GPU matrix. Existing state supports tested historical interval prices through original readout; macro cross-resolution reusable representation remains unestablished."
+}
