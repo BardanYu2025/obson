@@ -1,6 +1,6 @@
 {
   "schema": "babel-downloaded-reports-v1",
-  "verified_on": "2026-09-29",
+  "verified_on": "2026-09-30",
   "purpose": "Exact hashes of existing local downloaded archives; remote cleanup deletes only matching report bytes.",
   "archives": [
     {
@@ -22,6 +22,11 @@
       "name": "babel_activity_alignment512_reports.tar.gz",
       "bytes": 1818117,
       "sha256": "b41189696184e53c90419b88036f24a1154ae6205f56aa125589f2b6dda8c004"
+    },
+    {
+      "name": "babel_activity_weight768_reports.tar.gz",
+      "bytes": 66390476,
+      "sha256": "2436c05782036a469f1c1c118b406e9c935bdfcdd7830c6af06660a30959346b"
     },
     {
       "name": "babel_architecture512_reports.tar.gz",
