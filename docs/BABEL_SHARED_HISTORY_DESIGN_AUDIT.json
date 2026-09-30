@@ -1,0 +1,46 @@
+{
+  "scope": "Constructed nuisance codes only; not measured trained-model behavior.",
+  "source_sha256": {
+    "shared_history.py": "236638bc1e058856cc07d909d7171a976649bae50458fb86fd7749369ef49681",
+    "shared_history_evaluate.py": "7ca9228e87e97bf36f03d24ccef68215f5eeef2d5a4e5975e6c6b33b59ada0c7"
+  },
+  "optimizer_steps": 0,
+  "uses_market_data": false,
+  "uses_learned_checkpoint": false,
+  "auxiliary_total": 4.768372493399867e-35,
+  "components": {
+    "within": {
+      "invariance": 0.0,
+      "variance": 0.0,
+      "covariance": 5.960465616749833e-33,
+      "total": 2.3841862466999333e-34,
+      "rows": 128
+    },
+    "cross": {
+      "invariance": 0.0,
+      "variance": 0.0,
+      "covariance": 5.960465616749833e-33,
+      "total": 2.3841862466999333e-34,
+      "rows": 128
+    }
+  },
+  "query_change_max_abs": 0.0,
+  "factorization_max_abs": 0.0,
+  "shared_diagnostics": {
+    "ratio": 0.0,
+    "within_pair_std": 1.0,
+    "effective_rank": 63.99999999999998,
+    "noncollapsed": true,
+    "samples": 128
+  },
+  "shuffled_mean_distance": 2.0000000000000004,
+  "conclusion": "Zero auxiliary loss and noncollapsed, discriminating outputs can coexist with complete query insensitivity. This does not pass or invalidate the original-state utility/retention gates.",
+  "preconditioner_example": {
+    "euclidean_dot": 2.0,
+    "preconditioned_dot": -19.6,
+    "main_only_linear_loss_change": -10.1,
+    "combined_linear_loss_change": 9.5,
+    "scope": "Analytic positive-diagonal preconditioner; not a measured training trajectory."
+  },
+  "audit_code_sha256": "aec278038e2064206bfc7f0591b2bb589c513ad055baff47376aa747a7575cd8"
+}
