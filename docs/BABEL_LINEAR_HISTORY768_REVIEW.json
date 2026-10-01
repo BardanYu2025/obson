@@ -1,0 +1,733 @@
+{
+  "archive_sha256": "98a4f18c4db89019a18a46d7a5397c4d0cdfe0d3d3f5ffdf2fbf1302b5653995",
+  "verified_files": 121,
+  "unavailable_files": [
+    "heads.npz",
+    "cal_linear_s42/e30_best.pt",
+    "cal_linear_s42/e30_last.pt",
+    "cal_native_s42/e30_best.pt",
+    "cal_native_s42/e30_last.pt",
+    "cal_native_s43/e30_best.pt",
+    "cal_native_s43/e30_last.pt",
+    "cal_linear_s43/e30_best.pt",
+    "cal_linear_s43/e30_last.pt",
+    "linear_frozen_s42/e100_best.pt",
+    "linear_frozen_s42/e100_last.pt",
+    "native_joint_s42/e100_best.pt",
+    "native_joint_s42/e100_last.pt",
+    "linear_joint_s42/e100_best.pt",
+    "linear_joint_s42/e100_last.pt",
+    "native_joint_s43/e100_best.pt",
+    "native_joint_s43/e100_last.pt",
+    "linear_frozen_s43/e100_best.pt",
+    "linear_frozen_s43/e100_last.pt",
+    "linear_joint_s43/e100_best.pt",
+    "linear_joint_s43/e100_last.pt"
+  ],
+  "verified_source_report_files": 131,
+  "verified_code_modules": 97,
+  "epoch_records": 720,
+  "optimizer_steps": 27360,
+  "selected_readouts": 156,
+  "readout_candidates": 780,
+  "checks": {
+    "activity_retention": {
+      "passed": 40,
+      "total": 48,
+      "failed_point_outside_margin": 8,
+      "failed_point_within_margin": 0,
+      "failed_lower_ci_above_margin": 8
+    },
+    "price_gain": {
+      "passed": 8,
+      "total": 8,
+      "failed_point_outside_margin": 0,
+      "failed_point_within_margin": 0,
+      "failed_lower_ci_above_margin": 0
+    },
+    "retention": {
+      "passed": 304,
+      "total": 440,
+      "failed_point_outside_margin": 94,
+      "failed_point_within_margin": 42,
+      "failed_lower_ci_above_margin": 22
+    },
+    "utility_gain": {
+      "passed": 0,
+      "total": 16,
+      "failed_point_outside_margin": 14,
+      "failed_point_within_margin": 2,
+      "failed_lower_ci_above_margin": 12
+    }
+  },
+  "numeric_values_compared": 870243,
+  "max_abs_difference": 0.0,
+  "trials": {
+    "cal_native_s42": {
+      "best_epoch": 30,
+      "epochs": 30,
+      "steps": 1140,
+      "views": 432000,
+      "seconds": 921.7940655276179,
+      "peak_allocated_gib": 0.743934154510498,
+      "encoder_frozen": true
+    },
+    "cal_linear_s42": {
+      "best_epoch": 30,
+      "epochs": 30,
+      "steps": 1140,
+      "views": 432000,
+      "seconds": 868.614393488504,
+      "peak_allocated_gib": 0.35806894302368164,
+      "encoder_frozen": true
+    },
+    "cal_native_s43": {
+      "best_epoch": 0,
+      "epochs": 30,
+      "steps": 1140,
+      "views": 432000,
+      "seconds": 925.2679555490613,
+      "peak_allocated_gib": 0.743934154510498,
+      "encoder_frozen": true
+    },
+    "cal_linear_s43": {
+      "best_epoch": 30,
+      "epochs": 30,
+      "steps": 1140,
+      "views": 432000,
+      "seconds": 863.7737510865554,
+      "peak_allocated_gib": 0.35806894302368164,
+      "encoder_frozen": true
+    },
+    "native_joint_s42": {
+      "best_epoch": 94,
+      "epochs": 100,
+      "steps": 3800,
+      "views": 1440000,
+      "seconds": 5661.16044325009,
+      "peak_allocated_gib": 2.285588264465332,
+      "encoder_frozen": false
+    },
+    "linear_frozen_s42": {
+      "best_epoch": 100,
+      "epochs": 100,
+      "steps": 3800,
+      "views": 1440000,
+      "seconds": 3293.7692885054275,
+      "peak_allocated_gib": 0.35806894302368164,
+      "encoder_frozen": true
+    },
+    "linear_joint_s42": {
+      "best_epoch": 99,
+      "epochs": 100,
+      "steps": 3800,
+      "views": 1440000,
+      "seconds": 6245.0734142921865,
+      "peak_allocated_gib": 1.8121495246887207,
+      "encoder_frozen": false
+    },
+    "native_joint_s43": {
+      "best_epoch": 95,
+      "epochs": 100,
+      "steps": 3800,
+      "views": 1440000,
+      "seconds": 5998.0343731166795,
+      "peak_allocated_gib": 2.285588264465332,
+      "encoder_frozen": false
+    },
+    "linear_frozen_s43": {
+      "best_epoch": 97,
+      "epochs": 100,
+      "steps": 3800,
+      "views": 1440000,
+      "seconds": 3408.6049764649943,
+      "peak_allocated_gib": 0.35806894302368164,
+      "encoder_frozen": true
+    },
+    "linear_joint_s43": {
+      "best_epoch": 97,
+      "epochs": 100,
+      "steps": 3800,
+      "views": 1440000,
+      "seconds": 3578.9601359749213,
+      "peak_allocated_gib": 1.8121495246887207,
+      "encoder_frozen": false
+    }
+  },
+  "elapsed_seconds": 17999.890395408496,
+  "branches": {
+    "linear_joint": {
+      "status": "no_confirmed_utility_upgrade",
+      "groups": {
+        "utility_gain": false,
+        "price_gain": true,
+        "retention": false,
+        "activity_retention": false
+      }
+    }
+  },
+  "metrics": {
+    "test": {
+      "source_s42": {
+        "query_price": 0.06776078477216765,
+        "query_fixed": 0.0678224100995018,
+        "activity": 0.06796620041131973,
+        "close_mae_bps": 5.8964844737555895,
+        "near_price": 0.009122913964533873,
+        "far": 0.011238051182785211,
+        "utility": 0.1604995038250619
+      },
+      "source_s43": {
+        "query_price": 0.03853340242696117,
+        "query_fixed": 0.03535192586018011,
+        "activity": 0.02792847901582718,
+        "close_mae_bps": 4.096748190952753,
+        "near_price": 0.005996518181754849,
+        "far": 0.00869259137748394,
+        "utility": 0.14100765056862574
+      },
+      "native_joint_s42_best": {
+        "query_price": 0.06103772863139741,
+        "query_fixed": 0.05988902707484083,
+        "activity": 0.057208720594644547,
+        "close_mae_bps": 5.4963395794889705,
+        "near_price": 0.007982762043503863,
+        "far": 0.010080619091476823,
+        "utility": 0.16290853038506936
+      },
+      "native_joint_s42_last": {
+        "query_price": 0.060841298366186694,
+        "query_fixed": 0.05968006850845342,
+        "activity": 0.05697052553296089,
+        "close_mae_bps": 5.506017986601967,
+        "near_price": 0.007988191570398094,
+        "far": 0.01009991072308006,
+        "utility": 0.16293420787281543
+      },
+      "linear_frozen_s42_best": {
+        "query_price": 0.11440808096333176,
+        "query_fixed": 0.11328955124888093,
+        "activity": 0.11067964136600494,
+        "close_mae_bps": 18.833117093704185,
+        "near_price": 0.07909979553831589,
+        "far": 0.0795223221970602,
+        "utility": 0.1604995038250619
+      },
+      "linear_frozen_s42_last": {
+        "query_price": 0.11440808096333176,
+        "query_fixed": 0.11328955124888093,
+        "activity": 0.11067964136600494,
+        "close_mae_bps": 18.833117093704185,
+        "near_price": 0.07909979553831589,
+        "far": 0.0795223221970602,
+        "utility": 0.1604995038250619
+      },
+      "linear_joint_s42_best": {
+        "query_price": 0.05218901487109864,
+        "query_fixed": 0.0512253818418987,
+        "activity": 0.048976898193359375,
+        "close_mae_bps": 5.062209534370488,
+        "near_price": 0.004581857602683269,
+        "far": 0.02241489084879955,
+        "utility": 0.15253192584896202
+      },
+      "linear_joint_s42_last": {
+        "query_price": 0.05206322043563016,
+        "query_fixed": 0.05111290237228249,
+        "activity": 0.04889548569917679,
+        "close_mae_bps": 5.057018730304784,
+        "near_price": 0.004561057764514666,
+        "far": 0.022390261478302968,
+        "utility": 0.1524970983930534
+      },
+      "native_joint_s43_best": {
+        "query_price": 0.03313281205872481,
+        "query_fixed": 0.029833731341822194,
+        "activity": 0.022135872393846512,
+        "close_mae_bps": 3.7597062951723976,
+        "near_price": 0.005498780115786601,
+        "far": 0.007810488333067349,
+        "utility": 0.14291991366537984
+      },
+      "native_joint_s43_last": {
+        "query_price": 0.033016832309792535,
+        "query_fixed": 0.0297155802902825,
+        "activity": 0.022012660279870033,
+        "close_mae_bps": 3.7989784797754043,
+        "near_price": 0.0054859876709846085,
+        "far": 0.007735835054409886,
+        "utility": 0.142934724181124
+      },
+      "linear_frozen_s43_best": {
+        "query_price": 0.07632384108141814,
+        "query_fixed": 0.07142640408757292,
+        "activity": 0.059999044984579086,
+        "close_mae_bps": 13.506799785928854,
+        "near_price": 0.024303737701558168,
+        "far": 0.06033565590201617,
+        "utility": 0.14100765056862574
+      },
+      "linear_frozen_s43_last": {
+        "query_price": 0.07611361443189459,
+        "query_fixed": 0.07127645581606229,
+        "activity": 0.059989750385284424,
+        "close_mae_bps": 13.528593218195711,
+        "near_price": 0.024061862874383586,
+        "far": 0.06003453460001851,
+        "utility": 0.14100765056862574
+      },
+      "linear_joint_s43_best": {
+        "query_price": 0.04237369787291445,
+        "query_fixed": 0.04098981870078581,
+        "activity": 0.03776076063513756,
+        "close_mae_bps": 4.233771183610594,
+        "near_price": 0.004532016718560401,
+        "far": 0.017429568471495543,
+        "utility": 0.14423682119632547
+      },
+      "linear_joint_s43_last": {
+        "query_price": 0.042293349614208886,
+        "query_fixed": 0.04089521051747853,
+        "activity": 0.037632886320352554,
+        "close_mae_bps": 4.216917227640097,
+        "near_price": 0.004491211488225959,
+        "far": 0.017401229401266188,
+        "utility": 0.14426794173117607
+      }
+    },
+    "cross_research": {
+      "source_s42": {
+        "query_price": 0.02115429464142944,
+        "query_fixed": 0.03520165710670318,
+        "activity": 0.06797882914543152,
+        "close_mae_bps": 4.178212407823495,
+        "near_price": 0.001956947843350165,
+        "far": 0.0015284863643580642,
+        "utility": 0.04385275485362839
+      },
+      "source_s43": {
+        "query_price": 0.009082380820906434,
+        "query_fixed": 0.0139018330940022,
+        "activity": 0.025147221982479095,
+        "close_mae_bps": 2.9268309626428066,
+        "near_price": 0.000739802429164398,
+        "far": 0.0010223363922910599,
+        "utility": 0.044112490154924605
+      },
+      "native_joint_s42_best": {
+        "query_price": 0.018949572965586498,
+        "query_fixed": 0.030098712490362965,
+        "activity": 0.05611336603760719,
+        "close_mae_bps": 3.868184170106983,
+        "near_price": 0.0019366138403568217,
+        "far": 0.0013816112321944011,
+        "utility": 0.044063158409096005
+      },
+      "native_joint_s42_last": {
+        "query_price": 0.018990004479457333,
+        "query_fixed": 0.03002546366637289,
+        "activity": 0.05577486380934715,
+        "close_mae_bps": 3.90008550304733,
+        "near_price": 0.0019918801230604734,
+        "far": 0.0013800378045896653,
+        "utility": 0.04401496237153024
+      },
+      "linear_frozen_s42_best": {
+        "query_price": 0.032665397786050626,
+        "query_fixed": 0.05822838347042925,
+        "activity": 0.11787533760070801,
+        "close_mae_bps": 14.478577154039497,
+        "near_price": 0.03092887589893802,
+        "far": 0.0233066272490645,
+        "utility": 0.04385275485362839
+      },
+      "linear_frozen_s42_last": {
+        "query_price": 0.032665397786050626,
+        "query_fixed": 0.05822838347042925,
+        "activity": 0.11787533760070801,
+        "close_mae_bps": 14.478577154039497,
+        "near_price": 0.03092887589893802,
+        "far": 0.0233066272490645,
+        "utility": 0.04385275485362839
+      },
+      "linear_joint_s42_best": {
+        "query_price": 0.00940250539277571,
+        "query_fixed": 0.022183152903029957,
+        "activity": 0.05200466141104698,
+        "close_mae_bps": 3.335288274259175,
+        "near_price": 0.0005546649784452088,
+        "far": 0.00161876193134571,
+        "utility": 0.047671913813844335
+      },
+      "linear_joint_s42_last": {
+        "query_price": 0.009388922305795848,
+        "query_fixed": 0.022145729294442744,
+        "activity": 0.0519116148352623,
+        "close_mae_bps": 3.348693106126243,
+        "near_price": 0.0005633812861201704,
+        "far": 0.0016308056082052428,
+        "utility": 0.047692742684084355
+      },
+      "native_joint_s43_best": {
+        "query_price": 0.007533611064709097,
+        "query_fixed": 0.011030485771112666,
+        "activity": 0.01918986067175865,
+        "close_mae_bps": 2.7127121571615413,
+        "near_price": 0.0007394241430080397,
+        "far": 0.0009159557916115518,
+        "utility": 0.04413075447566934
+      },
+      "native_joint_s43_last": {
+        "query_price": 0.007552125841013151,
+        "query_fixed": 0.011002838073912523,
+        "activity": 0.01905449666082859,
+        "close_mae_bps": 2.7475855029450837,
+        "near_price": 0.0007215235959412728,
+        "far": 0.0009251558409497746,
+        "utility": 0.044134461252122156
+      },
+      "linear_frozen_s43_best": {
+        "query_price": 0.01722791414503497,
+        "query_fixed": 0.03109671814967657,
+        "activity": 0.06345725059509277,
+        "close_mae_bps": 9.686921648895146,
+        "near_price": 0.004782479318988815,
+        "far": 0.009242580250779515,
+        "utility": 0.044112490154924605
+      },
+      "linear_frozen_s43_last": {
+        "query_price": 0.01736069359888397,
+        "query_fixed": 0.031191906721050943,
+        "activity": 0.06346473842859268,
+        "close_mae_bps": 9.746580016803145,
+        "near_price": 0.004775978779272995,
+        "far": 0.009265247237417671,
+        "utility": 0.044112490154924605
+      },
+      "linear_joint_s43_best": {
+        "query_price": 0.00636492343827241,
+        "query_fixed": 0.016037666722361663,
+        "activity": 0.0386073961853981,
+        "close_mae_bps": 2.8210348681520903,
+        "near_price": 0.000470641565726275,
+        "far": 0.0006917189785228223,
+        "utility": 0.048239454530684366
+      },
+      "linear_joint_s43_last": {
+        "query_price": 0.006345466147605276,
+        "query_fixed": 0.015980240183183714,
+        "activity": 0.03846137598156929,
+        "close_mae_bps": 2.819106667413968,
+        "near_price": 0.00046209385249576615,
+        "far": 0.000694593103998696,
+        "utility": 0.04829778405547498
+      }
+    }
+  },
+  "best_improvements_percent": {
+    "test/s42/linear_joint/native_joint": {
+      "query_price": 14.497121630681143,
+      "query_fixed": 14.466164598258601,
+      "activity": 14.389104171044465,
+      "close_mae_bps": 7.898530264369996,
+      "near_price": 42.60310431761085,
+      "far": -122.35629226136884,
+      "utility": 6.36958943253616
+    },
+    "test/s42/linear_joint/linear_frozen": {
+      "query_price": 54.38345400809106,
+      "query_fixed": 54.783666033451,
+      "activity": 55.748954741009356,
+      "close_mae_bps": 73.12070270054893,
+      "near_price": 94.20749753965694,
+      "far": 71.81308313248907,
+      "utility": 4.964238384677011
+    },
+    "test/s42/native_joint/source": {
+      "query_price": 9.921750704888089,
+      "query_fixed": 11.697288570285181,
+      "activity": 15.827690457275489,
+      "close_mae_bps": 6.786160398583374,
+      "near_price": 12.49767262370829,
+      "far": 10.299224238107918,
+      "utility": -1.5009557678341556
+    },
+    "test/s43/linear_joint/native_joint": {
+      "query_price": -27.8904362171585,
+      "query_fixed": -37.39420735254975,
+      "activity": -70.58627716716765,
+      "close_mae_bps": -12.609093669016481,
+      "near_price": 17.581415820768896,
+      "far": -123.15593760896859,
+      "utility": -0.9214303991457173
+    },
+    "test/s43/linear_joint/linear_frozen": {
+      "query_price": 44.48170155939546,
+      "query_fixed": 42.61251252333813,
+      "activity": 37.06439720025077,
+      "close_mae_bps": 68.65452031041977,
+      "near_price": 81.35259368656763,
+      "far": 71.11232452697492,
+      "utility": -2.2900676769507244
+    },
+    "test/s43/native_joint/source": {
+      "query_price": 14.01534779720791,
+      "query_fixed": 15.609317976573166,
+      "activity": 20.740859603195627,
+      "close_mae_bps": 8.227059122761748,
+      "near_price": 8.300451209881732,
+      "far": 10.147756935882956,
+      "utility": -1.3561413788845789
+    },
+    "cross_research/s42/linear_joint/native_joint": {
+      "query_price": 50.38143914983628,
+      "query_fixed": 26.298665067043714,
+      "activity": 7.322149635091502,
+      "close_mae_bps": 13.776383760783272,
+      "near_price": 71.35903054668805,
+      "far": -17.164792354405268,
+      "utility": -8.189960808627305
+    },
+    "cross_research/s42/linear_joint/linear_frozen": {
+      "query_price": 71.21570214953591,
+      "query_fixed": 61.903196377939175,
+      "activity": 55.88164371820674,
+      "close_mae_bps": 76.96397761482636,
+      "near_price": 98.20664359009487,
+      "far": 93.05449941749644,
+      "utility": -8.709051399310086
+    },
+    "cross_research/s42/native_joint/source": {
+      "query_price": 10.422099688094189,
+      "query_fixed": 14.496319309264848,
+      "activity": 17.454644713635435,
+      "close_mae_bps": 7.420116725899328,
+      "near_price": 1.0390671914144,
+      "far": 9.60918825241519,
+      "utility": -0.47979552520678315
+    },
+    "cross_research/s43/linear_joint/native_joint": {
+      "query_price": 15.51298064631128,
+      "query_fixed": -45.394020310167285,
+      "activity": -101.18643301155315,
+      "close_mae_bps": -3.993151676803519,
+      "near_price": 36.35025713230494,
+      "far": 24.4811829503477,
+      "utility": -9.310287358173941
+    },
+    "cross_research/s43/linear_joint/linear_frozen": {
+      "query_price": 63.054590447290096,
+      "query_fixed": 48.42649746777711,
+      "activity": 39.15999224147971,
+      "close_mae_bps": 70.87790145929542,
+      "near_price": 90.15904650423485,
+      "far": 92.51595377314162,
+      "utility": -9.355546153177286
+    },
+    "cross_research/s43/native_joint/source": {
+      "query_price": 17.052464400438637,
+      "query_fixed": 20.654451132263606,
+      "activity": 23.68993805705909,
+      "close_mae_bps": 7.3157216188503345,
+      "near_price": 0.05113340284454981,
+      "far": 10.405635706766613,
+      "utility": -0.0414039667236743
+    }
+  },
+  "plain_utility_intervals": {
+    "test/s42": {
+      "weeks": 51,
+      "low": -0.03739065426304935,
+      "high": 0.005811634513942188,
+      "interpretation": "Candidate minus reference; negative favors candidate. Research data, uncorrected weekly interval.",
+      "delta": -0.010376604536107387,
+      "support": 984,
+      "supported": true
+    },
+    "test/s43": {
+      "weeks": 51,
+      "low": -0.008817931356344965,
+      "high": 0.007249529733435883,
+      "interpretation": "Candidate minus reference; negative favors candidate. Research data, uncorrected weekly interval.",
+      "delta": 0.0013169075309456104,
+      "support": 984,
+      "supported": true
+    },
+    "cross_research/s42": {
+      "weeks": 53,
+      "low": 1.6296689737730114e-05,
+      "high": 0.007527161345979113,
+      "interpretation": "Candidate minus reference; negative favors candidate. Research data, uncorrected weekly interval.",
+      "delta": 0.0036087554047483316,
+      "support": 453,
+      "supported": true
+    },
+    "cross_research/s43": {
+      "weeks": 53,
+      "low": 0.0028377815859521394,
+      "high": 0.005463442252806559,
+      "interpretation": "Candidate minus reference; negative favors candidate. Research data, uncorrected weekly interval.",
+      "delta": 0.004108700055015029,
+      "support": 453,
+      "supported": true
+    }
+  },
+  "last20_validation_improvement_percent": {
+    "native_joint_s42": {
+      "query_price": 2.9767771685991873,
+      "near_price": 5.58333795595487,
+      "far": 8.764023615845417,
+      "activity": 2.686043093251822
+    },
+    "linear_frozen_s42": {
+      "query_price": 0.8034353268460914,
+      "near_price": 0.9651658704167732,
+      "far": 1.01233763969375,
+      "activity": 0.6243492055107214
+    },
+    "linear_joint_s42": {
+      "query_price": 2.7590223013055692,
+      "near_price": 7.398462775794268,
+      "far": 4.951967727595852,
+      "activity": 3.844825720046652
+    },
+    "native_joint_s43": {
+      "query_price": 2.3372262003382938,
+      "near_price": 6.898380897497058,
+      "far": 4.595036365379057,
+      "activity": 3.7513779706322636
+    },
+    "linear_frozen_s43": {
+      "query_price": 0.755833245680404,
+      "near_price": 1.446720402548074,
+      "far": 0.5942554733938121,
+      "activity": 0.46362325798045
+    },
+    "linear_joint_s43": {
+      "query_price": 2.926554960574379,
+      "near_price": 8.404192409163025,
+      "far": 7.3738071941098156,
+      "activity": 3.110841553948862
+    }
+  },
+  "absolute_coverage": {
+    "test": {
+      "source_s42": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "source_s43": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "native_joint_s42_best": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "native_joint_s42_last": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "linear_frozen_s42_best": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "linear_frozen_s42_last": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "linear_joint_s42_best": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "linear_joint_s42_last": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "native_joint_s43_best": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "native_joint_s43_last": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "linear_frozen_s43_best": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "linear_frozen_s43_last": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "linear_joint_s43_best": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "linear_joint_s43_last": {
+        "utility_passed": false,
+        "current_passed": true
+      }
+    },
+    "cross_research": {
+      "source_s42": {
+        "utility_passed": true,
+        "current_passed": true
+      },
+      "source_s43": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "native_joint_s42_best": {
+        "utility_passed": true,
+        "current_passed": true
+      },
+      "native_joint_s42_last": {
+        "utility_passed": true,
+        "current_passed": true
+      },
+      "linear_frozen_s42_best": {
+        "utility_passed": true,
+        "current_passed": true
+      },
+      "linear_frozen_s42_last": {
+        "utility_passed": true,
+        "current_passed": true
+      },
+      "linear_joint_s42_best": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "linear_joint_s42_last": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "native_joint_s43_best": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "native_joint_s43_last": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "linear_frozen_s43_best": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "linear_frozen_s43_last": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "linear_joint_s43_best": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "linear_joint_s43_last": {
+        "utility_passed": false,
+        "current_passed": true
+      }
+    }
+  },
+  "date": "2026-10-01",
+  "decision": "Retain nonlinear mainline/source and native research references; archive linear joint as confirmed recent-path gain with information/utility tradeoffs. No promotion, extension or new GPU matrix."
+}
