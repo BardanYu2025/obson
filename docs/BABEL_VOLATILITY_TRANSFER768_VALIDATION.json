@@ -1,0 +1,36 @@
+{
+  "schema": "babel-volatility-transfer-validation-v1",
+  "local_only": true,
+  "formal_training": false,
+  "source_modules_unchanged": 94,
+  "bound_code_modules": 99,
+  "tests": {
+    "command": ".venv/bin/pytest -q tests/babel/test_volatility_transfer.py tests/babel/test_linear_history.py tests/babel/test_utility_probe.py tests/babel/test_history_query.py",
+    "passed": 61,
+    "neural_optimizer_steps": "disabled in synthetic lifecycle tests"
+  },
+  "engineering": [
+    "Ruff check and format",
+    "bash -n wrapper",
+    "CLI --help",
+    "git diff --check",
+    "nested file fingerprints and tamper rejection",
+    "whole64-fit synthetic selection and evaluation",
+    "checkpoint interruption and recovery",
+    "success/failure shell export receipts"
+  ],
+  "scientific_review": [
+    "Future16/64 labels exactly start at t+1; entire128+64 bar span remains in session-date partition",
+    "Raw inputs replayed from causal price/activity features; feature truncation and trained encoder causality checked on AutoDL",
+    "Same eligibility and label subsets across representations; full unlabeled training and validation-label advantages disclosed",
+    "PCA/scalers training-only; few-label target normalization uses only chosen labels",
+    "Scoring restored to common log-RMS units; no budget-specific normalization of headline score",
+    "All64 model selections locked before research feature/label preparation; primary family/fraction fixed",
+    "Paired month clusters, uncertainty coverage/width, all strata; reused research data and uncorrected intervals identified"
+  ],
+  "limitations": [
+    "Real weights and full raw CUDA data pipeline not run locally",
+    "GPU numerical replay, timing, memory and actual convergence remain unverified",
+    "No claim of independent peer review or successful transfer"
+  ]
+}
