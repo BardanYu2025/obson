@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-01",
+  "status": "local_synthetic_and_engineering_checks_passed_cuda_pending",
+  "tests": [
+    {
+      "command": ".venv/bin/pytest -q tests/babel/test_position_supervision.py tests/babel/test_history_query.py tests/babel/test_macro_history.py --disable-warnings --maxfail=1",
+      "passed": 46,
+      "scope": "New initial10 and36 related regressions; synthetic fixtures with optimizer steps mocked."
+    },
+    {
+      "command": ".venv/bin/pytest -q tests/babel/test_position_supervision.py --disable-warnings --maxfail=1",
+      "passed": 13,
+      "scope": "Final13 tests including decision controls, orchestration and wrapped checkpoint restoration; covers subsequent final evaluation changes."
+    }
+  ],
+  "engineering_checks": [
+    "Ruff check and format",
+    "bash -n scripts/babel_position_supervision768_autodl.sh",
+    "git diff --check",
+    "Original tracked Babel Python sources unchanged"
+  ],
+  "new_files_sha256": {
+    "src/obson/babel/position_supervision.py": "b615e2523d101139053febe1fdf49c1540bc60c7c38ebcc63629679f24574bff",
+    "src/obson/babel/position_supervision_run.py": "fd7f4bb0facdeec72d32bd509316b736b5c04dc2bdfa0afb0099abd326829286",
+    "src/obson/babel/position_supervision_evaluate.py": "0c8324065e6c5d207855519f9cd4be46673480c7ddf03b867dc5d43abf378fc3",
+    "scripts/babel_position_supervision768_autodl.sh": "698c8993ce33fe65b939f4e93945208195225ac08feaac4cf403813b064a5feb",
+    "tests/babel/test_position_supervision.py": "e57c5f4994fe40902071e839280e2281967f8b8cfd18fdd6a4eb806182ffd018"
+  },
+  "science_review": {
+    "question": "Does dense same-expectation or all-prefix supervision improve position and short/long historical balance?",
+    "paired_controls": "Same source model/query, data,60epochs,38updates per epoch; unequal query exposures and compute are reported.",
+    "gradient": "Dense chunked leaf accumulation equals full objective in synthetic gradients; sampled equals original objective; encoder receives complete accumulated gradient.",
+    "boundaries": [
+      "No past target for prefix1",
+      "dense_all trains old held48/80/112; no position-holdout claim",
+      "Short prefix is not a full rolling128 context",
+      "Dense all changes both support and weights, not pure density",
+      "Not from-scratch training, future prediction, or independent temporal confirmation"
+    ],
+    "decision": "Position gain and original information/utility protection reported separately; no automatic promotion."
+  },
+  "not_run": [
+    "Real-data model training or optimizer updates locally",
+    "AutoDL CUDA numerical replay",
+    "Real hardware memory/throughput and disk preflight",
+    "Remote train/evaluate and future rollout"
+  ],
+  "independent_peer_review": false,
+  "preserved_user_change": "docs/BABEL.md excluded from staging"
+}
