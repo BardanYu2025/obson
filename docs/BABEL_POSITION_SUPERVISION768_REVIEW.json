@@ -1,0 +1,1469 @@
+{
+  "date": "2026-10-03",
+  "archive_sha256": "66f32b81235f158ff0e2185ad96e2d786e506f4974ed9ed6ba9318aabcef04c0",
+  "verified_files": 101,
+  "unavailable_files": [
+    "heads.npz",
+    "sampled_s42/e60_best.pt",
+    "sampled_s42/e60_last.pt",
+    "dense_matched_s42/e60_best.pt",
+    "dense_matched_s42/e60_last.pt",
+    "dense_all_s42/e60_best.pt",
+    "dense_all_s42/e60_last.pt",
+    "sampled_s43/e60_best.pt",
+    "sampled_s43/e60_last.pt",
+    "dense_matched_s43/e60_best.pt",
+    "dense_matched_s43/e60_last.pt",
+    "dense_all_s43/e60_best.pt",
+    "dense_all_s43/e60_last.pt"
+  ],
+  "verified_source_report_files": 131,
+  "verified_code_modules": 100,
+  "epoch_records": 360,
+  "optimizer_steps": 13680,
+  "views": 5184000,
+  "decoder_query_contexts": 390528000,
+  "selected_readouts": 156,
+  "readout_candidates": 780,
+  "decision_checks": 904,
+  "checks": {
+    "dense_matched": {
+      "activity_retention": {
+        "passed": 32,
+        "total": 32,
+        "failed_point_outside_margin": 0,
+        "failed_point_within_margin": 0,
+        "failed_lower_ci_above_margin": 0
+      },
+      "position_gain": {
+        "passed": 0,
+        "total": 8,
+        "failed_point_outside_margin": 8,
+        "failed_point_within_margin": 0,
+        "failed_lower_ci_above_margin": 8
+      },
+      "price_gain": {
+        "passed": 0,
+        "total": 8,
+        "failed_point_outside_margin": 8,
+        "failed_point_within_margin": 0,
+        "failed_lower_ci_above_margin": 8
+      },
+      "retention": {
+        "passed": 318,
+        "total": 320,
+        "failed_point_outside_margin": 0,
+        "failed_point_within_margin": 2,
+        "failed_lower_ci_above_margin": 0
+      },
+      "utility_gain": {
+        "passed": 0,
+        "total": 8,
+        "failed_point_outside_margin": 8,
+        "failed_point_within_margin": 0,
+        "failed_lower_ci_above_margin": 8
+      }
+    },
+    "dense_all": {
+      "activity_retention": {
+        "passed": 27,
+        "total": 48,
+        "failed_point_outside_margin": 19,
+        "failed_point_within_margin": 2,
+        "failed_lower_ci_above_margin": 15
+      },
+      "position_gain": {
+        "passed": 0,
+        "total": 16,
+        "failed_point_outside_margin": 16,
+        "failed_point_within_margin": 0,
+        "failed_lower_ci_above_margin": 15
+      },
+      "price_gain": {
+        "passed": 0,
+        "total": 8,
+        "failed_point_outside_margin": 7,
+        "failed_point_within_margin": 1,
+        "failed_lower_ci_above_margin": 4
+      },
+      "retention": {
+        "passed": 304,
+        "total": 440,
+        "failed_point_outside_margin": 106,
+        "failed_point_within_margin": 30,
+        "failed_lower_ci_above_margin": 86
+      },
+      "utility_gain": {
+        "passed": 0,
+        "total": 16,
+        "failed_point_outside_margin": 16,
+        "failed_point_within_margin": 0,
+        "failed_lower_ci_above_margin": 12
+      }
+    }
+  },
+  "numeric_values_compared": 842867,
+  "max_abs_difference": 0.0,
+  "recomputed_utility_prediction_values": 317577,
+  "position_error_values_aggregated": 13139928,
+  "trials": {
+    "sampled_s42": {
+      "selected_epoch": 60,
+      "epochs": 60,
+      "validation": {
+        "query_price": 0.019703845874798155,
+        "near_price": 0.0016871773810829176,
+        "far": 0.0020197650322486683,
+        "gap_price": 0.0030244260222796787,
+        "query_fixed": 0.030188274094344877,
+        "activity": 0.05465193808932002,
+        "families": {
+          "path": 0.0007471353423177952,
+          "change1": 0.028689904515971337,
+          "body": 0.07755857072237322,
+          "activity": 0.05465193808932002,
+          "primary": 0.030188274094344877
+        }
+      },
+      "initial_validation": {
+        "query_price": 0.02153015409359135,
+        "near_price": 0.0017010489367342825,
+        "far": 0.002051616631517067,
+        "gap_price": 0.0030712955044947697,
+        "query_fixed": 0.03302341763843461,
+        "activity": 0.05984102887366203,
+        "families": {
+          "path": 0.0007881271902372744,
+          "change1": 0.03265032531083599,
+          "body": 0.08225791927251835,
+          "activity": 0.05984102887366203,
+          "primary": 0.03302341763843461
+        }
+      },
+      "fork_sha256": "eb1743b178d680caae8376fc61c016431555a9007d98b35113af34821a022b28",
+      "encoder_frozen": false,
+      "exposure_per_epoch": {
+        "query_contexts": 72000,
+        "positions_per_view": 5,
+        "supervised_position1": false,
+        "legacy_held_trained": false
+      },
+      "query_start_sha256": "5a7698ab211772d20d8ec87bd8a7e9d93c2570f20583c1c7694516cf701916fa",
+      "encoder_start_sha256": "8f9f8da494480f64e6d5a5de366ef7d63826465bef9a33b126ac100a074e4dd9",
+      "encoder_end_sha256": "36868d9294fa328f439735a15e99c03ab564d989448f5a9274f445b34692e673",
+      "seconds": 4320.511887776665,
+      "views": 864000,
+      "steps": 2280,
+      "peak_allocated_bytes": 1420367360
+    },
+    "dense_matched_s42": {
+      "selected_epoch": 60,
+      "epochs": 60,
+      "validation": {
+        "query_price": 0.01948308465178893,
+        "near_price": 0.0016746199229371321,
+        "far": 0.001993820309404402,
+        "gap_price": 0.0030286476598823625,
+        "query_fixed": 0.029831787399550325,
+        "activity": 0.05397875628344608,
+        "families": {
+          "path": 0.0007264210313086252,
+          "change1": 0.02818376241597946,
+          "body": 0.07710838360532905,
+          "activity": 0.05397875628344608,
+          "primary": 0.029831787399550325
+        }
+      },
+      "initial_validation": {
+        "query_price": 0.02153015409359135,
+        "near_price": 0.0017010489367342825,
+        "far": 0.002051616631517067,
+        "gap_price": 0.0030712955044947697,
+        "query_fixed": 0.03302341763843461,
+        "activity": 0.05984102887366203,
+        "families": {
+          "path": 0.0007881271902372744,
+          "change1": 0.03265032531083599,
+          "body": 0.08225791927251835,
+          "activity": 0.05984102887366203,
+          "primary": 0.03302341763843461
+        }
+      },
+      "fork_sha256": "eb1743b178d680caae8376fc61c016431555a9007d98b35113af34821a022b28",
+      "encoder_frozen": false,
+      "exposure_per_epoch": {
+        "query_contexts": 1353600,
+        "positions_per_view": 94,
+        "supervised_position1": false,
+        "legacy_held_trained": false
+      },
+      "query_start_sha256": "5a7698ab211772d20d8ec87bd8a7e9d93c2570f20583c1c7694516cf701916fa",
+      "encoder_start_sha256": "8f9f8da494480f64e6d5a5de366ef7d63826465bef9a33b126ac100a074e4dd9",
+      "encoder_end_sha256": "e85c58bb724a76a9eb5929fd696120595b5f7390b576d8d8b6ed45683ad43de3",
+      "seconds": 27763.89700893406,
+      "views": 864000,
+      "steps": 2280,
+      "peak_allocated_bytes": 1432750080
+    },
+    "dense_all_s42": {
+      "selected_epoch": 0,
+      "epochs": 60,
+      "validation": {
+        "query_price": 0.02153015409359135,
+        "near_price": 0.0017010489367342825,
+        "far": 0.002051616631517067,
+        "gap_price": 0.0030712955044947697,
+        "query_fixed": 0.03302341763843461,
+        "activity": 0.05984102887366203,
+        "families": {
+          "path": 0.0007881271902372744,
+          "change1": 0.03265032531083599,
+          "body": 0.08225791927251835,
+          "activity": 0.05984102887366203,
+          "primary": 0.03302341763843461
+        }
+      },
+      "initial_validation": {
+        "query_price": 0.02153015409359135,
+        "near_price": 0.0017010489367342825,
+        "far": 0.002051616631517067,
+        "gap_price": 0.0030712955044947697,
+        "query_fixed": 0.03302341763843461,
+        "activity": 0.05984102887366203,
+        "families": {
+          "path": 0.0007881271902372744,
+          "change1": 0.03265032531083599,
+          "body": 0.08225791927251835,
+          "activity": 0.05984102887366203,
+          "primary": 0.03302341763843461
+        }
+      },
+      "fork_sha256": "eb1743b178d680caae8376fc61c016431555a9007d98b35113af34821a022b28",
+      "encoder_frozen": false,
+      "exposure_per_epoch": {
+        "query_contexts": 1828800,
+        "positions_per_view": 127,
+        "supervised_position1": false,
+        "legacy_held_trained": true
+      },
+      "query_start_sha256": "5a7698ab211772d20d8ec87bd8a7e9d93c2570f20583c1c7694516cf701916fa",
+      "encoder_start_sha256": "8f9f8da494480f64e6d5a5de366ef7d63826465bef9a33b126ac100a074e4dd9",
+      "encoder_end_sha256": "5503d7898cd2c83d8889a3c92f6056b6be40f5ad5eb507886e0d8d6ae68e8dfc",
+      "seconds": 35231.003884001635,
+      "views": 864000,
+      "steps": 2280,
+      "peak_allocated_bytes": 1432940544
+    },
+    "sampled_s43": {
+      "selected_epoch": 58,
+      "epochs": 60,
+      "validation": {
+        "query_price": 0.011726621401288622,
+        "near_price": 0.0008291507333081463,
+        "far": 0.0011584080667855431,
+        "gap_price": 0.0005329112851608049,
+        "query_fixed": 0.015030639107752574,
+        "activity": 0.022740013059419112,
+        "families": {
+          "path": 0.0003879294818331981,
+          "change1": 0.01506920094685223,
+          "body": 0.05039622998798308,
+          "activity": 0.022740013059419112,
+          "primary": 0.015030639107752574
+        }
+      },
+      "initial_validation": {
+        "query_price": 0.012722163311948625,
+        "near_price": 0.0008700409002803359,
+        "far": 0.0012206366942723338,
+        "gap_price": 0.0005472199455867033,
+        "query_fixed": 0.01661252427363836,
+        "activity": 0.02569003162452292,
+        "families": {
+          "path": 0.000412633215460035,
+          "change1": 0.016989017836394515,
+          "body": 0.05342657464901119,
+          "activity": 0.02569003162452292,
+          "primary": 0.01661252427363836
+        }
+      },
+      "fork_sha256": "70578bf63518c4815406b7e349b1e27608a5e8e1623e32343719ebbf3d167915",
+      "encoder_frozen": false,
+      "exposure_per_epoch": {
+        "query_contexts": 72000,
+        "positions_per_view": 5,
+        "supervised_position1": false,
+        "legacy_held_trained": false
+      },
+      "query_start_sha256": "acd6e3b65809684af7b0130fae0dfc4a60d661edfccfe426f19a169fda4fe886",
+      "encoder_start_sha256": "208fac7ab1e7c2a60ea1f5665b01847e5b42f3abba3213e1372c907f530cd2fd",
+      "encoder_end_sha256": "98527eb1c9b0278efbfdf9d66634d7226786039849656e9a15299836be8d6049",
+      "seconds": 4063.1318615069613,
+      "views": 864000,
+      "steps": 2280,
+      "peak_allocated_bytes": 1421694464
+    },
+    "dense_matched_s43": {
+      "selected_epoch": 59,
+      "epochs": 60,
+      "validation": {
+        "query_price": 0.011589380955664405,
+        "near_price": 0.0008164931738802063,
+        "far": 0.0011372278467367007,
+        "gap_price": 0.0005217499895526592,
+        "query_fixed": 0.01482319259658063,
+        "activity": 0.02236875236521957,
+        "families": {
+          "path": 0.0003787511014541447,
+          "change1": 0.014836199595155511,
+          "body": 0.04993826309352321,
+          "activity": 0.02236875236521957,
+          "primary": 0.01482319259658063
+        }
+      },
+      "initial_validation": {
+        "query_price": 0.012722163311948625,
+        "near_price": 0.0008700409002803359,
+        "far": 0.0012206366942723338,
+        "gap_price": 0.0005472199455867033,
+        "query_fixed": 0.01661252427363836,
+        "activity": 0.02569003162452292,
+        "families": {
+          "path": 0.000412633215460035,
+          "change1": 0.016989017836394515,
+          "body": 0.05342657464901119,
+          "activity": 0.02569003162452292,
+          "primary": 0.01661252427363836
+        }
+      },
+      "fork_sha256": "70578bf63518c4815406b7e349b1e27608a5e8e1623e32343719ebbf3d167915",
+      "encoder_frozen": false,
+      "exposure_per_epoch": {
+        "query_contexts": 1353600,
+        "positions_per_view": 94,
+        "supervised_position1": false,
+        "legacy_held_trained": false
+      },
+      "query_start_sha256": "acd6e3b65809684af7b0130fae0dfc4a60d661edfccfe426f19a169fda4fe886",
+      "encoder_start_sha256": "208fac7ab1e7c2a60ea1f5665b01847e5b42f3abba3213e1372c907f530cd2fd",
+      "encoder_end_sha256": "e1bb83790bfc5b9b585f055f3abc1b37dae7bbbd8590cc3eecd7e83f7a813c90",
+      "seconds": 26413.22736906074,
+      "views": 864000,
+      "steps": 2280,
+      "peak_allocated_bytes": 1432750080
+    },
+    "dense_all_s43": {
+      "selected_epoch": 0,
+      "epochs": 60,
+      "validation": {
+        "query_price": 0.012722163311948625,
+        "near_price": 0.0008700409002803359,
+        "far": 0.0012206366942723338,
+        "gap_price": 0.0005472199455867033,
+        "query_fixed": 0.01661252427363836,
+        "activity": 0.02569003162452292,
+        "families": {
+          "path": 0.000412633215460035,
+          "change1": 0.016989017836394515,
+          "body": 0.05342657464901119,
+          "activity": 0.02569003162452292,
+          "primary": 0.01661252427363836
+        }
+      },
+      "initial_validation": {
+        "query_price": 0.012722163311948625,
+        "near_price": 0.0008700409002803359,
+        "far": 0.0012206366942723338,
+        "gap_price": 0.0005472199455867033,
+        "query_fixed": 0.01661252427363836,
+        "activity": 0.02569003162452292,
+        "families": {
+          "path": 0.000412633215460035,
+          "change1": 0.016989017836394515,
+          "body": 0.05342657464901119,
+          "activity": 0.02569003162452292,
+          "primary": 0.01661252427363836
+        }
+      },
+      "fork_sha256": "70578bf63518c4815406b7e349b1e27608a5e8e1623e32343719ebbf3d167915",
+      "encoder_frozen": false,
+      "exposure_per_epoch": {
+        "query_contexts": 1828800,
+        "positions_per_view": 127,
+        "supervised_position1": false,
+        "legacy_held_trained": true
+      },
+      "query_start_sha256": "acd6e3b65809684af7b0130fae0dfc4a60d661edfccfe426f19a169fda4fe886",
+      "encoder_start_sha256": "208fac7ab1e7c2a60ea1f5665b01847e5b42f3abba3213e1372c907f530cd2fd",
+      "encoder_end_sha256": "290a68367ab57fecead29721f4a3f14ef7eccf44ac1b2af19bb8b5d88b0d5beb",
+      "seconds": 33189.595461372286,
+      "views": 864000,
+      "steps": 2280,
+      "peak_allocated_bytes": 1432940544
+    }
+  },
+  "elapsed_seconds": 73713.86512737814,
+  "branches": {
+    "dense_matched": {
+      "status": "no_confirmed_supervision_upgrade",
+      "groups": {
+        "utility_gain": false,
+        "position_gain": false,
+        "price_gain": false,
+        "retention": false,
+        "activity_retention": true
+      }
+    },
+    "dense_all": {
+      "status": "no_confirmed_supervision_upgrade",
+      "groups": {
+        "utility_gain": false,
+        "position_gain": false,
+        "price_gain": false,
+        "retention": false,
+        "activity_retention": false
+      }
+    }
+  },
+  "metrics": {
+    "test": {
+      "source_s42": {
+        "query_price": 0.06776078477216765,
+        "query_fixed": 0.0678224100995018,
+        "activity": 0.06796620041131973,
+        "close_mae_bps": 5.8964844737555895,
+        "near_price": 0.009122913964533873,
+        "far": 0.011238051182785211,
+        "utility": 0.1604995038250619
+      },
+      "source_s43": {
+        "query_price": 0.03853340242696117,
+        "query_fixed": 0.03535192586018011,
+        "activity": 0.02792847901582718,
+        "close_mae_bps": 4.096748190952753,
+        "near_price": 0.005996518181754849,
+        "far": 0.00869259137748394,
+        "utility": 0.14100765056862574
+      },
+      "sampled_s42_best": {
+        "query_price": 0.06468840018188514,
+        "query_fixed": 0.06380914742725616,
+        "activity": 0.06175755709409714,
+        "close_mae_bps": 5.712569983043391,
+        "near_price": 0.008624483083453302,
+        "far": 0.01073619109100315,
+        "utility": 0.16204380594211237
+      },
+      "sampled_s42_last": {
+        "query_price": 0.06468840018188514,
+        "query_fixed": 0.06380914742725616,
+        "activity": 0.06175755709409714,
+        "close_mae_bps": 5.712569983043391,
+        "near_price": 0.008624483083453302,
+        "far": 0.01073619109100315,
+        "utility": 0.16204380594211237
+      },
+      "dense_matched_s42_best": {
+        "query_price": 0.0646239810500478,
+        "query_fixed": 0.0636021691232682,
+        "activity": 0.061217937618494034,
+        "close_mae_bps": 5.654239945971933,
+        "near_price": 0.008520751711889133,
+        "far": 0.01063994094043964,
+        "utility": 0.162044878047005
+      },
+      "dense_matched_s42_last": {
+        "query_price": 0.0646239810500478,
+        "query_fixed": 0.0636021691232682,
+        "activity": 0.061217937618494034,
+        "close_mae_bps": 5.654239945971933,
+        "near_price": 0.008520751711889133,
+        "far": 0.01063994094043964,
+        "utility": 0.162044878047005
+      },
+      "dense_all_s42_best": {
+        "query_price": 0.06776078477216765,
+        "query_fixed": 0.0678224100995018,
+        "activity": 0.06796620041131973,
+        "close_mae_bps": 5.8964844737555895,
+        "near_price": 0.009122913964533873,
+        "far": 0.011238051182785211,
+        "utility": 0.1604995038250619
+      },
+      "dense_all_s42_last": {
+        "query_price": 0.056593040978986695,
+        "query_fixed": 0.05572258672487465,
+        "activity": 0.053691525012254715,
+        "close_mae_bps": 5.160296803685542,
+        "near_price": 0.011407642719094876,
+        "far": 0.014095863883908473,
+        "utility": 0.16255143997722338
+      },
+      "sampled_s43_best": {
+        "query_price": 0.03619583393051497,
+        "query_fixed": 0.03279377054801894,
+        "activity": 0.02485562115907669,
+        "close_mae_bps": 3.9375516956998964,
+        "near_price": 0.006061107618936164,
+        "far": 0.008526524951607953,
+        "utility": 0.14216532042279512
+      },
+      "sampled_s43_last": {
+        "query_price": 0.036139708746794987,
+        "query_fixed": 0.03275171593499462,
+        "activity": 0.0248463973402977,
+        "close_mae_bps": 3.9285344615688054,
+        "near_price": 0.006048415819162205,
+        "far": 0.008417107392015271,
+        "utility": 0.1421939414854942
+      },
+      "dense_matched_s43_best": {
+        "query_price": 0.036026438462986254,
+        "query_fixed": 0.0325682213246812,
+        "activity": 0.02449904754757881,
+        "close_mae_bps": 3.8919027510770983,
+        "near_price": 0.0059369792563928134,
+        "far": 0.00853441393214029,
+        "utility": 0.14205693939131692
+      },
+      "dense_matched_s43_last": {
+        "query_price": 0.03601480070079631,
+        "query_fixed": 0.0325520540517536,
+        "activity": 0.0244723130017519,
+        "close_mae_bps": 3.8944815349427326,
+        "near_price": 0.005986063216726383,
+        "far": 0.008513463924864876,
+        "utility": 0.14202202682371345
+      },
+      "dense_all_s43_best": {
+        "query_price": 0.03853340242696117,
+        "query_fixed": 0.03535192586018011,
+        "activity": 0.02792847901582718,
+        "close_mae_bps": 4.096748190952753,
+        "near_price": 0.005996518181754849,
+        "far": 0.00869259137748394,
+        "utility": 0.14100765056862574
+      },
+      "dense_all_s43_last": {
+        "query_price": 0.03660275835403699,
+        "query_fixed": 0.033107408188435467,
+        "activity": 0.024951593950390816,
+        "close_mae_bps": 3.8515653982112728,
+        "near_price": 0.00630583311991672,
+        "far": 0.009824315197380844,
+        "utility": 0.1414459688730179
+      }
+    },
+    "cross_research": {
+      "source_s42": {
+        "query_price": 0.02115429464142944,
+        "query_fixed": 0.03520165710670318,
+        "activity": 0.06797882914543152,
+        "close_mae_bps": 4.178212407823495,
+        "near_price": 0.001956947843350165,
+        "far": 0.0015284863643580642,
+        "utility": 0.04385275485362839
+      },
+      "source_s43": {
+        "query_price": 0.009082380820906434,
+        "query_fixed": 0.0139018330940022,
+        "activity": 0.025147221982479095,
+        "close_mae_bps": 2.9268309626428066,
+        "near_price": 0.000739802429164398,
+        "far": 0.0010223363922910599,
+        "utility": 0.044112490154924605
+      },
+      "sampled_s42_best": {
+        "query_price": 0.01996504373551096,
+        "query_fixed": 0.032334458788737974,
+        "activity": 0.061196427792310715,
+        "close_mae_bps": 4.027155709076071,
+        "near_price": 0.001988818031892556,
+        "far": 0.0014680335568971984,
+        "utility": 0.04418784949269691
+      },
+      "sampled_s42_last": {
+        "query_price": 0.01996504373551096,
+        "query_fixed": 0.032334458788737974,
+        "activity": 0.061196427792310715,
+        "close_mae_bps": 4.027155709076071,
+        "near_price": 0.001988818031892556,
+        "far": 0.0014680335568971984,
+        "utility": 0.04418784949269691
+      },
+      "dense_matched_s42_best": {
+        "query_price": 0.020203491269403597,
+        "query_fixed": 0.032313897016310225,
+        "activity": 0.06057150661945343,
+        "close_mae_bps": 3.977595950503312,
+        "near_price": 0.001944618762378462,
+        "far": 0.0014565165891268928,
+        "utility": 0.04408327457729665
+      },
+      "dense_matched_s42_last": {
+        "query_price": 0.020203491269403597,
+        "query_fixed": 0.032313897016310225,
+        "activity": 0.06057150661945343,
+        "close_mae_bps": 3.977595950503312,
+        "near_price": 0.001944618762378462,
+        "far": 0.0014565165891268928,
+        "utility": 0.04408327457729665
+      },
+      "dense_all_s42_best": {
+        "query_price": 0.02115429464142944,
+        "query_fixed": 0.03520165710670318,
+        "activity": 0.06797882914543152,
+        "close_mae_bps": 4.178212407823495,
+        "near_price": 0.001956947843350165,
+        "far": 0.0015284863643580642,
+        "utility": 0.04385275485362839
+      },
+      "dense_all_s42_last": {
+        "query_price": 0.013865649384975783,
+        "query_fixed": 0.02563570981626116,
+        "activity": 0.05309918522834778,
+        "close_mae_bps": 3.4940807177831075,
+        "near_price": 0.003102490712859018,
+        "far": 0.0024029429041492155,
+        "utility": 0.042769025467260524
+      },
+      "sampled_s43_best": {
+        "query_price": 0.008317500155922315,
+        "query_fixed": 0.012407085717284515,
+        "activity": 0.02194945141673088,
+        "close_mae_bps": 2.802773283043371,
+        "near_price": 0.000732717650167834,
+        "far": 0.0010144437560850842,
+        "utility": 0.04414571140251699
+      },
+      "sampled_s43_last": {
+        "query_price": 0.008293994152607937,
+        "query_fixed": 0.01238589418613726,
+        "activity": 0.02193366177380085,
+        "close_mae_bps": 2.811489228494094,
+        "near_price": 0.0007340756362622025,
+        "far": 0.0009828108417172497,
+        "utility": 0.04418877876975605
+      },
+      "dense_matched_s43_best": {
+        "query_price": 0.008202573989951846,
+        "query_fixed": 0.012210675548351533,
+        "activity": 0.021562909707427025,
+        "close_mae_bps": 2.770336858835266,
+        "near_price": 0.0007151206616096113,
+        "far": 0.0009875722622338474,
+        "utility": 0.04424482976820854
+      },
+      "dense_matched_s43_last": {
+        "query_price": 0.00819683080355699,
+        "query_fixed": 0.012199590750751698,
+        "activity": 0.021539364010095596,
+        "close_mae_bps": 2.7719902453432,
+        "near_price": 0.0007275387466706374,
+        "far": 0.000977437102604988,
+        "utility": 0.04425153912961274
+      },
+      "dense_all_s43_best": {
+        "query_price": 0.009082380820906434,
+        "query_fixed": 0.0139018330940022,
+        "activity": 0.025147221982479095,
+        "close_mae_bps": 2.9268309626428066,
+        "near_price": 0.000739802429164398,
+        "far": 0.0010223363922910599,
+        "utility": 0.044112490154924605
+      },
+      "dense_all_s43_last": {
+        "query_price": 0.008190018093465791,
+        "query_fixed": 0.012363760020080007,
+        "activity": 0.022102490067481995,
+        "close_mae_bps": 2.709109289495121,
+        "near_price": 0.0006931413932505804,
+        "far": 0.0012326776934684853,
+        "utility": 0.043800007109355436
+      }
+    }
+  },
+  "improvement_percent": {
+    "test/s42/best/dense_matched/sampled": {
+      "query_price": 0.09958374554976945,
+      "query_fixed": 0.3243708971725656,
+      "activity": 0.8737707593921007,
+      "close_mae_bps": 1.0210822317205492,
+      "near_price": 1.2027546527766497,
+      "far": 0.8965018389451629,
+      "utility": -0.0006616142384396895,
+      "position_bands": {
+        "2..31": -5.045551039912932,
+        "32..127": 0.8437329940120919,
+        "32..64": 0.6633796682511406,
+        "65..96": 0.8041222785407531,
+        "97..127": 0.9390590688518885,
+        "128..128": 0.5943010287144168
+      }
+    },
+    "test/s42/best/dense_all/sampled": {
+      "query_price": -4.749513949400286,
+      "query_fixed": -6.289478599946574,
+      "activity": -10.053252766722576,
+      "close_mae_bps": -3.2194702429573896,
+      "near_price": -5.779255130511496,
+      "far": -4.67447055969985,
+      "utility": 0.9530152097280142,
+      "position_bands": {
+        "2..31": -0.6624270939543209,
+        "32..127": -5.09096902908357,
+        "32..64": -3.5279625284560634,
+        "65..96": -4.754466408232294,
+        "97..127": -5.913089483500333,
+        "128..128": -6.822877808742711
+      }
+    },
+    "test/s42/best/dense_all/dense_matched": {
+      "query_price": -4.853931421666169,
+      "query_fixed": -6.635372715125931,
+      "activity": -11.023342267556302,
+      "close_mae_bps": -4.284298687328092,
+      "near_price": -7.067008557525911,
+      "far": -5.621368066737187,
+      "utility": 0.9536705143465385,
+      "position_bands": {
+        "2..31": 4.172593605885522,
+        "32..127": -5.985201139870733,
+        "32..64": -4.219332389917851,
+        "65..96": -5.603648875794498,
+        "97..127": -6.917104247086425,
+        "128..128": -7.461522743881788
+      }
+    },
+    "test/s42/last/dense_matched/sampled": {
+      "query_price": 0.09958374554976945,
+      "query_fixed": 0.3243708971725656,
+      "activity": 0.8737707593921007,
+      "close_mae_bps": 1.0210822317205492,
+      "near_price": 1.2027546527766497,
+      "far": 0.8965018389451629,
+      "utility": -0.0006616142384396895,
+      "position_bands": {
+        "2..31": -5.045551039912932,
+        "32..127": 0.8437329940120919,
+        "32..64": 0.6633796682511406,
+        "65..96": 0.8041222785407531,
+        "97..127": 0.9390590688518885,
+        "128..128": 0.5943010287144168
+      }
+    },
+    "test/s42/last/dense_all/sampled": {
+      "query_price": 12.514390802889896,
+      "query_fixed": 12.67304301722627,
+      "activity": 13.06080172431785,
+      "close_mae_bps": 9.667683389387971,
+      "near_price": -32.27045155878696,
+      "far": -31.292967537814253,
+      "utility": -0.3132696323439488,
+      "position_bands": {
+        "2..31": 98.16917644670211,
+        "32..127": 1.302905494671991,
+        "32..64": 1.5436348418121026,
+        "65..96": 1.6144556043613534,
+        "97..127": 1.022649592114211,
+        "128..128": -22.30005400235646
+      }
+    },
+    "test/s42/last/dense_all/dense_matched": {
+      "query_price": 12.427182511151036,
+      "query_fixed": 12.388857969799783,
+      "activity": 12.294456329357917,
+      "close_mae_bps": 8.735800868130383,
+      "near_price": -33.88070800346901,
+      "far": -32.480659082737674,
+      "utility": -0.3126059498600453,
+      "position_bands": {
+        "2..31": 98.25711461820762,
+        "32..127": 0.4630796565104345,
+        "32..64": 0.8861336037215839,
+        "65..96": 0.8169022185538832,
+        "97..127": 0.08438292880785792,
+        "128..128": -23.031229867096627
+      }
+    },
+    "test/s43/best/dense_matched/sampled": {
+      "query_price": 0.46799713981974245,
+      "query_fixed": 0.6877806960546851,
+      "activity": 1.4345793622126624,
+      "close_mae_bps": 1.159323055304906,
+      "near_price": 2.0479484996363984,
+      "far": -0.09252281060703194,
+      "utility": 0.07623591404420926,
+      "position_bands": {
+        "2..31": 1.710032718142851,
+        "32..127": 0.41337154295619793,
+        "32..64": 0.4023693176823495,
+        "65..96": 0.28692460707917533,
+        "97..127": 0.5052954083856864,
+        "128..128": 0.6278281259390783
+      }
+    },
+    "test/s43/best/dense_all/sampled": {
+      "query_price": -6.458114767941603,
+      "query_fixed": -7.800735534254399,
+      "activity": -12.362828661911562,
+      "close_mae_bps": -4.04303251248006,
+      "near_price": 1.0656375243944582,
+      "far": -1.947644870782561,
+      "utility": 0.8143124150999048,
+      "position_bands": {
+        "2..31": -9.219949417680894,
+        "32..127": -6.02811737238127,
+        "32..64": -4.464339556238084,
+        "65..96": -4.193144280271244,
+        "97..127": -8.099702423386379,
+        "128..128": -8.057546099805446
+      }
+    },
+    "test/s43/best/dense_all/dense_matched": {
+      "query_price": -6.9586783232835625,
+      "query_fixed": -8.547302929894208,
+      "activity": -13.998223651707997,
+      "close_mae_bps": -5.263375088675137,
+      "near_price": -1.002848802241063,
+      "far": -1.8534072357090592,
+      "utility": 0.7386396097136427,
+      "position_bands": {
+        "2..31": -11.120140171052096,
+        "32..127": -6.468226723948156,
+        "32..64": -4.886370128064166,
+        "65..96": -4.492960296026016,
+        "97..127": -8.648699312282115,
+        "128..128": -8.740247960718728
+      }
+    },
+    "test/s43/last/dense_matched/sampled": {
+      "query_price": 0.34562549154398825,
+      "query_fixed": 0.60962266415997,
+      "activity": 1.505587846086165,
+      "close_mae_bps": 0.8668099251565198,
+      "near_price": 1.0308914648076928,
+      "far": -1.144770149196539,
+      "utility": 0.12090153770599743,
+      "position_bands": {
+        "2..31": 2.1176650904699446,
+        "32..127": 0.26692931164208344,
+        "32..64": 0.21748320589567438,
+        "65..96": 0.09770703082353505,
+        "97..127": 0.4081876935679185,
+        "128..128": 0.4604533603770111
+      }
+    },
+    "test/s43/last/dense_all/sampled": {
+      "query_price": -1.2812765329301978,
+      "query_fixed": -1.0860263143061655,
+      "activity": -0.4233877799358021,
+      "close_mae_bps": 1.9592309577652567,
+      "near_price": -4.255945828641305,
+      "far": -16.71842522409177,
+      "utility": 0.526022842226781,
+      "position_bands": {
+        "2..31": 98.25049390593331,
+        "32..127": -2.0654779191703554,
+        "32..64": 1.056352513806269,
+        "65..96": -0.8497290513740596,
+        "97..127": -4.534102150535557,
+        "128..128": -7.8470882855248725
+      }
+    },
+    "test/s43/last/dense_all/dense_matched": {
+      "query_price": -1.63254451447703,
+      "query_fixed": -1.706049442529567,
+      "activity": -1.958461991739835,
+      "close_mae_bps": 1.1019730443295295,
+      "near_price": -5.341906552153164,
+      "far": -15.397390346453754,
+      "utility": 0.40561169529750307,
+      "position_bands": {
+        "2..31": 98.21264368521275,
+        "32..127": -2.3386497725520483,
+        "32..64": 0.8406976841860647,
+        "65..96": -0.9483626992324412,
+        "97..127": -4.962546347581931,
+        "128..128": -8.345970949595394
+      }
+    },
+    "cross_research/s42/best/dense_matched/sampled": {
+      "query_price": -1.1943251267139576,
+      "query_fixed": 0.06359089713575683,
+      "activity": 1.0211726327852833,
+      "close_mae_bps": 1.2306392439970892,
+      "near_price": 2.2223888161369,
+      "far": 0.7845166560529804,
+      "utility": 0.23665988863647014,
+      "position_bands": {
+        "2..31": -5.873982753246243,
+        "32..127": 1.103048452523503,
+        "32..64": 0.991967308232955,
+        "65..96": 1.015971302452967,
+        "97..127": 1.1792772469725654,
+        "128..128": 0.7871152234881773
+      }
+    },
+    "cross_research/s42/best/dense_all/sampled": {
+      "query_price": -5.956665668621675,
+      "query_fixed": -8.86731501120359,
+      "activity": -11.083002060412749,
+      "close_mae_bps": -3.750952524805151,
+      "near_price": 1.6024688046529567,
+      "far": -4.117944523600503,
+      "utility": 0.758341134306395,
+      "position_bands": {
+        "2..31": -0.5974157887149056,
+        "32..127": -6.849216714240236,
+        "32..64": -4.480181542783446,
+        "65..96": -6.554776402460738,
+        "97..127": -7.719801746762545,
+        "128..128": -8.750890377751341
+      }
+    },
+    "cross_research/s42/best/dense_all/dense_matched": {
+      "query_price": -4.706134001036499,
+      "query_fixed": -8.936588765308539,
+      "activity": -12.229054450494914,
+      "close_mae_bps": -5.043661040905811,
+      "near_price": -0.6340101828814726,
+      "far": -4.941225920009162,
+      "utility": 0.5229187846834238,
+      "position_bands": {
+        "2..31": 4.983818335075851,
+        "32..127": -8.040960861110236,
+        "32..64": -5.526974632505177,
+        "65..96": -7.648453800609278,
+        "97..127": -9.00527616659479,
+        "128..128": -9.613676311020436
+      }
+    },
+    "cross_research/s42/last/dense_matched/sampled": {
+      "query_price": -1.1943251267139576,
+      "query_fixed": 0.06359089713575683,
+      "activity": 1.0211726327852833,
+      "close_mae_bps": 1.2306392439970892,
+      "near_price": 2.2223888161369,
+      "far": 0.7845166560529804,
+      "utility": 0.23665988863647014,
+      "position_bands": {
+        "2..31": -5.873982753246243,
+        "32..127": 1.103048452523503,
+        "32..64": 0.991967308232955,
+        "65..96": 1.015971302452967,
+        "97..127": 1.1792772469725654,
+        "128..128": 0.7871152234881773
+      }
+    },
+    "cross_research/s42/last/dense_all/sampled": {
+      "query_price": 30.55036809003553,
+      "query_fixed": 20.71705920994099,
+      "activity": 13.231560821562116,
+      "close_mae_bps": 13.237009686304491,
+      "near_price": -55.99671076527262,
+      "far": -63.6844670790782,
+      "utility": 3.2108917761903832,
+      "position_bands": {
+        "2..31": 99.6920656837522,
+        "32..127": 3.891816624855493,
+        "32..64": 4.24685390243138,
+        "65..96": 6.329203446349441,
+        "97..127": 2.6048084690315387,
+        "128..128": -29.96401253985812
+      }
+    },
+    "cross_research/s42/last/dense_all/dense_matched": {
+      "query_price": 31.370033030013555,
+      "query_fixed": 20.666610395763453,
+      "activity": 12.336363759368352,
+      "close_mae_bps": 12.155966536998864,
+      "near_price": -59.54236238389286,
+      "far": -64.97875287432578,
+      "utility": 2.981287398992305,
+      "position_bands": {
+        "2..31": 99.70915015356938,
+        "32..127": 2.8198727348974106,
+        "32..64": 3.287497494603875,
+        "65..96": 5.367767117391686,
+        "97..127": 1.4425428010900743,
+        "128..128": -30.995094873631256
+      }
+    },
+    "cross_research/s43/best/dense_matched/sampled": {
+      "query_price": 1.3817392704061238,
+      "query_fixed": 1.5830483758112468,
+      "activity": 1.7610540781407225,
+      "close_mae_bps": 1.1572974669176395,
+      "near_price": 2.40160565999632,
+      "far": 2.6488894716981237,
+      "utility": -0.2245254692755827,
+      "position_bands": {
+        "2..31": 2.121109930801557,
+        "32..127": 1.2808084954720744,
+        "32..64": 1.1953406527409949,
+        "65..96": 1.2649652772184439,
+        "97..127": 1.3272258169412798,
+        "128..128": 1.0555401293132594
+      }
+    },
+    "cross_research/s43/best/dense_all/sampled": {
+      "query_price": -9.196040284285424,
+      "query_fixed": -12.04753002258483,
+      "activity": -14.568794932663899,
+      "close_mae_bps": -4.426247401100114,
+      "near_price": -0.9669180201870686,
+      "far": -0.7780260027854924,
+      "utility": 0.0752536238219692,
+      "position_bands": {
+        "2..31": -10.870128435516824,
+        "32..127": -8.578158108221356,
+        "32..64": -6.053455442778022,
+        "65..96": -5.633430560429975,
+        "97..127": -11.383170319030778,
+        "128..128": -11.024138826621922
+      }
+    },
+    "cross_research/s43/best/dense_all/dense_matched": {
+      "query_price": -10.725984697393187,
+      "query_fixed": -13.849827873601782,
+      "activity": -16.622581663074463,
+      "close_mae_bps": -5.648919672293418,
+      "near_price": -3.4514130103907803,
+      "far": -3.5201606390379503,
+      "utility": 0.29910752053344813,
+      "position_bands": {
+        "2..31": -13.272768374400057,
+        "32..127": -9.986879403526338,
+        "32..64": -7.336492168899045,
+        "65..96": -6.986776129685945,
+        "97..127": -12.8813608831871,
+        "128..128": -12.208545048123408
+      }
+    },
+    "cross_research/s43/last/dense_matched/sampled": {
+      "query_price": 1.1714904455339514,
+      "query_fixed": 1.5041581381671998,
+      "activity": 1.7976832494801753,
+      "close_mae_bps": 1.4049131951343385,
+      "near_price": 0.8904926507096511,
+      "far": 0.5467724697534204,
+      "utility": -0.14202782155103844,
+      "position_bands": {
+        "2..31": 2.5715436838028127,
+        "32..127": 1.2780947915908336,
+        "32..64": 1.1532251639070124,
+        "65..96": 1.3259987880778645,
+        "97..127": 1.3047816013404878,
+        "128..128": 1.113253081727883
+      }
+    },
+    "cross_research/s43/last/dense_all/sampled": {
+      "query_price": 1.2536307263907642,
+      "query_fixed": 0.17870462741419457,
+      "activity": -0.7697223355691785,
+      "close_mae_bps": 3.641484305234577,
+      "near_price": 5.576297725947255,
+      "far": -25.423697129210264,
+      "utility": 0.8797972499450468,
+      "position_bands": {
+        "2..31": 99.72260853772573,
+        "32..127": -0.3845409816126688,
+        "32..64": 4.298329352193719,
+        "65..96": 2.636681378142103,
+        "97..127": -4.176944120907122,
+        "128..128": -9.557344666391998
+      }
+    },
+    "cross_research/s43/last/dense_all/dense_matched": {
+      "query_price": 0.08311395287362577,
+      "query_fixed": -1.3456948899551735,
+      "activity": -2.6144042931001144,
+      "close_mae_bps": 2.2684407332859813,
+      "near_price": 4.727906737265364,
+      "far": -26.11324965905737,
+      "utility": 1.020375853899147,
+      "position_bands": {
+        "2..31": 99.71528701904707,
+        "32..127": -1.6841609465432894,
+        "32..64": 3.1817974774613456,
+        "65..96": 1.3282957759554903,
+        "97..127": -5.55419584777177,
+        "128..128": -10.79072583603029
+      }
+    }
+  },
+  "selection_diagnostics": {
+    "sampled_s42": {
+      "eligible_epochs": [
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60
+      ],
+      "minimum_minimax_in_budget": 0.9918452930119719,
+      "last_relative_to_initial_percent": {
+        "query_price": -8.482559905768683,
+        "near_price": -0.8154706988028115,
+        "far": -1.5525122373786782,
+        "gap_price": -1.5260492566247175,
+        "activity": -8.671459836189243
+      },
+      "guard_failures": {
+        "query_price": 24,
+        "near_price": 42,
+        "far": 47,
+        "gap_price": 38
+      }
+    },
+    "dense_matched_s42": {
+      "eligible_epochs": [
+        46,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60
+      ],
+      "minimum_minimax_in_budget": 0.9844631078939508,
+      "last_relative_to_initial_percent": {
+        "query_price": -9.507918210449539,
+        "near_price": -1.553689210604925,
+        "far": -2.8171112099986906,
+        "gap_price": -1.3885946353906053,
+        "activity": -9.796410089459751
+      },
+      "guard_failures": {
+        "query_price": 25,
+        "near_price": 42,
+        "far": 46,
+        "gap_price": 36
+      }
+    },
+    "dense_all_s42": {
+      "eligible_epochs": [],
+      "minimum_minimax_in_budget": 1.6293511874297135,
+      "last_relative_to_initial_percent": {
+        "query_price": 2.94436407223031,
+        "near_price": 68.55711385583017,
+        "far": 51.99480294548391,
+        "gap_price": 76.68918690197609,
+        "activity": 2.976079167455703
+      },
+      "guard_failures": {
+        "query_price": 35,
+        "near_price": 60,
+        "far": 60,
+        "gap_price": 60
+      }
+    },
+    "sampled_s43": {
+      "eligible_epochs": [
+        42,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60
+      ],
+      "minimum_minimax_in_budget": 0.9530020175384692,
+      "last_relative_to_initial_percent": {
+        "query_price": -7.890506837392497,
+        "near_price": -4.213157302667881,
+        "far": -5.034820110038218,
+        "gap_price": 0.06666534441737149,
+        "activity": -11.698738042498924
+      },
+      "guard_failures": {
+        "query_price": 29,
+        "near_price": 43,
+        "far": 41,
+        "gap_price": 35
+      }
+    },
+    "dense_matched_s43": {
+      "eligible_epochs": [
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60
+      ],
+      "minimum_minimax_in_budget": 0.9384537825947309,
+      "last_relative_to_initial_percent": {
+        "query_price": -8.9644438785505,
+        "near_price": -5.9836457147349975,
+        "far": -6.979720212964335,
+        "gap_price": -2.7018435919070716,
+        "activity": -13.085195498855429
+      },
+      "guard_failures": {
+        "query_price": 27,
+        "near_price": 39,
+        "far": 40,
+        "gap_price": 34
+      }
+    },
+    "dense_all_s43": {
+      "eligible_epochs": [],
+      "minimum_minimax_in_budget": 1.1730403403921155,
+      "last_relative_to_initial_percent": {
+        "query_price": -5.065555132571364,
+        "near_price": -16.24696678966533,
+        "far": 17.748921251078652,
+        "gap_price": 1.7719189471986363,
+        "activity": -4.940489764628486
+      },
+      "guard_failures": {
+        "query_price": 29,
+        "near_price": 36,
+        "far": 60,
+        "gap_price": 33
+      }
+    }
+  },
+  "last20_validation_improvement_percent": {
+    "sampled_s42": {
+      "query_price": 3.9944060995075192,
+      "near_price": 9.290441409699557,
+      "far": 15.97976605177015,
+      "activity": 4.255962864832563
+    },
+    "dense_matched_s42": {
+      "query_price": 3.595724389809418,
+      "near_price": 7.060475848173331,
+      "far": 12.356132376996754,
+      "activity": 3.622047417173224
+    },
+    "dense_all_s42": {
+      "query_price": 1.1884215477702798,
+      "near_price": -1.5089824886578063,
+      "far": 0.7757231264568176,
+      "activity": 1.3662927810260461
+    },
+    "sampled_s43": {
+      "query_price": 3.753015914408775,
+      "near_price": 9.24943492526662,
+      "far": 18.767559631377885,
+      "activity": 5.543294976208479
+    },
+    "dense_matched_s43": {
+      "query_price": 4.295287357615751,
+      "near_price": 9.75896507868389,
+      "far": 16.184780411068942,
+      "activity": 6.214705593735337
+    },
+    "dense_all_s43": {
+      "query_price": 2.3674996925304836,
+      "near_price": 5.7188320968118544,
+      "far": 4.887673280251093,
+      "activity": 3.2035441979659574
+    }
+  },
+  "dense_matched_retention_failures": [
+    {
+      "mode": "dense_matched",
+      "dataset": "test",
+      "seed": 43,
+      "checkpoint": "best",
+      "group": "retention",
+      "metric": "far/level/source",
+      "factor": 1.1,
+      "interval": {
+        "weeks": 51,
+        "low": -0.00014268835017002918,
+        "high": 0.00016885417223792723,
+        "interpretation": "Candidate minus reference; negative favors candidate. Research data, uncorrected weekly interval.",
+        "delta": -1.8710409724117175e-05,
+        "support": 984,
+        "supported": true
+      },
+      "passed": false
+    },
+    {
+      "mode": "dense_matched",
+      "dataset": "test",
+      "seed": 43,
+      "checkpoint": "last",
+      "group": "retention",
+      "metric": "far/level/source",
+      "factor": 1.1,
+      "interval": {
+        "weeks": 51,
+        "low": -0.00014991415241348118,
+        "high": 0.00020338345808682792,
+        "interpretation": "Candidate minus reference; negative favors candidate. Research data, uncorrected weekly interval.",
+        "delta": -1.1321258755130335e-05,
+        "support": 984,
+        "supported": true
+      },
+      "passed": false
+    }
+  ],
+  "absolute_coverage": {
+    "test": {
+      "source_s42": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "source_s43": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "sampled_s42_best": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "sampled_s42_last": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "dense_matched_s42_best": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "dense_matched_s42_last": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "dense_all_s42_best": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "dense_all_s42_last": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "sampled_s43_best": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "sampled_s43_last": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "dense_matched_s43_best": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "dense_matched_s43_last": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "dense_all_s43_best": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "dense_all_s43_last": {
+        "utility_passed": false,
+        "current_passed": true
+      }
+    },
+    "cross_research": {
+      "source_s42": {
+        "utility_passed": true,
+        "current_passed": true
+      },
+      "source_s43": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "sampled_s42_best": {
+        "utility_passed": true,
+        "current_passed": true
+      },
+      "sampled_s42_last": {
+        "utility_passed": true,
+        "current_passed": true
+      },
+      "dense_matched_s42_best": {
+        "utility_passed": true,
+        "current_passed": true
+      },
+      "dense_matched_s42_last": {
+        "utility_passed": true,
+        "current_passed": true
+      },
+      "dense_all_s42_best": {
+        "utility_passed": true,
+        "current_passed": true
+      },
+      "dense_all_s42_last": {
+        "utility_passed": true,
+        "current_passed": true
+      },
+      "sampled_s43_best": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "sampled_s43_last": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "dense_matched_s43_best": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "dense_matched_s43_last": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "dense_all_s43_best": {
+        "utility_passed": false,
+        "current_passed": true
+      },
+      "dense_all_s43_last": {
+        "utility_passed": false,
+        "current_passed": true
+      }
+    }
+  },
+  "limitations": [
+    "No12 checkpoint binaries or heads.npz: no neural replay or refit locally.",
+    "Historical per-position errors were aggregated from exported errors; raw historical decoder predictions are not present.",
+    "Same cohort and warm-start continuation, not from-scratch comparison or fresh temporal confirmation."
+  ],
+  "implementation_commit": "736aa0e",
+  "review_scope": "Report/hash/selection/formula recomputation; no binary model replay or new fitting."
+}
