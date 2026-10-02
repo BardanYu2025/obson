@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-03",
+  "task": "state_rollout768",
+  "status": "implementation_verified_real_cuda_pending",
+  "tests": {
+    "command": ".venv/bin/pytest tests/babel/test_state_rollout.py tests/babel/test_volatility_transfer.py tests/babel/test_history_query.py -q --disable-warnings",
+    "passed": 56,
+    "new_tests": 18,
+    "real_local_optimizer_updates": 0,
+    "neural_optimizer_steps": "AdamW.step mocked in synthetic lifecycle tests"
+  },
+  "checks": [
+    "128+32 contract/partition eligibility and exact next-bar indexing",
+    "Observed inputs independent of future changes",
+    "Independent rolling128 extraction with endpoint dedup",
+    "Train-only state moments and unique-pair increment scaling",
+    "Actual-age price sign/scale without future anchors",
+    "Full8-step analytic gradients, TF/free distinction and microgradient equivalence",
+    "Same N1/N8 initialization, validation-only ties and epoch0 fallback",
+    "Interrupted epoch resume and source/resource/cache binding rejection",
+    "Full20-fit mocked lifecycle, selection lock, oracle audit and best/last evaluation",
+    "All-horizon simultaneous bands, insufficient-support rejection, tail/increment gates",
+    "Worker failure terminates remaining workers; no false completion",
+    "Synthetic CUDA OOM micro fallback without optimizer updates",
+    "Failure archive retains nonzero command status",
+    "Ruff, bash -n, git diff --check",
+    "Synthetic PNG curves and fixed/failure example layouts rendered and visually inspected"
+  ],
+  "source_integrity": {
+    "inherited_bound_modules": 97,
+    "unchanged_from_parent_commit": "779966e",
+    "feature_dependencies_bound": true
+  },
+  "separate_self_review": {
+    "method": "After implementation, trace conclusions back to price/latent metrics, validation lock, fit budgets, inference inputs and raw lineage; self-review, not independent peer review",
+    "findings_resolved": [
+      "Avoid inherited full127-age physical() broadcasting for one-age queries",
+      "Keep direct controls at8 outputs; no fabricated32-step direct forecasts",
+      "Detect nonfinite price/error scales and overflow rather than dropping rows",
+      "Release parent CUDA allocator cache before spawning workers",
+      "Skip bound completed jobs on resume instead of reloading all old encoders",
+      "Bind feature helpers without an untracked dependency on another experimental runner"
+    ],
+    "scientific_limits": [
+      "Forecast utility is separate from historical representation balance",
+      "Warm-start all-position failure does not negate from-scratch hypothesis",
+      "Same origin/update budgets do not mean same FLOPs or parameters",
+      "Repeated research sets and paired pretrained seeds are not new independent holdout evidence",
+      "Oracle future-state reader sees labels and is not a deployable predictor or strict lower bound",
+      "Report carries full price predictions, but latent diagnostics need remote caches/small weights for full tensor replay"
+    ]
+  },
+  "not_verified_locally": [
+    "Real source checkpoint restore and GPU numeric replay",
+    "Actual AutoDL eligible counts, memory peak, throughput and training convergence",
+    "Future price skill or trading utility"
+  ],
+  "decision": "Ready for the single finite AutoDL matrix; no result or automatic promotion claimed"
+}
