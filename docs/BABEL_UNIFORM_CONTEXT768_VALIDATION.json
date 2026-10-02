@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-03",
+  "status": "prepared_cuda_pending",
+  "tests": {
+    "command": "PYTHONPATH=src .venv/bin/pytest -q tests/babel/test_uniform_context.py tests/babel/test_history_query.py tests/babel/test_state_rollout.py tests/babel/test_position_supervision.py --disable-warnings",
+    "passed": 63,
+    "new_tests": 16,
+    "seconds": 43.28,
+    "optimizer_updates": 0,
+    "scope": "Synthetic forward/backward, AdamW.step mocked, real source neural inference/training not run locally"
+  },
+  "checks": [
+    "Ruff and shell syntax pass",
+    "Relative full-chunk vs independent rolling128 states; future invariance; exact input receptive field including oldest reachable feature",
+    "Gradient-checkpoint and micro-accumulation equivalence",
+    "Paired encoder and decoder initial values, budgets, schedules, validation-only best selection, epoch0 fallback",
+    "Atomic last journal, recovery of best/history, weight-only resume through cosine phase",
+    "Input/model/readout fingerprints and forbidden research-before-selection access",
+    "Synthetic research extraction through metrics, subgrouping, gates, PNG and HTML; image inspected",
+    "Actual shell failure exports failed receipt and protocol without model checkpoints"
+  ],
+  "raw_cpu_audit": {
+    "raw_files": 1251,
+    "eligible": {
+      "train": {
+        "original": 4789,
+        "eligible": 4789,
+        "excluded": 0
+      },
+      "val": {
+        "original": 978,
+        "eligible": 978,
+        "excluded": 0
+      },
+      "test": {
+        "original": 984,
+        "eligible": 984,
+        "excluded": 0
+      },
+      "cross_research": {
+        "original": 453,
+        "eligible": 439,
+        "excluded": 14
+      }
+    },
+    "target_comparisons": 96,
+    "max_abs_difference": 1.3124068800607347e-06
+  },
+  "source_code": {
+    "previous_modules_still_bound": 98,
+    "changed": 0,
+    "new_bound_modules": 102
+  },
+  "self_review": {
+    "conclusions": [
+      "Prefix vs rolling changes context and label support: explicitly not a pure loss ablation",
+      "Rolling vs relative bundles local attention and relative bias; equal parameter/sample budget, unequal compute",
+      "Original Macro remains unequal-pretraining reference; never auto-promoted",
+      "End/interior and age-band protections prevent average masking",
+      "All-position from-scratch and cross-resolution branches remain open"
+    ],
+    "fixes_before_release": [
+      "Use builtin float LR for weights_only checkpoint restoration after warmup",
+      "Reconstruct history as well as best from committed last journal",
+      "Check PCA/current-target support and frozen source restoration before expensive training",
+      "Preflight relative chunk invariance and conservative optimizer/concurrency memory budget"
+    ]
+  },
+  "cuda_pending": [
+    "Actual CUDA forward/backward and memory preflight",
+    "Six real120-epoch fits and closed-form readouts",
+    "Research results; no success claim yet"
+  ]
+}
