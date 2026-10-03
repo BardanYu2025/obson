@@ -1,0 +1,1239 @@
+{
+  "date": "2026-10-04",
+  "status": "plan_only_no_new_training_or_runner",
+  "scope_warning": "Counts are the bounded response to confirmed issues, not a claim that all historical experiments are valid or that undiscovered defects cannot change the plan.",
+  "coverage": {
+    "report_archives": 61,
+    "unique_run_roots": 60,
+    "standard_manifests": 58,
+    "nonstandard_archives": 3,
+    "partial_protocol_audited_roots": 9,
+    "inventory_only_roots": 51,
+    "excluded": "Earlier standalone metrics, 128/256 directories and unavailable reports"
+  },
+  "counts": {
+    "confirmed_whole_old_matrix_exact_reruns": 0,
+    "planned_core_question_replacement_experiments": 1,
+    "preceding_short_diagnostic_experiments": 1,
+    "max_new_training_jobs": 8,
+    "max_worker_epochs": 370,
+    "updates_per_epoch": 38,
+    "max_optimizer_updates": 14060
+  },
+  "mainline": {
+    "goal": "Causal per-bar price/activity representation; historical retention and utility before separate future-state tests",
+    "reference": "Macro control s42/s43 best97/94",
+    "width": 768,
+    "layers": 4,
+    "heads": 8,
+    "status": "Frozen research reference, not globally optimal or final validated product",
+    "selected_weight_edges": [
+      {
+        "consumer": "babel_activity_weight768",
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_depth768",
+        "chosen": {
+          "42": {
+            "path": "d4_lr3_s42/e281_best.pt",
+            "sha256": "0eda2eb26bddaa757c7bd4a028dab017981c7a17fe5e683b0c0e50d3b60c3973",
+            "selected_epoch": 279,
+            "budget": 281,
+            "trial": "d4_lr3_s42"
+          },
+          "43": {
+            "path": "d4_lr3_s43/e281_best.pt",
+            "sha256": "68abb5d5035f23d4cd2fe0d45077615ed2182306ae2b730bf074dcb49613a936",
+            "selected_epoch": 281,
+            "budget": 281,
+            "trial": "d4_lr3_s43"
+          }
+        }
+      },
+      {
+        "consumer": "babel_shared_history768",
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_activity_weight768",
+        "chosen": {
+          "42": {
+            "path": "a030_s42/e100_best.pt",
+            "sha256": "0cf4d73ab62d1ec2641ca56fd232dd20e38319e401976b64ebd3cf2f54c78bca",
+            "epoch": 100,
+            "selected_epoch": 100,
+            "budget": 100,
+            "trial": "a030_s42"
+          },
+          "43": {
+            "path": "a030_s43/e100_best.pt",
+            "sha256": "a25d814444f6473e449363921342940b848429bbdb3f778bd6fa51daa88aa25e",
+            "epoch": 99,
+            "selected_epoch": 99,
+            "budget": 100,
+            "trial": "a030_s43"
+          }
+        }
+      },
+      {
+        "consumer": "babel_macro_history768",
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_shared_history768",
+        "chosen": {
+          "42": {
+            "path": "control_s42/e100_best.pt",
+            "sha256": "3f761293a0203b99d2776e05960daca0a9c563225c0d6ab75782cdf946f573ae",
+            "epoch": 100,
+            "selected_epoch": 100,
+            "budget": 100,
+            "trial": "control_s42"
+          },
+          "43": {
+            "path": "control_s43/e100_best.pt",
+            "sha256": "2a50518e7544bc849bbb711f0fcea80e59e2ec3d921e6405de92c135e622426f",
+            "epoch": 99,
+            "selected_epoch": 99,
+            "budget": 100,
+            "trial": "control_s43"
+          }
+        }
+      },
+      {
+        "consumer": "babel_context_transfer768",
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_macro_history768",
+        "chosen": {
+          "42": {
+            "path": "control_s42/e100_best.pt",
+            "sha256": "eb1743b178d680caae8376fc61c016431555a9007d98b35113af34821a022b28",
+            "epoch": 97
+          },
+          "43": {
+            "path": "control_s43/e100_best.pt",
+            "sha256": "70578bf63518c4815406b7e349b1e27608a5e8e1623e32343719ebbf3d167915",
+            "epoch": 94
+          }
+        }
+      }
+    ],
+    "cache_not_weight_inheritance": "Context Transfer reuses Uniform Context input cache; does not inherit its scratch neural weights"
+  },
+  "stages": [
+    {
+      "id": "R0",
+      "training_jobs": 0,
+      "optimizer_updates": 0,
+      "checks": [
+        "Actual weight/cache/metric dependency closure",
+        "Six real checkpoints replay with their original interface",
+        "Causality, split full-span, train-only scaling and common-target tensor identity",
+        "Fixed train batch task gradients with zero updates",
+        "Source/optimizer availability and exact-resume versus fresh-Adam distinction"
+      ],
+      "gate": "Identity/causality/common target/numerical contract failures stop; new defects require explicit dependency impact and revised count before training"
+    },
+    {
+      "id": "R1",
+      "training_jobs": 2,
+      "seeds": [
+        42,
+        43
+      ],
+      "epochs_per_job": 5,
+      "max_worker_epochs": 10,
+      "max_optimizer_updates": 380,
+      "initialization": "Original Macro best, fresh matched AdamW",
+      "only_changed_training_factor": "Constant LR amplitude relative to previous Context prefix",
+      "encoder_lr_by_seed": {
+        "42": 3.066380815642346e-06,
+        "43": 3.2648704606900738e-06
+      },
+      "query_lr_by_seed": {
+        "42": 3.0663808156423456e-05,
+        "43": 3.2648704606900735e-05
+      },
+      "reference": "Reuse prior high-LR prefix first five epochs only if sampling/init/objective signatures match",
+      "gate": "Both actually updated epoch5 checkpoints finite and all24 full/native retention metrics <=1.10 source; epoch0 fallback cannot pass",
+      "failure": "Stop, report and revise plan; no implicit third LR or extra reference jobs"
+    },
+    {
+      "id": "R2",
+      "training_jobs": 6,
+      "seeds": [
+        42,
+        43
+      ],
+      "epochs_per_job": 60,
+      "max_worker_epochs": 360,
+      "max_optimizer_updates": 13680,
+      "initialization": "Restart all arms from original Macro; never R1 outputs",
+      "arms": {
+        "A": "Native prefix inputs and native targets",
+        "B": "Full128 inputs with exactly A common target/mask/age support",
+        "C": "Exactly B inputs, full1..127 targets and original full-band averaging"
+      },
+      "contrasts": {
+        "B_minus_A": "Full-context encoding policy including position/origin change, not physical length alone",
+        "C_minus_B": "Target-support expansion and resulting band-weight changes jointly, not separately"
+      },
+      "budget_comparison": "Equal updates; not equal compute or efficiency proof",
+      "gate": "Predeclared validation selection and research readout locking; report best/last and all arms; no automatic promotion; A instability limits causal claims"
+    }
+  ],
+  "resource_limits": {
+    "max_gpu_session_hours": 10,
+    "formal_R2_estimated_hours_on_prior_3080Ti": [
+      6,
+      8
+    ],
+    "estimate_not_guarantee": true,
+    "single_worker": true,
+    "batch": 128,
+    "micro": 8,
+    "new_disk_estimate_GiB": 10,
+    "disk_preflight_required": true,
+    "export_directory": "/root/autodl-tmp/download",
+    "timeout_behavior": "Mark incomplete; do not rank incomplete unequal budgets or silently extend"
+  },
+  "interpretation_corrections": [
+    "Do not claim four layers globally optimal from unequal extended budgets",
+    "Do not reject all common-history/cross-resolution alignment from old non-identifiable query head",
+    "Do not reject full context from unstable high-LR warm adaptation",
+    "Detached local diagnostic cannot establish encoder protection",
+    "Near targets are supervised; far-only extra structure does not mean no near supervision"
+  ],
+  "deferred_not_cancelled": [
+    "From-scratch all-position supervision",
+    "Cross-resolution semantic alignment",
+    "Deeper architectures with explicit budget question",
+    "Updated-real-bar one-step prediction",
+    "Free rollout without new observations"
+  ],
+  "evidence": [
+    "BABEL_EXPERIMENT_VALIDITY_AUDIT.json",
+    "BABEL_CONTEXT_TRANSFER768_REVIEW.json",
+    "BABEL_RECOVERY_PLAN.md"
+  ],
+  "inventory": [
+    {
+      "archive": "babel_activity512_reports.tar.gz",
+      "archive_bytes": 1851886,
+      "archive_sha256": "bb47060510893386da50ba279ae2b4c32daad367f107e0727c3b5591d7db15cd",
+      "root": "babel_activity512",
+      "schema": "babel-activity-ablation-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_recon_fusion512_s42"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_activity_alignment100_reports (1).tar.gz",
+      "archive_bytes": 5265302,
+      "archive_sha256": "2369314baf2fbea5728747001dbc902cdcd718dd592ca1a98cd488896bde6c6d",
+      "root": "babel_activity_alignment100",
+      "schema": "babel-activity-extend-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_recon_fusion512_s42"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_activity_alignment100_reports.tar.gz",
+      "archive_bytes": 3617222,
+      "archive_sha256": "adf0fbc9b243feff3fad4b49b291919cbbc15dc652ca8c57672f7f39fc7b71c6",
+      "root": "babel_activity_alignment100",
+      "schema": "babel-activity-extend-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_recon_fusion512_s42"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_activity_alignment512_reports.tar.gz",
+      "archive_bytes": 1818117,
+      "archive_sha256": "b41189696184e53c90419b88036f24a1154ae6205f56aa125589f2b6dda8c004",
+      "root": "babel_activity_alignment512",
+      "schema": "babel-activity-alignment-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_recon_fusion512_s42"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_activity_weight768_reports.tar.gz",
+      "archive_bytes": 66390476,
+      "archive_sha256": "2436c05782036a469f1c1c118b406e9c935bdfcdd7830c6af06660a30959346b",
+      "root": "babel_activity_weight768",
+      "schema": "babel-activity-weight768-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_control600_v2",
+        "warmup": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_history_query768",
+          "epoch": 50
+        },
+        "start": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_causal_pool768"
+        },
+        "task_source": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_depth768",
+          "chosen": {
+            "42": {
+              "path": "d4_lr3_s42/e281_best.pt",
+              "sha256": "0eda2eb26bddaa757c7bd4a028dab017981c7a17fe5e683b0c0e50d3b60c3973",
+              "selected_epoch": 279,
+              "budget": 281,
+              "trial": "d4_lr3_s42"
+            },
+            "43": {
+              "path": "d4_lr3_s43/e281_best.pt",
+              "sha256": "68abb5d5035f23d4cd2fe0d45077615ed2182306ae2b730bf074dcb49613a936",
+              "selected_epoch": 281,
+              "budget": 281,
+              "trial": "d4_lr3_s43"
+            }
+          }
+        }
+      },
+      "audit_scope": "partial_source_protocol_audit",
+      "planned_action": "retain_bounded_findings_no_whole_rerun"
+    },
+    {
+      "archive": "babel_architecture512_reports.tar.gz",
+      "archive_bytes": 3511733,
+      "archive_sha256": "7f475ab81f4f86fddbf974b98ca9af0c03de68b31c728599e489b8793bc5edca",
+      "root": "babel_architecture512",
+      "schema": "babel-ordered-architecture-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {},
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_ardec512_reports.tar.gz",
+      "archive_bytes": 2003778,
+      "archive_sha256": "30b55a02a3b97b8df1a522d7dfa1eb9b408641dbe4423ba2f2e08a350a909209",
+      "root": "babel_ardec512",
+      "schema": "babel-ar-reconstruction-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_recon_fusion512_s42"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_bar_alignment_reports.tar.gz",
+      "archive_bytes": 19014235,
+      "archive_sha256": "13a6c20c8b66a18c32ca8aa1b7fdb4acdc9cefdc12c0949e0df84f847e1f77fd",
+      "root": "babel_bar_alignment",
+      "schema": "babel-bar-alignment-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_shared_readout512"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_bar_semantics768_reports.tar.gz",
+      "archive_bytes": 81073396,
+      "archive_sha256": "616d13ff9327dfe2ef94acd46f346f74a12ea92c2650fc2c7ffd3e673bdd5163",
+      "root": "babel_bar_semantics768",
+      "schema": "babel-bar-semantics768-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_control600_v2",
+        "warmup": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_history_query768",
+          "epoch": 50
+        }
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_capacity512_reports.tar.gz",
+      "archive_bytes": 5967695,
+      "archive_sha256": "ae6f519c98bdf613422cb430ab3db6ddbfc0f69b94ebfe2896a54365c1f2213f",
+      "root": "babel_capacity512",
+      "schema": "babel-native-capacity-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_architecture512"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_causal_pool768_reports.tar.gz",
+      "archive_bytes": 119400569,
+      "archive_sha256": "ffedea703a5cf06b77d01d26a31d6158ec9516923d51a6f480082a4f27e49c09",
+      "root": "babel_causal_pool768",
+      "schema": "babel-causal-pool768-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_control600_v2",
+        "warmup": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_history_query768",
+          "epoch": 50
+        },
+        "start": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_history_structure768"
+        }
+      },
+      "audit_scope": "partial_source_protocol_audit",
+      "planned_action": "retain_bounded_findings_no_whole_rerun"
+    },
+    {
+      "archive": "babel_consistency768_reports.tar.gz",
+      "archive_bytes": 27660484,
+      "archive_sha256": "8459dda3dfce739261f770d0e35ff4f0e00aef47c26cc9e499e891270ede8e44",
+      "root": "babel_consistency768",
+      "schema": "babel-paired-consistency768-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_path768"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_consistency_readout768_reports.tar.gz",
+      "archive_bytes": 8616094,
+      "archive_sha256": "59b710f9da2cd3ee30da3d4e8d952612ad2f2d5bc665a9382e333064068bb659",
+      "root": "babel_consistency_readout768",
+      "schema": "babel-consistency-readout768-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_consistency768"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_context_transfer768_reports.tar.gz",
+      "archive_bytes": 35191752,
+      "archive_sha256": "e28dbc2dc7c3b3f683755979a9232b4f9633afd0b0e28e19411101356bb5ccc2",
+      "root": "babel_context_transfer768",
+      "schema": "babel-context-transfer768-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "task_source": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_macro_history768",
+          "chosen": {
+            "42": {
+              "path": "control_s42/e100_best.pt",
+              "sha256": "eb1743b178d680caae8376fc61c016431555a9007d98b35113af34821a022b28",
+              "epoch": 97
+            },
+            "43": {
+              "path": "control_s43/e100_best.pt",
+              "sha256": "70578bf63518c4815406b7e349b1e27608a5e8e1623e32343719ebbf3d167915",
+              "epoch": 94
+            }
+          }
+        },
+        "cache_source": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_uniform_context768"
+        },
+        "protocol": {
+          "source": "Macro control97/94, original trained input adapter, global encoder and query reader; fresh matched AdamW; no scratch/Uniform neural weights"
+        }
+      },
+      "audit_scope": "partial_source_protocol_audit",
+      "planned_action": "replacement_comparison_after_gates"
+    },
+    {
+      "archive": "babel_control600_v2_reports.tar.gz",
+      "archive_bytes": 1120239,
+      "archive_sha256": "8b7121039ff70d9e0b8d0a389ab8ef6f942008d760315c4aaa4c45aa57d8a3c0",
+      "root": "babel_control600_v2",
+      "schema": "babel-control600-delivery-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_cross_period768_v2_recheck"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_coverage512_reports.tar.gz",
+      "manifest_candidates": [],
+      "root": "babel_coverage512",
+      "archive_bytes": 876576,
+      "archive_sha256": "c6a1ce420ba6463794d807eec6819e3bc69db6f1a6328558d52932eaa69bd5f5",
+      "metadata_files": [
+        "babel_coverage512/audit_manifest.json"
+      ],
+      "metadata_format": "nonstandard_audit_or_run_state",
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_cross_period768_v2_recheck_reports.tar.gz",
+      "archive_bytes": 38430047,
+      "archive_sha256": "83f7d658e2a05602a6eb7a5a1d5acada7ce70232dfe0137c194cf6acea1a6699",
+      "root": "babel_cross_period768_v2_recheck",
+      "schema": "babel-cross-period-evaluation-recheck-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_cross_period768_v2",
+        "original_manifest": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_growth768",
+          "epochs": 100
+        }
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_cross_period_audit_reports.tar.gz",
+      "archive_bytes": 405574,
+      "archive_sha256": "0523cef31dbc2be2de3720441b9c7b66f47f6a4db23071cdccc686c9ffd89434",
+      "root": "babel_cross_period_audit",
+      "schema": null,
+      "completion_status": "raw_audit_complete",
+      "manifest_top_level_provenance": {},
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_decoder_parity768_v2_reports.tar.gz",
+      "archive_bytes": 6430381,
+      "archive_sha256": "95128c32f7348f3c50edcd1dbddeb0c42dbbd6420a5c6285e6baf0d2c69257eb",
+      "root": "babel_decoder_parity768_v2",
+      "schema": "babel-decoder-parity768-v2",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_control600_v2"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_depth768_reports.tar.gz",
+      "archive_bytes": 147426318,
+      "archive_sha256": "b41a370399daeb1cea4a1be2c8ef5594cd6a01a65d4d8a46b3f4c551a6327d49",
+      "root": "babel_depth768",
+      "schema": "babel-depth768-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_control600_v2",
+        "warmup": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_history_query768",
+          "epoch": 50
+        },
+        "start": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_causal_pool768"
+        }
+      },
+      "audit_scope": "partial_source_protocol_audit",
+      "planned_action": "retain_bounded_findings_no_whole_rerun"
+    },
+    {
+      "archive": "babel_detail512_reports.tar.gz",
+      "archive_bytes": 2179704,
+      "archive_sha256": "8179193a7f4d58dd6130406071cb6cc1a113731599f9d674969965c96cfa1ba4",
+      "root": "babel_detail512",
+      "schema": "babel-detail-alignment-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_recon_fusion512_s42"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_dual_state512_reports.tar.gz",
+      "archive_bytes": 6328529,
+      "archive_sha256": "6d537c1947a38ada18798840f1ce2757e7e6e57de5f62328ce7f5b98b227fb18",
+      "root": "babel_dual_state512",
+      "schema": "babel-dual-state-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_recon_fusion512_s42"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_ema512_reports.tar.gz",
+      "archive_bytes": 2185999,
+      "archive_sha256": "949e58c16516c88c296d845466ed624928930e9b7b4edb6f38b1de25b5bf3d2f",
+      "root": "babel_ema512",
+      "schema": "babel-ema-ablation-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_recon_fusion512_s42"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_endpoint_readout_reports.tar.gz",
+      "archive_bytes": 6153135,
+      "archive_sha256": "2d51595b99dac20258b1694c5518a270acd2071bc0508dc695413a91e7be61c7",
+      "root": "babel_endpoint_readout",
+      "schema": "babel-endpoint-readout-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_bar_alignment"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_fusion512_reports.tar.gz",
+      "archive_bytes": 2512446,
+      "archive_sha256": "6d1419babb0d52ae361fa0d59383055e25683aabc6397db51f536e8daa59d7f6",
+      "root": "babel_fusion512_s42",
+      "schema": "babel-residual-fusion-v1",
+      "completion_status": null,
+      "manifest_top_level_provenance": {},
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_grounded_history768_reports.tar.gz",
+      "archive_bytes": 1756151,
+      "archive_sha256": "c9fbf7b025e69ce22d49185e84be4d1dd34b946fd999812d8ad95ad65e01584d",
+      "root": "babel_grounded_history768",
+      "schema": "babel-grounded-history768-v1",
+      "completion_status": null,
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_control600_v2",
+        "warmup": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_history_query768",
+          "epoch": 50
+        },
+        "start": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_causal_pool768"
+        },
+        "task_source": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_shared_history768",
+          "chosen": {
+            "42": {
+              "path": "control_s42/e100_best.pt",
+              "sha256": "3f761293a0203b99d2776e05960daca0a9c563225c0d6ab75782cdf946f573ae",
+              "epoch": 100,
+              "selected_epoch": 100,
+              "budget": 100,
+              "trial": "control_s42"
+            },
+            "43": {
+              "path": "control_s43/e100_best.pt",
+              "sha256": "2a50518e7544bc849bbb711f0fcea80e59e2ec3d921e6405de92c135e622426f",
+              "epoch": 99,
+              "selected_epoch": 99,
+              "budget": 100,
+              "trial": "control_s43"
+            }
+          }
+        }
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_grounded_readout768_reports.tar.gz",
+      "archive_bytes": 2489006,
+      "archive_sha256": "bae377a85962debd41f05bc5c4ad6fe1de1cf0a89a98774ff5f818c92689ebd1",
+      "root": "babel_grounded_readout768",
+      "schema": "babel-grounded-readout-audit-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_grounded_history768"
+        }
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_growth768_reports.tar.gz",
+      "archive_bytes": 48922076,
+      "archive_sha256": "25e05cfcc9e54899299a26dc34910b627412a61227632eb6af2c9e2fcf56a13a",
+      "root": "babel_growth768",
+      "schema": "babel-capacity-growth768-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_consistency_readout768"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_history_query768_reports.tar.gz",
+      "archive_bytes": 73442676,
+      "archive_sha256": "c18a0a5894c66673646d460fb1014a839601abc3e481422fb64c952d8770ac05",
+      "root": "babel_history_query768",
+      "schema": "babel-history-query768-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_control600_v2"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_history_structure768_reports.tar.gz",
+      "archive_bytes": 107258895,
+      "archive_sha256": "a47c2298a5e92bd4a75e88096e588e5d60fc7d351316e1b52d192adab50250eb",
+      "root": "babel_history_structure768",
+      "schema": "babel-history-structure768-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_control600_v2",
+        "warmup": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_history_query768",
+          "epoch": 50
+        },
+        "start": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_bar_semantics768"
+        }
+      },
+      "audit_scope": "partial_source_protocol_audit",
+      "planned_action": "retain_bounded_findings_no_whole_rerun"
+    },
+    {
+      "archive": "babel_large512_reports.tar.gz",
+      "archive_bytes": 795870,
+      "archive_sha256": "ceb8367484294f9a4b923417d27293b9af9419d2a6df8a204bdf2a1d61a29ddb",
+      "root": "babel_large512_s42",
+      "schema": "babel-large-history-v1",
+      "completion_status": null,
+      "manifest_top_level_provenance": {},
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_linear_history768_reports.tar.gz",
+      "archive_bytes": 62549585,
+      "archive_sha256": "98a4f18c4db89019a18a46d7a5397c4d0cdfe0d3d3f5ffdf2fbf1302b5653995",
+      "root": "babel_linear_history768",
+      "schema": "babel-linear-history768-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_control600_v2",
+        "warmup": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_history_query768",
+          "epoch": 50
+        },
+        "start": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_causal_pool768"
+        },
+        "task_source": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_macro_history768",
+          "chosen": {
+            "42": {
+              "path": "control_s42/e100_best.pt",
+              "sha256": "eb1743b178d680caae8376fc61c016431555a9007d98b35113af34821a022b28",
+              "epoch": 97
+            },
+            "43": {
+              "path": "control_s43/e100_best.pt",
+              "sha256": "70578bf63518c4815406b7e349b1e27608a5e8e1623e32343719ebbf3d167915",
+              "epoch": 94
+            }
+          }
+        }
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_local_readapt768_reports.tar.gz",
+      "archive_bytes": 11498593,
+      "archive_sha256": "2c2695130864df1fe40cc31cdff60daf61295f9523c68ea59aa860418c5453e7",
+      "root": "babel_local_readapt768",
+      "schema": "babel-local-readapt768-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_growth768"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_local_warmstart768_reports.tar.gz",
+      "archive_bytes": 6394330,
+      "archive_sha256": "a2f7114442fc5cbe8542f5557e688aa7401cf23c3b0e770d6146f5c7c3c9a747",
+      "root": "babel_local_warmstart768",
+      "schema": "babel-local-warmstart768-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_cross_period768_v2_recheck"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_macro_history768_reports.tar.gz",
+      "archive_bytes": 124557100,
+      "archive_sha256": "42d0ee31ea743423a06e614ca46cda02067df717fe94a9c4565b87648ca2dc53",
+      "root": "babel_macro_history768",
+      "schema": "babel-macro-history768-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_control600_v2",
+        "warmup": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_history_query768",
+          "epoch": 50
+        },
+        "start": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_causal_pool768"
+        },
+        "task_source": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_shared_history768",
+          "chosen": {
+            "42": {
+              "path": "control_s42/e100_best.pt",
+              "sha256": "3f761293a0203b99d2776e05960daca0a9c563225c0d6ab75782cdf946f573ae",
+              "epoch": 100,
+              "selected_epoch": 100,
+              "budget": 100,
+              "trial": "control_s42"
+            },
+            "43": {
+              "path": "control_s43/e100_best.pt",
+              "sha256": "2a50518e7544bc849bbb711f0fcea80e59e2ec3d921e6405de92c135e622426f",
+              "epoch": 99,
+              "selected_epoch": 99,
+              "budget": 100,
+              "trial": "control_s43"
+            }
+          }
+        }
+      },
+      "audit_scope": "partial_source_protocol_audit",
+      "planned_action": "retain_bounded_findings_no_whole_rerun"
+    },
+    {
+      "archive": "babel_overlap768_reports.tar.gz",
+      "archive_bytes": 4428956,
+      "archive_sha256": "4d8db23221e5e8768dff8eddb9479db24327d5399d045b487e081fbd52d83e97",
+      "root": "babel_overlap768",
+      "schema": "babel-frozen-overlap768-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_path768",
+        "loader": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_path768",
+          "checkpoints": "All four source-selected best; no last/seed/model reselection"
+        }
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_path768_reports.tar.gz",
+      "archive_bytes": 18958387,
+      "archive_sha256": "50946bafd2426f8634342c900ba50ea35756b4a67cf20e5d082b825ca2cb813c",
+      "root": "babel_path768",
+      "schema": "babel-causal-path768-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_bar_alignment"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_pca_anneal512_reports.tar.gz",
+      "archive_bytes": 2800514,
+      "archive_sha256": "23a52c86323d65e75693644cb7df57f56a2a84a400866e6df1cf450a30e76469",
+      "root": "babel_pca_anneal512",
+      "schema": "babel-pca-anneal-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_architecture512"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_pca_teacher512_reports.tar.gz",
+      "archive_bytes": 5939679,
+      "archive_sha256": "acd4402dfb0f7a41f316a8a63b42e70b9f2e926e1207e62c2ea620b6d6e1f86b",
+      "root": "babel_pca_teacher512",
+      "schema": "babel-pca-teacher-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_architecture512"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_position_supervision768_reports.tar.gz",
+      "archive_bytes": 187148440,
+      "archive_sha256": "66f32b81235f158ff0e2185ad96e2d786e506f4974ed9ed6ba9318aabcef04c0",
+      "root": "babel_position_supervision768",
+      "schema": "babel-position-supervision768-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_control600_v2",
+        "warmup": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_history_query768",
+          "epoch": 50
+        },
+        "start": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_causal_pool768"
+        },
+        "task_source": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_macro_history768",
+          "chosen": {
+            "42": {
+              "path": "control_s42/e100_best.pt",
+              "sha256": "eb1743b178d680caae8376fc61c016431555a9007d98b35113af34821a022b28",
+              "epoch": 97
+            },
+            "43": {
+              "path": "control_s43/e100_best.pt",
+              "sha256": "70578bf63518c4815406b7e349b1e27608a5e8e1623e32343719ebbf3d167915",
+              "epoch": 94
+            }
+          }
+        }
+      },
+      "audit_scope": "partial_source_protocol_audit",
+      "planned_action": "retain_bounded_findings_no_whole_rerun"
+    },
+    {
+      "archive": "babel_prefix_readout512_reports.tar.gz",
+      "archive_bytes": 10754742,
+      "archive_sha256": "af89ba1c349ba233992acca13b7fbe6adf7a35ce736ce6a0a564430c77282edc",
+      "root": "babel_prefix_readout512",
+      "schema": "babel-prefix-readout-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_sampling512"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_price_readapt512_reports.tar.gz",
+      "archive_bytes": 2023112,
+      "archive_sha256": "5e3246c5a64baa4e292217bea3bf5891cf6f460668f97af8bcdec4e7c1fba6c9",
+      "root": "babel_price_readapt512",
+      "schema": "babel-price-readapt-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_recon_fusion512_s42"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_recon_fusion512_s42_reports.tar.gz",
+      "archive_bytes": 1345913,
+      "archive_sha256": "da9b313ad92ccd66844854857eea26a03bcd7ffa774c2ecbde666ecac70de366",
+      "root": "babel_recon_fusion512_s42",
+      "schema": "babel-reconstruction-fusion-v1",
+      "completion_status": null,
+      "manifest_top_level_provenance": {},
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_sampling512_reports.tar.gz",
+      "archive_bytes": 4464629,
+      "archive_sha256": "fbed2874d39095467e09ae510b5bb43bba81a0bf969abb6fe3ba67e979df1816",
+      "root": "babel_sampling512",
+      "schema": "babel-window-sampling-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_architecture512"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_shared_history768_reports.tar.gz",
+      "archive_bytes": 73914796,
+      "archive_sha256": "d91e3249657e3deccc34ad15dc5c6c98bd9f756735a638ce9c7006901c550356",
+      "root": "babel_shared_history768",
+      "schema": "babel-shared-history768-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_control600_v2",
+        "warmup": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_history_query768",
+          "epoch": 50
+        },
+        "start": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_causal_pool768"
+        },
+        "task_source": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_activity_weight768",
+          "chosen": {
+            "42": {
+              "path": "a030_s42/e100_best.pt",
+              "sha256": "0cf4d73ab62d1ec2641ca56fd232dd20e38319e401976b64ebd3cf2f54c78bca",
+              "epoch": 100,
+              "selected_epoch": 100,
+              "budget": 100,
+              "trial": "a030_s42"
+            },
+            "43": {
+              "path": "a030_s43/e100_best.pt",
+              "sha256": "a25d814444f6473e449363921342940b848429bbdb3f778bd6fa51daa88aa25e",
+              "epoch": 99,
+              "selected_epoch": 99,
+              "budget": 100,
+              "trial": "a030_s43"
+            }
+          }
+        }
+      },
+      "audit_scope": "partial_source_protocol_audit",
+      "planned_action": "retain_bounded_findings_no_whole_rerun"
+    },
+    {
+      "archive": "babel_shared_readout512_reports.tar.gz",
+      "archive_bytes": 21125806,
+      "archive_sha256": "898a43155b333562f86589ef2f8813fb362b4149d0a9a80eb0fab8493761d8b1",
+      "root": "babel_shared_readout512",
+      "schema": "babel-shared-readout-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_prefix_readout512"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_short512_b128_reports.tar.gz",
+      "archive_bytes": 39130,
+      "archive_sha256": "e5bb8ffccfb19aeaa94565524f3b7e0723764ebcc51391bb1bb8ff08d77646de",
+      "root": "babel_short512_b128_s42",
+      "schema": "babel-short-state-v1",
+      "completion_status": null,
+      "manifest_top_level_provenance": {},
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_state_combination1024_reports.tar.gz",
+      "archive_bytes": 36612582,
+      "archive_sha256": "0698f4f45c0704340203e84fb2a6ed37cb4c6cc6364cb25873da12b1deabbb48",
+      "root": "babel_state_combination1024",
+      "schema": "babel-state-combination-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {},
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_state_holdout512_reports.tar.gz",
+      "archive_bytes": 6201123,
+      "archive_sha256": "bd2834d93b6ef398f68102d7c9296e1e9262b37c8a994bb7ab8932ab32f87c01",
+      "root": "babel_state_holdout512",
+      "schema": "babel-state-holdout-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {},
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_state_readout1024_reports.tar.gz",
+      "archive_bytes": 290712,
+      "archive_sha256": "98611a73b45be94e3a1c535df7417fcedf163a50012f8f2d7729a7f1469f3c71",
+      "root": "babel_state_readout1024",
+      "schema": "babel-state-readout-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {},
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_state_rollout768_reports.tar.gz",
+      "archive_bytes": 117292453,
+      "archive_sha256": "a389645f63b40545c454c969797416a17ef5eeda27c560ddf4878d5aab27b1b7",
+      "root": "babel_state_rollout768",
+      "schema": "babel-state-rollout768-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "task_source": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_macro_history768",
+          "chosen": {
+            "42": {
+              "path": "control_s42/e100_best.pt",
+              "sha256": "eb1743b178d680caae8376fc61c016431555a9007d98b35113af34821a022b28",
+              "epoch": 97
+            },
+            "43": {
+              "path": "control_s43/e100_best.pt",
+              "sha256": "70578bf63518c4815406b7e349b1e27608a5e8e1623e32343719ebbf3d167915",
+              "epoch": 94
+            }
+          }
+        },
+        "protocol": {
+          "source": "Macro control validation best97/94; E and original D frozen; no source promotion"
+        }
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_state_transfer512_reports.tar.gz",
+      "archive_bytes": 3700616,
+      "archive_sha256": "0b55f07d7bc58577ca8d29c1c906353f8434120133fdf906dd7cbc334d8e8c97",
+      "root": "babel_state_transfer512",
+      "schema": "babel-state-transfer-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {},
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_stream1024_numeric_reports.tar.gz",
+      "archive_bytes": 677343,
+      "archive_sha256": "742a6bc2e6c6e3879953d4ccda1f9408c378fd6ef66762891e4a8727ea3d391d",
+      "root": "babel_stream1024_numeric",
+      "schema": null,
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {},
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_time_confirmation_reports.tar.gz",
+      "manifest_candidates": [],
+      "root": "babel_time_confirmation",
+      "archive_bytes": 559572,
+      "archive_sha256": "85d7e04b9b485ed82ce6a11f0ab0f0f66be8985a05ad8faa74ef81fa4755d412",
+      "metadata_files": [
+        "babel_time_confirmation/run_state.json",
+        "babel_time_confirmation/lineage.json"
+      ],
+      "metadata_format": "nonstandard_audit_or_run_state",
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_time_confirmation_v2_reports.tar.gz",
+      "manifest_candidates": [],
+      "root": "babel_time_confirmation_v2",
+      "archive_bytes": 799318,
+      "archive_sha256": "0c7d9c2cf2ab2a4be1819d62b45731a352ea14fd0b892990cd3b590ca138500b",
+      "metadata_files": [
+        "babel_time_confirmation_v2/run_state.json",
+        "babel_time_confirmation_v2/lineage.json"
+      ],
+      "metadata_format": "nonstandard_audit_or_run_state",
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_uniform_context768_reports.tar.gz",
+      "archive_bytes": 11728373,
+      "archive_sha256": "d630e050e1de449ebdaa718b0d4c3d76556cd9f4b0de753fdf51128cd4468d8a",
+      "root": "babel_uniform_context768",
+      "schema": "babel-uniform-context768-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "task_source": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_macro_history768",
+          "chosen": {
+            "42": {
+              "path": "control_s42/e100_best.pt",
+              "sha256": "eb1743b178d680caae8376fc61c016431555a9007d98b35113af34821a022b28",
+              "epoch": 97
+            },
+            "43": {
+              "path": "control_s43/e100_best.pt",
+              "sha256": "70578bf63518c4815406b7e349b1e27608a5e8e1623e32343719ebbf3d167915",
+              "epoch": 94
+            }
+          }
+        }
+      },
+      "audit_scope": "partial_source_protocol_audit",
+      "planned_action": "retain_bounded_findings_no_whole_rerun"
+    },
+    {
+      "archive": "babel_utility768_v2_reports.tar.gz",
+      "archive_bytes": 5694907,
+      "archive_sha256": "19a92ce5c52059e63c1cae4db3a55f34972d3d8c15242b683bb99236284bed3f",
+      "root": "babel_utility768_v2",
+      "schema": "babel-frozen-utility768-v2",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_path768"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_volatility_transfer768_reports.tar.gz",
+      "archive_bytes": 9172228,
+      "archive_sha256": "6475318b0ba3fea7aded3c006248aa3e29e8019a1b73202c4ae4bd0bf038281d",
+      "root": "babel_volatility_transfer768",
+      "schema": "babel-volatility-transfer768-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "task_source": {
+          "source": "/root/autodl-tmp/obson/checkpoints/babel_macro_history768",
+          "chosen": {
+            "42": {
+              "path": "control_s42/e100_best.pt",
+              "sha256": "eb1743b178d680caae8376fc61c016431555a9007d98b35113af34821a022b28",
+              "epoch": 97
+            },
+            "43": {
+              "path": "control_s43/e100_best.pt",
+              "sha256": "70578bf63518c4815406b7e349b1e27608a5e8e1623e32343719ebbf3d167915",
+              "epoch": 94
+            }
+          }
+        }
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_wick512_reports.tar.gz",
+      "archive_bytes": 2459760,
+      "archive_sha256": "01b126f6b21b40ec1a187008e476dd346b32557190b1b2f1a3052afb366e929d",
+      "root": "babel_wick512",
+      "schema": "babel-wick-ablation-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_recon_fusion512_s42"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_window_state_probe_reports.tar.gz",
+      "archive_bytes": 1727384,
+      "archive_sha256": "9d92c3dac4924b8b0ae8a0646b078088efd2173a9ab202d080b7490184206a4b",
+      "root": "babel_window_state_probe",
+      "schema": "babel-window-state-probe-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_window_state"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    },
+    {
+      "archive": "babel_window_state_reports.tar.gz",
+      "archive_bytes": 597830,
+      "archive_sha256": "46d5f9a21d5d33f459ca2863d73666a62ce61a6df36a896863f947316dc9e552",
+      "root": "babel_window_state",
+      "schema": "babel-window-state-delivery-v1",
+      "completion_status": "complete",
+      "manifest_top_level_provenance": {
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_endpoint_readout"
+      },
+      "audit_scope": "inventory_only_not_cleared",
+      "planned_action": "no_rerun_authorized_by_inventory_alone"
+    }
+  ]
+}
