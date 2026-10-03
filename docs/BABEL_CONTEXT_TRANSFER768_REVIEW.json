@@ -1,0 +1,2977 @@
+{
+  "archive_sha256": "e28dbc2dc7c3b3f683755979a9232b4f9633afd0b0e28e19411101356bb5ccc2",
+  "available_files": 38,
+  "omitted_files": [
+    "cache/train.npz",
+    "cache/val.npz",
+    "cache/train_states.npz",
+    "cache/val_states.npz",
+    "cache/test.npz",
+    "cache/cross_research.npz",
+    "cache/test_states.npz",
+    "cache/cross_research_states.npz",
+    "rolling_s42/last.pt",
+    "rolling_s42/update_best.pt",
+    "rolling_s42/update_last.pt",
+    "prefix_s42/last.pt",
+    "prefix_s42/time_best.pt",
+    "prefix_s42/time_last.pt",
+    "prefix_s42/update_best.pt",
+    "prefix_s42/update_last.pt",
+    "rolling_s43/last.pt",
+    "rolling_s43/update_best.pt",
+    "rolling_s43/update_last.pt",
+    "prefix_s43/last.pt",
+    "prefix_s43/time_best.pt",
+    "prefix_s43/time_last.pt",
+    "prefix_s43/update_best.pt",
+    "prefix_s43/update_last.pt"
+  ],
+  "source_verification": {
+    "macro": {
+      "verified": 131,
+      "omitted": [
+        "control_s42/e100_best.pt",
+        "control_s43/e100_best.pt"
+      ]
+    },
+    "uniform": {
+      "verified": 17,
+      "omitted": [
+        "cache/train.npz",
+        "cache/val.npz",
+        "cache/test.npz",
+        "cache/cross_research.npz"
+      ]
+    }
+  },
+  "code_files": 106,
+  "epochs": 407,
+  "steps": 15466,
+  "examples": 1949123,
+  "supervised_states": 9745615,
+  "training": {
+    "rolling_s42": {
+      "epochs": 60,
+      "best": 0,
+      "eligible": 0,
+      "parameters": 30188167,
+      "training_seconds": 3832.2163165500388,
+      "epoch_seconds": 4218.6282971398905,
+      "time_match": null,
+      "blocking_fields": {
+        "full/endpoint/activity": 24,
+        "full/interior/activity": 24,
+        "full/endpoint/structure": 60,
+        "full/interior/structure": 60,
+        "full/endpoint/near": 60,
+        "full/interior/near": 60,
+        "full/endpoint/mid": 50,
+        "full/interior/mid": 52,
+        "full/endpoint/far": 6,
+        "full/interior/far": 6,
+        "full/endpoint/price": 15,
+        "full/interior/price": 16,
+        "native/endpoint/activity": 24,
+        "native/interior/activity": 60,
+        "native/endpoint/structure": 60,
+        "native/interior/structure": 60,
+        "native/endpoint/near": 60,
+        "native/interior/near": 60,
+        "native/endpoint/mid": 50,
+        "native/interior/mid": 60,
+        "native/endpoint/far": 6,
+        "native/interior/far": 60,
+        "native/endpoint/price": 15,
+        "native/interior/price": 60
+      },
+      "first_validation_changes": {
+        "full/endpoint/activity": 343.6894998760686,
+        "full/interior/activity": 348.53171460509003,
+        "full/endpoint/structure": 2110.933785434495,
+        "full/interior/structure": 2418.6207672021283,
+        "full/endpoint/near": 1514.2213446545713,
+        "full/interior/near": 1307.455774320003,
+        "full/endpoint/mid": 848.0565702037259,
+        "full/interior/mid": 788.705153687931,
+        "full/endpoint/far": 114.68830223022212,
+        "full/interior/far": 117.55627922719421,
+        "full/endpoint/price": 334.6098096317723,
+        "full/interior/price": 345.7000097583361,
+        "native/endpoint/activity": 343.6894998760686,
+        "native/interior/activity": 4384.992802867459,
+        "native/endpoint/structure": 2110.9304517325595,
+        "native/interior/structure": 44529.38937024362,
+        "native/endpoint/near": 1514.2208014576788,
+        "native/interior/near": 21681.93835535192,
+        "native/endpoint/mid": 848.0565834380482,
+        "native/interior/mid": 3644.8188645235755,
+        "native/endpoint/far": 114.68825649391673,
+        "native/interior/far": 1275.4771333879946,
+        "native/endpoint/price": 334.6097271528337,
+        "native/interior/price": 4773.426451582687
+      },
+      "last_validation_changes": {
+        "full/endpoint/activity": -12.732139378652008,
+        "full/interior/activity": -12.47429439188621,
+        "full/endpoint/structure": 79.9018915567695,
+        "full/interior/structure": 107.76263469218001,
+        "full/endpoint/near": 69.72187508358283,
+        "full/interior/near": 65.61955478162427,
+        "full/endpoint/mid": 3.4649578947882897,
+        "full/interior/mid": 5.293431219579792,
+        "full/endpoint/far": -40.98962478742831,
+        "full/interior/far": -41.470073247830044,
+        "full/endpoint/price": -25.653123520858212,
+        "full/interior/price": -23.314960855493215,
+        "native/endpoint/activity": -12.732139378652008,
+        "native/interior/activity": 7794.929063145095,
+        "native/endpoint/structure": 79.90159597447698,
+        "native/interior/structure": 42922.165626816466,
+        "native/endpoint/near": 69.72180426816412,
+        "native/interior/near": 21672.072989782344,
+        "native/endpoint/mid": 3.464945260090646,
+        "native/interior/mid": 6896.237060569431,
+        "native/endpoint/far": -40.989633541934666,
+        "native/interior/far": 3219.2915827874344,
+        "native/endpoint/price": -25.653138099624773,
+        "native/interior/price": 7129.682888010228
+      },
+      "last20_train_pct": -16.977440871951,
+      "last20_score_pct": -13.12063756417443
+    },
+    "prefix_s42": {
+      "epochs": 142,
+      "best": 0,
+      "eligible": 0,
+      "parameters": 30188167,
+      "training_seconds": 3859.3950024899095,
+      "epoch_seconds": 4796.100283398293,
+      "time_match": {
+        "ratio": 1.007092158608713,
+        "matched": true,
+        "scope": "Single-worker synchronized training-stage wall time; includes CPU feeding/targets, excludes validation/checkpoint I/O. Not exact FLOPs."
+      },
+      "blocking_fields": {
+        "full/endpoint/activity": 61,
+        "full/interior/activity": 66,
+        "full/endpoint/structure": 142,
+        "full/interior/structure": 142,
+        "full/endpoint/near": 142,
+        "full/interior/near": 142,
+        "full/endpoint/mid": 142,
+        "full/interior/mid": 142,
+        "full/endpoint/far": 5,
+        "full/interior/far": 9,
+        "full/endpoint/price": 46,
+        "full/interior/price": 53,
+        "native/endpoint/activity": 61,
+        "native/interior/activity": 95,
+        "native/endpoint/structure": 142,
+        "native/interior/structure": 142,
+        "native/endpoint/near": 142,
+        "native/interior/near": 142,
+        "native/endpoint/mid": 142,
+        "native/interior/mid": 128,
+        "native/endpoint/far": 5,
+        "native/interior/far": 23,
+        "native/endpoint/price": 46,
+        "native/interior/price": 102
+      },
+      "first_validation_changes": {
+        "full/endpoint/activity": 87.65044068434264,
+        "full/interior/activity": 87.97003906380738,
+        "full/endpoint/structure": 413.3396536744259,
+        "full/interior/structure": 492.0066734874358,
+        "full/endpoint/near": 217.05473933293962,
+        "full/interior/near": 193.83145485185273,
+        "full/endpoint/mid": 224.34182778899182,
+        "full/interior/mid": 200.85599493777585,
+        "full/endpoint/far": 36.48359802536538,
+        "full/interior/far": 39.02389802754664,
+        "full/endpoint/price": 78.58360792601356,
+        "full/interior/price": 81.35912733212196,
+        "native/endpoint/activity": 87.65046225637892,
+        "native/interior/activity": 196.84938043276415,
+        "native/endpoint/structure": 413.33887146559493,
+        "native/interior/structure": 522.480373769881,
+        "native/endpoint/near": 217.05458586188504,
+        "native/interior/near": 389.28949318835765,
+        "native/endpoint/mid": 224.3418091192565,
+        "native/interior/mid": 123.17673415865751,
+        "native/endpoint/far": 36.48357741838522,
+        "native/interior/far": 61.940674268418896,
+        "native/endpoint/price": 78.58357418127038,
+        "native/interior/price": 132.44683058029761
+      },
+      "last_validation_changes": {
+        "full/endpoint/activity": -2.940063607306098,
+        "full/interior/activity": -1.8526870774764226,
+        "full/endpoint/structure": 98.70044873057624,
+        "full/interior/structure": 123.05932695655564,
+        "full/endpoint/near": 59.344004455167365,
+        "full/interior/near": 64.3386412597651,
+        "full/endpoint/mid": 22.46072099921337,
+        "full/interior/mid": 21.68106513922727,
+        "full/endpoint/far": -25.83366877680665,
+        "full/interior/far": -25.85903480868842,
+        "full/endpoint/price": -11.972093396995731,
+        "full/interior/price": -9.171441985493868,
+        "native/endpoint/activity": -2.940063607306098,
+        "native/interior/activity": 5.3135130110333995,
+        "native/endpoint/structure": 98.70021274887198,
+        "native/interior/structure": 187.57528244920914,
+        "native/endpoint/near": 59.343953619280555,
+        "native/interior/near": 109.02999072910538,
+        "native/endpoint/mid": 22.460710651566053,
+        "native/interior/mid": 7.020985533596558,
+        "native/endpoint/far": -25.83368585233461,
+        "native/interior/far": -38.37199909053363,
+        "native/endpoint/price": -11.972113246340687,
+        "native/interior/price": 1.4985673819535084
+      },
+      "last20_train_pct": -7.064485140481658,
+      "last20_score_pct": -3.6821208300860664
+    },
+    "rolling_s43": {
+      "epochs": 60,
+      "best": 0,
+      "eligible": 0,
+      "parameters": 30188167,
+      "training_seconds": 3886.367307727225,
+      "epoch_seconds": 4290.98689376004,
+      "time_match": null,
+      "blocking_fields": {
+        "full/endpoint/activity": 39,
+        "full/interior/activity": 41,
+        "full/endpoint/structure": 60,
+        "full/interior/structure": 60,
+        "full/endpoint/near": 60,
+        "full/interior/near": 60,
+        "full/endpoint/mid": 60,
+        "full/interior/mid": 60,
+        "full/endpoint/far": 4,
+        "full/interior/far": 4,
+        "full/endpoint/price": 29,
+        "full/interior/price": 30,
+        "native/endpoint/activity": 39,
+        "native/interior/activity": 60,
+        "native/endpoint/structure": 60,
+        "native/interior/structure": 60,
+        "native/endpoint/near": 60,
+        "native/interior/near": 60,
+        "native/endpoint/mid": 60,
+        "native/interior/mid": 60,
+        "native/endpoint/far": 4,
+        "native/interior/far": 60,
+        "native/endpoint/price": 29,
+        "native/interior/price": 60
+      },
+      "first_validation_changes": {
+        "full/endpoint/activity": 110.8086279071383,
+        "full/interior/activity": 110.92199252306116,
+        "full/endpoint/structure": 766.6594596984714,
+        "full/interior/structure": 808.3205924881836,
+        "full/endpoint/near": 726.3842339608368,
+        "full/interior/near": 563.5953337381666,
+        "full/endpoint/mid": 197.95116668575497,
+        "full/interior/mid": 156.35494477258857,
+        "full/endpoint/far": 40.69268761734995,
+        "full/interior/far": 41.16491516207705,
+        "full/endpoint/price": 79.16063719211253,
+        "full/interior/price": 79.28878488587145,
+        "native/endpoint/activity": 110.80865009436023,
+        "native/interior/activity": 1570.735637249343,
+        "native/endpoint/structure": 766.6599565096208,
+        "native/interior/structure": 10745.844566718431,
+        "native/endpoint/near": 726.3839632120089,
+        "native/interior/near": 2736.6579813426965,
+        "native/endpoint/mid": 197.95108277072134,
+        "native/interior/mid": 1037.593492293878,
+        "native/endpoint/far": 40.69268992902244,
+        "native/interior/far": 411.64538221756317,
+        "native/endpoint/price": 79.16062939344106,
+        "native/interior/price": 1187.9015691104835
+      },
+      "last_validation_changes": {
+        "full/endpoint/activity": -6.08763761459683,
+        "full/interior/activity": -5.114389928316465,
+        "full/endpoint/structure": 199.71753152563247,
+        "full/interior/structure": 231.52875201126548,
+        "full/endpoint/near": 108.53879360414847,
+        "full/interior/near": 90.33271268875151,
+        "full/endpoint/mid": 61.993666935042,
+        "full/interior/mid": 55.62045928491484,
+        "full/endpoint/far": -36.02749743154868,
+        "full/interior/far": -38.61114582175892,
+        "full/endpoint/price": -20.254491357097336,
+        "full/interior/price": -19.185075625425874,
+        "native/endpoint/activity": -6.087627730492695,
+        "native/interior/activity": 2235.157974050147,
+        "native/endpoint/structure": 199.71771032003085,
+        "native/interior/structure": 13762.553597384633,
+        "native/endpoint/near": 108.53857833651004,
+        "native/interior/near": 2430.823574115278,
+        "native/endpoint/mid": 61.993644437067765,
+        "native/interior/mid": 1655.414189278676,
+        "native/endpoint/far": -36.02749532764291,
+        "native/interior/far": 706.9212593555468,
+        "native/endpoint/price": -20.254496301187707,
+        "native/interior/price": 1665.7075108377423
+      },
+      "last20_train_pct": -11.515257405495072,
+      "last20_score_pct": -20.59404627646294
+    },
+    "prefix_s43": {
+      "epochs": 145,
+      "best": 0,
+      "eligible": 0,
+      "parameters": 30188167,
+      "training_seconds": 3890.5818963050842,
+      "epoch_seconds": 4841.374284018762,
+      "time_match": {
+        "ratio": 1.0010844545160411,
+        "matched": true,
+        "scope": "Single-worker synchronized training-stage wall time; includes CPU feeding/targets, excludes validation/checkpoint I/O. Not exact FLOPs."
+      },
+      "blocking_fields": {
+        "full/endpoint/activity": 55,
+        "full/interior/activity": 57,
+        "full/endpoint/structure": 145,
+        "full/interior/structure": 145,
+        "full/endpoint/near": 145,
+        "full/interior/near": 145,
+        "full/endpoint/mid": 145,
+        "full/interior/mid": 145,
+        "full/endpoint/far": 12,
+        "full/interior/far": 12,
+        "full/endpoint/price": 41,
+        "full/interior/price": 42,
+        "native/endpoint/activity": 55,
+        "native/interior/activity": 145,
+        "native/endpoint/structure": 145,
+        "native/interior/structure": 145,
+        "native/endpoint/near": 145,
+        "native/interior/near": 145,
+        "native/endpoint/mid": 145,
+        "native/interior/mid": 132,
+        "native/endpoint/far": 12,
+        "native/interior/far": 117,
+        "native/endpoint/price": 41,
+        "native/interior/price": 145
+      },
+      "first_validation_changes": {
+        "full/endpoint/activity": 79.89217115792128,
+        "full/interior/activity": 79.8946111093656,
+        "full/endpoint/structure": 491.95576315161134,
+        "full/interior/structure": 526.2533627912998,
+        "full/endpoint/near": 416.2647675847577,
+        "full/interior/near": 332.95174495808766,
+        "full/endpoint/mid": 159.16069211981042,
+        "full/interior/mid": 125.57063081937838,
+        "full/endpoint/far": 25.69391747235439,
+        "full/interior/far": 26.069019877267042,
+        "full/endpoint/price": 52.7849007803191,
+        "full/interior/price": 53.341348566978006,
+        "native/endpoint/activity": 79.8921900912428,
+        "native/interior/activity": 427.6375387113352,
+        "native/endpoint/structure": 491.9559644477578,
+        "native/interior/structure": 574.3638467222288,
+        "native/endpoint/near": 416.26460987207025,
+        "native/interior/near": 327.88859282654823,
+        "native/endpoint/mid": 159.16064582300288,
+        "native/interior/mid": 109.27205865719571,
+        "native/endpoint/far": 25.693922520746316,
+        "native/interior/far": 99.07720766777715,
+        "native/endpoint/price": 52.78490089503385,
+        "native/interior/price": 139.07936273772563
+      },
+      "last_validation_changes": {
+        "full/endpoint/activity": -11.24109258533047,
+        "full/interior/activity": -10.42386493143459,
+        "full/endpoint/structure": 121.01321921769244,
+        "full/interior/structure": 128.6738382421469,
+        "full/endpoint/near": 260.58017310326323,
+        "full/interior/near": 194.3329185886826,
+        "full/endpoint/mid": 33.53094284678812,
+        "full/interior/mid": 22.82054372790896,
+        "full/endpoint/far": -33.044114510563446,
+        "full/interior/far": -36.293449241113095,
+        "full/endpoint/price": -16.634344795111854,
+        "full/interior/price": -18.213977342514653,
+        "native/endpoint/activity": -11.241083243618045,
+        "native/interior/activity": 33.02008961686109,
+        "native/endpoint/structure": 121.01342725307953,
+        "native/interior/structure": 208.23013236992392,
+        "native/endpoint/near": 260.58003503330315,
+        "native/interior/near": 164.20186679587198,
+        "native/endpoint/mid": 33.53093821120767,
+        "native/interior/mid": 8.229637039243531,
+        "native/endpoint/far": -33.04411288873534,
+        "native/interior/far": 13.778833887644382,
+        "native/endpoint/price": -16.634344620615217,
+        "native/interior/price": 31.842129942731944
+      },
+      "last20_train_pct": -3.147707341003503,
+      "last20_score_pct": -4.530342674244259
+    }
+  },
+  "readout_heads": 221,
+  "readout_candidates": 1105,
+  "numeric_checks": 8074,
+  "max_abs_difference": 0.0,
+  "utility_prediction_values": 314483,
+  "reconstruction_error_values": 956256,
+  "gates": 336,
+  "passed_gates": 312,
+  "best_prediction_and_errors_equal_macro": true,
+  "comparisons": {
+    "test": {
+      "rolling_s42_update_last vs macro_s42": {
+        "full/activity": {
+          "all_pct": -14.930015563964844,
+          "endpoint_pct": -14.263463020324707,
+          "interior_pct": -15.146636962890625,
+          "paired": {
+            "delta": -0.023110542736939965,
+            "low": -0.029349447219134857,
+            "high": -0.01747894549056846,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/structure": {
+          "all_pct": -9.522435657823126,
+          "endpoint_pct": -1.0714017344642945,
+          "interior_pct": -12.094149982545588,
+          "paired": {
+            "delta": -0.0009311613097397023,
+            "low": -0.004518300910663214,
+            "high": 0.0015221148770253436,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/near": {
+          "all_pct": -0.9672020916150936,
+          "endpoint_pct": 15.25165521007754,
+          "interior_pct": -3.6973219270446944,
+          "paired": {
+            "delta": -0.0005211722465446362,
+            "low": -0.01802574943187383,
+            "high": 0.008604662135957094,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/mid": {
+          "all_pct": -11.456905176695276,
+          "endpoint_pct": -10.0862571131902,
+          "interior_pct": -11.986725284381283,
+          "paired": {
+            "delta": -0.008960237056118422,
+            "low": -0.0232445568463834,
+            "high": 0.00048227300422669725,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/far": {
+          "all_pct": -35.255776431628874,
+          "endpoint_pct": -35.47362511172173,
+          "interior_pct": -35.18607850515484,
+          "paired": {
+            "delta": -0.08271222106525043,
+            "low": -0.11237655569251002,
+            "high": -0.05526088129241101,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/price": {
+          "all_pct": -25.118494413410918,
+          "endpoint_pct": -24.53645348684844,
+          "interior_pct": -25.297687352385434,
+          "paired": {
+            "delta": -0.03062566096042305,
+            "low": -0.048923996542504414,
+            "high": -0.015636145492213937,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/activity": {
+          "all_pct": 2989.34619140625,
+          "endpoint_pct": -14.263457298278809,
+          "interior_pct": 6683.57177734375,
+          "paired": {
+            "delta": 2.0576553540769256,
+            "low": 1.9894252918389501,
+            "high": 2.1240137589599737,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/structure": {
+          "all_pct": 3772.3448851053718,
+          "endpoint_pct": -1.07137510158134,
+          "interior_pct": 6193.780486587103,
+          "paired": {
+            "delta": 0.22018051008973297,
+            "low": 0.1946641710764954,
+            "high": 0.24586566540402557,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/near": {
+          "all_pct": 3309.0323181018243,
+          "endpoint_pct": 15.251602363963324,
+          "interior_pct": 5343.376168371731,
+          "paired": {
+            "delta": 0.6728390780444038,
+            "low": 0.595853712048101,
+            "high": 0.7559492643409937,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/mid": {
+          "all_pct": 1617.406238592789,
+          "endpoint_pct": -10.086281901556326,
+          "interior_pct": 2486.5814651433484,
+          "paired": {
+            "delta": 1.0129608160055,
+            "low": 0.8741317469451177,
+            "high": 1.1560211117483428,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/far": {
+          "all_pct": 478.7916281647785,
+          "endpoint_pct": -35.473611285757535,
+          "interior_pct": 1377.3649798949696,
+          "paired": {
+            "delta": 0.428091372370068,
+            "low": 0.37647466549605385,
+            "high": 0.48091100760337707,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/price": {
+          "all_pct": 1381.1489080021404,
+          "endpoint_pct": -24.53645217770849,
+          "interior_pct": 2559.962409104039,
+          "paired": {
+            "delta": 0.869093268646622,
+            "low": 0.7612961201869173,
+            "high": 0.9825597899658637,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "utility": {
+          "all_pct": -2.096288021109771,
+          "paired": {
+            "delta": -0.0033643945280772474,
+            "low": -0.011123681444449173,
+            "high": 0.0015359065926741748,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "direction": {
+          "all_pct": -4.413335528536022,
+          "paired": {
+            "delta": -0.002500314665256688,
+            "low": -0.008767438544545501,
+            "high": 0.0018590708127370348,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "volatility": {
+          "all_pct": -1.5996814479293686,
+          "paired": {
+            "delta": -0.004228474390897807,
+            "low": -0.013543300898403913,
+            "high": 0.0019149492325619773,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        }
+      },
+      "rolling_s42_update_last vs prefix_s42_update_last": {
+        "full/activity": {
+          "all_pct": -26.949417114257812,
+          "endpoint_pct": -26.639652252197266,
+          "interior_pct": -27.050567626953125,
+          "paired": {
+            "delta": -0.04857936987134711,
+            "low": -0.05413867582562044,
+            "high": -0.043330029811681256,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/structure": {
+          "all_pct": -40.29040725506219,
+          "endpoint_pct": -35.41683165828451,
+          "interior_pct": -41.79461723695138,
+          "paired": {
+            "delta": -0.005970013658350733,
+            "low": -0.01035896352488445,
+            "high": -0.002728034714167977,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/near": {
+          "all_pct": -18.37802025063161,
+          "endpoint_pct": -15.873212843965323,
+          "interior_pct": -18.864674235693023,
+          "paired": {
+            "delta": -0.012015302355591149,
+            "low": -0.02662053312672646,
+            "high": -0.00306465650049389,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/mid": {
+          "all_pct": -22.915362894835855,
+          "endpoint_pct": -20.472938599218114,
+          "interior_pct": -23.839037442819176,
+          "paired": {
+            "delta": -0.020585706938405345,
+            "low": -0.03369057422422094,
+            "high": -0.010666707522552697,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/far": {
+          "all_pct": -31.001905757414328,
+          "endpoint_pct": -30.14688789886192,
+          "interior_pct": -31.269866090834853,
+          "paired": {
+            "delta": -0.06824828190237134,
+            "low": -0.09104072201789391,
+            "high": -0.0467275238769764,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/price": {
+          "all_pct": -26.870953453481526,
+          "endpoint_pct": -25.742508505439865,
+          "interior_pct": -27.214949005250098,
+          "paired": {
+            "delta": -0.03354745656081588,
+            "low": -0.0491748166801321,
+            "high": -0.020231935429423947,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/activity": {
+          "all_pct": 2506.247802734375,
+          "endpoint_pct": -26.63964080810547,
+          "interior_pct": 5525.5537109375,
+          "paired": {
+            "delta": 2.044896356282662,
+            "low": 1.9769543929131093,
+            "high": 2.1111201111804423,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/structure": {
+          "all_pct": 2471.501677803632,
+          "endpoint_pct": -35.416834211080264,
+          "interior_pct": 4126.204348133714,
+          "paired": {
+            "delta": 0.21722790323323532,
+            "low": 0.19222329937254362,
+            "high": 0.24247463403963698,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/near": {
+          "all_pct": 2393.640695094455,
+          "endpoint_pct": -15.873172403187375,
+          "interior_pct": 3886.9183264398894,
+          "paired": {
+            "delta": 0.6653748782574868,
+            "low": 0.5895964392523386,
+            "high": 0.747220704681553,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/mid": {
+          "all_pct": 1463.5269707354166,
+          "endpoint_pct": -20.472933363000024,
+          "interior_pct": 2292.2622585750755,
+          "paired": {
+            "delta": 1.006797019869797,
+            "low": 0.8683424445643969,
+            "high": 1.1503151417212794,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/far": {
+          "all_pct": 525.8481737526461,
+          "endpoint_pct": -30.14688065951473,
+          "interior_pct": 1494.2606474220793,
+          "paired": {
+            "delta": 0.4348140297887585,
+            "low": 0.3792002578470789,
+            "high": 0.4911015083933212,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/price": {
+          "all_pct": 1308.3633731650325,
+          "endpoint_pct": -25.7424992213793,
+          "interior_pct": 2359.738107590438,
+          "paired": {
+            "delta": 0.8658412259608548,
+            "low": 0.75714421407956,
+            "high": 0.9802688331038104,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "utility": {
+          "all_pct": -4.096802449195158,
+          "paired": {
+            "delta": -0.00671223354008598,
+            "low": -0.025897761539468496,
+            "high": 0.001926571671600138,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "direction": {
+          "all_pct": 0.07225354901305714,
+          "paired": {
+            "delta": 3.909943961000082e-05,
+            "low": -0.002011033856156515,
+            "high": 0.002022489051688673,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "volatility": {
+          "all_pct": -4.921481161488639,
+          "paired": {
+            "delta": -0.013463566519781965,
+            "low": -0.050592914569871424,
+            "high": 0.003189632160670652,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        }
+      },
+      "rolling_s42_update_last vs prefix_s42_time_last": {
+        "full/activity": {
+          "all_pct": -12.722784042358398,
+          "endpoint_pct": -11.84126091003418,
+          "interior_pct": -13.00840950012207,
+          "paired": {
+            "delta": -0.01919585508975859,
+            "low": -0.02448418883036657,
+            "high": -0.014580693558183444,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/structure": {
+          "all_pct": -34.31697110749212,
+          "endpoint_pct": -29.96313462421336,
+          "interior_pct": -35.68617063247045,
+          "paired": {
+            "delta": -0.00462246417572443,
+            "low": -0.009887311179372069,
+            "high": -0.0009005075757504481,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/near": {
+          "all_pct": -14.487563768511935,
+          "endpoint_pct": -10.292219048880202,
+          "interior_pct": -15.2856772466198,
+          "paired": {
+            "delta": -0.009040848331925084,
+            "low": -0.02498371333250048,
+            "high": 0.00018485278032230086,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/mid": {
+          "all_pct": -16.62820501664257,
+          "endpoint_pct": -13.923358570027977,
+          "interior_pct": -17.650087188020603,
+          "paired": {
+            "delta": -0.013811253521474635,
+            "low": -0.02679072937934718,
+            "high": -0.004998425236868878,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/far": {
+          "all_pct": -18.652345132436487,
+          "endpoint_pct": -17.2046327515309,
+          "interior_pct": -19.102895266866483,
+          "paired": {
+            "delta": -0.03482802375556355,
+            "low": -0.04925204980579286,
+            "high": -0.021975318373928247,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/price": {
+          "all_pct": -17.385103547475033,
+          "endpoint_pct": -15.39608637089913,
+          "interior_pct": -17.984774616281417,
+          "paired": {
+            "delta": -0.019212565122701353,
+            "low": -0.032842627808968926,
+            "high": -0.008933197219264988,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/activity": {
+          "all_pct": 3001.04833984375,
+          "endpoint_pct": -11.841249465942383,
+          "interior_pct": 6515.67626953125,
+          "paired": {
+            "delta": 2.0579150885885875,
+            "low": 1.9893466706365543,
+            "high": 2.1249783070680386,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/structure": {
+          "all_pct": 3031.1243456174743,
+          "endpoint_pct": -29.9631834519694,
+          "interior_pct": 5499.8652710096785,
+          "paired": {
+            "delta": 0.2187988073691848,
+            "low": 0.19320328485313415,
+            "high": 0.2446008674573866,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/near": {
+          "all_pct": 2684.900419509611,
+          "endpoint_pct": -10.292258468719561,
+          "interior_pct": 4487.124068327625,
+          "paired": {
+            "delta": 0.6682821003050529,
+            "low": 0.591756841306705,
+            "high": 0.7508472631974764,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/mid": {
+          "all_pct": 1633.95469143536,
+          "endpoint_pct": -13.923379911235422,
+          "interior_pct": 2590.006175133251,
+          "paired": {
+            "delta": 1.0135585296689593,
+            "low": 0.8726804763744197,
+            "high": 1.1597523970717836,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/far": {
+          "all_pct": 669.3357769815933,
+          "endpoint_pct": -17.20462384597532,
+          "interior_pct": 1995.219737996595,
+          "paired": {
+            "delta": 0.4502360628852731,
+            "low": 0.3898536177555575,
+            "high": 0.512015911293854,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/price": {
+          "all_pct": 1534.8052327119412,
+          "endpoint_pct": -15.396093463350402,
+          "interior_pct": 2798.229216237032,
+          "paired": {
+            "delta": 0.8750076633440323,
+            "low": 0.7634911460580777,
+            "high": 0.9927780331637178,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "utility": {
+          "all_pct": -6.5228660451778335,
+          "paired": {
+            "delta": -0.010964483923265095,
+            "low": -0.03331929690272244,
+            "high": -0.000279075519900478,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "direction": {
+          "all_pct": -0.663687165813498,
+          "paired": {
+            "delta": -0.00036180987201940286,
+            "low": -0.002147663201108354,
+            "high": 0.0017682082711375216,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "volatility": {
+          "all_pct": -7.656862444933843,
+          "paired": {
+            "delta": -0.021567157974510823,
+            "low": -0.06792502213382365,
+            "high": -0.0007653976449977496,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        }
+      },
+      "rolling_s43_update_last vs macro_s43": {
+        "full/activity": {
+          "all_pct": -5.5737199783325195,
+          "endpoint_pct": -5.174446105957031,
+          "interior_pct": -5.707139015197754,
+          "paired": {
+            "delta": -0.004429045842668965,
+            "low": -0.005998934520783157,
+            "high": -0.0028919153866548302,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/structure": {
+          "all_pct": 4.523108642664497,
+          "endpoint_pct": 14.898474448851417,
+          "interior_pct": 1.7059646089209846,
+          "paired": {
+            "delta": 0.0003246796233717877,
+            "low": -0.002392505417610582,
+            "high": 0.002091101370001201,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/near": {
+          "all_pct": 17.706300843265097,
+          "endpoint_pct": 54.201008875589366,
+          "interior_pct": 14.060977441473765,
+          "paired": {
+            "delta": 0.0032497862762260127,
+            "low": 0.002559153173672634,
+            "high": 0.004208482977426817,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/mid": {
+          "all_pct": 17.97621192212158,
+          "endpoint_pct": 9.687316911638199,
+          "interior_pct": 21.562123418114787,
+          "paired": {
+            "delta": 0.007930908743455723,
+            "low": 0.005555653544559183,
+            "high": 0.009626112747087228,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/far": {
+          "all_pct": -31.477186969728322,
+          "endpoint_pct": -33.52449896398425,
+          "interior_pct": -30.808555810302906,
+          "paired": {
+            "delta": -0.05003541723918517,
+            "low": -0.06936208360635981,
+            "high": -0.03258120738540877,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/price": {
+          "all_pct": -17.364863817486366,
+          "endpoint_pct": -20.06375270914039,
+          "interior_pct": -16.493149759082304,
+          "paired": {
+            "delta": -0.01275151177508579,
+            "low": -0.018797153203767902,
+            "high": -0.0071201611292172505,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/activity": {
+          "all_pct": 583.771484375,
+          "endpoint_pct": -5.174446105957031,
+          "interior_pct": 1564.8465576171875,
+          "paired": {
+            "delta": 0.18593870761064382,
+            "low": 0.17992725893299932,
+            "high": 0.19162186469770548,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/structure": {
+          "all_pct": 1988.5871482475989,
+          "endpoint_pct": 14.898452812666685,
+          "interior_pct": 3353.160017134752,
+          "paired": {
+            "delta": 0.07457061433445038,
+            "low": 0.04785158226439297,
+            "high": 0.10295947680723179,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/near": {
+          "all_pct": 452.67370387034146,
+          "endpoint_pct": 54.2012275913198,
+          "interior_pct": 498.54654142210916,
+          "paired": {
+            "delta": 0.07308618705245594,
+            "low": 0.05937422688594974,
+            "high": 0.0878614825897198,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/mid": {
+          "all_pct": 480.2876011536606,
+          "endpoint_pct": 9.68734361074388,
+          "interior_pct": 688.2376455005618,
+          "paired": {
+            "delta": 0.20879598905405578,
+            "low": 0.16499553381345022,
+            "high": 0.253653442505172,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/far": {
+          "all_pct": 49.88627070705278,
+          "endpoint_pct": -33.52448507652592,
+          "interior_pct": 260.6269949787052,
+          "paired": {
+            "delta": 0.027249029631616392,
+            "low": 0.024645113176990894,
+            "high": 0.030181994268052084,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/price": {
+          "all_pct": 340.0947639562473,
+          "endpoint_pct": -20.06372880967051,
+          "interior_pct": 605.2717639634337,
+          "paired": {
+            "delta": 0.14378045497540418,
+            "low": 0.11589876331667447,
+            "high": 0.17328157164889918,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "utility": {
+          "all_pct": 0.8302283860733173,
+          "paired": {
+            "delta": 0.001170741875626597,
+            "low": -0.0017160236578975007,
+            "high": 0.005087800064992307,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "direction": {
+          "all_pct": -1.8894970607900907,
+          "paired": {
+            "delta": -0.0010293566659384554,
+            "low": -0.0031726462755875605,
+            "high": 0.0007487170212671333,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "volatility": {
+          "all_pct": 1.4813556247029291,
+          "paired": {
+            "delta": 0.0033708404171916596,
+            "low": -0.0009428624853546904,
+            "high": 0.010841227797956324,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        }
+      },
+      "rolling_s43_update_last vs prefix_s43_update_last": {
+        "full/activity": {
+          "all_pct": -20.32998275756836,
+          "endpoint_pct": -20.372264862060547,
+          "interior_pct": -20.31574821472168,
+          "paired": {
+            "delta": -0.019146983019583595,
+            "low": -0.02004062894065153,
+            "high": -0.01817762744590215,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/structure": {
+          "all_pct": -21.085709622050473,
+          "endpoint_pct": -21.25010691474092,
+          "interior_pct": -21.035144389649574,
+          "paired": {
+            "delta": -0.002004762350512896,
+            "low": -0.003929981227680737,
+            "high": -0.0005135135942002303,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/near": {
+          "all_pct": -2.466735675476306,
+          "endpoint_pct": -13.673362720570758,
+          "interior_pct": -0.7264524544827511,
+          "paired": {
+            "delta": -0.0005463821815820225,
+            "low": -0.0018963311881481587,
+            "high": 0.0021239006757718085,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/mid": {
+          "all_pct": -6.888815367188683,
+          "endpoint_pct": -6.71215116085937,
+          "interior_pct": -6.957595890362878,
+          "paired": {
+            "delta": -0.003850897097110017,
+            "low": -0.0048687353286818655,
+            "high": -0.0030333142873638147,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/far": {
+          "all_pct": -26.293780574996372,
+          "endpoint_pct": -27.67384503406769,
+          "interior_pct": -25.84983686236103,
+          "paired": {
+            "delta": -0.03885668029861152,
+            "low": -0.052584274870678,
+            "high": -0.02631510482167844,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/price": {
+          "all_pct": -19.025221582686104,
+          "endpoint_pct": -20.822615740266937,
+          "interior_pct": -18.45287177111604,
+          "paired": {
+            "delta": -0.014257224788506464,
+            "low": -0.01868056642174512,
+            "high": -0.01015974686584994,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/activity": {
+          "all_pct": 347.9062194824219,
+          "endpoint_pct": -20.372264862060547,
+          "interior_pct": 698.1555786132812,
+          "paired": {
+            "delta": 0.16916596828342312,
+            "low": 0.1634787120117856,
+            "high": 0.17452361340559874,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/structure": {
+          "all_pct": 1241.2805556148594,
+          "endpoint_pct": -21.250168046314688,
+          "interior_pct": 2025.0176908879432,
+          "paired": {
+            "delta": 0.07248130724729626,
+            "low": 0.04601061159616944,
+            "high": 0.10045254579977819,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/near": {
+          "all_pct": 351.7060063207535,
+          "endpoint_pct": -13.673278090081197,
+          "interior_pct": 416.54803036445446,
+          "paired": {
+            "delta": 0.06947727228192335,
+            "low": 0.05619053075628013,
+            "high": 0.08349341334857194,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/mid": {
+          "all_pct": 393.12378134548476,
+          "endpoint_pct": -6.712107278807178,
+          "interior_pct": 569.5955576247361,
+          "paired": {
+            "delta": 0.20111174617508426,
+            "low": 0.15787801378202931,
+            "high": 0.24552981128914994,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/far": {
+          "all_pct": 55.14391398240805,
+          "endpoint_pct": -27.67384369417808,
+          "interior_pct": 232.41559341790685,
+          "paired": {
+            "delta": 0.029100114688192888,
+            "low": 0.025246039329621706,
+            "high": 0.033500956234105594,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/price": {
+          "all_pct": 301.26594075750404,
+          "endpoint_pct": -20.822598061857512,
+          "interior_pct": 507.4924500248775,
+          "paired": {
+            "delta": 0.13968952695971398,
+            "low": 0.11134351950508259,
+            "high": 0.1685645261311026,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "utility": {
+          "all_pct": 1.3544521368125118,
+          "paired": {
+            "delta": 0.001900094311141913,
+            "low": -0.0001270190138559588,
+            "high": 0.0050397347501251145,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "direction": {
+          "all_pct": 4.257865837578545,
+          "paired": {
+            "delta": 0.0021828219130684183,
+            "low": 0.0004506074618052397,
+            "high": 0.0042112658084693015,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "volatility": {
+          "all_pct": 0.7053356893722551,
+          "paired": {
+            "delta": 0.0016173667092154208,
+            "low": -0.001156981126989008,
+            "high": 0.006050639213578163,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        }
+      },
+      "rolling_s43_update_last vs prefix_s43_time_last": {
+        "full/activity": {
+          "all_pct": 5.061888694763184,
+          "endpoint_pct": 5.720734596252441,
+          "interior_pct": 4.84236478805542,
+          "paired": {
+            "delta": 0.0036151576810895003,
+            "low": 0.003078955616123461,
+            "high": 0.004096705962817707,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/structure": {
+          "all_pct": -9.029963951630048,
+          "endpoint_pct": -6.71340337970896,
+          "interior_pct": -9.717666542317271,
+          "paired": {
+            "delta": -0.0007447628095090895,
+            "low": -0.0031605503925260007,
+            "high": 0.0008753371312240616,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/near": {
+          "all_pct": -5.2529854892994665,
+          "endpoint_pct": -25.954549680323147,
+          "interior_pct": -1.5355758161249566,
+          "paired": {
+            "delta": -0.00119775319958747,
+            "low": -0.0034057553609035786,
+            "high": 0.002680973319221373,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/mid": {
+          "all_pct": 13.775048680499768,
+          "endpoint_pct": 11.92712338662687,
+          "interior_pct": 14.513063639841262,
+          "paired": {
+            "delta": 0.006301810406596971,
+            "low": 0.004604743934721604,
+            "high": 0.007955698737560643,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/far": {
+          "all_pct": -3.189351658054318,
+          "endpoint_pct": -2.6487554952666637,
+          "interior_pct": -3.357739346865418,
+          "paired": {
+            "delta": -0.003588360555185418,
+            "low": -0.007873773528831427,
+            "high": -0.0007491059579256907,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/price": {
+          "all_pct": 0.8955756725504971,
+          "endpoint_pct": -0.14796302691332253,
+          "interior_pct": 1.2226451444770747,
+          "paired": {
+            "delta": 0.0005386233875280494,
+            "low": -0.00021135639139942004,
+            "high": 0.001487375037629177,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/activity": {
+          "all_pct": 575.1270141601562,
+          "endpoint_pct": 5.720734596252441,
+          "interior_pct": 1280.6915283203125,
+          "paired": {
+            "delta": 0.18553087446403008,
+            "low": 0.1790322762181016,
+            "high": 0.19158396927277854,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/structure": {
+          "all_pct": 1647.6889823718452,
+          "endpoint_pct": -6.713460310320885,
+          "interior_pct": 2852.07226509467,
+          "paired": {
+            "delta": 0.07383916607835361,
+            "low": 0.047183635611366216,
+            "high": 0.10211737883129925,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/near": {
+          "all_pct": 340.5866669914346,
+          "endpoint_pct": -25.954505710045915,
+          "interior_pct": 416.4024458348701,
+          "paired": {
+            "delta": 0.06897872011556895,
+            "low": 0.055166275366116804,
+            "high": 0.08393238138562353,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/mid": {
+          "all_pct": 509.267963139475,
+          "endpoint_pct": 11.927098474894905,
+          "interior_pct": 738.3205602184793,
+          "paired": {
+            "delta": 0.21086382575823617,
+            "low": 0.1648338378245229,
+            "high": 0.25808867506824157,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/far": {
+          "all_pct": 94.29791147714712,
+          "endpoint_pct": -2.6487334473160096,
+          "interior_pct": 262.35391007367116,
+          "paired": {
+            "delta": 0.03973432117636297,
+            "low": 0.03241984277986182,
+            "high": 0.04729894646870093,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/price": {
+          "all_pct": 376.9636254016665,
+          "endpoint_pct": -0.14795096540739516,
+          "interior_pct": 596.4683335086648,
+          "paired": {
+            "delta": 0.1470483972342677,
+            "low": 0.11633213143843363,
+            "high": 0.17863427368739676,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "utility": {
+          "all_pct": 1.9504427203315355,
+          "paired": {
+            "delta": 0.0027201848035942285,
+            "low": -0.00010690111207868439,
+            "high": 0.006738398012602595,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "direction": {
+          "all_pct": 6.178176379479061,
+          "paired": {
+            "delta": 0.0031099986701886547,
+            "low": 0.0008575313219406438,
+            "high": 0.005450680390996983,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "volatility": {
+          "all_pct": 1.0194476359745908,
+          "paired": {
+            "delta": 0.0023303709369998267,
+            "low": -0.0014655247194864537,
+            "high": 0.00878339253927599,
+            "months": 13,
+            "windows": 984,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        }
+      }
+    },
+    "cross_research": {
+      "rolling_s42_update_last vs macro_s42": {
+        "full/activity": {
+          "all_pct": -14.837800979614258,
+          "endpoint_pct": -15.1386079788208,
+          "interior_pct": -14.738666534423828,
+          "paired": {
+            "delta": -0.02438711865268359,
+            "low": -0.026511664868888746,
+            "high": -0.022418155352864972,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/structure": {
+          "all_pct": 104.89664120766014,
+          "endpoint_pct": 113.26264593963403,
+          "interior_pct": 102.24460855486868,
+          "paired": {
+            "delta": 0.0013764671660373294,
+            "low": 0.0012780402201861445,
+            "high": 0.0014910145356775283,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/near": {
+          "all_pct": 55.86728301413253,
+          "endpoint_pct": 46.20746238561235,
+          "interior_pct": 59.49255730415244,
+          "paired": {
+            "delta": 0.006796132033185773,
+            "low": 0.0059845482573417244,
+            "high": 0.007305648464483338,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/mid": {
+          "all_pct": 3.297843014391,
+          "endpoint_pct": 3.0986318477338237,
+          "interior_pct": 3.3604688873979827,
+          "paired": {
+            "delta": 0.0006491215998468005,
+            "low": 0.0002485756689751158,
+            "high": 0.0010467388728669566,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/far": {
+          "all_pct": -39.11808223594673,
+          "endpoint_pct": -39.38308563944746,
+          "interior_pct": -39.02409957317323,
+          "paired": {
+            "delta": -0.02873652765307092,
+            "low": -0.03629965486355041,
+            "high": -0.022957393902533377,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/price": {
+          "all_pct": -20.17604070924324,
+          "endpoint_pct": -21.60989550835518,
+          "interior_pct": -19.67521795413205,
+          "paired": {
+            "delta": -0.0070623561757324335,
+            "low": -0.009844674988154237,
+            "high": -0.005112529891399747,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/activity": {
+          "all_pct": 2796.03564453125,
+          "endpoint_pct": -15.138614654541016,
+          "interior_pct": 6716.55419921875,
+          "paired": {
+            "delta": 1.9556432658897136,
+            "low": 1.9155831750347045,
+            "high": 2.000601657989267,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/structure": {
+          "all_pct": 22016.36542196448,
+          "endpoint_pct": 113.26282267625069,
+          "interior_pct": 39115.73475537443,
+          "paired": {
+            "delta": 0.15861197817697992,
+            "low": 0.1400605322223484,
+            "high": 0.18238944808215596,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/near": {
+          "all_pct": 9806.924814920269,
+          "endpoint_pct": 46.20757727958369,
+          "interior_pct": 26889.048949496315,
+          "paired": {
+            "delta": 0.5115634795801454,
+            "low": 0.47854303872213627,
+            "high": 0.5507558059499365,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/mid": {
+          "all_pct": 4944.933781771476,
+          "endpoint_pct": 3.0986517419622217,
+          "interior_pct": 7351.048772392689,
+          "paired": {
+            "delta": 0.7109335253937845,
+            "low": 0.6490967657308885,
+            "high": 0.784735826830664,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/far": {
+          "all_pct": 1108.3111862855783,
+          "endpoint_pct": -39.38311045118912,
+          "interior_pct": 3727.5487706063905,
+          "paired": {
+            "delta": 0.30655018032780984,
+            "low": 0.28195443694766786,
+            "high": 0.3349613979019386,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/price": {
+          "all_pct": 3722.1027121284083,
+          "endpoint_pct": -21.609908184561977,
+          "interior_pct": 8039.199343062893,
+          "paired": {
+            "delta": 0.6297444792879644,
+            "low": 0.581394727268926,
+            "high": 0.6872821599764595,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "utility": {
+          "all_pct": 5.663541423700846,
+          "paired": {
+            "delta": 0.0024940011368380223,
+            "low": 0.0010170326812037895,
+            "high": 0.0041752499182149275,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "direction": {
+          "all_pct": 3.955018160410728,
+          "paired": {
+            "delta": 0.0016511533954257514,
+            "low": -0.0010316247397076635,
+            "high": 0.004000581128360515,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "volatility": {
+          "all_pct": 7.203309779726896,
+          "paired": {
+            "delta": 0.0033368488782502923,
+            "low": 0.000659529614073862,
+            "high": 0.006620796015382157,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        }
+      },
+      "rolling_s42_update_last vs prefix_s42_update_last": {
+        "full/activity": {
+          "all_pct": -25.816577911376953,
+          "endpoint_pct": -25.83702850341797,
+          "interior_pct": -25.809860229492188,
+          "paired": {
+            "delta": -0.04871131642032118,
+            "low": -0.050846580182123485,
+            "high": -0.046541547430101096,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/structure": {
+          "all_pct": -40.6810702807588,
+          "endpoint_pct": -39.68789287356053,
+          "interior_pct": -41.005806105475784,
+          "paired": {
+            "delta": -0.0018439034503132579,
+            "low": -0.0021176604628099435,
+            "high": -0.0016051730018143157,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/near": {
+          "all_pct": -11.145406463579254,
+          "endpoint_pct": -14.580778257193483,
+          "interior_pct": -9.898741019777347,
+          "paired": {
+            "delta": -0.00237834716666696,
+            "low": -0.0038826518863998,
+            "high": -0.0013582112147127769,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/mid": {
+          "all_pct": -25.976857177384936,
+          "endpoint_pct": -27.774910108400007,
+          "interior_pct": -25.39445358893644,
+          "paired": {
+            "delta": -0.007135204452518979,
+            "low": -0.00819583108174255,
+            "high": -0.00637873974954244,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/far": {
+          "all_pct": -36.60312781832297,
+          "endpoint_pct": -36.076330007113015,
+          "interior_pct": -36.786790954528584,
+          "paired": {
+            "delta": -0.025822329889144725,
+            "low": -0.03191840225638489,
+            "high": -0.021124100434644754,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/price": {
+          "all_pct": -29.63812560940402,
+          "endpoint_pct": -30.312952142207894,
+          "interior_pct": -29.405099825498226,
+          "paired": {
+            "delta": -0.011769561164448236,
+            "low": -0.014654138459638283,
+            "high": -0.009662137145496559,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/activity": {
+          "all_pct": 2384.862060546875,
+          "endpoint_pct": -25.83702850341797,
+          "interior_pct": 5603.9453125,
+          "paired": {
+            "delta": 1.9440696312237642,
+            "low": 1.904029441444604,
+            "high": 1.988689635570634,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/structure": {
+          "all_pct": 5899.149500641643,
+          "endpoint_pct": -39.68790198921069,
+          "interior_pct": 10208.66893116324,
+          "paired": {
+            "delta": 0.15667648922785454,
+            "low": 0.13825637678191208,
+            "high": 0.18030209091349406,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/near": {
+          "all_pct": 4596.226930608257,
+          "endpoint_pct": -14.580830684645585,
+          "interior_pct": 9518.633704499349,
+          "paired": {
+            "delta": 0.5057756797089747,
+            "low": 0.473234739226576,
+            "high": 0.5444844894960664,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/mid": {
+          "all_pct": 3777.035564897618,
+          "endpoint_pct": -27.774919541016075,
+          "interior_pct": 5909.996646267367,
+          "paired": {
+            "delta": 0.7066026695824378,
+            "low": 0.6452893821415695,
+            "high": 0.7798425406081296,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/far": {
+          "all_pct": 1158.1270950590856,
+          "endpoint_pct": -36.076362155908456,
+          "interior_pct": 3773.655132910824,
+          "paired": {
+            "delta": 0.30764535502483564,
+            "low": 0.2825768967791162,
+            "high": 0.3368724085331341,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/price": {
+          "all_pct": 3041.6346998839726,
+          "endpoint_pct": -30.312982327409987,
+          "interior_pct": 6055.094678271162,
+          "paired": {
+            "delta": 0.6260798669042611,
+            "low": 0.5777636126334226,
+            "high": 0.6834597978066626,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "utility": {
+          "all_pct": 3.129422617826272,
+          "paired": {
+            "delta": 0.001411937129604988,
+            "low": -6.393998808545878e-05,
+            "high": 0.0029065765456933743,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "direction": {
+          "all_pct": 1.6193315218600235,
+          "paired": {
+            "delta": 0.0006915822445455537,
+            "low": -0.0014770312934793944,
+            "high": 0.0027167653129005122,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "volatility": {
+          "all_pct": 4.486354822270666,
+          "paired": {
+            "delta": 0.002132292014664424,
+            "low": 0.00022211148918499686,
+            "high": 0.004413201097910887,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        }
+      },
+      "rolling_s42_update_last vs prefix_s42_time_last": {
+        "full/activity": {
+          "all_pct": -10.830926895141602,
+          "endpoint_pct": -10.628443717956543,
+          "interior_pct": -10.897123336791992,
+          "paired": {
+            "delta": -0.0170015829990794,
+            "low": -0.018348699566550573,
+            "high": -0.015783998503711302,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/structure": {
+          "all_pct": -3.5730107680673084,
+          "endpoint_pct": -3.4116898956529917,
+          "interior_pct": -3.626815541264916,
+          "paired": {
+            "delta": -9.962649038923863e-05,
+            "low": -0.0002730230142185693,
+            "high": 5.395401760592451e-05,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/near": {
+          "all_pct": 3.101280464475531,
+          "endpoint_pct": -1.1247184457498727,
+          "interior_pct": 4.6399310956676265,
+          "paired": {
+            "delta": 0.0005703431189631885,
+            "low": -0.0003239530846248868,
+            "high": 0.001218053713008986,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/mid": {
+          "all_pct": -13.325845605556363,
+          "endpoint_pct": -15.512128336732022,
+          "interior_pct": -12.616792963611278,
+          "paired": {
+            "delta": -0.003126025377330084,
+            "low": -0.003879416473195882,
+            "high": -0.0026372745694366916,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/far": {
+          "all_pct": -21.444071875214867,
+          "endpoint_pct": -20.49868530431238,
+          "interior_pct": -21.772038032414763,
+          "paired": {
+            "delta": -0.01220881037368271,
+            "low": -0.014762903734417741,
+            "high": -0.010242409532336351,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/price": {
+          "all_pct": -14.922958444219836,
+          "endpoint_pct": -15.611265829250897,
+          "interior_pct": -14.68576097862373,
+          "paired": {
+            "delta": -0.004901053985208863,
+            "low": -0.006261490492777015,
+            "high": -0.003913592376725222,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/activity": {
+          "all_pct": 2890.468017578125,
+          "endpoint_pct": -10.628437995910645,
+          "interior_pct": 6752.43701171875,
+          "paired": {
+            "delta": 1.9578519220697823,
+            "low": 1.9177034863563103,
+            "high": 2.002506002368938,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/structure": {
+          "all_pct": 8685.767801409713,
+          "endpoint_pct": -3.4117919798038243,
+          "interior_pct": 14114.845568402809,
+          "paired": {
+            "delta": 0.15751887726879868,
+            "low": 0.13908212384700952,
+            "high": 0.1811793492880007,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/near": {
+          "all_pct": 5583.85343331049,
+          "endpoint_pct": -1.1247668407907807,
+          "interior_pct": 12137.04813922573,
+          "paired": {
+            "delta": 0.5076877609663333,
+            "low": 0.4749134860015514,
+            "high": 0.5466616002887176,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/mid": {
+          "all_pct": 4426.161484033347,
+          "endpoint_pct": -15.512138784356077,
+          "interior_pct": 6908.323926155148,
+          "paired": {
+            "delta": 0.7092856846128038,
+            "low": 0.6474622981600688,
+            "high": 0.7830541036921339,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/far": {
+          "all_pct": 1494.0746460711923,
+          "endpoint_pct": -20.49869303722489,
+          "interior_pct": 5018.291939471041,
+          "paired": {
+            "delta": 0.3132436653060355,
+            "low": 0.28712291091687203,
+            "high": 0.34384476298248884,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/price": {
+          "all_pct": 3748.960445176639,
+          "endpoint_pct": -15.611282482838773,
+          "interior_pct": 7528.503438905048,
+          "paired": {
+            "delta": 0.6298625390545857,
+            "low": 0.580848201482692,
+            "high": 0.6881610001638844,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "utility": {
+          "all_pct": 0.8177111628276945,
+          "paired": {
+            "delta": 0.0003773955901426792,
+            "low": -0.0016241865697354705,
+            "high": 0.0024590304380141623,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "direction": {
+          "all_pct": -0.3032782622992225,
+          "paired": {
+            "delta": -0.000132021542826137,
+            "low": -0.0024892473550963035,
+            "high": 0.002519300435019525,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "volatility": {
+          "all_pct": 1.8182129445088124,
+          "paired": {
+            "delta": 0.0008868127231114957,
+            "low": -0.0023832814695724795,
+            "high": 0.005096435691930696,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        }
+      },
+      "rolling_s43_update_last vs macro_s43": {
+        "full/activity": {
+          "all_pct": -7.839107513427734,
+          "endpoint_pct": -7.543081283569336,
+          "interior_pct": -7.936591148376465,
+          "paired": {
+            "delta": -0.00655377557255107,
+            "low": -0.0074111657699595076,
+            "high": -0.00573169756783239,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/structure": {
+          "all_pct": 220.19380780646532,
+          "endpoint_pct": 223.04084699192796,
+          "interior_pct": 219.27823050273142,
+          "paired": {
+            "delta": 0.0016451195802034742,
+            "low": 0.0014470354509908314,
+            "high": 0.0018880773614355802,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/near": {
+          "all_pct": 86.5193256185604,
+          "endpoint_pct": 81.44618601514848,
+          "interior_pct": 88.39756164558136,
+          "paired": {
+            "delta": 0.0022535204369930253,
+            "low": 0.0019177792961429282,
+            "high": 0.0026591382963454895,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/mid": {
+          "all_pct": 52.40655947868697,
+          "endpoint_pct": 52.700763185768686,
+          "interior_pct": 52.315894097808524,
+          "paired": {
+            "delta": 0.005584089247351805,
+            "low": 0.004629781385585451,
+            "high": 0.00681271327471485,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/far": {
+          "all_pct": -33.6582537718021,
+          "endpoint_pct": -33.4568494735058,
+          "interior_pct": -33.730654606838826,
+          "paired": {
+            "delta": -0.016396075506226977,
+            "low": -0.020735652753555607,
+            "high": -0.012687846900410507,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/price": {
+          "all_pct": -13.523506142828523,
+          "endpoint_pct": -14.71922162244751,
+          "interior_pct": -13.104163152967951,
+          "paired": {
+            "delta": -0.002774804729231726,
+            "low": -0.0037142691152888194,
+            "high": -0.0019336283877615164,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/activity": {
+          "all_pct": 618.1832275390625,
+          "endpoint_pct": -7.543087005615234,
+          "interior_pct": 2034.848388671875,
+          "paired": {
+            "delta": 0.1845966345767951,
+            "low": 0.1793987752017246,
+            "high": 0.18880805507678944,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/structure": {
+          "all_pct": 6485.31522753634,
+          "endpoint_pct": 223.0402223568615,
+          "interior_pct": 11461.517560506845,
+          "paired": {
+            "delta": 0.026628003511264053,
+            "low": 0.01876873236978432,
+            "high": 0.0358972747971166,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/near": {
+          "all_pct": 1716.3808021363361,
+          "endpoint_pct": 81.44625387121675,
+          "interior_pct": 2391.523090931808,
+          "paired": {
+            "delta": 0.0413306345461938,
+            "low": 0.035770915568579045,
+            "high": 0.047766811721955266,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/mid": {
+          "all_pct": 1103.9117657739775,
+          "endpoint_pct": 52.700827841700935,
+          "interior_pct": 1460.3089679459304,
+          "paired": {
+            "delta": 0.1094401924538105,
+            "low": 0.09046785681860202,
+            "high": 0.1319652254571937,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/far": {
+          "all_pct": 113.88517285172645,
+          "endpoint_pct": -33.45688369419547,
+          "interior_pct": 615.4441218399323,
+          "paired": {
+            "delta": 0.018979037012409973,
+            "low": 0.0162818963417655,
+            "high": 0.022216476147663432,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/price": {
+          "all_pct": 731.2357823970685,
+          "endpoint_pct": -14.719251049221793,
+          "interior_pct": 1481.3602403978455,
+          "paired": {
+            "delta": 0.07769680455286854,
+            "low": 0.065168399953886,
+            "high": 0.09214372673357973,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "utility": {
+          "all_pct": 1.3996610622940997,
+          "paired": {
+            "delta": 0.0006173505803275916,
+            "low": -0.0012021613766635669,
+            "high": 0.0022399255834470292,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "direction": {
+          "all_pct": 0.33197498896571087,
+          "paired": {
+            "delta": 0.00015346641015197109,
+            "low": -0.0015531397820626469,
+            "high": 0.001613877301526224,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "volatility": {
+          "all_pct": 2.5752273737620346,
+          "paired": {
+            "delta": 0.00108123475050321,
+            "low": -0.0014568484998936633,
+            "high": 0.00336963268635541,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        }
+      },
+      "rolling_s43_update_last vs prefix_s43_update_last": {
+        "full/activity": {
+          "all_pct": -20.07806396484375,
+          "endpoint_pct": -19.95151710510254,
+          "interior_pct": -20.119840621948242,
+          "paired": {
+            "delta": -0.019356541239056134,
+            "low": -0.019944958686768967,
+            "high": -0.01864802475472541,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/structure": {
+          "all_pct": -18.47142792778658,
+          "endpoint_pct": -19.12394885949601,
+          "interior_pct": -18.256834871374327,
+          "paired": {
+            "delta": -0.0005419958138682959,
+            "low": -0.0006126290262258866,
+            "high": -0.0004694466144302652,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/near": {
+          "all_pct": -29.33573245549551,
+          "endpoint_pct": -28.92162543089126,
+          "interior_pct": -29.482226382652556,
+          "paired": {
+            "delta": -0.002016829970168366,
+            "low": -0.0021461755376541345,
+            "high": -0.0018699331004609708,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/mid": {
+          "all_pct": -14.609617383533735,
+          "endpoint_pct": -16.17684824750465,
+          "interior_pct": -14.113501398380313,
+          "paired": {
+            "delta": -0.0027784350156937407,
+            "low": -0.0030947242478352173,
+            "high": -0.002378705617061387,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/far": {
+          "all_pct": -30.693748300423383,
+          "endpoint_pct": -30.11157903711894,
+          "interior_pct": -30.901516024130636,
+          "paired": {
+            "delta": -0.014312409176959752,
+            "low": -0.01694221175984129,
+            "high": -0.011940052624336948,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/price": {
+          "all_pct": -26.163786944435152,
+          "endpoint_pct": -26.39580950152035,
+          "interior_pct": -26.083589180417054,
+          "paired": {
+            "delta": -0.006287418753307255,
+            "low": -0.00700322260790044,
+            "high": -0.005597391715576493,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/activity": {
+          "all_pct": 374.1815490722656,
+          "endpoint_pct": -19.95151710510254,
+          "interior_pct": 816.7803955078125,
+          "paired": {
+            "delta": 0.16923085190960394,
+            "low": 0.16393782709303897,
+            "high": 0.17366410101737964,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/structure": {
+          "all_pct": 1144.8579740134828,
+          "endpoint_pct": -19.124057993839692,
+          "interior_pct": 1729.4544188342386,
+          "paired": {
+            "delta": 0.024866570412646463,
+            "low": 0.017108958638451313,
+            "high": 0.03406278400665658,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/near": {
+          "all_pct": 666.7744657276271,
+          "endpoint_pct": -28.921652116136663,
+          "interior_pct": 986.6175873910043,
+          "paired": {
+            "delta": 0.03803440668015595,
+            "low": 0.03261353001546718,
+            "high": 0.044254979098790725,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/mid": {
+          "all_pct": 650.2191066392567,
+          "endpoint_pct": -16.176872997563805,
+          "interior_pct": 919.0163952459303,
+          "paired": {
+            "delta": 0.10344482069792886,
+            "low": 0.08498397931087297,
+            "high": 0.12541904250089844,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/far": {
+          "all_pct": 108.64390172314882,
+          "endpoint_pct": -30.11155798298234,
+          "interior_pct": 461.76150756016625,
+          "paired": {
+            "delta": 0.018560399715078908,
+            "low": 0.015487715962535772,
+            "high": 0.022129717770879728,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/price": {
+          "all_pct": 511.3829352460717,
+          "endpoint_pct": -26.39580214205266,
+          "interior_pct": 912.6006693133176,
+          "paired": {
+            "delta": 0.0738759148216163,
+            "low": 0.06148327567104679,
+            "high": 0.08812677867832738,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "utility": {
+          "all_pct": 1.8545525896170645,
+          "paired": {
+            "delta": 0.0008143370433001684,
+            "low": -0.0002636426937089482,
+            "high": 0.0017268478482714792,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "direction": {
+          "all_pct": 2.057965164239306,
+          "paired": {
+            "delta": 0.0009352731018721757,
+            "low": -0.00012477689661413924,
+            "high": 0.00209196920355556,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "volatility": {
+          "all_pct": 1.6363898649191189,
+          "paired": {
+            "delta": 0.0006934009847281592,
+            "low": -0.0011951144540795608,
+            "high": 0.0023797944090671814,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        }
+      },
+      "rolling_s43_update_last vs prefix_s43_time_last": {
+        "full/activity": {
+          "all_pct": 5.993080139160156,
+          "endpoint_pct": 6.931865215301514,
+          "interior_pct": 5.68619966506958,
+          "paired": {
+            "delta": 0.004356565593544538,
+            "low": 0.0039797210553077856,
+            "high": 0.004711884877896412,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/structure": {
+          "all_pct": 45.62081197141754,
+          "endpoint_pct": 47.332394871311756,
+          "interior_pct": 45.07244117804954,
+          "paired": {
+            "delta": 0.0007494537911909384,
+            "low": 0.0006624728520131437,
+            "high": 0.0008512832446231607,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/near": {
+          "all_pct": -40.712575575176224,
+          "endpoint_pct": -39.29114124625009,
+          "interior_pct": -41.20345234136769,
+          "paired": {
+            "delta": -0.003336093435470617,
+            "low": -0.003474685459632963,
+            "high": -0.003176637778221062,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/mid": {
+          "all_pct": 26.380592701302863,
+          "endpoint_pct": 23.913697225405972,
+          "interior_pct": 27.162725673288012,
+          "paired": {
+            "delta": 0.0033898034855969674,
+            "low": 0.002279631174015465,
+            "high": 0.004839440510450912,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/far": {
+          "all_pct": -3.269093498702591,
+          "endpoint_pct": -2.411598708694307,
+          "interior_pct": -3.57492961478707,
+          "paired": {
+            "delta": -0.0010921877772554016,
+            "low": -0.0013914427451546876,
+            "high": -0.0007861359515720243,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "full/price": {
+          "all_pct": -1.9046269298249374,
+          "endpoint_pct": -2.134321220960278,
+          "interior_pct": -1.8253196588323806,
+          "paired": {
+            "delta": -0.0003445106038846822,
+            "low": -0.000790957686629856,
+            "high": 0.00020215267966254783,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/activity": {
+          "all_pct": 630.9631958007812,
+          "endpoint_pct": 6.931865215301514,
+          "interior_pct": 1608.6907958984375,
+          "paired": {
+            "delta": 0.18511871898765325,
+            "low": 0.1798744620427205,
+            "high": 0.1894712352238218,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/structure": {
+          "all_pct": 2311.841347035325,
+          "endpoint_pct": 47.332259900779626,
+          "interior_pct": 3561.2881914990658,
+          "paired": {
+            "delta": 0.025917515950277373,
+            "low": 0.018137743038857127,
+            "high": 0.03510974217317131,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/near": {
+          "all_pct": 543.9727793244616,
+          "endpoint_pct": -39.29117793308866,
+          "interior_pct": 805.637999066105,
+          "paired": {
+            "delta": 0.03694664311859904,
+            "low": 0.03154585993154307,
+            "high": 0.04310749018069042,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/mid": {
+          "all_pct": 997.1833878597183,
+          "endpoint_pct": 23.913703120689522,
+          "interior_pct": 1383.9010460027223,
+          "paired": {
+            "delta": 0.10847582360916705,
+            "low": 0.08914115960895973,
+            "high": 0.1313344415215764,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/far": {
+          "all_pct": 171.46732746917473,
+          "endpoint_pct": -2.411606629480134,
+          "interior_pct": 522.802854192837,
+          "paired": {
+            "delta": 0.022513938631883845,
+            "low": 0.018659949091633928,
+            "high": 0.02695887921771094,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "native/price": {
+          "all_pct": 666.3175320429876,
+          "endpoint_pct": -2.134328649387285,
+          "interior_pct": 1117.165734022886,
+          "paired": {
+            "delta": 0.07679667759694267,
+            "low": 0.06381421610172792,
+            "high": 0.09187854555026677,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "utility": {
+          "all_pct": 1.459491336464236,
+          "paired": {
+            "delta": 0.0006433603970573537,
+            "low": -0.00032968173325403157,
+            "high": 0.001497152115398205,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "direction": {
+          "all_pct": 0.7617416372044605,
+          "paired": {
+            "delta": 0.00035063830630759443,
+            "low": -0.0009544162108153017,
+            "high": 0.0017483205372223543,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        },
+        "volatility": {
+          "all_pct": 2.221830219974552,
+          "paired": {
+            "delta": 0.0009360824878071129,
+            "low": -0.0009602193932926616,
+            "high": 0.0027479877192405373,
+            "months": 13,
+            "windows": 439,
+            "supported": true,
+            "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+          }
+        }
+      }
+    }
+  },
+  "raw_audit": {
+    "raw_files": 1251,
+    "qualifications": {
+      "train": {
+        "original": 4789,
+        "eligible": 4789,
+        "excluded": 0
+      },
+      "val": {
+        "original": 978,
+        "eligible": 978,
+        "excluded": 0
+      },
+      "test": {
+        "original": 984,
+        "eligible": 984,
+        "excluded": 0
+      },
+      "cross_research": {
+        "original": 453,
+        "eligible": 439,
+        "excluded": 14
+      }
+    },
+    "utility_label_values": 18499,
+    "max_abs_difference": 8.881784197001252e-16
+  },
+  "fixed_example_target_replay": {
+    "test": {
+      "windows": 3,
+      "prefixes": [
+        32,
+        64,
+        96,
+        128
+      ],
+      "export_target_max_abs": 1.7763568394002505e-15,
+      "old_pipeline_target_max_abs": 2.384185791015625e-07,
+      "masks_equal": true
+    },
+    "cross_research": {
+      "windows": 3,
+      "prefixes": [
+        32,
+        64,
+        96,
+        128
+      ],
+      "export_target_max_abs": 3.552713678800501e-15,
+      "old_pipeline_target_max_abs": 5.364418029785156e-07,
+      "masks_equal": true
+    }
+  },
+  "decision": {
+    "status": "no_balanced_warm_context_upgrade",
+    "reconstruction_progress": false,
+    "representation_upgrade": false,
+    "promoted": false,
+    "close_current_matrix": true,
+    "next_priority": "Isolate continuation stability and objective/sampling transition before another core modification; no new GPU experiment in this review",
+    "local_optimizer_updates": 0
+  },
+  "limitations": [
+    "16 neural/checkpoint PT and 8 input/state NPZ omitted: no independent neural replay or refit",
+    "All bests equal source epoch0: formal best comparisons cannot measure trained candidate gains",
+    "Last-epoch analyses are descriptive and do not replace validation selection",
+    "Time match includes CPU feed and excludes evaluation/checkpoint I/O; not exact FLOPs",
+    "Reused research cohorts, not fresh independent holdout"
+  ],
+  "review_date": "2026-10-04",
+  "training_date": "2026-10-03"
+}

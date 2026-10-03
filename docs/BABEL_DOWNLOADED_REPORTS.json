@@ -64,6 +64,11 @@
       "sha256": "59b710f9da2cd3ee30da3d4e8d952612ad2f2d5bc665a9382e333064068bb659"
     },
     {
+      "name": "babel_context_transfer768_reports.tar.gz",
+      "bytes": 35191752,
+      "sha256": "e28dbc2dc7c3b3f683755979a9232b4f9633afd0b0e28e19411101356bb5ccc2"
+    },
+    {
       "name": "babel_control600_v2_reports.tar.gz",
       "bytes": 1120239,
       "sha256": "8b7121039ff70d9e0b8d0a389ab8ef6f942008d760315c4aaa4c45aa57d8a3c0"
