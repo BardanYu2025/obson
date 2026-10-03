@@ -1,0 +1,1168 @@
+{
+  "date": "2026-10-04",
+  "status": "partial_protocol_audit_not_full_independent_replication",
+  "scope": "Nine key stages around current Macro source and recent context studies; source/archive code and recorded optimizer schedules, plus manual objective/gradient route review. Earlier studies are not cleared by this audit.",
+  "local_optimizer_updates": 0,
+  "experiments": {
+    "babel_history_structure768": {
+      "archive_sha256": "a47c2298a5e92bd4a75e88096e588e5d60fc7d351316e1b52d192adab50250eb",
+      "schema": "babel-history-structure768-v1",
+      "bound_code_verified": 71,
+      "bound_code_mismatches": [],
+      "bound_code_unavailable": [],
+      "settings": {
+        "epochs": 100,
+        "budget": 4789,
+        "batch": 128,
+        "micro": 16,
+        "encoder_lr": 1e-05,
+        "head_lr": 3e-05,
+        "query_lr": 0.0003
+      },
+      "histories": {
+        "structure_s42": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 2.0000000000000003e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 1.0000000000000002e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "ea656aa4dabebbbe8758d2767892005afd9c2607b4d9f0bcdc51a5b55733ab67"
+        },
+        "control_s42": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 2.0000000000000003e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 1.0000000000000002e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "1a59eb43e65622f2a1606d11f6e50684dfabfcf277a815b79f0d9722118b84e7"
+        },
+        "control_s43": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 2.0000000000000003e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 1.0000000000000002e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "087c2c5db4840976b4a21898f4080a61d1f72063068ab7ba42eec3f1f10b4276"
+        },
+        "consistent_s42": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 2.0000000000000003e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 1.0000000000000002e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "a4f2af18850647f8a9134cf2706b901dacee4c62e4f385f9321b36211efd9b13"
+        },
+        "structure_s43": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 2.0000000000000003e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 1.0000000000000002e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "6e7450038f9717745d80df56d8456ed71fcb001b477ec4e4be2ccd1a83c8f7f7"
+        },
+        "consistent_s43": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 2.0000000000000003e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 1.0000000000000002e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "d83f30bc92359dcc901a001aa5522be137ff6347e1e249d2f33fb274d0ed7115"
+        }
+      }
+    },
+    "babel_causal_pool768": {
+      "archive_sha256": "ffedea703a5cf06b77d01d26a31d6158ec9516923d51a6f480082a4f27e49c09",
+      "schema": "babel-causal-pool768-v1",
+      "bound_code_verified": 74,
+      "bound_code_mismatches": [],
+      "bound_code_unavailable": [],
+      "settings": {
+        "epochs": 100,
+        "budget": 4789,
+        "batch": 128,
+        "micro": 16,
+        "encoder_lr": 1e-05,
+        "head_lr": 3e-05,
+        "query_lr": 0.0003
+      },
+      "histories": {
+        "plain_s42": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 2.0000000000000003e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 1.0000000000000002e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "74b609663196118dcc31151064c2fbaf3178a47f6950c56ee38a0fe2c8bcb2ef"
+        },
+        "full_pool_s42": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 2.0000000000000003e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 1.0000000000000002e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "d0e23a2efda19d613213157bef84cff1fbeadee3856142927bc75565bde2abe3"
+        },
+        "scale_pool_s42": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 2.0000000000000003e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 1.0000000000000002e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "7fc0d3bbda1207fd772356b784f71d39939b1cefb905376497242fad19d034e2"
+        },
+        "plain_s43": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 2.0000000000000003e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 1.0000000000000002e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "34c5d285105b6c739e09f95e04a314563841e9861ab8a4efae0231329dff31c0"
+        },
+        "full_pool_s43": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 2.0000000000000003e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 1.0000000000000002e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "7e537a693a4749d6ce02274fd5221dee3baea5cacf4775d8a6f9ecb3275a89d5"
+        },
+        "scale_pool_s43": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 2.0000000000000003e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 1.0000000000000002e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "8f445db070e771c346ee6fb18bbf6c69fba39fdf375794bdbbab4d6f86ad1869"
+        }
+      }
+    },
+    "babel_depth768": {
+      "archive_sha256": "b41a370399daeb1cea4a1be2c8ef5594cd6a01a65d4d8a46b3f4c551a6327d49",
+      "schema": "babel-depth768-v1",
+      "bound_code_verified": 77,
+      "bound_code_mismatches": [],
+      "bound_code_unavailable": [],
+      "settings": {
+        "epochs": 100,
+        "budget": 4789,
+        "batch": 128,
+        "micro": 8,
+        "encoder_lr": 1e-05,
+        "head_lr": 3e-05,
+        "query_lr": 0.0003
+      },
+      "histories": {
+        "d8_lr1_s42": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 2.0000000000000003e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 1.0000000000000002e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "002eb36e421a31862e97afd4b84ff8a826586c06eca5070e7fb47eb3cb244e82"
+        },
+        "d4_lr1_s42": {
+          "epochs": 281,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 2.0000000000000003e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 281,
+            "encoder_lr": 1.0000000000000002e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "037e4da0489a1a4dadeb5101c75561d32e30a76830e69293c38484cd5fa5ccad"
+        },
+        "d12_lr1_s42": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 2.0000000000000003e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 1.0000000000000002e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "2d9fc12d6e41749e05231102fd5680f6c55690529b35dc8aee58b683b825c4cd"
+        },
+        "d4_lr3_s42": {
+          "epochs": 281,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6.000000000000001e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 281,
+            "encoder_lr": 3.0000000000000005e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "8a8f2a41ea4d1942c9654c0a47eaa5e1c700cee4e4bdc023f173e7bc6dff87a5"
+        },
+        "d8_lr3_s42": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6.000000000000001e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3.0000000000000005e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "4c87292bdf429cac8c15368306f42bb498ee7119231b135f18863d9421703f00"
+        },
+        "d12_lr3_s42": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6.000000000000001e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3.0000000000000005e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "f940b081ae850f08ab8e5bc90f7d785bc8b7abb6d9ddc8638983172ded37f77b"
+        },
+        "d4_lr1_s43": {
+          "epochs": 281,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 2.0000000000000003e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 281,
+            "encoder_lr": 1.0000000000000002e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "ec716402c8d99028f387d2418c553010020a50d5e955e50396a59c52d0acea8b"
+        },
+        "d8_lr1_s43": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 2.0000000000000003e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 1.0000000000000002e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "880dbb1314dbbdc936fafabaad088e01fd7f476eecaa14e2d313a0179c28ee21"
+        },
+        "d12_lr1_s43": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 2.0000000000000003e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 1.0000000000000002e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "b20135a3ac1b157a938bb36d680badd9ccc3f8d850213eb2f621b7b6a9dfc9b4"
+        },
+        "d4_lr3_s43": {
+          "epochs": 281,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6.000000000000001e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 281,
+            "encoder_lr": 3.0000000000000005e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "082fdf410bd4297f5f78453d2b9dfe9a5dad2d668a5b3baaa44af0109232a5c9"
+        },
+        "d8_lr3_s43": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6.000000000000001e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3.0000000000000005e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "8376a3e862b093879e472e01dff69c25ec8423dd9ec270a333b2ec2ed8ab3e19"
+        },
+        "d12_lr3_s43": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6.000000000000001e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3.0000000000000005e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "00bb673d2fbe35fb2569837e557a5f421806bd5063a1600057a86d1e5c03fc54"
+        }
+      }
+    },
+    "babel_activity_weight768": {
+      "archive_sha256": "2436c05782036a469f1c1c118b406e9c935bdfcdd7830c6af06660a30959346b",
+      "schema": "babel-activity-weight768-v1",
+      "bound_code_verified": 80,
+      "bound_code_mismatches": [],
+      "bound_code_unavailable": [],
+      "settings": {
+        "epochs": 100,
+        "budget": 4789,
+        "batch": 128,
+        "micro": 16,
+        "encoder_lr": 3e-05,
+        "head_lr": 3e-05,
+        "query_lr": 0.0003,
+        "sampling_stream_start": 781
+      },
+      "histories": {
+        "a000_s42": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "e22be0a6df32eed7722d17a333a2c7fcfe2cc6aeaff4ff5239dd6afe3032ed17"
+        },
+        "a010_s42": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "db90ef52ab66ba06aa3e68f8980cef639724a954f76b2211856e296c6563f035"
+        },
+        "a000_s43": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "d76e5accf0fc1f3e577b5fac800fdd88479524dc2ba2a106bc1260a1d78b7e4c"
+        },
+        "a030_s42": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "d398f0697c33d11dbd182049736de8f10fb107204487ab3f78a02190918994ff"
+        },
+        "a010_s43": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "d1ecac905b7291c88c2eafe06f3fc13497a9976e9c61f32e1b312e0de1828cea"
+        },
+        "a030_s43": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "3136beac0dcecd441c13bc3cf78deee56a1d10617e3bc1d3ce44ebf047e71519"
+        }
+      }
+    },
+    "babel_shared_history768": {
+      "archive_sha256": "d91e3249657e3deccc34ad15dc5c6c98bd9f756735a638ce9c7006901c550356",
+      "schema": "babel-shared-history768-v1",
+      "bound_code_verified": 84,
+      "bound_code_mismatches": [],
+      "bound_code_unavailable": [],
+      "settings": {
+        "epochs": 100,
+        "budget": 4800,
+        "batch": 128,
+        "micro": 16,
+        "encoder_lr": 3e-05,
+        "head_lr": 3e-05,
+        "query_lr": 0.0003,
+        "sampling_stream_start": 881
+      },
+      "histories": {
+        "within_s42": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "e2658f42e468f965929a85766557dbd1e18adf8c92d8ca5a10a8e0bd23a5b81f"
+        },
+        "control_s42": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "c59b63fb59358a8d2beecdcf19323f9670414db1252e75a349405cabd71043c8"
+        },
+        "cross_s42": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "f49d82725d0e53423f346b6f9bce34982c5f98ee7f06a37d9d8a42a2cbaabbb0"
+        },
+        "control_s43": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "f3aece2d0f2a70a84c60efd42f5af479aacefa362e001dbcb01b21c183d2f769"
+        },
+        "within_s43": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "442263f125ba5dbd33b034c893942646bd5de6261c80dfdf43e9d0d2e4eb812a"
+        },
+        "cross_s43": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "84110951f36fdaefefffaeec65d19b9e4925c338b2da4bc3313c6273a635a1a4"
+        }
+      }
+    },
+    "babel_macro_history768": {
+      "archive_sha256": "42d0ee31ea743423a06e614ca46cda02067df717fe94a9c4565b87648ca2dc53",
+      "schema": "babel-macro-history768-v1",
+      "bound_code_verified": 94,
+      "bound_code_mismatches": [],
+      "bound_code_unavailable": [],
+      "settings": {
+        "epochs": 100,
+        "budget": 4800,
+        "batch": 128,
+        "micro": 16,
+        "encoder_lr": 3e-05,
+        "head_lr": 3e-05,
+        "query_lr": 0.0003,
+        "sampling_stream_start": 1091
+      },
+      "histories": {
+        "content_s42": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "6e4ddadb3f890530f6d4d29651b72866702fe462e91e290014d3d3665c99bf3b"
+        },
+        "control_s42": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "c89b5a2ca1bb6b24fd28ba337d8687146201ec950731f2bff08882d2813964bf"
+        },
+        "aligned_s42": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "fcd7ca637a87611d940db4a9474988051b560d0f25230fef444b7f48098ed912"
+        },
+        "control_s43": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "2115cfe35b7d5f5152f1563d6b53a9437f7ebf55b146eacdaa28a6838f0fa892"
+        },
+        "content_s43": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "fe28270f9df7c83b0feb01a3e8fc356942f24f41fee9587b9c0d62b656a29a1e"
+        },
+        "aligned_s43": {
+          "epochs": 100,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 100,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "0d88c4d26897e3459192e297b9b595b93ebc2ca018715b7e1b29f7042566b795"
+        }
+      }
+    },
+    "babel_position_supervision768": {
+      "archive_sha256": "66f32b81235f158ff0e2185ad96e2d786e506f4974ed9ed6ba9318aabcef04c0",
+      "schema": "babel-position-supervision768-v1",
+      "bound_code_verified": 100,
+      "bound_code_mismatches": [],
+      "bound_code_unavailable": [],
+      "settings": {
+        "epochs": 60,
+        "budget": 4800,
+        "batch": 128,
+        "micro": 8,
+        "encoder_lr": 3e-05,
+        "head_lr": 3e-05,
+        "query_lr": 0.0003,
+        "sampling_stream_start": 1591
+      },
+      "histories": {
+        "sampled_s42": {
+          "epochs": 60,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 60,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "a42423982a6b574b8d872c1249f3cb67bf7f70ae57aec7a9c4a7151079fb1e1b"
+        },
+        "dense_matched_s42": {
+          "epochs": 60,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 60,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "7ef85980b4e0d044ef4cbea045c7501f99d1dca08d1d94dd58ef63dec88d9d9f"
+        },
+        "dense_all_s42": {
+          "epochs": 60,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 60,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "74f49db70d88af8250d054aea1fa290c7010c1c7d740130937d84e6244ea0a8d"
+        },
+        "sampled_s43": {
+          "epochs": 60,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 60,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "e0210d14d9816a6fb65dcb6e1587ec96544c84b2c32e84bed868afd815724259"
+        },
+        "dense_matched_s43": {
+          "epochs": 60,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 60,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "c7c7231423e9f02b132ef695f9e895d1bc18a00234fee1ae352048f0dddfe0c2"
+        },
+        "dense_all_s43": {
+          "epochs": 60,
+          "first": {
+            "epoch": 1,
+            "encoder_lr": 6e-06,
+            "head_lr": 6e-06,
+            "query_lr": 5.9999999999999995e-05
+          },
+          "last": {
+            "epoch": 60,
+            "encoder_lr": 3e-06,
+            "head_lr": 3e-06,
+            "query_lr": 2.9999999999999997e-05
+          },
+          "history_sha256": "add76ac7f7613d37a74e793b05be45b7ab4ced19f4de6d7556d9f4e30d7ec9c7"
+        }
+      }
+    },
+    "babel_uniform_context768": {
+      "archive_sha256": "d630e050e1de449ebdaa718b0d4c3d76556cd9f4b0de753fdf51128cd4468d8a",
+      "schema": "babel-uniform-context768-v1",
+      "bound_code_verified": 102,
+      "bound_code_mismatches": [],
+      "bound_code_unavailable": [],
+      "settings": {
+        "epochs": 120,
+        "batch": 128,
+        "micro": 8
+      },
+      "histories": {
+        "prefix_s42": {
+          "epochs": 120,
+          "first": {
+            "epoch": 1,
+            "lr": 2.9999999999999997e-05,
+            "best_epoch": 1
+          },
+          "last": {
+            "epoch": 120,
+            "lr": 1.4999999999999999e-05,
+            "best_epoch": 120
+          },
+          "history_sha256": "e727e153367afddabb1130dc2ce6f7060b1c6752e1c5c0e0644774a7078185b8"
+        },
+        "rolling_s42": {
+          "epochs": 120,
+          "first": {
+            "epoch": 1,
+            "lr": 2.9999999999999997e-05,
+            "best_epoch": 1
+          },
+          "last": {
+            "epoch": 120,
+            "lr": 1.4999999999999999e-05,
+            "best_epoch": 120
+          },
+          "history_sha256": "2a62208e1fe821d862b3f90c86c053235756a545baa78ddd5c982cb85384aeda"
+        },
+        "relative_s42": {
+          "epochs": 120,
+          "first": {
+            "epoch": 1,
+            "lr": 2.9999999999999997e-05,
+            "best_epoch": 1
+          },
+          "last": {
+            "epoch": 120,
+            "lr": 1.4999999999999999e-05,
+            "best_epoch": 120
+          },
+          "history_sha256": "9cd7114e081b3598fd33931da14f4cf6c6ff9ce9e15d290935b66b3a31dd291a"
+        },
+        "prefix_s43": {
+          "epochs": 120,
+          "first": {
+            "epoch": 1,
+            "lr": 2.9999999999999997e-05,
+            "best_epoch": 1
+          },
+          "last": {
+            "epoch": 120,
+            "lr": 1.4999999999999999e-05,
+            "best_epoch": 120
+          },
+          "history_sha256": "7dc0528fd61ad89b38b763022cf9c8233da07b39061c33e07e4b084b0df9d404"
+        },
+        "rolling_s43": {
+          "epochs": 120,
+          "first": {
+            "epoch": 1,
+            "lr": 2.9999999999999997e-05,
+            "best_epoch": 1
+          },
+          "last": {
+            "epoch": 120,
+            "lr": 1.4999999999999999e-05,
+            "best_epoch": 120
+          },
+          "history_sha256": "27f599fe4bd9fd096a42306a8c9712e70b9c63ed7a01c41dac8d817781bbf405"
+        },
+        "relative_s43": {
+          "epochs": 120,
+          "first": {
+            "epoch": 1,
+            "lr": 2.9999999999999997e-05,
+            "best_epoch": 1
+          },
+          "last": {
+            "epoch": 120,
+            "lr": 1.4999999999999999e-05,
+            "best_epoch": 119
+          },
+          "history_sha256": "70d58f746d58db281be3458a2667ad05cd00b4ed13f8b071af3d2e660507977e"
+        }
+      }
+    },
+    "babel_context_transfer768": {
+      "archive_sha256": "e28dbc2dc7c3b3f683755979a9232b4f9633afd0b0e28e19411101356bb5ccc2",
+      "schema": "babel-context-transfer768-v1",
+      "bound_code_verified": 106,
+      "bound_code_mismatches": [],
+      "bound_code_unavailable": [],
+      "settings": {
+        "base_epochs": 60,
+        "prefix_cap": 300,
+        "batch": 128,
+        "micro": 8,
+        "encoder_lr": 3e-05,
+        "query_lr": 0.0003
+      },
+      "histories": {
+        "rolling_s42": {
+          "epochs": 60,
+          "first": {
+            "epoch": 1,
+            "best_epoch": 0,
+            "encoder_lr": 3e-05,
+            "query_lr": 0.0003
+          },
+          "last": {
+            "epoch": 60,
+            "best_epoch": 0,
+            "encoder_lr": 3e-05,
+            "query_lr": 0.0003
+          },
+          "history_sha256": "8f03714deb4a0e2d57c60cde57330a652dbab8cbb392711be839d8aaca608620"
+        },
+        "prefix_s42": {
+          "epochs": 142,
+          "first": {
+            "epoch": 1,
+            "best_epoch": 0,
+            "encoder_lr": 3e-05,
+            "query_lr": 0.0003
+          },
+          "last": {
+            "epoch": 142,
+            "best_epoch": 0,
+            "encoder_lr": 3e-05,
+            "query_lr": 0.0003
+          },
+          "history_sha256": "3ee0fc26969549806922d86341ed75d92c4f875bc274ea6f5acc3b9824338a8c"
+        },
+        "rolling_s43": {
+          "epochs": 60,
+          "first": {
+            "epoch": 1,
+            "best_epoch": 0,
+            "encoder_lr": 3e-05,
+            "query_lr": 0.0003
+          },
+          "last": {
+            "epoch": 60,
+            "best_epoch": 0,
+            "encoder_lr": 3e-05,
+            "query_lr": 0.0003
+          },
+          "history_sha256": "9fb531a45ce100733b294939396ef4ccf9089540e095591252fce66e8e9dbdf8"
+        },
+        "prefix_s43": {
+          "epochs": 145,
+          "first": {
+            "epoch": 1,
+            "best_epoch": 0,
+            "encoder_lr": 3e-05,
+            "query_lr": 0.0003
+          },
+          "last": {
+            "epoch": 145,
+            "best_epoch": 0,
+            "encoder_lr": 3e-05,
+            "query_lr": 0.0003
+          },
+          "history_sha256": "600a9bd0d4ce21c4b17662ab5199209c64e530dea5e22d2d923e42403d1aa677"
+        }
+      }
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "status": "confirmed_design_limitation",
+      "finding": "Only remote ages17+ receive the additional structure loss; local diagnostic head is detached from encoder in multiple stages. Not an implementation accident, but cannot be described as a symmetric near/far encoder objective.",
+      "evidence": [
+        "history_structure.py:metrics,losses",
+        "causal_pool.py:losses",
+        "activity_weight.py:losses",
+        "shared_history.py:losses",
+        "uniform_context.py:loss_rows"
+      ]
+    },
+    {
+      "id": "F2",
+      "status": "confirmed_implicit_reweighting",
+      "finding": "Changing prefix availability changes band averaging; full-context training mixes added input history, expanded labels and changed effective age weights. It does not isolate input length alone.",
+      "expected_band_shares_prefix": [
+        0.3806451612903227,
+        0.3806451612903227,
+        0.23870967741935478
+      ],
+      "expected_band_shares_full": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "evidence": [
+        "history_query.py:metrics,sample_prefixes",
+        "uniform_context.py:targets"
+      ]
+    },
+    {
+      "id": "F3",
+      "status": "confirmed_recent_recipe_discontinuity_not_universal_bug",
+      "finding": "Context Transfer resets optimizer and uses fixed peak LR immediately. Earlier audited warm stages have warmup/cosine; optimizer reset alone is not automatically invalid when matched across arms. No evidence here establishes high LR as the unique cause.",
+      "source_epoch_to_restart_lr_ratio": {
+        "s42": 9.78352064002057,
+        "s43": 9.188725972809072
+      },
+      "evidence": [
+        "context_transfer_run.py:worker,train_epoch",
+        "capacity_growth.py:learning_rate",
+        "macro_history_run.py:rates",
+        "recorded archived histories"
+      ]
+    },
+    {
+      "id": "F4",
+      "status": "previously_confirmed_objective_identifiability_gap",
+      "finding": "Shared History free auxiliary task admits query-independent noncollapsed solutions. The existing constructive counterexample limits semantic claims, not proof that real trained weights used that shortcut.",
+      "evidence": [
+        "docs/BABEL_SHARED_HISTORY_DESIGN_AUDIT.md",
+        "shared_history.py"
+      ]
+    },
+    {
+      "id": "F5",
+      "status": "limited_causal_scope",
+      "finding": "Depth equal100 comparisons retain recipe-level evidence; extended4-layer191/281 add updates, exposure, LR restarts and validation opportunities. Cannot infer4layers globally optimal.",
+      "evidence": [
+        "depth_scaling_run.py:learning_rates",
+        "docs/BABEL_DEPTH768_REVIEW.md"
+      ]
+    },
+    {
+      "id": "F6",
+      "status": "limited_scope_across_all_reviewed_reports",
+      "finding": "Repeated research cohorts, warm starts, epoch0 fallbacks and decoder/encoder co-adaptation limit generalization and information-loss claims. Report arithmetic verification does not establish causal interpretation or independent replication.",
+      "evidence": [
+        "docs/BABEL_ACTIVITY_WEIGHT768_REVIEW.md",
+        "docs/BABEL_POSITION_SUPERVISION768_REVIEW.md",
+        "docs/BABEL_CONTEXT_TRANSFER768_REVIEW.md"
+      ]
+    }
+  ],
+  "pending": [
+    "Earlier512/768 experiments outside the named nine stages",
+    "Independent neural forward/gradient/optimizer replay on source and candidate checkpoints, absent from report archives",
+    "Full-chain train/validation/research isolation and selection audit beyond existing report checks",
+    "Stable continuation control and source/new first-step behavior with exact optimizer/sampling contract",
+    "Re-evaluation plan using fresh independent holdout after model/design freeze, rather than repeated research-set selection"
+  ]
+}
