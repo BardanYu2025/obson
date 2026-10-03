@@ -1,0 +1,207 @@
+{
+  "archive_sha256": "d630e050e1de449ebdaa718b0d4c3d76556cd9f4b0de753fdf51128cd4468d8a",
+  "available_files": 43,
+  "omitted_files": [
+    "readout_weights.npz",
+    "cache/train.npz",
+    "cache/val.npz",
+    "cache/train_states.npz",
+    "cache/val_states.npz",
+    "cache/test.npz",
+    "cache/cross_research.npz",
+    "cache/test_states.npz",
+    "cache/cross_research_states.npz",
+    "prefix_s42/last.pt",
+    "prefix_s42/best.pt",
+    "rolling_s42/last.pt",
+    "rolling_s42/best.pt",
+    "relative_s42/last.pt",
+    "relative_s42/best.pt",
+    "prefix_s43/last.pt",
+    "prefix_s43/best.pt",
+    "rolling_s43/last.pt",
+    "rolling_s43/best.pt",
+    "relative_s43/last.pt",
+    "relative_s43/best.pt"
+  ],
+  "code_files": 102,
+  "epochs": 720,
+  "steps": 27360,
+  "examples": 3448080,
+  "supervised_states": 17240400,
+  "numeric_checks": 5390,
+  "max_abs_difference": 0,
+  "utility_prediction_values": 314483,
+  "reconstruction_error_values": 478128,
+  "gates": 72,
+  "passed_gates": 8,
+  "comparisons": {
+    "test": {
+      "42": {
+        "price": -22.910589338879717,
+        "near": -56.95385373024968,
+        "far": -17.607356096851923,
+        "activity": -23.50910597543865,
+        "endpoint_price": -21.10323936923867,
+        "utility": 2.7808275196080645,
+        "relative_vs_rolling_price": 105.23686867106603,
+        "rolling_vs_macro_price": 26.671960219005353,
+        "rolling_gain_5pct_interval": {
+          "delta": -0.035882897773418646,
+          "low": -0.05353067552516879,
+          "high": -0.0214211636637663,
+          "months": 13,
+          "windows": 984,
+          "supported": true,
+          "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+        }
+      },
+      "43": {
+        "price": -19.820314051704123,
+        "near": -42.20619640852242,
+        "far": -20.009437188024716,
+        "activity": -20.913629180580184,
+        "endpoint_price": -19.01131195976504,
+        "utility": -2.009332869702729,
+        "relative_vs_rolling_price": 82.50746816733334,
+        "rolling_vs_macro_price": 139.5582123052074,
+        "rolling_gain_5pct_interval": {
+          "delta": -0.03251579777644795,
+          "low": -0.04337036922893713,
+          "high": -0.0224092741921965,
+          "months": 13,
+          "windows": 984,
+          "supported": true,
+          "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+        }
+      }
+    },
+    "cross_research": {
+      "42": {
+        "price": -22.735342910207557,
+        "near": -53.195086187220355,
+        "far": -18.085725796203743,
+        "activity": -22.90155596328902,
+        "endpoint_price": -22.546449545877323,
+        "utility": -6.0972149011343735,
+        "relative_vs_rolling_price": 106.00735609618953,
+        "rolling_vs_macro_price": 45.573914559428715,
+        "rolling_gain_5pct_interval": {
+          "delta": -0.011696500400575401,
+          "low": -0.014720769718595234,
+          "high": -0.009243026166726278,
+          "months": 13,
+          "windows": 439,
+          "supported": true,
+          "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+        }
+      },
+      "43": {
+        "price": -21.863115778673368,
+        "near": -46.29157233063638,
+        "far": -20.677355009725307,
+        "activity": -21.020111020249566,
+        "endpoint_price": -22.151573242975843,
+        "utility": -11.130352076602367,
+        "relative_vs_rolling_price": 84.60313210392079,
+        "rolling_vs_macro_price": 179.74746142435416,
+        "rolling_gain_5pct_interval": {
+          "delta": -0.012387709435103249,
+          "low": -0.016675651221768326,
+          "high": -0.009427958927315428,
+          "months": 13,
+          "windows": 439,
+          "supported": true,
+          "scope": "Paired calendar months; reused research cohorts; no multiple-model winner search"
+        }
+      }
+    }
+  },
+  "learning_trends": {
+    "prefix_s42": {
+      "validation_last20_change_pct": -5.759880427517361,
+      "train_last20_change_pct": -8.124753762678093
+    },
+    "rolling_s42": {
+      "validation_last20_change_pct": -5.009565962388862,
+      "train_last20_change_pct": -4.819884000553487
+    },
+    "relative_s42": {
+      "validation_last20_change_pct": -2.4156562469831,
+      "train_last20_change_pct": -3.29240383040752
+    },
+    "prefix_s43": {
+      "validation_last20_change_pct": -4.8413969589851895,
+      "train_last20_change_pct": -6.254270934752215
+    },
+    "rolling_s43": {
+      "validation_last20_change_pct": -6.437155717493203,
+      "train_last20_change_pct": -6.252610636630496
+    },
+    "relative_s43": {
+      "validation_last20_change_pct": -2.487141529867376,
+      "train_last20_change_pct": -2.9687095296188404
+    }
+  },
+  "date": "2026-10-03",
+  "source_archive": "babel_uniform_context768_reports.tar.gz",
+  "status": "reviewed_complete_no_architecture_promotion",
+  "raw_audit": {
+    "raw_files": 1251,
+    "qualifications": {
+      "train": {
+        "original": 4789,
+        "eligible": 4789,
+        "excluded": 0
+      },
+      "val": {
+        "original": 978,
+        "eligible": 978,
+        "excluded": 0
+      },
+      "test": {
+        "original": 984,
+        "eligible": 984,
+        "excluded": 0
+      },
+      "cross_research": {
+        "original": 453,
+        "eligible": 439,
+        "excluded": 14
+      }
+    },
+    "utility_label_values": 18499,
+    "max_abs_difference": 8.881784197001252e-16
+  },
+  "runtime": {
+    "log_start": "02:31:30",
+    "log_end": "11:26:03",
+    "elapsed_seconds": 32073,
+    "gpu": "NVIDIA GeForce RTX 3080 Ti"
+  },
+  "readouts": {
+    "selected": 221,
+    "alpha_candidates": 1105,
+    "selected_by_validation_verified": true
+  },
+  "limitations": [
+    "All12 neural checkpoints,8 input/state NPZ and readout_weights.npz intentionally absent; cannot locally replay model inference or refit coefficients from this archive",
+    "314483 exported utility predictions and478128 historical error values permit full exported metric/gate recomputation, but not all historical prediction errors can be re-derived from full predictions (only fixed examples exported)",
+    "Research cohorts have been reused; monthly intervals are exploratory, not new held-out confirmation",
+    "Rolling uses2.11–2.20 times prefix worker time; equal update budget is not equal compute",
+    "Best epochs119/120 and continuing improvement preclude convergence claims"
+  ],
+  "decision": {
+    "keep_macro": true,
+    "close_current_relative_recipe": true,
+    "full_context_supervision_promising": true,
+    "uniform_utility_upgrade": false,
+    "next_proposal": "Same-source Macro warm-start global encoder: native-prefix versus full rolling supervision, with comparable-compute control designed before running. No new training entry point in this review.",
+    "retained_branches": [
+      "from-scratch dense all128 equal-position supervision",
+      "cross-resolution common physical history",
+      "conditional joint prediction training",
+      "stochastic innovation/distribution modelling"
+    ]
+  }
+}
