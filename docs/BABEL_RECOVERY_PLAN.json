@@ -1,6 +1,6 @@
 {
   "date": "2026-10-04",
-  "status": "r0_reviewed_r1_preparation_eligible_no_new_training",
+  "status": "issue_mapping_corrected_R1_RS_pending_training_entrypoints",
   "scope_warning": "Counts are the bounded response to confirmed issues, not a claim that all historical experiments are valid or that undiscovered defects cannot change the plan.",
   "coverage": {
     "report_archives": 61,
@@ -13,12 +13,13 @@
   },
   "counts": {
     "confirmed_whole_old_matrix_exact_reruns": 0,
-    "planned_core_question_replacement_experiments": 1,
+    "planned_current_question_experiments": 1,
     "preceding_short_diagnostic_experiments": 1,
-    "max_new_training_jobs": 8,
-    "max_worker_epochs": 370,
+    "max_new_training_jobs": 10,
+    "max_worker_epochs": 250,
     "updates_per_epoch": 38,
-    "max_optimizer_updates": 14060
+    "max_optimizer_updates": 9500,
+    "deferred_context_jobs_not_in_active_budget": 6
   },
   "mainline": {
     "goal": "Causal per-bar price/activity representation; historical retention and utility before separate future-state tests",
@@ -166,46 +167,64 @@
       "reference": "Reuse prior high-LR prefix first five epochs only if sampling/init/objective signatures match",
       "gate": "Both actually updated epoch5 checkpoints finite and all24 full/native retention metrics <=1.10 source; epoch0 fallback cannot pass",
       "failure": "Stop, report and revise plan; no implicit third LR or extra reference jobs",
-      "status": "eligible_for_preparation_not_implemented"
+      "status": "not_implemented_or_run"
     },
     {
-      "id": "R2",
-      "training_jobs": 6,
+      "id": "RS",
+      "issue_ids": [
+        "S1",
+        "S2"
+      ],
+      "training_jobs": 8,
       "seeds": [
         42,
         43
       ],
-      "epochs_per_job": 60,
-      "max_worker_epochs": 360,
-      "max_optimizer_updates": 13680,
-      "initialization": "Restart all arms from original Macro; never R1 outputs",
+      "epochs_per_job": 30,
+      "max_worker_epochs": 240,
+      "max_optimizer_updates": 9120,
+      "initialization": "Original Macro best; never R1 outputs; same frozen source local head in every arm",
       "arms": {
-        "A": "Native prefix inputs and native targets",
-        "B": "Full128 inputs with exactly A common target/mask/age support",
-        "C": "Exactly B inputs, full1..127 targets and original full-band averaging"
+        "baseline": {
+          "remote_structure": true,
+          "local_to_encoder": false
+        },
+        "without_remote": {
+          "remote_structure": false,
+          "local_to_encoder": false
+        },
+        "with_local": {
+          "remote_structure": true,
+          "local_to_encoder": true
+        },
+        "without_remote_with_local": {
+          "remote_structure": false,
+          "local_to_encoder": true
+        }
       },
-      "contrasts": {
-        "B_minus_A": "Full-context encoding policy including position/origin change, not physical length alone",
-        "C_minus_B": "Target-support expansion and resulting band-weight changes jointly, not separately"
+      "weights": {
+        "query": "original",
+        "remote_structure": 1.0,
+        "local": 0.25
       },
-      "budget_comparison": "Equal updates; not equal compute or efficiency proof",
-      "gate": "Predeclared validation selection and research readout locking; report best/last and all arms; no automatic promotion; A instability limits causal claims"
+      "qualification": "R1 both seeds pass; gradient residual audit passes unchanged tolerance; source local head provenance, causal targets and frozen-reader validation primary better than train-mean baseline for each seed and native endpoint/interior",
+      "budget_interpretation": "Same source and updates; finite adaptation diagnostic, not convergence or equal FLOPs proof",
+      "status": "objective_component_and_synthetic_tests_only_no_training_entrypoint",
+      "module": "obson.babel.recovery_objectives",
+      "protocol": "docs/BABEL_RECOVERY_PLAN.md",
+      "real_training_executed": false
     }
   ],
   "resource_limits": {
     "max_gpu_session_hours": 10,
-    "formal_R2_estimated_hours_on_prior_3080Ti": [
-      6,
-      8
-    ],
-    "estimate_not_guarantee": true,
+    "cap_not_runtime_estimate": true,
     "single_worker": true,
     "batch": 128,
     "micro": 8,
-    "new_disk_estimate_GiB": 10,
     "disk_preflight_required": true,
     "export_directory": "/root/autodl-tmp/download",
-    "timeout_behavior": "Mark incomplete; do not rank incomplete unequal budgets or silently extend"
+    "timeout_behavior": "Mark incomplete; no ranking unequal incomplete budgets or silent extension",
+    "enforcement_implementation_status": "R1/RS entrypoints not yet implemented"
   },
   "interpretation_corrections": [
     "Do not claim four layers globally optimal from unequal extended budgets",
@@ -224,7 +243,8 @@
   "evidence": [
     "BABEL_EXPERIMENT_VALIDITY_AUDIT.json",
     "BABEL_CONTEXT_TRANSFER768_REVIEW.json",
-    "BABEL_RECOVERY_PLAN.md"
+    "BABEL_RECOVERY_PLAN.md",
+    "docs/BABEL_ISSUE_CLOSURE.md"
   ],
   "inventory": [
     {
@@ -1254,5 +1274,57 @@
       "audit_scope": "inventory_only_not_cleared",
       "planned_action": "no_rerun_authorized_by_inventory_alone"
     }
-  ]
+  ],
+  "issue_ledger": "docs/BABEL_ISSUE_CLOSURE.md",
+  "superseded_context_schedule": {
+    "reason": "Original LR/context plan did not directly test S1 remote-only structure and S2 local gradient routing",
+    "counts": {
+      "confirmed_whole_old_matrix_exact_reruns": 0,
+      "planned_core_question_replacement_experiments": 1,
+      "preceding_short_diagnostic_experiments": 1,
+      "max_new_training_jobs": 8,
+      "max_worker_epochs": 370,
+      "updates_per_epoch": 38,
+      "max_optimizer_updates": 14060
+    },
+    "R2": {
+      "id": "R2",
+      "training_jobs": 6,
+      "seeds": [
+        42,
+        43
+      ],
+      "epochs_per_job": 60,
+      "max_worker_epochs": 360,
+      "max_optimizer_updates": 13680,
+      "initialization": "Restart all arms from original Macro; never R1 outputs",
+      "arms": {
+        "A": "Native prefix inputs and native targets",
+        "B": "Full128 inputs with exactly A common target/mask/age support",
+        "C": "Exactly B inputs, full1..127 targets and original full-band averaging"
+      },
+      "contrasts": {
+        "B_minus_A": "Full-context encoding policy including position/origin change, not physical length alone",
+        "C_minus_B": "Target-support expansion and resulting band-weight changes jointly, not separately"
+      },
+      "budget_comparison": "Equal updates; not equal compute or efficiency proof",
+      "gate": "Predeclared validation selection and research readout locking; report best/last and all arms; no automatic promotion; A instability limits causal claims"
+    },
+    "resource_limits": {
+      "max_gpu_session_hours": 10,
+      "formal_R2_estimated_hours_on_prior_3080Ti": [
+        6,
+        8
+      ],
+      "estimate_not_guarantee": true,
+      "single_worker": true,
+      "batch": 128,
+      "micro": 8,
+      "new_disk_estimate_GiB": 10,
+      "disk_preflight_required": true,
+      "export_directory": "/root/autodl-tmp/download",
+      "timeout_behavior": "Mark incomplete; do not rank incomplete unequal budgets or silently extend"
+    }
+  },
+  "deferred_context_status": "R2 suspended; original protocol retained under superseded_context_schedule; any activation needs separately stated budget"
 }

@@ -1,0 +1,163 @@
+{
+  "date": "2026-10-04",
+  "scope": "Nine audited stages plus audit-engineering and evidence interpretation issues; not a full-history clearance",
+  "human_ledger": "docs/BABEL_ISSUE_CLOSURE.md",
+  "protocol": "docs/BABEL_RECOVERY_PLAN.md",
+  "new_real_training_runs": 0,
+  "new_real_weight_inferences": 0,
+  "new_optimizer_updates": 0,
+  "new_implementation": {
+    "module": "obson.babel.recovery_objectives",
+    "tests": "tests/babel/test_recovery_objectives.py",
+    "synthetic_tests": 9,
+    "training_entrypoint_ready": false
+  },
+  "issues": [
+    {
+      "id": "S1",
+      "stages": [
+        "babel_history_structure768",
+        "babel_causal_pool768"
+      ],
+      "status": "open_real_intervention_pending",
+      "action": "RS",
+      "evidence": "src/obson/babel/history_structure.py",
+      "fact": "Extra17+ structure is asymmetric; not proven cause of near degradation",
+      "decision_effect": "Keep structure_gain_with_tradeoffs; reject architecture/capacity-only attribution"
+    },
+    {
+      "id": "S2",
+      "stages": [
+        "babel_history_structure768"
+      ],
+      "status": "open_real_intervention_pending",
+      "action": "RS",
+      "evidence": "src/obson/babel/history_structure.py",
+      "fact": "Detached local diagnostic cannot supervise encoder; main query still covers near ages",
+      "decision_effect": "Retract local-head-protection claim, not original local readout measurements"
+    },
+    {
+      "id": "S3",
+      "stages": [
+        "babel_uniform_context768",
+        "babel_context_transfer768"
+      ],
+      "status": "open_deferred",
+      "action": "R2",
+      "evidence": "src/obson/babel/uniform_context.py",
+      "fact": "Context, target support and band averaging change together",
+      "decision_effect": "Preserve recipe findings, no input-length-only causal conclusion"
+    },
+    {
+      "id": "S4",
+      "stages": [
+        "babel_position_supervision768"
+      ],
+      "status": "existing_control_verified_scope_corrected",
+      "action": "existing_dense_matched",
+      "evidence": "docs/BABEL_POSITION_SUPERVISION768_REVIEW.md",
+      "fact": "dense_matched already controls expected position weights; dense_all also changes coverage",
+      "decision_effect": "Preserve finite warm-start conclusion; full-context/scratch remain open"
+    },
+    {
+      "id": "S5",
+      "stages": [
+        "babel_shared_history768"
+      ],
+      "status": "qualification_remedy_executed_no_successful_candidate",
+      "action": "existing_grounded_qualification",
+      "evidence": "docs/BABEL_GROUNDED_HISTORY768_REVIEW.md",
+      "fact": "Query-independent counterexample; later grounded qualification already ran and blocked joint training",
+      "decision_effect": "No shared representation upgrade; no claim actual model necessarily took shortcut"
+    },
+    {
+      "id": "S6",
+      "stages": [
+        "babel_macro_history768"
+      ],
+      "status": "open_same_target_information_attribution",
+      "action": "deferred_matched_readout",
+      "evidence": "docs/BABEL_MACRO_HISTORY768_REVIEW.md",
+      "fact": "Old-reader drift is not information loss",
+      "decision_effect": "Preserve interface findings, no added-memory interpretation"
+    },
+    {
+      "id": "T1",
+      "stages": [
+        "babel_context_transfer768"
+      ],
+      "status": "open_R1_not_run",
+      "action": "R1",
+      "evidence": "docs/BABEL_RECOVERY_R0_REVIEW.md",
+      "fact": "Changed LR/Adam/sampling/clipping is adaptation, not exact resume",
+      "decision_effect": "Preserve recipe failure; LR causal role unproven"
+    },
+    {
+      "id": "B1",
+      "stages": [
+        "babel_depth768"
+      ],
+      "status": "scope_disposition_complete_optimum_open",
+      "action": "no_repeat_for_scope_correction",
+      "evidence": "docs/BABEL_DEPTH768_REVIEW.md",
+      "fact": "Equal exposure and extended compute-budget study are different comparisons",
+      "decision_effect": "Preserve both axes; not global four-layer optimum"
+    },
+    {
+      "id": "B2",
+      "stages": [
+        "babel_causal_pool768"
+      ],
+      "status": "scope_disposition_complete",
+      "action": "existing_within_study_comparisons",
+      "evidence": "docs/BABEL_CAUSAL_POOL768_REVIEW.md",
+      "fact": "plain versus old source includes continuation and structure objective",
+      "decision_effect": "Preserve within-study pool comparison"
+    },
+    {
+      "id": "A1",
+      "stages": [
+        "babel_activity_weight768"
+      ],
+      "status": "scope_disposition_complete_input_value_open",
+      "action": "no_new_input_ablation_now",
+      "evidence": "docs/BABEL_ACTIVITY_WEIGHT768_REVIEW.md",
+      "fact": "Output loss ablation is not input removal or information deletion",
+      "decision_effect": "Preserve price/activity tradeoff, no global0.3 optimum"
+    },
+    {
+      "id": "E1",
+      "stages": [],
+      "status": "fixed_and_real_replay_verified",
+      "action": "R0_v2",
+      "evidence": "docs/BABEL_RECOVERY_R0_REVIEW.md",
+      "fact": "R0 omitted historical runtime profile on first attempt",
+      "decision_effect": "140 original validation values now exact; old degradation remains"
+    },
+    {
+      "id": "E2",
+      "stages": [],
+      "status": "open_real_gradient_identity_pending",
+      "action": "zero_update_preflight",
+      "evidence": "docs/BABEL_RECOVERY_R0_REVIEW.md",
+      "fact": "Exported norms/cosines do not strictly establish gradient additivity",
+      "decision_effect": "Do not tune weights from exact gradient-ratio claims"
+    },
+    {
+      "id": "E3",
+      "stages": [],
+      "status": "process_rule_recorded_independent_acceptance_pending",
+      "action": "future_frozen_protocol_holdout",
+      "evidence": "docs/BABEL_EXPERIMENT_VALIDITY_AUDIT.md",
+      "fact": "Repeated research cohorts are not final independent validation",
+      "decision_effect": "Do not equate engineering tests or arithmetic with representation success"
+    }
+  ],
+  "validation": {
+    "suite_passed": 55,
+    "suite_command": ".venv/bin/pytest -q tests/babel/test_recovery_objectives.py tests/babel/test_recovery_audit.py tests/babel/test_context_transfer.py tests/babel/test_uniform_context.py",
+    "lint": "ruff check and format --check passed",
+    "stage_coverage": "All nine audited stage IDs covered",
+    "boundary": "Synthetic CPU tests only; real target pipeline and CUDA qualification remain pending"
+  }
+}
