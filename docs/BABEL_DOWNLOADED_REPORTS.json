@@ -184,6 +184,11 @@
       "sha256": "da9b313ad92ccd66844854857eea26a03bcd7ffa774c2ecbde666ecac70de366"
     },
     {
+      "name": "babel_recovery_r0_v2_reports.tar.gz",
+      "bytes": 44223,
+      "sha256": "8105a5f361252d45054458f2bb37bbe7fa56ec5d5aa191064160044be3206c40"
+    },
+    {
       "name": "babel_sampling512_reports.tar.gz",
       "bytes": 4464629,
       "sha256": "fbed2874d39095467e09ae510b5bb43bba81a0bf969abb6fe3ba67e979df1816"

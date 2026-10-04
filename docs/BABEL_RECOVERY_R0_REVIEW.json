@@ -1,0 +1,158 @@
+{
+  "date": "2026-10-04",
+  "archive": "babel_recovery_r0_v2_reports.tar.gz",
+  "archive_bytes": 44223,
+  "archive_sha256": "8105a5f361252d45054458f2bb37bbe7fa56ec5d5aa191064160044be3206c40",
+  "status": "r0_reviewed_bounded_r1_diagnostic_eligible_not_full_history_clearance",
+  "elapsed_seconds": 307.52099366206676,
+  "optimizer_updates": 0,
+  "verification": {
+    "completion_files_verified": 25,
+    "bound_code_verified": 107,
+    "source_report_files_cross_checked": 31,
+    "check_records_passed": 1592,
+    "validation_values_exactly_replayed_and_matched_to_original_archived_histories": 140,
+    "by_report": {
+      "macro_s42_original.json": 11,
+      "shared_s42.json": 11,
+      "rolling_s42.json": 24,
+      "macro_s42_context.json": 24,
+      "macro_s43_original.json": 11,
+      "shared_s43.json": 11,
+      "rolling_s43.json": 24,
+      "macro_s43_context.json": 24
+    },
+    "causality_checks": 48,
+    "causality_max_abs": 2.5272369384765625e-05
+  },
+  "first_failure": {
+    "failed_metrics": 18,
+    "maximum_relative_error_percent": 0.16857641383689614,
+    "corrected_context_metrics_exact": 24,
+    "interpretation": "Original numerical entry policy mismatch resolved in real replay, with unchanged tolerances; does not erase the original high-LR training degradation"
+  },
+  "raw": {
+    "train": {
+      "windows": 4789,
+      "contracts": 576,
+      "excluded": 0,
+      "max_input_difference": 0.0,
+      "max_target_difference": 5.5730342864990234e-06
+    },
+    "val": {
+      "windows": 978,
+      "contracts": 148,
+      "excluded": 0,
+      "max_input_difference": 0.0,
+      "max_target_difference": 7.271766662597656e-06
+    },
+    "test": {
+      "windows": 984,
+      "contracts": 163,
+      "excluded": 0,
+      "max_input_difference": 0.0,
+      "max_target_difference": 4.887580871582031e-06
+    },
+    "cross_research": {
+      "windows": 439,
+      "contracts": 57,
+      "excluded": 14,
+      "max_input_difference": 0.0,
+      "max_target_difference": 3.0994415283203125e-06
+    }
+  },
+  "learning_rates": {
+    "42": {
+      "source_epoch": 97,
+      "source_rates": {
+        "encoder_lr": 3.066380815642346e-06,
+        "head_lr": 3.066380815642346e-06,
+        "query_lr": 3.0663808156423456e-05
+      },
+      "context_to_source_encoder_ratio": 9.78352064002057,
+      "context_to_source_query_ratio": 9.78352064002057
+    },
+    "43": {
+      "source_epoch": 94,
+      "source_rates": {
+        "encoder_lr": 3.2648704606900738e-06,
+        "head_lr": 3.2648704606900738e-06,
+        "query_lr": 3.2648704606900735e-05
+      },
+      "context_to_source_encoder_ratio": 9.188725972809072,
+      "context_to_source_query_ratio": 9.188725972809072
+    }
+  },
+  "gradient_diagnostics": {
+    "42/prefix": {
+      "additivity_cross_check": {
+        "family_squared_encoder_norm": 0.8029987474662343,
+        "age_band_squared_encoder_norm": 0.8029439059821115,
+        "relative_squared_norm_difference": -6.829585263468108e-05,
+        "strict_identity_verified": false,
+        "scope": "Derived from exported norms/cosines only; raw gradient vectors unavailable. Small nonzero discrepancy retained, not used for acceptance or loss-weight tuning."
+      },
+      "near_encoder_norm": 0.49368876218795776,
+      "structure_to_near_norm": 1.8870756634019996,
+      "structure_near_cosine": 0.02423207093031553,
+      "near_far_cosine": 0.05963871049654609,
+      "hypothetical_clip_factor": 0.3924332788064809
+    },
+    "42/rolling": {
+      "additivity_cross_check": {
+        "family_squared_encoder_norm": 1.4104392326526387,
+        "age_band_squared_encoder_norm": 1.4104208785575096,
+        "relative_squared_norm_difference": -1.3013035020659203e-05,
+        "strict_identity_verified": false,
+        "scope": "Derived from exported norms/cosines only; raw gradient vectors unavailable. Small nonzero discrepancy retained, not used for acceptance or loss-weight tuning."
+      },
+      "near_encoder_norm": 0.6781812906265259,
+      "structure_to_near_norm": 1.631745279528184,
+      "structure_near_cosine": 0.02282354906034289,
+      "near_far_cosine": 0.0020707475342956125,
+      "hypothetical_clip_factor": 0.31494526011305807
+    },
+    "43/prefix": {
+      "additivity_cross_check": {
+        "family_squared_encoder_norm": 0.37170329456971296,
+        "age_band_squared_encoder_norm": 0.3721058736367322,
+        "relative_squared_norm_difference": 0.0010830656410654171,
+        "strict_identity_verified": false,
+        "scope": "Derived from exported norms/cosines only; raw gradient vectors unavailable. Small nonzero discrepancy retained, not used for acceptance or loss-weight tuning."
+      },
+      "near_encoder_norm": 0.30270272493362427,
+      "structure_to_near_norm": 2.0861319729865597,
+      "structure_near_cosine": 0.0733819981200074,
+      "near_far_cosine": -0.007519694907931303,
+      "hypothetical_clip_factor": 0.5890464983924956
+    },
+    "43/rolling": {
+      "additivity_cross_check": {
+        "family_squared_encoder_norm": 0.2816938403255913,
+        "age_band_squared_encoder_norm": 0.28176288441796693,
+        "relative_squared_norm_difference": 0.0002451033089534427,
+        "strict_identity_verified": false,
+        "scope": "Derived from exported norms/cosines only; raw gradient vectors unavailable. Small nonzero discrepancy retained, not used for acceptance or loss-weight tuning."
+      },
+      "near_encoder_norm": 0.2063380777835846,
+      "structure_to_near_norm": 4.065177191434981,
+      "structure_near_cosine": 0.0702504554575974,
+      "near_far_cosine": 0.004451857996824131,
+      "hypothetical_clip_factor": 0.538078804062468
+    }
+  },
+  "decision": {
+    "R1": "Eligible for preparation: exactly two5-epoch low-LR prefix tasks from original Macro, fresh matched Adam, existing24 validation safeguards",
+    "R2": "Not authorized by R0; contingent on both R1 actual epoch5 checkpoints passing",
+    "whole_old_experiments_rerun_added": 0,
+    "model_promotion": false,
+    "scope_limitations": [
+      "Scalers provenance and source bindings verified, original fitting not independently reproduced",
+      "Six checkpoints, not every old experiment or intermediate update",
+      "Gradient diagnostics use first two train windows and four fixed prefixes, not full-batch average or whole-trajectory attribution",
+      "Exported price-gradient decomposition squared norms differ by up to0.1084%; exact CUDA gradient additivity not established, so diagnostic ratios cannot justify tuning weights",
+      "No new independent generalization cohort; no proof of predictive ability"
+    ],
+    "unfinished_implementation": "R1/R2 scripts not implemented at review time"
+  }
+}

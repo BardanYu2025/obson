@@ -1,6 +1,6 @@
 {
   "date": "2026-10-04",
-  "status": "r0_runtime_parity_fix_implemented_real_recheck_pending_no_new_training",
+  "status": "r0_reviewed_r1_preparation_eligible_no_new_training",
   "scope_warning": "Counts are the bounded response to confirmed issues, not a claim that all historical experiments are valid or that undiscovered defects cannot change the plan.",
   "coverage": {
     "report_archives": 61,
@@ -128,13 +128,19 @@
         "module": "obson.babel.recovery_audit",
         "script": "scripts/babel_recovery_r0_autodl.sh",
         "protocol": "docs/BABEL_RECOVERY_R0.md",
-        "real_audit_executed": false,
+        "real_audit_executed": true,
         "success_status": "audit_complete_requires_review",
         "automatic_R1": false,
         "independent_scaler_fit_reproduction": false,
         "schema": "babel-recovery-r0-v2",
         "prior_run": "User reported Context replay mismatch; raw and original Macro stages passed; report archive not yet independently reviewed",
         "fix": "Restore historical per-stage MHA/TF32/thread policies; keep existing tolerances"
+      },
+      "review": {
+        "document": "docs/BABEL_RECOVERY_R0_REVIEW.md",
+        "report_sha256": "8105a5f361252d45054458f2bb37bbe7fa56ec5d5aa191064160044be3206c40",
+        "validation_replay": "140 values exact",
+        "limitations": "Inherited scaling fitting not independently reproduced; exported gradient additivity has up to0.1084% squared-norm discrepancy; no full-history clearance"
       }
     },
     {
@@ -159,7 +165,8 @@
       },
       "reference": "Reuse prior high-LR prefix first five epochs only if sampling/init/objective signatures match",
       "gate": "Both actually updated epoch5 checkpoints finite and all24 full/native retention metrics <=1.10 source; epoch0 fallback cannot pass",
-      "failure": "Stop, report and revise plan; no implicit third LR or extra reference jobs"
+      "failure": "Stop, report and revise plan; no implicit third LR or extra reference jobs",
+      "status": "eligible_for_preparation_not_implemented"
     },
     {
       "id": "R2",
