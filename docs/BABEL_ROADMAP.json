@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-04",
-  "current_iteration": "P00",
-  "current_iteration_scope": "Consolidate requirements, repair/validation tasks, retained future hypotheses and mandatory per-delivery review; no new model or GPU run",
+  "current_iteration": "V02+V14",
+  "current_iteration_scope": "Zero-update qualification entrypoint prepared and synthetic tests passed; real CUDA execution pending; no R1/RS training or model promotion",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -105,16 +105,18 @@
       "legacy_ids": [
         "E2"
       ],
-      "implementation": "待实现完整诊断",
+      "implementation": "零更新直接梯度诊断入口及合成测试完成",
       "execution": "未运行新CUDA诊断",
       "conclusion": "最高约0.1084%的范数分解差异原因未定",
       "evidence": [
-        "docs/BABEL_ISSUE_CLOSURE.md"
+        "docs/BABEL_ISSUE_CLOSURE.md",
+        "docs/BABEL_RECOVERY_QUALIFICATION.md",
+        "docs/BABEL_RECOVERY_QUALIFICATION_VALIDATION.json"
       ],
       "depends_on": [
         "V01"
       ],
-      "next_action": "同参数顺序导出向量/残差；零更新，原门槛失败则留证停止"
+      "next_action": "AutoDL同图逐坐标核对；导出逐参数残差和最大8坐标，不打包全梯度；原门槛失败留证停止"
     },
     {
       "id": "V03",
@@ -309,17 +311,19 @@
       "legacy_ids": [
         "new_entrypoint_qualification"
       ],
-      "implementation": "需整合入新入口",
-      "execution": "R0已覆盖部分；新入口未验",
+      "implementation": "源绑定、目标、局部头资格入口及合成测试完成",
+      "execution": "R0部分证据复用；本轮真实CUDA待执行",
       "conclusion": "补证覆盖缺口不是新发现数据错误；源scaler拟合等未全量独立重做",
       "evidence": [
         "docs/BABEL_RECOVERY_R0_REVIEW.md",
-        "docs/BABEL_RECOVERY_PLAN.md"
+        "docs/BABEL_RECOVERY_PLAN.md",
+        "docs/BABEL_RECOVERY_QUALIFICATION.md",
+        "docs/BABEL_RECOVERY_QUALIFICATION_VALIDATION.json"
       ],
       "depends_on": [
         "V01"
       ],
-      "next_action": "V03核对原采样/目标/后端；V05另核对旧局部头、train均值资格、真实目标舍入；按依赖补缺证据"
+      "next_action": "AutoDL核验源/采样/目标/复放及冻结局部头对train均值；分别报告R1共同预检与RS局部资格"
     }
   ],
   "future_branches": [
@@ -571,5 +575,9 @@
   "historical_ar_evidence": "docs/BABEL_AR_RECONSTRUCTION.md",
   "workflow": "docs/BABEL_EXPERIMENT_WORKFLOW.md",
   "progress_log": "docs/BABEL_PROGRESS_LOG.jsonl",
-  "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten."
+  "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
+  "current_task_ids": [
+    "V02",
+    "V14"
+  ]
 }

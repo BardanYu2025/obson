@@ -1,0 +1,92 @@
+{
+  "schema": "babel-recovery-qualification-validation-v1",
+  "date": "2026-10-04",
+  "task_ids": [
+    "V02",
+    "V14"
+  ],
+  "status": "implementation_checked_real_cuda_pending",
+  "commands": [
+    {
+      "command": ".venv/bin/pytest -q tests/babel/test_recovery_qualification.py tests/babel/test_recovery_objectives.py tests/babel/test_recovery_audit.py tests/babel/test_context_transfer.py tests/babel/test_uniform_context.py",
+      "result": "73 passed in10.53s;18 qualification cases"
+    },
+    {
+      "command": "uv tool run ruff check src/obson/babel/recovery_qualification.py tests/babel/test_recovery_qualification.py",
+      "result": "passed"
+    },
+    {
+      "command": "bash -n scripts/babel_recovery_qualification_autodl.sh",
+      "result": "passed"
+    },
+    {
+      "command": "Compare previous.code_identity() and recovery_audit.py SHA with reviewed R0v2 manifest",
+      "result": "106 historical modules and R0 implementation unchanged"
+    }
+  ],
+  "file_sha256": {
+    "src/obson/babel/recovery_qualification.py": "fd3b3c890e544a67007cfd0bc0e6bba57fb2128d151de606dff813d571c07f6d",
+    "src/obson/babel/recovery_objectives.py": "2352e6712217ea26c1d76dd548f68737264c32c54cde6e570ed65f1f7b8bd47e",
+    "scripts/babel_recovery_qualification_autodl.sh": "e21e619612829a11a1c2665306b6e03f6af75e5d6c5313da4e920dd0f5a9ae35",
+    "tests/babel/test_recovery_qualification.py": "574f14d6948146e5e3ac8c931dec32aad55adf2bd7d52225f5aaebb187cf1fca",
+    "docs/BABEL_RECOVERY_QUALIFICATION.md": "a97ad615db95c286ec259d98cd71fabb983cb4af84b6c3aee1cbb70003f1bdba"
+  },
+  "real_weight_inferences": 0,
+  "real_training_runs": 0,
+  "optimizer_updates": 0,
+  "review": {
+    "purpose": {
+      "status": "pass_for_scope",
+      "evidence": [
+        "V02 directly checks actual gradient identity, V14 checks source/target/reader qualification",
+        "No model promotion or representation success inferred from engineering"
+      ],
+      "remaining": "Near/far balance still requires V03 then matched V04/V05 actual intervention; general representation acceptance pending"
+    },
+    "architecture": {
+      "status": "pass_for_scope",
+      "evidence": [
+        "Original Macro768/4layers/8heads and existing query/local heads restored",
+        "Native versus rolling context explicitly separated; no new head or target input bypass",
+        "Synthetic causality and frozen reader tests"
+      ],
+      "remaining": "Actual CUDA causal replay and source signatures pending; no claim optimum architecture"
+    },
+    "training": {
+      "status": "pass_for_scope",
+      "evidence": [
+        "No optimizer creation, clipping or updates; synthetic fixtures forbid AdamW creation/step",
+        "Same-forward joint/family/age-band gradients; all-coordinate checks at unchanged tolerances",
+        "Actual-source objective parity and local route checks implemented; tests catch unplanned weights"
+      ],
+      "remaining": "True CUDA gradient discrepancy not yet explained; small fixed batch does not establish whole-training task dominance; R1/RS not implemented"
+    },
+    "validation": {
+      "status": "pass_for_scope",
+      "evidence": [
+        "Original24 validation replay per seed, no new research scoring",
+        "Reader compared with train-only mean by native endpoint/interior, rowwise error arrays exported",
+        "R1 common gates and RS-specific qualifications separately reported"
+      ],
+      "remaining": "Actual model reader and numerical acceptance pending; repeated cohorts not independent holdout; full gradients checked but only summaries/top8 coordinates exported"
+    },
+    "data": {
+      "status": "pass_for_scope",
+      "evidence": [
+        "Exact reviewed R0 completion/source/cache/code binding",
+        "All train/val native input mapping and independent query/local target paths audited at inherited thresholds",
+        "Masked missing channels, baseline support, immutable input checks"
+      ],
+      "remaining": "Real cache target checks pending; reuse reviewed raw audit, no independent source scaler fitting or all-ancestor training reproduction"
+    },
+    "engineering": {
+      "status": "pass_for_scope",
+      "evidence": [
+        "73 synthetic tests passed including18 new qualification cases",
+        "Ruff, shell syntax, historical106module+R0 hash checks",
+        "Atomic new output, independent1800second supervisor, failure/blocked export to download"
+      ],
+      "remaining": "AutoDL PyTorch/CUDA kernels, memory and runtime not locally exercised; timeout and512MiB disk threshold are guards, not runtime or peak-memory guarantees"
+    }
+  }
+}

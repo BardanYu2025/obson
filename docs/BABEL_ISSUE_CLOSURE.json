@@ -138,10 +138,11 @@
       "id": "E2",
       "stages": [],
       "status": "open_real_gradient_identity_pending",
-      "action": "zero_update_preflight",
+      "action": "V02 zero-update qualification on AutoDL; unchanged tolerances",
       "evidence": "docs/BABEL_RECOVERY_R0_REVIEW.md",
       "fact": "Exported norms/cosines do not strictly establish gradient additivity",
-      "decision_effect": "Do not tune weights from exact gradient-ratio claims"
+      "decision_effect": "Do not tune weights from exact gradient-ratio claims",
+      "implementation": "Same-forward coordinate-wise audit ready; real evidence pending; full vectors checked but only parameter summaries and top8 residual witnesses exported"
     },
     {
       "id": "E3",
@@ -159,5 +160,18 @@
     "lint": "ruff check and format --check passed",
     "stage_coverage": "All nine audited stage IDs covered",
     "boundary": "Synthetic CPU tests only; real target pipeline and CUDA qualification remain pending"
+  },
+  "qualification_implementation": {
+    "task_ids": [
+      "V02",
+      "V14"
+    ],
+    "module": "obson.babel.recovery_qualification",
+    "script": "scripts/babel_recovery_qualification_autodl.sh",
+    "protocol": "docs/BABEL_RECOVERY_QUALIFICATION.md",
+    "validation": "docs/BABEL_RECOVERY_QUALIFICATION_VALIDATION.json",
+    "new_synthetic_tests": 18,
+    "real_cuda_executed": false,
+    "training_entrypoint_ready": false
   }
 }

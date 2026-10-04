@@ -1,6 +1,6 @@
 {
   "date": "2026-10-04",
-  "status": "issue_mapping_corrected_R1_RS_pending_training_entrypoints",
+  "status": "V02_V14_zero_update_entrypoint_ready_CUDA_pending_R1_RS_training_entrypoints_pending",
   "scope_warning": "Counts are the bounded response to confirmed issues, not a claim that all historical experiments are valid or that undiscovered defects cannot change the plan.",
   "coverage": {
     "report_archives": 61,
@@ -1326,5 +1326,25 @@
       "timeout_behavior": "Mark incomplete; do not rank incomplete unequal budgets or silently extend"
     }
   },
-  "deferred_context_status": "R2 suspended; original protocol retained under superseded_context_schedule; any activation needs separately stated budget"
+  "deferred_context_status": "R2 suspended; original protocol retained under superseded_context_schedule; any activation needs separately stated budget",
+  "qualification_entrypoint": {
+    "task_ids": [
+      "V02",
+      "V14"
+    ],
+    "module": "obson.babel.recovery_qualification",
+    "script": "scripts/babel_recovery_qualification_autodl.sh",
+    "protocol": "docs/BABEL_RECOVERY_QUALIFICATION.md",
+    "validation": "docs/BABEL_RECOVERY_QUALIFICATION_VALIDATION.json",
+    "new_synthetic_tests": 18,
+    "real_cuda_executed": false,
+    "training_entrypoint_ready": false,
+    "timeout_seconds": 1800,
+    "minimum_free_disk_MiB": 512,
+    "optimizer_updates": 0,
+    "r1_automatic": false,
+    "rs_automatic": false,
+    "gradient_export": "All coordinates checked at original tolerance; parameter summaries and top8 coordinate witnesses exported, not full gradient arrays",
+    "raw_scope": "Reuse reviewed R0 only after exact source/cache/code/report binding; no independent scaler fit reproduction"
+  }
 }
