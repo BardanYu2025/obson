@@ -75,14 +75,16 @@
       "stages": [
         "babel_macro_history768"
       ],
-      "status": "open_same_target_information_attribution",
-      "action": "V07 zero-update crossed encoder/query readout before optional matched fitting",
+      "status": "frozen_cross_diagnostic_complete_information_attribution_open",
+      "action": "Close eight-cross recipe; defer matched fitting unless needed; return to V04/V05 protocol revision",
       "evidence": "docs/BABEL_MACRO_HISTORY768_REVIEW.md",
-      "fact": "Old-reader drift is not information loss",
+      "fact": "Matched E5D5 generally beats crossed readouts; residual source degradation remains; no proof of information loss",
       "decision_effect": "Preserve interface findings, no added-memory interpretation",
       "plan": "docs/BABEL_RECOVERY_INTERFACE_PLAN.md",
-      "implementation": "V07 frozen eight-cross runner and14 synthetic tests ready; CUDA pending",
-      "validation": "docs/BABEL_RECOVERY_INTERFACE_VALIDATION.json"
+      "implementation": "V07 frozen eight-cross runner completed real CUDA and reviewed; information attribution remains open",
+      "validation": "docs/BABEL_RECOVERY_INTERFACE_VALIDATION.json",
+      "review": "docs/BABEL_RECOVERY_INTERFACE_REVIEW.md",
+      "execution": "8 CUDA combinations,0 updates,96 scalar replays passed"
     },
     {
       "id": "T1",
@@ -90,7 +92,7 @@
         "babel_context_transfer768"
       ],
       "status": "R1_completed_retention_failed_LR_contributor_supported",
-      "action": "Stop R1 recipe; V07 zero-update localization",
+      "action": "R1 recipe closed; V07 diagnostic reviewed; V04/V05 protocol revision next, original gate held",
       "evidence": "docs/BABEL_RECOVERY_R0_REVIEW.md",
       "fact": "Same-source lowerLR improves all48 final reference comparisons but seed42 fails3structure fields; LR alone insufficient",
       "decision_effect": "Old recipe failure retained; bounded LR contribution supported; RS remains held",
@@ -187,5 +189,6 @@
     "real_training_executed": true,
     "validation": "docs/BABEL_RECOVERY_R1_VALIDATION.json",
     "review": "docs/BABEL_RECOVERY_R1_REVIEW.md"
-  }
+  },
+  "original_component_delivery_counts_note": "Top-level new_real_* counters describe the original objective-component delivery; subsequent executions are recorded per task and in BABEL_PROGRESS_LOG.jsonl, not zero cumulative research use."
 }

@@ -1,0 +1,4251 @@
+{
+  "schema": "babel-recovery-interface-review-v1",
+  "date": "2026-10-04",
+  "task_ids": [
+    "V07"
+  ],
+  "archive_path": "/Users/bardan/Downloads/babel_recovery_interface_reports.tar.gz",
+  "archive_sha256": "e9efb15178713ab1cbd3447d9c214c18558fd6fda536c2ab8ed61b7aecba0a74",
+  "archive_bytes": 5377487,
+  "manifest_sha256": "cc57670798687a3d94b6ff74bf4d273f790652a1f845775e0ae5c3fc025528a7",
+  "completion_sha256": "3e4b4624238d31b5ace4d1a9787d3dbe3aa28342a596a2a62c05d992fb36a6c7",
+  "verified_bound_files": 44,
+  "r1_code_modules_verified": 110,
+  "new_code_module_verified": true,
+  "used_seconds": 234.4872990148142,
+  "optimizer_updates": 0,
+  "recomputed_aggregates": 192,
+  "recomputed_position_summaries": 768,
+  "recomputed_contrast_position_summaries": 192,
+  "checked_error_cells": 751104,
+  "replay_values": 96,
+  "causality_checks": 64,
+  "max_array_difference_vs_R1": 6.9823098871601985e-06,
+  "seeds": {
+    "42": {
+      "aggregate_ratios": {
+        "source": {
+          "full/endpoint/price": 1.0,
+          "full/endpoint/near": 1.0,
+          "full/endpoint/mid": 1.0,
+          "full/endpoint/far": 1.0,
+          "full/endpoint/activity": 1.0,
+          "full/endpoint/structure": 1.0,
+          "full/interior/price": 1.0,
+          "full/interior/near": 1.0,
+          "full/interior/mid": 1.0,
+          "full/interior/far": 1.0,
+          "full/interior/activity": 1.0,
+          "full/interior/structure": 1.0,
+          "native/endpoint/price": 1.0,
+          "native/endpoint/near": 1.0,
+          "native/endpoint/mid": 1.0,
+          "native/endpoint/far": 1.0,
+          "native/endpoint/activity": 1.0,
+          "native/endpoint/structure": 1.0,
+          "native/interior/price": 1.0,
+          "native/interior/near": 1.0,
+          "native/interior/mid": 1.0,
+          "native/interior/far": 1.0,
+          "native/interior/activity": 1.0,
+          "native/interior/structure": 1.0
+        },
+        "joint": {
+          "full/endpoint/price": 1.0058475136984604,
+          "full/endpoint/near": 1.0688550152683134,
+          "full/endpoint/mid": 1.0142062199303337,
+          "full/endpoint/far": 0.9976558400121446,
+          "full/endpoint/activity": 1.0033040809331026,
+          "full/endpoint/structure": 1.1118077765793084,
+          "full/interior/price": 1.0078888107383603,
+          "full/interior/near": 1.0586354103184676,
+          "full/interior/mid": 1.0156733018311936,
+          "full/interior/far": 0.9995635798851544,
+          "full/interior/activity": 1.0048707345155896,
+          "full/interior/structure": 1.1361361467246183,
+          "native/endpoint/price": 1.0058473166795168,
+          "native/endpoint/near": 1.0688549414763846,
+          "native/endpoint/mid": 1.0142058343614033,
+          "native/endpoint/far": 0.997655686853026,
+          "native/endpoint/activity": 1.003304188793284,
+          "native/endpoint/structure": 1.1118071498981086,
+          "native/interior/price": 1.0092315189292866,
+          "native/interior/near": 1.068239152098214,
+          "native/interior/mid": 1.0058773349747334,
+          "native/interior/far": 0.9985372621409508,
+          "native/interior/activity": 1.012584990528578,
+          "native/interior/structure": 1.0943944493281956
+        },
+        "encoder_swap": {
+          "full/endpoint/price": 1.0128214686274426,
+          "full/endpoint/near": 1.085514816103025,
+          "full/endpoint/mid": 1.0270506589853574,
+          "full/endpoint/far": 1.0026474149133076,
+          "full/endpoint/activity": 1.0061914979859268,
+          "full/endpoint/structure": 1.2460979609138425,
+          "full/interior/price": 1.0107634301846453,
+          "full/interior/near": 1.0570542137642311,
+          "full/interior/mid": 1.019322702013095,
+          "full/interior/far": 1.002931330255218,
+          "full/interior/activity": 1.0062402653915372,
+          "full/interior/structure": 1.2100852169926066,
+          "native/endpoint/price": 1.012821416060289,
+          "native/endpoint/near": 1.0855139906384534,
+          "native/endpoint/mid": 1.0270500867039467,
+          "native/endpoint/far": 1.0026475695412065,
+          "native/endpoint/activity": 1.0061914979859268,
+          "native/endpoint/structure": 1.2460974718808138,
+          "native/interior/price": 1.0099880796659306,
+          "native/interior/near": 1.0552018609682894,
+          "native/interior/mid": 1.007381796429319,
+          "native/interior/far": 1.0031606767061054,
+          "native/interior/activity": 1.0128613277390228,
+          "native/interior/structure": 1.2341253531838994
+        },
+        "query_swap": {
+          "full/endpoint/price": 1.0099003036130862,
+          "full/endpoint/near": 1.0718902674141142,
+          "full/endpoint/mid": 1.023433920082714,
+          "full/endpoint/far": 1.0007910284954258,
+          "full/endpoint/activity": 1.0082066497527522,
+          "full/endpoint/structure": 1.088983027928346,
+          "full/interior/price": 1.0140549410444029,
+          "full/interior/near": 1.0768144181665762,
+          "full/interior/mid": 1.0275749661594102,
+          "full/interior/far": 1.002702484184685,
+          "full/interior/activity": 1.0096367579246022,
+          "full/interior/structure": 1.1833425686913692,
+          "native/endpoint/price": 1.009900141115933,
+          "native/endpoint/near": 1.0718907843682586,
+          "native/endpoint/mid": 1.0234330177454742,
+          "native/endpoint/far": 1.0007909674873994,
+          "native/endpoint/activity": 1.0082066497527522,
+          "native/endpoint/structure": 1.088983349024336,
+          "native/interior/price": 1.0201529973389585,
+          "native/interior/near": 1.0767502497836023,
+          "native/interior/mid": 1.0188616456078439,
+          "native/interior/far": 1.0039723454637404,
+          "native/interior/activity": 1.0173884886065825,
+          "native/interior/structure": 1.2628741559412402
+        }
+      },
+      "joint_better_than_encoder_swap_fields": 22,
+      "joint_better_than_query_swap_fields": 22,
+      "mixed_fields_better_than_source": {
+        "encoder_swap": 0,
+        "query_swap": 0
+      },
+      "by_position": {
+        "full/structure": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.17791411042944785
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.1901840490797546
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.16359918200409
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.17075664621676892
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.1315247851143753,
+              "fraction_worse_than_source": 0.8220858895705522,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1260808941997709,
+              "fraction_worse_than_source": 0.8098159509202454,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.150424769801427,
+              "fraction_worse_than_source": 0.83640081799591,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.1118077765793084,
+              "fraction_worse_than_source": 0.8292433537832311,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.2207432976601191,
+              "fraction_worse_than_source": 0.8936605316973415,
+              "fraction_worse_than_joint": 0.5347648261758691
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.190184655780578,
+              "fraction_worse_than_source": 0.8752556237218814,
+              "fraction_worse_than_joint": 0.558282208588957
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.218468939577938,
+              "fraction_worse_than_source": 0.8834355828220859,
+              "fraction_worse_than_joint": 0.523517382413088
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.2460979609138425,
+              "fraction_worse_than_source": 0.8813905930470347,
+              "fraction_worse_than_joint": 0.5470347648261759
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.1687074463305842,
+              "fraction_worse_than_source": 0.8353783231083844,
+              "fraction_worse_than_joint": 0.516359918200409
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.197197348793035,
+              "fraction_worse_than_source": 0.8179959100204499,
+              "fraction_worse_than_joint": 0.5388548057259713
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.1847611366997146,
+              "fraction_worse_than_source": 0.83640081799591,
+              "fraction_worse_than_joint": 0.5357873210633947
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.088983027928346,
+              "fraction_worse_than_source": 0.8404907975460123,
+              "fraction_worse_than_joint": 0.5276073619631901
+            }
+          ]
+        },
+        "full/structure_level": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.38445807770961143
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3773006134969325
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.37934560327198363
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3445807770961145
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0758439342904547,
+              "fraction_worse_than_source": 0.6155419222903885,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1223274396386342,
+              "fraction_worse_than_source": 0.6226993865030674,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.1012076264832034,
+              "fraction_worse_than_source": 0.6206543967280164,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0662500115136004,
+              "fraction_worse_than_source": 0.6554192229038854,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.8026377015621393,
+              "fraction_worse_than_source": 0.7822085889570553,
+              "fraction_worse_than_joint": 0.7505112474437627
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.6387758219952384,
+              "fraction_worse_than_source": 0.7822085889570553,
+              "fraction_worse_than_joint": 0.7351738241308794
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.8001019348423803,
+              "fraction_worse_than_source": 0.7985685071574642,
+              "fraction_worse_than_joint": 0.7423312883435583
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.8066726800495283,
+              "fraction_worse_than_source": 0.8179959100204499,
+              "fraction_worse_than_joint": 0.7648261758691206
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.4410311377408986,
+              "fraction_worse_than_source": 0.7208588957055214,
+              "fraction_worse_than_joint": 0.5940695296523517
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.5494938322056029,
+              "fraction_worse_than_source": 0.6983640081799591,
+              "fraction_worse_than_joint": 0.5920245398773006
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.4888759973126704,
+              "fraction_worse_than_source": 0.7065439672801636,
+              "fraction_worse_than_joint": 0.5961145194274029
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 0.8840227276872477,
+              "fraction_worse_than_source": 0.6850715746421268,
+              "fraction_worse_than_joint": 0.558282208588957
+            }
+          ]
+        },
+        "full/structure_trend": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.17893660531697342
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.20143149284253578
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.17177914110429449
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.17586912065439672
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.1374910731739731,
+              "fraction_worse_than_source": 0.8210633946830266,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1265509454181164,
+              "fraction_worse_than_source": 0.7985685071574642,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.1556825898279648,
+              "fraction_worse_than_source": 0.8282208588957055,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.1212943045881623,
+              "fraction_worse_than_source": 0.8241308793456033,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.1583924250966515,
+              "fraction_worse_than_source": 0.8711656441717791,
+              "fraction_worse_than_joint": 0.4376278118609407
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1340068545620365,
+              "fraction_worse_than_source": 0.8384458077709611,
+              "fraction_worse_than_joint": 0.4703476482617587
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.1563336467832386,
+              "fraction_worse_than_source": 0.8507157464212679,
+              "fraction_worse_than_joint": 0.42433537832310836
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.1293690615381622,
+              "fraction_worse_than_source": 0.8517382413087935,
+              "fraction_worse_than_joint": 0.4171779141104294
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.1395275475976232,
+              "fraction_worse_than_source": 0.8241308793456033,
+              "fraction_worse_than_joint": 0.47137014314928427
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1530786872907444,
+              "fraction_worse_than_source": 0.8057259713701431,
+              "fraction_worse_than_joint": 0.5061349693251533
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.1522728389909265,
+              "fraction_worse_than_source": 0.8231083844580777,
+              "fraction_worse_than_joint": 0.4938650306748466
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.1316620668613555,
+              "fraction_worse_than_source": 0.8394683026584867,
+              "fraction_worse_than_joint": 0.5020449897750511
+            }
+          ]
+        },
+        "full/structure_level4": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3445807770961145
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3507157464212679
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.33844580777096117
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3210633946830266
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0841202077669445,
+              "fraction_worse_than_source": 0.6554192229038854,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.117555213597984,
+              "fraction_worse_than_source": 0.6492842535787321,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.1071913871380608,
+              "fraction_worse_than_source": 0.6615541922290389,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.068987092771569,
+              "fraction_worse_than_source": 0.6789366053169734,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.6832636470315145,
+              "fraction_worse_than_source": 0.7995910020449898,
+              "fraction_worse_than_joint": 0.7372188139059305
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.5475085341717116,
+              "fraction_worse_than_source": 0.7955010224948875,
+              "fraction_worse_than_joint": 0.7269938650306749
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.6749411603625264,
+              "fraction_worse_than_source": 0.8128834355828221,
+              "fraction_worse_than_joint": 0.7361963190184049
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.7311587270811053,
+              "fraction_worse_than_source": 0.8312883435582822,
+              "fraction_worse_than_joint": 0.7607361963190185
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.3874794973618936,
+              "fraction_worse_than_source": 0.7423312883435583,
+              "fraction_worse_than_joint": 0.5950920245398773
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.4779993873323936,
+              "fraction_worse_than_source": 0.7269938650306749,
+              "fraction_worse_than_joint": 0.5858895705521472
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.4268840971125254,
+              "fraction_worse_than_source": 0.7310838445807771,
+              "fraction_worse_than_joint": 0.598159509202454
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 0.9091331512341313,
+              "fraction_worse_than_source": 0.7167689161554193,
+              "fraction_worse_than_joint": 0.5480572597137015
+            }
+          ]
+        },
+        "full/structure_level16": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.4171779141104294
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.4222903885480573
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.4233128834355828
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.38650306748466257
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0627582420840718,
+              "fraction_worse_than_source": 0.5828220858895705,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1296916278614957,
+              "fraction_worse_than_source": 0.5777096114519428,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.091558422145732,
+              "fraction_worse_than_source": 0.5766871165644172,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0627201131043675,
+              "fraction_worse_than_source": 0.6134969325153374,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.991381118445733,
+              "fraction_worse_than_source": 0.7535787321063395,
+              "fraction_worse_than_joint": 0.7474437627811861
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.7796135527308325,
+              "fraction_worse_than_source": 0.7648261758691206,
+              "fraction_worse_than_joint": 0.7321063394683026
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 2.00193184710868,
+              "fraction_worse_than_source": 0.7832310838445807,
+              "fraction_worse_than_joint": 0.7433537832310838
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.9040598444539727,
+              "fraction_worse_than_source": 0.7965235173824131,
+              "fraction_worse_than_joint": 0.7658486707566462
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.5257021294785682,
+              "fraction_worse_than_source": 0.6697341513292433,
+              "fraction_worse_than_joint": 0.5950920245398773
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.6598194002844235,
+              "fraction_worse_than_source": 0.6595092024539877,
+              "fraction_worse_than_joint": 0.5920245398773006
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.588841979711017,
+              "fraction_worse_than_source": 0.6666666666666666,
+              "fraction_worse_than_joint": 0.6012269938650306
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 0.8516388721202084,
+              "fraction_worse_than_source": 0.65439672801636,
+              "fraction_worse_than_joint": 0.5603271983640081
+            }
+          ]
+        },
+        "full/structure_trend4": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.17791411042944785
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.19631901840490798
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.16155419222903886
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.17893660531697342
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.152568698641078,
+              "fraction_worse_than_source": 0.8220858895705522,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.136917418311749,
+              "fraction_worse_than_source": 0.803680981595092,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.1672495477714147,
+              "fraction_worse_than_source": 0.8384458077709611,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.1355226430998906,
+              "fraction_worse_than_source": 0.8210633946830266,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.1226504453672914,
+              "fraction_worse_than_source": 0.8333333333333334,
+              "fraction_worse_than_joint": 0.3486707566462168
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1032916924617875,
+              "fraction_worse_than_source": 0.8139059304703476,
+              "fraction_worse_than_joint": 0.3997955010224949
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.1227903369308083,
+              "fraction_worse_than_source": 0.8190184049079755,
+              "fraction_worse_than_joint": 0.3588957055214724
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0978584450359035,
+              "fraction_worse_than_source": 0.8241308793456033,
+              "fraction_worse_than_joint": 0.36400817995910023
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.1398348501967785,
+              "fraction_worse_than_source": 0.8333333333333334,
+              "fraction_worse_than_joint": 0.47443762781186094
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1470350220337864,
+              "fraction_worse_than_source": 0.8016359918200409,
+              "fraction_worse_than_joint": 0.4734151329243354
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.1494132140070548,
+              "fraction_worse_than_source": 0.8220858895705522,
+              "fraction_worse_than_joint": 0.47648261758691207
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.13883277887164,
+              "fraction_worse_than_source": 0.8374233128834356,
+              "fraction_worse_than_joint": 0.4662576687116564
+            }
+          ]
+        },
+        "full/structure_trend16": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.45296523517382414
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.43558282208588955
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.4222903885480573
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.45194274028629855
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0379599769510108,
+              "fraction_worse_than_source": 0.5470347648261759,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0627205091843803,
+              "fraction_worse_than_source": 0.5644171779141104,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.081145936455767,
+              "fraction_worse_than_source": 0.5777096114519428,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0362406053430877,
+              "fraction_worse_than_source": 0.5480572597137015,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.3943339817697242,
+              "fraction_worse_than_source": 0.7719836400817995,
+              "fraction_worse_than_joint": 0.6942740286298569
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.3231321449057765,
+              "fraction_worse_than_source": 0.7372188139059305,
+              "fraction_worse_than_joint": 0.6625766871165644
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.3724843470494832,
+              "fraction_worse_than_source": 0.7361963190184049,
+              "fraction_worse_than_joint": 0.6451942740286298
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.317732200129564,
+              "fraction_worse_than_source": 0.7566462167689162,
+              "fraction_worse_than_joint": 0.6912065439672802
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.1374989679228722,
+              "fraction_worse_than_source": 0.5756646216768916,
+              "fraction_worse_than_joint": 0.5286298568507157
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1902919027942764,
+              "fraction_worse_than_source": 0.621676891615542,
+              "fraction_worse_than_joint": 0.565439672801636
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.1707000587698355,
+              "fraction_worse_than_source": 0.6186094069529653,
+              "fraction_worse_than_joint": 0.5388548057259713
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0887972178002316,
+              "fraction_worse_than_source": 0.5950920245398773,
+              "fraction_worse_than_joint": 0.558282208588957
+            }
+          ]
+        },
+        "full/near": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.19427402862985685
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.1656441717791411
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.18507157464212678
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.16462167689161555
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.068607498396844,
+              "fraction_worse_than_source": 0.8057259713701431,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0488595918740913,
+              "fraction_worse_than_source": 0.8343558282208589,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0631515364820723,
+              "fraction_worse_than_source": 0.8149284253578732,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0688550152683134,
+              "fraction_worse_than_source": 0.8353783231083844,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0708191297369838,
+              "fraction_worse_than_source": 0.8292433537832311,
+              "fraction_worse_than_joint": 0.44069529652351735
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.047203012012901,
+              "fraction_worse_than_source": 0.8374233128834356,
+              "fraction_worse_than_joint": 0.4325153374233129
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0579756614984592,
+              "fraction_worse_than_source": 0.8261758691206544,
+              "fraction_worse_than_joint": 0.4212678936605317
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.085514816103025,
+              "fraction_worse_than_source": 0.8517382413087935,
+              "fraction_worse_than_joint": 0.43047034764826175
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0865612752408167,
+              "fraction_worse_than_source": 0.8619631901840491,
+              "fraction_worse_than_joint": 0.5674846625766872
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0603224793968289,
+              "fraction_worse_than_source": 0.8773006134969326,
+              "fraction_worse_than_joint": 0.558282208588957
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0913447923265278,
+              "fraction_worse_than_source": 0.8640081799591002,
+              "fraction_worse_than_joint": 0.5858895705521472
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0718902674141142,
+              "fraction_worse_than_source": 0.8680981595092024,
+              "fraction_worse_than_joint": 0.5736196319018405
+            }
+          ]
+        },
+        "native/structure": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.5102249488752556
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.31390593047034765
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.23721881390593047
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.17075664621676892
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.036323772215923,
+              "fraction_worse_than_source": 0.4897750511247444,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1431914742692117,
+              "fraction_worse_than_source": 0.6860940695296524,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0981271047264556,
+              "fraction_worse_than_source": 0.7627811860940695,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.1118071498981086,
+              "fraction_worse_than_source": 0.8292433537832311,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.105904130552833,
+              "fraction_worse_than_source": 0.5746421267893661,
+              "fraction_worse_than_joint": 0.6032719836400818
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.3003954221451919,
+              "fraction_worse_than_source": 0.7995910020449898,
+              "fraction_worse_than_joint": 0.6042944785276073
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.2647975582199706,
+              "fraction_worse_than_source": 0.8578732106339468,
+              "fraction_worse_than_joint": 0.6257668711656442
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.2460974718808138,
+              "fraction_worse_than_source": 0.8813905930470347,
+              "fraction_worse_than_joint": 0.5470347648261759
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.3407163294809412,
+              "fraction_worse_than_source": 0.5521472392638037,
+              "fraction_worse_than_joint": 0.5449897750511248
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.3536674482843665,
+              "fraction_worse_than_source": 0.754601226993865,
+              "fraction_worse_than_joint": 0.5787321063394683
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.1733919645354431,
+              "fraction_worse_than_source": 0.7658486707566462,
+              "fraction_worse_than_joint": 0.5143149284253579
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.088983349024336,
+              "fraction_worse_than_source": 0.8404907975460123,
+              "fraction_worse_than_joint": 0.5276073619631901
+            }
+          ]
+        },
+        "native/structure_level": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.42024539877300615
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.34355828220858897
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3486707566462168
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3445807770961145
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.2096604590943412,
+              "fraction_worse_than_source": 0.5797546012269938,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.2102025981604494,
+              "fraction_worse_than_source": 0.656441717791411,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.1846910553898324,
+              "fraction_worse_than_source": 0.6513292433537833,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.066246467482731,
+              "fraction_worse_than_source": 0.6554192229038854,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.5854437920869944,
+              "fraction_worse_than_source": 0.647239263803681,
+              "fraction_worse_than_joint": 0.5971370143149284
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.584603633625022,
+              "fraction_worse_than_source": 0.7730061349693251,
+              "fraction_worse_than_joint": 0.5848670756646217
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 2.0531156213254027,
+              "fraction_worse_than_source": 0.8241308793456033,
+              "fraction_worse_than_joint": 0.7310838445807771
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.8066668199791924,
+              "fraction_worse_than_source": 0.8179959100204499,
+              "fraction_worse_than_joint": 0.7648261758691206
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.510799724637556,
+              "fraction_worse_than_source": 0.591002044989775,
+              "fraction_worse_than_joint": 0.5255623721881391
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.7930592108099326,
+              "fraction_worse_than_source": 0.7065439672801636,
+              "fraction_worse_than_joint": 0.5695296523517382
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.574537965823001,
+              "fraction_worse_than_source": 0.7208588957055214,
+              "fraction_worse_than_joint": 0.5899795501022495
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 0.8840229502639494,
+              "fraction_worse_than_source": 0.6850715746421268,
+              "fraction_worse_than_joint": 0.558282208588957
+            }
+          ]
+        },
+        "native/structure_trend": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.532719836400818
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3394683026584867
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.2689161554192229
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.17586912065439672
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 0.9914719449083732,
+              "fraction_worse_than_source": 0.467280163599182,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1284668304353749,
+              "fraction_worse_than_source": 0.6605316973415133,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0874182793151121,
+              "fraction_worse_than_source": 0.7310838445807771,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.121294315860478,
+              "fraction_worse_than_source": 0.8241308793456033,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 0.9818205884384175,
+              "fraction_worse_than_source": 0.49284253578732107,
+              "fraction_worse_than_joint": 0.5439672801635992
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.2379451236621446,
+              "fraction_worse_than_source": 0.7423312883435583,
+              "fraction_worse_than_joint": 0.5869120654396728
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.1672747390589926,
+              "fraction_worse_than_source": 0.7995910020449898,
+              "fraction_worse_than_joint": 0.5378323108384458
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.1293693160042075,
+              "fraction_worse_than_source": 0.8517382413087935,
+              "fraction_worse_than_joint": 0.4171779141104294
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.296706309416365,
+              "fraction_worse_than_source": 0.5398773006134969,
+              "fraction_worse_than_joint": 0.5511247443762781
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.2571179975213607,
+              "fraction_worse_than_source": 0.7280163599182005,
+              "fraction_worse_than_joint": 0.5746421267893661
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.123766197003736,
+              "fraction_worse_than_source": 0.7494887525562373,
+              "fraction_worse_than_joint": 0.5061349693251533
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.1316625455522824,
+              "fraction_worse_than_source": 0.8394683026584867,
+              "fraction_worse_than_joint": 0.5020449897750511
+            }
+          ]
+        },
+        "native/structure_level4": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.42024539877300615
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3210633946830266
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3169734151329243
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3210633946830266
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.2096604590943412,
+              "fraction_worse_than_source": 0.5797546012269938,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1866240591603798,
+              "fraction_worse_than_source": 0.6789366053169734,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.1581051952850419,
+              "fraction_worse_than_source": 0.6830265848670757,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0689840381033,
+              "fraction_worse_than_source": 0.6789366053169734,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.5854437920869944,
+              "fraction_worse_than_source": 0.647239263803681,
+              "fraction_worse_than_joint": 0.5971370143149284
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.562916212912174,
+              "fraction_worse_than_source": 0.8006134969325154,
+              "fraction_worse_than_joint": 0.6175869120654397
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.8928225728879875,
+              "fraction_worse_than_source": 0.8404907975460123,
+              "fraction_worse_than_joint": 0.7576687116564417
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.731153803512064,
+              "fraction_worse_than_source": 0.8312883435582822,
+              "fraction_worse_than_joint": 0.7607361963190185
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.510799724637556,
+              "fraction_worse_than_source": 0.591002044989775,
+              "fraction_worse_than_joint": 0.5255623721881391
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.6767434263496255,
+              "fraction_worse_than_source": 0.7351738241308794,
+              "fraction_worse_than_joint": 0.5766871165644172
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.468566694507465,
+              "fraction_worse_than_source": 0.7167689161554193,
+              "fraction_worse_than_joint": 0.5858895705521472
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 0.9091334159484196,
+              "fraction_worse_than_source": 0.7167689161554193,
+              "fraction_worse_than_joint": 0.5480572597137015
+            }
+          ]
+        },
+        "native/structure_level16": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 0,
+              "ratio": null,
+              "fraction_worse_than_source": null,
+              "fraction_worse_than_joint": null
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.36912065439672803
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.36912065439672803
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.38650306748466257
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 0,
+              "ratio": null,
+              "fraction_worse_than_source": null,
+              "fraction_worse_than_joint": null
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.2460338052475723,
+              "fraction_worse_than_source": 0.630879345603272,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.2317785823450522,
+              "fraction_worse_than_source": 0.630879345603272,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0627159413138247,
+              "fraction_worse_than_source": 0.6134969325153374,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 0,
+              "ratio": null,
+              "fraction_worse_than_source": null,
+              "fraction_worse_than_joint": null
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.617560996366849,
+              "fraction_worse_than_source": 0.6901840490797546,
+              "fraction_worse_than_joint": 0.5347648261758691
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 2.3370185384881625,
+              "fraction_worse_than_source": 0.8016359918200409,
+              "fraction_worse_than_joint": 0.6912065439672802
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.9040526841929246,
+              "fraction_worse_than_source": 0.7965235173824131,
+              "fraction_worse_than_joint": 0.7658486707566462
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 0,
+              "ratio": null,
+              "fraction_worse_than_source": null,
+              "fraction_worse_than_joint": null
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.9698188887732764,
+              "fraction_worse_than_source": 0.6676891615541922,
+              "fraction_worse_than_joint": 0.5531697341513292
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.7622289066043375,
+              "fraction_worse_than_source": 0.696319018404908,
+              "fraction_worse_than_joint": 0.591002044989775
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 0.8516390710878877,
+              "fraction_worse_than_source": 0.65439672801636,
+              "fraction_worse_than_joint": 0.5603271983640081
+            }
+          ]
+        },
+        "native/structure_trend4": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.532719836400818
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.34355828220858897
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.27300613496932513
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.17893660531697342
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 0.9914719449083732,
+              "fraction_worse_than_source": 0.467280163599182,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1075589958200542,
+              "fraction_worse_than_source": 0.656441717791411,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.096242787967676,
+              "fraction_worse_than_source": 0.7269938650306749,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.135523089825688,
+              "fraction_worse_than_source": 0.8210633946830266,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 0.9818205884384175,
+              "fraction_worse_than_source": 0.49284253578732107,
+              "fraction_worse_than_joint": 0.5439672801635992
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1858672115766102,
+              "fraction_worse_than_source": 0.7372188139059305,
+              "fraction_worse_than_joint": 0.5930470347648262
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.1008702577722802,
+              "fraction_worse_than_source": 0.7699386503067485,
+              "fraction_worse_than_joint": 0.4263803680981595
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0978594957052836,
+              "fraction_worse_than_source": 0.8241308793456033,
+              "fraction_worse_than_joint": 0.36400817995910023
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.296706309416365,
+              "fraction_worse_than_source": 0.5398773006134969,
+              "fraction_worse_than_joint": 0.5511247443762781
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1758496094233548,
+              "fraction_worse_than_source": 0.6983640081799591,
+              "fraction_worse_than_joint": 0.565439672801636
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0790765095763073,
+              "fraction_worse_than_source": 0.7024539877300614,
+              "fraction_worse_than_joint": 0.4284253578732106
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.138833562207312,
+              "fraction_worse_than_source": 0.8374233128834356,
+              "fraction_worse_than_joint": 0.4662576687116564
+            }
+          ]
+        },
+        "native/structure_trend16": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 0,
+              "ratio": null,
+              "fraction_worse_than_source": null,
+              "fraction_worse_than_joint": null
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.41513292433537835
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.4325153374233129
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.45194274028629855
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 0,
+              "ratio": null,
+              "fraction_worse_than_source": null,
+              "fraction_worse_than_joint": null
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.2639825087162215,
+              "fraction_worse_than_source": 0.5848670756646217,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0231805006886885,
+              "fraction_worse_than_source": 0.5674846625766872,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0362382356997786,
+              "fraction_worse_than_source": 0.5480572597137015,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 0,
+              "ratio": null,
+              "fraction_worse_than_source": null,
+              "fraction_worse_than_joint": null
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.5754919672051897,
+              "fraction_worse_than_source": 0.6257668711656442,
+              "fraction_worse_than_joint": 0.5153374233128835
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.6506644139570985,
+              "fraction_worse_than_source": 0.754601226993865,
+              "fraction_worse_than_joint": 0.7494887525562373
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.317727203180401,
+              "fraction_worse_than_source": 0.7566462167689162,
+              "fraction_worse_than_joint": 0.6912065439672802
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 0,
+              "ratio": null,
+              "fraction_worse_than_source": null,
+              "fraction_worse_than_joint": null
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.783865072889091,
+              "fraction_worse_than_source": 0.6226993865030674,
+              "fraction_worse_than_joint": 0.5276073619631901
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.4490836011646142,
+              "fraction_worse_than_source": 0.7515337423312883,
+              "fraction_worse_than_joint": 0.6380368098159509
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0887959873417674,
+              "fraction_worse_than_source": 0.5950920245398773,
+              "fraction_worse_than_joint": 0.558282208588957
+            }
+          ]
+        },
+        "native/near": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.2147239263803681
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.19938650306748465
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.15030674846625766
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.16462167689161555
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.040002150085583,
+              "fraction_worse_than_source": 0.7852760736196319,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0648519584352223,
+              "fraction_worse_than_source": 0.8006134969325154,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0970884352616475,
+              "fraction_worse_than_source": 0.8496932515337423,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0688549414763846,
+              "fraction_worse_than_source": 0.8353783231083844,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0450141928490784,
+              "fraction_worse_than_source": 0.6820040899795501,
+              "fraction_worse_than_joint": 0.3609406952965235
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0479958245406213,
+              "fraction_worse_than_source": 0.6840490797546013,
+              "fraction_worse_than_joint": 0.32413087934560325
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0736732134602518,
+              "fraction_worse_than_source": 0.7822085889570553,
+              "fraction_worse_than_joint": 0.2955010224948875
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0855139906384534,
+              "fraction_worse_than_source": 0.8517382413087935,
+              "fraction_worse_than_joint": 0.43047034764826175
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0691381263524506,
+              "fraction_worse_than_source": 0.8220858895705522,
+              "fraction_worse_than_joint": 0.5419222903885481
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0654106427726742,
+              "fraction_worse_than_source": 0.8261758691206544,
+              "fraction_worse_than_joint": 0.5378323108384458
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0985760520795642,
+              "fraction_worse_than_source": 0.8660531697341514,
+              "fraction_worse_than_joint": 0.4815950920245399
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0718907843682586,
+              "fraction_worse_than_source": 0.8680981595092024,
+              "fraction_worse_than_joint": 0.5736196319018405
+            }
+          ]
+        }
+      }
+    },
+    "43": {
+      "aggregate_ratios": {
+        "source": {
+          "full/endpoint/price": 1.0,
+          "full/endpoint/near": 1.0,
+          "full/endpoint/mid": 1.0,
+          "full/endpoint/far": 1.0,
+          "full/endpoint/activity": 1.0,
+          "full/endpoint/structure": 1.0,
+          "full/interior/price": 1.0,
+          "full/interior/near": 1.0,
+          "full/interior/mid": 1.0,
+          "full/interior/far": 1.0,
+          "full/interior/activity": 1.0,
+          "full/interior/structure": 1.0,
+          "native/endpoint/price": 1.0,
+          "native/endpoint/near": 1.0,
+          "native/endpoint/mid": 1.0,
+          "native/endpoint/far": 1.0,
+          "native/endpoint/activity": 1.0,
+          "native/endpoint/structure": 1.0,
+          "native/interior/price": 1.0,
+          "native/interior/near": 1.0,
+          "native/interior/mid": 1.0,
+          "native/interior/far": 1.0,
+          "native/interior/activity": 1.0,
+          "native/interior/structure": 1.0
+        },
+        "joint": {
+          "full/endpoint/price": 0.9988498605082237,
+          "full/endpoint/near": 1.0406741422531793,
+          "full/endpoint/mid": 1.0085846104031357,
+          "full/endpoint/far": 0.9960599116094422,
+          "full/endpoint/activity": 0.9997986602539659,
+          "full/endpoint/structure": 1.071381715493227,
+          "full/interior/price": 1.000319496195349,
+          "full/interior/near": 1.0566879013022579,
+          "full/interior/mid": 1.0095151043819968,
+          "full/interior/far": 0.9958378591007363,
+          "full/interior/activity": 1.0010238238455957,
+          "full/interior/structure": 1.0694490587802716,
+          "native/endpoint/price": 0.9988499147453433,
+          "native/endpoint/near": 1.0406732194247696,
+          "native/endpoint/mid": 1.0085851767880814,
+          "native/endpoint/far": 0.9960599305800896,
+          "native/endpoint/activity": 0.9997987655021343,
+          "native/endpoint/structure": 1.0713821650062905,
+          "native/interior/price": 1.0157465906545082,
+          "native/interior/near": 1.0673892020405957,
+          "native/interior/mid": 1.0068360676371901,
+          "native/interior/far": 1.0060050654537653,
+          "native/interior/activity": 1.0244419390694113,
+          "native/interior/structure": 1.0784990865309387
+        },
+        "encoder_swap": {
+          "full/endpoint/price": 1.0098042608731668,
+          "full/endpoint/near": 1.1100120312007697,
+          "full/endpoint/mid": 1.0420814077678016,
+          "full/endpoint/far": 1.0020448291326944,
+          "full/endpoint/activity": 1.0085160502930477,
+          "full/endpoint/structure": 1.2868443960674474,
+          "full/interior/price": 1.0084321904532352,
+          "full/interior/near": 1.0839188946665943,
+          "full/interior/mid": 1.0276284023043427,
+          "full/interior/far": 1.0012274497327638,
+          "full/interior/activity": 1.0082793475540257,
+          "full/interior/structure": 1.235024899456655,
+          "native/endpoint/price": 1.00980436161384,
+          "native/endpoint/near": 1.1100130725520545,
+          "native/endpoint/mid": 1.0420819657146594,
+          "native/endpoint/far": 1.0020448389384613,
+          "native/endpoint/activity": 1.008516155541216,
+          "native/endpoint/structure": 1.2868461068876573,
+          "native/interior/price": 1.0277502825718912,
+          "native/interior/near": 1.0742772804657885,
+          "native/interior/mid": 1.0241065077370544,
+          "native/interior/far": 1.008799994994408,
+          "native/interior/activity": 1.0483022579653656,
+          "native/interior/structure": 1.315297301934665
+        },
+        "query_swap": {
+          "full/endpoint/price": 1.0097388956871676,
+          "full/endpoint/near": 1.1007575704041008,
+          "full/endpoint/mid": 1.0333622117776502,
+          "full/endpoint/far": 1.0033139856367357,
+          "full/endpoint/activity": 1.0084722670550184,
+          "full/endpoint/structure": 1.14354821114075,
+          "full/interior/price": 1.0122841379935001,
+          "full/interior/near": 1.0986221891625108,
+          "full/interior/mid": 1.033589253542237,
+          "full/interior/far": 1.0040512045774457,
+          "full/interior/activity": 1.0102432105287769,
+          "full/interior/structure": 1.217161694002772,
+          "native/endpoint/price": 1.0097389770771978,
+          "native/endpoint/near": 1.1007557727899027,
+          "native/endpoint/mid": 1.0333623278801312,
+          "native/endpoint/far": 1.0033141331020008,
+          "native/endpoint/activity": 1.00847216180685,
+          "native/endpoint/structure": 1.1435495893937886,
+          "native/interior/price": 1.038959094357152,
+          "native/interior/near": 1.1006702269977493,
+          "native/interior/mid": 1.025037709253365,
+          "native/interior/far": 1.0350407272672602,
+          "native/interior/activity": 1.0638272442177414,
+          "native/interior/structure": 1.3730876272459214
+        }
+      },
+      "joint_better_than_encoder_swap_fields": 24,
+      "joint_better_than_query_swap_fields": 24,
+      "mixed_fields_better_than_source": {
+        "encoder_swap": 0,
+        "query_swap": 0
+      },
+      "by_position": {
+        "full/structure": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.294478527607362
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.2842535787321063
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3057259713701431
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.2668711656441718
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0723162217285096,
+              "fraction_worse_than_source": 0.7055214723926381,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0734124305602646,
+              "fraction_worse_than_source": 0.7157464212678937,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0625455060718783,
+              "fraction_worse_than_source": 0.6942740286298569,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.071381715493227,
+              "fraction_worse_than_source": 0.7331288343558282,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.245206113872135,
+              "fraction_worse_than_source": 0.83640081799591,
+              "fraction_worse_than_joint": 0.6359918200408998
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.2333281051032068,
+              "fraction_worse_than_source": 0.8374233128834356,
+              "fraction_worse_than_joint": 0.6196319018404908
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.2260725778005193,
+              "fraction_worse_than_source": 0.8353783231083844,
+              "fraction_worse_than_joint": 0.6002044989775052
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.2868443960674474,
+              "fraction_worse_than_source": 0.8568507157464212,
+              "fraction_worse_than_joint": 0.6206543967280164
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.1976672739499266,
+              "fraction_worse_than_source": 0.83640081799591,
+              "fraction_worse_than_joint": 0.7188139059304703
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.2298506284294723,
+              "fraction_worse_than_source": 0.852760736196319,
+              "fraction_worse_than_joint": 0.7280163599182005
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.2249879657213938,
+              "fraction_worse_than_source": 0.8353783231083844,
+              "fraction_worse_than_joint": 0.7382413087934561
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.14354821114075,
+              "fraction_worse_than_source": 0.8394683026584867,
+              "fraction_worse_than_joint": 0.7147239263803681
+            }
+          ]
+        },
+        "full/structure_level": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3394683026584867
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3159509202453988
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3374233128834356
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.2985685071574642
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.1123464771812916,
+              "fraction_worse_than_source": 0.6605316973415133,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.069988705721628,
+              "fraction_worse_than_source": 0.6840490797546013,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0661775349768092,
+              "fraction_worse_than_source": 0.6625766871165644,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 0.974777432794408,
+              "fraction_worse_than_source": 0.7014314928425358,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 2.1827621972193034,
+              "fraction_worse_than_source": 0.7934560327198364,
+              "fraction_worse_than_joint": 0.7249488752556237
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 2.123032158011818,
+              "fraction_worse_than_source": 0.7811860940695297,
+              "fraction_worse_than_joint": 0.6973415132924335
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.9874009337795082,
+              "fraction_worse_than_source": 0.8067484662576687,
+              "fraction_worse_than_joint": 0.7331288343558282
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.9861585626905582,
+              "fraction_worse_than_source": 0.820040899795501,
+              "fraction_worse_than_joint": 0.7331288343558282
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.8200364358110503,
+              "fraction_worse_than_source": 0.7934560327198364,
+              "fraction_worse_than_joint": 0.7372188139059305
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.735565965782477,
+              "fraction_worse_than_source": 0.7924335378323109,
+              "fraction_worse_than_joint": 0.7137014314928425
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.9517942743858117,
+              "fraction_worse_than_source": 0.7995910020449898,
+              "fraction_worse_than_joint": 0.7290388548057259
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0667591679919364,
+              "fraction_worse_than_source": 0.7791411042944786,
+              "fraction_worse_than_joint": 0.7004089979550102
+            }
+          ]
+        },
+        "full/structure_trend": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3159509202453988
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.2995910020449898
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3098159509202454
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.28016359918200406
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0679084235430099,
+              "fraction_worse_than_source": 0.6840490797546013,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0738370883560884,
+              "fraction_worse_than_source": 0.7004089979550102,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0621253480870154,
+              "fraction_worse_than_source": 0.6901840490797546,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0919839986256867,
+              "fraction_worse_than_source": 0.7198364008179959,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.1419702499927165,
+              "fraction_worse_than_source": 0.7862985685071575,
+              "fraction_worse_than_joint": 0.5419222903885481
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1229746801491987,
+              "fraction_worse_than_source": 0.7883435582822086,
+              "fraction_worse_than_joint": 0.5214723926380368
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.13800109041976,
+              "fraction_worse_than_source": 0.7862985685071575,
+              "fraction_worse_than_joint": 0.5184049079754601
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.1377053718253491,
+              "fraction_worse_than_source": 0.7791411042944786,
+              "fraction_worse_than_joint": 0.5081799591002045
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.1291371676257682,
+              "fraction_worse_than_source": 0.8016359918200409,
+              "fraction_worse_than_joint": 0.66359918200409
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1671248047735832,
+              "fraction_worse_than_source": 0.8149284253578732,
+              "fraction_worse_than_joint": 0.6666666666666666
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.1409100351687045,
+              "fraction_worse_than_source": 0.7914110429447853,
+              "fraction_worse_than_joint": 0.6820040899795501
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.159924603203561,
+              "fraction_worse_than_source": 0.8128834355828221,
+              "fraction_worse_than_joint": 0.6666666666666666
+            }
+          ]
+        },
+        "full/structure_level4": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3220858895705521
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.30265848670756645
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.32719836400818
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.28118609406952966
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.1021031759659343,
+              "fraction_worse_than_source": 0.6779141104294478,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0706959432917351,
+              "fraction_worse_than_source": 0.6973415132924335,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0690011302912124,
+              "fraction_worse_than_source": 0.6728016359918201,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 0.9834617776162462,
+              "fraction_worse_than_source": 0.7188139059304703,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 2.017255876918563,
+              "fraction_worse_than_source": 0.8026584867075665,
+              "fraction_worse_than_joint": 0.7321063394683026
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.9834451521686272,
+              "fraction_worse_than_source": 0.7914110429447853,
+              "fraction_worse_than_joint": 0.6973415132924335
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.8607968575305796,
+              "fraction_worse_than_source": 0.8057259713701431,
+              "fraction_worse_than_joint": 0.7290388548057259
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.9084209969944208,
+              "fraction_worse_than_source": 0.8282208588957055,
+              "fraction_worse_than_joint": 0.7382413087934561
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.7094589072873911,
+              "fraction_worse_than_source": 0.7965235173824131,
+              "fraction_worse_than_joint": 0.7413087934560327
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.6527310771444297,
+              "fraction_worse_than_source": 0.8087934560327198,
+              "fraction_worse_than_joint": 0.7341513292433538
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.829239049692502,
+              "fraction_worse_than_source": 0.8169734151329243,
+              "fraction_worse_than_joint": 0.7402862985685071
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0725850585753234,
+              "fraction_worse_than_source": 0.7914110429447853,
+              "fraction_worse_than_joint": 0.7065439672801636
+            }
+          ]
+        },
+        "full/structure_level16": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.36298568507157464
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3507157464212679
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3619631901840491
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.31390593047034765
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.1274133149694712,
+              "fraction_worse_than_source": 0.6370143149284253,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.068992652786524,
+              "fraction_worse_than_source": 0.6492842535787321,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0620817939481322,
+              "fraction_worse_than_source": 0.6380368098159509,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 0.964076264611785,
+              "fraction_worse_than_source": 0.6860940695296524,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 2.426204894887027,
+              "fraction_worse_than_source": 0.7852760736196319,
+              "fraction_worse_than_joint": 0.7229038854805726
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 2.319622459134291,
+              "fraction_worse_than_source": 0.7627811860940695,
+              "fraction_worse_than_joint": 0.6901840490797546
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 2.1710453487016466,
+              "fraction_worse_than_source": 0.7955010224948875,
+              "fraction_worse_than_joint": 0.7321063394683026
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 2.0819496421200845,
+              "fraction_worse_than_source": 0.8057259713701431,
+              "fraction_worse_than_joint": 0.7423312883435583
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.9826845558122344,
+              "fraction_worse_than_source": 0.7832310838445807,
+              "fraction_worse_than_joint": 0.7372188139059305
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.8522282267317083,
+              "fraction_worse_than_source": 0.7811860940695297,
+              "fraction_worse_than_joint": 0.7024539877300614
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 2.129565663754045,
+              "fraction_worse_than_source": 0.7822085889570553,
+              "fraction_worse_than_joint": 0.721881390593047
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0595802919540334,
+              "fraction_worse_than_source": 0.7699386503067485,
+              "fraction_worse_than_joint": 0.6922290388548057
+            }
+          ]
+        },
+        "full/structure_trend4": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.34049079754601225
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.34151329243353784
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.33844580777096117
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.30265848670756645
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.059192248530324,
+              "fraction_worse_than_source": 0.6595092024539877,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0561652156537618,
+              "fraction_worse_than_source": 0.6584867075664622,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0435056197923376,
+              "fraction_worse_than_source": 0.6615541922290389,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0796990442930503,
+              "fraction_worse_than_source": 0.6973415132924335,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0887178513034612,
+              "fraction_worse_than_source": 0.7474437627811861,
+              "fraction_worse_than_joint": 0.5122699386503068
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0761167417381088,
+              "fraction_worse_than_source": 0.7443762781186094,
+              "fraction_worse_than_joint": 0.5132924335378323
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0818844885087329,
+              "fraction_worse_than_source": 0.7249488752556237,
+              "fraction_worse_than_joint": 0.4938650306748466
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.090725975111507,
+              "fraction_worse_than_source": 0.7433537832310838,
+              "fraction_worse_than_joint": 0.48773006134969327
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.103393032806774,
+              "fraction_worse_than_source": 0.7576687116564417,
+              "fraction_worse_than_joint": 0.6329243353783232
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.122477172644935,
+              "fraction_worse_than_source": 0.7730061349693251,
+              "fraction_worse_than_joint": 0.6523517382413088
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.102390531832668,
+              "fraction_worse_than_source": 0.7464212678936605,
+              "fraction_worse_than_joint": 0.6656441717791411
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.1246943425328164,
+              "fraction_worse_than_source": 0.7658486707566462,
+              "fraction_worse_than_joint": 0.6298568507157464
+            }
+          ]
+        },
+        "full/structure_trend16": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3507157464212679
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.30879345603271985
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3261758691206544
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3149284253578732
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.1095676473931226,
+              "fraction_worse_than_source": 0.6492842535787321,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1707513822996043,
+              "fraction_worse_than_source": 0.6912065439672802,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.1719002413600732,
+              "fraction_worse_than_source": 0.6738241308793456,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.1532684789588084,
+              "fraction_worse_than_source": 0.6850715746421268,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.3964917108769062,
+              "fraction_worse_than_source": 0.7730061349693251,
+              "fraction_worse_than_joint": 0.6073619631901841
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.3799482388236946,
+              "fraction_worse_than_source": 0.7576687116564417,
+              "fraction_worse_than_joint": 0.5736196319018405
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.4688434039131555,
+              "fraction_worse_than_source": 0.7617586912065439,
+              "fraction_worse_than_joint": 0.5950920245398773
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.3720658615768389,
+              "fraction_worse_than_source": 0.754601226993865,
+              "fraction_worse_than_joint": 0.5899795501022495
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.2521820438118256,
+              "fraction_worse_than_source": 0.7443762781186094,
+              "fraction_worse_than_joint": 0.6288343558282209
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.4119768256591876,
+              "fraction_worse_than_source": 0.7638036809815951,
+              "fraction_worse_than_joint": 0.6349693251533742
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.3680064944039985,
+              "fraction_worse_than_source": 0.7627811860940695,
+              "fraction_worse_than_joint": 0.6615541922290389
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.3356735851489956,
+              "fraction_worse_than_source": 0.7832310838445807,
+              "fraction_worse_than_joint": 0.647239263803681
+            }
+          ]
+        },
+        "full/near": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.2392638036809816
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.20961145194274028
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.25357873210633947
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.2331288343558282
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0626372086657672,
+              "fraction_worse_than_source": 0.7607361963190185,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0486738649867875,
+              "fraction_worse_than_source": 0.7903885480572597,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.06477634215422,
+              "fraction_worse_than_source": 0.7464212678936605,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0406741422531793,
+              "fraction_worse_than_source": 0.7668711656441718,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0971226670340273,
+              "fraction_worse_than_source": 0.803680981595092,
+              "fraction_worse_than_joint": 0.5081799591002045
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0730939926878214,
+              "fraction_worse_than_source": 0.7955010224948875,
+              "fraction_worse_than_joint": 0.5184049079754601
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0892235325723865,
+              "fraction_worse_than_source": 0.8149284253578732,
+              "fraction_worse_than_joint": 0.5204498977505112
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.1100120312007697,
+              "fraction_worse_than_source": 0.7842535787321063,
+              "fraction_worse_than_joint": 0.50920245398773
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.1078697462280909,
+              "fraction_worse_than_source": 0.8844580777096115,
+              "fraction_worse_than_joint": 0.7188139059304703
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0706872965585525,
+              "fraction_worse_than_source": 0.8619631901840491,
+              "fraction_worse_than_joint": 0.7055214723926381
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.139313815825588,
+              "fraction_worse_than_source": 0.8752556237218814,
+              "fraction_worse_than_joint": 0.7177914110429447
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.1007575704041008,
+              "fraction_worse_than_source": 0.8773006134969326,
+              "fraction_worse_than_joint": 0.7361963190184049
+            }
+          ]
+        },
+        "native/structure": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.43558282208588955
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3169734151329243
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.29243353783231085
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.2668711656441718
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0280588567797972,
+              "fraction_worse_than_source": 0.5644171779141104,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1449159507502673,
+              "fraction_worse_than_source": 0.6830265848670757,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.07992792808175,
+              "fraction_worse_than_source": 0.7075664621676891,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0713821650062905,
+              "fraction_worse_than_source": 0.7331288343558282,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.2094547253888415,
+              "fraction_worse_than_source": 0.6676891615541922,
+              "fraction_worse_than_joint": 0.6278118609406953
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.4416221708433972,
+              "fraction_worse_than_source": 0.7699386503067485,
+              "fraction_worse_than_joint": 0.5930470347648262
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.3262299770426724,
+              "fraction_worse_than_source": 0.8118609406952966,
+              "fraction_worse_than_joint": 0.6288343558282209
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.2868461068876573,
+              "fraction_worse_than_source": 0.8568507157464212,
+              "fraction_worse_than_joint": 0.6206543967280164
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.302639775866537,
+              "fraction_worse_than_source": 0.6738241308793456,
+              "fraction_worse_than_joint": 0.5511247443762781
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.5109969188944878,
+              "fraction_worse_than_source": 0.8149284253578732,
+              "fraction_worse_than_joint": 0.7280163599182005
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.3476180772733604,
+              "fraction_worse_than_source": 0.8496932515337423,
+              "fraction_worse_than_joint": 0.8210633946830266
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.1435495893937886,
+              "fraction_worse_than_source": 0.8394683026584867,
+              "fraction_worse_than_joint": 0.7147239263803681
+            }
+          ]
+        },
+        "native/structure_level": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.49079754601226994
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.4335378323108384
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.4130879345603272
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.2985685071574642
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.021585837746683,
+              "fraction_worse_than_source": 0.50920245398773,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0862838531762573,
+              "fraction_worse_than_source": 0.5664621676891616,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0203997015831052,
+              "fraction_worse_than_source": 0.5869120654396728,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 0.97478129310651,
+              "fraction_worse_than_source": 0.7014314928425358,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.7189105570058327,
+              "fraction_worse_than_source": 0.6380368098159509,
+              "fraction_worse_than_joint": 0.6625766871165644
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 2.195557719792985,
+              "fraction_worse_than_source": 0.7433537832310838,
+              "fraction_worse_than_joint": 0.6952965235173824
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.9875796349501997,
+              "fraction_worse_than_source": 0.7505112474437627,
+              "fraction_worse_than_joint": 0.6717791411042945
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.9861652731041555,
+              "fraction_worse_than_source": 0.820040899795501,
+              "fraction_worse_than_joint": 0.7331288343558282
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.7347707565128414,
+              "fraction_worse_than_source": 0.6482617586912065,
+              "fraction_worse_than_joint": 0.6359918200408998
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 2.0137074776449877,
+              "fraction_worse_than_source": 0.7300613496932515,
+              "fraction_worse_than_joint": 0.7259713701431493
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 2.0732348593694105,
+              "fraction_worse_than_source": 0.787321063394683,
+              "fraction_worse_than_joint": 0.7648261758691206
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0667597368786912,
+              "fraction_worse_than_source": 0.7791411042944786,
+              "fraction_worse_than_joint": 0.6993865030674846
+            }
+          ]
+        },
+        "native/structure_trend": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.4212678936605317
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.30879345603271985
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.28629856850715746
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.28016359918200406
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0296592243765939,
+              "fraction_worse_than_source": 0.5787321063394683,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1589585864379053,
+              "fraction_worse_than_source": 0.6912065439672802,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0896007075006868,
+              "fraction_worse_than_source": 0.7137014314928425,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0919837026144872,
+              "fraction_worse_than_source": 0.7198364008179959,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0834985678759341,
+              "fraction_worse_than_source": 0.6063394683026585,
+              "fraction_worse_than_joint": 0.5419222903885481
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.2610514138020965,
+              "fraction_worse_than_source": 0.6952965235173824,
+              "fraction_worse_than_joint": 0.49693251533742333
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.2187668501196078,
+              "fraction_worse_than_source": 0.7832310838445807,
+              "fraction_worse_than_joint": 0.5603271983640081
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.1377061475932055,
+              "fraction_worse_than_source": 0.7791411042944786,
+              "fraction_worse_than_joint": 0.5081799591002045
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.1958011561343103,
+              "fraction_worse_than_source": 0.630879345603272,
+              "fraction_worse_than_joint": 0.5112474437627812
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.39059561099396,
+              "fraction_worse_than_source": 0.7883435582822086,
+              "fraction_worse_than_joint": 0.6728016359918201
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.2297121444289878,
+              "fraction_worse_than_source": 0.8353783231083844,
+              "fraction_worse_than_joint": 0.7832310838445807
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.1599261396609426,
+              "fraction_worse_than_source": 0.8118609406952966,
+              "fraction_worse_than_joint": 0.6666666666666666
+            }
+          ]
+        },
+        "native/structure_level4": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.49079754601226994
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.38650306748466257
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3936605316973415
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.28118609406952966
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.021585837746683,
+              "fraction_worse_than_source": 0.50920245398773,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.082381652920521,
+              "fraction_worse_than_source": 0.6134969325153374,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0309496845039394,
+              "fraction_worse_than_source": 0.6063394683026585,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 0.9834653051920285,
+              "fraction_worse_than_source": 0.7188139059304703,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.7189105570058327,
+              "fraction_worse_than_source": 0.6380368098159509,
+              "fraction_worse_than_joint": 0.6625766871165644
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.9891533011119282,
+              "fraction_worse_than_source": 0.7597137014314929,
+              "fraction_worse_than_joint": 0.7024539877300614
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.8745601866230532,
+              "fraction_worse_than_source": 0.7648261758691206,
+              "fraction_worse_than_joint": 0.679959100204499
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.9084272132968365,
+              "fraction_worse_than_source": 0.8282208588957055,
+              "fraction_worse_than_joint": 0.7382413087934561
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.7347707565128414,
+              "fraction_worse_than_source": 0.6482617586912065,
+              "fraction_worse_than_joint": 0.6359918200408998
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.9131039096725702,
+              "fraction_worse_than_source": 0.7556237218813906,
+              "fraction_worse_than_joint": 0.7310838445807771
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.9218768344966355,
+              "fraction_worse_than_source": 0.8047034764826176,
+              "fraction_worse_than_joint": 0.7893660531697342
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0725856654319292,
+              "fraction_worse_than_source": 0.7914110429447853,
+              "fraction_worse_than_joint": 0.7065439672801636
+            }
+          ]
+        },
+        "native/structure_level16": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 0,
+              "ratio": null,
+              "fraction_worse_than_source": null,
+              "fraction_worse_than_joint": null
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.48466257668711654
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.4386503067484663
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.31390593047034765
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 0,
+              "ratio": null,
+              "fraction_worse_than_source": null,
+              "fraction_worse_than_joint": null
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0924381639467742,
+              "fraction_worse_than_source": 0.5153374233128835,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0043372967915034,
+              "fraction_worse_than_source": 0.5613496932515337,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 0.9640805343976686,
+              "fraction_worse_than_source": 0.6860940695296524,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 0,
+              "ratio": null,
+              "fraction_worse_than_source": null,
+              "fraction_worse_than_joint": null
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 2.52108610217258,
+              "fraction_worse_than_source": 0.7034764826175869,
+              "fraction_worse_than_joint": 0.6922290388548057
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 2.159652342742846,
+              "fraction_worse_than_source": 0.7321063394683026,
+              "fraction_worse_than_joint": 0.6554192229038854
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 2.0819569661948245,
+              "fraction_worse_than_source": 0.8057259713701431,
+              "fraction_worse_than_joint": 0.7423312883435583
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 0,
+              "ratio": null,
+              "fraction_worse_than_source": null,
+              "fraction_worse_than_joint": null
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 2.1723732511441596,
+              "fraction_worse_than_source": 0.6768916155419223,
+              "fraction_worse_than_joint": 0.689161554192229
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 2.303678252710143,
+              "fraction_worse_than_source": 0.7556237218813906,
+              "fraction_worse_than_joint": 0.7239263803680982
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0595808136932763,
+              "fraction_worse_than_source": 0.7699386503067485,
+              "fraction_worse_than_joint": 0.6922290388548057
+            }
+          ]
+        },
+        "native/structure_trend4": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.4212678936605317
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3261758691206544
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.30368098159509205
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.30265848670756645
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0296592243765939,
+              "fraction_worse_than_source": 0.5787321063394683,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1478907807018253,
+              "fraction_worse_than_source": 0.6738241308793456,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.089983572564971,
+              "fraction_worse_than_source": 0.696319018404908,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0796988041476163,
+              "fraction_worse_than_source": 0.6973415132924335,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0834985678759341,
+              "fraction_worse_than_source": 0.6063394683026585,
+              "fraction_worse_than_joint": 0.5419222903885481
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.1533058316281115,
+              "fraction_worse_than_source": 0.7065439672801636,
+              "fraction_worse_than_joint": 0.47443762781186094
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.1459109541265966,
+              "fraction_worse_than_source": 0.7433537832310838,
+              "fraction_worse_than_joint": 0.5132924335378323
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0907266785131344,
+              "fraction_worse_than_source": 0.7443762781186094,
+              "fraction_worse_than_joint": 0.48773006134969327
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.1958011561343103,
+              "fraction_worse_than_source": 0.630879345603272,
+              "fraction_worse_than_joint": 0.5112474437627812
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.2749385510676146,
+              "fraction_worse_than_source": 0.7361963190184049,
+              "fraction_worse_than_joint": 0.5950920245398773
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.1858539772697736,
+              "fraction_worse_than_source": 0.8128834355828221,
+              "fraction_worse_than_joint": 0.7433537832310838
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.1246963327591435,
+              "fraction_worse_than_source": 0.7658486707566462,
+              "fraction_worse_than_joint": 0.6298568507157464
+            }
+          ]
+        },
+        "native/structure_trend16": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 0,
+              "ratio": null,
+              "fraction_worse_than_source": null,
+              "fraction_worse_than_joint": null
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.4376278118609407
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.38139059304703476
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.3149284253578732
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 0,
+              "ratio": null,
+              "fraction_worse_than_source": null,
+              "fraction_worse_than_joint": null
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.2226207729864724,
+              "fraction_worse_than_source": 0.5623721881390593,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0873504422606906,
+              "fraction_worse_than_source": 0.6186094069529653,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.153267855002004,
+              "fraction_worse_than_source": 0.6850715746421268,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 0,
+              "ratio": null,
+              "fraction_worse_than_source": null,
+              "fraction_worse_than_joint": null
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.8808056375127253,
+              "fraction_worse_than_source": 0.5787321063394683,
+              "fraction_worse_than_joint": 0.5501022494887525
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.6469727784626909,
+              "fraction_worse_than_source": 0.6973415132924335,
+              "fraction_worse_than_joint": 0.5705521472392638
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.3720668099911764,
+              "fraction_worse_than_source": 0.754601226993865,
+              "fraction_worse_than_joint": 0.5899795501022495
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 0,
+              "ratio": null,
+              "fraction_worse_than_source": null,
+              "fraction_worse_than_joint": null
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 2.0558567747933294,
+              "fraction_worse_than_source": 0.6860940695296524,
+              "fraction_worse_than_joint": 0.6503067484662577
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.487485752561387,
+              "fraction_worse_than_source": 0.7423312883435583,
+              "fraction_worse_than_joint": 0.6952965235173824
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.3356727166941142,
+              "fraction_worse_than_source": 0.7832310838445807,
+              "fraction_worse_than_joint": 0.647239263803681
+            }
+          ]
+        },
+        "native/near": {
+          "source": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.24130879345603273
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.16462167689161555
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.18507157464212678
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0,
+              "fraction_worse_than_source": 0.0,
+              "fraction_worse_than_joint": 0.2331288343558282
+            }
+          ],
+          "joint": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.044002012391866,
+              "fraction_worse_than_source": 0.7586912065439673,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.06519928323978,
+              "fraction_worse_than_source": 0.8353783231083844,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.096325250803284,
+              "fraction_worse_than_source": 0.8149284253578732,
+              "fraction_worse_than_joint": 0.0
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.0406732194247696,
+              "fraction_worse_than_source": 0.7668711656441718,
+              "fraction_worse_than_joint": 0.0
+            }
+          ],
+          "encoder_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.066509177952149,
+              "fraction_worse_than_source": 0.754601226993865,
+              "fraction_worse_than_joint": 0.5
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0745534645737425,
+              "fraction_worse_than_source": 0.8190184049079755,
+              "fraction_worse_than_joint": 0.41411042944785276
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.0820226567311833,
+              "fraction_worse_than_source": 0.7668711656441718,
+              "fraction_worse_than_joint": 0.3609406952965235
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.1100130725520545,
+              "fraction_worse_than_source": 0.7842535787321063,
+              "fraction_worse_than_joint": 0.50920245398773
+            }
+          ],
+          "query_swap": [
+            {
+              "prefix": 32,
+              "n": 978,
+              "ratio": 1.1130522159762377,
+              "fraction_worse_than_source": 0.876278118609407,
+              "fraction_worse_than_joint": 0.7392638036809815
+            },
+            {
+              "prefix": 64,
+              "n": 978,
+              "ratio": 1.0712834768737707,
+              "fraction_worse_than_source": 0.9069529652351738,
+              "fraction_worse_than_joint": 0.6523517382413088
+            },
+            {
+              "prefix": 96,
+              "n": 978,
+              "ratio": 1.1421405038806776,
+              "fraction_worse_than_source": 0.8895705521472392,
+              "fraction_worse_than_joint": 0.6359918200408998
+            },
+            {
+              "prefix": 128,
+              "n": 978,
+              "ratio": 1.1007557727899027,
+              "fraction_worse_than_source": 0.8773006134969326,
+              "fraction_worse_than_joint": 0.7361963190184049
+            }
+          ]
+        }
+      }
+    }
+  },
+  "execution_complete": true,
+  "diagnostic_complete": true,
+  "information_loss_identified": false,
+  "model_promoted": false,
+  "rs_allowed": false,
+  "review": {
+    "purpose": {
+      "status": "pass_for_scope",
+      "evidence": "V07固定模块替换问题已执行；没有选新模型、拟合新头或启动RS。",
+      "remaining": "接口敏感性不等于信息消失或通用表示成功；目的仍是可复用的因果行情状态。"
+    },
+    "architecture": {
+      "status": "pass_for_scope",
+      "evidence": "双种子八组合的encoder/query完整签名分别匹配R1初始/末轮；归一化buffer随头绑定；64项AutoDL因果检查通过。",
+      "remaining": "包内没有权重，未独立运行真实模型；模块交换不是训练时冻结模块的干预。"
+    },
+    "training": {
+      "status": "not_applicable",
+      "evidence": "零优化器更新、零拟合、没有新随机头或模型选择；234.487秒会话记录与成功出口一致。",
+      "remaining": "不能把E5D0评价当作只训练编码器的结果，也不能把E0D5当作只训练解码器的结果。"
+    },
+    "validation": {
+      "status": "pass_for_scope",
+      "evidence": "复算192原口径均值、768分位置分布、192交叉差值分布、751104误差元素；96原/末轮验证值复现，逐窗口原字段与R1在原容差内。",
+      "remaining": "数组是已计算误差，不含原始预测/目标；只能独立复算聚合和分解，不能重新生成误差。val反复使用，未做最终独立留出或总体显著性检验。"
+    },
+    "data": {
+      "status": "pass_for_scope",
+      "evidence": "978端点ID、source identity与R1一致；全部八组合support一致；无支持位置保持null，不把0误称提升。",
+      "remaining": "未独立重建raw输入、目标和scaler拟合，沿用已有资格范围。"
+    },
+    "engineering": {
+      "status": "pass_for_scope",
+      "evidence": "44个completion绑定文件、R1的110个源码模块以及V07模块/脚本/协议哈希核验；单次会话无超时，源未变，report成功且RS未放行。",
+      "remaining": "真实权重签名来自远端加载记录；本地没有权重，不能将代码哈希或算术一致称为全历史审计完成。"
+    }
+  },
+  "conclusions": {
+    "V07": "Completed frozen-cross sensitivity test: matched E5D5 generally beats mismatches, but fails original retention for seed42; information loss versus recoverability remains unidentifiable.",
+    "V03": "Original five-epoch failure retained. No threshold/epoch/source changes, no third LR.",
+    "V04_V05": "No loss-factor interventions executed; old RS still blocked. Next task is prospective protocol revision, not automatic launch or claim of stable control.",
+    "mixed_readers": "Across 2seeds x2mixed combinations x24 aggregate fields, zero mixed fields outperform original source; correlated fields are not independent trials.",
+    "exceptions": "s42 E0D5 improves endpoint structure relative to E5D5 but remains8.90% above source; E5D0 improves some near means only. No global recovery."
+  },
+  "next_task_ids": [
+    "V04",
+    "V05"
+  ],
+  "next_phase": "Protocol revision only; old RS not runnable; V07 equal-budget fitting deferred until necessary",
+  "total_recovery_session_seconds": 758.652147969231,
+  "remaining_recovery_session_seconds": 35241.34785203077,
+  "limits": [
+    "No raw predictions/targets or neural weights in report",
+    "No independent model re-execution or scaler fitting",
+    "Descriptive matched-window comparisons, not independent held-out generalization",
+    "Post-training module replacement cannot isolate the effect of freezing either module during training"
+  ],
+  "next_design_review": {
+    "purpose": {
+      "status": "pass_for_scope",
+      "evidence": "回到V04/S1与V05/S2两个未直接干预的问题，不新增容量/预测/读头矩阵。",
+      "remaining": "修订工作单不是最终可执行协议或效果证明。"
+    },
+    "architecture": {
+      "status": "open",
+      "evidence": "保留原Macro双种子、共享原查询与固定源局部头的候选设计；V07提醒固定头可能锚定源坐标。",
+      "remaining": "需在最终协议明确接口保留与信息增益的区分及读取用途。"
+    },
+    "training": {
+      "status": "open",
+      "evidence": "原2×2因素、低LR、同起点/更新/曝光预算保留为修订基础，不扫第三LR、不继承R1多5轮。",
+      "remaining": "必须锁定新准入、训练失败/停止和恢复规则；旧RS未放行。"
+    },
+    "validation": {
+      "status": "open",
+      "evidence": "R1旧10%门槛和失败不改；区分与同期对照比较、与原源比较、实际末轮与epoch0回退。",
+      "remaining": "新研究对照准入和因果结论范围需要完整预注册；不能把相对坏对照改善当作修复。"
+    },
+    "data": {
+      "status": "pass_for_scope",
+      "evidence": "沿用已核对原身份、数据与标签，修订不增加数据集。",
+      "remaining": "独立留出及raw/scaler覆盖缺口保留。"
+    },
+    "engineering": {
+      "status": "open",
+      "evidence": "旧损失组件存在；8任务/240轮/9120更新上限和剩余会话预算不变。",
+      "remaining": "完整RS入口未实现，暂无开跑命令；不得运行旧代码冒充修订实验。"
+    }
+  }
+}

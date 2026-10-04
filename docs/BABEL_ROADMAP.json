@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-04",
-  "current_iteration": "V07-code",
-  "current_iteration_scope": "Frozen eight-cross entrypoint ready; real CUDA pending; R1 failed and RS held",
+  "current_iteration": "V07-report-review",
+  "current_iteration_scope": "Eight frozen crosses reviewed; interface sensitivity supported, information loss unresolved; next V04/V05 protocol revision only, old RS held",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -139,7 +139,7 @@
         "V02",
         "V14"
       ],
-      "next_action": "收束本五轮配方，不补轮或扫第三LR；转V07零更新定位，V04/V05等待"
+      "next_action": "本五轮配方收束且V07零更新已复核；不补轮或扫第三LR，下一步修订V04/V05协议"
     },
     {
       "id": "V04",
@@ -153,12 +153,13 @@
       "conclusion": "额外17+监督不对称，但不是已证实根因",
       "evidence": [
         "docs/BABEL_RECOVERY_PLAN.md",
-        "src/obson/babel/recovery_objectives.py"
+        "src/obson/babel/recovery_objectives.py",
+        "docs/BABEL_RECOVERY_RS_REVISION.md"
       ],
       "depends_on": [
         "V03"
       ],
-      "next_action": "同起点2×2中独立开关结构项；报告近端收益和远端代价"
+      "next_action": "依据V03/V07证据修订受控比较准入与解释边界；旧RS继续等待，不自动开跑"
     },
     {
       "id": "V05",
@@ -172,13 +173,14 @@
       "conclusion": "原detached局部头不保护编码器；主查询仍有近期监督",
       "evidence": [
         "docs/BABEL_RECOVERY_PLAN.md",
-        "src/obson/babel/recovery_objectives.py"
+        "src/obson/babel/recovery_objectives.py",
+        "docs/BABEL_RECOVERY_RS_REVISION.md"
       ],
       "depends_on": [
         "V03",
         "V14"
       ],
-      "next_action": "与V04共用四组；源局部头先取得资格，冻结头参数后只改变回传"
+      "next_action": "依据V03/V07证据修订受控比较准入与解释边界；旧RS继续等待，不自动开跑"
     },
     {
       "id": "V06",
@@ -206,16 +208,17 @@
         "S6"
       ],
       "implementation": "零更新八组合入口及14项新增合成测试完成",
-      "execution": "真实CUDA未运行",
-      "conclusion": "R1编码器与query均更新；当前不能归因信息丢失或读头变化",
+      "execution": "真实八组合完成，零更新；96原/末轮值复现，报告已复核",
+      "conclusion": "配套新组合通常优于混合，但未恢复源能力；信息是否丢失仍未识别",
       "evidence": [
         "docs/BABEL_MACRO_HISTORY768_REVIEW.md",
         "docs/BABEL_RECOVERY_R1_REVIEW.md",
         "docs/BABEL_RECOVERY_INTERFACE_PLAN.md",
-        "docs/BABEL_RECOVERY_INTERFACE_VALIDATION.json"
+        "docs/BABEL_RECOVERY_INTERFACE_VALIDATION.json",
+        "docs/BABEL_RECOVERY_INTERFACE_REVIEW.md"
       ],
       "depends_on": [],
-      "next_action": "AutoDL运行八组合；先复放原/末轮96值，再复核模块替换敏感性，不自动训练或升级"
+      "next_action": "收束本零更新诊断；等预算读头拟合暂缓，回到V04/V05协议修订"
     },
     {
       "id": "V08",
@@ -523,10 +526,11 @@
   ],
   "active_order": [
     [
-      "V07"
+      "V04",
+      "V05"
     ]
   ],
-  "next_after_active": "Review V07 diagnostic before defining a defensible next training comparison; no automatic RS or third LR",
+  "next_after_active": "Lock prospective RS revision and implement only after explicit protocol disposition; original R1 failed, no automatic launch",
   "active_training_budget": {
     "source": "docs/BABEL_RECOVERY_PLAN.json",
     "jobs_max": 10,
@@ -540,19 +544,24 @@
       "jobs": 2,
       "worker_epochs": 10,
       "optimizer_updates": 380,
-      "session_seconds": 524.1648489544168
+      "session_seconds": 758.652147969231,
+      "session_breakdown": {
+        "R1": 524.1648489544168,
+        "V07": 234.4872990148142
+      }
     },
     "remaining_unexecuted": {
       "jobs": 8,
       "worker_epochs": 240,
       "optimizer_updates": 9120,
-      "session_seconds": 35475.83515104558,
+      "session_seconds": 35241.34785203077,
       "authorization": "Held; not automatic release"
     },
     "completed_entrypoints": [
       "V03"
     ],
-    "ready_zero_update_stages": [
+    "ready_zero_update_stages": [],
+    "completed_zero_update_stages": [
       "V07"
     ]
   },
@@ -601,5 +610,6 @@
   ],
   "blocked_followups": {
     "V04_V05": "R1 both-seed retention prerequisite failed; retained, not cancelled"
-  }
+  },
+  "active_phase": "protocol_revision_only_not_GPU_execution"
 }
