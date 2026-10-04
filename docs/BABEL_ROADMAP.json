@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-04",
-  "current_iteration": "V03-report-review",
-  "current_iteration_scope": "R1 completed but retention gate failed; stop LR recipe, hold RS; V07 zero-update crossed readout plan next",
+  "current_iteration": "V07-code",
+  "current_iteration_scope": "Frozen eight-cross entrypoint ready; real CUDA pending; R1 failed and RS held",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -205,16 +205,17 @@
       "legacy_ids": [
         "S6"
       ],
-      "implementation": "零更新交叉回读计划已锁，入口未实现",
-      "execution": "由R1结构保护失败触发；诊断未运行",
+      "implementation": "零更新八组合入口及14项新增合成测试完成",
+      "execution": "真实CUDA未运行",
       "conclusion": "R1编码器与query均更新；当前不能归因信息丢失或读头变化",
       "evidence": [
         "docs/BABEL_MACRO_HISTORY768_REVIEW.md",
         "docs/BABEL_RECOVERY_R1_REVIEW.md",
-        "docs/BABEL_RECOVERY_INTERFACE_PLAN.md"
+        "docs/BABEL_RECOVERY_INTERFACE_PLAN.md",
+        "docs/BABEL_RECOVERY_INTERFACE_VALIDATION.json"
       ],
       "depends_on": [],
-      "next_action": "先做两种子E0/E5×D0/D5八组合零更新回读；必要时再锁等预算读头验证"
+      "next_action": "AutoDL运行八组合；先复放原/末轮96值，再复核模块替换敏感性，不自动训练或升级"
     },
     {
       "id": "V08",
@@ -550,6 +551,9 @@
     },
     "completed_entrypoints": [
       "V03"
+    ],
+    "ready_zero_update_stages": [
+      "V07"
     ]
   },
   "aliases": {
@@ -593,7 +597,7 @@
   "progress_log": "docs/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "current_task_ids": [
-    "V03"
+    "V07"
   ],
   "blocked_followups": {
     "V04_V05": "R1 both-seed retention prerequisite failed; retained, not cancelled"

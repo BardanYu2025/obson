@@ -1,6 +1,6 @@
 {
   "date": "2026-10-04",
-  "status": "R1_completed_retention_gate_failed_RS_held_V07_zero_update_next",
+  "status": "V07_zero_update_entrypoint_ready_CUDA_pending_R1_failed_RS_held",
   "scope_warning": "Counts are the bounded response to confirmed issues, not a claim that all historical experiments are valid or that undiscovered defects cannot change the plan.",
   "coverage": {
     "report_archives": 61,
@@ -1374,10 +1374,14 @@
   "next_zero_update_plan": {
     "task_id": "V07",
     "document": "docs/BABEL_RECOVERY_INTERFACE_PLAN.md",
-    "implementation_ready": false,
+    "implementation_ready": true,
     "training_jobs": 0,
     "optimizer_updates": 0,
     "planned_seconds_cap": 1800,
-    "deduct_from_existing_budget": true
+    "deduct_from_existing_budget": true,
+    "module": "obson.babel.recovery_interface",
+    "script": "scripts/babel_recovery_interface_autodl.sh",
+    "validation": "docs/BABEL_RECOVERY_INTERFACE_VALIDATION.json",
+    "real_cuda_executed": false
   }
 }

@@ -80,7 +80,9 @@
       "evidence": "docs/BABEL_MACRO_HISTORY768_REVIEW.md",
       "fact": "Old-reader drift is not information loss",
       "decision_effect": "Preserve interface findings, no added-memory interpretation",
-      "plan": "docs/BABEL_RECOVERY_INTERFACE_PLAN.md"
+      "plan": "docs/BABEL_RECOVERY_INTERFACE_PLAN.md",
+      "implementation": "V07 frozen eight-cross runner and14 synthetic tests ready; CUDA pending",
+      "validation": "docs/BABEL_RECOVERY_INTERFACE_VALIDATION.json"
     },
     {
       "id": "T1",
