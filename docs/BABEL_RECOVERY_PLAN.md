@@ -1,5 +1,7 @@
 # Babel补证计划：先稳定适配，再逐项检验结构因素
 
+当前统一入口：[Babel总计划与固定编号](BABEL_ROADMAP.md)。每次写代码先声明任务编号，每次tar复核更新结论/计划，完成代码或计划按[六方面规则](BABEL_EXPERIMENT_WORKFLOW.md)复查并记入进度日志。本页原实验协议/证据保留；历史“下一步”建议不覆盖总计划的当前队列。
+
 2026-10-04修订。执行依据为[BABEL_ISSUE_CLOSURE.md](BABEL_ISSUE_CLOSURE.md)逐项台账。**上一版遗漏S1远端额外损失与S2局部梯度路由的直接对照，不能称完备；本版替代它的执行队列。** 历史版本保存在Git和JSON的`superseded_context_schedule`，不抹掉原承诺或原实验结果。
 
 ## 范围、现状和主线

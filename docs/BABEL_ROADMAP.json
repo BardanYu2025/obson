@@ -1,0 +1,575 @@
+{
+  "schema": "babel-roadmap-v1",
+  "updated": "2026-10-04",
+  "current_iteration": "P00",
+  "current_iteration_scope": "Consolidate requirements, repair/validation tasks, retained future hypotheses and mandatory per-delivery review; no new model or GPU run",
+  "current_reference": {
+    "model": "Macro control",
+    "seeds": [
+      42,
+      43
+    ],
+    "selected_epochs": [
+      97,
+      94
+    ],
+    "width": 768,
+    "layers": 4,
+    "heads": 8,
+    "claim": "Research reference only, not globally optimal or fully accepted"
+  },
+  "requirements": [
+    {
+      "id": "N01",
+      "title": "每根已收盘bar的因果状态",
+      "requirement": "状态只能使用截至该bar收盘的已知行情；历史标签不倒灌输入，未来行情只用于独立预测任务的训练标签/评分。",
+      "acceptance": "未来扰动/截断不改已有状态，训练后权重也要检查。",
+      "status": "ongoing_contract_not_blanket_accepted"
+    },
+    {
+      "id": "N02",
+      "title": "行情信息压缩，而非拟合几条规则",
+      "requirement": "价格路径、局部形态和有用成交/持仓活动应易于读取；允许有损压缩，不要求100%还原所有影线。",
+      "acceptance": "分开当前字段、近中远历史、活动、困难样本和冻结用途；图形像不像不作唯一验收。",
+      "status": "ongoing_contract_not_blanket_accepted"
+    },
+    {
+      "id": "N03",
+      "title": "bar状态与序列状态的关系明确",
+      "requirement": "声明每个状态的可见历史与预热；当前研究的滚动128末端状态可作该窗口seq表示，单次128前向的早期状态不能冒称同样有128历史。",
+      "acceptance": "同物理端点/上下文评价；短前缀冷启动、完整滚动与长期记忆分开。",
+      "status": "ongoing_contract_not_blanket_accepted"
+    },
+    {
+      "id": "N04",
+      "title": "价格与数据处理可追溯",
+      "requirement": "以真实合约和周期处理，不偷偷拼连续主力；价格锚点/尺度、EMA预热、缺失活动、分区跨度及train-only统计明确。",
+      "acceptance": "每轮协议绑定原始数据和统计来源；数据窗口/标签和缓存核对；没有独立复算的部分注明。",
+      "status": "ongoing_contract_not_blanket_accepted"
+    },
+    {
+      "id": "N05",
+      "title": "状态可复用，可支持分类/趋势/波动等用途",
+      "requirement": "冻结embedding后验证用途，配同信息原始输入、PCA、当前特征和简单指标基线；不把重训主模型拟合评价规则当语义学习。",
+      "acceptance": "同权重、同读取机会及事前门槛；历史状态描述不等于未来收益或开仓建议。",
+      "status": "ongoing_contract_not_blanket_accepted"
+    },
+    {
+      "id": "N06",
+      "title": "保留未来逐bar外推方向",
+      "requirement": "真实新bar刷新后的一步预测与没有新行情的自由递推分开；预测z129目标为E(2..129)，不是E(2..128)。",
+      "acceptance": "状态相似度与新增价格增益分别评价；按步长给误差/基线skill/可用范围，不用未来重置或重新锚定。",
+      "status": "ongoing_contract_not_blanket_accepted"
+    },
+    {
+      "id": "N07",
+      "title": "研究必须可归因、可证伪并逐步收敛",
+      "requirement": "固定来源、对照、预算、目标、选择和停止条件；失败配方不无限加轮数，不将保留研究模型称全局最优。",
+      "acceptance": "每轮只回答编号问题，记录有限结论、取舍和停止决定；最终独立留出另验。",
+      "status": "ongoing_contract_not_blanket_accepted"
+    },
+    {
+      "id": "N08",
+      "title": "高效、可恢复的AutoDL交付",
+      "requirement": "本地只做合成测试/CPU数据与报告核验；真实模型在AutoDL；features/babel准备推送；成功失败均导出到/root/autodl-tmp/download。",
+      "acceptance": "可运行时一次给完整启动/恢复/导出命令；同批必要对照，资源预算明确，不删除来源来过预检。",
+      "status": "ongoing_contract_not_blanket_accepted"
+    },
+    {
+      "id": "N09",
+      "title": "每轮更新计划并按六方面复查",
+      "requirement": "写代码前声明编号；每个tar识别、复核、更新结论和队列；完成代码/计划都复查目标、架构、损失训练、验证及数据工程。",
+      "acceptance": "持久项目规则、逐项台账和追加事件；不把未验证标完成，不丢旧假设。",
+      "status": "ongoing_contract_not_blanket_accepted"
+    }
+  ],
+  "repair_tasks": [
+    {
+      "id": "V01",
+      "title": "修复R0复放运行口径",
+      "legacy_ids": [
+        "E1"
+      ],
+      "implementation": "已完成修复",
+      "execution": "真实CUDA报告已复核",
+      "conclusion": "140个原验证值一致；只关闭复放问题",
+      "evidence": [
+        "docs/BABEL_RECOVERY_R0_REVIEW.md"
+      ],
+      "depends_on": [],
+      "next_action": "复用已验证结果；不因此宣布结构目标合理"
+    },
+    {
+      "id": "V02",
+      "title": "核对实际联合梯度与分项梯度",
+      "legacy_ids": [
+        "E2"
+      ],
+      "implementation": "待实现完整诊断",
+      "execution": "未运行新CUDA诊断",
+      "conclusion": "最高约0.1084%的范数分解差异原因未定",
+      "evidence": [
+        "docs/BABEL_ISSUE_CLOSURE.md"
+      ],
+      "depends_on": [
+        "V01"
+      ],
+      "next_action": "同参数顺序导出向量/残差；零更新，原门槛失败则留证停止"
+    },
+    {
+      "id": "V03",
+      "title": "学习率单因素稳定性筛查",
+      "legacy_ids": [
+        "T1",
+        "R1"
+      ],
+      "implementation": "完整训练入口未完成",
+      "execution": "未运行",
+      "conclusion": "高LR是否造成损伤尚未确认",
+      "evidence": [
+        "docs/BABEL_RECOVERY_PLAN.md"
+      ],
+      "depends_on": [
+        "V02",
+        "V14"
+      ],
+      "next_action": "两个种子各5轮低LR；原24项保护；不把epoch0回退当通过"
+    },
+    {
+      "id": "V04",
+      "title": "检验远端额外结构项的作用",
+      "legacy_ids": [
+        "S1",
+        "RS"
+      ],
+      "implementation": "四组损失组件和合成测试完成",
+      "execution": "未运行",
+      "conclusion": "额外17+监督不对称，但不是已证实根因",
+      "evidence": [
+        "docs/BABEL_RECOVERY_PLAN.md",
+        "src/obson/babel/recovery_objectives.py"
+      ],
+      "depends_on": [
+        "V03"
+      ],
+      "next_action": "同起点2×2中独立开关结构项；报告近端收益和远端代价"
+    },
+    {
+      "id": "V05",
+      "title": "检验局部监督回传编码器",
+      "legacy_ids": [
+        "S2",
+        "RS"
+      ],
+      "implementation": "梯度开关和合成测试完成",
+      "execution": "未运行",
+      "conclusion": "原detached局部头不保护编码器；主查询仍有近期监督",
+      "evidence": [
+        "docs/BABEL_RECOVERY_PLAN.md",
+        "src/obson/babel/recovery_objectives.py"
+      ],
+      "depends_on": [
+        "V03",
+        "V14"
+      ],
+      "next_action": "与V04共用四组；源局部头先取得资格，冻结头参数后只改变回传"
+    },
+    {
+      "id": "V06",
+      "title": "拆开上下文策略与目标扩展",
+      "legacy_ids": [
+        "S3",
+        "R2"
+      ],
+      "implementation": "原三组方案保留，暂缓实现",
+      "execution": "未运行受控补证",
+      "conclusion": "原whole-recipe结果保留；输入长度单因素未证实",
+      "evidence": [
+        "docs/BABEL_RECOVERY_PLAN.md"
+      ],
+      "depends_on": [
+        "V04",
+        "V05"
+      ],
+      "next_action": "先依据RS结果决定适配基线；A/B共标签，C扩标签仍含段权重变化"
+    },
+    {
+      "id": "V07",
+      "title": "分清解码接口漂移与状态信息缺失",
+      "legacy_ids": [
+        "S6"
+      ],
+      "implementation": "同目标等预算读出方案待条件触发",
+      "execution": "本次补证未运行",
+      "conclusion": "固定头变差不证明信息消失",
+      "evidence": [
+        "docs/BABEL_MACRO_HISTORY768_REVIEW.md"
+      ],
+      "depends_on": [],
+      "next_action": "候选出现相关歧义时，固定新旧编码器进行同目标读取比较；不自动新增头矩阵"
+    },
+    {
+      "id": "V08",
+      "title": "位置密度/权重比较范围纠正",
+      "legacy_ids": [
+        "S4",
+        "H1",
+        "H2"
+      ],
+      "implementation": "已有dense_matched对照已核实",
+      "execution": "旧实验已完成",
+      "conclusion": "小幅收益不达原门槛；dense_all有取舍；不是从头完整历史结论",
+      "evidence": [
+        "docs/BABEL_POSITION_SUPERVISION768_REVIEW.md"
+      ],
+      "depends_on": [],
+      "next_action": "保留旧结论，不重复原矩阵；从头全位置转F01"
+    },
+    {
+      "id": "V09",
+      "title": "共同历史查询语义的准入漏洞",
+      "legacy_ids": [
+        "S5"
+      ],
+      "implementation": "内容绑定/错查询/无旁路检查已有实现",
+      "execution": "旧Grounded资格已执行且阻断联合训练",
+      "conclusion": "不能仅以一致性距离证明所问区间语义；尚无合格新候选",
+      "evidence": [
+        "docs/BABEL_SHARED_HISTORY_DESIGN_AUDIT.md",
+        "docs/BABEL_GROUNDED_HISTORY768_REVIEW.md",
+        "docs/BABEL_GROUNDED_READOUT768_REVIEW.md"
+      ],
+      "depends_on": [],
+      "next_action": "复用已做证据；F04重开必须证明相对旧失败方案的新变量"
+    },
+    {
+      "id": "V10",
+      "title": "深度与预算比较范围纠正",
+      "legacy_ids": [
+        "B1"
+      ],
+      "implementation": "解释已纠正",
+      "execution": "原实验已完成",
+      "conclusion": "同曝光加深收益与浅层追加预算分开；非四层全局最优",
+      "evidence": [
+        "docs/BABEL_DEPTH768_REVIEW.md"
+      ],
+      "depends_on": [],
+      "next_action": "保留两种预算轴；未来容量问题归F05"
+    },
+    {
+      "id": "V11",
+      "title": "汇聚架构与续训/目标变化分开",
+      "legacy_ids": [
+        "B2"
+      ],
+      "implementation": "解释已纠正",
+      "execution": "原实验已完成",
+      "conclusion": "只以同轮plain/full/scale归因于pool配方",
+      "evidence": [
+        "docs/BABEL_CAUSAL_POOL768_REVIEW.md"
+      ],
+      "depends_on": [],
+      "next_action": "不重复pool矩阵；当前结构目标由V04检验"
+    },
+    {
+      "id": "V12",
+      "title": "活动损失、活动输入与可读性分开",
+      "legacy_ids": [
+        "A1"
+      ],
+      "implementation": "解释已纠正",
+      "execution": "原调权实验已完成",
+      "conclusion": "价格/活动取舍成立，不说明输入无用或状态信息完全消失",
+      "evidence": [
+        "docs/BABEL_ACTIVITY_WEIGHT768_REVIEW.md"
+      ],
+      "depends_on": [],
+      "next_action": "保留活动分项；必要输入消融与读取验证需独立锁协议"
+    },
+    {
+      "id": "V13",
+      "title": "独立验收与反复使用研究集分开",
+      "legacy_ids": [
+        "E3"
+      ],
+      "implementation": "已有时间确认入口，需按届时来源重锁",
+      "execution": "旧快照无新历史；未做最终独立验收",
+      "conclusion": "现有研究证据不等于最终独立泛化确认",
+      "evidence": [
+        "docs/BABEL_TIME_CONFIRMATION_REVIEW.md",
+        "docs/BABEL_RECONSTRUCTION_EXIT.md"
+      ],
+      "depends_on": [],
+      "next_action": "方案冻结且有未参与设计的数据时再验；不为补几天数据阻塞当前研究"
+    },
+    {
+      "id": "V14",
+      "title": "新入口的数据、源头与恢复资格",
+      "legacy_ids": [
+        "new_entrypoint_qualification"
+      ],
+      "implementation": "需整合入新入口",
+      "execution": "R0已覆盖部分；新入口未验",
+      "conclusion": "补证覆盖缺口不是新发现数据错误；源scaler拟合等未全量独立重做",
+      "evidence": [
+        "docs/BABEL_RECOVERY_R0_REVIEW.md",
+        "docs/BABEL_RECOVERY_PLAN.md"
+      ],
+      "depends_on": [
+        "V01"
+      ],
+      "next_action": "V03核对原采样/目标/后端；V05另核对旧局部头、train均值资格、真实目标舍入；按依赖补缺证据"
+    }
+  ],
+  "future_branches": [
+    {
+      "id": "F01",
+      "title": "从头全位置监督与相同完整历史职责",
+      "legacy_ids": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "consider_after": [
+        "V06",
+        "V08"
+      ],
+      "status": "保留待设计；旧位置续训及五位置从头rolling已做，未检验从头全128同时等权",
+      "reentry_or_acceptance": "在匹配起点/预算下区分密度、位置权重和完整历史；不能把旧warm-start失败当否定证据；1～128指bar位置而非向量维度，完整上下文方案的首个受监督位置需额外已知历史，历史不足显式mask",
+      "evidence": [
+        "docs/BABEL_STATE_ROLLOUT768_PLAN.md",
+        "docs/BABEL_POSITION_SUPERVISION768_REVIEW.md",
+        "docs/BABEL_UNIFORM_CONTEXT768_REVIEW.md"
+      ]
+    },
+    {
+      "id": "F02",
+      "title": "可变历史、长短状态与在线记忆",
+      "legacy_ids": [],
+      "consider_after": [
+        "V04",
+        "V05"
+      ],
+      "status": "保留；早期memory/stream/双状态已有工作，当前768不是无限历史已验收",
+      "reentry_or_acceptance": "先定义上下文/资源预算和状态重置，配同信息滚动基线；检查历史增长与近端保护，避免拼接维数红利；短状态作为偏置、残差注意力等保留为候选机制，需与已有融合/记忆实验区分后才立项",
+      "evidence": [
+        "docs/BABEL_MEMORY.md",
+        "docs/BABEL_MEMORY_ATTENTION.md",
+        "docs/BABEL_DUAL_STATE.md",
+        "docs/BABEL_STREAMING.md"
+      ]
+    },
+    {
+      "id": "F03",
+      "title": "重叠窗口共同历史与逐bar状态增量",
+      "legacy_ids": [],
+      "consider_after": [
+        "V04",
+        "V05"
+      ],
+      "status": "保留既有重叠稳定性收益；未证明相邻状态差等同新增行情语义",
+      "reentry_or_acceptance": "先比同一物理共同内容及新旧信息进入/退出；相似度、距离单调、整个向量强制相等均不作为语义判据",
+      "evidence": [
+        "docs/BABEL_OVERLAP768_REVIEW.md",
+        "docs/BABEL_CONSISTENCY_READOUT768_REVIEW.md",
+        "docs/BABEL_NEXT_CORE_REASONING.md"
+      ]
+    },
+    {
+      "id": "F04",
+      "title": "15/30/60跨分辨率共同内容",
+      "legacy_ids": [
+        "S5"
+      ],
+      "consider_after": [
+        "V09"
+      ],
+      "status": "保留方向；旧跨周期与自由辅助配方已收束，不自动复跑",
+      "reentry_or_acceptance": "对齐同一合约/真实区间的可核验宏观内容，不强迫不同覆盖范围的完整embedding相同；复用查询语义准入",
+      "evidence": [
+        "docs/BABEL_CROSS_PERIOD_AUDIT_REVIEW.md",
+        "docs/BABEL_CROSS_PERIOD768_REVIEW.md",
+        "docs/BABEL_GROUNDED_HISTORY768_REVIEW.md"
+      ]
+    },
+    {
+      "id": "F05",
+      "title": "宽度、层数、头数与信息组织",
+      "legacy_ids": [],
+      "consider_after": [
+        "V04",
+        "V05",
+        "V10"
+      ],
+      "status": "保留；已有2→4层和8/12层证据，不是从未扩容",
+      "reentry_or_acceptance": "基线可靠后固定问题，分别控制深度/宽度/头数/训练预算；不拿短训深层与长训浅层作单因素结论",
+      "evidence": [
+        "docs/BABEL_GROWTH768_REVIEW.md",
+        "docs/BABEL_DEPTH768_REVIEW.md"
+      ]
+    },
+    {
+      "id": "F06",
+      "title": "接收真实新bar后刷新状态，再做下一步预测",
+      "legacy_ids": [],
+      "consider_after": [],
+      "status": "条件性未来分支，独立于无新数据自由运行",
+      "reentry_or_acceptance": "先固定通过资格的表示版本与预测用途；每步只用当时已知真实bar刷新，明确下一步目标和简单基线",
+      "evidence": [
+        "docs/BABEL_STATE_ROLLOUT768_PLAN.md"
+      ]
+    },
+    {
+      "id": "F07",
+      "title": "无新行情的未来状态自由自回归",
+      "legacy_ids": [
+        "H4"
+      ],
+      "consider_after": [],
+      "status": "原确定性20组已完成且无价格优势；收束旧配方，保留新证据触发重开",
+      "reentry_or_acceptance": "仅当来源/问题有实质新证据重新立项；z129对E(2..129)，分开状态拟合与新增价格，逐h报告1..32误差和有效范围",
+      "evidence": [
+        "docs/BABEL_STATE_ROLLOUT768_PLAN.md",
+        "docs/BABEL_STATE_ROLLOUT768_REVIEW.md"
+      ]
+    },
+    {
+      "id": "F08",
+      "title": "预测目标联合更新编码器",
+      "legacy_ids": [
+        "H5"
+      ],
+      "consider_after": [
+        "F06",
+        "F07"
+      ],
+      "status": "条件分支，尚未满足原触发证据，不是两分支都必须重跑",
+      "reentry_or_acceptance": "原始输入预测胜而状态预测败等定位证据成立时再设计；同时保护历史价量信息，不能仅因冻结预测失败就联合重训",
+      "evidence": [
+        "docs/BABEL_STATE_ROLLOUT768_PLAN.md",
+        "docs/BABEL_STATE_ROLLOUT768_REVIEW.md"
+      ],
+      "trigger_mode": "Any qualifying localization evidence from F06 or F07; does not require running both again"
+    },
+    {
+      "id": "F09",
+      "title": "趋势/残差分解与概率未来、短期噪声",
+      "legacy_ids": [],
+      "consider_after": [],
+      "status": "保留有条件研究想法，不是已锁训练矩阵",
+      "reentry_or_acceptance": "确定性局限有证据且用途需要分布时，另锁校准/覆盖/概率评分及简单随机基线；不能人为加噪让图像真行情就算预测提升",
+      "evidence": [
+        "docs/BABEL_STATE_ROLLOUT768_PLAN.md",
+        "docs/BABEL_RESIDUAL_FUSION.md"
+      ]
+    },
+    {
+      "id": "F10",
+      "title": "价量/持仓联合状态与更细交易行为",
+      "legacy_ids": [],
+      "consider_after": [
+        "V12"
+      ],
+      "status": "联合信息保留是需求；具体订单流机制需更细数据",
+      "reentry_or_acceptance": "没有逐笔/盘口及可靠开平标识时，只称价量/持仓活动，不给潜在分支虚构主动买卖或开平仓含义",
+      "evidence": [
+        "docs/BABEL_ACTIVITY_ABLATION.md",
+        "docs/BABEL_ACTIVITY_ALIGNMENT.md"
+      ]
+    },
+    {
+      "id": "F11",
+      "title": "冻结用途、重建阶段退出与可用模型交付",
+      "legacy_ids": [],
+      "consider_after": [
+        "V04",
+        "V05"
+      ],
+      "status": "已有有限原型及用途证据；通用用途完整验收未过",
+      "reentry_or_acceptance": "锁同一权重做当前字段/方向/波动/结构和强基线比较；达到用途条件即停止追零误差；若未过则限定预算收束而非宣布胜利，独立确认归V13",
+      "evidence": [
+        "docs/BABEL_RECONSTRUCTION_EXIT.md",
+        "docs/BABEL_UTILITY768_REVIEW.md",
+        "docs/BABEL_VOLATILITY_TRANSFER768_REVIEW.md"
+      ]
+    },
+    {
+      "id": "F12",
+      "title": "指标上下文、PCA教师、渐进监督和影线保真",
+      "legacy_ids": [],
+      "consider_after": [],
+      "status": "保留原始想法；EMA/PCA/影线等旧有限配方已有实验，非默认下一项",
+      "reentry_or_acceptance": "必须先说明新机制与已失败/收束方案差别；所有教师/指标须因果，完整窗口教师不能泄露给早期bar，权重改变须分项验收",
+      "evidence": [
+        "docs/BABEL_EMA_ABLATION.md",
+        "docs/BABEL_PCA_TEACHER_REVIEW.md",
+        "docs/BABEL_PCA_ANNEAL_REVIEW.md",
+        "docs/BABEL_WICK_ABLATION.md"
+      ]
+    }
+  ],
+  "active_order": [
+    [
+      "V02",
+      "V14"
+    ],
+    [
+      "V03"
+    ],
+    [
+      "V04",
+      "V05"
+    ]
+  ],
+  "next_after_active": "Review actual results before deciding V06 or V07; future branches are conditional, not an automatic training queue",
+  "active_training_budget": {
+    "source": "docs/BABEL_RECOVERY_PLAN.json",
+    "jobs_max": 10,
+    "worker_epochs_max": 250,
+    "optimizer_updates_max": 9500,
+    "gpu_session_hours_cap": 10,
+    "entrypoints_ready": false,
+    "future_branches_included": false
+  },
+  "aliases": {
+    "R0": [
+      "V01",
+      "V02",
+      "V14"
+    ],
+    "R1": [
+      "V03"
+    ],
+    "RS": [
+      "V04",
+      "V05"
+    ],
+    "R2": [
+      "V06"
+    ],
+    "H1": [
+      "V08",
+      "F01"
+    ],
+    "H2": [
+      "V08",
+      "F01"
+    ],
+    "H3": [
+      "V06",
+      "F01"
+    ],
+    "H4": [
+      "F07"
+    ],
+    "H5": [
+      "F08"
+    ]
+  },
+  "retired_recipe_note": "Historical AR reconstruction at512 was tried; it is not future rollout. EMA/PCA/wick/readout/grid failures stay on record; retained direction does not reopen a closed recipe.",
+  "historical_ar_evidence": "docs/BABEL_AR_RECONSTRUCTION.md",
+  "workflow": "docs/BABEL_EXPERIMENT_WORKFLOW.md",
+  "progress_log": "docs/BABEL_PROGRESS_LOG.jsonl",
+  "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten."
+}
