@@ -1,6 +1,6 @@
 {
   "date": "2026-10-04",
-  "status": "r0_implemented_real_audit_pending_no_new_training",
+  "status": "r0_runtime_parity_fix_implemented_real_recheck_pending_no_new_training",
   "scope_warning": "Counts are the bounded response to confirmed issues, not a claim that all historical experiments are valid or that undiscovered defects cannot change the plan.",
   "coverage": {
     "report_archives": 61,
@@ -131,7 +131,10 @@
         "real_audit_executed": false,
         "success_status": "audit_complete_requires_review",
         "automatic_R1": false,
-        "independent_scaler_fit_reproduction": false
+        "independent_scaler_fit_reproduction": false,
+        "schema": "babel-recovery-r0-v2",
+        "prior_run": "User reported Context replay mismatch; raw and original Macro stages passed; report archive not yet independently reviewed",
+        "fix": "Restore historical per-stage MHA/TF32/thread policies; keep existing tolerances"
       }
     },
     {

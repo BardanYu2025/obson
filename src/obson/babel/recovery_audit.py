@@ -9,6 +9,7 @@ import gc
 import math
 import time
 import traceback
+from contextlib import contextmanager
 from pathlib import Path
 
 import numpy as np
@@ -23,7 +24,7 @@ from .dual_state import sha256
 from .holdout_audit import read_json
 from .progress import progress
 
-SCHEMA = "babel-recovery-r0-v1"
+SCHEMA = "babel-recovery-r0-v2"
 # Pinned to the already reviewed user-supplied Context report, not a mutable latest run.
 SOURCE_MANIFEST = "fb108cf33be08126a6c761800be93e9efbdf4e8bdaa3c0254b0974ecfc2a00a2"
 SOURCE_COMPLETION = "136e0dce63581038bd0bd152bf755c16c9e36c82a948d34d5d44a0b1a17857b5"
@@ -31,6 +32,59 @@ SOURCE_COMPLETION = "136e0dce63581038bd0bd152bf755c16c9e36c82a948d34d5d44a0b1a17
 ATOL, RTOL = 1e-6, 2e-5
 TARGET_ATOL = 1e-5  # Prior independent raw-vs-float32 target pipeline contract.
 STATE_ATOL, STATE_RTOL = 1e-4, 2e-4  # Existing Context preflight contract.
+
+
+# Historical entry points set different MHA policies. Importing their validation
+# functions does not execute main(); a replay must restore each policy explicitly.
+RUNTIME_PROFILES = {
+    "macro_shared": {
+        "mha_fastpath": True,
+        "matmul_tf32": False,
+        "cudnn_tf32": False,
+        "cudnn_benchmark": False,
+        "threads": 4,
+    },
+    "context": {
+        "mha_fastpath": False,
+        "matmul_tf32": False,
+        "cudnn_tf32": False,
+        "cudnn_benchmark": False,
+        "threads": 4,
+    },
+}
+
+
+def runtime_state():
+    return {
+        "mha_fastpath": torch.backends.mha.get_fastpath_enabled(),
+        "matmul_tf32": torch.backends.cuda.matmul.allow_tf32,
+        "cudnn_tf32": torch.backends.cudnn.allow_tf32,
+        "cudnn_benchmark": torch.backends.cudnn.benchmark,
+        "threads": torch.get_num_threads(),
+    }
+
+
+def apply_runtime(policy):
+    torch.backends.mha.set_fastpath_enabled(policy["mha_fastpath"])
+    torch.backends.cuda.matmul.allow_tf32 = policy["matmul_tf32"]
+    torch.backends.cudnn.allow_tf32 = policy["cudnn_tf32"]
+    torch.backends.cudnn.benchmark = policy["cudnn_benchmark"]
+    torch.set_num_threads(policy["threads"])
+
+
+@contextmanager
+def replay_runtime(profile):
+    """Scoped policy, including restoration on a failed replay; no tolerance change."""
+    policy = RUNTIME_PROFILES[profile]
+    before = runtime_state()
+    try:
+        apply_runtime(policy)
+        actual = runtime_state()
+        if actual != policy:
+            raise ValueError(f"Unable to restore historical runtime: {profile}: {actual}")
+        yield {"profile": profile, "effective": actual}
+    finally:
+        apply_runtime(before)
 
 
 def compare(actual, expected, atol=ATOL, rtol=RTOL):
@@ -492,6 +546,12 @@ def checkpoint_report(ck, path):
 
 
 def neural_replay(source, meta, mm, sm, stats, out, device="cuda"):
+    # Default process settings and test fixtures must not determine replay numerics.
+    with replay_runtime("context"):
+        return _neural_replay(source, meta, mm, sm, stats, out, device)
+
+
+def _neural_replay(source, meta, mm, sm, stats, out, device):
     macro = Path(meta["task_source"]["source"])
     shared = Path(mm["task_source"]["source"])
     train, _ = previous.data.cache(source, "train")
@@ -505,11 +565,13 @@ def neural_replay(source, meta, mm, sm, stats, out, device="cuda"):
         item = meta["task_source"]["chosen"][str(seed)]
         path = macro / item["path"]
         ck = torch.load(path, map_location="cpu", weights_only=True)
-        actual = previous.parent.base.validation(mm, model, query, device)
+        with replay_runtime("macro_shared") as original_runtime:
+            actual = previous.parent.base.validation(mm, model, query, device)
         save_checks(
             out,
             f"macro_s{seed}_original",
             nested_compare(actual, ck["validation"]),
+            runtime=original_runtime,
             actual=actual,
             expected=ck["validation"],
         )
@@ -520,12 +582,16 @@ def neural_replay(source, meta, mm, sm, stats, out, device="cuda"):
         recorded = read_json(source / f"prefix_s{seed}/completion.json")
         if before != (recorded["initial_encoder_hash"], recorded["initial_query_hash"]):
             raise ValueError("Old high-LR reference initialization differs")
+        # Match Context.construct as well as its main() backend policy.
+        encoder.eval().requires_grad_(True)
+        query.eval().requires_grad_(True)
         with torch.no_grad():
             current = previous.validation(meta, encoder, query, val, device)
         save_checks(
             out,
             f"macro_s{seed}_context",
             nested_compare(current, recorded["initial_validation"]),
+            runtime={"profile": "context", "effective": runtime_state()},
             actual=current,
             expected=recorded["initial_validation"],
         )
@@ -580,6 +646,7 @@ def neural_replay(source, meta, mm, sm, stats, out, device="cuda"):
             out,
             f"rolling_s{seed}",
             nested_compare(actual, ck["validation"]),
+            runtime={"profile": "context", "effective": runtime_state()},
             actual=actual,
             expected=ck["validation"],
         )
@@ -600,11 +667,13 @@ def neural_replay(source, meta, mm, sm, stats, out, device="cuda"):
             raise ValueError("Shared selected snapshot metadata differs")
         model.load_state_dict(ck["model"], strict=True)
         query.load_state_dict(ck["query"], strict=True)
-        actual = sr.validation(sm, model, query, device)
+        with replay_runtime("macro_shared") as original_runtime:
+            actual = sr.validation(sm, model, query, device)
         save_checks(
             out,
             f"shared_s{seed}",
             nested_compare(actual, ck["validation"]),
+            runtime=original_runtime,
             actual=actual,
             expected=ck["validation"],
         )
@@ -641,6 +710,9 @@ def run(source, out):
                 "source": str(source),
                 "code_sha256": {Path(__file__).name: sha256(__file__)},
                 "historical_code": previous.code_identity(),
+                "runtime_before_audit": runtime_state(),
+                "runtime_profiles": RUNTIME_PROFILES,
+                "runtime_scope": "Macro/Shared use original configure_runtime plus fresh-process MHA default true; Context uses its explicit MHA false. Causality/gradient diagnostics use Context policy.",
                 "numeric_contract": {
                     "atol": ATOL,
                     "rtol": RTOL,

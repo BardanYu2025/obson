@@ -3,10 +3,11 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 export PYTHONPATH="$PWD/src${PYTHONPATH:+:$PYTHONPATH}" PYTHONUNBUFFERED=1
 export OMP_NUM_THREADS="${OMP_NUM_THREADS:-4}" OPENBLAS_NUM_THREADS="${OPENBLAS_NUM_THREADS:-4}"
-run="${BABEL_RECOVERY_RUN:-checkpoints/babel_recovery_r0}"
+run="${BABEL_RECOVERY_RUN:-checkpoints/babel_recovery_r0_v2}"
 source_run="${BABEL_RECOVERY_SOURCE:-checkpoints/babel_context_transfer768}"
-log="${BABEL_RECOVERY_LOG:-logs/babel_recovery_r0.log}"
+log="${BABEL_RECOVERY_LOG:-logs/babel_recovery_r0_v2.log}"
 download="${BABEL_DOWNLOAD_DIR:-/root/autodl-tmp/download}"
+prior="${BABEL_RECOVERY_PRIOR:-checkpoints/babel_recovery_r0}"
 mode="${1:-audit}"
 case "$mode" in audit|export) ;; *) echo 'Usage: bash scripts/babel_recovery_r0_autodl.sh [audit|export]' >&2; exit 2 ;; esac
 finish() {
@@ -22,6 +23,14 @@ finish() {
       mkdir -p "$stage/$name/$(dirname "$rel")"
       cp "$file" "$stage/$name/$rel"
     done < <(find "$run" -type f \( -name '*.json' -o -name '*.txt' \) -print0)
+  fi
+  # Preserve the first failure alongside the corrected run; never use it as
+  # an input, acceptance threshold or a reason to skip any checks.
+  if [[ -d "$prior" ]]; then
+    mkdir -p "$stage/$name/prior_failure"
+    for rel in manifest.json audit_status.json macro_s42_original.json macro_s42_context.json; do
+      if [[ -f "$prior/$rel" ]]; then cp "$prior/$rel" "$stage/$name/prior_failure/$rel"; fi
+    done
   fi
   if [[ -f "$log" ]]; then cp "$log" "$stage/$name/run.log"; fi
   cp docs/BABEL_RECOVERY_R0.md "$stage/$name/protocol.md"

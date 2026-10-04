@@ -1,5 +1,7 @@
 # State Rollout768：从历史压缩走向未来状态外推
 
+R0数值入口修复待复查（2026-10-04）：首次AutoDL核查在Macro的Context接口18项数值复放处停止，之前原始数据/目标及Macro原接口已通过。确认R0遗漏了不同原入口的后端配置，测试夹具又掩盖了fastpath差异；已修复按Macro/Shared与Context分别恢复并记录原MHA/TF32/线程设置，阈值不变。不能在真实复放前断言这解释了全部差异。默认新输出`babel_recovery_r0_v2`，附带原失败报告，仍零更新；R1/R2不放行。详见[BABEL_RECOVERY_R0.md](BABEL_RECOVERY_R0.md)。
+
 R0零更新核查入口已实现（2026-10-04）：[运行协议](BABEL_RECOVERY_R0.md)复核原始255输入/分区/共同目标、旧prefix采样与初始化，并用Macro/Shared/rolling各双种子共六份权重复放原验证接口；记录分任务及近中远梯度、detach路径和无更新哈希。独立3600秒超时监督，成功失败都打包到download。真实AutoDL核查待执行，成功也仅为audit_complete_requires_review，不自动进入R1；原scaler拟合的独立完整再现仍未覆盖，不能宣称全链通过。R1/R2仍按[BABEL_RECOVERY_PLAN.md](BABEL_RECOVERY_PLAN.md)的有限预算登记，未实现、未启动。
 
 当前补证计划（2026-10-04）：[数量、影响与阶段门槛](BABEL_RECOVERY_PLAN.md)及[报告清单](BABEL_RECOVERY_PLAN.json)固定已确认问题的预算：1项完整历史核心对照替代补证，先做1项短程稳定性诊断；R0零更新核查，R1两个种子各5轮，均通过才进入R2三组×两种子各60轮，最多8个新增任务／370轮／14060更新。不默认整套重跑任何旧矩阵，不从512起点重训。61报告包对应60运行根目录，仅9阶段完成第一批协议细查，其余51为清单盘点；新实质缺陷须先列最早受影响节点和依赖闭包再修订计划，不能无声扩大训练。Macro control97/94冻结作研究参照；其他研究分支保留。当前仅提交计划，尚未实现运行入口或启动新GPU任务。以下旧记录的下一步安排以本计划为准。

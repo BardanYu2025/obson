@@ -1,5 +1,7 @@
 # Babel R0：零更新核查入口
 
+R0 v2修复（2026-10-04）：用户首次运行在`macro_s42_context`的18项指标处停止；此前原始输入/目标阶段和Macro原验证接口已执行通过。已确认R0遗漏旧入口的数值运行设置：Context的`main()`显式关闭MHA fastpath及TF32，直接导入验证函数不会执行这些设置；Macro/Shared原入口关闭TF32/cudnn benchmark，保留新进程MHA默认开启。v2分别使用作用域内的原设置，记录实际开关，并在退出时恢复，所有比较阈值不变。原测试夹具预先关闭fastpath，遮蔽了生产入口遗漏；现已去除该设置，并从故意错误的调用方配置测试整个复放入口和原main配置。这个工程缺陷已确认，但它能否解释用户记录的全部数值差异，仍待v2真实CUDA复放，不能提前宣称通过。
+
 2026-10-04。落实[BABEL_RECOVERY_PLAN.md](BABEL_RECOVERY_PLAN.md)的第一阶段。这里只核查，不执行R1或R2，不实例化优化器，不新建训练缓存，不改动旧实现及其代码哈希。保持原Macro作研究参照，所有新训练仍暂停。
 
 ## 本次检查
@@ -17,7 +19,7 @@
 
 成功状态为`audit_complete_requires_review`，**不是R1准入通过**，更不是旧实验全部有效。失败记录最早失败阶段和具体文件/指标；不删除或修复源文件，不自动重试训练。原统计量的train-only来源、绑定代码与数值一致性在本次核查，原始scaler拟合的独立完整再现未包括；审计报告显式保留此限制。梯度仅代表固定train小批次，不能单独证明训练全程近端误差的原因。结果回传后还需结合这些限制判定R1是否可开。
 
-默认输出独立目录`checkpoints/babel_recovery_r0`，目录非空会拒绝运行，保护失败证据。R0默认最多3600秒，独立父进程超时终止并打包；超时后不得声称核查通过。预计无需新的GiB级空间，但原权重、原数据与缓存仍须存在。CPU原始特征阶段GPU可能空闲。
+默认输出独立目录`checkpoints/babel_recovery_r0_v2`，目录非空会拒绝运行，保护失败证据。R0默认最多3600秒，独立父进程超时终止并打包；超时后不得声称核查通过。预计无需新的GiB级空间，但原权重、原数据与缓存仍须存在。CPU原始特征阶段GPU可能空闲。
 
 ## AutoDL一次启动及自动导出
 
@@ -25,14 +27,14 @@
 cd /root/autodl-tmp/obson
 git pull --ff-only origin features/babel
 mkdir -p logs
-nohup bash scripts/babel_recovery_r0_autodl.sh audit > logs/babel_recovery_r0.log 2>&1 &
-tail -f logs/babel_recovery_r0.log
+nohup bash scripts/babel_recovery_r0_autodl.sh audit > logs/babel_recovery_r0_v2.log 2>&1 &
+tail -f logs/babel_recovery_r0_v2.log
 ```
 
 无论成功或失败，报告自动汇总至：
 
 ```text
-/root/autodl-tmp/download/babel_recovery_r0_reports.tar.gz
+/root/autodl-tmp/download/babel_recovery_r0_v2_reports.tar.gz
 ```
 
 仅重新打包已有结果：
@@ -46,4 +48,6 @@ bash scripts/babel_recovery_r0_autodl.sh export
 
 ## 本地交付验证
 
-新增R0及原Context/Uniform相关测试共44项通过，涵盖合成六检查点复放、真实detach分支、精确年龄损失/梯度分解、非因果反例、原始输入和独立标签复建、采样篡改检测、超时和失败导出。源码静态检查及shell语法检查通过。另直接对照用户已下载归档确认旧106份源码哈希未变、源97/94轮学习率与归档记录一致。没有在本地训练或复放真实神经模型；CUDA显存、耗时和真实数值复放待AutoDL执行。
+v2修复后，新增R0及原Context/Uniform相关测试共46项通过，涵盖合成六检查点复放、真实detach分支、精确年龄损失/梯度分解、非因果反例、原始输入和独立标签复建、采样篡改检测、超时和失败导出。源码静态检查及shell语法检查通过。另直接对照用户已下载归档确认旧106份源码哈希未变、源97/94轮学习率与归档记录一致。没有在本地训练或复放真实神经模型；CUDA显存、耗时和真实数值复放待AutoDL执行。
+
+默认新目录保留上一轮失败证据。导出时会只读附带`checkpoints/babel_recovery_r0`中的初次manifest、失败状态、Macro原接口及Context复放差异，放入新包的`prior_failure/`；这些文件不参与本次验收，也不会让检查跳过。源目录可用`BABEL_RECOVERY_PRIOR`覆盖。仍执行完整R0，不启动训练。

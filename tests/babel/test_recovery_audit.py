@@ -31,9 +31,8 @@ CONFIG = {"width": 32, "heads": 4, "ff": 64, "layers": 4}
 
 @pytest.fixture(autouse=True)
 def no_optimizer(monkeypatch):
+    old = run.runtime_state()
     torch.set_num_threads(1)
-    old = torch.backends.mha.get_fastpath_enabled()
-    torch.backends.mha.set_fastpath_enabled(False)
 
     def forbidden(*args, **kwargs):
         raise AssertionError("No optimizer may be constructed or stepped in R0")
@@ -41,7 +40,7 @@ def no_optimizer(monkeypatch):
     monkeypatch.setattr(torch.optim.AdamW, "__init__", forbidden)
     monkeypatch.setattr(torch.optim.AdamW, "step", forbidden)
     yield
-    torch.backends.mha.set_fastpath_enabled(old)
+    run.apply_runtime(old)
 
 
 def inputs(n=2, length=255):
@@ -277,9 +276,23 @@ def test_six_synthetic_snapshot_replays_including_frozen_restore(tmp_path, monke
 
     monkeypatch.setattr(run.previous.parent, "construct", construct)
     monkeypatch.setattr(run.previous.parent.base.prior, "construct", construct)
-    monkeypatch.setattr(run.previous.parent.base, "validation", lambda *a: dict(value))
-    monkeypatch.setattr(run.previous.parent.base.prior, "validation", lambda *a: dict(value))
-    monkeypatch.setattr(run.previous, "validation", lambda *a: dict(value))
+    policies_seen = []
+
+    def original_validation(*args):
+        assert run.runtime_state() == run.RUNTIME_PROFILES["macro_shared"]
+        policies_seen.append("macro_shared")
+        return dict(value)
+
+    def context_validation(meta, encoder, query, *args):
+        assert run.runtime_state() == run.RUNTIME_PROFILES["context"]
+        assert all(p.requires_grad for p in encoder.parameters())
+        assert all(p.requires_grad for p in query.parameters())
+        policies_seen.append("context")
+        return dict(value)
+
+    monkeypatch.setattr(run.previous.parent.base, "validation", original_validation)
+    monkeypatch.setattr(run.previous.parent.base.prior, "validation", original_validation)
+    monkeypatch.setattr(run.previous, "validation", context_validation)
     monkeypatch.setattr(run, "schedule_audit", lambda *a: None)
     x = inputs()
     y, m = run.ar.ordered_targets(x[:, -128:])
@@ -290,7 +303,19 @@ def test_six_synthetic_snapshot_replays_including_frozen_restore(tmp_path, monke
     monkeypatch.setattr(
         run.previous.parent, "stats", lambda *a: (STATS, {"mean": [0.0] * 7, "scale": [1.0] * 7})
     )
+    # Deliberately wrong caller defaults: the production entry, not a fixture,
+    # must establish and later restore each historical backend policy.
+    caller = {
+        "mha_fastpath": True,
+        "matmul_tf32": True,
+        "cudnn_tf32": True,
+        "cudnn_benchmark": True,
+        "threads": 1,
+    }
+    run.apply_runtime(caller)
     result = run.neural_replay(source, meta, mm, {}, STATS, out, device="cpu")
+    assert run.runtime_state() == caller
+    assert policies_seen == ["macro_shared", "context", "context", "macro_shared"] * 2
     assert len(result) == 6
     for seed in (42, 43):
         diagnostic = json.loads((out / f"gradients_s{seed}.json").read_text())
@@ -318,9 +343,14 @@ def test_export_packs_failure_and_excludes_weights(tmp_path):
     out.mkdir()
     atomic_json({"status": "failed", "optimizer_updates": 0}, out / "audit_status.json")
     (out / "secret.pt").write_text("not a report")
+    prior = tmp_path / "prior"
+    prior.mkdir()
+    atomic_json({"checks": {"mismatch": {"passed": False}}}, prior / "macro_s42_context.json")
+    prior_bytes = (prior / "macro_s42_context.json").read_bytes()
     env = {
         **os.environ,
         "BABEL_RECOVERY_RUN": str(out),
+        "BABEL_RECOVERY_PRIOR": str(prior),
         "BABEL_DOWNLOAD_DIR": str(tmp_path / "download"),
         "PYTHON_BIN": str(Path(".venv/bin/python").resolve()),
     }
@@ -333,6 +363,10 @@ def test_export_packs_failure_and_excludes_weights(tmp_path):
     assert result.returncode == 0, result.stderr
     with tarfile.open(tmp_path / "download/audit_reports.tar.gz") as archive:
         assert "audit/audit_status.json" in archive.getnames()
+        assert (
+            archive.extractfile("audit/prior_failure/macro_s42_context.json").read() == prior_bytes
+        )
+        assert (prior / "macro_s42_context.json").read_bytes() == prior_bytes
         assert not any(n.endswith(".pt") for n in archive.getnames())
         assert "run_status=failed" in archive.extractfile("audit/export_status.txt").read().decode()
 
@@ -408,3 +442,39 @@ def test_completed_audit_requires_review_and_keeps_zero_updates(tmp_path, monkey
     assert status["status"] == "audit_complete_requires_review"
     assert not status["r1_authorized"] and status["optimizer_updates"] == 0
     assert status["replayed_checkpoints"] == 6
+
+
+def test_replay_profiles_match_original_entry_points(tmp_path, monkeypatch):
+    import sys
+
+    # Macro/Shared configure_runtime preserves the fresh-process MHA default true.
+    run.apply_runtime(
+        dict(
+            run.RUNTIME_PROFILES["macro_shared"],
+            matmul_tf32=True,
+            cudnn_tf32=True,
+            cudnn_benchmark=True,
+            threads=1,
+        )
+    )
+    run.previous.parent.ur.bb.ab.configure_runtime()
+    assert run.runtime_state() == run.RUNTIME_PROFILES["macro_shared"]
+    observed = []
+    monkeypatch.setattr(sys, "argv", ["context_transfer_run", "--out", str(tmp_path / "out")])
+    monkeypatch.setattr(run.previous, "run", lambda *a: observed.append(run.runtime_state()))
+    run.previous.main()
+    assert observed == [run.RUNTIME_PROFILES["context"]]
+
+
+def test_runtime_restores_after_nested_failure():
+    before = run.runtime_state()
+    with (
+        pytest.raises(RuntimeError, match="synthetic replay mismatch"),
+        run.replay_runtime("context"),
+    ):
+        assert run.runtime_state() == run.RUNTIME_PROFILES["context"]
+        with run.replay_runtime("macro_shared"):
+            assert run.runtime_state() == run.RUNTIME_PROFILES["macro_shared"]
+        assert run.runtime_state() == run.RUNTIME_PROFILES["context"]
+        raise RuntimeError("synthetic replay mismatch")
+    assert run.runtime_state() == before
