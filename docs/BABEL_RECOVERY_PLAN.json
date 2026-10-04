@@ -1,6 +1,6 @@
 {
   "date": "2026-10-04",
-  "status": "V02_V14_zero_update_entrypoint_ready_CUDA_pending_R1_RS_training_entrypoints_pending",
+  "status": "V02_V14_qualification_reviewed_passed_for_scope_V03_training_entrypoint_next",
   "scope_warning": "Counts are the bounded response to confirmed issues, not a claim that all historical experiments are valid or that undiscovered defects cannot change the plan.",
   "coverage": {
     "report_archives": 61,
@@ -1337,7 +1337,7 @@
     "protocol": "docs/BABEL_RECOVERY_QUALIFICATION.md",
     "validation": "docs/BABEL_RECOVERY_QUALIFICATION_VALIDATION.json",
     "new_synthetic_tests": 18,
-    "real_cuda_executed": false,
+    "real_cuda_executed": true,
     "training_entrypoint_ready": false,
     "timeout_seconds": 1800,
     "minimum_free_disk_MiB": 512,
@@ -1345,6 +1345,8 @@
     "r1_automatic": false,
     "rs_automatic": false,
     "gradient_export": "All coordinates checked at original tolerance; parameter summaries and top8 coordinate witnesses exported, not full gradient arrays",
-    "raw_scope": "Reuse reviewed R0 only after exact source/cache/code/report binding; no independent scaler fit reproduction"
+    "raw_scope": "Reuse reviewed R0 only after exact source/cache/code/report binding; no independent scaler fit reproduction",
+    "review": "docs/BABEL_RECOVERY_QUALIFICATION_REVIEW.md",
+    "reviewed_completion_sha256": "2e0fe27289d2000db90c0ac4e80d67cc175545f07370c85975373a859cc47c86"
   }
 }

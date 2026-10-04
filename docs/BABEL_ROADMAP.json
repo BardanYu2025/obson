@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-04",
-  "current_iteration": "V02+V14",
-  "current_iteration_scope": "Zero-update qualification entrypoint prepared and synthetic tests passed; real CUDA execution pending; no R1/RS training or model promotion",
+  "current_iteration": "V02+V14-report-review",
+  "current_iteration_scope": "Real zero-update qualification accepted within scope; V03 implementation next; original LR/loss causal questions remain open",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -106,17 +106,18 @@
         "E2"
       ],
       "implementation": "零更新直接梯度诊断入口及合成测试完成",
-      "execution": "未运行新CUDA诊断",
-      "conclusion": "最高约0.1084%的范数分解差异原因未定",
+      "execution": "真实CUDA固定批直接梯度核对16/16通过",
+      "conclusion": "直接数值准入缺口关闭；旧精确比例弃用，不证明损失均衡",
       "evidence": [
         "docs/BABEL_ISSUE_CLOSURE.md",
         "docs/BABEL_RECOVERY_QUALIFICATION.md",
-        "docs/BABEL_RECOVERY_QUALIFICATION_VALIDATION.json"
+        "docs/BABEL_RECOVERY_QUALIFICATION_VALIDATION.json",
+        "docs/BABEL_RECOVERY_QUALIFICATION_REVIEW.md"
       ],
       "depends_on": [
         "V01"
       ],
-      "next_action": "AutoDL同图逐坐标核对；导出逐参数残差和最大8坐标，不打包全梯度；原门槛失败留证停止"
+      "next_action": "进入V03准备；不全量复跑R0、不用旧范数比例调权"
     },
     {
       "id": "V03",
@@ -312,18 +313,19 @@
         "new_entrypoint_qualification"
       ],
       "implementation": "源绑定、目标、局部头资格入口及合成测试完成",
-      "execution": "R0部分证据复用；本轮真实CUDA待执行",
-      "conclusion": "补证覆盖缺口不是新发现数据错误；源scaler拟合等未全量独立重做",
+      "execution": "本入口源/目标/复放/原局部头最低资格通过",
+      "conclusion": "只接受本入口资格；s42末端读头明显较弱，源scaler拟合未独立重做",
       "evidence": [
         "docs/BABEL_RECOVERY_R0_REVIEW.md",
         "docs/BABEL_RECOVERY_PLAN.md",
         "docs/BABEL_RECOVERY_QUALIFICATION.md",
-        "docs/BABEL_RECOVERY_QUALIFICATION_VALIDATION.json"
+        "docs/BABEL_RECOVERY_QUALIFICATION_VALIDATION.json",
+        "docs/BABEL_RECOVERY_QUALIFICATION_REVIEW.md"
       ],
       "depends_on": [
         "V01"
       ],
-      "next_action": "AutoDL核验源/采样/目标/复放及冻结局部头对train均值；分别报告R1共同预检与RS局部资格"
+      "next_action": "为V03提供已验来源；未来训练入口核对优化/恢复，RS仍须V03通过"
     }
   ],
   "future_branches": [
@@ -514,10 +516,6 @@
     }
   ],
   "active_order": [
-    [
-      "V02",
-      "V14"
-    ],
     [
       "V03"
     ],

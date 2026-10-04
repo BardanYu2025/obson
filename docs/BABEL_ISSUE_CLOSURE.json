@@ -137,12 +137,13 @@
     {
       "id": "E2",
       "stages": [],
-      "status": "open_real_gradient_identity_pending",
-      "action": "V02 zero-update qualification on AutoDL; unchanged tolerances",
+      "status": "fixed_batch_direct_gradient_qualification_passed",
+      "action": "V03 preparation; retire old exact gradient attribution",
       "evidence": "docs/BABEL_RECOVERY_R0_REVIEW.md",
       "fact": "Exported norms/cosines do not strictly establish gradient additivity",
-      "decision_effect": "Do not tune weights from exact gradient-ratio claims",
-      "implementation": "Same-forward coordinate-wise audit ready; real evidence pending; full vectors checked but only parameter summaries and top8 residual witnesses exported"
+      "decision_effect": "Numerical precondition cleared for fixed batch; no old training finding overturned; no balanced-loss claim",
+      "implementation": "Same-forward coordinate-wise audit ready; real evidence pending; full vectors checked but only parameter summaries and top8 residual witnesses exported",
+      "qualification_review": "docs/BABEL_RECOVERY_QUALIFICATION_REVIEW.md"
     },
     {
       "id": "E3",
@@ -171,7 +172,8 @@
     "protocol": "docs/BABEL_RECOVERY_QUALIFICATION.md",
     "validation": "docs/BABEL_RECOVERY_QUALIFICATION_VALIDATION.json",
     "new_synthetic_tests": 18,
-    "real_cuda_executed": false,
-    "training_entrypoint_ready": false
+    "real_cuda_executed": true,
+    "training_entrypoint_ready": false,
+    "review": "docs/BABEL_RECOVERY_QUALIFICATION_REVIEW.md"
   }
 }
