@@ -1,6 +1,6 @@
 {
   "date": "2026-10-04",
-  "status": "V02_V14_qualification_reviewed_passed_for_scope_V03_training_entrypoint_next",
+  "status": "R1_entrypoint_ready_real_CUDA_pending_RS_training_entrypoint_pending",
   "scope_warning": "Counts are the bounded response to confirmed issues, not a claim that all historical experiments are valid or that undiscovered defects cannot change the plan.",
   "coverage": {
     "report_archives": 61,
@@ -167,7 +167,16 @@
       "reference": "Reuse prior high-LR prefix first five epochs only if sampling/init/objective signatures match",
       "gate": "Both actually updated epoch5 checkpoints finite and all24 full/native retention metrics <=1.10 source; epoch0 fallback cannot pass",
       "failure": "Stop, report and revise plan; no implicit third LR or extra reference jobs",
-      "status": "not_implemented_or_run"
+      "status": "entrypoint_ready_real_cuda_pending",
+      "implementation": {
+        "module": "obson.babel.recovery_lr",
+        "script": "scripts/babel_recovery_r1_autodl.sh",
+        "protocol": "docs/BABEL_RECOVERY_R1.md",
+        "validation": "docs/BABEL_RECOVERY_R1_VALIDATION.json",
+        "real_training_executed": false,
+        "uses_immutable_historical_train_epoch": true,
+        "resume": "Complete atomic epoch checkpoints only; uncommitted epoch blocks automatic replay"
+      }
     },
     {
       "id": "RS",
@@ -224,7 +233,9 @@
     "disk_preflight_required": true,
     "export_directory": "/root/autodl-tmp/download",
     "timeout_behavior": "Mark incomplete; no ranking unequal incomplete budgets or silent extension",
-    "enforcement_implementation_status": "R1/RS entrypoints not yet implemented"
+    "enforcement_implementation_status": "R1 cumulative independent supervisor implemented; RS runner pending",
+    "R1_cumulative_seconds_cap": 3600,
+    "RS_time_budget_rule": "Deduct actual R1 session used_seconds from existing36000second total; never allocate a fresh10h"
   },
   "interpretation_corrections": [
     "Do not claim four layers globally optimal from unequal extended budgets",

@@ -90,7 +90,9 @@
       "action": "R1",
       "evidence": "docs/BABEL_RECOVERY_R0_REVIEW.md",
       "fact": "Changed LR/Adam/sampling/clipping is adaptation, not exact resume",
-      "decision_effect": "Preserve recipe failure; LR causal role unproven"
+      "decision_effect": "Preserve recipe failure; LR causal role unproven",
+      "implementation": "V03/R1 training entrypoint and17 synthetic cases ready; actual CUDA pending",
+      "protocol": "docs/BABEL_RECOVERY_R1.md"
     },
     {
       "id": "B1",
@@ -175,5 +177,10 @@
     "real_cuda_executed": true,
     "training_entrypoint_ready": false,
     "review": "docs/BABEL_RECOVERY_QUALIFICATION_REVIEW.md"
+  },
+  "r1_implementation": {
+    "entrypoint_ready": true,
+    "real_training_executed": false,
+    "validation": "docs/BABEL_RECOVERY_R1_VALIDATION.json"
   }
 }

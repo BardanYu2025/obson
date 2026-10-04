@@ -1,0 +1,95 @@
+{
+  "schema": "babel-recovery-r1-validation-v1",
+  "date": "2026-10-04",
+  "task_ids": [
+    "V03"
+  ],
+  "status": "implementation_checked_real_cuda_pending",
+  "source_qualification_completion_sha256": "2e0fe27289d2000db90c0ac4e80d67cc175545f07370c85975373a859cc47c86",
+  "file_sha256": {
+    "src/obson/babel/recovery_lr.py": "4a5ac937f1eab0691389f5c33880d01e057406c9a678761027621010111650fd",
+    "scripts/babel_recovery_r1_autodl.sh": "14401e2f75d1a6e5e8ab1388d6e7a962ca052a90e7b34f54d571a2dffa8a4fd1",
+    "tests/babel/test_recovery_lr.py": "890870c257d9e0babde5df717c83b0ee68be7c4b98e414c2ee7877048ab7eb00",
+    "docs/BABEL_RECOVERY_R1.md": "16302023ebad7d70dd5c375972bc0e1dc1b5fc303431043f0aabe17506738c41"
+  },
+  "checks": [
+    {
+      "command": ".venv/bin/pytest -q tests/babel/test_recovery_lr.py tests/babel/test_recovery_qualification.py tests/babel/test_recovery_objectives.py tests/babel/test_recovery_audit.py tests/babel/test_context_transfer.py tests/babel/test_uniform_context.py",
+      "result": "90 passed in11.08s;17 new R1 cases"
+    },
+    {
+      "command": "uv tool run ruff check src/obson/babel/recovery_lr.py tests/babel/test_recovery_lr.py",
+      "result": "passed"
+    },
+    {
+      "command": "bash -n scripts/babel_recovery_r1_autodl.sh",
+      "result": "passed"
+    },
+    {
+      "command": "Compare109 bound module hashes with reviewed qualification manifest",
+      "result": "unchanged"
+    },
+    {
+      "command": "PYTHONPATH=src .venv/bin/python -m obson.babel.recovery_lr --help",
+      "result": "passed"
+    }
+  ],
+  "local_real_weight_inferences": 0,
+  "real_training_runs": 0,
+  "local_optimizer_scope": "Tiny synthetic optimizer/resume fixtures only; no real weights or market data",
+  "review": {
+    "purpose": {
+      "status": "pass_for_scope",
+      "evidence": [
+        "V03 isolates fixed LR amplitude with same source and immutable historical train_epoch",
+        "Fixed fifth-epoch stability screen, no model promotion or automatic RS"
+      ],
+      "remaining": "Actual R1 outcome pending; loss design/near-far balance not answered by this screen"
+    },
+    "architecture": {
+      "status": "pass_for_scope",
+      "evidence": [
+        "Original Macro768/4layers/8heads and trained adapter/query unchanged",
+        "Native prefix training retains shorter early-position history; rolling contexts only in matched validation",
+        "Qualified109 bound modules unchanged"
+      ],
+      "remaining": "Real CUDA loaded-state replay and final causality checks must run remotely; no architecture optimality claim"
+    },
+    "training": {
+      "status": "pass_for_scope",
+      "evidence": [
+        "Same train_epoch, batch128/micro8, targets, deterministic schedule, fresh AdamW decay/clipping; only fixed LR amplitude changed",
+        "Synthetic original-step equivalence, no-op optimizer rejection, actual post-step counts and optimizer-state counts",
+        "Epoch-boundary resume exactly matches uninterrupted synthetic parameters/Adam"
+      ],
+      "remaining": "Real training pending; mid-epoch interruption cannot be silently replayed; fresh Adam is not exact historical optimizer continuation"
+    },
+    "validation": {
+      "status": "pass_for_scope",
+      "evidence": [
+        "Exactly24 fields each seed at actual epoch5; no best/epoch0 fallback",
+        "Original high-LR five epochs reused only under bound sampling/source; initial/final per-window error exports matched to original aggregation",
+        "Synthetic damaged near metric, malformed/nonfinite fields and failed final gates tested"
+      ],
+      "remaining": "Five-epoch criterion does not certify long training or independent generalization; s42 local endpoint weakness remains; no new research-set scoring"
+    },
+    "data": {
+      "status": "pass_for_scope",
+      "evidence": [
+        "Qualification completion pinned; all report/code/source bindings checked before/after",
+        "Train4789/val978 counts fixed; inherited train-only stats and caches reused without refitting",
+        "Original Context report confirms batch128/micro8 and fixed four validation positions"
+      ],
+      "remaining": "No new full raw/scaler reproduction; qualification scope limitations retained"
+    },
+    "engineering": {
+      "status": "pass_for_scope",
+      "evidence": [
+        "17 new synthetic cases,90 combined tests passed; Ruff and shell syntax passed",
+        "Atomic checkpoints, source/recipe/hash checks, worker/session locks, cumulative independent3600second supervisor",
+        "Failure/timeout export to download;2GiB disk reserve; no source deletion or cache copies"
+      ],
+      "remaining": "True CUDA runtime/memory/optimizer execution pending. Whole-epoch recovery only; supervisor death reserves budget rather than allowing hidden reset. RS must deduct actual R1 session time from original10h total"
+    }
+  }
+}

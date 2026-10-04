@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-04",
-  "current_iteration": "V02+V14-report-review",
-  "current_iteration_scope": "Real zero-update qualification accepted within scope; V03 implementation next; original LR/loss causal questions remain open",
+  "current_iteration": "V03-code",
+  "current_iteration_scope": "Fixed five-epoch low-LR entrypoint ready; real AutoDL training pending; no automatic RS",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -126,17 +126,19 @@
         "T1",
         "R1"
       ],
-      "implementation": "完整训练入口未完成",
-      "execution": "未运行",
-      "conclusion": "高LR是否造成损伤尚未确认",
+      "implementation": "固定五轮双种子训练、恢复与导出入口完成",
+      "execution": "合成测试通过；真实CUDA未运行",
+      "conclusion": "高LR因果作用仍待本轮实际结果",
       "evidence": [
-        "docs/BABEL_RECOVERY_PLAN.md"
+        "docs/BABEL_RECOVERY_PLAN.md",
+        "docs/BABEL_RECOVERY_R1.md",
+        "docs/BABEL_RECOVERY_R1_VALIDATION.json"
       ],
       "depends_on": [
         "V02",
         "V14"
       ],
-      "next_action": "两个种子各5轮低LR；原24项保护；不把epoch0回退当通过"
+      "next_action": "AutoDL执行R1；两种子实际第5轮24项均保留才进入V04/V05，失败不扩LR或轮数"
     },
     {
       "id": "V04",
@@ -532,7 +534,10 @@
     "optimizer_updates_max": 9500,
     "gpu_session_hours_cap": 10,
     "entrypoints_ready": false,
-    "future_branches_included": false
+    "future_branches_included": false,
+    "ready_stages": [
+      "V03"
+    ]
   },
   "aliases": {
     "R0": [
@@ -575,7 +580,6 @@
   "progress_log": "docs/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "current_task_ids": [
-    "V02",
-    "V14"
+    "V03"
   ]
 }
