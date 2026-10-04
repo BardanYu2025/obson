@@ -19,22 +19,30 @@
         "babel_history_structure768",
         "babel_causal_pool768"
       ],
-      "status": "open_real_intervention_pending",
-      "action": "RS",
+      "status": "RS_v2_implemented_real_intervention_pending",
+      "action": "Run RS-v2; evaluate effects and dual-reference acceptance separately, original fact not yet resolved",
       "evidence": "src/obson/babel/history_structure.py",
       "fact": "Extra17+ structure is asymmetric; not proven cause of near degradation",
-      "decision_effect": "Keep structure_gain_with_tradeoffs; reject architecture/capacity-only attribution"
+      "decision_effect": "Keep structure_gain_with_tradeoffs; reject architecture/capacity-only attribution",
+      "implementation": "Matched four-arm two-seed training/evaluation entrypoint; synthetic tests passed",
+      "execution": "Not executed on real CUDA",
+      "protocol": "docs/BABEL_RECOVERY_RS.md",
+      "validation": "docs/BABEL_RECOVERY_RS_VALIDATION.json"
     },
     {
       "id": "S2",
       "stages": [
         "babel_history_structure768"
       ],
-      "status": "open_real_intervention_pending",
-      "action": "RS",
+      "status": "RS_v2_implemented_real_intervention_pending",
+      "action": "Run RS-v2; evaluate effects and dual-reference acceptance separately, original fact not yet resolved",
       "evidence": "src/obson/babel/history_structure.py",
       "fact": "Detached local diagnostic cannot supervise encoder; main query still covers near ages",
-      "decision_effect": "Retract local-head-protection claim, not original local readout measurements"
+      "decision_effect": "Retract local-head-protection claim, not original local readout measurements",
+      "implementation": "Matched four-arm two-seed training/evaluation entrypoint; synthetic tests passed",
+      "execution": "Not executed on real CUDA",
+      "protocol": "docs/BABEL_RECOVERY_RS.md",
+      "validation": "docs/BABEL_RECOVERY_RS_VALIDATION.json"
     },
     {
       "id": "S3",
@@ -76,7 +84,7 @@
         "babel_macro_history768"
       ],
       "status": "frozen_cross_diagnostic_complete_information_attribution_open",
-      "action": "Close eight-cross recipe; defer matched fitting unless needed; return to V04/V05 protocol revision",
+      "action": "Eight-cross recipe closed; matched fitting deferred; RS-v2 implemented, CUDA pending",
       "evidence": "docs/BABEL_MACRO_HISTORY768_REVIEW.md",
       "fact": "Matched E5D5 generally beats crossed readouts; residual source degradation remains; no proof of information loss",
       "decision_effect": "Preserve interface findings, no added-memory interpretation",
@@ -92,10 +100,10 @@
         "babel_context_transfer768"
       ],
       "status": "R1_completed_retention_failed_LR_contributor_supported",
-      "action": "R1 recipe closed; V07 diagnostic reviewed; V04/V05 protocol revision next, original gate held",
+      "action": "R1 recipe closed; prospective RS-v2 intervention admission documented, no extra LR or R1 epochs",
       "evidence": "docs/BABEL_RECOVERY_R0_REVIEW.md",
       "fact": "Same-source lowerLR improves all48 final reference comparisons but seed42 fails3structure fields; LR alone insufficient",
-      "decision_effect": "Old recipe failure retained; bounded LR contribution supported; RS remains held",
+      "decision_effect": "Old failure retained; bounded LR contribution supported; RS-v2 no longer requires claiming R1 passed",
       "implementation": "V03/R1 entrypoint tested; real CUDA completed, retention gate failed; review recorded",
       "protocol": "docs/BABEL_RECOVERY_R1.md",
       "review": "docs/BABEL_RECOVERY_R1_REVIEW.md"
@@ -190,5 +198,23 @@
     "validation": "docs/BABEL_RECOVERY_R1_VALIDATION.json",
     "review": "docs/BABEL_RECOVERY_R1_REVIEW.md"
   },
-  "original_component_delivery_counts_note": "Top-level new_real_* counters describe the original objective-component delivery; subsequent executions are recorded per task and in BABEL_PROGRESS_LOG.jsonl, not zero cumulative research use."
+  "original_component_delivery_counts_note": "Top-level new_real_* counters describe the original objective-component delivery; subsequent executions are recorded per task and in BABEL_PROGRESS_LOG.jsonl, not zero cumulative research use.",
+  "rs_implementation": {
+    "task_ids": [
+      "V04",
+      "V05"
+    ],
+    "module": "obson.babel.recovery_rs",
+    "evaluation_module": "obson.babel.recovery_rs_evaluate",
+    "script": "scripts/babel_recovery_rs_autodl.sh",
+    "protocol": "docs/BABEL_RECOVERY_RS.md",
+    "validation": "docs/BABEL_RECOVERY_RS_VALIDATION.json",
+    "entrypoint_ready": true,
+    "real_training_executed": false,
+    "scientific_acceptance": "pending",
+    "training_jobs": 8,
+    "epochs_per_job": 30,
+    "max_optimizer_updates": 9120,
+    "cumulative_seconds_cap": 35241
+  }
 }

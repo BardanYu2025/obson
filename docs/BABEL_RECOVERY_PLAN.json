@@ -1,6 +1,6 @@
 {
   "date": "2026-10-04",
-  "status": "V07_diagnostic_reviewed_RS_protocol_revision_pending_original_gate_held",
+  "status": "RS_v2_code_ready_real_CUDA_pending_R1_failure_preserved",
   "scope_warning": "Counts are the bounded response to confirmed issues, not a claim that all historical experiments are valid or that undiscovered defects cannot change the plan.",
   "coverage": {
     "report_archives": 61,
@@ -225,12 +225,35 @@
         "remote_structure": 1.0,
         "local": 0.25
       },
-      "qualification": "R1 both seeds pass; gradient residual audit passes unchanged tolerance; source local head provenance, causal targets and frozen-reader validation primary better than train-mean baseline for each seed and native endpoint/interior",
+      "qualification": "Reviewed V02/V14 source/local-reader/target/gradient eligibility; pinned R1 and V07 source; original source replay and baseline first5 R1 replay. R1 retention is NOT claimed passed.",
       "budget_interpretation": "Same source and updates; finite adaptation diagnostic, not convergence or equal FLOPs proof",
-      "status": "held_R1_prerequisite_failed_no_training_entrypoint",
-      "module": "obson.babel.recovery_objectives",
-      "protocol": "docs/BABEL_RECOVERY_PLAN.md",
-      "real_training_executed": false
+      "status": "v2_entrypoint_ready_real_CUDA_pending",
+      "module": "obson.babel.recovery_rs",
+      "protocol": "docs/BABEL_RECOVERY_RS.md",
+      "real_training_executed": false,
+      "superseded_v1_admission": {
+        "qualification": "R1 both seeds pass; gradient residual audit passes unchanged tolerance; source local head provenance, causal targets and frozen-reader validation primary better than train-mean baseline for each seed and native endpoint/interior",
+        "status": "held_R1_prerequisite_failed_no_training_entrypoint",
+        "reason": "R1 gate failed; V07 did not restore source retention. RS-v2 permits finite loss-factor research while keeping source protection and dual-reference acceptance."
+      },
+      "implementation": {
+        "task_ids": [
+          "V04",
+          "V05"
+        ],
+        "module": "obson.babel.recovery_rs",
+        "evaluation_module": "obson.babel.recovery_rs_evaluate",
+        "script": "scripts/babel_recovery_rs_autodl.sh",
+        "protocol": "docs/BABEL_RECOVERY_RS.md",
+        "validation": "docs/BABEL_RECOVERY_RS_VALIDATION.json",
+        "entrypoint_ready": true,
+        "real_training_executed": false,
+        "scientific_acceptance": "pending",
+        "training_jobs": 8,
+        "epochs_per_job": 30,
+        "max_optimizer_updates": 9120,
+        "cumulative_seconds_cap": 35241
+      }
     }
   ],
   "resource_limits": {
@@ -242,13 +265,14 @@
     "disk_preflight_required": true,
     "export_directory": "/root/autodl-tmp/download",
     "timeout_behavior": "Mark incomplete; no ranking unequal incomplete budgets or silent extension",
-    "enforcement_implementation_status": "R1 cumulative independent supervisor implemented; RS runner pending",
+    "enforcement_implementation_status": "R1 and RS cumulative independent supervisors implemented",
     "R1_cumulative_seconds_cap": 3600,
-    "RS_time_budget_rule": "Deduct actual R1 session used_seconds from existing36000second total; never allocate a fresh10h",
+    "RS_time_budget_rule": "Deduct actual R1 and V07 used_seconds from original36000; RS cumulative cap35241; no reset",
     "actual_R1_session_seconds": 524.1648489544168,
     "remaining_total_session_seconds": 35241.34785203077,
     "actual_V07_session_seconds": 234.4872990148142,
-    "actual_recovery_session_seconds": 758.652147969231
+    "actual_recovery_session_seconds": 758.652147969231,
+    "RS_cumulative_seconds_cap": 35241
   },
   "interpretation_corrections": [
     "Do not claim four layers globally optimal from unequal extended budgets",
@@ -1393,9 +1417,10 @@
       "V04",
       "V05"
     ],
-    "document": "docs/BABEL_RECOVERY_RS_REVISION.md",
-    "phase": "protocol_revision_only",
-    "original_RS_still_held": true,
-    "new_executable_protocol_ready": false
+    "document": "docs/BABEL_RECOVERY_RS.md",
+    "phase": "implemented_AutoDL_pending",
+    "original_RS_admission_superseded": true,
+    "R1_passed": false,
+    "new_executable_protocol_ready": true
   }
 }

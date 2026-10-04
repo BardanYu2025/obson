@@ -1,0 +1,67 @@
+{
+  "schema": "babel-recovery-rs-implementation-review-v1",
+  "date": "2026-10-04",
+  "task_ids": [
+    "V04",
+    "V05"
+  ],
+  "scope": "Code delivery only; synthetic CPU tests, source fingerprint checks; no local real weights",
+  "new_synthetic_tests": 24,
+  "related_tests_passed": 97,
+  "pytest_command": ".venv/bin/pytest -q tests/babel/test_recovery_rs.py tests/babel/test_recovery_interface.py tests/babel/test_recovery_lr.py tests/babel/test_recovery_qualification.py tests/babel/test_recovery_audit.py tests/babel/test_recovery_objectives.py",
+  "real_cuda_executed": false,
+  "scientific_acceptance": "pending",
+  "R1_retention_passed": false,
+  "protocol": "docs/BABEL_RECOVERY_RS.md",
+  "admission_revision": "Allow finite matched loss-factor study without claiming stable control. Candidate success requires improvement versus both source and concurrent control. Original R1 failure/thresholds unchanged.",
+  "budget": {
+    "previous_consumed_seconds": 758.652147969231,
+    "new_cap_seconds": 35241,
+    "new_jobs": 8,
+    "new_worker_epochs": 240,
+    "new_updates": 9120,
+    "total_jobs_limit": 10,
+    "total_epoch_limit": 250,
+    "total_updates_limit": 9500,
+    "budget_increased": false
+  },
+  "review": {
+    "purpose": {
+      "status": "pass_for_scope",
+      "evidence": "V04/S1 and V05/S2 use four declared loss interventions; separate effect attribution, source retention and frozen-use acceptance. No automatic model promotion.",
+      "remaining": "Real improvement unknown. Reconstruction cannot establish prediction or universal representation."
+    },
+    "architecture": {
+      "status": "pass_for_scope",
+      "evidence": "Original Macro768/4/8 and query restored; frozen source16-bar reader; synthetic future perturbation and explicit encoder-only local gradient checks pass.",
+      "remaining": "Fixed local reader compatibility limits general information claims; s42 source endpoint reader weaker than s43."
+    },
+    "training": {
+      "status": "pass_for_scope",
+      "evidence": "Same source/fresh AdamW/constant LR/sampler/batch128/micro8/30epochs. Synthetic baseline step exactly matches immutable prior train_epoch including micro-tail. Gradient factor differences, combined clipping, observed updates, optimizer configuration and best journal recovery checked.",
+      "remaining": "Real baseline first5 R1 replay mandatory on AutoDL; R1 failed retention is preserved.30epochs not convergence or equal FLOPs."
+    },
+    "validation": {
+      "status": "pass_for_scope",
+      "evidence": "All8 workers lock before train-fit/val-selected13-head readouts; readout lock before research scoring. Both source and concurrent controls, best/actual last/epoch0, original24 fields and physical errors retained; paired month/contract-month intervals, explicit unsupported-age masks. Synthetic end-to-end report and actual extraction tested.",
+      "remaining": "Repeated research cohorts are not final holdout; intervals not multiplicity-adjusted global discoveries. Row/position quantiles are not individual-bar tails. Full neural outputs/weights not exported."
+    },
+    "data": {
+      "status": "pass_for_scope",
+      "evidence": "Pinned reviewed V07/R1/qualification/Context identities; reuse verified aligned255/native targets and immutable data caches. Fixed4789/978 train/val, same contracts/periods, train-only statistics and causal masks.",
+      "remaining": "Inherited scaler fitting and all historical ancestors not independently recreated; V14 coverage limitation retained."
+    },
+    "engineering": {
+      "status": "pass_for_scope",
+      "evidence": "24 new synthetic tests and97 related tests; lint/format, bash syntax, CLI help passed. Historical implementation exactly equals V07 manifest. Atomic epoch/checkpoint transaction, uncommitted refusal, altered weights/optimizer/selection rejection, timeout budget, disk and failure export tested.",
+      "remaining": "Real CUDA not executed locally;8-job GPU memory/time and full real evaluation still pending. Mid-epoch interruption deliberately needs review; cannot automatically spend additional updates."
+    }
+  },
+  "files_sha256": {
+    "src/obson/babel/recovery_rs.py": "607f80acfb64d5a58cf73c4733641b3dd513b6e41e48a52646b49db2cc824ee3",
+    "src/obson/babel/recovery_rs_evaluate.py": "87abda093b91cde5ed5f41dceb63ae6e2f68e62441afc323e85f3cde983e7f74",
+    "tests/babel/test_recovery_rs.py": "12558e2227fb995fc9416c3309b726cf127fffc77d03940bbbbf3a87b7d8046d",
+    "scripts/babel_recovery_rs_autodl.sh": "bf242890576c424819ed1b678322d5978061df582db14f5ef7de58cb0b76973b",
+    "docs/BABEL_RECOVERY_RS.md": "b5dd984b803c603d7895f503a455caf24e8337cb2737472ba9c724a5da6a117d"
+  }
+}
