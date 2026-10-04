@@ -1,6 +1,6 @@
 {
   "date": "2026-10-04",
-  "status": "plan_only_no_new_training_or_runner",
+  "status": "r0_implemented_real_audit_pending_no_new_training",
   "scope_warning": "Counts are the bounded response to confirmed issues, not a claim that all historical experiments are valid or that undiscovered defects cannot change the plan.",
   "coverage": {
     "report_archives": 61,
@@ -123,7 +123,16 @@
         "Fixed train batch task gradients with zero updates",
         "Source/optimizer availability and exact-resume versus fresh-Adam distinction"
       ],
-      "gate": "Identity/causality/common target/numerical contract failures stop; new defects require explicit dependency impact and revised count before training"
+      "gate": "Identity/causality/common target/numerical contract failures stop; new defects require explicit dependency impact and revised count before training",
+      "implementation": {
+        "module": "obson.babel.recovery_audit",
+        "script": "scripts/babel_recovery_r0_autodl.sh",
+        "protocol": "docs/BABEL_RECOVERY_R0.md",
+        "real_audit_executed": false,
+        "success_status": "audit_complete_requires_review",
+        "automatic_R1": false,
+        "independent_scaler_fit_reproduction": false
+      }
     },
     {
       "id": "R1",
