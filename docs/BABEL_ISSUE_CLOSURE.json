@@ -76,23 +76,25 @@
         "babel_macro_history768"
       ],
       "status": "open_same_target_information_attribution",
-      "action": "deferred_matched_readout",
+      "action": "V07 zero-update crossed encoder/query readout before optional matched fitting",
       "evidence": "docs/BABEL_MACRO_HISTORY768_REVIEW.md",
       "fact": "Old-reader drift is not information loss",
-      "decision_effect": "Preserve interface findings, no added-memory interpretation"
+      "decision_effect": "Preserve interface findings, no added-memory interpretation",
+      "plan": "docs/BABEL_RECOVERY_INTERFACE_PLAN.md"
     },
     {
       "id": "T1",
       "stages": [
         "babel_context_transfer768"
       ],
-      "status": "open_R1_not_run",
-      "action": "R1",
+      "status": "R1_completed_retention_failed_LR_contributor_supported",
+      "action": "Stop R1 recipe; V07 zero-update localization",
       "evidence": "docs/BABEL_RECOVERY_R0_REVIEW.md",
-      "fact": "Changed LR/Adam/sampling/clipping is adaptation, not exact resume",
-      "decision_effect": "Preserve recipe failure; LR causal role unproven",
-      "implementation": "V03/R1 training entrypoint and17 synthetic cases ready; actual CUDA pending",
-      "protocol": "docs/BABEL_RECOVERY_R1.md"
+      "fact": "Same-source lowerLR improves all48 final reference comparisons but seed42 fails3structure fields; LR alone insufficient",
+      "decision_effect": "Old recipe failure retained; bounded LR contribution supported; RS remains held",
+      "implementation": "V03/R1 entrypoint tested; real CUDA completed, retention gate failed; review recorded",
+      "protocol": "docs/BABEL_RECOVERY_R1.md",
+      "review": "docs/BABEL_RECOVERY_R1_REVIEW.md"
     },
     {
       "id": "B1",
@@ -180,7 +182,8 @@
   },
   "r1_implementation": {
     "entrypoint_ready": true,
-    "real_training_executed": false,
-    "validation": "docs/BABEL_RECOVERY_R1_VALIDATION.json"
+    "real_training_executed": true,
+    "validation": "docs/BABEL_RECOVERY_R1_VALIDATION.json",
+    "review": "docs/BABEL_RECOVERY_R1_REVIEW.md"
   }
 }

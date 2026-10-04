@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-04",
-  "current_iteration": "V03-code",
-  "current_iteration_scope": "Fixed five-epoch low-LR entrypoint ready; real AutoDL training pending; no automatic RS",
+  "current_iteration": "V03-report-review",
+  "current_iteration_scope": "R1 completed but retention gate failed; stop LR recipe, hold RS; V07 zero-update crossed readout plan next",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -127,18 +127,19 @@
         "R1"
       ],
       "implementation": "固定五轮双种子训练、恢复与导出入口完成",
-      "execution": "合成测试通过；真实CUDA未运行",
-      "conclusion": "高LR因果作用仍待本轮实际结果",
+      "execution": "真实双种子各5轮完成，共380更新；正式门槛未过",
+      "conclusion": "降LR减轻全部48项相对旧配方的误差；s42结构仍退化，不能单靠降LR解决",
       "evidence": [
         "docs/BABEL_RECOVERY_PLAN.md",
         "docs/BABEL_RECOVERY_R1.md",
-        "docs/BABEL_RECOVERY_R1_VALIDATION.json"
+        "docs/BABEL_RECOVERY_R1_VALIDATION.json",
+        "docs/BABEL_RECOVERY_R1_REVIEW.md"
       ],
       "depends_on": [
         "V02",
         "V14"
       ],
-      "next_action": "AutoDL执行R1；两种子实际第5轮24项均保留才进入V04/V05，失败不扩LR或轮数"
+      "next_action": "收束本五轮配方，不补轮或扫第三LR；转V07零更新定位，V04/V05等待"
     },
     {
       "id": "V04",
@@ -148,7 +149,7 @@
         "RS"
       ],
       "implementation": "四组损失组件和合成测试完成",
-      "execution": "未运行",
+      "execution": "未运行；R1前置失败，保持等待",
       "conclusion": "额外17+监督不对称，但不是已证实根因",
       "evidence": [
         "docs/BABEL_RECOVERY_PLAN.md",
@@ -167,7 +168,7 @@
         "RS"
       ],
       "implementation": "梯度开关和合成测试完成",
-      "execution": "未运行",
+      "execution": "未运行；R1前置失败，保持等待",
       "conclusion": "原detached局部头不保护编码器；主查询仍有近期监督",
       "evidence": [
         "docs/BABEL_RECOVERY_PLAN.md",
@@ -204,14 +205,16 @@
       "legacy_ids": [
         "S6"
       ],
-      "implementation": "同目标等预算读出方案待条件触发",
-      "execution": "本次补证未运行",
-      "conclusion": "固定头变差不证明信息消失",
+      "implementation": "零更新交叉回读计划已锁，入口未实现",
+      "execution": "由R1结构保护失败触发；诊断未运行",
+      "conclusion": "R1编码器与query均更新；当前不能归因信息丢失或读头变化",
       "evidence": [
-        "docs/BABEL_MACRO_HISTORY768_REVIEW.md"
+        "docs/BABEL_MACRO_HISTORY768_REVIEW.md",
+        "docs/BABEL_RECOVERY_R1_REVIEW.md",
+        "docs/BABEL_RECOVERY_INTERFACE_PLAN.md"
       ],
       "depends_on": [],
-      "next_action": "候选出现相关歧义时，固定新旧编码器进行同目标读取比较；不自动新增头矩阵"
+      "next_action": "先做两种子E0/E5×D0/D5八组合零更新回读；必要时再锁等预算读头验证"
     },
     {
       "id": "V08",
@@ -519,14 +522,10 @@
   ],
   "active_order": [
     [
-      "V03"
-    ],
-    [
-      "V04",
-      "V05"
+      "V07"
     ]
   ],
-  "next_after_active": "Review actual results before deciding V06 or V07; future branches are conditional, not an automatic training queue",
+  "next_after_active": "Review V07 diagnostic before defining a defensible next training comparison; no automatic RS or third LR",
   "active_training_budget": {
     "source": "docs/BABEL_RECOVERY_PLAN.json",
     "jobs_max": 10,
@@ -535,7 +534,21 @@
     "gpu_session_hours_cap": 10,
     "entrypoints_ready": false,
     "future_branches_included": false,
-    "ready_stages": [
+    "ready_stages": [],
+    "consumed": {
+      "jobs": 2,
+      "worker_epochs": 10,
+      "optimizer_updates": 380,
+      "session_seconds": 524.1648489544168
+    },
+    "remaining_unexecuted": {
+      "jobs": 8,
+      "worker_epochs": 240,
+      "optimizer_updates": 9120,
+      "session_seconds": 35475.83515104558,
+      "authorization": "Held; not automatic release"
+    },
+    "completed_entrypoints": [
       "V03"
     ]
   },
@@ -581,5 +594,8 @@
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "current_task_ids": [
     "V03"
-  ]
+  ],
+  "blocked_followups": {
+    "V04_V05": "R1 both-seed retention prerequisite failed; retained, not cancelled"
+  }
 }

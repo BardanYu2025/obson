@@ -1,0 +1,1785 @@
+{
+  "schema": "babel-recovery-r1-review-v1",
+  "date": "2026-10-04",
+  "task_ids": [
+    "V03"
+  ],
+  "archive_path": "/Users/bardan/Downloads/babel_recovery_r1_reports.tar.gz",
+  "archive_sha256": "706a91bea61a925d75a6ecec87ba0a660b35dd69105d5b00f62d7f87c012c8f9",
+  "archive_bytes": 1310744,
+  "manifest_sha256": "378678e50a6fc0fe25d2cfeb784fcc38ef4416d020f6551be8079b75a0a00e09",
+  "completion_sha256": "d6ef283d86910327686b1dd5a3dce8bc4e47df8da3f31af154ccc9389ea24456",
+  "verified_report_files": 26,
+  "omitted_bound_weights": [
+    "s42/last.pt",
+    "s43/last.pt"
+  ],
+  "verified_code_modules": 110,
+  "used_seconds": 524.1648489544168,
+  "remaining_total_budget_seconds": 35475.83515104558,
+  "total_epochs": 10,
+  "total_optimizer_updates": 380,
+  "scalar_gate_checks_recomputed": 240,
+  "export_aggregates_recomputed": 96,
+  "export_error_cells": 187776,
+  "maximum_export_mean_replay_difference": 9.313225746154785e-10,
+  "seeds": {
+    "42": {
+      "epochs": 5,
+      "optimizer_updates": 190,
+      "initial": {
+        "full/endpoint/activity": 0.1381525695323944,
+        "full/interior/activity": 0.1384650617837906,
+        "full/endpoint/structure": 0.0017600218337878888,
+        "full/interior/structure": 0.0015262718042800586,
+        "full/endpoint/near": 0.010832347647741302,
+        "full/interior/near": 0.012854517481966098,
+        "full/endpoint/mid": 0.020431738613150438,
+        "full/interior/mid": 0.023554665616676337,
+        "full/endpoint/far": 0.10627766189859196,
+        "full/interior/far": 0.10051762358887423,
+        "full/endpoint/price": 0.045668446012832396,
+        "full/interior/price": 0.045461356729699094,
+        "native/endpoint/activity": 0.1381525695323944,
+        "native/interior/activity": 0.033742837607860565,
+        "native/endpoint/structure": 0.0017600246243836797,
+        "native/interior/structure": 0.000560698007829718,
+        "native/endpoint/near": 0.010832351541336225,
+        "native/interior/near": 0.003475581775976807,
+        "native/endpoint/mid": 0.020431737582247617,
+        "native/interior/mid": 0.015979965516122532,
+        "native/endpoint/far": 0.10627768518307744,
+        "native/interior/far": 0.014875278755173214,
+        "native/endpoint/price": 0.045668454612762074,
+        "native/interior/price": 0.013481642336664568
+      },
+      "low_lr_epoch5": {
+        "full/endpoint/activity": 0.13860903680324554,
+        "full/interior/activity": 0.13913948833942413,
+        "full/endpoint/structure": 0.001956807335175915,
+        "full/interior/structure": 0.0017340524126855349,
+        "full/endpoint/near": 0.011578212699682096,
+        "full/interior/near": 0.0136082488602239,
+        "full/endpoint/mid": 0.020721989942608734,
+        "full/interior/mid": 0.023923843123342982,
+        "full/endpoint/far": 0.10602852889686906,
+        "full/interior/far": 0.1004737419137067,
+        "full/endpoint/price": 0.04593549064233309,
+        "full/interior/price": 0.04581998778256678,
+        "native/endpoint/activity": 0.13860903680324554,
+        "native/interior/activity": 0.03416748717427254,
+        "native/endpoint/structure": 0.0019568073205734355,
+        "native/interior/structure": 0.0006136245032726419,
+        "native/endpoint/near": 0.011578215386519073,
+        "native/interior/near": 0.003712749545663572,
+        "native/endpoint/mid": 0.020721990624201946,
+        "native/interior/mid": 0.01607388714909625,
+        "native/endpoint/far": 0.10602850511426633,
+        "native/interior/far": 0.014853521709594279,
+        "native/endpoint/price": 0.045935484259325435,
+        "native/interior/price": 0.01360609880643618
+      },
+      "high_lr_epoch5": {
+        "full/endpoint/activity": 0.1726570725440979,
+        "full/interior/activity": 0.17379984259605408,
+        "full/endpoint/structure": 0.007373661529991535,
+        "full/interior/structure": 0.007148431860497061,
+        "full/endpoint/near": 0.04282770484216557,
+        "full/interior/near": 0.0455011016677664,
+        "full/endpoint/mid": 0.032790183834385166,
+        "full/interior/mid": 0.036028631135199364,
+        "full/endpoint/far": 0.11607648419605379,
+        "full/interior/far": 0.11097315483018509,
+        "full/endpoint/price": 0.06377869633410856,
+        "full/interior/price": 0.06403301974012038,
+        "native/endpoint/activity": 0.1726570576429367,
+        "native/interior/activity": 0.05297165736556053,
+        "native/endpoint/structure": 0.0073736623358940075,
+        "native/interior/structure": 0.00208550200844055,
+        "native/endpoint/near": 0.04282769053520273,
+        "native/interior/near": 0.009844261755092282,
+        "native/endpoint/mid": 0.032790182285286504,
+        "native/interior/mid": 0.021762006890041742,
+        "native/endpoint/far": 0.11607649173867031,
+        "native/interior/far": 0.018007136566164598,
+        "native/endpoint/price": 0.06377869296483688,
+        "native/interior/price": 0.019846203288456977
+      },
+      "low_lr_gate": {
+        "passed": false,
+        "ratios": {
+          "full/endpoint/activity": 1.0033040809331026,
+          "full/endpoint/far": 0.9976558291058321,
+          "full/endpoint/mid": 1.0142059045954848,
+          "full/endpoint/near": 1.068855346615128,
+          "full/endpoint/price": 1.0058474647774451,
+          "full/endpoint/structure": 1.1118085569225624,
+          "full/interior/activity": 1.0048707345155896,
+          "full/interior/far": 0.9995634429704884,
+          "full/interior/mid": 1.0156732221409788,
+          "full/interior/near": 1.0586355247729236,
+          "full/interior/price": 1.007888701056592,
+          "full/interior/structure": 1.1361360459013958,
+          "native/endpoint/activity": 1.0033040809331026,
+          "native/endpoint/far": 0.997655386750456,
+          "native/endpoint/mid": 1.0142059891277442,
+          "native/endpoint/near": 1.0688552104625328,
+          "native/endpoint/price": 1.0058471355956227,
+          "native/endpoint/structure": 1.111806785804866,
+          "native/interior/activity": 1.0125848801261768,
+          "native/interior/far": 0.9985373688831634,
+          "native/interior/mid": 1.0058774615551553,
+          "native/interior/near": 1.0682382936077255,
+          "native/interior/price": 1.009231551072464,
+          "native/interior/structure": 1.0943939423786886
+        },
+        "failed_fields": [
+          "full/endpoint/structure",
+          "full/interior/structure",
+          "native/endpoint/structure"
+        ],
+        "worst_ratio": 1.1361360459013958
+      },
+      "high_lr_gate": {
+        "passed": false,
+        "ratios": {
+          "full/endpoint/activity": 1.2497565056407638,
+          "full/endpoint/far": 1.0922002057855928,
+          "full/endpoint/mid": 1.6048650805115765,
+          "full/endpoint/near": 3.9536863323525027,
+          "full/endpoint/price": 1.3965593730994779,
+          "full/endpoint/structure": 4.1895284413160185,
+          "full/interior/activity": 1.2551891456014932,
+          "full/interior/far": 1.1040168964208197,
+          "full/interior/mid": 1.5295751475109736,
+          "full/interior/near": 3.5396973656616013,
+          "full/interior/price": 1.4085153709961487,
+          "full/interior/structure": 4.683590328047088,
+          "native/endpoint/activity": 1.2497563977805826,
+          "native/endpoint/far": 1.092200037465185,
+          "native/endpoint/mid": 1.6048650856683224,
+          "native/endpoint/near": 3.9536835904717806,
+          "native/endpoint/price": 1.3965590363334495,
+          "native/endpoint/structure": 4.189522256528709,
+          "native/interior/activity": 1.569863743564368,
+          "native/interior/far": 1.2105411174161835,
+          "native/interior/mid": 1.361830654020222,
+          "native/interior/near": 2.832406885988337,
+          "native/interior/price": 1.4720909213325886,
+          "native/interior/structure": 3.7194746179192943
+        },
+        "failed_fields": [
+          "full/endpoint/activity",
+          "full/endpoint/mid",
+          "full/endpoint/near",
+          "full/endpoint/price",
+          "full/endpoint/structure",
+          "full/interior/activity",
+          "full/interior/far",
+          "full/interior/mid",
+          "full/interior/near",
+          "full/interior/price",
+          "full/interior/structure",
+          "native/endpoint/activity",
+          "native/endpoint/mid",
+          "native/endpoint/near",
+          "native/endpoint/price",
+          "native/endpoint/structure",
+          "native/interior/activity",
+          "native/interior/far",
+          "native/interior/mid",
+          "native/interior/near",
+          "native/interior/price",
+          "native/interior/structure"
+        ],
+        "worst_ratio": 4.683590328047088
+      },
+      "epoch_gates": [
+        {
+          "epoch": 1,
+          "passed": false,
+          "worst_ratio": 1.1183535831722764,
+          "failed_fields": [
+            "full/interior/structure",
+            "native/interior/structure"
+          ]
+        },
+        {
+          "epoch": 2,
+          "passed": false,
+          "worst_ratio": 1.2266972510596328,
+          "failed_fields": [
+            "full/endpoint/structure",
+            "full/interior/structure",
+            "native/endpoint/structure",
+            "native/interior/structure"
+          ]
+        },
+        {
+          "epoch": 3,
+          "passed": false,
+          "worst_ratio": 1.229401471500539,
+          "failed_fields": [
+            "full/endpoint/structure",
+            "full/interior/structure",
+            "native/endpoint/structure",
+            "native/interior/structure"
+          ]
+        },
+        {
+          "epoch": 4,
+          "passed": false,
+          "worst_ratio": 1.214149331838905,
+          "failed_fields": [
+            "full/endpoint/structure",
+            "full/interior/structure",
+            "native/endpoint/structure",
+            "native/interior/structure"
+          ]
+        },
+        {
+          "epoch": 5,
+          "passed": false,
+          "worst_ratio": 1.1361360459013958,
+          "failed_fields": [
+            "full/endpoint/structure",
+            "full/interior/structure",
+            "native/endpoint/structure"
+          ]
+        }
+      ],
+      "low_better_than_high_fields": 24,
+      "per_window_diagnostics": {
+        "full/activity": {
+          "initial_prefix_means": [
+            0.13975298404693604,
+            0.1381540596485138,
+            0.13748814165592194,
+            0.13815252482891083
+          ],
+          "epoch5_prefix_means": [
+            0.14034512639045715,
+            0.13890738785266876,
+            0.13816578686237335,
+            0.13860909640789032
+          ],
+          "prefix_ratios": [
+            1.0042370557785034,
+            1.0054528713226318,
+            1.004928708076477,
+            1.0033048391342163
+          ],
+          "fraction_worse_by_prefix": [
+            0.7055214723926381,
+            0.7188139059304703,
+            0.7014314928425358,
+            0.6973415132924335
+          ],
+          "initial_p50": [
+            0.12476150691509247,
+            0.12263581156730652,
+            0.12298621982336044,
+            0.12158426642417908
+          ],
+          "epoch5_p50": [
+            0.12524253129959106,
+            0.12394869327545166,
+            0.12382754683494568,
+            0.12233976274728775
+          ],
+          "initial_p95": [
+            0.2596317529678345,
+            0.2559400498867035,
+            0.25872474908828735,
+            0.261819988489151
+          ],
+          "epoch5_p95": [
+            0.2571723461151123,
+            0.25342828035354614,
+            0.2569209933280945,
+            0.26074516773223877
+          ]
+        },
+        "full/structure": {
+          "initial_prefix_means": [
+            0.0015526984919948385,
+            0.0014820563812394773,
+            0.0015440605396058653,
+            0.0017600218337878878
+          ],
+          "epoch5_prefix_means": [
+            0.0017569157465097713,
+            0.0016689153351955078,
+            0.0017763261563513246,
+            0.001956807335175914
+          ],
+          "prefix_ratios": [
+            1.1315240889121774,
+            1.1260808673147482,
+            1.1504252008180633,
+            1.1118085569225626
+          ],
+          "fraction_worse_by_prefix": [
+            0.8220858895705522,
+            0.8098159509202454,
+            0.83640081799591,
+            0.8292433537832311
+          ],
+          "initial_p50": [
+            0.0007395210265198972,
+            0.000754580072417411,
+            0.0007320072693731801,
+            0.0007266719466355192
+          ],
+          "epoch5_p50": [
+            0.0009525819087810427,
+            0.0009541141434399239,
+            0.000943418199254436,
+            0.00093308582484089
+          ],
+          "initial_p95": [
+            0.004110757458277215,
+            0.004276435528981702,
+            0.004384929727822401,
+            0.004966813544008439
+          ],
+          "epoch5_p95": [
+            0.0043399677571559795,
+            0.004559594107121475,
+            0.0047205999866013005,
+            0.00550006849911611
+          ]
+        },
+        "full/near": {
+          "initial_prefix_means": [
+            0.01096533831216366,
+            0.016371765796622455,
+            0.0112264483371122,
+            0.010832347647741315
+          ],
+          "epoch5_prefix_means": [
+            0.011717641331854814,
+            0.017171684485836163,
+            0.011935420762980715,
+            0.011578212699682075
+          ],
+          "prefix_ratios": [
+            1.068607369720334,
+            1.0488596464883913,
+            1.063151978664954,
+            1.068855346615125
+          ],
+          "fraction_worse_by_prefix": [
+            0.8047034764826176,
+            0.8343558282208589,
+            0.8149284253578732,
+            0.8353783231083844
+          ],
+          "initial_p50": [
+            0.0041002649480608565,
+            0.004123068883567739,
+            0.004297920299739414,
+            0.003968823134951031
+          ],
+          "epoch5_p50": [
+            0.004937968801636177,
+            0.0049743666872138995,
+            0.005136668059289742,
+            0.004826646116451385
+          ],
+          "initial_p95": [
+            0.020579670556628907,
+            0.02306947845934761,
+            0.02302343357966958,
+            0.021903747058188185
+          ],
+          "epoch5_p95": [
+            0.02293413228045832,
+            0.023648495989241822,
+            0.023627715238266057,
+            0.022280554769325875
+          ]
+        },
+        "full/mid": {
+          "initial_prefix_means": [
+            0.022890630834500766,
+            0.02415823815147891,
+            0.0236151278640493,
+            0.020431738613150396
+          ],
+          "epoch5_prefix_means": [
+            0.02325541359856712,
+            0.024462669207545095,
+            0.02405344656391677,
+            0.02072198994260879
+          ],
+          "prefix_ratios": [
+            1.0159358982591493,
+            1.012601542138848,
+            1.018560928502731,
+            1.0142059045954894
+          ],
+          "fraction_worse_by_prefix": [
+            0.7402862985685071,
+            0.7280163599182005,
+            0.754601226993865,
+            0.7423312883435583
+          ],
+          "initial_p50": [
+            0.010999420348748144,
+            0.011198825407312867,
+            0.011108148937452461,
+            0.011238192680472128
+          ],
+          "epoch5_p50": [
+            0.011634381329605956,
+            0.011713360016162924,
+            0.011773596196929206,
+            0.011865472304831176
+          ],
+          "initial_p95": [
+            0.05394089558575089,
+            0.058614077191250134,
+            0.058134140375481945,
+            0.0490107210841888
+          ],
+          "epoch5_p95": [
+            0.05524208882122614,
+            0.05860660333829596,
+            0.05747927634931835,
+            0.049152589366067756
+          ]
+        },
+        "full/far": {
+          "initial_prefix_means": [
+            0.10553754883387316,
+            0.09490516336542497,
+            0.10111015856732446,
+            0.106277661898592
+          ],
+          "epoch5_prefix_means": [
+            0.1054865730135056,
+            0.09481259636092039,
+            0.10112205636669422,
+            0.10602852889686908
+          ],
+          "prefix_ratios": [
+            0.9995169887785834,
+            0.9990246367929618,
+            1.0001176716517741,
+            0.9976558291058318
+          ],
+          "fraction_worse_by_prefix": [
+            0.5572597137014315,
+            0.5736196319018405,
+            0.5838445807770961,
+            0.5521472392638037
+          ],
+          "initial_p50": [
+            0.058515442598632166,
+            0.05697497809048918,
+            0.05311325852979158,
+            0.055479651468678115
+          ],
+          "epoch5_p50": [
+            0.05804869340542616,
+            0.05779510215760418,
+            0.05388769420064331,
+            0.05641294436768174
+          ],
+          "initial_p95": [
+            0.3132613607237557,
+            0.29397445361634433,
+            0.34563108767379175,
+            0.3325981484707585
+          ],
+          "epoch5_p95": [
+            0.3122970972092582,
+            0.2961369853266953,
+            0.3425113206649855,
+            0.3319468102806786
+          ]
+        },
+        "full/price": {
+          "initial_prefix_means": [
+            0.046271644565408596,
+            0.044973755137478214,
+            0.045138670486210425,
+            0.045668446012832424
+          ],
+          "epoch5_prefix_means": [
+            0.046628512850629064,
+            0.04530894677933743,
+            0.04552250371773397,
+            0.04593549064233308
+          ],
+          "prefix_ratios": [
+            1.007712461672202,
+            1.0074530499139907,
+            1.008503423503375,
+            1.0058474647774442
+          ],
+          "fraction_worse_by_prefix": [
+            0.7760736196319018,
+            0.7770961145194274,
+            0.7924335378323109,
+            0.7791411042944786
+          ],
+          "initial_p50": [
+            0.02572092723624111,
+            0.025328992928133287,
+            0.02414206586526517,
+            0.025175523040746953
+          ],
+          "epoch5_p50": [
+            0.026174330253480715,
+            0.025691165848665886,
+            0.024494131122104034,
+            0.025789664435290363
+          ],
+          "initial_p95": [
+            0.14055396166169387,
+            0.13862908571730148,
+            0.14777510025459958,
+            0.1406105704961202
+          ],
+          "epoch5_p95": [
+            0.14160098309212502,
+            0.13734294339963163,
+            0.14749852353921372,
+            0.1405508860079624
+          ]
+        },
+        "native/activity": {
+          "initial_prefix_means": [
+            0.009300225414335728,
+            0.01903444528579712,
+            0.07289384305477142,
+            0.13815249502658844
+          ],
+          "epoch5_prefix_means": [
+            0.009622547775506973,
+            0.01945492997765541,
+            0.07342499494552612,
+            0.13860909640789032
+          ],
+          "prefix_ratios": [
+            1.0346574783325195,
+            1.0220906734466553,
+            1.0072866678237915,
+            1.0033050775527954
+          ],
+          "fraction_worse_by_prefix": [
+            0.7566462167689162,
+            0.8047034764826176,
+            0.7147239263803681,
+            0.6973415132924335
+          ],
+          "initial_p50": [
+            0.006495044566690922,
+            0.015276731923222542,
+            0.06248012185096741,
+            0.12158438563346863
+          ],
+          "epoch5_p50": [
+            0.006985694635659456,
+            0.01575060933828354,
+            0.06306441128253937,
+            0.12233995646238327
+          ],
+          "initial_p95": [
+            0.020147254690527916,
+            0.040939487516880035,
+            0.13645008206367493,
+            0.26182010769844055
+          ],
+          "epoch5_p95": [
+            0.020355049520730972,
+            0.04098818078637123,
+            0.1375129371881485,
+            0.2607456147670746
+          ]
+        },
+        "native/structure": {
+          "initial_prefix_means": [
+            0.0004236629324908648,
+            0.0004417042307649182,
+            0.0008167268602333705,
+            0.00176002462438368
+          ],
+          "epoch5_prefix_means": [
+            0.00043905293678169177,
+            0.000504951061895004,
+            0.0008968695111412298,
+            0.001956807320573437
+          ],
+          "prefix_ratios": [
+            1.0363260580772164,
+            1.1431881941011943,
+            1.0981266256933921,
+            1.1118067858048666
+          ],
+          "fraction_worse_by_prefix": [
+            0.4897750511247444,
+            0.6860940695296524,
+            0.7627811860940695,
+            0.8292433537832311
+          ],
+          "initial_p50": [
+            0.00017447645399952787,
+            0.0002150401193343473,
+            0.00040621223355657114,
+            0.000726650966641064
+          ],
+          "epoch5_p50": [
+            0.00017696935851537078,
+            0.00027059369228590445,
+            0.0004912843142893679,
+            0.0009330903197786343
+          ],
+          "initial_p95": [
+            0.0010444100824085804,
+            0.0011556053589538101,
+            0.0021618358915945065,
+            0.004966912338448361
+          ],
+          "epoch5_p95": [
+            0.0010690404814100625,
+            0.0012190013860034414,
+            0.0023817695773851854,
+            0.005500031208280549
+          ]
+        },
+        "native/near": {
+          "initial_prefix_means": [
+            0.0027958567089943903,
+            0.004380101550600534,
+            0.0032507870683354933,
+            0.010832351541336244
+          ],
+          "epoch5_prefix_means": [
+            0.0029076938835200703,
+            0.00466415794555205,
+            0.003566396807918595,
+            0.011578215386519077
+          ],
+          "prefix_ratios": [
+            1.0400010394545238,
+            1.0648515546203652,
+            1.0970871770277788,
+            1.0688552104625313
+          ],
+          "fraction_worse_by_prefix": [
+            0.7852760736196319,
+            0.8006134969325154,
+            0.8496932515337423,
+            0.8353783231083844
+          ],
+          "initial_p50": [
+            0.0009963554747050118,
+            0.0009628488658963831,
+            0.0011802160999599028,
+            0.003968735991407259
+          ],
+          "epoch5_p50": [
+            0.0011316264615027945,
+            0.001161317075958855,
+            0.0014744113734387596,
+            0.004826622900508492
+          ],
+          "initial_p95": [
+            0.003882324681307566,
+            0.004372029543237266,
+            0.004638077772967326,
+            0.021903380158893843
+          ],
+          "epoch5_p95": [
+            0.003885582590047059,
+            0.00449525104846339,
+            0.005132627497490715,
+            0.022280821902431025
+          ]
+        },
+        "native/mid": {
+          "initial_prefix_means": [
+            0.015671236723554152,
+            0.015613986003788171,
+            0.016654673821025243,
+            0.020431737582247585
+          ],
+          "epoch5_prefix_means": [
+            0.015642934469206213,
+            0.01568971573035307,
+            0.016889011247729416,
+            0.020721990624201936
+          ],
+          "prefix_ratios": [
+            0.9981939999473429,
+            1.0048501213301027,
+            1.0140703702289469,
+            1.014205989127745
+          ],
+          "fraction_worse_by_prefix": [
+            0.6462167689161554,
+            0.6288343558282209,
+            0.7280163599182005,
+            0.7423312883435583
+          ],
+          "initial_p50": [
+            0.0031937089889996512,
+            0.005850054164741854,
+            0.006573893072962248,
+            0.011238202904200651
+          ],
+          "epoch5_p50": [
+            0.003318388253279165,
+            0.005994892465184405,
+            0.006970873350523694,
+            0.01186530543936216
+          ],
+          "initial_p95": [
+            0.030834936955777197,
+            0.044777533314615675,
+            0.03733522560220594,
+            0.04901076135511677
+          ],
+          "epoch5_p95": [
+            0.03135937714666967,
+            0.04386969744487197,
+            0.03797823243198112,
+            0.04915237758937225
+          ]
+        },
+        "native/far": {
+          "initial_prefix_means": [
+            0.0,
+            0.0,
+            0.04462583626551967,
+            0.10627768518307745
+          ],
+          "epoch5_prefix_means": [
+            0.0,
+            0.0,
+            0.044560565128782835,
+            0.10602850511426617
+          ],
+          "prefix_ratios": [
+            null,
+            null,
+            0.9985373688831627,
+            0.9976553867504544
+          ],
+          "fraction_worse_by_prefix": [
+            0.0,
+            0.0,
+            0.581799591002045,
+            0.5511247443762781
+          ],
+          "initial_p50": [
+            0.0,
+            0.0,
+            0.019409343898640595,
+            0.05548012886880137
+          ],
+          "epoch5_p50": [
+            0.0,
+            0.0,
+            0.019374652450130918,
+            0.05641269510433222
+          ],
+          "initial_p95": [
+            0.0,
+            0.0,
+            0.14628847783920057,
+            0.33259755548379677
+          ],
+          "epoch5_p95": [
+            0.0,
+            0.0,
+            0.14671706099215046,
+            0.3319465055924739
+          ]
+        },
+        "native/price": {
+          "initial_prefix_means": [
+            0.009178560520197854,
+            0.00995958401834095,
+            0.0213067824714549,
+            0.04566845461276208
+          ],
+          "epoch5_prefix_means": [
+            0.00921248089672034,
+            0.010139396312217804,
+            0.021466419210370402,
+            0.045935484259325386
+          ],
+          "prefix_ratios": [
+            1.0036956096163274,
+            1.0180541971979675,
+            1.0074922968369049,
+            1.0058471355956216
+          ],
+          "fraction_worse_by_prefix": [
+            0.7484662576687117,
+            0.7494887525562373,
+            0.7586912065439673,
+            0.7791411042944786
+          ],
+          "initial_p50": [
+            0.002075258515461342,
+            0.0034568820095521773,
+            0.0093758228971174,
+            0.0251755692384293
+          ],
+          "epoch5_p50": [
+            0.0022435358370269287,
+            0.0036200378517843154,
+            0.0096603253414464,
+            0.025789805157926674
+          ],
+          "initial_p95": [
+            0.019564822586950345,
+            0.02487828321870848,
+            0.07928183122738063,
+            0.14061030442162342
+          ],
+          "epoch5_p95": [
+            0.01834264871545117,
+            0.02481713107322705,
+            0.07765716415894211,
+            0.1405511840313467
+          ]
+        }
+      },
+      "training_seconds": 132.486872471869
+    },
+    "43": {
+      "epochs": 5,
+      "optimizer_updates": 190,
+      "initial": {
+        "full/endpoint/activity": 0.0707906037569046,
+        "full/interior/activity": 0.07042884081602097,
+        "full/endpoint/structure": 0.0009248679121255127,
+        "full/interior/structure": 0.00084149220642885,
+        "full/endpoint/near": 0.002311910752726112,
+        "full/interior/near": 0.00312621234226468,
+        "full/endpoint/mid": 0.009365637469177976,
+        "full/interior/mid": 0.012117826610008488,
+        "full/endpoint/far": 0.06880892465243613,
+        "full/interior/far": 0.0652489226075181,
+        "full/endpoint/price": 0.026638037170998025,
+        "full/interior/price": 0.02664311746390866,
+        "native/endpoint/activity": 0.070790596306324,
+        "native/interior/activity": 0.010659558698534966,
+        "native/endpoint/structure": 0.0009248672896905897,
+        "native/interior/structure": 0.00035051524613477936,
+        "native/endpoint/near": 0.0023119114012750607,
+        "native/interior/near": 0.0028208376897761542,
+        "native/endpoint/mid": 0.009365638810119727,
+        "native/interior/mid": 0.011216930244888717,
+        "native/endpoint/far": 0.06880892292068419,
+        "native/interior/far": 0.005561795483934211,
+        "native/endpoint/price": 0.026638037260414908,
+        "native/interior/price": 0.008081645138173018
+      },
+      "low_lr_epoch5": {
+        "full/endpoint/activity": 0.07077635079622269,
+        "full/interior/activity": 0.0705009400844574,
+        "full/endpoint/structure": 0.0009908857866668752,
+        "full/interior/structure": 0.0008999331511923441,
+        "full/endpoint/near": 0.0024059452965700064,
+        "full/interior/near": 0.0033034268617652927,
+        "full/endpoint/mid": 0.009446045858033464,
+        "full/interior/mid": 0.01223313181621789,
+        "full/endpoint/far": 0.0685378220063268,
+        "full/interior/far": 0.06497735977191778,
+        "full/endpoint/price": 0.026607405765760553,
+        "full/interior/price": 0.026651633601571804,
+        "native/endpoint/activity": 0.07077635079622269,
+        "native/interior/activity": 0.01092009898275137,
+        "native/endpoint/structure": 0.0009908863668719344,
+        "native/interior/structure": 0.00037803029201057025,
+        "native/endpoint/near": 0.0024059442204810654,
+        "native/interior/near": 0.0030109338551262492,
+        "native/endpoint/mid": 0.009446045035104104,
+        "native/interior/mid": 0.011293604886787828,
+        "native/endpoint/far": 0.06853782560798385,
+        "native/interior/far": 0.005595191227186427,
+        "native/endpoint/price": 0.02660740619813164,
+        "native/interior/price": 0.008208901470658503
+      },
+      "high_lr_epoch5": {
+        "full/endpoint/activity": 0.09456497430801392,
+        "full/interior/activity": 0.09452788531780243,
+        "full/endpoint/structure": 0.007177801112729983,
+        "full/interior/structure": 0.006915563800809615,
+        "full/endpoint/near": 0.01391104529455984,
+        "full/interior/near": 0.0153139431124198,
+        "full/endpoint/mid": 0.0185047659016528,
+        "full/interior/mid": 0.02131307844583569,
+        "full/endpoint/far": 0.08157773752842569,
+        "full/interior/far": 0.07772561406544769,
+        "full/endpoint/price": 0.03793382770933592,
+        "full/interior/price": 0.03806260781398917,
+        "native/endpoint/activity": 0.09456496685743332,
+        "native/interior/activity": 0.03036334365606308,
+        "native/endpoint/structure": 0.007177801429728578,
+        "native/interior/structure": 0.0024881531687170138,
+        "native/endpoint/near": 0.0139110454410038,
+        "native/interior/near": 0.013239810293377454,
+        "native/endpoint/mid": 0.018504762978922645,
+        "native/interior/mid": 0.017745651724543638,
+        "native/endpoint/far": 0.08157774436646753,
+        "native/interior/far": 0.00908898620666595,
+        "native/endpoint/price": 0.03793382915504244,
+        "native/interior/price": 0.016754895389200733
+      },
+      "low_lr_gate": {
+        "passed": true,
+        "ratios": {
+          "full/endpoint/activity": 0.9997986602751566,
+          "full/endpoint/far": 0.9960600656458635,
+          "full/endpoint/mid": 1.0085854688610476,
+          "full/endpoint/near": 1.0406739506414826,
+          "full/endpoint/price": 0.9988500877508039,
+          "full/endpoint/structure": 1.0713808682038082,
+          "full/interior/activity": 1.0010237179485144,
+          "full/interior/far": 0.9958380487409145,
+          "full/interior/mid": 1.0095153371904304,
+          "full/interior/near": 1.0566866546794564,
+          "full/interior/price": 1.0003196374326195,
+          "full/interior/structure": 1.0694491812485198,
+          "native/endpoint/activity": 0.9997987655021343,
+          "native/endpoint/far": 0.9960601430571319,
+          "native/endpoint/mid": 1.0085852365881862,
+          "native/endpoint/near": 1.040673193252191,
+          "native/endpoint/price": 0.9988501006292687,
+          "native/endpoint/structure": 1.071382216580966,
+          "native/interior/activity": 1.0244419390694113,
+          "native/interior/far": 1.0060044896200666,
+          "native/interior/mid": 1.006835617252238,
+          "native/interior/near": 1.0673899693126903,
+          "native/interior/price": 1.0157463400470776,
+          "native/interior/structure": 1.0784988561245374
+        },
+        "failed_fields": [],
+        "worst_ratio": 1.0784988561245374
+      },
+      "high_lr_gate": {
+        "passed": false,
+        "ratios": {
+          "full/endpoint/activity": 1.3358407654319584,
+          "full/endpoint/far": 1.185569138603556,
+          "full/endpoint/mid": 1.9758148831354423,
+          "full/endpoint/near": 6.0171203746323245,
+          "full/endpoint/price": 1.4240474050631668,
+          "full/endpoint/structure": 7.760893224454188,
+          "full/interior/activity": 1.342175793645882,
+          "full/interior/far": 1.1912168195171393,
+          "full/interior/mid": 1.7588202184897215,
+          "full/interior/near": 4.898561401406958,
+          "full/interior/price": 1.428609390982478,
+          "full/interior/structure": 8.218214913906444,
+          "native/endpoint/activity": 1.3358408007785838,
+          "native/endpoint/far": 1.1855692678186798,
+          "native/endpoint/mid": 1.9758142881751903,
+          "native/endpoint/near": 6.017118750022863,
+          "native/endpoint/price": 1.4240474545552757,
+          "native/endpoint/structure": 7.760898790279285,
+          "native/interior/activity": 2.8484616028462955,
+          "native/interior/far": 1.6341820250169885,
+          "native/interior/mid": 1.58204172952131,
+          "native/interior/near": 4.693573948392646,
+          "native/interior/price": 2.0732035498639125,
+          "native/interior/structure": 7.098559038884929
+        },
+        "failed_fields": [
+          "full/endpoint/activity",
+          "full/endpoint/far",
+          "full/endpoint/mid",
+          "full/endpoint/near",
+          "full/endpoint/price",
+          "full/endpoint/structure",
+          "full/interior/activity",
+          "full/interior/far",
+          "full/interior/mid",
+          "full/interior/near",
+          "full/interior/price",
+          "full/interior/structure",
+          "native/endpoint/activity",
+          "native/endpoint/far",
+          "native/endpoint/mid",
+          "native/endpoint/near",
+          "native/endpoint/price",
+          "native/endpoint/structure",
+          "native/interior/activity",
+          "native/interior/far",
+          "native/interior/mid",
+          "native/interior/near",
+          "native/interior/price",
+          "native/interior/structure"
+        ],
+        "worst_ratio": 8.218214913906444
+      },
+      "epoch_gates": [
+        {
+          "epoch": 1,
+          "passed": false,
+          "worst_ratio": 1.160430219387347,
+          "failed_fields": [
+            "full/endpoint/near",
+            "full/interior/near",
+            "native/endpoint/near",
+            "native/interior/structure"
+          ]
+        },
+        {
+          "epoch": 2,
+          "passed": false,
+          "worst_ratio": 1.1569345038941776,
+          "failed_fields": [
+            "full/endpoint/structure",
+            "native/endpoint/structure",
+            "native/interior/structure"
+          ]
+        },
+        {
+          "epoch": 3,
+          "passed": false,
+          "worst_ratio": 1.1881650993465833,
+          "failed_fields": [
+            "full/endpoint/near",
+            "full/endpoint/structure",
+            "full/interior/near",
+            "full/interior/structure",
+            "native/endpoint/near",
+            "native/endpoint/structure",
+            "native/interior/structure"
+          ]
+        },
+        {
+          "epoch": 4,
+          "passed": false,
+          "worst_ratio": 1.2339392636539404,
+          "failed_fields": [
+            "full/endpoint/structure",
+            "full/interior/structure",
+            "native/endpoint/structure",
+            "native/interior/structure"
+          ]
+        },
+        {
+          "epoch": 5,
+          "passed": true,
+          "worst_ratio": 1.0784988561245374,
+          "failed_fields": []
+        }
+      ],
+      "low_better_than_high_fields": 24,
+      "per_window_diagnostics": {
+        "full/activity": {
+          "initial_prefix_means": [
+            0.07152718305587769,
+            0.06950195133686066,
+            0.07025732845067978,
+            0.07079056650400162
+          ],
+          "epoch5_prefix_means": [
+            0.0716046541929245,
+            0.06961409747600555,
+            0.07028398662805557,
+            0.07077639549970627
+          ],
+          "prefix_ratios": [
+            1.0010831356048584,
+            1.0016136169433594,
+            1.0003794431686401,
+            0.9997998476028442
+          ],
+          "fraction_worse_by_prefix": [
+            0.6319018404907976,
+            0.6226993865030674,
+            0.5858895705521472,
+            0.5838445807770961
+          ],
+          "initial_p50": [
+            0.06311488151550293,
+            0.06181994080543518,
+            0.06303524971008301,
+            0.061288099735975266
+          ],
+          "epoch5_p50": [
+            0.0633736401796341,
+            0.06200382858514786,
+            0.06331221759319305,
+            0.061675235629081726
+          ],
+          "initial_p95": [
+            0.13708317279815674,
+            0.13108067214488983,
+            0.1350250393152237,
+            0.13526782393455505
+          ],
+          "epoch5_p95": [
+            0.13588427007198334,
+            0.12837085127830505,
+            0.13253849744796753,
+            0.13253192603588104
+          ]
+        },
+        "full/structure": {
+          "initial_prefix_means": [
+            0.0008694637537922088,
+            0.0008219970047975001,
+            0.0008330158606968415,
+            0.0009248679121255114
+          ],
+          "epoch5_prefix_means": [
+            0.0009323402056535452,
+            0.0008823415360120367,
+            0.0008851177119114512,
+            0.000990885786666875
+          ],
+          "prefix_ratios": [
+            1.0723163577401562,
+            1.0734121059594404,
+            1.0625460494485963,
+            1.0713808682038095
+          ],
+          "fraction_worse_by_prefix": [
+            0.7055214723926381,
+            0.7157464212678937,
+            0.6942740286298569,
+            0.7331288343558282
+          ],
+          "initial_p50": [
+            0.00040179138356737705,
+            0.00040797958663066336,
+            0.00041948572654716405,
+            0.00039802194213063526
+          ],
+          "epoch5_p50": [
+            0.000478237270521692,
+            0.0005013841890515092,
+            0.00048217366133754735,
+            0.0004891825035320315
+          ],
+          "initial_p95": [
+            0.002311132594765285,
+            0.00230666256292321,
+            0.002315749783954765,
+            0.0025298715936906404
+          ],
+          "epoch5_p95": [
+            0.002537096997584613,
+            0.0024849460235616,
+            0.0024601863694257357,
+            0.002744772185487854
+          ]
+        },
+        "full/near": {
+          "initial_prefix_means": [
+            0.002612641732172686,
+            0.0043639095207094565,
+            0.0024020857739119037,
+            0.0023119107527261127
+          ],
+          "epoch5_prefix_means": [
+            0.0027762824678890284,
+            0.004576313247674488,
+            0.0025576848697323614,
+            0.002405945296570009
+          ],
+          "prefix_ratios": [
+            1.0626342041854542,
+            1.048672807251627,
+            1.064776660979536,
+            1.0406739506414833
+          ],
+          "fraction_worse_by_prefix": [
+            0.7607361963190185,
+            0.7903885480572597,
+            0.7464212678936605,
+            0.7668711656441718
+          ],
+          "initial_p50": [
+            0.0008988307419772997,
+            0.0008938193755746647,
+            0.0009008725044085621,
+            0.0008917483184455757
+          ],
+          "epoch5_p50": [
+            0.001040340972228492,
+            0.0010479693151009654,
+            0.0010551042301584592,
+            0.001027471407646922
+          ],
+          "initial_p95": [
+            0.003527091618250361,
+            0.004143763419633407,
+            0.004120414151187643,
+            0.004045090427445296
+          ],
+          "epoch5_p95": [
+            0.0037196404971955917,
+            0.004181895265436504,
+            0.003936537960464375,
+            0.004015887743568029
+          ]
+        },
+        "full/mid": {
+          "initial_prefix_means": [
+            0.011580524940232696,
+            0.012565265447763228,
+            0.012207689442029561,
+            0.009365637469177974
+          ],
+          "epoch5_prefix_means": [
+            0.011695593207649124,
+            0.012683335540716276,
+            0.012320466700288276,
+            0.009446045858033462
+          ],
+          "prefix_ratios": [
+            1.009936360226354,
+            1.0093965458544345,
+            1.0092382148804044,
+            1.0085854688610476
+          ],
+          "fraction_worse_by_prefix": [
+            0.7208588957055214,
+            0.696319018404908,
+            0.6973415132924335,
+            0.7443762781186094
+          ],
+          "initial_p50": [
+            0.004481946745371338,
+            0.004461634384716845,
+            0.004572624848938446,
+            0.004611781453475243
+          ],
+          "epoch5_p50": [
+            0.004651125120849172,
+            0.004634715006957979,
+            0.004690335694913797,
+            0.004805586089242137
+          ],
+          "initial_p95": [
+            0.028203820884252242,
+            0.032573192321241666,
+            0.027967178316294295,
+            0.02149048286470063
+          ],
+          "epoch5_p95": [
+            0.02828758842901539,
+            0.03170644055981312,
+            0.027545304466303776,
+            0.021450675274437073
+          ]
+        },
+        "full/far": {
+          "initial_prefix_means": [
+            0.07072277368354243,
+            0.05994864102625342,
+            0.06507535311275842,
+            0.0688089246524362
+          ],
+          "epoch5_prefix_means": [
+            0.07038966786468401,
+            0.05968179470194875,
+            0.06486061674912058,
+            0.0685378220063268
+          ],
+          "prefix_ratios": [
+            0.9952899780154417,
+            0.9955487510686388,
+            0.9967001890367655,
+            0.9960600656458625
+          ],
+          "fraction_worse_by_prefix": [
+            0.4621676891615542,
+            0.45194274028629855,
+            0.4948875255623722,
+            0.4815950920245399
+          ],
+          "initial_p50": [
+            0.03608591723200798,
+            0.0347240671899855,
+            0.03343109905863745,
+            0.03370458559254065
+          ],
+          "epoch5_p50": [
+            0.0363150912835642,
+            0.034665209978995096,
+            0.033417374880695946,
+            0.033510714566213615
+          ],
+          "initial_p95": [
+            0.21417221840709552,
+            0.1802352888313653,
+            0.20742408862576273,
+            0.24065397605545596
+          ],
+          "epoch5_p95": [
+            0.21216142780229685,
+            0.17964707134747473,
+            0.2069385186646743,
+            0.2377945394590962
+          ]
+        },
+        "full/price": {
+          "initial_prefix_means": [
+            0.028100240289970695,
+            0.025449720755335817,
+            0.026379391346419465,
+            0.026638037170998028
+          ],
+          "epoch5_prefix_means": [
+            0.028084245342629252,
+            0.025472738645451135,
+            0.026397916816634934,
+            0.026607405765760535
+          ],
+          "prefix_ratios": [
+            0.9994307896595762,
+            1.0009044456847525,
+            1.0007022705706963,
+            0.9988500877508031
+          ],
+          "fraction_worse_by_prefix": [
+            0.6175869120654397,
+            0.614519427402863,
+            0.6380368098159509,
+            0.6267893660531697
+          ],
+          "initial_p50": [
+            0.014556513858790827,
+            0.013679415721720557,
+            0.013047136784069747,
+            0.013496227948568414
+          ],
+          "epoch5_p50": [
+            0.01461123852667644,
+            0.013658777938470104,
+            0.013196336294750362,
+            0.013651948837540822
+          ],
+          "initial_p95": [
+            0.08768359435931451,
+            0.07895133289412054,
+            0.09378673455521658,
+            0.0906156404735924
+          ],
+          "epoch5_p95": [
+            0.08698323169764838,
+            0.07738640155882175,
+            0.0935206582842666,
+            0.0917811063522141
+          ]
+        },
+        "native/activity": {
+          "initial_prefix_means": [
+            0.004907496739178896,
+            0.0076955282129347324,
+            0.019375650212168694,
+            0.07079055905342102
+          ],
+          "epoch5_prefix_means": [
+            0.005094229709357023,
+            0.008008567616343498,
+            0.019657503813505173,
+            0.07077641040086746
+          ],
+          "prefix_ratios": [
+            1.0380505323410034,
+            1.0406781435012817,
+            1.0145467519760132,
+            0.9998001456260681
+          ],
+          "fraction_worse_by_prefix": [
+            0.778118609406953,
+            0.8425357873210634,
+            0.7638036809815951,
+            0.5838445807770961
+          ],
+          "initial_p50": [
+            0.003272444009780884,
+            0.0057679954916238785,
+            0.01542455330491066,
+            0.06128804385662079
+          ],
+          "epoch5_p50": [
+            0.00351763516664505,
+            0.006109872367233038,
+            0.016023758798837662,
+            0.06167518347501755
+          ],
+          "initial_p95": [
+            0.011674707755446434,
+            0.0179935060441494,
+            0.04551413655281067,
+            0.1352679580450058
+          ],
+          "epoch5_p95": [
+            0.011641893535852432,
+            0.017922909930348396,
+            0.045899003744125366,
+            0.13253186643123627
+          ]
+        },
+        "native/structure": {
+          "initial_prefix_means": [
+            0.00035775884360942343,
+            0.00026241951888461606,
+            0.00043136737591029865,
+            0.0009248672896905876
+          ],
+          "epoch5_prefix_means": [
+            0.0003677973302658203,
+            0.00030044795520317114,
+            0.00046584559056271944,
+            0.0009908863668719344
+          ],
+          "prefix_ratios": [
+            1.028059366905144,
+            1.1449146636659902,
+            1.0799277288405567,
+            1.0713822165809683
+          ],
+          "fraction_worse_by_prefix": [
+            0.5644171779141104,
+            0.6830265848670757,
+            0.7075664621676891,
+            0.7331288343558282
+          ],
+          "initial_p50": [
+            0.00010131067293991927,
+            0.000136311168599682,
+            0.0002094650206668018,
+            0.00039802347402974
+          ],
+          "epoch5_p50": [
+            0.00012537922499531102,
+            0.00016693853245452843,
+            0.0002454799713979876,
+            0.0004891872991348621
+          ],
+          "initial_p95": [
+            0.0007704152249683646,
+            0.000646630901971606,
+            0.0010902636664312003,
+            0.0025298856982359516
+          ],
+          "epoch5_p95": [
+            0.0008883053873610993,
+            0.0007839488614465707,
+            0.0011341203458817804,
+            0.002744733789930337
+          ]
+        },
+        "native/near": {
+          "initial_prefix_means": [
+            0.002293820216553329,
+            0.004011168467885543,
+            0.002157524384889595,
+            0.0023119114012750607
+          ],
+          "epoch5_prefix_means": [
+            0.0023947550850119096,
+            0.0042726988106813624,
+            0.002365347669685487,
+            0.002405944220481064
+          ],
+          "prefix_ratios": [
+            1.0440029553014596,
+            1.0652005381697875,
+            1.0963248833947834,
+            1.0406731932521907
+          ],
+          "fraction_worse_by_prefix": [
+            0.7586912065439673,
+            0.8353783231083844,
+            0.8149284253578732,
+            0.7668711656441718
+          ],
+          "initial_p50": [
+            0.0006425216002897435,
+            0.0006092006372875227,
+            0.0007788726084638695,
+            0.0008917488542433007
+          ],
+          "epoch5_p50": [
+            0.0007316862070853408,
+            0.0007869933638133247,
+            0.0009606083881018184,
+            0.0010274589541187963
+          ],
+          "initial_p95": [
+            0.002823540596376829,
+            0.0031300562354732333,
+            0.0032716225531099243,
+            0.0040450530912687814
+          ],
+          "epoch5_p95": [
+            0.002850143610726481,
+            0.003459719143059562,
+            0.0034046271457529457,
+            0.004015747586884322
+          ]
+        },
+        "native/mid": {
+          "initial_prefix_means": [
+            0.010935572775738192,
+            0.011276730492105206,
+            0.011438487466822782,
+            0.009365638810119738
+          ],
+          "epoch5_prefix_means": [
+            0.010957714630505004,
+            0.011370149517838251,
+            0.011552950512020214,
+            0.009446045035104118
+          ],
+          "prefix_ratios": [
+            1.0020247549187307,
+            1.0082842297063361,
+            1.0100068339917694,
+            1.0085852365881867
+          ],
+          "fraction_worse_by_prefix": [
+            0.6083844580777096,
+            0.7065439672801636,
+            0.712678936605317,
+            0.7443762781186094
+          ],
+          "initial_p50": [
+            0.0018941074945400143,
+            0.0034495738798758953,
+            0.004019204332938939,
+            0.0046117827547825785
+          ],
+          "epoch5_p50": [
+            0.0019479896196947912,
+            0.003597920500650208,
+            0.004149109707675706,
+            0.004805611191592261
+          ],
+          "initial_p95": [
+            0.01926698549506732,
+            0.03030338192814319,
+            0.02531413955161173,
+            0.02149046772337051
+          ],
+          "epoch5_p95": [
+            0.019914444386856807,
+            0.029375927375890752,
+            0.024373954573734972,
+            0.021450576192725553
+          ]
+        },
+        "native/far": {
+          "initial_prefix_means": [
+            0.0,
+            0.0,
+            0.016685386451802633,
+            0.06880892292068409
+          ],
+          "epoch5_prefix_means": [
+            0.0,
+            0.0,
+            0.01678557368155928,
+            0.06853782560798385
+          ],
+          "prefix_ratios": [
+            null,
+            null,
+            1.0060044896200664,
+            0.9960601430571333
+          ],
+          "fraction_worse_by_prefix": [
+            0.0,
+            0.0,
+            0.6441717791411042,
+            0.4815950920245399
+          ],
+          "initial_p50": [
+            0.0,
+            0.0,
+            0.005415344883500395,
+            0.033704532969439274
+          ],
+          "epoch5_p50": [
+            0.0,
+            0.0,
+            0.005555275523093697,
+            0.03351064371894483
+          ],
+          "initial_p95": [
+            0.0,
+            0.0,
+            0.037902272301871626,
+            0.24065432108692017
+          ],
+          "epoch5_p95": [
+            0.0,
+            0.0,
+            0.0382807218796841,
+            0.2377943308069398
+          ]
+        },
+        "native/price": {
+          "initial_prefix_means": [
+            0.006564732475391445,
+            0.007621853924253788,
+            0.010058349014873813,
+            0.02663803726041489
+          ],
+          "epoch5_prefix_means": [
+            0.00662787341395313,
+            0.007800038145965159,
+            0.010198792852057218,
+            0.026607406198131654
+          ],
+          "prefix_ratios": [
+            1.0096182043668,
+            1.0233780683127978,
+            1.0139629115052304,
+            0.9988501006292698
+          ],
+          "fraction_worse_by_prefix": [
+            0.7106339468302658,
+            0.8251533742331288,
+            0.7903885480572597,
+            0.6267893660531697
+          ],
+          "initial_p50": [
+            0.0013078881000390813,
+            0.0020604068397509466,
+            0.00357818817911959,
+            0.013496190556027606
+          ],
+          "epoch5_p50": [
+            0.001392450572122008,
+            0.0022190372310119727,
+            0.0037174405732733626,
+            0.013651893949853434
+          ],
+          "initial_p95": [
+            0.013251289371624501,
+            0.01904115546059995,
+            0.026932459131609313,
+            0.0906158648758418
+          ],
+          "epoch5_p95": [
+            0.01371129602888446,
+            0.018589584534345314,
+            0.026761188452031282,
+            0.09178102957874817
+          ]
+        }
+      },
+      "training_seconds": 129.9629328083247
+    }
+  },
+  "r1_passed": false,
+  "run_status": "r1_complete_requires_review",
+  "scientific_decision": "r1_retention_gate_failed_stop_recipe",
+  "execution_complete": true,
+  "engineering_review": "passed_with_export_scope_limits",
+  "local_real_weight_inferences": 0,
+  "new_local_or_remote_training_this_review": 0,
+  "rs_allowed": false,
+  "conclusions": {
+    "V03": "Lower LR substantially reduces degradation under the matched prefix adaptation recipe; insufficient for both seeds to retain all24 metrics. Fixed five-epoch recipe complete and not accepted.",
+    "T1": "High LR is a supported contributor in this bounded comparison, not the only cause or proof all prior training used bad LR.",
+    "V04_V05": "Original R1 prerequisite failed; RS matrix remains held, no implicit LR sweep or extension.",
+    "V07": "Trigger zero-update crossed encoder/query readout plan; it diagnoses interface sensitivity, not permanent information loss."
+  },
+  "next_plan": "docs/BABEL_RECOVERY_INTERFACE_PLAN.md",
+  "review": {
+    "purpose": {
+      "status": "pass_for_scope",
+      "evidence": [
+        "V03 completed fixed five-epoch question; no model promotion",
+        "All48 final low-LR vs high-LR comparisons better, but protected source gate failed for seed42"
+      ],
+      "remaining": "Reusable balanced representation not accepted; no new prediction result"
+    },
+    "architecture": {
+      "status": "pass_for_scope",
+      "evidence": [
+        "110 bound module hashes and same initial source signatures verified",
+        "Original768/4layers/8heads, adapter/query; final trained signatures differ; causal checks passed remotely"
+      ],
+      "remaining": "No local weights to replay models; source-to-updated interface/information explanation not identified; V07 conditional diagnostic next"
+    },
+    "training": {
+      "status": "pass_for_scope",
+      "evidence": [
+        "Two seeds5epochs each,380 observed committed updates;10 exact deterministic sampling records match old high-LR run",
+        "LR/step/history checks and no epoch0 fallback; original train step immutable",
+        "Single session524.165seconds, exit3 for gate failure"
+      ],
+      "remaining": "Five-epoch effect only; fresh Adam and prefix-only adaptation remain different from source pretraining; no third LR or extra epochs authorized"
+    },
+    "validation": {
+      "status": "pass_for_scope",
+      "evidence": [
+        "240 epoch-field retention calculations,96 array aggregations and187776 exported error cells checked",
+        "Seed42 passes21/24; seed43 passes24/24; all three formal failures structure",
+        "Prefix64 native structure also degrades~14% in both seeds, supplementary diagnostic not a retroactive gate"
+      ],
+      "remaining": "Formal seed43 pass is aggregate scope, not every-position stability. Old high-LR per-window arrays unavailable; no final independent holdout or raw prediction rerun"
+    },
+    "data": {
+      "status": "pass_for_scope",
+      "evidence": [
+        "Source identity/rows match reviewed qualification",
+        "978 identical validation endpoints; high-LR reference matches original downloaded Context report",
+        "Unobserved age bands have undefined diagnostic ratios, never treated as gains"
+      ],
+      "remaining": "No independent scaler refit or raw data regeneration in this report review"
+    },
+    "engineering": {
+      "status": "pass_for_scope",
+      "evidence": [
+        "26 exported bound reports,110 code modules, protocol/script hashes verified; two omitted weight hashes consistent with worker receipts",
+        "Execution completed normally; rs_authorized false; no pending epoch or timeout",
+        "Plans/ledger/budget/issue disposition updated"
+      ],
+      "remaining": "Two last.pt omitted as designed, optimizer tensor states and final models only remotely verified; no claim every historical experiment is audited"
+    }
+  },
+  "next_plan_review": {
+    "purpose": {
+      "status": "pass_for_scope",
+      "evidence": "V07限定固定模块替换的读取敏感性；不增加训练或选新主模型。",
+      "remaining": "不能独立判定状态信息是否丢失。"
+    },
+    "architecture": {
+      "status": "pass_for_scope",
+      "evidence": "双种子E0/E5与完整D0/D5含buffer交叉；768/4层/8头与可见历史不变。",
+      "remaining": "实际加载路径、接口与因果检查待实现。"
+    },
+    "training": {
+      "status": "not_applicable",
+      "evidence": "全部冻结，零更新，无新头、校准或统计拟合。",
+      "remaining": "若后续需要读头适配必须单独锁协议。"
+    },
+    "validation": {
+      "status": "pass_for_scope",
+      "evidence": "先复放96源与末轮值，再披露全部组合/位置/分项/逐窗口；不改原门槛。",
+      "remaining": "实现与CUDA尚未验证；val为反复使用研究诊断数据。"
+    },
+    "data": {
+      "status": "pass_for_scope",
+      "evidence": "沿用978端点、255缓存、物理目标/价格坐标/mask与固定统计。",
+      "remaining": "源码须验证来源不变；不扩张原scaler审查结论。"
+    },
+    "engineering": {
+      "status": "open",
+      "evidence": "规定1800秒累计上限计入原预算，串行与失败导出。",
+      "remaining": "运行入口、磁盘预检、加载/数值测试和CUDA均未完成，暂无运行命令。"
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "date": "2026-10-04",
-  "status": "R1_entrypoint_ready_real_CUDA_pending_RS_training_entrypoint_pending",
+  "status": "R1_completed_retention_gate_failed_RS_held_V07_zero_update_next",
   "scope_warning": "Counts are the bounded response to confirmed issues, not a claim that all historical experiments are valid or that undiscovered defects cannot change the plan.",
   "coverage": {
     "report_archives": 61,
@@ -167,15 +167,24 @@
       "reference": "Reuse prior high-LR prefix first five epochs only if sampling/init/objective signatures match",
       "gate": "Both actually updated epoch5 checkpoints finite and all24 full/native retention metrics <=1.10 source; epoch0 fallback cannot pass",
       "failure": "Stop, report and revise plan; no implicit third LR or extra reference jobs",
-      "status": "entrypoint_ready_real_cuda_pending",
+      "status": "completed_gate_failed",
       "implementation": {
         "module": "obson.babel.recovery_lr",
         "script": "scripts/babel_recovery_r1_autodl.sh",
         "protocol": "docs/BABEL_RECOVERY_R1.md",
         "validation": "docs/BABEL_RECOVERY_R1_VALIDATION.json",
-        "real_training_executed": false,
+        "real_training_executed": true,
         "uses_immutable_historical_train_epoch": true,
         "resume": "Complete atomic epoch checkpoints only; uncommitted epoch blocks automatic replay"
+      },
+      "review": {
+        "document": "docs/BABEL_RECOVERY_R1_REVIEW.md",
+        "sha256": "706a91bea61a925d75a6ecec87ba0a660b35dd69105d5b00f62d7f87c012c8f9",
+        "passed": false,
+        "epochs": 10,
+        "updates": 380,
+        "seed42_passed_fields": 21,
+        "seed43_passed_fields": 24
       }
     },
     {
@@ -218,7 +227,7 @@
       },
       "qualification": "R1 both seeds pass; gradient residual audit passes unchanged tolerance; source local head provenance, causal targets and frozen-reader validation primary better than train-mean baseline for each seed and native endpoint/interior",
       "budget_interpretation": "Same source and updates; finite adaptation diagnostic, not convergence or equal FLOPs proof",
-      "status": "objective_component_and_synthetic_tests_only_no_training_entrypoint",
+      "status": "held_R1_prerequisite_failed_no_training_entrypoint",
       "module": "obson.babel.recovery_objectives",
       "protocol": "docs/BABEL_RECOVERY_PLAN.md",
       "real_training_executed": false
@@ -235,7 +244,9 @@
     "timeout_behavior": "Mark incomplete; no ranking unequal incomplete budgets or silent extension",
     "enforcement_implementation_status": "R1 cumulative independent supervisor implemented; RS runner pending",
     "R1_cumulative_seconds_cap": 3600,
-    "RS_time_budget_rule": "Deduct actual R1 session used_seconds from existing36000second total; never allocate a fresh10h"
+    "RS_time_budget_rule": "Deduct actual R1 session used_seconds from existing36000second total; never allocate a fresh10h",
+    "actual_R1_session_seconds": 524.1648489544168,
+    "remaining_total_session_seconds": 35475.83515104558
   },
   "interpretation_corrections": [
     "Do not claim four layers globally optimal from unequal extended budgets",
@@ -1359,5 +1370,14 @@
     "raw_scope": "Reuse reviewed R0 only after exact source/cache/code/report binding; no independent scaler fit reproduction",
     "review": "docs/BABEL_RECOVERY_QUALIFICATION_REVIEW.md",
     "reviewed_completion_sha256": "2e0fe27289d2000db90c0ac4e80d67cc175545f07370c85975373a859cc47c86"
+  },
+  "next_zero_update_plan": {
+    "task_id": "V07",
+    "document": "docs/BABEL_RECOVERY_INTERFACE_PLAN.md",
+    "implementation_ready": false,
+    "training_jobs": 0,
+    "optimizer_updates": 0,
+    "planned_seconds_cap": 1800,
+    "deduct_from_existing_budget": true
   }
 }
