@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-05",
-  "current_iteration": "roadmap_correction_first",
-  "current_iteration_scope": "User priority: fix original implementation/experimental-control errors, verify affected conclusions, archive reliable conclusions in the existing roadmap before any model optimization.",
+  "current_iteration": "roadmap_human_readable_repair_ledger",
+  "current_iteration_scope": "只重写现有路线图及同步状态，让已修复、未修复、结论撤回和最终验收可分辨；本轮不修改模型或启动实验。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -86,7 +86,7 @@
   "repair_tasks": [
     {
       "id": "V01",
-      "title": "修复R0复放运行口径",
+      "title": "复放旧模型时的运行配置错误",
       "legacy_ids": [
         "E1"
       ],
@@ -97,11 +97,17 @@
         "docs/BABEL_RECOVERY_R0_REVIEW.md"
       ],
       "depends_on": [],
-      "next_action": "复用已验证结果；不因此宣布结构目标合理"
+      "next_action": "无；已关闭，不重复运行。",
+      "human_status": "已修复，已关闭",
+      "original_problem": "审计程序未恢复旧实验的注意力后端等运行配置，导致旧模型复放报错。",
+      "completed_work": "已修复配置恢复；AutoDL复放的140个原验证值一致，未放宽容差。",
+      "completion_rule": "修正运行配置且140个归档值按原容差复现；已满足。",
+      "closed": true,
+      "remaining_work": "无；本项已关闭。"
     },
     {
       "id": "V02",
-      "title": "核对实际联合梯度与分项梯度",
+      "title": "用不充分的梯度统计推断精确占比",
       "legacy_ids": [
         "E2"
       ],
@@ -117,11 +123,17 @@
       "depends_on": [
         "V01"
       ],
-      "next_action": "保留固定批直接梯度通过的结论；弃用旧精确比例，不重复已完成R1"
+      "next_action": "无；已关闭，不重复运行。",
+      "human_status": "核查完成，已关闭",
+      "original_problem": "旧梯度范数和夹角不足以支持精确的联合梯度占比解释。",
+      "completed_work": "增加直接核对；真实固定批16/16通过，弃用旧精确占比。",
+      "completion_rule": "直接梯度核对通过，并停止引用旧精确占比；已满足。",
+      "closed": true,
+      "remaining_work": "无；本项已关闭。"
     },
     {
       "id": "V03",
-      "title": "学习率单因素稳定性筛查",
+      "title": "续训后退化，是否由学习率过高造成",
       "legacy_ids": [
         "T1",
         "R1"
@@ -139,11 +151,21 @@
         "V02",
         "V14"
       ],
-      "next_action": "本五轮配方收束，不补轮或扫LR；RS-v2准入前瞻修订，R1失败保留"
+      "next_action": "不追加学习率试跑。V06开跑前逐项列出新旧Adam、学习率、采样和裁剪差异；各对照必须相同，并保留未训练源模型作基准。",
+      "human_status": "部分完成",
+      "original_problem": "旧适配提高了学习率，还重置Adam并改变采样；失败不能归因于完整历史输入。",
+      "completed_work": "只降学习率的双种子5轮实验完成：退化减轻，但一组仍未守住原能力。",
+      "completion_rule": "学习率这条解释已核验；其余训练变化需在V06中受控，结果仍退化时只归档该配方失败，不归因为历史长度。",
+      "closed": false,
+      "remaining_work": "不追加学习率试跑。V06开跑前逐项列出新旧Adam、学习率、采样和裁剪差异；各对照必须相同，并保留未训练源模型作基准。",
+      "code_locations": [
+        "src/obson/babel/context_transfer_run.py:train_epoch",
+        "src/obson/babel/context_transfer_run.py:worker"
+      ]
     },
     {
       "id": "V04",
-      "title": "检验远端额外结构项的作用",
+      "title": "近端和远端受到的额外结构监督不对称",
       "legacy_ids": [
         "S1",
         "RS"
@@ -162,13 +184,24 @@
       "depends_on": [
         "V03"
       ],
-      "next_action": "归档已复核的有限干预结果及错误表述撤回；不作为全部历史修复完成，不扩展损失实验",
+      "next_action": "停止本30轮配方。归档前将原结构实验的结论逐句对应到实际损失和RS证据；若仍要保留“架构导致近端弱”的判断，必须先列出能隔离该因素的原阶段重验，不能引用RS替代。",
       "admission_revision": "V03 is reviewed evidence, not a claimed passed stability gate; V02/V14 source/target/gradient qualification plus original/R1 replay remain mandatory",
-      "scientific_acceptance": false
+      "scientific_acceptance": false,
+      "human_status": "部分完成",
+      "original_problem": "额外结构损失只覆盖回看17根及更远；此前没有把它与架构能力分清。",
+      "completed_work": "确认不对称；开关该损失的30轮实验完成，去掉它有小幅近期收益但明显损害结构，未得到修复模型。",
+      "completion_rule": "损失覆盖事实、错误归因撤回、原结论受影响范围逐项有出处；近端能力未修好必须继续明示，不能以RS跑完销项。",
+      "closed": false,
+      "remaining_work": "停止本30轮配方。归档前将原结构实验的结论逐句对应到实际损失和RS证据；若仍要保留“架构导致近端弱”的判断，必须先列出能隔离该因素的原阶段重验，不能引用RS替代。",
+      "code_locations": [
+        "src/obson/babel/history_structure.py:pools",
+        "src/obson/babel/history_structure.py:metrics",
+        "src/obson/babel/recovery_objectives.py"
+      ]
     },
     {
       "id": "V05",
-      "title": "检验局部监督回传编码器",
+      "title": "局部损失是否真的训练了编码器",
       "legacy_ids": [
         "S2",
         "RS"
@@ -188,13 +221,23 @@
         "V03",
         "V14"
       ],
-      "next_action": "归档已复核的有限干预结果及错误表述撤回；不作为全部历史修复完成，不扩展损失实验",
+      "next_action": "停止本30轮配方。归档前追踪受影响实验实际是否采用这条detach路径，列明哪些只是局部读数有效、哪些训练保护解释须撤回；原阶段重新训练是否必要要对应具体旧结论，不泛化重跑。",
       "admission_revision": "V03 is reviewed evidence, not a claimed passed stability gate; V02/V14 source/target/gradient qualification plus original/R1 replay remain mandatory",
-      "scientific_acceptance": false
+      "scientific_acceptance": false,
+      "human_status": "部分完成",
+      "original_problem": "局部头接收z.detach()，该损失不会回传编码器；此前“它保护编码器”的解释错误。",
+      "completed_work": "已确认梯度路径并撤回该解释；打开固定局部头0.25回传的30轮实验未通过模型修复验收。",
+      "completion_rule": "受影响代码路径与旧结论逐项对应，保留与撤回都有依据；需要重验的结论留在本项，不能移到未来优化里当作已修复。",
+      "closed": false,
+      "remaining_work": "停止本30轮配方。归档前追踪受影响实验实际是否采用这条detach路径，列明哪些只是局部读数有效、哪些训练保护解释须撤回；原阶段重新训练是否必要要对应具体旧结论，不泛化重跑。",
+      "code_locations": [
+        "src/obson/babel/history_structure.py:losses",
+        "src/obson/babel/recovery_objectives.py"
+      ]
     },
     {
       "id": "V06",
-      "title": "拆开上下文策略与目标扩展",
+      "title": "输入历史和训练答案一起变了，比较不公平",
       "legacy_ids": [
         "S3",
         "R2"
@@ -209,12 +252,25 @@
         "V04",
         "V05"
       ],
-      "next_action": "在原模型与原任务上隔离输入上下文变化，锁共同标签/坐标/mask/有效权重；完成回归检查和必要匹配重验，再归档原结论处置",
-      "closure": "修正后的比较足以支持或否定原归因，不要求新模型优于旧模型；未取得真实证据前保持待重验"
+      "next_action": "按下方A/B/C任务卡修改比较入口、检查实际训练损失、锁定预算，再在AutoDL做匹配重验。",
+      "closure": "修正后的比较足以支持或否定原归因，不要求新模型优于旧模型；未取得真实证据前保持待重验",
+      "human_status": "待修复、待重验",
+      "original_problem": "旧prefix/full比较同时改变可见历史、重建范围及各段有效权重，无法单独判断增加历史的作用。",
+      "completed_work": "已定位context_transfer_run训练步及uniform_context.targets/loss_rows；尚无修正后的训练结果。",
+      "completion_rule": "共同目标对照在真实训练中成立，结果完成复核并逐条处置原结论；改善、无改善或证据不足都必须如实归档。",
+      "closed": false,
+      "remaining_work": "按下方A/B/C任务卡修改比较入口、检查实际训练损失、锁定预算，再在AutoDL做匹配重验。",
+      "code_locations": [
+        "src/obson/babel/context_transfer_run.py:train_epoch",
+        "src/obson/babel/context_transfer.py:states",
+        "src/obson/babel/uniform_context.py:targets",
+        "src/obson/babel/uniform_context.py:loss_rows"
+      ],
+      "dependency_note": "V04/V05的已有失败报告是V06设计输入；不要求它们先产生更好模型。其未核销的旧结论责任仍保留，不把执行顺序当全部关闭。"
     },
     {
       "id": "V07",
-      "title": "分清解码接口漂移与状态信息缺失",
+      "title": "读不出来是否就等于编码器丢了信息",
       "legacy_ids": [
         "S6"
       ],
@@ -229,11 +285,20 @@
         "docs/BABEL_RECOVERY_INTERFACE_REVIEW.md"
       ],
       "depends_on": [],
-      "next_action": "零更新诊断已收束；RS也未修复，不追加读头矩阵；信息缺失归因仍开放"
+      "next_action": "不再跑同一八组合。归档时撤回“固定旧头读差就证明信息丢失”的推断；若需保留信息减少判断，须先设计冻结编码器、同目标同读头容量同拟合预算的直接对照。",
+      "human_status": "部分完成",
+      "original_problem": "更换编码器后仍用旧读头，误差变大可能只是两者不再配合，不能直接认定信息丢失。",
+      "completed_work": "新旧编码器和读头的八种组合已测完，96个原/末轮值复现；证明接口配合会影响结果。",
+      "completion_rule": "接口敏感性证据可归档；信息减少判断只有直接证据才保留，否则明确撤回该判断并将科学问题记为未知。",
+      "closed": false,
+      "remaining_work": "不再跑同一八组合。归档时撤回“固定旧头读差就证明信息丢失”的推断；若需保留信息减少判断，须先设计冻结编码器、同目标同读头容量同拟合预算的直接对照。",
+      "code_locations": [
+        "src/obson/babel/recovery_interface.py"
+      ]
     },
     {
       "id": "V08",
-      "title": "位置密度/权重比较范围纠正",
+      "title": "全位置监督与位置权重混淆",
       "legacy_ids": [
         "S4",
         "H1",
@@ -246,11 +311,17 @@
         "docs/BABEL_POSITION_SUPERVISION768_REVIEW.md"
       ],
       "depends_on": [],
-      "next_action": "保留旧结论，不重复原矩阵；从头全位置转F01"
+      "next_action": "无；不重复原矩阵。从头全位置训练仍保留在F01。",
+      "human_status": "解释已纠正，已关闭",
+      "original_problem": "dense_all改变位置覆盖及权重，不能当作纯采样密度比较。",
+      "completed_work": "已核实原来就有dense_matched匹配权重对照；其收益未达原门槛。",
+      "completion_rule": "保留匹配权重对照；dense_all只解释整套配方；已满足。",
+      "closed": true,
+      "remaining_work": "无；本项已关闭。"
     },
     {
       "id": "V09",
-      "title": "共同历史查询语义的准入漏洞",
+      "title": "共同历史头可能不看查询也能得分",
       "legacy_ids": [
         "S5"
       ],
@@ -263,11 +334,17 @@
         "docs/BABEL_GROUNDED_READOUT768_REVIEW.md"
       ],
       "depends_on": [],
-      "next_action": "复用已做证据；F04重开必须证明相对旧失败方案的新变量"
+      "next_action": "无；不重跑已失败方案。跨分辨率方向F04保留。",
+      "human_status": "防错检查完成，已关闭",
+      "original_problem": "只看一致性距离，不能确认模型读的是指定历史区间。",
+      "completed_work": "已增加真实内容、错查询、无旁路检查；24项资格只有2项通过，已阻止不合格方案进入联合训练。",
+      "completion_rule": "不合格头被拦截，不再把距离变化当区间语义已学会；已满足。",
+      "closed": true,
+      "remaining_work": "无；本项已关闭。"
     },
     {
       "id": "V10",
-      "title": "深度与预算比较范围纠正",
+      "title": "深度效果与训练预算混淆",
       "legacy_ids": [
         "B1"
       ],
@@ -278,11 +355,17 @@
         "docs/BABEL_DEPTH768_REVIEW.md"
       ],
       "depends_on": [],
-      "next_action": "保留两种预算轴；未来容量问题归F05"
+      "next_action": "无；不为纠正文案重跑。新容量实验归F05。",
+      "human_status": "解释已纠正，已关闭",
+      "original_problem": "深层100轮与浅层追加至191/281轮不是同预算的深度比较。",
+      "completed_work": "同训练量与追加预算的结论已分开；这些结果不支持四层全局最优。",
+      "completion_rule": "每个深度结论注明比较预算；已满足。",
+      "closed": true,
+      "remaining_work": "无；本项已关闭。"
     },
     {
       "id": "V11",
-      "title": "汇聚架构与续训/目标变化分开",
+      "title": "汇聚结构效果与续训、新损失混淆",
       "legacy_ids": [
         "B2"
       ],
@@ -293,11 +376,17 @@
         "docs/BABEL_CAUSAL_POOL768_REVIEW.md"
       ],
       "depends_on": [],
-      "next_action": "不重复pool矩阵；当前结构目标由V04检验"
+      "next_action": "无；不重复汇聚矩阵。",
+      "human_status": "解释已纠正，已关闭",
+      "original_problem": "plain比旧源多了续训及新目标，不能把变化全部算作汇聚结构的效果。",
+      "completed_work": "汇聚效果只使用同轮plain/full/scale对照；原同轮结果保留。",
+      "completion_rule": "同轮对照与对旧源的混合改动分开解释；已满足。",
+      "closed": true,
+      "remaining_work": "无；本项已关闭。"
     },
     {
       "id": "V12",
-      "title": "活动损失、活动输入与可读性分开",
+      "title": "活动重建变差被当成活动输入无用",
       "legacy_ids": [
         "A1"
       ],
@@ -308,11 +397,17 @@
         "docs/BABEL_ACTIVITY_WEIGHT768_REVIEW.md"
       ],
       "depends_on": [],
-      "next_action": "保留活动分项；必要输入消融与读取验证需独立锁协议"
+      "next_action": "无；调权实验不重跑。未来价量输入问题归F10。",
+      "human_status": "解释已纠正，已关闭",
+      "original_problem": "改变成交/持仓输出损失，没有检验删除这些输入，也没有直接证明状态丢失这些信息。",
+      "completed_work": "保留调权产生的价格/活动取舍；这些结果不回答输入是否有用、信息是否消失及0.3是否全局最优。",
+      "completion_rule": "只归档实际调权对照支持的结论；已满足。",
+      "closed": true,
+      "remaining_work": "无；本项已关闭。"
     },
     {
       "id": "V13",
-      "title": "独立验收与反复使用研究集分开",
+      "title": "缺少最终独立数据验收",
       "legacy_ids": [
         "E3"
       ],
@@ -324,11 +419,17 @@
         "docs/BABEL_RECONSTRUCTION_EXIT.md"
       ],
       "depends_on": [],
-      "next_action": "方案冻结且有未参与设计的数据时再验；不为补几天数据阻塞当前研究"
+      "next_action": "修复阶段结束且方案冻结后，在未参与设计的数据上验收；当前不为补几天数据启动新训练。",
+      "human_status": "等待最终验收",
+      "original_problem": "反复用于设计的研究集不能再充当最终独立测试集。",
+      "completed_work": "已纠正数据集身份和结论表述；没有完成最终独立验收。",
+      "completion_rule": "冻结模型、用途和门槛后，完成真正独立数据的验收。此项不计作当前代码已修复。",
+      "closed": false,
+      "remaining_work": "修复阶段结束且方案冻结后，在未参与设计的数据上验收；当前不为补几天数据启动新训练。"
     },
     {
       "id": "V14",
-      "title": "新入口的数据、源头与恢复资格",
+      "title": "数据来源和运行入口还有哪些没有核实",
       "legacy_ids": [
         "new_entrypoint_qualification"
       ],
@@ -345,7 +446,13 @@
       "depends_on": [
         "V01"
       ],
-      "next_action": "RS真实入口及基线复放已通过；真实中断恢复未触发，仍只有合成恢复证据；源scaler独立拟合缺口保留"
+      "next_action": "先追踪源统计文件的拟合脚本、训练行和日期边界；能重建则从训练数据独立复算，不能重建则列缺失材料和受影响结论。V06入口交付时另检查保存后恢复是否等价。",
+      "human_status": "部分完成",
+      "original_problem": "现有入口检查通过，但源标准化统计未独立重算；恢复流程只有合成中断证据。",
+      "completed_work": "来源绑定、目标、原验证值和旧局部头最低资格通过；RS实际入口已运行成功。",
+      "completion_rule": "统计来源及训练分区有可核对证据；恢复证据标明真实或合成，缺材料不得记通过。s42局部头偏弱仍作为源模型事实保留。",
+      "closed": false,
+      "remaining_work": "先追踪源统计文件的拟合脚本、训练行和日期边界；能重建则从训练数据独立复算，不能重建则列缺失材料和受影响结论。V06入口交付时另检查保存后恢复是否等价。"
     }
   ],
   "future_branches": [
@@ -540,7 +647,7 @@
       "V06"
     ]
   ],
-  "next_after_active": "Complete V06 correction and matched verification of the old context claim; archive retain/retract/unverified disposition before considering any new optimization branch.",
+  "next_after_active": "V06结果复核后，逐项核销V03/V04/V05/V07的旧结论影响及V14证据缺口；未完成修复不转入F分支。V13保留为方案冻结后的独立验收。",
   "active_training_budget": {
     "source": "docs/BABEL_RECOVERY_PLAN.json",
     "jobs_max": 10,
@@ -718,5 +825,70 @@
         "docs/BABEL_RECOVERY_INTERFACE_REVIEW.md"
       ]
     }
-  ]
+  ],
+  "documentation_review_task_ids": [
+    "V01",
+    "V02",
+    "V03",
+    "V04",
+    "V05",
+    "V06",
+    "V07",
+    "V08",
+    "V09",
+    "V10",
+    "V11",
+    "V12",
+    "V13",
+    "V14"
+  ],
+  "repair_exit_checklist": [
+    "V06修正比较实现、通过训练入口检查、完成真实重验并归档受影响原结论。",
+    "V03/V04/V05/V07逐项给出旧结论出处、实际代码路径、证据及保留/撤回/仍待重验处置；需要重验的留在修复队列。",
+    "V14核对源标准化统计来源和分区，缺材料明确列出；不得称数据链全通过。",
+    "所有仍待修复、待重验事项完成或有明确撤回依据后，才评估新的优化分支；近端能力没有改善不能写已改善。",
+    "V13最终独立验收与修复阶段分开记录，不把既有研究集改名为独立测试。"
+  ],
+  "V06_execution_card": {
+    "status": "计划已具体化；代码未修复，预算未锁定，真实重验未运行",
+    "source": "Macro control s42/s43 best97/94，768维/4层/8头",
+    "code_locations": [
+      "src/obson/babel/context_transfer_run.py:train_epoch",
+      "src/obson/babel/context_transfer.py:states",
+      "src/obson/babel/uniform_context.py:targets",
+      "src/obson/babel/uniform_context.py:loss_rows"
+    ],
+    "example_endpoint": 32,
+    "arms": [
+      {
+        "arm": "A",
+        "input": "当前窗口1..32",
+        "target": "当前窗口1..31"
+      },
+      {
+        "arm": "B",
+        "input": "结束于当前第32根的最近128根",
+        "target": "与A完全相同的1..31及目标坐标、缺失mask、有效权重"
+      },
+      {
+        "arm": "C",
+        "input": "与B完全相同",
+        "target": "该端点之前127根；目标扩展及权重变化单列"
+      }
+    ],
+    "comparisons": {
+      "B-A": "同重建任务下的上下文编码策略效果，包括位置变化；不声称只改变物理长度而无其他编码差异。",
+      "C-B": "监督范围扩展与有效权重变化的组合效果；不声称权重独立归因。"
+    },
+    "required_checks": [
+      "在实际训练步验证A/B的标签、价格坐标、缺失mask和有效权重一致",
+      "B/C编码器输入逐项一致",
+      "改动端点之后行情不影响其状态及历史训练目标",
+      "同种子匹配源权重、采样顺序、优化器初始化、学习率、裁剪和更新数",
+      "分别记录近/中/远/活动/结构、原源/同期对照、best/last；不靠epoch0回退宣称修好",
+      "绑定源和数据，验证设备与数值配置、失败导出及保存恢复"
+    ],
+    "budget": "旧额度已用完；实现前补齐轮数、更新数、任务数、时间和磁盘上限，当前没有可用启动命令。",
+    "completion": "完成受控重验和旧结论处置，不要求模型一定提升；控制失败则仍未完成。"
+  }
 }
