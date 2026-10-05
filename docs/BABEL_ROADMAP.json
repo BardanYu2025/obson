@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
-  "updated": "2026-10-04",
-  "current_iteration": "V04-V05-RS-v2-code",
-  "current_iteration_scope": "Prospective controlled loss-intervention protocol and executable entrypoints delivered; real CUDA and scientific acceptance pending; R1 failure unchanged",
+  "updated": "2026-10-05",
+  "current_iteration": "V04-V05-RS-report-review",
+  "current_iteration_scope": "Eight matched30epoch interventions completed and reviewed; loss-factor tradeoffs, all candidate repairs rejected; recipe closed, Macro retained; next V06 design only",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -149,20 +149,22 @@
         "RS"
       ],
       "implementation": "RS-v2四组双种子训练、锁定评价、恢复与导出入口完成，合成测试通过",
-      "execution": "真实CUDA未运行；原R1失败保留，按前瞻RS-v2准入执行受控干预",
-      "conclusion": "额外17+监督不对称，但不是已证实根因",
+      "execution": "八组真实CUDA完成并复核，240轮/9120更新；该配方收束",
+      "conclusion": "移除远端额外项有有限近期收益但结构明显受损；非一致修复，原不对称事实保留",
       "evidence": [
         "docs/BABEL_RECOVERY_PLAN.md",
         "src/obson/babel/recovery_objectives.py",
         "docs/BABEL_RECOVERY_RS_REVISION.md",
         "docs/BABEL_RECOVERY_RS.md",
-        "docs/BABEL_RECOVERY_RS_VALIDATION.json"
+        "docs/BABEL_RECOVERY_RS_VALIDATION.json",
+        "docs/BABEL_RECOVERY_RS_REVIEW.md"
       ],
       "depends_on": [
         "V03"
       ],
-      "next_action": "运行RS-v2完整矩阵；分别报告因子效应、源保护和用途进展；不只比较退化对照",
-      "admission_revision": "V03 is reviewed evidence, not a claimed passed stability gate; V02/V14 source/target/gradient qualification plus original/R1 replay remain mandatory"
+      "next_action": "停止本30轮配方，不补轮/扫权；V06先锁上下文与共同标签对照、独立新预算",
+      "admission_revision": "V03 is reviewed evidence, not a claimed passed stability gate; V02/V14 source/target/gradient qualification plus original/R1 replay remain mandatory",
+      "scientific_acceptance": false
     },
     {
       "id": "V05",
@@ -172,21 +174,23 @@
         "RS"
       ],
       "implementation": "RS-v2四组双种子训练、锁定评价、恢复与导出入口完成，合成测试通过",
-      "execution": "真实CUDA未运行；原R1失败保留，按前瞻RS-v2准入执行受控干预",
-      "conclusion": "原detached局部头不保护编码器；主查询仍有近期监督",
+      "execution": "八组真实CUDA完成并复核，240轮/9120更新；该配方收束",
+      "conclusion": "冻结局部头0.25回传有小幅收益和代价；不能修复，六个干预best均回退源；不否定全部局部监督",
       "evidence": [
         "docs/BABEL_RECOVERY_PLAN.md",
         "src/obson/babel/recovery_objectives.py",
         "docs/BABEL_RECOVERY_RS_REVISION.md",
         "docs/BABEL_RECOVERY_RS.md",
-        "docs/BABEL_RECOVERY_RS_VALIDATION.json"
+        "docs/BABEL_RECOVERY_RS_VALIDATION.json",
+        "docs/BABEL_RECOVERY_RS_REVIEW.md"
       ],
       "depends_on": [
         "V03",
         "V14"
       ],
-      "next_action": "运行RS-v2完整矩阵；分别报告因子效应、源保护和用途进展；不只比较退化对照",
-      "admission_revision": "V03 is reviewed evidence, not a claimed passed stability gate; V02/V14 source/target/gradient qualification plus original/R1 replay remain mandatory"
+      "next_action": "停止本30轮配方，不补轮/扫权；V06先锁上下文与共同标签对照、独立新预算",
+      "admission_revision": "V03 is reviewed evidence, not a claimed passed stability gate; V02/V14 source/target/gradient qualification plus original/R1 replay remain mandatory",
+      "scientific_acceptance": false
     },
     {
       "id": "V06",
@@ -205,7 +209,7 @@
         "V04",
         "V05"
       ],
-      "next_action": "先依据RS结果决定适配基线；A/B共标签，C扩标签仍含段权重变化"
+      "next_action": "依据RS未得到合格适配基线，保留原Macro；先锁A/B共同标签、B/C扩标签及权重差别、保护/用途与新预算；目前只设计"
     },
     {
       "id": "V07",
@@ -224,7 +228,7 @@
         "docs/BABEL_RECOVERY_INTERFACE_REVIEW.md"
       ],
       "depends_on": [],
-      "next_action": "收束零更新诊断；等预算读头拟合暂缓，V04/V05 RS-v2已实现待CUDA"
+      "next_action": "零更新诊断已收束；RS也未修复，不追加读头矩阵；信息缺失归因仍开放"
     },
     {
       "id": "V08",
@@ -340,7 +344,7 @@
       "depends_on": [
         "V01"
       ],
-      "next_action": "RS-v2沿用已验源/目标资格；优化器、完整轮恢复和基线一致性合成测试完成，真实CUDA仍待执行；源scaler完整独立拟合仍未覆盖"
+      "next_action": "RS真实入口及基线复放已通过；真实中断恢复未触发，仍只有合成恢复证据；源scaler独立拟合缺口保留"
     }
   ],
   "future_branches": [
@@ -532,42 +536,41 @@
   ],
   "active_order": [
     [
-      "V04",
-      "V05"
+      "V06"
     ]
   ],
-  "next_after_active": "Review V04/V05 report against both source and concurrent baseline; retain Macro unless separately justified, then decide V06 or one retained future branch",
+  "next_after_active": "Lock V06 common-target context comparison, selection and separate finite budget before implementation; no additional RS jobs",
   "active_training_budget": {
     "source": "docs/BABEL_RECOVERY_PLAN.json",
     "jobs_max": 10,
     "worker_epochs_max": 250,
     "optimizer_updates_max": 9500,
     "gpu_session_hours_cap": 10,
-    "entrypoints_ready": true,
+    "entrypoints_ready": false,
     "future_branches_included": false,
-    "ready_stages": [
-      "V04",
-      "V05"
-    ],
+    "ready_stages": [],
     "consumed": {
-      "jobs": 2,
-      "worker_epochs": 10,
-      "optimizer_updates": 380,
-      "session_seconds": 758.652147969231,
+      "jobs": 10,
+      "worker_epochs": 250,
+      "optimizer_updates": 9500,
+      "session_seconds": 10055.482703923248,
       "session_breakdown": {
         "R1": 524.1648489544168,
-        "V07": 234.4872990148142
+        "V07": 234.4872990148142,
+        "RS": 9296.830555954017
       }
     },
     "remaining_unexecuted": {
-      "jobs": 8,
-      "worker_epochs": 240,
-      "optimizer_updates": 9120,
-      "session_seconds": 35241.34785203077,
-      "authorization": "RS-v2 explicitly revised and implemented; only the declared eight jobs, no budget expansion"
+      "jobs": 0,
+      "worker_epochs": 0,
+      "optimizer_updates": 0,
+      "session_seconds": 25944.517296076752,
+      "authorization": "No training quota remaining; unused time is not permission for additional jobs. V06 requires separately declared protocol/budget."
     },
     "completed_entrypoints": [
-      "V03"
+      "V03",
+      "V04",
+      "V05"
     ],
     "ready_zero_update_stages": [],
     "completed_zero_update_stages": [
@@ -620,9 +623,9 @@
     "V05"
   ],
   "blocked_followups": {
-    "V06": "Depends on reviewed RS outcomes and separately locked protocol/budget; not automatically launched"
+    "V06_execution": "Design queued; executable protocol and separate budget not yet locked. F branches retained, not launched."
   },
-  "active_phase": "RS_v2_code_ready_AutoDL_pending",
+  "active_phase": "V06_design_only_no_new_training_budget",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -634,11 +637,12 @@
     "protocol": "docs/BABEL_RECOVERY_RS.md",
     "validation": "docs/BABEL_RECOVERY_RS_VALIDATION.json",
     "entrypoint_ready": true,
-    "real_training_executed": false,
-    "scientific_acceptance": "pending",
+    "real_training_executed": true,
+    "scientific_acceptance": "failed_recipe_closed",
     "training_jobs": 8,
     "epochs_per_job": 30,
     "max_optimizer_updates": 9120,
-    "cumulative_seconds_cap": 35241
+    "cumulative_seconds_cap": 35241,
+    "review": "docs/BABEL_RECOVERY_RS_REVIEW.md"
   }
 }

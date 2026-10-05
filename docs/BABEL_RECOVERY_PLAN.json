@@ -1,6 +1,6 @@
 {
-  "date": "2026-10-04",
-  "status": "RS_v2_code_ready_real_CUDA_pending_R1_failure_preserved",
+  "date": "2026-10-05",
+  "status": "RS_complete_reviewed_no_repair_recipe_closed_V06_design_next",
   "scope_warning": "Counts are the bounded response to confirmed issues, not a claim that all historical experiments are valid or that undiscovered defects cannot change the plan.",
   "coverage": {
     "report_archives": 61,
@@ -227,10 +227,10 @@
       },
       "qualification": "Reviewed V02/V14 source/local-reader/target/gradient eligibility; pinned R1 and V07 source; original source replay and baseline first5 R1 replay. R1 retention is NOT claimed passed.",
       "budget_interpretation": "Same source and updates; finite adaptation diagnostic, not convergence or equal FLOPs proof",
-      "status": "v2_entrypoint_ready_real_CUDA_pending",
+      "status": "completed_reviewed_acceptance_failed_recipe_closed",
       "module": "obson.babel.recovery_rs",
       "protocol": "docs/BABEL_RECOVERY_RS.md",
-      "real_training_executed": false,
+      "real_training_executed": true,
       "superseded_v1_admission": {
         "qualification": "R1 both seeds pass; gradient residual audit passes unchanged tolerance; source local head provenance, causal targets and frozen-reader validation primary better than train-mean baseline for each seed and native endpoint/interior",
         "status": "held_R1_prerequisite_failed_no_training_entrypoint",
@@ -247,12 +247,22 @@
         "protocol": "docs/BABEL_RECOVERY_RS.md",
         "validation": "docs/BABEL_RECOVERY_RS_VALIDATION.json",
         "entrypoint_ready": true,
-        "real_training_executed": false,
-        "scientific_acceptance": "pending",
+        "real_training_executed": true,
+        "scientific_acceptance": "failed_recipe_closed",
         "training_jobs": 8,
         "epochs_per_job": 30,
         "max_optimizer_updates": 9120,
-        "cumulative_seconds_cap": 35241
+        "cumulative_seconds_cap": 35241,
+        "review": "docs/BABEL_RECOVERY_RS_REVIEW.md"
+      },
+      "review": {
+        "document": "docs/BABEL_RECOVERY_RS_REVIEW.md",
+        "archive_sha256": "0f9ec39f5e6e65855c8e62af24be4052d427cefb4c485b531f2e114b3a86a378",
+        "epochs": 240,
+        "updates": 9120,
+        "seconds": 9296.830555954017,
+        "scientific_acceptance": false,
+        "all_intervention_best_epochs": 0
       }
     }
   ],
@@ -269,10 +279,13 @@
     "R1_cumulative_seconds_cap": 3600,
     "RS_time_budget_rule": "Deduct actual R1 and V07 used_seconds from original36000; RS cumulative cap35241; no reset",
     "actual_R1_session_seconds": 524.1648489544168,
-    "remaining_total_session_seconds": 35241.34785203077,
+    "remaining_total_session_seconds": 25944.517296076752,
     "actual_V07_session_seconds": 234.4872990148142,
-    "actual_recovery_session_seconds": 758.652147969231,
-    "RS_cumulative_seconds_cap": 35241
+    "actual_recovery_session_seconds": 10055.482703923248,
+    "RS_cumulative_seconds_cap": 35241,
+    "actual_RS_session_seconds": 9296.830555954017,
+    "remaining_training_jobs": 0,
+    "unused_time_does_not_expand_training_quota": true
   },
   "interpretation_corrections": [
     "Do not claim four layers globally optimal from unequal extended budgets",
@@ -1414,13 +1427,12 @@
   },
   "next_design_task": {
     "task_ids": [
-      "V04",
-      "V05"
+      "V06"
     ],
-    "document": "docs/BABEL_RECOVERY_RS.md",
-    "phase": "implemented_AutoDL_pending",
-    "original_RS_admission_superseded": true,
-    "R1_passed": false,
-    "new_executable_protocol_ready": true
+    "phase": "design_only",
+    "document": "docs/BABEL_RECOVERY_RS_REVIEW.md",
+    "scope": "Separate native/full context and common/expanded targets; originalMacro starting point; oldA/B/C question retained",
+    "new_executable_protocol_ready": false,
+    "new_GPU_budget_allocated": false
   }
 }

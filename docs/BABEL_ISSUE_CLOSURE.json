@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-04",
+  "date": "2026-10-05",
   "scope": "Nine audited stages plus audit-engineering and evidence interpretation issues; not a full-history clearance",
   "human_ledger": "docs/BABEL_ISSUE_CLOSURE.md",
   "protocol": "docs/BABEL_RECOVERY_PLAN.md",
@@ -19,30 +19,32 @@
         "babel_history_structure768",
         "babel_causal_pool768"
       ],
-      "status": "RS_v2_implemented_real_intervention_pending",
-      "action": "Run RS-v2; evaluate effects and dual-reference acceptance separately, original fact not yet resolved",
+      "status": "finite_intervention_reviewed_tradeoff_no_repair_recipe_closed",
+      "action": "Close RS30epoch recipe; V06 design only, originalMacro retained",
       "evidence": "src/obson/babel/history_structure.py",
       "fact": "Extra17+ structure is asymmetric; not proven cause of near degradation",
-      "decision_effect": "Keep structure_gain_with_tradeoffs; reject architecture/capacity-only attribution",
+      "decision_effect": "Extra remote supervision supports structural retention; removal has limited near gains with structural cost. No sole-root-cause or capacity attribution.",
       "implementation": "Matched four-arm two-seed training/evaluation entrypoint; synthetic tests passed",
-      "execution": "Not executed on real CUDA",
+      "execution": "Eight CUDA workers complete,240epochs/9120steps; all6intervention bests epoch0",
       "protocol": "docs/BABEL_RECOVERY_RS.md",
-      "validation": "docs/BABEL_RECOVERY_RS_VALIDATION.json"
+      "validation": "docs/BABEL_RECOVERY_RS_VALIDATION.json",
+      "review": "docs/BABEL_RECOVERY_RS_REVIEW.md"
     },
     {
       "id": "S2",
       "stages": [
         "babel_history_structure768"
       ],
-      "status": "RS_v2_implemented_real_intervention_pending",
-      "action": "Run RS-v2; evaluate effects and dual-reference acceptance separately, original fact not yet resolved",
+      "status": "finite_intervention_reviewed_tradeoff_no_repair_recipe_closed",
+      "action": "Close RS30epoch recipe; V06 design only, originalMacro retained",
       "evidence": "src/obson/babel/history_structure.py",
       "fact": "Detached local diagnostic cannot supervise encoder; main query still covers near ages",
-      "decision_effect": "Retract local-head-protection claim, not original local readout measurements",
+      "decision_effect": "Detach does not protect encoder remains true; turning on frozen-reader0.25 loss insufficient. No rejection of all local supervision.",
       "implementation": "Matched four-arm two-seed training/evaluation entrypoint; synthetic tests passed",
-      "execution": "Not executed on real CUDA",
+      "execution": "Eight CUDA workers complete,240epochs/9120steps; all6intervention bests epoch0",
       "protocol": "docs/BABEL_RECOVERY_RS.md",
-      "validation": "docs/BABEL_RECOVERY_RS_VALIDATION.json"
+      "validation": "docs/BABEL_RECOVERY_RS_VALIDATION.json",
+      "review": "docs/BABEL_RECOVERY_RS_REVIEW.md"
     },
     {
       "id": "S3",
@@ -51,7 +53,7 @@
         "babel_context_transfer768"
       ],
       "status": "open_deferred",
-      "action": "R2",
+      "action": "V06 design next: lock matched common-target context comparison and separate budget; no new execution yet",
       "evidence": "src/obson/babel/uniform_context.py",
       "fact": "Context, target support and band averaging change together",
       "decision_effect": "Preserve recipe findings, no input-length-only causal conclusion"
@@ -84,7 +86,7 @@
         "babel_macro_history768"
       ],
       "status": "frozen_cross_diagnostic_complete_information_attribution_open",
-      "action": "Eight-cross recipe closed; matched fitting deferred; RS-v2 implemented, CUDA pending",
+      "action": "V07 eight-cross and RS recipes closed; information-loss attribution remains open, no automatic reader fitting",
       "evidence": "docs/BABEL_MACRO_HISTORY768_REVIEW.md",
       "fact": "Matched E5D5 generally beats crossed readouts; residual source degradation remains; no proof of information loss",
       "decision_effect": "Preserve interface findings, no added-memory interpretation",
@@ -210,11 +212,12 @@
     "protocol": "docs/BABEL_RECOVERY_RS.md",
     "validation": "docs/BABEL_RECOVERY_RS_VALIDATION.json",
     "entrypoint_ready": true,
-    "real_training_executed": false,
-    "scientific_acceptance": "pending",
+    "real_training_executed": true,
+    "scientific_acceptance": "failed_recipe_closed",
     "training_jobs": 8,
     "epochs_per_job": 30,
     "max_optimizer_updates": 9120,
-    "cumulative_seconds_cap": 35241
+    "cumulative_seconds_cap": 35241,
+    "review": "docs/BABEL_RECOVERY_RS_REVIEW.md"
   }
 }
