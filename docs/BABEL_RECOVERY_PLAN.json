@@ -1429,10 +1429,16 @@
     "task_ids": [
       "V06"
     ],
-    "phase": "design_only",
+    "phase": "held_for_error_to_conclusion_scope_alignment",
     "document": "docs/BABEL_RECOVERY_RS_REVIEW.md",
     "scope": "Separate native/full context and common/expanded targets; originalMacro starting point; oldA/B/C question retained",
     "new_executable_protocol_ready": false,
     "new_GPU_budget_allocated": false
+  },
+  "scope_correction": {
+    "document": "docs/BABEL_RECOVERY_SCOPE_CORRECTION.md",
+    "original_core_retest": "V06/S3 remains unexecuted",
+    "error_correction_distinct_from_model_upgrade": true,
+    "no_new_jobs_this_turn": true
   }
 }

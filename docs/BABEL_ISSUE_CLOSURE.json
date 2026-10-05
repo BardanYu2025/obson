@@ -219,5 +219,10 @@
     "max_optimizer_updates": 9120,
     "cumulative_seconds_cap": 35241,
     "review": "docs/BABEL_RECOVERY_RS_REVIEW.md"
+  },
+  "closure_policy": {
+    "document": "docs/BABEL_RECOVERY_SCOPE_CORRECTION.md",
+    "model_upgrade_not_required_to_retract_unsupported_claims": true,
+    "finite_RS_not_full_historical_retest": true
   }
 }
