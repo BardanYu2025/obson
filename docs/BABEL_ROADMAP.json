@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
-  "updated": "2026-10-05",
-  "current_iteration": "roadmap_human_readable_repair_ledger",
-  "current_iteration_scope": "只重写现有路线图及同步状态，让已修复、未修复、结论撤回和最终验收可分辨；本轮不修改模型或启动实验。",
+  "updated": "2026-10-06",
+  "current_iteration": "V06_context_target_separation_code_delivery",
+  "current_iteration_scope": "实现V06三组双种子受控重验，核对V03训练配置及V14来源证据；代码交付，真实AutoDL未运行，尚无新模型结论。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -151,13 +151,13 @@
         "V02",
         "V14"
       ],
-      "next_action": "不追加学习率试跑。V06开跑前逐项列出新旧Adam、学习率、采样和裁剪差异；各对照必须相同，并保留未训练源模型作基准。",
+      "next_action": "V06已写出原Macro/旧Context/三组新适配的训练差异并检查共同采样和更新；待真实报告确认，R1五轮失败保留，不再追加LR扫描。",
       "human_status": "部分完成",
       "original_problem": "旧适配提高了学习率，还重置Adam并改变采样；失败不能归因于完整历史输入。",
       "completed_work": "只降学习率的双种子5轮实验完成：退化减轻，但一组仍未守住原能力。",
       "completion_rule": "学习率这条解释已核验；其余训练变化需在V06中受控，结果仍退化时只归档该配方失败，不归因为历史长度。",
       "closed": false,
-      "remaining_work": "不追加学习率试跑。V06开跑前逐项列出新旧Adam、学习率、采样和裁剪差异；各对照必须相同，并保留未训练源模型作基准。",
+      "remaining_work": "V06已写出原Macro/旧Context/三组新适配的训练差异并检查共同采样和更新；待真实报告确认，R1五轮失败保留，不再追加LR扫描。",
       "code_locations": [
         "src/obson/babel/context_transfer_run.py:train_epoch",
         "src/obson/babel/context_transfer_run.py:worker"
@@ -242,31 +242,41 @@
         "S3",
         "R2"
       ],
-      "implementation": "待修复原比较中输入上下文与监督目标混改的实现；不新增模型结构",
-      "execution": "未运行受控补证",
+      "implementation": "独立输入/目标策略、六组匹配训练、实际损失核对、锁模后共同目标评价、恢复与失败导出入口完成；合成与关联测试通过。",
+      "execution": "真实AutoDL未运行；无新训练结果。",
       "conclusion": "原whole-recipe结果保留；输入长度单因素未证实",
       "evidence": [
-        "docs/BABEL_RECOVERY_PLAN.md"
+        "docs/BABEL_RECOVERY_PLAN.md",
+        "src/obson/babel/recovery_context.py",
+        "src/obson/babel/recovery_context_run.py",
+        "src/obson/babel/recovery_context_evaluate.py",
+        "tests/babel/test_recovery_context.py"
       ],
       "depends_on": [
         "V04",
         "V05"
       ],
-      "next_action": "按下方A/B/C任务卡修改比较入口、检查实际训练损失、锁定预算，再在AutoDL做匹配重验。",
+      "next_action": "在AutoDL执行babel_recovery_context_autodl.sh all；六组固定60轮后自动评价和导出。收到报告后核验对照及逐条处置原Uniform/Context结论。",
       "closure": "修正后的比较足以支持或否定原归因，不要求新模型优于旧模型；未取得真实证据前保持待重验",
-      "human_status": "待修复、待重验",
+      "human_status": "代码已交付，待AutoDL重验",
       "original_problem": "旧prefix/full比较同时改变可见历史、重建范围及各段有效权重，无法单独判断增加历史的作用。",
-      "completed_work": "已定位context_transfer_run训练步及uniform_context.targets/loss_rows；尚无修正后的训练结果。",
+      "completed_work": "A/B锁定共同标签与权重，B/C保持相同输入；入口和测试完成，真实重验未运行。",
       "completion_rule": "共同目标对照在真实训练中成立，结果完成复核并逐条处置原结论；改善、无改善或证据不足都必须如实归档。",
       "closed": false,
-      "remaining_work": "按下方A/B/C任务卡修改比较入口、检查实际训练损失、锁定预算，再在AutoDL做匹配重验。",
+      "remaining_work": "实际GPU数值核验、六组训练和评价、旧结论处置尚未完成。",
       "code_locations": [
+        "src/obson/babel/recovery_context.py:forward",
+        "src/obson/babel/recovery_context.py:control_audit",
+        "src/obson/babel/recovery_context_run.py:train_epoch",
+        "src/obson/babel/recovery_context_evaluate.py:run_evaluation"
+      ],
+      "dependency_note": "V04/V05的已有失败报告是V06设计输入；不要求它们先产生更好模型。其未核销的旧结论责任仍保留，不把执行顺序当全部关闭。",
+      "original_code_locations": [
         "src/obson/babel/context_transfer_run.py:train_epoch",
         "src/obson/babel/context_transfer.py:states",
         "src/obson/babel/uniform_context.py:targets",
         "src/obson/babel/uniform_context.py:loss_rows"
-      ],
-      "dependency_note": "V04/V05的已有失败报告是V06设计输入；不要求它们先产生更好模型。其未核销的旧结论责任仍保留，不把执行顺序当全部关闭。"
+      ]
     },
     {
       "id": "V07",
@@ -435,24 +445,36 @@
       ],
       "implementation": "源绑定、目标、局部头资格入口及合成测试完成",
       "execution": "本入口源/目标/复放/原局部头最低资格通过",
-      "conclusion": "只接受本入口资格；s42末端读头明显较弱，源scaler拟合未独立重做",
+      "conclusion": "输入/历史目标统计可复用既有同源复算；不能扩展为768维状态/局部统计和全部祖先训练已独立核验。",
       "evidence": [
         "docs/BABEL_RECOVERY_R0_REVIEW.md",
         "docs/BABEL_RECOVERY_PLAN.md",
         "docs/BABEL_RECOVERY_QUALIFICATION.md",
         "docs/BABEL_RECOVERY_QUALIFICATION_VALIDATION.json",
-        "docs/BABEL_RECOVERY_QUALIFICATION_REVIEW.md"
+        "docs/BABEL_RECOVERY_QUALIFICATION_REVIEW.md",
+        "docs/BABEL_COVERAGE_REVIEW.md",
+        "src/obson/babel/recovery_context_run.py",
+        "tests/babel/test_recovery_context.py"
       ],
       "depends_on": [
         "V01"
       ],
-      "next_action": "先追踪源统计文件的拟合脚本、训练行和日期边界；能重建则从训练数据独立复算，不能重建则列缺失材料和受影响结论。V06入口交付时另检查保存后恢复是否等价。",
+      "next_action": "V06运行时强制核对统计SHA及完整255行train/val区间；继续保留768维状态/局部统计独立复算、真实中断恢复的证据缺口。",
       "human_status": "部分完成",
-      "original_problem": "现有入口检查通过，但源标准化统计未独立重算；恢复流程只有合成中断证据。",
-      "completed_work": "来源绑定、目标、原验证值和旧局部头最低资格通过；RS实际入口已运行成功。",
-      "completion_rule": "统计来源及训练分区有可核对证据；恢复证据标明真实或合成，缺材料不得记通过。s42局部头偏弱仍作为源模型事实保留。",
+      "original_problem": "标准化证据记录不完整；输入/历史目标统计已有早期同源复算，768维状态统计等不能一并称已独立核验。真实中断恢复也尚未覆盖。",
+      "completed_work": "来源与入口资格通过；补回Coverage原始数据复算证据，当前输入/目标统计SHA完全一致；恢复新增合成检查通过。",
+      "completion_rule": "输入/目标统计的既有复算与当前来源逐项绑定；768维状态/局部统计和恢复分别交代，缺证据不得记为全部通过。",
       "closed": false,
-      "remaining_work": "先追踪源统计文件的拟合脚本、训练行和日期边界；能重建则从训练数据独立复算，不能重建则列缺失材料和受影响结论。V06入口交付时另检查保存后恢复是否等价。"
+      "remaining_work": "V06运行时强制核对统计SHA及完整255行train/val区间；继续保留768维状态/局部统计独立复算、真实中断恢复的证据缺口。",
+      "reused_input_target_scaler_evidence": {
+        "coverage_archive_sha256": "c6a1ce420ba6463794d807eec6819e3bc69db6f1a6328558d52932eaa69bd5f5",
+        "coverage_completion_sha256": "08ed3fb06117d5b2a19bf81b95c6e7fed8859edd802a168223cb35efb242bdcc",
+        "coverage_train_replay_sha256": "f14732236386283a105a70071e83a440a2f1a4f9f7db592f1b9f8569f6e13a6e",
+        "architecture_index_sha256": "c24db61e390cdff81ea8522c81c3cda59d3983cb39f7d2b9e3be7ad82d8629b0",
+        "shared_statistics_sha256": "9b81f16b6377044ba1e389db45bee277265567bc903020bd1458a2f4f4f8943b",
+        "evidence": "Coverage audit_manifest pins Architecture index; index pins statistics; RS identity pins exactly the same statistics. Coverage train_cache_replay records raw refit max_abs=0 for six fields. Reused evidence, not another experiment.",
+        "scope": "Input/target statistics only; no independent reconstruction of state-vector/local scalers this turn."
+      }
     }
   ],
   "future_branches": [
@@ -647,44 +669,29 @@
       "V06"
     ]
   ],
-  "next_after_active": "V06结果复核后，逐项核销V03/V04/V05/V07的旧结论影响及V14证据缺口；未完成修复不转入F分支。V13保留为方案冻结后的独立验收。",
+  "next_after_active": "收到V06报告，先核验A/B/C对照、预算、因果性和原能力，再逐句归档原Uniform/Context结论。V03/V04/V05/V07及V14未完成责任仍保留，禁止直接推进F分支。",
   "active_training_budget": {
-    "source": "docs/BABEL_RECOVERY_PLAN.json",
-    "jobs_max": 10,
-    "worker_epochs_max": 250,
-    "optimizer_updates_max": 9500,
-    "gpu_session_hours_cap": 10,
-    "entrypoints_ready": false,
+    "source": "docs/BABEL_ROADMAP.md#2-本轮v06具体怎么改怎样才算交账",
+    "task_ids": [
+      "V06"
+    ],
+    "jobs_max": 6,
+    "worker_epochs_max": 360,
+    "optimizer_updates_max": 13680,
+    "gpu_session_hours_cap": 12,
+    "entrypoints_ready": true,
+    "ready_stages": [
+      "V06"
+    ],
     "future_branches_included": false,
-    "ready_stages": [],
     "consumed": {
-      "jobs": 10,
-      "worker_epochs": 250,
-      "optimizer_updates": 9500,
-      "session_seconds": 10055.482703923248,
-      "session_breakdown": {
-        "R1": 524.1648489544168,
-        "V07": 234.4872990148142,
-        "RS": 9296.830555954017
-      }
-    },
-    "remaining_unexecuted": {
       "jobs": 0,
       "worker_epochs": 0,
       "optimizer_updates": 0,
-      "session_seconds": 25944.517296076752,
-      "authorization": "No training quota remaining; unused time is not permission for additional jobs. V06 requires separately declared protocol/budget."
+      "session_seconds": 0
     },
-    "completed_entrypoints": [
-      "V03",
-      "V04",
-      "V05"
-    ],
-    "ready_zero_update_stages": [],
-    "completed_zero_update_stages": [
-      "V07"
-    ],
-    "RS_entrypoint_cap_seconds": 35241
+    "reason": "Separate bounded correction study authorized by user continuation.60epochs matches old Context fixed-update arm horizon; three arms/two seeds, lower qualified LR shared across all. Prior exhausted budget archived, not reset.",
+    "disk": "10 * largest reviewed R1 last.pt bytes +1.5GiB total estimate; deduct owned outputs, >=512MiB new free floor; serial worker, no source deletion."
   },
   "aliases": {
     "R0": [
@@ -845,18 +852,18 @@
   "repair_exit_checklist": [
     "V06修正比较实现、通过训练入口检查、完成真实重验并归档受影响原结论。",
     "V03/V04/V05/V07逐项给出旧结论出处、实际代码路径、证据及保留/撤回/仍待重验处置；需要重验的留在修复队列。",
-    "V14核对源标准化统计来源和分区，缺材料明确列出；不得称数据链全通过。",
+    "V14复用已绑定的输入/目标统计复算；状态向量/局部统计及恢复证据分别核对，不得称数据链全通过。",
     "所有仍待修复、待重验事项完成或有明确撤回依据后，才评估新的优化分支；近端能力没有改善不能写已改善。",
     "V13最终独立验收与修复阶段分开记录，不把既有研究集改名为独立测试。"
   ],
   "V06_execution_card": {
-    "status": "计划已具体化；代码未修复，预算未锁定，真实重验未运行",
+    "status": "代码交付；真实训练与结论归档尚未完成",
     "source": "Macro control s42/s43 best97/94，768维/4层/8头",
     "code_locations": [
-      "src/obson/babel/context_transfer_run.py:train_epoch",
-      "src/obson/babel/context_transfer.py:states",
-      "src/obson/babel/uniform_context.py:targets",
-      "src/obson/babel/uniform_context.py:loss_rows"
+      "src/obson/babel/recovery_context.py:forward",
+      "src/obson/babel/recovery_context.py:control_audit",
+      "src/obson/babel/recovery_context_run.py:train_epoch",
+      "src/obson/babel/recovery_context_evaluate.py:run_evaluation"
     ],
     "example_endpoint": 32,
     "arms": [
@@ -888,7 +895,101 @@
       "分别记录近/中/远/活动/结构、原源/同期对照、best/last；不靠epoch0回退宣称修好",
       "绑定源和数据，验证设备与数值配置、失败导出及保存恢复"
     ],
-    "budget": "旧额度已用完；实现前补齐轮数、更新数、任务数、时间和磁盘上限，当前没有可用启动命令。",
-    "completion": "完成受控重验和旧结论处置，不要求模型一定提升；控制失败则仍未完成。"
-  }
+    "budget": {
+      "task": "V06; V03 training controls; V14 source provenance scope",
+      "source": "Original Macro control s42/s43 best97/94; 768/4/8; no RS trained weights",
+      "arms": {
+        "A_prefix_common": {
+          "native_input": true,
+          "native_target": true
+        },
+        "B_full_common": {
+          "native_input": false,
+          "native_target": true
+        },
+        "C_full_extended": {
+          "native_input": false,
+          "native_target": false
+        }
+      },
+      "epochs": 60,
+      "seeds": [
+        42,
+        43
+      ],
+      "batch": 128,
+      "micro": 8,
+      "jobs": 6,
+      "worker_epochs": 360,
+      "updates": 13680,
+      "session_seconds": 43200,
+      "train_rows": 4789,
+      "val_rows": 978,
+      "input": "Bound255 causal rows; same contract/partition, original endpoint inventories and train-only frozen statistics; causal EMA feature prehistory remains, prefix is a feature-row context, not zero information about earlier raw history",
+      "sampling": "Original Context deterministic order, four uniformly sampled distinct interior prefixes from original non-held-out set plus128, same seed/epoch stream across arms",
+      "optimizer": "Fresh AdamW, betas .9/.999, eps1e-8; decay encoder .01/query .0001; no inherited optimizer; combined clip1; eval-mode autograd, FP32, no AMP",
+      "rates": {
+        "42": [
+          3.066380815642346e-06,
+          3.0663808156423456e-05
+        ],
+        "43": [
+          3.2648704606900738e-06,
+          3.2648704606900735e-05
+        ]
+      },
+      "loss": "Original query(.4path+.2change1+.1body+.3activity)+remote structure1; identical reductions. No extra local gradient or head fitting",
+      "comparison": "Equal60 epochs/updates, not equal compute. A/B identical labels/masks/effective weights; B/C identical inputs, target expansion includes weight changes",
+      "selection": "Original24 validation guard<=1.10 and full-context price minimax; epoch0 allowed for best ONLY. Primary inference uses fixed last60, best secondary. All six locked before research",
+      "evaluation": "Every model/source evaluated under A/B/C at32/64/96/128, support masks exported. A/B deployed common-task effect plus common fixed-interface contrasts; source policy gap and difference-in-differences separate. Both seeds and reused test/cross research; monthly and contract-month paired bootstrap",
+      "decision": "No automatic promotion. Completed controlled evidence closes attribution only; B last60 must beat deployed A AND source under B by>=5% on common interior price in BOTH seeds/cohorts; both month and contract-month supported paired upper bounds<=0, and all24 source measures<=1.10 for retention. C-B contrasts are secondary and include support/weight expansion. No claim of global architecture superiority or independent final generalization",
+      "stop": "No extra LR/weight/depth/grid/epoch extension. Nonfinite, identity/control/replay failure stop and export. Incomplete or unsupported intervals remain inconclusive",
+      "data_gap": "V14 input/target statistics linked by exact SHA to reviewed Coverage raw-data refit; no refit in this run. State-vector/local scaler ancestry not independently refit; do not mark full data ancestry accepted"
+    },
+    "completion": "完成受控重验和旧结论处置，不要求模型一定提升；控制失败则仍未完成。",
+    "entrypoint": "scripts/babel_recovery_context_autodl.sh",
+    "protocol_in_code": "src/obson/babel/recovery_context_run.py:protocol",
+    "default_source": "checkpoints/babel_recovery_interface",
+    "output": "checkpoints/babel_recovery_context"
+  },
+  "completed_training_budgets": [
+    {
+      "source": "docs/BABEL_RECOVERY_PLAN.json",
+      "jobs_max": 10,
+      "worker_epochs_max": 250,
+      "optimizer_updates_max": 9500,
+      "gpu_session_hours_cap": 10,
+      "entrypoints_ready": false,
+      "future_branches_included": false,
+      "ready_stages": [],
+      "consumed": {
+        "jobs": 10,
+        "worker_epochs": 250,
+        "optimizer_updates": 9500,
+        "session_seconds": 10055.482703923248,
+        "session_breakdown": {
+          "R1": 524.1648489544168,
+          "V07": 234.4872990148142,
+          "RS": 9296.830555954017
+        }
+      },
+      "remaining_unexecuted": {
+        "jobs": 0,
+        "worker_epochs": 0,
+        "optimizer_updates": 0,
+        "session_seconds": 25944.517296076752,
+        "authorization": "No training quota remaining; unused time is not permission for additional jobs. V06 requires separately declared protocol/budget."
+      },
+      "completed_entrypoints": [
+        "V03",
+        "V04",
+        "V05"
+      ],
+      "ready_zero_update_stages": [],
+      "completed_zero_update_stages": [
+        "V07"
+      ],
+      "RS_entrypoint_cap_seconds": 35241
+    }
+  ]
 }
