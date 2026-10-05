@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-05",
-  "current_iteration": "recovery_scope_correction",
-  "current_iteration_scope": "Correct accountability: resolving prior code/design and conclusion errors is distinct from finding a better model. Original V06 causal re-experiment remains uncompleted; no new training/design expansion this turn.",
+  "current_iteration": "roadmap_correction_first",
+  "current_iteration_scope": "User priority: fix original implementation/experimental-control errors, verify affected conclusions, archive reliable conclusions in the existing roadmap before any model optimization.",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -117,7 +117,7 @@
       "depends_on": [
         "V01"
       ],
-      "next_action": "进入V03准备；不全量复跑R0、不用旧范数比例调权"
+      "next_action": "保留固定批直接梯度通过的结论；弃用旧精确比例，不重复已完成R1"
     },
     {
       "id": "V03",
@@ -133,8 +133,7 @@
         "docs/BABEL_RECOVERY_PLAN.md",
         "docs/BABEL_RECOVERY_R1.md",
         "docs/BABEL_RECOVERY_R1_VALIDATION.json",
-        "docs/BABEL_RECOVERY_R1_REVIEW.md",
-        "docs/BABEL_RECOVERY_SCOPE_CORRECTION.md"
+        "docs/BABEL_RECOVERY_R1_REVIEW.md"
       ],
       "depends_on": [
         "V02",
@@ -158,13 +157,12 @@
         "docs/BABEL_RECOVERY_RS_REVISION.md",
         "docs/BABEL_RECOVERY_RS.md",
         "docs/BABEL_RECOVERY_RS_VALIDATION.json",
-        "docs/BABEL_RECOVERY_RS_REVIEW.md",
-        "docs/BABEL_RECOVERY_SCOPE_CORRECTION.md"
+        "docs/BABEL_RECOVERY_RS_REVIEW.md"
       ],
       "depends_on": [
         "V03"
       ],
-      "next_action": "有限干预已复核、配方停止；其模型门槛未过不等于旧问题已核销，按纠错责任表处理原结论",
+      "next_action": "归档已复核的有限干预结果及错误表述撤回；不作为全部历史修复完成，不扩展损失实验",
       "admission_revision": "V03 is reviewed evidence, not a claimed passed stability gate; V02/V14 source/target/gradient qualification plus original/R1 replay remain mandatory",
       "scientific_acceptance": false
     },
@@ -184,14 +182,13 @@
         "docs/BABEL_RECOVERY_RS_REVISION.md",
         "docs/BABEL_RECOVERY_RS.md",
         "docs/BABEL_RECOVERY_RS_VALIDATION.json",
-        "docs/BABEL_RECOVERY_RS_REVIEW.md",
-        "docs/BABEL_RECOVERY_SCOPE_CORRECTION.md"
+        "docs/BABEL_RECOVERY_RS_REVIEW.md"
       ],
       "depends_on": [
         "V03",
         "V14"
       ],
-      "next_action": "有限干预已复核、配方停止；其模型门槛未过不等于旧问题已核销，按纠错责任表处理原结论",
+      "next_action": "归档已复核的有限干预结果及错误表述撤回；不作为全部历史修复完成，不扩展损失实验",
       "admission_revision": "V03 is reviewed evidence, not a claimed passed stability gate; V02/V14 source/target/gradient qualification plus original/R1 replay remain mandatory",
       "scientific_acceptance": false
     },
@@ -202,18 +199,18 @@
         "S3",
         "R2"
       ],
-      "implementation": "原三组方案保留，暂缓实现",
+      "implementation": "待修复原比较中输入上下文与监督目标混改的实现；不新增模型结构",
       "execution": "未运行受控补证",
       "conclusion": "原whole-recipe结果保留；输入长度单因素未证实",
       "evidence": [
-        "docs/BABEL_RECOVERY_PLAN.md",
-        "docs/BABEL_RECOVERY_SCOPE_CORRECTION.md"
+        "docs/BABEL_RECOVERY_PLAN.md"
       ],
       "depends_on": [
         "V04",
         "V05"
       ],
-      "next_action": "最初完整历史归因重验尚未完成；先对齐旧错误与受影响结论及最小必要补证，再锁新协议/预算；本轮不新增设计或训练"
+      "next_action": "在原模型与原任务上隔离输入上下文变化，锁共同标签/坐标/mask/有效权重；完成回归检查和必要匹配重验，再归档原结论处置",
+      "closure": "修正后的比较足以支持或否定原归因，不要求新模型优于旧模型；未取得真实证据前保持待重验"
     },
     {
       "id": "V07",
@@ -229,8 +226,7 @@
         "docs/BABEL_RECOVERY_R1_REVIEW.md",
         "docs/BABEL_RECOVERY_INTERFACE_PLAN.md",
         "docs/BABEL_RECOVERY_INTERFACE_VALIDATION.json",
-        "docs/BABEL_RECOVERY_INTERFACE_REVIEW.md",
-        "docs/BABEL_RECOVERY_SCOPE_CORRECTION.md"
+        "docs/BABEL_RECOVERY_INTERFACE_REVIEW.md"
       ],
       "depends_on": [],
       "next_action": "零更新诊断已收束；RS也未修复，不追加读头矩阵；信息缺失归因仍开放"
@@ -544,7 +540,7 @@
       "V06"
     ]
   ],
-  "next_after_active": "Resolve original-error/affected-claim/necessary-remedy ledger before any new V06 protocol or budget; no automatic extra experiments",
+  "next_after_active": "Complete V06 correction and matched verification of the old context claim; archive retain/retract/unverified disposition before considering any new optimization branch.",
   "active_training_budget": {
     "source": "docs/BABEL_RECOVERY_PLAN.json",
     "jobs_max": 10,
@@ -624,16 +620,12 @@
   "progress_log": "docs/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "current_task_ids": [
-    "V03",
-    "V04",
-    "V05",
-    "V06",
-    "V07"
+    "V06"
   ],
   "blocked_followups": {
     "V06_execution": "Design queued; executable protocol and separate budget not yet locked. F branches retained, not launched."
   },
-  "active_phase": "error_to_conclusion_accountability_before_new_experiments",
+  "active_phase": "repair_original_errors_then_archive_verified_conclusions",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -654,10 +646,77 @@
     "review": "docs/BABEL_RECOVERY_RS_REVIEW.md"
   },
   "closure_policy": {
-    "document": "docs/BABEL_RECOVERY_SCOPE_CORRECTION.md",
+    "document": "docs/BABEL_ROADMAP.md",
     "error_disposition_requires_model_improvement": false,
     "scientific_upgrade_gate_unchanged": true,
     "RS_completion_not_full_historical_correction": true,
     "original_V06_retest_complete": false
-  }
+  },
+  "document_policy": {
+    "execution_entry": "docs/BABEL_ROADMAP.md",
+    "machine_mirror": "docs/BABEL_ROADMAP.json",
+    "new_duplicate_explanation_documents": false,
+    "conclusion_archive": "Current roadmap conclusion table plus existing source report references",
+    "historical_bound_protocols": "Preserve unchanged; no mass removal",
+    "merged_document": {
+      "former_path": "docs/BABEL_RECOVERY_SCOPE_CORRECTION.md",
+      "available_in_git_commit": "27f85db"
+    }
+  },
+  "conclusion_archive": [
+    {
+      "task_ids": [
+        "V01",
+        "V02"
+      ],
+      "disposition": "保留，限检查范围",
+      "conclusion": "原接口复放和固定批梯度核查通过，不等于所有历史实现已正确",
+      "evidence": [
+        "docs/BABEL_RECOVERY_R0_REVIEW.md",
+        "docs/BABEL_RECOVERY_QUALIFICATION_REVIEW.md"
+      ]
+    },
+    {
+      "task_ids": [
+        "V03"
+      ],
+      "disposition": "保留有限结论",
+      "conclusion": "该迁移配方降低LR减轻损伤，但未完全保留源能力；不能归因为完整历史无效",
+      "evidence": [
+        "docs/BABEL_RECOVERY_R1_REVIEW.md"
+      ]
+    },
+    {
+      "task_ids": [
+        "V04",
+        "V05"
+      ],
+      "disposition": "保留观测，撤回错误解释",
+      "conclusion": "远端额外监督不对称、detach局部损失不保护编码器。RS只支持该30轮配方的取舍；不得归档成原阶段正确训练的重验结果",
+      "evidence": [
+        "docs/BABEL_RECOVERY_RS_REVIEW.md"
+      ]
+    },
+    {
+      "task_ids": [
+        "V06"
+      ],
+      "disposition": "待修复重验，归因结论不得使用",
+      "conclusion": "输入历史、标签支持、有效权重混改；尚不能单独判断完整历史输入效果",
+      "evidence": [
+        "docs/BABEL_CONTEXT_TRANSFER768_REVIEW.md",
+        "docs/BABEL_EXPERIMENT_VALIDITY_AUDIT.md"
+      ]
+    },
+    {
+      "task_ids": [
+        "V07"
+      ],
+      "disposition": "保留接口证据，信息缺失待确认",
+      "conclusion": "固定头回读退化不足以证明编码器信息丢失；八组合仅证明接口配合敏感性",
+      "evidence": [
+        "docs/BABEL_RECOVERY_INTERFACE_REVIEW.md"
+      ]
+    }
+  ]
 }

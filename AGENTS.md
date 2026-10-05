@@ -49,3 +49,13 @@ recorded, without inventing scientific results or relaxing gates to pass.
   new modules are preferable to silently changing historical bound code.
 - Do not require repeated user approval for already authorized work. Do not spawn
   agents unless the user or other applicable instructions explicitly request it.
+
+## Documentation consolidation (user clarification, 2026-10-05)
+
+- Use `docs/BABEL_ROADMAP.md` as the single execution and conclusion-disposition entry;
+  its JSON is a synchronized mirror. Update existing evidence documents when needed.
+- Do not create another explanatory/clarification/plan document for status corrections.
+  Preserve historical bound protocols and report evidence; do not rewrite their hashes.
+- Current priority is correcting original errors, verifying affected conclusions, then
+  archiving reliable conclusions. Model improvement is not the closure criterion for
+  correcting an unsupported historical claim. No new optimization branch before that work.

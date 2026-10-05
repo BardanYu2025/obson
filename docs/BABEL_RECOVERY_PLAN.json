@@ -1429,14 +1429,14 @@
     "task_ids": [
       "V06"
     ],
-    "phase": "held_for_error_to_conclusion_scope_alignment",
-    "document": "docs/BABEL_RECOVERY_RS_REVIEW.md",
+    "phase": "repair_original_context_comparison_before_new_optimization",
+    "document": "docs/BABEL_ROADMAP.md",
     "scope": "Separate native/full context and common/expanded targets; originalMacro starting point; oldA/B/C question retained",
     "new_executable_protocol_ready": false,
     "new_GPU_budget_allocated": false
   },
   "scope_correction": {
-    "document": "docs/BABEL_RECOVERY_SCOPE_CORRECTION.md",
+    "document": "docs/BABEL_ROADMAP.md",
     "original_core_retest": "V06/S3 remains unexecuted",
     "error_correction_distinct_from_model_upgrade": true,
     "no_new_jobs_this_turn": true

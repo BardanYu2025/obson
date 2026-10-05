@@ -221,7 +221,7 @@
     "review": "docs/BABEL_RECOVERY_RS_REVIEW.md"
   },
   "closure_policy": {
-    "document": "docs/BABEL_RECOVERY_SCOPE_CORRECTION.md",
+    "document": "docs/BABEL_ROADMAP.md",
     "model_upgrade_not_required_to_retract_unsupported_claims": true,
     "finite_RS_not_full_historical_retest": true
   }
