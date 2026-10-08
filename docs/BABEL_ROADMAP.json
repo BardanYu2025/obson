@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-08",
-  "current_iteration": "V04_V05_historical_routes_and_claim_disposition",
-  "current_iteration_scope": "12阶段源码绑定及实际损失路径核查；V04/V05旧结论逐项归档并关闭纠错，RS失败与近端未修好保留。下一段为V07同目标读取推断核销、V14统计和恢复证据补齐。",
+  "current_iteration": "V07_interface_claim_disposition",
+  "current_iteration_scope": "V07八组合来源/同目标结果与旧结论核销；撤回信息减少断言，保留接口退化及R1失败。下一项V14复算原始来源的状态/局部统计与真实恢复证据。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -294,25 +294,27 @@
       ],
       "implementation": "零更新八组合入口及14项新增合成测试完成",
       "execution": "真实八组合完成，零更新；96原/末轮值复现，报告已复核",
-      "conclusion": "配套新组合通常优于混合，但未恢复源能力；信息是否丢失仍未识别",
+      "conclusion": "原Macro与R1低LR第五轮的模块交叉证明固定读取兼容性会变化；未识别信息丢失。撤回由固定头读差直接推出信息减少的判断，也不声称信息必定完整。",
       "evidence": [
         "docs/BABEL_MACRO_HISTORY768_REVIEW.md",
         "docs/BABEL_RECOVERY_R1_REVIEW.md",
         "docs/BABEL_RECOVERY_INTERFACE_PLAN.md",
         "docs/BABEL_RECOVERY_INTERFACE_VALIDATION.json",
-        "docs/BABEL_RECOVERY_INTERFACE_REVIEW.md"
+        "docs/BABEL_RECOVERY_INTERFACE_REVIEW.md",
+        "docs/BABEL_RECOVERY_INTERFACE_REVIEW.json#conclusion_disposition_20261008"
       ],
       "depends_on": [],
-      "next_action": "不再跑同一八组合。归档时撤回“固定旧头读差就证明信息丢失”的推断；若需保留信息减少判断，须先设计冻结编码器、同目标同读头容量同拟合预算的直接对照。",
-      "human_status": "部分完成",
+      "next_action": "本条不再训练或重跑；继续V14统计和真实恢复证据。",
+      "human_status": "错误推断已撤回，纠错关闭",
       "original_problem": "更换编码器后仍用旧读头，误差变大可能只是两者不再配合，不能直接认定信息丢失。",
-      "completed_work": "新旧编码器和读头的八种组合已测完，96个原/末轮值复现；证明接口配合会影响结果。",
+      "completed_work": "既有八组合及96原/末轮回放已完成；本次重核44文件/192均值/768交叉均值槽位，完成原结论与来源范围归档。",
       "completion_rule": "接口敏感性证据可归档；信息减少判断只有直接证据才保留，否则明确撤回该判断并将科学问题记为未知。",
-      "closed": false,
-      "remaining_work": "不再跑同一八组合。归档时撤回“固定旧头读差就证明信息丢失”的推断；若需保留信息减少判断，须先设计冻结编码器、同目标同读头容量同拟合预算的直接对照。",
+      "closed": true,
+      "remaining_work": "本条错误归因已核销。信息可恢复上限未知，未承诺/批准新的读头矩阵；不把未知当已证实。",
       "code_locations": [
         "src/obson/babel/recovery_interface.py"
-      ]
+      ],
+      "closure": "旧接口真实退化与信息总量判断分开，错误断言明确撤回；不是模型能力修复或泛化验收。"
     },
     {
       "id": "V08",
@@ -675,23 +677,20 @@
   ],
   "active_order": [
     [
-      "V07"
-    ],
-    [
       "V14"
     ]
   ],
-  "next_after_active": "V07核销固定读头误差到信息丢失的错误推断，复用已完成八组合不重跑；再逐项准备V14状态/局部统计与真实中断恢复证据。所有原纠错交账前不开F分支。",
+  "next_after_active": "先完成V14剩余统计和恢复证据，不启动F分支；V13最终独立验收仍单列。若已有证据足够则复用，确有缺口才准备有限AutoDL检查。",
   "active_training_budget": {
     "task_ids": [
-      "V07"
+      "V14"
     ],
-    "status": "conclusion_disposition_only_no_active_training",
+    "status": "provenance_preparation_no_ready_gpu_job",
     "jobs_max": 0,
     "worker_epochs_max": 0,
     "optimizer_updates_max": 0,
     "future_branches_included": false,
-    "reason": "V04/V05纠错核销完成；V07复用既有八组合报告做结论处置，不新增训练。"
+    "reason": "V07已核销；V14先定位原状态/局部尺度拟合来源及既有恢复证据，新的真实检查入口/预算尚未交付。"
   },
   "aliases": {
     "R0": [
@@ -734,10 +733,10 @@
   "progress_log": "docs/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "current_task_ids": [
-    "V07"
+    "V14"
   ],
   "blocked_followups": {
-    "F_optimization": "V07错误推断核销、V14状态/局部统计及真实恢复证据仍未完成；先完成修复，不开优化分支。"
+    "F_optimization": "V14状态/局部统计独立复算与真实中断恢复证据仍未完成；V07已核销，不无限扩读头诊断。"
   },
   "active_phase": "repair_original_errors_then_archive_verified_conclusions",
   "RS_entrypoint": {
@@ -829,10 +828,11 @@
       "task_ids": [
         "V07"
       ],
-      "disposition": "保留接口证据，信息缺失待确认",
-      "conclusion": "固定头回读退化不足以证明编码器信息丢失；八组合仅证明接口配合敏感性",
+      "disposition": "保留接口观测；错误信息推断撤回，纠错关闭",
+      "conclusion": "原Macro与R1低LR第五轮的模块交叉证明固定读取兼容性会变化；未识别信息丢失。撤回由固定头读差直接推出信息减少的判断，也不声称信息必定完整。",
       "evidence": [
-        "docs/BABEL_RECOVERY_INTERFACE_REVIEW.md"
+        "docs/BABEL_RECOVERY_INTERFACE_REVIEW.md",
+        "docs/BABEL_RECOVERY_INTERFACE_REVIEW.json#conclusion_disposition_20261008"
       ]
     },
     {
@@ -896,7 +896,7 @@
   ],
   "repair_exit_checklist": [
     "V06已完成真实重验及原Uniform/Context归因处置，关闭；不重跑。",
-    "V03/V04/V05已逐项归档；V07仍须将固定头读取与信息丢失的推断按原文/代码/证据核销。",
+    "V03/V04/V05/V07旧结论已核销；不得重启已收束配方或把未知机制当新待跑网格。",
     "V14复用已绑定的输入/目标统计复算；状态向量/局部统计及恢复证据分别核对，不得称数据链全通过。",
     "所有仍待修复、待重验事项完成或有明确撤回依据后，才评估新的优化分支；近端能力没有改善不能写已改善。",
     "V13最终独立验收与修复阶段分开记录，不把既有研究集改名为独立测试。"
@@ -1069,7 +1069,9 @@
       "deliverable": "原结论出处→八组合具体含义→保留/撤回/未知；只有要保留信息减少判断才需同目标、等容量等拟合预算的冻结表示对照。",
       "budget": "0训练、0新头拟合；不重复已有八组合。",
       "acceptance": "固定头误差与表示信息量分开，原观测保留；无直接证据的信息减少断言明确撤回。",
-      "stop": "现有证据足以核销原断言后结束，不为了证明任意未知机制开新读头网格。"
+      "stop": "现有证据足以核销原断言后结束，不为了证明任意未知机制开新读头网格。",
+      "status": "closed",
+      "result": "同目标固定模块交叉的有限结论归档；永久信息丢失断言撤回，未新增读取适配。"
     },
     "V14": {
       "question": "哪些统计与恢复行为尚未独立验证，是否影响现有结论？",
@@ -1077,7 +1079,20 @@
       "deliverable": "先查既有证据；仅对缺口准备独立复算和真实中断恢复检查，不重复已完成原始输入/目标统计。",
       "budget": "暂无新AutoDL预算或可运行新入口；需要真实执行时先在此卡锁范围、资源、命令和停止标准。",
       "acceptance": "训练集来源/拟合量/形状/尺度逐项比对；恢复必须是真实已提交断点恢复与不中断对照，不能用普通完成运行代替。",
-      "stop": "数值或来源不一致就保存诊断并停止依赖任务；通过按范围归档，不扩大为全部历史链已验。"
+      "stop": "数值或来源不一致就保存诊断并停止依赖任务；通过按范围归档，不扩大为全部历史链已验。",
+      "source_clarification": "Query state_mean/state_scale由history_query_run.construct继承control600 bundle utility.heads[0].statistics，后续严格载入保留buffer；须用原control600训练状态复算，不用当前Macro状态的均值强行比对。local来自Prefix target_scales，经Shared/Bar Alignment local_scales复制和下游statistics传递。",
+      "located_code": [
+        "src/obson/babel/history_query_run.py:construct",
+        "src/obson/babel/research_state_delivery.py:build_bundle",
+        "src/obson/babel/history_structure_run.py:construct",
+        "src/obson/babel/macro_history_run.py:construct",
+        "src/obson/babel/prefix_readout_benchmark.py:prepare_split",
+        "src/obson/babel/prefix_readout.py:fit_target_scales",
+        "src/obson/babel/shared_readout_benchmark.py:prepare_split",
+        "src/obson/babel/bar_alignment_benchmark.py:prepare",
+        "src/obson/babel/overlap_consistency_run.py:statistics"
+      ],
+      "implementation_status": "仅完成上述源码来源定位，独立复算/真实恢复入口尚未实现；缓存是否足够、必要源文件与绑定hash须进一步核对。"
     }
   }
 }

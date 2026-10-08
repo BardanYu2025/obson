@@ -4247,5 +4247,103 @@
       "evidence": "旧损失组件存在；8任务/240轮/9120更新上限和剩余会话预算不变。",
       "remaining": "完整RS入口未实现，暂无开跑命令；不得运行旧代码冒充修订实验。"
     }
+  },
+  "conclusion_disposition_20261008": {
+    "task_id": "V07",
+    "status": "incorrect_inference_withdrawn_closed",
+    "reused_archive": true,
+    "verification": {
+      "archive_sha256": "e9efb15178713ab1cbd3447d9c214c18558fd6fda536c2ab8ed61b7aecba0a74",
+      "bound_files_verified": 44,
+      "implementation_matches": true,
+      "optimizer_updates": 0,
+      "counts": {
+        "error_cells": 751104,
+        "aggregate_values": 192,
+        "contrast_mean_slots": 768
+      },
+      "aggregate_max_abs": 0,
+      "full_interior_structure_source100": {
+        "42": {
+          "source": 100.0,
+          "encoder_swap": 121.00852169926064,
+          "query_swap": 118.33425686913692,
+          "joint": 113.61361467246181
+        },
+        "43": {
+          "source": 100.0,
+          "encoder_swap": 123.5024899456655,
+          "query_swap": 121.71616940027724,
+          "joint": 106.94490587802716
+        }
+      },
+      "constructive_example": {
+        "invertible_coordinate": "z_new=2*z",
+        "paired_readout": "D_new=D_old/2",
+        "paired_error": 0.0,
+        "fixed_old_readout_error": 24.5,
+        "scope": "Arithmetic counterexample to a logical implication only, not evidence that this is the real model mechanism."
+      }
+    },
+    "claims": [
+      {
+        "origin": "docs/BABEL_MACRO_HISTORY768_REVIEW.md:普通control与内容监督",
+        "observation": "固定源查询头的粗路径读取漂移；新配套查询及用途是不同任务/接口，不能直接相互抵消。",
+        "disposition": "保留原固定接口误差、内容相对control收益和未形成平衡升级的决定。原文已经区分接口与表示，不能虚构它宣称过信息必然丢失。",
+        "withdraw": "若把固定接口误差倍数解释为丢失信息倍数，或把相对漂移control的恢复解释为新增信息，一律撤回。",
+        "limit": "V07实际使用R1第五轮而非Macro内容分支，不能直接归因Macro各分支结果。"
+      },
+      {
+        "origin": "docs/BABEL_CONTEXT_TRANSFER768_REVIEW.md:26,66; docs/BABEL_RECOVERY_R1_REVIEW.md",
+        "observation": "E与D共同训练，组合误差及近远/上下文保护有取舍；原Context为高LR长轨迹，R1为低LR五轮。",
+        "disposition": "保留各自指定预算和接口的失败/改善记录；V07不改变R1原失败，不替换Context真实60轮归因，后者V06已独立处置。",
+        "withdraw": "共同训练后误差变化不能只归给编码器或解码器，更不能直接证明不可恢复的信息减少。"
+      },
+      {
+        "origin": "docs/BABEL_RECOVERY_INTERFACE_PLAN.md:问题与边界/决策规则; docs/BABEL_RECOVERY_INTERFACE_REVIEW.md:一至四",
+        "observation": "双种子分别E0D0/E5D0/E0D5/E5D5；仅978个原val端点、同输入策略内同目标比较；不拟合读头。",
+        "disposition": "保留固定模块配套关系影响读取效果，保留原/末轮复现与例外。交叉差值是冻结组合上的代数分解，不是训练过程中单模块更新的因果效应。",
+        "withdraw": "信息永久丢失、信息必定完整仅头不适配、混合组等于独立训练消融，三种推断均不成立。"
+      }
+    ],
+    "scientific_unknown": "同目标在充分但公平的读取条件下能恢复多少信息，未识别；不把这个未知问题当作已证明丢失或未丢失。",
+    "source_scope": "Original Macro control97/94 and R1 low-LR actual epoch5; not old Context60 or Macro content/aligned.",
+    "new_training_jobs": 0,
+    "model_promoted": false,
+    "next_task_ids": [
+      "V14"
+    ],
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "完成V07错误信息归因的处置；旧模型与有限读出观测保留，不用新头网格替代纠错。",
+        "remaining": "近端能力仍未修好，状态总信息量未知，V14剩余检查继续。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "核对完整E0/E5与D0/D5参数/buffer载入和签名；来源是Macro97/94及R1低LR第五轮，不是旧Context60轮或Macro content分支。",
+        "remaining": "未独立本地执行真实权重；交叉模块不是各自训练的冻结消融。"
+      },
+      "training": {
+        "status": "not_applicable",
+        "evidence": "本轮0训练/0拟合/0选模；原V07也为0更新，未修改旧训练、优化器、损失或验收规则。",
+        "remaining": "同目标等预算读头适配未做，不据此保留信息减少判断；也不预授权新的读头实验。"
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "重核751104误差元素、192原口径均值、768交叉均值槽位、结构分解及两种子主表；支持mask一致。",
+        "remaining": "重复使用val；没有全量预测/标签，不重新生成神经误差；计数/均值不当显著性或独立泛化证据。"
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "沿原978验证端点、255输入缓存、两种读取方式及原训练统计，未改变数据分区/尺度。",
+        "remaining": "V14原状态和局部统计尚未独立复算，V13最终独立验收尚未完成。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "原上传包SHA与已归档值一致，44个绑定文件及完整implementation相同；本地仅读包与CPU算术；生产代码/协议均未改。",
+        "remaining": "本轮不是新的AutoDL运行，不验证真实中断恢复。"
+      }
+    }
   }
 }
