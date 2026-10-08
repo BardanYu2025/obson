@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
-  "updated": "2026-10-06",
-  "current_iteration": "V06_context_target_separation_code_delivery",
-  "current_iteration_scope": "实现V06三组双种子受控重验，核对V03训练配置及V14来源证据；代码交付，真实AutoDL未运行，尚无新模型结论。",
+  "updated": "2026-10-08",
+  "current_iteration": "V06_report_review_and_conclusion_disposition",
+  "current_iteration_scope": "V06六组CUDA已完成并独立复核；关闭上下文/目标混杂比较纠错和V03配置核查，未升级模型。下一项V04/V05核销原结构与局部梯度解释。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -139,25 +139,26 @@
         "R1"
       ],
       "implementation": "固定五轮双种子训练、恢复与导出入口完成",
-      "execution": "真实双种子各5轮完成，共380更新；正式门槛未过",
-      "conclusion": "降LR减轻全部48项相对旧配方的误差；s42结构仍退化，不能单靠降LR解决",
+      "execution": "R1双种子5轮完成；V06 A前5轮240验证值复现，三组60轮训练设置/采样/更新核验完成。",
+      "conclusion": "降LR减轻该适配损伤但不充分；其他配置被记录并在V06跨组匹配，不能把适配失败归因为完整历史无效。",
       "evidence": [
         "docs/BABEL_RECOVERY_PLAN.md",
         "docs/BABEL_RECOVERY_R1.md",
         "docs/BABEL_RECOVERY_R1_VALIDATION.json",
-        "docs/BABEL_RECOVERY_R1_REVIEW.md"
+        "docs/BABEL_RECOVERY_R1_REVIEW.md",
+        "docs/BABEL_RECOVERY_CONTEXT_REVIEW.json"
       ],
       "depends_on": [
         "V02",
         "V14"
       ],
-      "next_action": "V06已写出原Macro/旧Context/三组新适配的训练差异并检查共同采样和更新；待真实报告确认，R1五轮失败保留，不再追加LR扫描。",
-      "human_status": "部分完成",
+      "next_action": "本条无需重跑；原模型不变。其他未完成修复按队列继续。",
+      "human_status": "纠错核验完成，已关闭",
       "original_problem": "旧适配提高了学习率，还重置Adam并改变采样；失败不能归因于完整历史输入。",
-      "completed_work": "只降学习率的双种子5轮实验完成：退化减轻，但一组仍未守住原能力。",
+      "completed_work": "R1学习率对照与V06真实训练控制核验完成；旧结论逐项归档。",
       "completion_rule": "学习率这条解释已核验；其余训练变化需在V06中受控，结果仍退化时只归档该配方失败，不归因为历史长度。",
-      "closed": false,
-      "remaining_work": "V06已写出原Macro/旧Context/三组新适配的训练差异并检查共同采样和更新；待真实报告确认，R1五轮失败保留，不再追加LR扫描。",
+      "closed": true,
+      "remaining_work": "本条纠错责任已完成；未证明的普遍机制不作为已验证结论。",
       "code_locations": [
         "src/obson/babel/context_transfer_run.py:train_epoch",
         "src/obson/babel/context_transfer_run.py:worker"
@@ -243,27 +244,28 @@
         "R2"
       ],
       "implementation": "独立输入/目标策略、六组匹配训练、实际损失核对、锁模后共同目标评价、恢复与失败导出入口完成；合成与关联测试通过。",
-      "execution": "真实AutoDL未运行；无新训练结果。",
-      "conclusion": "原whole-recipe结果保留；输入长度单因素未证实",
+      "execution": "6组各60轮，360轮/13680更新/22421.35秒；退出0，逐窗口评价和固定末轮统计复核完成。",
+      "conclusion": "B较同输入源改善5.03%～17.88%，但共同题目B/A误差+3.06%～79.30%，跨研究s43区间跨0；原能力保护未过。C扩展目标有远端/近端取舍。旧配方结果保留，输入长度单因归因撤回，Macro不变。",
       "evidence": [
         "docs/BABEL_RECOVERY_PLAN.md",
         "src/obson/babel/recovery_context.py",
         "src/obson/babel/recovery_context_run.py",
         "src/obson/babel/recovery_context_evaluate.py",
-        "tests/babel/test_recovery_context.py"
+        "tests/babel/test_recovery_context.py",
+        "docs/BABEL_RECOVERY_CONTEXT_REVIEW.json"
       ],
       "depends_on": [
         "V04",
         "V05"
       ],
-      "next_action": "在AutoDL执行babel_recovery_context_autodl.sh all；六组固定60轮后自动评价和导出。收到报告后核验对照及逐条处置原Uniform/Context结论。",
-      "closure": "修正后的比较足以支持或否定原归因，不要求新模型优于旧模型；未取得真实证据前保持待重验",
-      "human_status": "代码已交付，待AutoDL重验",
+      "next_action": "本条无需重跑；原模型不变。其他未完成修复按队列继续。",
+      "closure": "V06比较错误已修正并重验归档；模型提升门槛未过不妨碍纠错责任关闭，不能宣布近端能力已修好。",
+      "human_status": "纠错核验完成，已关闭",
       "original_problem": "旧prefix/full比较同时改变可见历史、重建范围及各段有效权重，无法单独判断增加历史的作用。",
-      "completed_work": "A/B锁定共同标签与权重，B/C保持相同输入；入口和测试完成，真实重验未运行。",
+      "completed_work": "真实A/B监督匹配、B/C输入匹配、因果检查、训练控制成立；完成统计复算及Uniform/Context原结论处置。",
       "completion_rule": "共同目标对照在真实训练中成立，结果完成复核并逐条处置原结论；改善、无改善或证据不足都必须如实归档。",
-      "closed": false,
-      "remaining_work": "实际GPU数值核验、六组训练和评价、旧结论处置尚未完成。",
+      "closed": true,
+      "remaining_work": "本条纠错责任已完成；未证明的普遍机制不作为已验证结论。",
       "code_locations": [
         "src/obson/babel/recovery_context.py:forward",
         "src/obson/babel/recovery_context.py:control_audit",
@@ -454,18 +456,19 @@
         "docs/BABEL_RECOVERY_QUALIFICATION_REVIEW.md",
         "docs/BABEL_COVERAGE_REVIEW.md",
         "src/obson/babel/recovery_context_run.py",
-        "tests/babel/test_recovery_context.py"
+        "tests/babel/test_recovery_context.py",
+        "docs/BABEL_RECOVERY_CONTEXT_REVIEW.json"
       ],
       "depends_on": [
         "V01"
       ],
-      "next_action": "V06运行时强制核对统计SHA及完整255行train/val区间；继续保留768维状态/局部统计独立复算、真实中断恢复的证据缺口。",
+      "next_action": "分别核对768维状态向量/局部统计独立复算及真实中断恢复证据，不重跑已绑定Coverage输入/目标统计。",
       "human_status": "部分完成",
       "original_problem": "标准化证据记录不完整；输入/历史目标统计已有早期同源复算，768维状态统计等不能一并称已独立核验。真实中断恢复也尚未覆盖。",
-      "completed_work": "来源与入口资格通过；补回Coverage原始数据复算证据，当前输入/目标统计SHA完全一致；恢复新增合成检查通过。",
+      "completed_work": "来源与入口资格通过；补回Coverage原始数据复算证据，当前输入/目标统计SHA完全一致；恢复新增合成检查通过。 V06真实CUDA入口完成；当前255行训练/验证区间交集0，来源统计SHA一致。",
       "completion_rule": "输入/目标统计的既有复算与当前来源逐项绑定；768维状态/局部统计和恢复分别交代，缺证据不得记为全部通过。",
       "closed": false,
-      "remaining_work": "V06运行时强制核对统计SHA及完整255行train/val区间；继续保留768维状态/局部统计独立复算、真实中断恢复的证据缺口。",
+      "remaining_work": "分别核对768维状态向量/局部统计独立复算及真实中断恢复证据，不重跑已绑定Coverage输入/目标统计。",
       "reused_input_target_scaler_evidence": {
         "coverage_archive_sha256": "c6a1ce420ba6463794d807eec6819e3bc69db6f1a6328558d52932eaa69bd5f5",
         "coverage_completion_sha256": "08ed3fb06117d5b2a19bf81b95c6e7fed8859edd802a168223cb35efb242bdcc",
@@ -666,32 +669,28 @@
   ],
   "active_order": [
     [
-      "V06"
+      "V04",
+      "V05"
+    ],
+    [
+      "V07"
+    ],
+    [
+      "V14"
     ]
   ],
-  "next_after_active": "收到V06报告，先核验A/B/C对照、预算、因果性和原能力，再逐句归档原Uniform/Context结论。V03/V04/V05/V07及V14未完成责任仍保留，禁止直接推进F分支。",
+  "next_after_active": "先按代码路径和原结论逐条完成V04/V05处置，再处理V07信息缺失推断和V14证据缺口。不追加RS/V06、不开始F分支；需要新修复执行时另列具体证据缺口和预算。",
   "active_training_budget": {
-    "source": "docs/BABEL_ROADMAP.md#2-本轮v06具体怎么改怎样才算交账",
     "task_ids": [
-      "V06"
+      "V04",
+      "V05"
     ],
-    "jobs_max": 6,
-    "worker_epochs_max": 360,
-    "optimizer_updates_max": 13680,
-    "gpu_session_hours_cap": 12,
-    "entrypoints_ready": true,
-    "ready_stages": [
-      "V06"
-    ],
+    "status": "conclusion_disposition_only_no_active_training",
+    "jobs_max": 0,
+    "worker_epochs_max": 0,
+    "optimizer_updates_max": 0,
     "future_branches_included": false,
-    "consumed": {
-      "jobs": 0,
-      "worker_epochs": 0,
-      "optimizer_updates": 0,
-      "session_seconds": 0
-    },
-    "reason": "Separate bounded correction study authorized by user continuation.60epochs matches old Context fixed-update arm horizon; three arms/two seeds, lower qualified LR shared across all. Prior exhausted budget archived, not reset.",
-    "disk": "10 * largest reviewed R1 last.pt bytes +1.5GiB total estimate; deduct owned outputs, >=512MiB new free floor; serial worker, no source deletion."
+    "reason": "V06固定预算已完成并归档；下一步核销旧结论，不自动开训练。"
   },
   "aliases": {
     "R0": [
@@ -734,10 +733,11 @@
   "progress_log": "docs/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "current_task_ids": [
-    "V06"
+    "V04",
+    "V05"
   ],
   "blocked_followups": {
-    "V06_execution": "Design queued; executable protocol and separate budget not yet locked. F branches retained, not launched."
+    "F_optimization": "V04/V05/V07/V14纠错责任仍未完成；V06已复核归档，不再等待或重跑。"
   },
   "active_phase": "repair_original_errors_then_archive_verified_conclusions",
   "RS_entrypoint": {
@@ -764,7 +764,7 @@
     "error_disposition_requires_model_improvement": false,
     "scientific_upgrade_gate_unchanged": true,
     "RS_completion_not_full_historical_correction": true,
-    "original_V06_retest_complete": false
+    "original_V06_retest_complete": true
   },
   "document_policy": {
     "execution_entry": "docs/BABEL_ROADMAP.md",
@@ -797,7 +797,8 @@
       "disposition": "保留有限结论",
       "conclusion": "该迁移配方降低LR减轻损伤，但未完全保留源能力；不能归因为完整历史无效",
       "evidence": [
-        "docs/BABEL_RECOVERY_R1_REVIEW.md"
+        "docs/BABEL_RECOVERY_R1_REVIEW.md",
+        "docs/BABEL_RECOVERY_CONTEXT_REVIEW.json"
       ]
     },
     {
@@ -815,11 +816,12 @@
       "task_ids": [
         "V06"
       ],
-      "disposition": "待修复重验，归因结论不得使用",
-      "conclusion": "输入历史、标签支持、有效权重混改；尚不能单独判断完整历史输入效果",
+      "disposition": "已修正比较并关闭纠错；保留旧配方观测，撤回单因素扩展归因",
+      "conclusion": "B较同输入源改善5.03%～17.88%，但共同题目B/A误差+3.06%～79.30%，跨研究s43区间跨0；原能力保护未过。C扩展目标有远端/近端取舍。旧配方结果保留，输入长度单因归因撤回，Macro不变。",
       "evidence": [
         "docs/BABEL_CONTEXT_TRANSFER768_REVIEW.md",
-        "docs/BABEL_EXPERIMENT_VALIDITY_AUDIT.md"
+        "docs/BABEL_EXPERIMENT_VALIDITY_AUDIT.md",
+        "docs/BABEL_RECOVERY_CONTEXT_REVIEW.json"
       ]
     },
     {
@@ -830,6 +832,48 @@
       "conclusion": "固定头回读退化不足以证明编码器信息丢失；八组合仅证明接口配合敏感性",
       "evidence": [
         "docs/BABEL_RECOVERY_INTERFACE_REVIEW.md"
+      ]
+    },
+    {
+      "task_ids": [
+        "V06",
+        "V03"
+      ],
+      "disposition": "逐条原文处置",
+      "evidence": [
+        "docs/BABEL_RECOVERY_CONTEXT_REVIEW.json"
+      ],
+      "items": [
+        {
+          "task_ids": [
+            "V06"
+          ],
+          "original": "docs/BABEL_UNIFORM_CONTEXT768_REVIEW.md:7,13-23,42",
+          "old_claim": "完整历史监督有收益；保留完整历史方向。原文已限定完整上下文及目标覆盖的整个配方。",
+          "code": "uniform_context targets/loss_rows及uniform_context_run的prefix/rolling路径同时改变输入、目标支持、有效权重。",
+          "disposition": "保留原从头120轮整套配方结果和相对注意力有限失败；不将其解释为增加输入历史单因素已经有益。V06是Macro低LR适配60轮，不覆盖从头120轮或同算力结论。",
+          "affected_decision": "完整历史不再作为已证实的单因素改进推进；方向保留，但当前修复期不追加优化。"
+        },
+        {
+          "task_ids": [
+            "V06"
+          ],
+          "original": "docs/BABEL_CONTEXT_TRANSFER768_REVIEW.md:1,11,26,66,70",
+          "old_claim": "完整历史有远处收益，尚未形成平衡升级；原文已说明训练变化，未宣称唯一原因。",
+          "code": "context_transfer_run.train_epoch同一native同时传递states和targets。",
+          "disposition": "保留旧407轮配置的观测、未升级决策及预算结论；撤回从该比较单独推断输入历史作用的任何扩展解释。新V06表明目标扩展组合可提高远端分数但损害近端，不能再把远端收益全归给输入变长。",
+          "affected_decision": "Macro保留；V06纠错对照关闭，未获得替代模型。不能定量拆分旧高LR每种因素贡献。"
+        },
+        {
+          "task_ids": [
+            "V03"
+          ],
+          "original": "docs/BABEL_RECOVERY_R1_REVIEW.md; docs/BABEL_CONTEXT_TRANSFER768_REVIEW.md:26,66",
+          "old_claim": "降低LR减轻适配损伤但未完全保住原能力；旧适配不是原Macro精确恢复。",
+          "code": "context_transfer_run train_epoch/worker; recovery_lr RATES; recovery_context_run training_controls/history_check",
+          "disposition": "保留R1双种子5轮结果；V06 A前5轮240项验证与R1上传包逐值相同。三组同低LR、新Adam、采样和裁剪受控；训练配置核查责任关闭。没有证明LR是唯一原因，也未恢复Macro原Adam和三视图课程。",
+          "affected_decision": "不追加LR扫描，不用适配损伤推断完整历史方向无效；其余未知优化原因保持未知。"
+        }
       ]
     }
   ],
@@ -850,14 +894,14 @@
     "V14"
   ],
   "repair_exit_checklist": [
-    "V06修正比较实现、通过训练入口检查、完成真实重验并归档受影响原结论。",
-    "V03/V04/V05/V07逐项给出旧结论出处、实际代码路径、证据及保留/撤回/仍待重验处置；需要重验的留在修复队列。",
+    "V06已完成真实重验及原Uniform/Context归因处置，关闭；不重跑。",
+    "V03已核销；V04/V05/V07继续逐项对应旧结论/代码/证据，保留或撤回有出处，需要重验的仍留在修复队列。",
     "V14复用已绑定的输入/目标统计复算；状态向量/局部统计及恢复证据分别核对，不得称数据链全通过。",
     "所有仍待修复、待重验事项完成或有明确撤回依据后，才评估新的优化分支；近端能力没有改善不能写已改善。",
     "V13最终独立验收与修复阶段分开记录，不把既有研究集改名为独立测试。"
   ],
   "V06_execution_card": {
-    "status": "代码交付；真实训练与结论归档尚未完成",
+    "status": "执行/复核/旧归因归档完成，V06纠错关闭；配方提升门槛未过，停止追加训练。",
     "source": "Macro control s42/s43 best97/94，768维/4层/8头",
     "code_locations": [
       "src/obson/babel/recovery_context.py:forward",
@@ -950,7 +994,8 @@
     "entrypoint": "scripts/babel_recovery_context_autodl.sh",
     "protocol_in_code": "src/obson/babel/recovery_context_run.py:protocol",
     "default_source": "checkpoints/babel_recovery_interface",
-    "output": "checkpoints/babel_recovery_context"
+    "output": "checkpoints/babel_recovery_context",
+    "report_review": "docs/BABEL_RECOVERY_CONTEXT_REVIEW.json"
   },
   "completed_training_budgets": [
     {
@@ -990,6 +1035,30 @@
         "V07"
       ],
       "RS_entrypoint_cap_seconds": 35241
+    },
+    {
+      "source": "docs/BABEL_ROADMAP.md#2-本轮v06具体怎么改怎样才算交账",
+      "task_ids": [
+        "V06"
+      ],
+      "jobs_max": 6,
+      "worker_epochs_max": 360,
+      "optimizer_updates_max": 13680,
+      "gpu_session_hours_cap": 12,
+      "entrypoints_ready": true,
+      "ready_stages": [
+        "V06"
+      ],
+      "future_branches_included": false,
+      "consumed": {
+        "jobs": 6,
+        "worker_epochs": 360,
+        "optimizer_updates": 13680,
+        "session_seconds": 22421.34846058581
+      },
+      "reason": "Separate bounded correction study authorized by user continuation.60epochs matches old Context fixed-update arm horizon; three arms/two seeds, lower qualified LR shared across all. Prior exhausted budget archived, not reset.",
+      "disk": "10 * largest reviewed R1 last.pt bytes +1.5GiB total estimate; deduct owned outputs, >=512MiB new free floor; serial worker, no source deletion.",
+      "status": "completed_no_further_jobs"
     }
   ]
 }

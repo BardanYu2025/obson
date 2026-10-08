@@ -1,0 +1,805 @@
+{
+  "schema": "babel-recovery-context-report-review-v1",
+  "date": "2026-10-08",
+  "task_ids": [
+    "V06",
+    "V03",
+    "V14"
+  ],
+  "archive": {
+    "path": "/Users/bardan/Downloads/babel_recovery_context_reports.tar.gz",
+    "sha256": "68ca5d50eb39f0f29806de4d2dbc1d1d07526d794d0ec93078fc5d3814ff2063",
+    "bytes": 13958028
+  },
+  "source": {
+    "model": "Macro control s42/s43 best97/94,768/4/8",
+    "run": "babel_recovery_context",
+    "git_commit": "e6b8fac",
+    "manifest_sha256": "7501546498f0656dfc6620cd92931113ecdab8b6835eb4766f3b7589ca89f50a",
+    "runtime": {
+      "mha_fastpath": false,
+      "matmul_tf32": false,
+      "cudnn_tf32": false,
+      "cudnn_benchmark": false,
+      "threads": 4
+    },
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "torch": "2.8.0+cu128"
+  },
+  "completion": {
+    "schema": "babel-recovery-context-v1",
+    "task_ids": [
+      "V06"
+    ],
+    "status": "v06_complete_requires_review",
+    "promoted": false,
+    "optimizer_updates": 13680,
+    "worker_epochs": 360,
+    "source_unchanged": true
+  },
+  "budget": {
+    "used_seconds": 22421.34846058581,
+    "attempts": [
+      {
+        "started_unix": 1791220174.6681328,
+        "reserved_seconds": 43200.0,
+        "elapsed_seconds": 22421.34846058581,
+        "exit_code": 0
+      }
+    ]
+  },
+  "independent_verification": {
+    "counts": {
+      "file_hash_checks": 217,
+      "epochs": 360,
+      "updates": 13680,
+      "reported_control_checks": 1620,
+      "replay_values": 528,
+      "numeric_leaves": 39056,
+      "evaluation_npz": 28,
+      "contrasts": 1296,
+      "retention_records": 24
+    },
+    "max_numeric_abs_difference": 6.938893903907228e-17,
+    "missing_weights": [
+      "A_prefix_common_s42/best.pt",
+      "A_prefix_common_s42/last.pt",
+      "A_prefix_common_s43/best.pt",
+      "A_prefix_common_s43/last.pt",
+      "B_full_common_s42/best.pt",
+      "B_full_common_s42/last.pt",
+      "B_full_common_s43/best.pt",
+      "B_full_common_s43/last.pt",
+      "C_full_extended_s42/best.pt",
+      "C_full_extended_s42/last.pt",
+      "C_full_extended_s43/best.pt",
+      "C_full_extended_s43/last.pt"
+    ],
+    "validation_array_mean_max_abs": 1.4901161193847656e-08,
+    "R1_prior_archive_exact_validation_values": 240,
+    "train_val_input_interval_overlaps": 0,
+    "arithmetic_note": "重算按远端float32活动分位点的rank及插值精度；39,056个评价标量最大差6.94e-17。另12份验证误差数组的float32均值差<=1.49e-8。未改变训练/验收门槛。",
+    "bootstrap": "Independent NumPy implementation: fixed seed20261004,2000 cluster resamples, window-weighted means, months and contract-months; same support; all published thresholds unchanged."
+  },
+  "results": [
+    {
+      "split": "test",
+      "seed": 42,
+      "B_vs_A_pct": 64.95184540573592,
+      "B_vs_source_pct": -17.8810612075339,
+      "B_retention_failed": {
+        "A_prefix_common/interior/price": 2.1963522563095723,
+        "A_prefix_common/interior/near": 3.586255116228217,
+        "A_prefix_common/interior/mid": 2.030499667342485,
+        "A_prefix_common/interior/far": 1.814718185031174,
+        "A_prefix_common/interior/activity": 4.56300163269043,
+        "A_prefix_common/interior/structure": 2.7813466103454867
+      },
+      "C_retention_failed": {
+        "A_prefix_common/interior/price": 2.485848436752738,
+        "A_prefix_common/interior/near": 3.8359295330134726,
+        "A_prefix_common/interior/mid": 2.3116386754887657,
+        "A_prefix_common/interior/far": 2.1540197087496322,
+        "A_prefix_common/interior/activity": 5.657919406890869,
+        "A_prefix_common/interior/structure": 2.5834039761091905
+      },
+      "finite_B_benefit": false,
+      "C_vs_B_by_view": {
+        "B_full_common": {
+          "price": -0.0471738723420323,
+          "near": 1.7176236435754388,
+          "mid": 0.1215660792587725,
+          "far": -2.511669602289579,
+          "activity": 0.4112124443054199,
+          "structure": -10.923182117961183
+        },
+        "C_full_extended": {
+          "price": -5.871973974897937,
+          "near": 1.7176236435754388,
+          "mid": -1.8184279383045898,
+          "far": -8.766554029449459,
+          "activity": -5.331850051879883,
+          "structure": -22.55184205582156
+        }
+      }
+    },
+    {
+      "split": "test",
+      "seed": 43,
+      "B_vs_A_pct": 3.179465205635612,
+      "B_vs_source_pct": -14.127898785700022,
+      "B_retention_failed": {
+        "A_prefix_common/interior/price": 1.193275067727405,
+        "A_prefix_common/interior/near": 1.2425086910513614,
+        "A_prefix_common/interior/mid": 1.161489961469232,
+        "A_prefix_common/interior/far": 1.1610604834168332,
+        "A_prefix_common/interior/activity": 2.131026029586792,
+        "A_prefix_common/interior/structure": 1.618392071355456
+      },
+      "C_retention_failed": {
+        "A_prefix_common/interior/price": 1.6677699182555976,
+        "A_prefix_common/interior/near": 1.6515539354224251,
+        "A_prefix_common/interior/mid": 1.6520944279217025,
+        "A_prefix_common/interior/far": 1.4562095675356463,
+        "A_prefix_common/interior/activity": 3.651334524154663,
+        "A_prefix_common/interior/structure": 3.752034030894991
+      },
+      "finite_B_benefit": false,
+      "C_vs_B_by_view": {
+        "B_full_common": {
+          "price": 4.020102181784302,
+          "near": 6.036050323759756,
+          "mid": 4.352458856644592,
+          "far": 0.7297422368895745,
+          "activity": 11.29244613647461,
+          "structure": -0.41064398812492575
+        },
+        "C_full_extended": {
+          "price": -7.302540235712717,
+          "near": 6.036050323759756,
+          "mid": 3.8970148757176304,
+          "far": -11.566154409998175,
+          "activity": -8.228135108947754,
+          "structure": -21.233912528335775
+        }
+      }
+    },
+    {
+      "split": "cross_research",
+      "seed": 42,
+      "B_vs_A_pct": 79.30306522153896,
+      "B_vs_source_pct": -13.299031866382515,
+      "B_retention_failed": {
+        "A_prefix_common/interior/price": 4.855172241449538,
+        "A_prefix_common/interior/near": 14.012809006609405,
+        "A_prefix_common/interior/mid": 4.124894338491614,
+        "A_prefix_common/interior/far": 3.3475033439477015,
+        "A_prefix_common/interior/activity": 4.573276042938232,
+        "A_prefix_common/endpoint/structure": 1.1279850299805023,
+        "A_prefix_common/interior/structure": 11.096315877699215,
+        "C_full_extended/endpoint/structure": 1.127983240929129,
+        "C_full_extended/interior/structure": 1.1319483714166998
+      },
+      "C_retention_failed": {
+        "A_prefix_common/interior/price": 5.842302755767975,
+        "A_prefix_common/interior/near": 15.56925368776285,
+        "A_prefix_common/interior/mid": 5.025568099572465,
+        "A_prefix_common/interior/far": 4.327497046929176,
+        "A_prefix_common/interior/activity": 5.6222147941589355,
+        "A_prefix_common/interior/structure": 11.359625173885853
+      },
+      "finite_B_benefit": false,
+      "C_vs_B_by_view": {
+        "B_full_common": {
+          "price": 1.9598586477986402,
+          "near": 6.609316625042738,
+          "mid": 0.4710360647737666,
+          "far": -0.60980129818482,
+          "activity": 0.1514434814453125,
+          "structure": -32.399423518893435
+        },
+        "C_full_extended": {
+          "price": -6.495593297269197,
+          "near": 6.609316625042738,
+          "mid": -3.1561124177415967,
+          "far": -9.663545617954394,
+          "activity": -5.411320686340332,
+          "structure": -20.29114280611265
+        }
+      }
+    },
+    {
+      "split": "cross_research",
+      "seed": 43,
+      "B_vs_A_pct": 3.059995140368521,
+      "B_vs_source_pct": -5.033929283168936,
+      "B_retention_failed": {
+        "A_prefix_common/interior/price": 1.9082368211133194,
+        "A_prefix_common/interior/near": 3.421087899258112,
+        "A_prefix_common/interior/mid": 1.6336720379517715,
+        "A_prefix_common/interior/far": 1.719888403281075,
+        "A_prefix_common/interior/activity": 2.496332883834839,
+        "A_prefix_common/endpoint/structure": 1.1734872906788179,
+        "A_prefix_common/interior/structure": 6.721663219287114,
+        "C_full_extended/endpoint/structure": 1.1734887159491532,
+        "C_full_extended/interior/structure": 1.163157478436657
+      },
+      "C_retention_failed": {
+        "A_prefix_common/interior/price": 3.020536967919377,
+        "A_prefix_common/interior/near": 5.036740827279784,
+        "A_prefix_common/interior/mid": 2.6530744104255195,
+        "A_prefix_common/interior/far": 2.4803644658353003,
+        "A_prefix_common/interior/activity": 4.552581310272217,
+        "A_prefix_common/interior/structure": 13.804178111122088
+      },
+      "finite_B_benefit": false,
+      "C_vs_B_by_view": {
+        "B_full_common": {
+          "price": 6.280553381685539,
+          "near": 7.209098835998806,
+          "mid": 6.649243954376205,
+          "far": 3.582455801571438,
+          "activity": 12.172805786132812,
+          "structure": -17.305489154946695
+        },
+        "C_full_extended": {
+          "price": -9.271641438416811,
+          "near": 7.209098835998806,
+          "mid": 5.740813779832377,
+          "far": -13.435251255452574,
+          "activity": -8.653444290161133,
+          "structure": -8.257534103498221
+        }
+      }
+    }
+  ],
+  "paired_primary_evidence": {
+    "test_42": {
+      "deployed_common/interior/price": {
+        "status": "estimated",
+        "windows": 984,
+        "candidate_mean": 0.06848517497868792,
+        "control_mean": 0.04151828359981868,
+        "relative_change": 0.6495184540573593,
+        "intervals": {
+          "month": {
+            "delta": 0.026966891378869234,
+            "low": 0.011945536331396372,
+            "high": 0.04796340071866971,
+            "groups": 13,
+            "windows": 984,
+            "supported": true
+          },
+          "contract_month": {
+            "delta": 0.026966891378869234,
+            "low": 0.016969134588118776,
+            "high": 0.04228830984871403,
+            "groups": 498,
+            "windows": 984,
+            "supported": true
+          }
+        },
+        "five_percent_intervals": {
+          "month": {
+            "delta": 0.02904280555886017,
+            "low": 0.012801338786659434,
+            "high": 0.051666353577196386,
+            "groups": 13,
+            "windows": 984,
+            "supported": true
+          },
+          "contract_month": {
+            "delta": 0.02904280555886017,
+            "low": 0.018374830539380042,
+            "high": 0.045126473690285475,
+            "groups": 498,
+            "windows": 984,
+            "supported": true
+          }
+        },
+        "supported_gain_5pct": false
+      },
+      "source_policy_gap/interior/price": {
+        "status": "estimated",
+        "windows": 984,
+        "candidate_mean": 0.08339754018469002,
+        "control_mean": 0.04563272407976968,
+        "relative_change": 0.8275818914273974,
+        "intervals": {
+          "month": {
+            "delta": 0.03776481610492033,
+            "low": 0.016139369573747335,
+            "high": 0.06806378048811895,
+            "groups": 13,
+            "windows": 984,
+            "supported": true
+          },
+          "contract_month": {
+            "delta": 0.03776481610492033,
+            "low": 0.02346026638792429,
+            "high": 0.05949749736426437,
+            "groups": 498,
+            "windows": 984,
+            "supported": true
+          }
+        },
+        "five_percent_intervals": {
+          "month": {
+            "delta": 0.04004645230890882,
+            "low": 0.016980649906487694,
+            "high": 0.07219483124274474,
+            "groups": 13,
+            "windows": 984,
+            "supported": true
+          },
+          "contract_month": {
+            "delta": 0.04004645230890882,
+            "low": 0.02487815397077944,
+            "high": 0.06323052415434728,
+            "groups": 498,
+            "windows": 984,
+            "supported": true
+          }
+        },
+        "supported_gain_5pct": false
+      },
+      "difference_in_differences/interior/price": {
+        "status": "estimated",
+        "windows": 984,
+        "candidate_mean": -0.014912365206002101,
+        "control_mean": -0.004114440479951,
+        "intervals": {
+          "month": {
+            "delta": -0.0107979247260511,
+            "low": -0.0201534319350058,
+            "high": -0.004236528132279223,
+            "groups": 13,
+            "windows": 984,
+            "supported": true
+          },
+          "contract_month": {
+            "delta": -0.0107979247260511,
+            "low": -0.01715630621220548,
+            "high": -0.006320965801164499,
+            "groups": 498,
+            "windows": 984,
+            "supported": true
+          }
+        }
+      }
+    },
+    "test_43": {
+      "deployed_common/interior/price": {
+        "status": "estimated",
+        "windows": 984,
+        "candidate_mean": 0.03032106195505173,
+        "control_mean": 0.02938672137389176,
+        "relative_change": 0.03179465205635612,
+        "intervals": {
+          "month": {
+            "delta": 0.0009343405811599664,
+            "low": 0.0004392661960805874,
+            "high": 0.001541848791162308,
+            "groups": 13,
+            "windows": 984,
+            "supported": true
+          },
+          "contract_month": {
+            "delta": 0.0009343405811599664,
+            "low": 8.207574724131158e-05,
+            "high": 0.0017864364750449634,
+            "groups": 498,
+            "windows": 984,
+            "supported": true
+          }
+        },
+        "five_percent_intervals": {
+          "month": {
+            "delta": 0.0024036766498545556,
+            "low": 0.0011628730996279509,
+            "high": 0.003911766119361968,
+            "groups": 13,
+            "windows": 984,
+            "supported": true
+          },
+          "contract_month": {
+            "delta": 0.0024036766498545556,
+            "low": 0.001403091459525474,
+            "high": 0.003724691770456572,
+            "groups": 498,
+            "windows": 984,
+            "supported": true
+          }
+        },
+        "supported_gain_5pct": false
+      },
+      "source_policy_gap/interior/price": {
+        "status": "estimated",
+        "windows": 984,
+        "candidate_mean": 0.03530956099395233,
+        "control_mean": 0.03246528544055565,
+        "relative_change": 0.08760975037797158,
+        "intervals": {
+          "month": {
+            "delta": 0.002844275553396681,
+            "low": 0.001501891252150338,
+            "high": 0.004609035349980799,
+            "groups": 13,
+            "windows": 984,
+            "supported": true
+          },
+          "contract_month": {
+            "delta": 0.002844275553396681,
+            "low": 0.0013052096540031235,
+            "high": 0.005120232628014152,
+            "groups": 498,
+            "windows": 984,
+            "supported": true
+          }
+        },
+        "five_percent_intervals": {
+          "month": {
+            "delta": 0.004467539825424465,
+            "low": 0.0020306881185796735,
+            "high": 0.007685539956584077,
+            "groups": 13,
+            "windows": 984,
+            "supported": true
+          },
+          "contract_month": {
+            "delta": 0.004467539825424465,
+            "low": 0.0025082452047945677,
+            "high": 0.0074777884189976326,
+            "groups": 498,
+            "windows": 984,
+            "supported": true
+          }
+        },
+        "supported_gain_5pct": false
+      },
+      "difference_in_differences/interior/price": {
+        "status": "estimated",
+        "windows": 984,
+        "candidate_mean": -0.0049884990389006,
+        "control_mean": -0.0030785640666638847,
+        "intervals": {
+          "month": {
+            "delta": -0.001909934972236715,
+            "low": -0.003528732573444086,
+            "high": -0.0007517015578641488,
+            "groups": 13,
+            "windows": 984,
+            "supported": true
+          },
+          "contract_month": {
+            "delta": -0.001909934972236715,
+            "low": -0.003609833656848319,
+            "high": -0.0009498949430887972,
+            "groups": 498,
+            "windows": 984,
+            "supported": true
+          }
+        }
+      }
+    },
+    "cross_research_42": {
+      "deployed_common/interior/price": {
+        "status": "estimated",
+        "windows": 439,
+        "candidate_mean": 0.018338442281064914,
+        "control_mean": 0.010227623414249357,
+        "relative_change": 0.7930306522153896,
+        "intervals": {
+          "month": {
+            "delta": 0.008110818866815557,
+            "low": 0.005619971932260197,
+            "high": 0.011375074872301933,
+            "groups": 13,
+            "windows": 439,
+            "supported": true
+          },
+          "contract_month": {
+            "delta": 0.008110818866815557,
+            "low": 0.006272806379533713,
+            "high": 0.010146183115487921,
+            "groups": 206,
+            "windows": 439,
+            "supported": true
+          }
+        },
+        "five_percent_intervals": {
+          "month": {
+            "delta": 0.008622200037528024,
+            "low": 0.005949672619698975,
+            "high": 0.012113349321676674,
+            "groups": 13,
+            "windows": 439,
+            "supported": true
+          },
+          "contract_month": {
+            "delta": 0.008622200037528024,
+            "low": 0.0066468047184299025,
+            "high": 0.010788717413323911,
+            "groups": 206,
+            "windows": 439,
+            "supported": true
+          }
+        },
+        "supported_gain_5pct": false
+      },
+      "source_policy_gap/interior/price": {
+        "status": "estimated",
+        "windows": 439,
+        "candidate_mean": 0.021151369674215156,
+        "control_mean": 0.010477040225395067,
+        "relative_change": 1.0188306257474147,
+        "intervals": {
+          "month": {
+            "delta": 0.01067432944882009,
+            "low": 0.007626452894774724,
+            "high": 0.01464416540510035,
+            "groups": 13,
+            "windows": 439,
+            "supported": true
+          },
+          "contract_month": {
+            "delta": 0.01067432944882009,
+            "low": 0.008491469312435131,
+            "high": 0.013167049821842566,
+            "groups": 206,
+            "windows": 439,
+            "supported": true
+          }
+        },
+        "five_percent_intervals": {
+          "month": {
+            "delta": 0.011198181460089844,
+            "low": 0.007958899897079087,
+            "high": 0.015381555605374414,
+            "groups": 13,
+            "windows": 439,
+            "supported": true
+          },
+          "contract_month": {
+            "delta": 0.011198181460089844,
+            "low": 0.008865631350761799,
+            "high": 0.013843678336453528,
+            "groups": 206,
+            "windows": 439,
+            "supported": true
+          }
+        },
+        "supported_gain_5pct": false
+      },
+      "difference_in_differences/interior/price": {
+        "status": "estimated",
+        "windows": 439,
+        "candidate_mean": -0.0028129273931502418,
+        "control_mean": -0.00024941681114570884,
+        "intervals": {
+          "month": {
+            "delta": -0.0025635105820045324,
+            "low": -0.003271697542501844,
+            "high": -0.0019970786493951407,
+            "groups": 13,
+            "windows": 439,
+            "supported": true
+          },
+          "contract_month": {
+            "delta": -0.0025635105820045324,
+            "low": -0.00310117291761627,
+            "high": -0.0021375743451364127,
+            "groups": 206,
+            "windows": 439,
+            "supported": true
+          }
+        }
+      }
+    },
+    "cross_research_43": {
+      "deployed_common/interior/price": {
+        "status": "estimated",
+        "windows": 439,
+        "candidate_mean": 0.007353197037056219,
+        "control_mean": 0.007134870351042717,
+        "relative_change": 0.03059995140368521,
+        "intervals": {
+          "month": {
+            "delta": 0.00021832668601350219,
+            "low": -0.00010053048385044043,
+            "high": 0.00039145500808452326,
+            "groups": 13,
+            "windows": 439,
+            "supported": true
+          },
+          "contract_month": {
+            "delta": 0.00021832668601350219,
+            "low": -0.0001663762841786153,
+            "high": 0.00045888087937878875,
+            "groups": 206,
+            "windows": 439,
+            "supported": true
+          }
+        },
+        "five_percent_intervals": {
+          "month": {
+            "delta": 0.0005750702035656384,
+            "low": 0.00036993111994527885,
+            "high": 0.0007600571508731362,
+            "groups": 13,
+            "windows": 439,
+            "supported": true
+          },
+          "contract_month": {
+            "delta": 0.0005750702035656384,
+            "low": 0.00027037535762269643,
+            "high": 0.000814112217862435,
+            "groups": 206,
+            "windows": 439,
+            "supported": true
+          }
+        },
+        "supported_gain_5pct": false
+      },
+      "source_policy_gap/interior/price": {
+        "status": "estimated",
+        "windows": 439,
+        "candidate_mean": 0.007742972812871149,
+        "control_mean": 0.007063865779113869,
+        "relative_change": 0.09613815649856128,
+        "intervals": {
+          "month": {
+            "delta": 0.0006791070337572798,
+            "low": 0.0003043519284514625,
+            "high": 0.0008876874443885552,
+            "groups": 13,
+            "windows": 439,
+            "supported": true
+          },
+          "contract_month": {
+            "delta": 0.0006791070337572798,
+            "low": 0.0002076615221547477,
+            "high": 0.0009916084580394336,
+            "groups": 206,
+            "windows": 439,
+            "supported": true
+          }
+        },
+        "five_percent_intervals": {
+          "month": {
+            "delta": 0.0010323003227129734,
+            "low": 0.0007861775548049573,
+            "high": 0.0012383869256323583,
+            "groups": 13,
+            "windows": 439,
+            "supported": true
+          },
+          "contract_month": {
+            "delta": 0.0010323003227129734,
+            "low": 0.0006443849728651363,
+            "high": 0.0013314528327080905,
+            "groups": 206,
+            "windows": 439,
+            "supported": true
+          }
+        },
+        "supported_gain_5pct": false
+      },
+      "difference_in_differences/interior/price": {
+        "status": "estimated",
+        "windows": 439,
+        "candidate_mean": -0.0003897757758149302,
+        "control_mean": 7.100457192884743e-05,
+        "intervals": {
+          "month": {
+            "delta": -0.0004607803477437776,
+            "low": -0.0005118155294674284,
+            "high": -0.0003953736859743141,
+            "groups": 13,
+            "windows": 439,
+            "supported": true
+          },
+          "contract_month": {
+            "delta": -0.0004607803477437776,
+            "low": -0.0005586406218068182,
+            "high": -0.00035660316855992463,
+            "groups": 206,
+            "windows": 439,
+            "supported": true
+          }
+        }
+      }
+    }
+  },
+  "best_epochs": {
+    "A_prefix_common_s42": 46,
+    "A_prefix_common_s43": 57,
+    "B_full_common_s42": 0,
+    "B_full_common_s43": 0,
+    "C_full_extended_s42": 0,
+    "C_full_extended_s43": 0
+  },
+  "original_conclusion_dispositions": [
+    {
+      "task_ids": [
+        "V06"
+      ],
+      "original": "docs/BABEL_UNIFORM_CONTEXT768_REVIEW.md:7,13-23,42",
+      "old_claim": "完整历史监督有收益；保留完整历史方向。原文已限定完整上下文及目标覆盖的整个配方。",
+      "code": "uniform_context targets/loss_rows及uniform_context_run的prefix/rolling路径同时改变输入、目标支持、有效权重。",
+      "disposition": "保留原从头120轮整套配方结果和相对注意力有限失败；不将其解释为增加输入历史单因素已经有益。V06是Macro低LR适配60轮，不覆盖从头120轮或同算力结论。",
+      "affected_decision": "完整历史不再作为已证实的单因素改进推进；方向保留，但当前修复期不追加优化。"
+    },
+    {
+      "task_ids": [
+        "V06"
+      ],
+      "original": "docs/BABEL_CONTEXT_TRANSFER768_REVIEW.md:1,11,26,66,70",
+      "old_claim": "完整历史有远处收益，尚未形成平衡升级；原文已说明训练变化，未宣称唯一原因。",
+      "code": "context_transfer_run.train_epoch同一native同时传递states和targets。",
+      "disposition": "保留旧407轮配置的观测、未升级决策及预算结论；撤回从该比较单独推断输入历史作用的任何扩展解释。新V06表明目标扩展组合可提高远端分数但损害近端，不能再把远端收益全归给输入变长。",
+      "affected_decision": "Macro保留；V06纠错对照关闭，未获得替代模型。不能定量拆分旧高LR每种因素贡献。"
+    },
+    {
+      "task_ids": [
+        "V03"
+      ],
+      "original": "docs/BABEL_RECOVERY_R1_REVIEW.md; docs/BABEL_CONTEXT_TRANSFER768_REVIEW.md:26,66",
+      "old_claim": "降低LR减轻适配损伤但未完全保住原能力；旧适配不是原Macro精确恢复。",
+      "code": "context_transfer_run train_epoch/worker; recovery_lr RATES; recovery_context_run training_controls/history_check",
+      "disposition": "保留R1双种子5轮结果；V06 A前5轮240项验证与R1上传包逐值相同。三组同低LR、新Adam、采样和裁剪受控；训练配置核查责任关闭。没有证明LR是唯一原因，也未恢复Macro原Adam和三视图课程。",
+      "affected_decision": "不追加LR扫描，不用适配损伤推断完整历史方向无效；其余未知优化原因保持未知。"
+    }
+  ],
+  "limits": [
+    "12个神经权重未随报告导出；本地未加载真实权重。源/训练后标签、Jacobian及因果性依赖绑定CUDA检查记录，非本地重新运行神经网络。",
+    "独立复算从导出的逐窗口误差和support开始；包内没有全量原始预测和标签，不能独立验证预测到误差的神经计算。",
+    "同更新而非同算力；原源模型已有B/A上下文差距。训练缩小了差距，不能将末轮B较差解释为额外历史必然有害。",
+    "A/B仍包含位置坐标职责变化，EMA还总结更早因果历史；C/B包含答案覆盖及有效权重变化。",
+    "研究集反复使用；当前结果不是V13独立泛化验收。V14状态/局部统计独立复算及真实中断恢复尚无新证据。",
+    "原结构损失及局部梯度路径保持原状；本轮不能核销V04/V05或将近端能力宣告修好。"
+  ],
+  "review": {
+    "purpose": {
+      "status": "pass_for_scope",
+      "evidence": "完成V06原混杂比较纠错及结论处置，不以涨分作为纠错关闭条件；无新模型提升声明、无F分支启动。",
+      "remaining": "近端能力没有修好；V04/V05/V07/V14责任仍保留。"
+    },
+    "architecture": {
+      "status": "pass_for_scope",
+      "evidence": "原Macro768/4/8与原查询头；A/B共同目标、B/C同输入、未来扰动及训练后检查记录通过；无新增读头。",
+      "remaining": "有限固定批CUDA检查；本地无神经权重复跑。位置职责与EMA前史不能被消去。"
+    },
+    "training": {
+      "status": "pass_for_scope",
+      "evidence": "6组360轮13680更新；同种子初始签名、60轮采样hash、LR、曝光与验证保护复核。A前5轮240验证值与R1原包完全一致。",
+      "remaining": "新Adam适配并非原课程恢复；C/B仍含有效权重变化，不能独立归因该权重。"
+    },
+    "validation": {
+      "status": "pass_for_scope",
+      "evidence": "28逐窗口误差/support文件；独立复算1296项对比、按月及合约月2000次配对区间、24份保护记录和选模；B/C best0与源误差数组完全一致。",
+      "remaining": "没有全量预测/标签；反复使用研究集；跨品种s43 B/A价格区间跨0，不能称四组均显著退化。"
+    },
+    "data": {
+      "status": "pass_for_scope",
+      "evidence": "统计SHA匹配既有Coverage复算；训练4789/验证978，255行输入区间本地复查交集0；研究984/439且模型间support相同。",
+      "remaining": "本轮没有重新从原始行情复算特征或状态/局部统计；V14剩余缺口保持。"
+    },
+    "engineering": {
+      "status": "pass_for_scope",
+      "evidence": "绑定源码/协议与当前实现一致；217次文件哈希校验通过（含重复引用）；1620个CUDA检查通过；0退出码，单会话22421.35秒且源未改；无训练代码修改。",
+      "remaining": "省略12个pt；只有普通完整运行，本轮不证明真实中断恢复。"
+    }
+  },
+  "decision": {
+    "V06": "修正比较、真实执行、结果复核和原归因处置完成；纠错关闭，不等于能力修复或模型晋升。",
+    "V03": "R1有限学习率结论与V06实际训练控制完成；该纠错责任关闭，不声称已识别所有优化原因。",
+    "V14": "记录新增真实入口及255行区间检查；其他缺口保留。",
+    "model_promoted": false,
+    "next_task_ids": [
+      "V04",
+      "V05"
+    ],
+    "new_training_authorized_by_this_review": false
+  }
+}
