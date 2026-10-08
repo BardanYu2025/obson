@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-08",
-  "current_iteration": "V07_interface_claim_disposition",
-  "current_iteration_scope": "V07八组合来源/同目标结果与旧结论核销；撤回信息减少断言，保留接口退化及R1失败。下一项V14复算原始来源的状态/局部统计与真实恢复证据。",
+  "current_iteration": "V14_original_scaler_and_committed_resume_audit",
+  "current_iteration_scope": "原control600状态标准化、原Prefix局部尺度独立复算；实际V06保存/加载路径的两步真实CUDA进程恢复检查。最多8次诊断更新，非新优化；代码完成，远端未执行。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -453,8 +453,8 @@
       "legacy_ids": [
         "new_entrypoint_qualification"
       ],
-      "implementation": "源绑定、目标、局部头资格入口及合成测试完成",
-      "execution": "本入口源/目标/复放/原局部头最低资格通过",
+      "implementation": "独立尺度复算与真实进程恢复审计入口完成；历史绑定模块未改。",
+      "execution": "既有qualification及Coverage证据保留；新增V14 CUDA审计未执行。",
       "conclusion": "输入/历史目标统计可复用既有同源复算；不能扩展为768维状态/局部统计和全部祖先训练已独立核验。",
       "evidence": [
         "docs/BABEL_RECOVERY_R0_REVIEW.md",
@@ -465,18 +465,22 @@
         "docs/BABEL_COVERAGE_REVIEW.md",
         "src/obson/babel/recovery_context_run.py",
         "tests/babel/test_recovery_context.py",
-        "docs/BABEL_RECOVERY_CONTEXT_REVIEW.json"
+        "docs/BABEL_RECOVERY_CONTEXT_REVIEW.json",
+        "src/obson/babel/recovery_provenance.py",
+        "src/obson/babel/recovery_provenance_run.py",
+        "tests/babel/test_recovery_provenance.py",
+        "scripts/babel_recovery_provenance_autodl.sh"
       ],
       "depends_on": [
         "V01"
       ],
-      "next_action": "分别核对768维状态向量/局部统计独立复算及真实中断恢复证据，不重跑已绑定Coverage输入/目标统计。",
-      "human_status": "部分完成",
+      "next_action": "运行一次V14有界审计并回传报告；逐项审查尺度/继承/真实恢复，不自动关闭。",
+      "human_status": "入口已完成，待AutoDL",
       "original_problem": "标准化证据记录不完整；输入/历史目标统计已有早期同源复算，768维状态统计等不能一并称已独立核验。真实中断恢复也尚未覆盖。",
-      "completed_work": "来源与入口资格通过；补回Coverage原始数据复算证据，当前输入/目标统计SHA完全一致；恢复新增合成检查通过。 V06真实CUDA入口完成；当前255行训练/验证区间交集0，来源统计SHA一致。",
+      "completed_work": "来源与入口资格通过；补回Coverage原始数据复算证据，当前输入/目标统计SHA完全一致；恢复新增合成检查通过。 V06真实CUDA入口完成；当前255行训练/验证区间交集0，来源统计SHA一致。 新增原统计复算与8更新进程恢复入口，合成测试覆盖负对照；尚无新增真实结果。",
       "completion_rule": "输入/目标统计的既有复算与当前来源逐项绑定；768维状态/局部统计和恢复分别交代，缺证据不得记为全部通过。",
       "closed": false,
-      "remaining_work": "分别核对768维状态向量/局部统计独立复算及真实中断恢复证据，不重跑已绑定Coverage输入/目标统计。",
+      "remaining_work": "真实旧权重与数据上的独立尺度复算及两种子进程恢复检查尚待AutoDL。",
       "reused_input_target_scaler_evidence": {
         "coverage_archive_sha256": "c6a1ce420ba6463794d807eec6819e3bc69db6f1a6328558d52932eaa69bd5f5",
         "coverage_completion_sha256": "08ed3fb06117d5b2a19bf81b95c6e7fed8859edd802a168223cb35efb242bdcc",
@@ -685,12 +689,17 @@
     "task_ids": [
       "V14"
     ],
-    "status": "provenance_preparation_no_ready_gpu_job",
-    "jobs_max": 0,
-    "worker_epochs_max": 0,
-    "optimizer_updates_max": 0,
+    "status": "code_ready_awaiting_autodl",
+    "jobs_max": 4,
+    "worker_epochs_max": 8,
+    "optimizer_updates_max": 8,
+    "window_exposures_max": 1024,
+    "state_exposures_max": 5120,
+    "session_seconds_max": 7200,
+    "source_epochs_retrained": 0,
     "future_branches_included": false,
-    "reason": "V07已核销；V14先定位原状态/局部尺度拟合来源及既有恢复证据，新的真实检查入口/预算尚未交付。"
+    "reason": "从准备期0预算增至8次诊断更新，以真实更新验证恢复连续性；不能用合成/普通完整运行替代。不是模型优化分支。",
+    "resumed_worker_additional_jobs": false
   },
   "aliases": {
     "R0": [
@@ -1075,10 +1084,10 @@
     },
     "V14": {
       "question": "哪些统计与恢复行为尚未独立验证，是否影响现有结论？",
-      "source": "Macro选中状态、原训练行、输入/目标统计已有Coverage同SHA复算、已有qualification；逐条核对state_mean/scale及local统计的拟合来源。",
-      "deliverable": "先查既有证据；仅对缺口准备独立复算和真实中断恢复检查，不重复已完成原始输入/目标统计。",
-      "budget": "暂无新AutoDL预算或可运行新入口；需要真实执行时先在此卡锁范围、资源、命令和停止标准。",
-      "acceptance": "训练集来源/拟合量/形状/尺度逐项比对；恢复必须是真实已提交断点恢复与不中断对照，不能用普通完成运行代替。",
+      "source": "原control600_v2 bundle及原fit；Architecture原train4789；Macro97/94；已绑定Coverage输入/目标复算。",
+      "deliverable": "三项分开的证据：state refit+继承、local refit、真实生产提交断点/新进程续跑与连续路径对比。",
+      "budget": "0尺度更新；恢复两种子×两路径×2步=8实际更新；1024窗口/5120位置曝光；串行单卡、7200秒、磁盘7×R1最大last.pt+0.5GiB；单次尝试。",
+      "acceptance": "两种子状态均值/尺度atol1e-6 rtol2e-5；继承float32 buffers严格一致；局部统计atol/rtol1e-10；模型/优化器/RNG/后续更新严格一致。结果仍须人工审查，不自动关闭或晋升。",
       "stop": "数值或来源不一致就保存诊断并停止依赖任务；通过按范围归档，不扩大为全部历史链已验。",
       "source_clarification": "Query state_mean/state_scale由history_query_run.construct继承control600 bundle utility.heads[0].statistics，后续严格载入保留buffer；须用原control600训练状态复算，不用当前Macro状态的均值强行比对。local来自Prefix target_scales，经Shared/Bar Alignment local_scales复制和下游statistics传递。",
       "located_code": [
@@ -1092,7 +1101,106 @@
         "src/obson/babel/bar_alignment_benchmark.py:prepare",
         "src/obson/babel/overlap_consistency_run.py:statistics"
       ],
-      "implementation_status": "仅完成上述源码来源定位，独立复算/真实恢复入口尚未实现；缓存是否足够、必要源文件与绑定hash须进一步核对。"
+      "implementation_status": "新入口完成，历史绑定代码未变；远端源可用性由预检确认。",
+      "status": "code_ready_awaiting_autodl",
+      "protocol": {
+        "task_ids": [
+          "V14"
+        ],
+        "requirements": [
+          "N01",
+          "N03",
+          "N04",
+          "N07",
+          "N08",
+          "N09"
+        ],
+        "purpose": "Close missing scaler provenance and committed-checkpoint recovery evidence; no model improvement claim",
+        "state_refit": "Original control600 s42/s43 selected control best, train4789 endpoint states; target0 support checked; original extraction batch64 and fastpath profile. FP64 population moments, std floor1e-6. Compare to bound fit and bundle, then exact inherited float32 Macro query buffers",
+        "local_refit": "Original Architecture train4789 y/mask; Prefix32/64/96/128 past16 before queried bar; close reanchored to predecessor; original float32 physical target/difference rounding, masked FP64 moments, std floor1e-5, delta RMS floor.01",
+        "reused": "Coverage raw input/target refit with identical statistics and Architecture index SHA; not rerun",
+        "resume": "Original Macro97/94 768/4/8; production recovery_context_run.train_job B_full_common; source/eval/optimizer/commit/load checks unchanged; fresh optimizer for audit clones",
+        "changes_to_harness": "EPOCHS=2, fixed first128 bound full255 train rows; batch128 micro8; RNG sentinel before each epoch and SystemExit73 after epoch1 commit only in interrupted child; each resume is a fresh process",
+        "loss": "Original query(.4path+.2change1+.1body+.3activity)+remote structure1; identical reductions. No extra local gradient or head fitting",
+        "rates": {
+          "42": [
+            3.066380815642346e-06,
+            3.0663808156423456e-05
+          ],
+          "43": [
+            3.2648704606900738e-06,
+            3.2648704606900735e-05
+          ]
+        },
+        "optimizer": "Fresh AdamW, betas .9/.999, eps1e-8; decay encoder .01/query .0001; no inherited optimizer; combined clip1; eval-mode autograd, FP32, no AMP",
+        "budget": {
+          "seeds": [
+            42,
+            43
+          ],
+          "paths_per_seed": 2,
+          "child_processes_total": 6,
+          "updates_per_path": 2,
+          "total_updates": 8,
+          "window_exposures": 1024,
+          "state_exposures": 5120,
+          "seconds_max": 7200,
+          "parallel_gpu_workers": 1
+        },
+        "validation": "Unchanged original978 validation for source replay and production journal only; no held-out/test/research reads and no scientific selection. Compare committed checkpoint+best tensors+optimizer+RNG+history(except seconds), both epoch RNG probes and subsequent updates exactly",
+        "numeric": {
+          "state_atol": 1e-06,
+          "state_rtol": 2e-05,
+          "local_atol": 1e-10,
+          "local_rtol": 1e-10,
+          "resume": "bit exact"
+        },
+        "backend": "Require reviewed R1 GPU/Torch; FP32 no AMP/TF32; restore historical MHA profile per stage; resume additionally deterministic algorithms and CUBLAS_WORKSPACE_CONFIG=:4096:8",
+        "acceptance": "All specified comparisons pass for both seeds; evidence then reviewed, never automatic V14 closure or model promotion",
+        "stop": "Missing source/hash, shape/support, numerical/refit/restore mismatch, nonfinite or timeout stops and exports. One attempt only; no automatic rerun or threshold relaxation",
+        "scope_limit": "Recovery qualifies this production path on this device at committed epoch boundary; not arbitrary mid-step crash or all historical workers. Refit covers these three scaler families only"
+      },
+      "budget_change_reason": "从准备期0预算增至8次诊断更新，以真实更新验证恢复连续性；不能用合成/普通完整运行替代。不是模型优化分支。",
+      "entrypoint": "scripts/babel_recovery_provenance_autodl.sh",
+      "report": "/root/autodl-tmp/download/babel_recovery_provenance_reports.tar.gz",
+      "six_aspect_review": {
+        "purpose": {
+          "status": "pass_for_scope",
+          "evidence": "只补V14标准化/恢复证据；独立复用已审Coverage，不为推翻过的解释增开优化网格。",
+          "remaining": "V14 CUDA结果未回；主模型和近端能力结论不变，V13独立验收仍单列。"
+        },
+        "architecture": {
+          "status": "pass_for_scope",
+          "evidence": "原control600两种子状态用于原统计复算；Macro97/94用于恢复。保持768/4/8和原查询头，不混用当前状态分布拟合旧统计；生产训练/加载代码字节不变。",
+          "remaining": "真实权重的继承buffers与原状态分布尚待CUDA核对；不证明所有历史架构最优。"
+        },
+        "validation": {
+          "status": "pass_for_scope",
+          "evidence": "逐维独立尺度复算，原fit/bundle/继承buffer三处比对；恢复严格对比模型/Adam/RNG/后续更新/选择日志，并用故意漏恢复负对照防止伪通过。使用原978 validation仅复放；不读取test/cross研究集。",
+          "remaining": "本地35项通过是合成/工程证据；尚无真实CUDA通过结论，不能自动关闭V14或晋升模型。"
+        },
+        "data": {
+          "status": "open",
+          "evidence": "从实际历史报告元数据定位control600_v2 bundle、原fit、Architecture train4789及Bar Alignment local_scales；来源SHA预锁，原统计拟合各自来源清楚，已清理的无关旧probe缓存不是新必要文件。",
+          "remaining": "远端必要文件是否仍齐全和真实尺度独立复算，须本次AutoDL执行；Coverage同SHA输入/目标复算继续复用。"
+        },
+        "engineering": {
+          "status": "pass_for_scope",
+          "evidence": "35项定向测试通过；独立子进程退出73后续跑、源文件篡改、漏optimizer/RNG恢复失败、shell明确调用V14并带7200秒上限、成功/失败/超时打包覆盖；ruff与bash -n通过。历史绑定模块未改，未使用本地真实权重/训练。",
+          "remaining": "真实CUDA进程恢复未验；只限定生产V06提交轮次边界，不声称所有历史worker或任意步中断安全。"
+        },
+        "training": {
+          "status": "pass_for_scope",
+          "evidence": "锁定两种子×两路径×2更新=8次；每路径原Macro新建匹配AdamW，128个原训练窗口、batch128/micro8、B共同目标、原loss/裁剪/LR/生产路径不变。恢复条在第1次提交后真退出，由新进程载入继续。",
+          "remaining": "这是诊断副本上的8次更新，不是0更新，也不是新模型实验；实际运行未发生。额外RNG探针与确定性后端只限定本次恢复检查。"
+        }
+      },
+      "local_verification": {
+        "pytest": "35 passed",
+        "ruff": "passed",
+        "bash_syntax": "passed",
+        "real_weight_execution": "not_run"
+      }
     }
   }
 }
