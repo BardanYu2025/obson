@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
-  "updated": "2026-10-08",
-  "current_iteration": "V14_original_scaler_and_committed_resume_audit",
-  "current_iteration_scope": "原control600状态标准化、原Prefix局部尺度独立复算；实际V06保存/加载路径的两步真实CUDA进程恢复检查。最多8次诊断更新，非新优化；代码完成，远端未执行。",
+  "updated": "2026-10-09",
+  "current_iteration": "V14_startup_environment_and_preflight_retry_fix",
+  "current_iteration_scope": "修复启动层；V14科学协议不变、真实执行状态未知，不开启优化。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -453,8 +453,8 @@
       "legacy_ids": [
         "new_entrypoint_qualification"
       ],
-      "implementation": "独立尺度复算与真实进程恢复审计入口完成；历史绑定模块未改。",
-      "execution": "既有qualification及Coverage证据保留；新增V14 CUDA审计未执行。",
+      "implementation": "新增受限startup修复：固定线程4，独占锁检查，仅空目录或前置失败可保留后替换一次；已运行/数值结果/worker记录继续拒绝。原审计和训练模块未改。",
+      "execution": "收到启动失败日志：非法OMP环境警告、已有目录拒绝；本次调用0更新，旧目录此前执行状态未知；真实尺度/恢复结果仍未收到。",
       "conclusion": "输入/历史目标统计可复用既有同源复算；不能扩展为768维状态/局部统计和全部祖先训练已独立核验。",
       "evidence": [
         "docs/BABEL_RECOVERY_R0_REVIEW.md",
@@ -469,7 +469,9 @@
         "src/obson/babel/recovery_provenance.py",
         "src/obson/babel/recovery_provenance_run.py",
         "tests/babel/test_recovery_provenance.py",
-        "scripts/babel_recovery_provenance_autodl.sh"
+        "scripts/babel_recovery_provenance_autodl.sh",
+        "src/obson/babel/recovery_provenance_startup.py",
+        "tests/babel/test_recovery_provenance_startup.py"
       ],
       "depends_on": [
         "V01"
@@ -1166,40 +1168,49 @@
       "six_aspect_review": {
         "purpose": {
           "status": "pass_for_scope",
-          "evidence": "只补V14标准化/恢复证据；独立复用已审Coverage，不为推翻过的解释增开优化网格。",
-          "remaining": "V14 CUDA结果未回；主模型和近端能力结论不变，V13独立验收仍单列。"
+          "evidence": "只解决V14入口失败，原纠错目标和保留主模型决定不变。",
+          "remaining": "真实尺度/恢复验收仍待报告。"
         },
         "architecture": {
-          "status": "pass_for_scope",
-          "evidence": "原control600两种子状态用于原统计复算；Macro97/94用于恢复。保持768/4/8和原查询头，不混用当前状态分布拟合旧统计；生产训练/加载代码字节不变。",
-          "remaining": "真实权重的继承buffers与原状态分布尚待CUDA核对；不证明所有历史架构最优。"
+          "status": "not_applicable",
+          "evidence": "未改编码器、查询头、数据上下文或绑定生产模块。",
+          "remaining": "未执行真实神经检查。"
         },
         "validation": {
           "status": "pass_for_scope",
-          "evidence": "逐维独立尺度复算，原fit/bundle/继承buffer三处比对；恢复严格对比模型/Adam/RNG/后续更新/选择日志，并用故意漏恢复负对照防止伪通过。使用原978 validation仅复放；不读取test/cross研究集。",
-          "remaining": "本地35项通过是合成/工程证据；尚无真实CUDA通过结论，不能自动关闭V14或晋升模型。"
+          "evidence": "验收容差和原协议保持；已有数值审计结果即阻止替换，避免把科学失败当启动问题重跑。",
+          "remaining": "当前日志不能判定旧目录科学执行情况。"
         },
         "data": {
-          "status": "open",
-          "evidence": "从实际历史报告元数据定位control600_v2 bundle、原fit、Architecture train4789及Bar Alignment local_scales；来源SHA预锁，原统计拟合各自来源清楚，已清理的无关旧probe缓存不是新必要文件。",
-          "remaining": "远端必要文件是否仍齐全和真实尺度独立复算，须本次AutoDL执行；Coverage同SHA输入/目标复算继续复用。"
+          "status": "pass_for_scope",
+          "evidence": "替换前核对原request的source/bundle并保留旧文件与hash；未知文件/软链接/非失败状态拒绝。 原审计模块SHA需已知，status声明已更新也直接拒绝。",
+          "remaining": "没有访问AutoDL文件，实际旧目录内容需入口检查或报告核验。"
         },
         "engineering": {
           "status": "pass_for_scope",
-          "evidence": "35项定向测试通过；独立子进程退出73后续跑、源文件篡改、漏optimizer/RNG恢复失败、shell明确调用V14并带7200秒上限、成功/失败/超时打包覆盖；ruff与bash -n通过。历史绑定模块未改，未使用本地真实权重/训练。",
-          "remaining": "真实CUDA进程恢复未验；只限定生产V06提交轮次边界，不声称所有历史worker或任意步中断安全。"
+          "evidence": "51项测试，含非法环境、空目录、前置失败、活动锁、错误来源、已有权重/worker/数值报告、一替换限制、旧包和报告保留；ruff/bash语法通过。",
+          "remaining": "只有启动失败文本；真实修复执行尚未发生。"
         },
         "training": {
           "status": "pass_for_scope",
-          "evidence": "锁定两种子×两路径×2更新=8次；每路径原Macro新建匹配AdamW，128个原训练窗口、batch128/micro8、B共同目标、原loss/裁剪/LR/生产路径不变。恢复条在第1次提交后真退出，由新进程载入继续。",
-          "remaining": "这是诊断副本上的8次更新，不是0更新，也不是新模型实验；实际运行未发生。额外RNG探针与确定性后端只限定本次恢复检查。"
+          "evidence": "原8更新预算/模型/LR/优化器不变；只证实未创建worker且无数值结果的前置失败允许一次替换。",
+          "remaining": "旧目录先前是否有更新不能由当前报错推断；不允许用户直接删除目录重跑绕过检查。"
         }
       },
       "local_verification": {
-        "pytest": "35 passed",
+        "pytest": "51 passed",
         "ruff": "passed",
         "bash_syntax": "passed",
-        "real_weight_execution": "not_run"
+        "real_weight_execution": "startup_failure_log_only_no_new_scientific_results"
+      },
+      "startup_fix_20261009": {
+        "evidence": "用户提供终端日志，无报告包，不能推断旧目录执行状态或编造报告SHA。",
+        "failure": "OMP_NUM_THREADS invalid; existing output rejected before checking CUDA/source/updating weights",
+        "policy_change": "一次空目录/已验证前置失败恢复；不重新执行有数值结果或worker证据的run。",
+        "preservation": "原目录整体改名保留，文件SHA记入startup_receipt；原下载包另存；报告含旧状态及阻止原因。",
+        "budget": "8更新不变；本次7200秒覆盖启动器+原审计；之前前置失败耗时未知。",
+        "state": "code_ready_awaiting_remote_run",
+        "tests": "51 passed"
       }
     }
   }

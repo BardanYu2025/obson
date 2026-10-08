@@ -2,7 +2,8 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 export PYTHONPATH="$PWD/src${PYTHONPATH:+:$PYTHONPATH}" PYTHONUNBUFFERED=1
-export OMP_NUM_THREADS="${OMP_NUM_THREADS:-4}" OPENBLAS_NUM_THREADS="${OPENBLAS_NUM_THREADS:-4}"
+# Fixed audit runtime; reject inherited malformed or different thread settings by replacing them before Python import.
+export OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 MKL_NUM_THREADS=4
 run="${BABEL_V14_RUN:-checkpoints/babel_recovery_provenance}"
 source_run="${BABEL_V14_SOURCE:-checkpoints/babel_recovery_interface}"
 log="${BABEL_V14_LOG:-logs/babel_recovery_provenance.log}"
@@ -26,6 +27,13 @@ finish() {
     done < <(find "$run" -type f \( -name '*.json' -o -name '*.txt' -o -name '*.md' -o \( -name '*.npz' ! -path "$run/cache/*" \) \) -print0)
   fi
   if [[ -f "$log" ]]; then cp "$log" "$stage/$name/run.log"; fi
+  if [[ -f "${run}.startup_receipt.json" ]]; then
+    cp "${run}.startup_receipt.json" "$stage/$name/startup_receipt.json"
+  fi
+  if [[ -d "${run}.startup_failure_v1" ]]; then
+    mkdir -p "$stage/$name/previous_startup"
+    cp "${run}.startup_failure_v1/"*.json "$stage/$name/previous_startup/" 2>/dev/null || true
+  fi
   cp docs/BABEL_ROADMAP.md "$stage/$name/roadmap_at_export.md"
   run_status=not_started
   if [[ -f "$run/status.json" ]]; then
@@ -44,5 +52,10 @@ finish() {
 }
 trap finish EXIT
 if [[ "$mode" == all ]]; then
-  timeout --signal=TERM --kill-after=30s 7200s "${PYTHON_BIN:-python}" -m obson.babel.recovery_provenance_run --source "$source_run" --bundle-source "$bundle_source" --out "$run"
+  if [[ -f "$download/$(basename "$run")_reports.tar.gz" ]]; then
+    prior=$(mktemp "$download/$(basename "$run")_before_startup_fix.XXXXXX.tar.gz")
+    cp "$download/$(basename "$run")_reports.tar.gz" "$prior"
+    echo "Preserved previous archive: $prior"
+  fi
+  timeout --signal=TERM --kill-after=30s 7200s "${PYTHON_BIN:-python}" -m obson.babel.recovery_provenance_startup --source "$source_run" --bundle-source "$bundle_source" --out "$run"
 fi

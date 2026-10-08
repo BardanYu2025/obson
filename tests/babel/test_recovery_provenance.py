@@ -316,7 +316,7 @@ def test_shell_invokes_only_bounded_v14_worker_and_passes_bundle_source(tmp_path
     assert result.returncode == 124
     lines = args.read_text().splitlines()
     assert lines[:3] == ["--signal=TERM", "--kill-after=30s", "7200s"]
-    assert lines[4:6] == ["-m", "obson.babel.recovery_provenance_run"]
+    assert lines[4:6] == ["-m", "obson.babel.recovery_provenance_startup"]
     assert lines[lines.index("--bundle-source") + 1] == str(tmp_path / "original_bundle")
     assert "obson.babel.recovery_context_run" not in lines
 
