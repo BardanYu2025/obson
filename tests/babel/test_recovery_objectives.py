@@ -1,5 +1,6 @@
 """Synthetic causal/gradient contracts; no real weights or optimizer updates."""
 
+from importlib import import_module
 from unittest.mock import patch
 
 import pytest
@@ -119,3 +120,73 @@ def test_unqualified_reader_and_unknown_arm_fail(case):
     case[0].local_head.requires_grad_(False).train()
     with pytest.raises(ValueError, match="evaluation"):
         objective(case, "baseline")
+
+
+@pytest.mark.parametrize(
+    "module,mode,local_reaches_encoder",
+    [
+        ("bar_semantics", "control", True),
+        ("bar_semantics", "additive", True),
+        ("bar_semantics", "uniform", False),
+        ("history_structure", "control", False),
+        ("history_structure", "structure", False),
+        ("history_structure", "consistent", False),
+        ("causal_pool", "plain", False),
+        ("depth_scaling", "d4", False),
+        ("activity_weight", 0.3, False),
+        ("shared_history", None, False),
+        ("grounded_history", None, False),
+        ("macro_history", None, False),
+        ("linear_history", None, False),
+    ],
+)
+def test_historical_local_loss_route_not_inferred_from_head_training(
+    case, module, mode, local_reaches_encoder
+):
+    """V05: exercise the bound objective, including wrappers and reused aliases.
+
+    A nonzero loss gradient at a trainable local reader does not imply that
+    this loss reaches the encoder. The two early attached arms are positive
+    controls: a blanket assertion that all historical local heads detach fails.
+    Only synthetic forward/backward; no optimizer updates or real weights.
+    """
+    model, query, batch, prefixes, stats, local = case
+    model.local_head.requires_grad_(True)
+    # Three views of one synthetic endpoint suffice for these objective routes.
+    batch = {k: v[:1].repeat(3, *([1] * (v.ndim - 1))) for k, v in batch.items()}
+    prefixes = prefixes[:1].repeat(3, 1)
+    seen = {}
+
+    def capture(key):
+        def hook(_module, _inputs, output):
+            seen[key] = output
+
+        return hook
+
+    encoder_hook = model.core.encoder.register_forward_hook(capture("state"))
+    reader_hook = model.local_head.register_forward_hook(capture("local"))
+    try:
+        args = (model, query, batch, prefixes, prefixes, torch.tensor([1]), stats, local)
+        objective_module = import_module("obson.babel." + module)
+        result = objective_module.losses(*args, *(() if mode is None else (mode,)))
+        parts = result[0] if isinstance(result, tuple) else result
+        loss = parts["optimization_value"].sum()
+        local_gradient = torch.autograd.grad(loss, seen["local"], retain_graph=True)[0]
+        assert torch.isfinite(local_gradient).all() and local_gradient.abs().sum() > 0
+        state_gradient = torch.autograd.grad(
+            seen["local"],
+            seen["state"],
+            grad_outputs=local_gradient,
+            retain_graph=True,
+            allow_unused=True,
+        )[0]
+        if local_reaches_encoder:
+            assert state_gradient is not None and state_gradient.abs().sum() > 0
+        else:
+            assert state_gradient is None
+        # The detached diagnostic must not be confused with all encoder training.
+        total_gradient = torch.autograd.grad(loss, seen["state"])[0]
+        assert torch.isfinite(total_gradient).all() and total_gradient.abs().sum() > 0
+    finally:
+        encoder_hook.remove()
+        reader_hook.remove()

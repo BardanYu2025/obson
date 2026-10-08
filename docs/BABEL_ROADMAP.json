@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-08",
-  "current_iteration": "V06_report_review_and_conclusion_disposition",
-  "current_iteration_scope": "V06六组CUDA已完成并独立复核；关闭上下文/目标混杂比较纠错和V03配置核查，未升级模型。下一项V04/V05核销原结构与局部梯度解释。",
+  "current_iteration": "V04_V05_historical_routes_and_claim_disposition",
+  "current_iteration_scope": "12阶段源码绑定及实际损失路径核查；V04/V05旧结论逐项归档并关闭纠错，RS失败与近端未修好保留。下一段为V07同目标读取推断核销、V14统计和恢复证据补齐。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -173,32 +173,35 @@
       ],
       "implementation": "RS-v2四组双种子训练、锁定评价、恢复与导出入口完成，合成测试通过",
       "execution": "八组真实CUDA完成并复核，240轮/9120更新；该配方收束",
-      "conclusion": "移除远端额外项有有限近期收益但结构明显受损；非一致修复，原不对称事实保留",
+      "conclusion": "S训练覆盖17+且主Q仍有近端；原结构配方收益/取舍保留，架构/容量或不对称为唯一根因的判断撤回。RS删S未修复，停止该配方。",
       "evidence": [
         "docs/BABEL_RECOVERY_PLAN.md",
         "src/obson/babel/recovery_objectives.py",
         "docs/BABEL_RECOVERY_RS_REVISION.md",
         "docs/BABEL_RECOVERY_RS.md",
         "docs/BABEL_RECOVERY_RS_VALIDATION.json",
-        "docs/BABEL_RECOVERY_RS_REVIEW.md"
+        "docs/BABEL_RECOVERY_RS_REVIEW.md",
+        "docs/BABEL_EXPERIMENT_VALIDITY_AUDIT.json#V04_V05_disposition_20261008",
+        "tests/babel/test_recovery_objectives.py"
       ],
       "depends_on": [
         "V03"
       ],
-      "next_action": "停止本30轮配方。归档前将原结构实验的结论逐句对应到实际损失和RS证据；若仍要保留“架构导致近端弱”的判断，必须先列出能隔离该因素的原阶段重验，不能引用RS替代。",
+      "next_action": "无需重跑RS或全部历史矩阵；本条错误归因已撤回。下一项V07，近端能力尚未改善不能称模型已修好。",
       "admission_revision": "V03 is reviewed evidence, not a claimed passed stability gate; V02/V14 source/target/gradient qualification plus original/R1 replay remain mandatory",
       "scientific_acceptance": false,
-      "human_status": "部分完成",
+      "human_status": "路径与结论已核销，纠错关闭",
       "original_problem": "额外结构损失只覆盖回看17根及更远；此前没有把它与架构能力分清。",
-      "completed_work": "确认不对称；开关该损失的30轮实验完成，去掉它有小幅近期收益但明显损害结构，未得到修复模型。",
+      "completed_work": "RS真实有限干预及复核已完成；补充12阶段绑定代码/执行边界、局部梯度路径及旧结论逐项处置。",
       "completion_rule": "损失覆盖事实、错误归因撤回、原结论受影响范围逐项有出处；近端能力未修好必须继续明示，不能以RS跑完销项。",
-      "closed": false,
-      "remaining_work": "停止本30轮配方。归档前将原结构实验的结论逐句对应到实际损失和RS证据；若仍要保留“架构导致近端弱”的判断，必须先列出能隔离该因素的原阶段重验，不能引用RS替代。",
+      "closed": true,
+      "remaining_work": "本条纠错责任完成；其他局部监督/结构目标的科学效果仍未知，不作为既定结论或自动训练任务。",
       "code_locations": [
         "src/obson/babel/history_structure.py:pools",
         "src/obson/babel/history_structure.py:metrics",
         "src/obson/babel/recovery_objectives.py"
-      ]
+      ],
+      "closure": "原错误解释撤回，实际代码路径与受影响结论逐项映射；没有为保留该错误解释而待重验的任务。模型修复判据仍未通过。"
     },
     {
       "id": "V05",
@@ -209,32 +212,35 @@
       ],
       "implementation": "RS-v2四组双种子训练、锁定评价、恢复与导出入口完成，合成测试通过",
       "execution": "八组真实CUDA完成并复核，240轮/9120更新；该配方收束",
-      "conclusion": "冻结局部头0.25回传有小幅收益和代价；不能修复，六个干预best均回退源；不否定全部局部监督",
+      "conclusion": "后续主干local是detach诊断而非编码器保护；Bar Semantics control/additive例外，Grounded联合未执行，Uniform/Context不训练local。RS固定头0.25回传未修复；原有限对照保留。",
       "evidence": [
         "docs/BABEL_RECOVERY_PLAN.md",
         "src/obson/babel/recovery_objectives.py",
         "docs/BABEL_RECOVERY_RS_REVISION.md",
         "docs/BABEL_RECOVERY_RS.md",
         "docs/BABEL_RECOVERY_RS_VALIDATION.json",
-        "docs/BABEL_RECOVERY_RS_REVIEW.md"
+        "docs/BABEL_RECOVERY_RS_REVIEW.md",
+        "docs/BABEL_EXPERIMENT_VALIDITY_AUDIT.json#V04_V05_disposition_20261008",
+        "tests/babel/test_recovery_objectives.py"
       ],
       "depends_on": [
         "V03",
         "V14"
       ],
-      "next_action": "停止本30轮配方。归档前追踪受影响实验实际是否采用这条detach路径，列明哪些只是局部读数有效、哪些训练保护解释须撤回；原阶段重新训练是否必要要对应具体旧结论，不泛化重跑。",
+      "next_action": "无需重跑RS或全部历史矩阵；本条错误归因已撤回。下一项V07，近端能力尚未改善不能称模型已修好。",
       "admission_revision": "V03 is reviewed evidence, not a claimed passed stability gate; V02/V14 source/target/gradient qualification plus original/R1 replay remain mandatory",
       "scientific_acceptance": false,
-      "human_status": "部分完成",
+      "human_status": "路径与结论已核销，纠错关闭",
       "original_problem": "局部头接收z.detach()，该损失不会回传编码器；此前“它保护编码器”的解释错误。",
-      "completed_work": "已确认梯度路径并撤回该解释；打开固定局部头0.25回传的30轮实验未通过模型修复验收。",
+      "completed_work": "RS真实有限干预及复核已完成；补充12阶段绑定代码/执行边界、局部梯度路径及旧结论逐项处置。",
       "completion_rule": "受影响代码路径与旧结论逐项对应，保留与撤回都有依据；需要重验的结论留在本项，不能移到未来优化里当作已修复。",
-      "closed": false,
-      "remaining_work": "停止本30轮配方。归档前追踪受影响实验实际是否采用这条detach路径，列明哪些只是局部读数有效、哪些训练保护解释须撤回；原阶段重新训练是否必要要对应具体旧结论，不泛化重跑。",
+      "closed": true,
+      "remaining_work": "本条纠错责任完成；其他局部监督/结构目标的科学效果仍未知，不作为既定结论或自动训练任务。",
       "code_locations": [
         "src/obson/babel/history_structure.py:losses",
         "src/obson/babel/recovery_objectives.py"
-      ]
+      ],
+      "closure": "原错误解释撤回，实际代码路径与受影响结论逐项映射；没有为保留该错误解释而待重验的任务。模型修复判据仍未通过。"
     },
     {
       "id": "V06",
@@ -272,7 +278,7 @@
         "src/obson/babel/recovery_context_run.py:train_epoch",
         "src/obson/babel/recovery_context_evaluate.py:run_evaluation"
       ],
-      "dependency_note": "V04/V05的已有失败报告是V06设计输入；不要求它们先产生更好模型。其未核销的旧结论责任仍保留，不把执行顺序当全部关闭。",
+      "dependency_note": "V06设计使用V04/V05已有失败证据，不要求它们先产生更好模型。其原结论核销随后于2026-10-08完成；执行顺序不等于当时全部关闭。",
       "original_code_locations": [
         "src/obson/babel/context_transfer_run.py:train_epoch",
         "src/obson/babel/context_transfer.py:states",
@@ -669,28 +675,23 @@
   ],
   "active_order": [
     [
-      "V04",
-      "V05"
-    ],
-    [
       "V07"
     ],
     [
       "V14"
     ]
   ],
-  "next_after_active": "先按代码路径和原结论逐条完成V04/V05处置，再处理V07信息缺失推断和V14证据缺口。不追加RS/V06、不开始F分支；需要新修复执行时另列具体证据缺口和预算。",
+  "next_after_active": "V07核销固定读头误差到信息丢失的错误推断，复用已完成八组合不重跑；再逐项准备V14状态/局部统计与真实中断恢复证据。所有原纠错交账前不开F分支。",
   "active_training_budget": {
     "task_ids": [
-      "V04",
-      "V05"
+      "V07"
     ],
     "status": "conclusion_disposition_only_no_active_training",
     "jobs_max": 0,
     "worker_epochs_max": 0,
     "optimizer_updates_max": 0,
     "future_branches_included": false,
-    "reason": "V06固定预算已完成并归档；下一步核销旧结论，不自动开训练。"
+    "reason": "V04/V05纠错核销完成；V07复用既有八组合报告做结论处置，不新增训练。"
   },
   "aliases": {
     "R0": [
@@ -733,11 +734,10 @@
   "progress_log": "docs/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "current_task_ids": [
-    "V04",
-    "V05"
+    "V07"
   ],
   "blocked_followups": {
-    "F_optimization": "V04/V05/V07/V14纠错责任仍未完成；V06已复核归档，不再等待或重跑。"
+    "F_optimization": "V07错误推断核销、V14状态/局部统计及真实恢复证据仍未完成；先完成修复，不开优化分支。"
   },
   "active_phase": "repair_original_errors_then_archive_verified_conclusions",
   "RS_entrypoint": {
@@ -806,10 +806,11 @@
         "V04",
         "V05"
       ],
-      "disposition": "保留观测，撤回错误解释",
-      "conclusion": "远端额外监督不对称、detach局部损失不保护编码器。RS只支持该30轮配方的取舍；不得归档成原阶段正确训练的重验结果",
+      "disposition": "代码路径与旧结论核销完成，纠错关闭；模型能力未修好",
+      "conclusion": "保留原有限配方观测与RS失败；撤回近远额外监督对称、detach局部保护编码器和架构唯一根因的解释。12阶段含分支例外和未执行联合阶段，不全量重跑。",
       "evidence": [
-        "docs/BABEL_RECOVERY_RS_REVIEW.md"
+        "docs/BABEL_RECOVERY_RS_REVIEW.md",
+        "docs/BABEL_EXPERIMENT_VALIDITY_AUDIT.json#V04_V05_disposition_20261008"
       ]
     },
     {
@@ -895,7 +896,7 @@
   ],
   "repair_exit_checklist": [
     "V06已完成真实重验及原Uniform/Context归因处置，关闭；不重跑。",
-    "V03已核销；V04/V05/V07继续逐项对应旧结论/代码/证据，保留或撤回有出处，需要重验的仍留在修复队列。",
+    "V03/V04/V05已逐项归档；V07仍须将固定头读取与信息丢失的推断按原文/代码/证据核销。",
     "V14复用已绑定的输入/目标统计复算；状态向量/局部统计及恢复证据分别核对，不得称数据链全通过。",
     "所有仍待修复、待重验事项完成或有明确撤回依据后，才评估新的优化分支；近端能力没有改善不能写已改善。",
     "V13最终独立验收与修复阶段分开记录，不把既有研究集改名为独立测试。"
@@ -1060,5 +1061,23 @@
       "disk": "10 * largest reviewed R1 last.pt bytes +1.5GiB total estimate; deduct owned outputs, >=512MiB new free floor; serial worker, no source deletion.",
       "status": "completed_no_further_jobs"
     }
-  ]
+  ],
+  "next_repair_cards": {
+    "V07": {
+      "question": "固定旧头读取变差，究竟支持接口失配还是信息减少？",
+      "source": "已完成Recovery Interface八组合与Macro/Context同目标报告；原Macro97/94保持。",
+      "deliverable": "原结论出处→八组合具体含义→保留/撤回/未知；只有要保留信息减少判断才需同目标、等容量等拟合预算的冻结表示对照。",
+      "budget": "0训练、0新头拟合；不重复已有八组合。",
+      "acceptance": "固定头误差与表示信息量分开，原观测保留；无直接证据的信息减少断言明确撤回。",
+      "stop": "现有证据足以核销原断言后结束，不为了证明任意未知机制开新读头网格。"
+    },
+    "V14": {
+      "question": "哪些统计与恢复行为尚未独立验证，是否影响现有结论？",
+      "source": "Macro选中状态、原训练行、输入/目标统计已有Coverage同SHA复算、已有qualification；逐条核对state_mean/scale及local统计的拟合来源。",
+      "deliverable": "先查既有证据；仅对缺口准备独立复算和真实中断恢复检查，不重复已完成原始输入/目标统计。",
+      "budget": "暂无新AutoDL预算或可运行新入口；需要真实执行时先在此卡锁范围、资源、命令和停止标准。",
+      "acceptance": "训练集来源/拟合量/形状/尺度逐项比对；恢复必须是真实已提交断点恢复与不中断对照，不能用普通完成运行代替。",
+      "stop": "数值或来源不一致就保存诊断并停止依赖任务；通过按范围归档，不扩大为全部历史链已验。"
+    }
+  }
 }

@@ -1164,5 +1164,309 @@
     "Full-chain train/validation/research isolation and selection audit beyond existing report checks",
     "Stable continuation control and source/new first-step behavior with exact optimizer/sampling contract",
     "Re-evaluation plan using fresh independent holdout after model/design freeze, rather than repeated research-set selection"
-  ]
+  ],
+  "V04_V05_disposition_20261008": {
+    "date": "2026-10-08",
+    "task_ids": [
+      "V04",
+      "V05"
+    ],
+    "scope": "Original objective routes and claim disposition; archived evidence reused, no new experiment or real-weight execution.",
+    "sources": {
+      "bar_semantics": {
+        "archive": "/Users/bardan/Downloads/babel_bar_semantics768_reports.tar.gz",
+        "archive_sha256": "616d13ff9327dfe2ef94acd46f346f74a12ea92c2650fc2c7ffd3e673bdd5163",
+        "manifest_sha256": "877430f1a743d2faf9ef2677d595af4f2f309c0f7ce4ab73a6a31b61967636cf",
+        "bound_code_count": 68,
+        "bound_code_mismatches": []
+      },
+      "history_structure": {
+        "archive": "/Users/bardan/Downloads/babel_history_structure768_reports.tar.gz",
+        "archive_sha256": "a47c2298a5e92bd4a75e88096e588e5d60fc7d351316e1b52d192adab50250eb",
+        "manifest_sha256": "7c7ea1c2e0f9ecdb61b7c4608a7cab99d12ae7626e87fef0af8c353a9d4ae4f6",
+        "bound_code_count": 71,
+        "bound_code_mismatches": []
+      },
+      "causal_pool": {
+        "archive": "/Users/bardan/Downloads/babel_causal_pool768_reports.tar.gz",
+        "archive_sha256": "ffedea703a5cf06b77d01d26a31d6158ec9516923d51a6f480082a4f27e49c09",
+        "manifest_sha256": "6a4b399bc044dcc70a94d76ef1f3191965a5725329a6747583a415b4c33ef95e",
+        "bound_code_count": 74,
+        "bound_code_mismatches": []
+      },
+      "depth": {
+        "archive": "/Users/bardan/Downloads/babel_depth768_reports.tar.gz",
+        "archive_sha256": "b41a370399daeb1cea4a1be2c8ef5594cd6a01a65d4d8a46b3f4c551a6327d49",
+        "manifest_sha256": "cc1881eb68a353628ee60ea55de7870b6b6f7e2c3abd6485f3a53602924c2741",
+        "bound_code_count": 77,
+        "bound_code_mismatches": []
+      },
+      "activity_weight": {
+        "archive": "/Users/bardan/Downloads/babel_activity_weight768_reports.tar.gz",
+        "archive_sha256": "2436c05782036a469f1c1c118b406e9c935bdfcdd7830c6af06660a30959346b",
+        "manifest_sha256": "1d9fdc15cde9430a9f6b585d53104f0643a6fe3f9ca5dc140c4fae820e35c15b",
+        "bound_code_count": 80,
+        "bound_code_mismatches": []
+      },
+      "shared_history": {
+        "archive": "/Users/bardan/Downloads/babel_shared_history768_reports.tar.gz",
+        "archive_sha256": "d91e3249657e3deccc34ad15dc5c6c98bd9f756735a638ce9c7006901c550356",
+        "manifest_sha256": "8a07a26e6d115974a349c707a772087b60bf761e954f5a70d40069f4100f7963",
+        "bound_code_count": 84,
+        "bound_code_mismatches": []
+      },
+      "grounded_history": {
+        "archive": "/Users/bardan/Downloads/babel_grounded_history768_reports.tar.gz",
+        "archive_sha256": "c9fbf7b025e69ce22d49185e84be4d1dd34b946fd999812d8ad95ad65e01584d",
+        "manifest_sha256": "5398747d62f42a6540fa6a31cec5b74e38ab6f1465bf30a31b14e06b88090211",
+        "bound_code_count": 89,
+        "bound_code_mismatches": []
+      },
+      "macro_history": {
+        "archive": "/Users/bardan/Downloads/babel_macro_history768_reports.tar.gz",
+        "archive_sha256": "42d0ee31ea743423a06e614ca46cda02067df717fe94a9c4565b87648ca2dc53",
+        "manifest_sha256": "157b0dd8f36b8912a08a57b619975499336f8f220a50ff2f235d1d1500cae1c1",
+        "bound_code_count": 94,
+        "bound_code_mismatches": []
+      },
+      "linear_history": {
+        "archive": "/Users/bardan/Downloads/babel_linear_history768_reports.tar.gz",
+        "archive_sha256": "98a4f18c4db89019a18a46d7a5397c4d0cdfe0d3d3f5ffdf2fbf1302b5653995",
+        "manifest_sha256": "9833c998e3364b71b070e4e0ed2fc403a8502d5ef5cf31d586632a36b6b20e43",
+        "bound_code_count": 97,
+        "bound_code_mismatches": []
+      },
+      "position_supervision": {
+        "archive": "/Users/bardan/Downloads/babel_position_supervision768_reports.tar.gz",
+        "archive_sha256": "66f32b81235f158ff0e2185ad96e2d786e506f4974ed9ed6ba9318aabcef04c0",
+        "manifest_sha256": "7046d31757bd4e55403b156b2c42173af1ab3cf3ec49965875a7443d7ebdad52",
+        "bound_code_count": 100,
+        "bound_code_mismatches": []
+      },
+      "uniform_context": {
+        "archive": "/Users/bardan/Downloads/babel_uniform_context768_reports.tar.gz",
+        "archive_sha256": "d630e050e1de449ebdaa718b0d4c3d76556cd9f4b0de753fdf51128cd4468d8a",
+        "manifest_sha256": "3e8135256cd79fe021718527271265a2a9201461192b091cfd2a41f9ccab5e01",
+        "bound_code_count": 102,
+        "bound_code_mismatches": []
+      },
+      "context_transfer": {
+        "archive": "/Users/bardan/Downloads/babel_context_transfer768_reports.tar.gz",
+        "archive_sha256": "e28dbc2dc7c3b3f683755979a9232b4f9633afd0b0e28e19411101356bb5ccc2",
+        "manifest_sha256": "fb108cf33be08126a6c761800be93e9efbdf4e8bdaa3c0254b0974ecfc2a00a2",
+        "bound_code_count": 106,
+        "bound_code_mismatches": []
+      }
+    },
+    "routes": [
+      {
+        "stage": "Bar Semantics",
+        "code": [
+          "bar_semantics.py:losses",
+          "bar_semantics_run.py:train_epoch"
+        ],
+        "local": "control/additive的local回传编码器；uniform断开，只训练诊断头。",
+        "structure": "本轮尚无history_structure粗结构项。",
+        "execution": "三组均已执行；uniform进入后续主干。",
+        "original": "docs/BABEL_BAR_SEMANTICS768.md:三组公平对照; docs/BABEL_BAR_SEMANTICS768_REVIEW.md:哪些进步是明确的",
+        "retain": "uniform较additive的近期一致性/真实误差改善及远处代价保留。",
+        "withdraw": "不能把global/local/overlap组合移除的结果单独归因为切断local有益，更不能称早期所有local均detach。"
+      },
+      {
+        "stage": "History Structure",
+        "code": [
+          "history_structure.py:pools",
+          "history_structure.py:metrics",
+          "history_structure.py:losses",
+          "history_structure_run.py:train_epoch"
+        ],
+        "local": "三组local均接z.detach；0.25仅更新局部诊断头，分组独立裁剪。",
+        "structure": "训练4/16分组覆盖age17..127；主要远处结构评价使用lo=65，不能把训练覆盖写成仅65+。control不加S，structure/consistent加S。",
+        "execution": "三组均执行；主干继承control，非structure/consistent。",
+        "original": "docs/BABEL_HISTORY_STRUCTURE768.md:三组同起点同预算对照/选模与验收; docs/BABEL_HISTORY_STRUCTURE768_REVIEW.md:同预算增量与代价/阶段判断与收束",
+        "retain": "远处粗结构较control改善67.53%～78.44%、近期误差增加13.96%～32.22%的structure配方观测；consistent结果亦保留原范围。",
+        "withdraw": "近远额外监督对称、local诊断保护编码器、取舍证明编码器容量不足或架构必然近端弱，均不可用。原报告已限定实现观察，不能虚构其作过理论证明。"
+      },
+      {
+        "stage": "Causal Pool / Depth",
+        "code": [
+          "causal_pool.py:losses",
+          "depth_scaling.py:losses",
+          "history_structure.py:losses"
+        ],
+        "local": "均调用history_structure.losses(...,structure)，local为detach诊断。",
+        "structure": "三种pool与三种depth均共享S17+；plain由无S的History Structure control起步后才加入S。",
+        "execution": "已执行；plain及Depth四层扩展预算进入主干。",
+        "original": "docs/BABEL_CAUSAL_POOL768_DESIGN.md:29,49,51; docs/BABEL_CAUSAL_POOL768_REVIEW.md; docs/BABEL_DEPTH768_REVIEW.md",
+        "retain": "同本轮目标的pool/深度及各自预算对照保留，适用范围见V10/V11。",
+        "withdraw": "plain相对旧源的进步不能归给汇聚模块；不能由不对称目标下的排名宣称四层全局最优或local保护始终存在。"
+      },
+      {
+        "stage": "Activity Weight",
+        "code": [
+          "activity_weight.py:losses",
+          "activity_weight_run.py:train_epoch"
+        ],
+        "local": "显式z.detach；独立诊断头训练。",
+        "structure": "0/0.1/0.3组共同使用S17+。",
+        "execution": "已执行；a030进入主干。",
+        "original": "docs/BABEL_ACTIVITY_WEIGHT768.md:21-31; docs/BABEL_ACTIVITY_WEIGHT768_REVIEW.md",
+        "retain": "活动系数适配的价格/活动取舍保留，local路径在对照中相同。",
+        "withdraw": "不支持原local保护编码器、活动输入无用或0.3全局最优。"
+      },
+      {
+        "stage": "Shared History / Macro History",
+        "code": [
+          "shared_history.py:losses",
+          "macro_history.py:losses alias",
+          "shared_history_run.py:train_epoch",
+          "macro_history_run.py:train_epoch"
+        ],
+        "local": "共用shared_history.losses的detach局部诊断；Macro的冻结查询辅助路径是另一条路径，冻结头参数不等于detach状态。",
+        "structure": "共享原查询Q及S17+，辅助内容/对齐另列；control不把辅助梯度传入编码器。",
+        "execution": "均已执行；仅各自control进入当前Macro97/94主干。",
+        "original": "docs/BABEL_SHARED_HISTORY768.md:23,49,56; docs/BABEL_SHARED_HISTORY768_REVIEW.md:第0轮/主线; docs/BABEL_MACRO_HISTORY768.md:25; docs/BABEL_MACRO_HISTORY768_REVIEW.md:结论",
+        "retain": "辅助方案未获平衡用途升级及原分项观测保留；control续训收益不能当成辅助成功。",
+        "withdraw": "训练局部头不等于给编码器额外近端梯度；固定头漂移不等于信息消失（V07继续）。"
+      },
+      {
+        "stage": "Grounded History",
+        "code": [
+          "grounded_history.py:losses alias",
+          "grounded_history_run.py:run",
+          "grounded_history_warmup.py"
+        ],
+        "local": "拟议联合阶段复用shared_history.losses，但其联合阶段没有执行。",
+        "structure": "联合设计包含S17+，不能算成实际接受了该轮S训练。",
+        "execution": "实际只有冻结资格阶段，24项仅2项过，主编码器未更新；不是当前权重主干训练边。",
+        "original": "docs/BABEL_GROUNDED_HISTORY768_REVIEW.md:运行事实与审计边界",
+        "retain": "冻结读头资格失败及停止决定保留。",
+        "withdraw": "不能因源码含losses别名就称联合训练已执行、损伤编码器或需要重跑主训练。"
+      },
+      {
+        "stage": "Linear History",
+        "code": [
+          "linear_history.py:losses alias",
+          "linear_history_run.py:train_epoch",
+          "shared_history.py:losses"
+        ],
+        "local": "主阶段沿用detach局部诊断；主查询正常进入编码器只适用于joint组。",
+        "structure": "共享S17+；校准与linear_frozen编码器冻结。",
+        "execution": "已执行；未晋升当前Macro主干。",
+        "original": "docs/BABEL_LINEAR_HISTORY768.md:65-72; docs/BABEL_LINEAR_HISTORY768_REVIEW.md:实验完整性/近期路径",
+        "retain": "linear_joint近期收益、远端及用途代价和frozen编码器不变均保留。",
+        "withdraw": "不能说局部收益来自旧local保护，也不能把frozen组/校准误列为编码器更新。"
+      },
+      {
+        "stage": "Position Supervision",
+        "code": [
+          "position_supervision.py:query_terms",
+          "position_supervision.py:backward_batch",
+          "position_supervision_run.py:train_epoch"
+        ],
+        "local": "local用states.detach；query/S先在proxy累加梯度，再states.backward(proxy.grad)回传。",
+        "structure": "所有位置方案共享S17+，支持随prefix变化。",
+        "execution": "已执行，未晋升；chunk/proxy不是整个编码器断梯度。",
+        "original": "docs/BABEL_POSITION_SUPERVISION768.md:17-19; docs/BABEL_POSITION_SUPERVISION768_REVIEW.md",
+        "retain": "sampled/dense_matched/dense_all原对照及有限失败保留，密集同权重已实际存在。",
+        "withdraw": "不能凭proxy.detach单句推断编码器没训练，也不能宣称从头全位置失败。"
+      },
+      {
+        "stage": "Uniform Context / Context Transfer",
+        "code": [
+          "uniform_context.py:loss_rows",
+          "uniform_context_run.py:train_epoch",
+          "context_transfer_run.py:train_epoch"
+        ],
+        "local": "不再训练独立local诊断头；原local不会提供编码器梯度。",
+        "structure": "实际优化Q+S17+；标签/权重混改归V06，已完成修正比较。",
+        "execution": "均已执行；Uniform权重未进入Context，Context未晋升。",
+        "original": "docs/BABEL_UNIFORM_CONTEXT768.md:44; docs/BABEL_CONTEXT_TRANSFER768.md:9,33; docs/BABEL_ROADMAP.md:V06",
+        "retain": "原完整配方结果及V06受控重验结论。",
+        "withdraw": "不能称它们训练了局部诊断头、受该头保护或因删诊断头而丢失编码器梯度。"
+      }
+    ],
+    "claims": [
+      {
+        "task": "V04",
+        "claim": "额外结构监督对近/远同等覆盖",
+        "disposition": "撤回",
+        "basis": "history_structure.pools默认lo17，WIDTHS4/16；metrics只取close，17+聚合。主Q仍覆盖1..16，因此不是完全无近期监督。"
+      },
+      {
+        "task": "V04",
+        "claim": "远处结构收益与近期代价",
+        "disposition": "按原配方范围保留",
+        "basis": "History Structure真实同起点/同预算对照已含S开关；当时的分数不因解释错误作废。RS再检验从当前Macro删除S，仍为另一阶段有限干预，不能覆盖原阶段。"
+      },
+      {
+        "task": "V04",
+        "claim": "不对称目标是近端问题唯一原因，或模型架构/维数注定不行",
+        "disposition": "撤回归因，机制未知",
+        "basis": "RS删除S只有有限近期收益且结构损伤；不支持删除即可修复，也不识别架构纯效应。"
+      },
+      {
+        "task": "V05",
+        "claim": "0.25 local损失在保护当前主干编码器",
+        "disposition": "撤回",
+        "basis": "从Bar Semantics uniform及后续主干的detach路径看，它训练诊断头，不回传编码器；原三组及后续协议已声明，不能称当时代码违反了该协议。"
+      },
+      {
+        "task": "V05",
+        "claim": "早期全部局部头都detach或所有近端监督消失",
+        "disposition": "明确否定",
+        "basis": "Bar Semantics control/additive有local编码器梯度；后续主Q也包含近端。"
+      },
+      {
+        "task": "V05",
+        "claim": "打开local回传即可修好；因此必须重跑所有下游",
+        "disposition": "不成立，不排全量重跑",
+        "basis": "RS冻结已有头0.25回传的30轮干预未通过；不是原阶段从头正确局部监督的复现。退回主参照，停止该具体配方；不保留原阶段local保护结论，故没有为该错误结论必须重跑的实验。"
+      }
+    ],
+    "model_unchanged": true,
+    "local_optimizer_updates": 0,
+    "required_historical_retraining_for_withdrawn_claims": 0,
+    "remaining_scientific_unknown": "原阶段采用其他局部监督或近远对称结构会怎样未被证明；不再保留相关旧因果断言。不因未知机制无限重跑，未来方案待全部修复责任完成再独立立项。",
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "完成V04/V05代码路径与原结论逐项处置，纠错关闭与模型能力升级分开；不新增优化。",
+        "remaining": "近端能力尚未修好；V07/V14责任仍保留，V13最终验收另列。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "核对12阶段绑定代码，明确进入Macro的控制主干及未继承分支；Grounded联合未执行、Linear冻结阶段单列。",
+        "remaining": "不是对所有早期512实验或全部架构作正确性保证。"
+      },
+      "training": {
+        "status": "pass_for_scope",
+        "evidence": "13组实际目标函数的合成局部梯度路径测试；早期附着正对照、后续detach与非零总编码器梯度分别核对。复用已有17+结构/Q近端覆盖测试；Position proxy手工回传单独检查。",
+        "remaining": "不估计真实梯度份额；RS有限修法未通过，原阶段不同监督的结果未知。"
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "原结构训练覆盖17+而主要远端评分65+分开；原同预算结果、best0含义与RS原失败不改写。",
+        "remaining": "本轮不重新计算全历史指标或真实权重；复用已归档报告复核，V13非独立问题不变。"
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "仅读取原上传包manifest/源码绑定，无数据集或尺度变更，无原始市场数据拟合。",
+        "remaining": "状态/局部统计的独立复算仍归V14，不能用代码哈希通过替代。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "12份归档manifest的1042条代码哈希引用均匹配；历史生产模块保持原样，新增回归测试；文档只更新roadmap镜像、既有审计JSON与进度事件。 新增13路径检查在内共60项相关测试通过；Ruff与diff检查通过。",
+        "remaining": "新测试是合成零更新，不冒充真实模型验收或中断恢复。"
+      }
+    },
+    "validation": {
+      "new_path_cases": 13,
+      "related_tests_passed": 60,
+      "command": ".venv/bin/pytest -q tests/babel/test_recovery_objectives.py tests/babel/test_history_structure.py tests/babel/test_bar_semantics.py tests/babel/test_position_supervision.py",
+      "ruff": "passed",
+      "real_weight_execution": false,
+      "new_training_jobs": 0
+    }
+  }
 }
