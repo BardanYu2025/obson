@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-09",
-  "current_iteration": "V14_report_review_repair_closure",
-  "current_iteration_scope": "原统计/提交断点恢复证据真实验收归档；本批已登记V01-V12/V14纠错结案，模型未升级。",
+  "current_iteration": "F11_information_contract_F01_from_scratch_design",
+  "current_iteration_scope": "设计单一从头2x2矩阵及有限信息用途/退出契约；原纠错保持结案，训练入口尚未实现。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -508,13 +508,14 @@
         "V06",
         "V08"
       ],
-      "status": "保留待设计；旧位置续训及五位置从头rolling已做，未检验从头全128同时等权",
+      "status": "设计完成/待实现：全128等权目标的无偏五位置抽样×额外远端S，从头2x2；显式同时128仍未做并保留",
       "reentry_or_acceptance": "在匹配起点/预算下区分密度、位置权重和完整历史；不能把旧warm-start失败当否定证据；1～128指bar位置而非向量维度，完整上下文方案的首个受监督位置需额外已知历史，历史不足显式mask",
       "evidence": [
         "docs/BABEL_STATE_ROLLOUT768_PLAN.md",
         "docs/BABEL_POSITION_SUPERVISION768_REVIEW.md",
         "docs/BABEL_UNIFORM_CONTEXT768_REVIEW.md"
-      ]
+      ],
+      "next_action": "与F11共用一次有界矩阵，具体见核心计划卡及Roadmap第7节。"
     },
     {
       "id": "F02",
@@ -659,13 +660,14 @@
         "V04",
         "V05"
       ],
-      "status": "已有有限原型及用途证据；通用用途完整验收未过",
+      "status": "信息保留/冻结用途/退出契约设计完成；配套F01矩阵入口待实现，无新科学结果",
       "reentry_or_acceptance": "锁同一权重做当前字段/方向/波动/结构和强基线比较；达到用途条件即停止追零误差；若未过则限定预算收束而非宣布胜利，独立确认归V13",
       "evidence": [
         "docs/BABEL_RECONSTRUCTION_EXIT.md",
         "docs/BABEL_UTILITY768_REVIEW.md",
         "docs/BABEL_VOLATILITY_TRANSFER768_REVIEW.md"
-      ]
+      ],
+      "next_action": "落实同一固定last权重的845次Ridge机会、原信息保留及分层判定，不重新开放旧读取网格。"
     },
     {
       "id": "F12",
@@ -682,16 +684,23 @@
       ]
     }
   ],
-  "active_order": [],
-  "next_after_active": "先带着纠错经验收敛下一项核心研究方案及退出条件；F01-F12保留未启动。V13待模型和用途冻结后独立验收。",
+  "active_order": [
+    [
+      "F01",
+      "F11"
+    ]
+  ],
+  "next_after_active": "实现并验证F01/F11新入口，源hash/全位置目标/训练实际梯度及资源准入通过后给AutoDL命令；不需要重复用户批准准备工作。",
   "active_training_budget": {
-    "task_ids": [],
-    "status": "repair_complete_no_new_training_authorized_by_card",
+    "task_ids": [
+      "F01",
+      "F11"
+    ],
+    "status": "design_only_no_runnable_entrypoint",
     "jobs_max": 0,
     "worker_epochs_max": 0,
     "optimizer_updates_max": 0,
-    "future_branches_included": false,
-    "reason": "本批纠错任务结案；先重新收敛核心研究问题与匹配方案，再锁预算。"
+    "reason": "新预算单独记录在核心计划卡；入口未实现，不准用旧命令开跑或挪旧修复预算。"
   },
   "aliases": {
     "R0": [
@@ -733,11 +742,14 @@
   "workflow": "docs/BABEL_EXPERIMENT_WORKFLOW.md",
   "progress_log": "docs/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
-  "current_task_ids": [],
+  "current_task_ids": [
+    "F11",
+    "F01"
+  ],
   "blocked_followups": {
-    "F_optimization": "纠错前置已完成，但没有已锁定的新实验卡/训练预算；先收敛单一核心方案，不自动启动保留分支。"
+    "F_optimization": "F01/F11设计已完成，允许实现；真实执行须新入口/合成检查/源数据与资源准入。其余F分支保留不自动启动。"
   },
-  "active_phase": "repair_closed_research_plan_reassessment_pending",
+  "active_phase": "post_repair_core_plan_ready_implementation_pending",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -1228,6 +1240,273 @@
       },
       "report_review": "docs/BABEL_RECOVERY_PROVENANCE_REVIEW.json",
       "archive_sha256": "e6ad648e81f996eb6de49f1cee3497932e6a9dca7a36295e42f8c8b41498dcb9"
+    }
+  },
+  "core_research_plan": {
+    "task_ids": [
+      "F01",
+      "F11"
+    ],
+    "requirement_ids": [
+      "N01",
+      "N02",
+      "N03",
+      "N04",
+      "N05",
+      "N07",
+      "N08",
+      "N09"
+    ],
+    "status": "design_reviewed_implementation_pending",
+    "implementation": "not_implemented",
+    "execution": "not_run",
+    "scientific_acceptance": "unknown",
+    "human_entry": "docs/BABEL_ROADMAP.md#7-2026-10-09从纠错归档转入状态到底保留了什么",
+    "reason_for_order": "用户要求修复先结案后重新审视核心目标；既有回读改善未带来共同用途提升，F11定义用途/退出，F01检验从头覆盖并设S对照，避免混杂。",
+    "source": {
+      "reference": {
+        "model": "Macro control",
+        "seeds": [
+          42,
+          43
+        ],
+        "selected_epochs": [
+          97,
+          94
+        ],
+        "width": 768,
+        "layers": 4,
+        "heads": 8,
+        "claim": "Research reference only, not globally optimal or fully accepted"
+      },
+      "reference_is_initialization": false,
+      "recovery_context_archive_sha256": "68ca5d50eb39f0f29806de4d2dbc1d1d07526d794d0ec93078fc5d3814ff2063",
+      "statistics_review": "docs/BABEL_RECOVERY_PROVENANCE_REVIEW.json",
+      "code_reference": [
+        "src/obson/babel/uniform_context.py",
+        "src/obson/babel/history_query.py",
+        "src/obson/babel/history_structure.py"
+      ],
+      "binding": "实际source/weights/cache/index/raw/statistics/code hashes在新入口实施时锁定；不按目录名认定身份"
+    },
+    "architecture": {
+      "initialization": "from_scratch_paired_seeds42_43",
+      "encoder": {
+        "input": 28,
+        "width": 768,
+        "layers": 4,
+        "heads": 8,
+        "ff": 3072,
+        "position": "fixed_sinusoidal_per_independent_128_window",
+        "input_adapter": "new_plain_linear_not_legacy_Macro_adapter"
+      },
+      "decoder": {
+        "slots": 4,
+        "width": 192,
+        "layers": 2,
+        "heads": 4,
+        "ff": 384,
+        "outputs": 7,
+        "state_scaler": "identity_0_1",
+        "input": "one_state_and_age_only"
+      },
+      "gradient": "Q and enabled S jointly update encoder/query; no detached local head"
+    },
+    "data": {
+      "expected_train": 4789,
+      "expected_val": 978,
+      "block_rows": 255,
+      "state_rows": 128,
+      "endpoint_p": [
+        1,
+        128
+      ],
+      "ages": [
+        1,
+        127
+      ],
+      "window_slice": "block[p-1:p+127]",
+      "current_index": "p+126",
+      "past_index": "p+126-age",
+      "ema": "causal_pre_history_inherited",
+      "weighting": "equal_parent_blocks_then_equal_endpoints_not_unique_physical_bars",
+      "qualification": "full255 within contract/partition; same rows all arms; change in train/val index stops"
+    },
+    "arms": {
+      "A": {
+        "sampling": "legacy5",
+        "loss": "Q+S"
+      },
+      "B": {
+        "sampling": "uniform5_without_replacement_1_to128",
+        "loss": "Q+S"
+      },
+      "C": {
+        "sampling": "legacy5",
+        "loss": "Q"
+      },
+      "D": {
+        "sampling": "uniform5_without_replacement_1_to128",
+        "loss": "Q",
+        "role": "only_predeclared_primary"
+      }
+    },
+    "loss": {
+      "Q": "0.4path+0.2change1+0.1body+0.3activity; original available-band/field masking",
+      "S": "original age17..127 structure widths4,16, coefficient1",
+      "training": "Huber",
+      "evaluation": "MSE",
+      "endpoint128_expected_weight": {
+        "legacy": 0.2,
+        "uniform": 0.0078125
+      },
+      "not_gradient_proportions": true,
+      "simultaneous128": "retained_not_tested; uniform5 estimates same expected full128 loss, not equal SGD trajectories"
+    },
+    "planned_budget": {
+      "jobs": 8,
+      "seeds": [
+        42,
+        43
+      ],
+      "epochs_each": 120,
+      "worker_epochs": 960,
+      "batch_parent_blocks": 128,
+      "states_per_parent": 5,
+      "micro_parent_blocks": 8,
+      "steps_per_epoch": 38,
+      "optimizer_updates": 36480,
+      "parent_exposures": 4597440,
+      "state_exposures": 22987200,
+      "session_seconds_max": 129600,
+      "session_limit_is_eta": false,
+      "readout_representations": 13,
+      "readout_targets": 13,
+      "readout_alphas": [
+        1,
+        0.1,
+        0.01,
+        0.001,
+        0.0001
+      ],
+      "readout_fits": 845,
+      "encoder_updates_for_probe_targets": 0,
+      "same_updates_not_exact_compute": true
+    },
+    "optimizer": {
+      "name": "AdamW",
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.01,
+      "peak_lr": 0.0003,
+      "warmup_epochs": 10,
+      "schedule": "cosine_to_5percent",
+      "clip": 1,
+      "precision": "FP32_no_AMP_TF32",
+      "dropout": 0,
+      "new_optimizer": true,
+      "seed_paired_tensor_initialization": true
+    },
+    "selection": {
+      "primary": "fixed_last120_all8arms",
+      "best": "shared validation Q, include0, validation diagnostic only",
+      "val_positions": [
+        1,
+        16,
+        32,
+        48,
+        64,
+        80,
+        96,
+        112,
+        128
+      ],
+      "final_history_positions": "all1..128",
+      "utility_positions": "original_endpoint_p128_only",
+      "no_position_holdout_claim": true,
+      "research": "open only after all weights and readouts locked"
+    },
+    "acceptance": {
+      "research_progress": "D vs A utility>=5% improvement; direction/volatility<=10% degradation; endpoint/interior near/mid/far price/activity and per-window priceP95<=10%; bothseeds/bothresearchcohorts and paired intervals",
+      "replacement_candidate": "research gate plus old absolute13target qualification, raw/PCA/current comparisons; Macro utility<=5% and history/P95<=10%; independent confirmation still V13",
+      "absolute_utility": "four R2>=0.50; raw comprehensive<=5%/families<=10%; PCA and current>=5% improvement",
+      "absolute_current": "sevenfields R2>=0.80, trainvariance NMSE upperCI<=0.10, original support requirements",
+      "intervals": "paired calendar-month primary and contract-period-month sensitivity;2000 draws seed20261009;>=100parent_windows/6groups;rawdifference if zero_reference;exploratory",
+      "old_protocol": "原阈值数值保留，新矩阵区间统一月级，旧周级评分仅另报；不改历史判定",
+      "contrasts": [
+        "B-A",
+        "D-C",
+        "C-A",
+        "D-B",
+        "D-B-C+A"
+      ],
+      "no_promotion_or_forecasting_claim": true
+    },
+    "resource_and_stop": {
+      "device": "AutoDL_CUDA_only",
+      "workers_default": 1,
+      "preflight": "zero_update measured forward/backward plus Adam reserve; no silent reduction or precision change",
+      "disk": "8*(last+best)+largest_last_atomic_replace+caches_readouts_margin computed from actual assets",
+      "resume": "committed_atomic_boundary_only, uncommitted_update_evidence_stops; cumulative budget",
+      "stop": "120epochs or cumulative36h or qualification/nonfinite failure; incomplete not ranked; no auto extensions",
+      "exports": "success_failure_stopped to /root/autodl-tmp/download",
+      "commands": "not_available_until_entrypoint_ready",
+      "time_preflight": "分别测训练/九位置验证/全128最终评价并估总量；预计无完成余量则0更新停止，不静默改组数/轮数。"
+    },
+    "future_preserved": {
+      "F01_dense": "simultaneous128 retained, fair same-objective compute/exposure comparison needed",
+      "F03_F04": "future observed common-content alignment, no whole-vector identity; not in this matrix",
+      "others": "F02/F05-F10/F12 retained; no auto launch",
+      "V13": "after model/use frozen independent confirmation"
+    },
+    "evidence": [
+      "docs/BABEL_LINEAR_HISTORY768_REVIEW.md",
+      "docs/BABEL_VOLATILITY_TRANSFER768_REVIEW.md",
+      "docs/BABEL_MACRO_HISTORY768_REVIEW.md",
+      "docs/BABEL_UNIFORM_CONTEXT768.md",
+      "docs/BABEL_RECOVERY_RS_REVIEW.md"
+    ],
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "F11将历史保留、冻结用途、未来能力分层；主结果不再只看重建，旧线性/波动/宏观失败不重开。",
+        "remaining": "历史规则读出只是有限用途；通用表示及未来能力未证明。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "计划四组同从头rolling768/4/8、单状态查询头，无多分辨率/记忆/新头混入；Macro97/94只作非等预训练参照。",
+        "remaining": "新全位置入口与GPU通路准入待实现；没有真实执行结论。"
+      },
+      "training": {
+        "status": "pass_for_scope",
+        "evidence": "2x2覆盖采样与S，明确Q近中远仍有监督；配对初始化/父窗口计划/更新预算，固定last120。全位置目标随机估计不冒充同时128。",
+        "remaining": "有限预算未保证收敛；删S也改变梯度/裁剪，须记录，不能推断唯一信息机制。"
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "D预定主候选；因素、用途、替换分开；845个Ridge机会，无研究选组；p48/80/112不再叫留出位置。",
+        "remaining": "重复研究集仅探索性，V13仍缺；逐bar历史评价不等于逐bar冻结用途验收。"
+      },
+      "data": {
+        "status": "open",
+        "evidence": "锁255特征块/单合约/原统计及完整分区，写明价格锚点、EMA预历史、缺失和父块重复端点权重。",
+        "remaining": "实施需实际来源hash、原始坐标边界核对；本轮未运行原始数据/权重准入。"
+      },
+      "engineering": {
+        "status": "open",
+        "evidence": "预算算术、均匀抽样期望与所有128位置的索引范围检查；恢复/资源/失败导出要求已列。",
+        "remaining": "无新代码入口、GPU资源测量、合成集成测试和真实训练；不提供启动命令。"
+      }
+    },
+    "local_plan_checks": {
+      "budget_arithmetic": "36480 updates /4597440 parent exposures /22987200 state exposures /845 Ridge fits",
+      "uniform_estimator": "C(127,4)/C(128,5)/5=1/128 exactly using Fraction; not a neural result",
+      "index_bounds": "all128 endpoints/all127 ages checked inside own128 past",
+      "documentation": "14repair_records unchanged;12F_ids preserved;Macro unchanged;JSON/MD key fields matched;log append-only",
+      "real_execution": "none"
     }
   }
 }
