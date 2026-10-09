@@ -1,0 +1,208 @@
+{
+  "task_ids": [
+    "V14"
+  ],
+  "archive": {
+    "path": "/Users/bardan/Downloads/babel_recovery_provenance_reports.tar.gz",
+    "sha256": "e6ad648e81f996eb6de49f1cee3497932e6a9dca7a36295e42f8c8b41498dcb9",
+    "run": "babel_recovery_provenance",
+    "completion_sha256": "0b32d8919c1984911908ae0713705df4879b5c647df2d706ee2b126fe9d81701"
+  },
+  "status": "accepted_for_declared_V14_scope",
+  "integrity": {
+    "verified_file_references": 158,
+    "top_bound_files_present": 98,
+    "omitted_unique_weights": [
+      "continuous_s42/resume_s42/best.pt",
+      "continuous_s42/resume_s42/last.pt",
+      "continuous_s43/resume_s43/best.pt",
+      "continuous_s43/resume_s43/last.pt",
+      "restarted_s42/resume_s42/best.pt",
+      "restarted_s42/resume_s42/last.pt",
+      "restarted_s43/resume_s43/best.pt",
+      "restarted_s43/resume_s43/last.pt"
+    ],
+    "implementation_protocol_and_startup_hash_match": true,
+    "passed_report_checks": 991
+  },
+  "state_scalers": {
+    "42": {
+      "shape": [
+        4789,
+        768
+      ],
+      "independent_refit_max_abs": {
+        "mean": 0.0,
+        "scale": 0.0
+      },
+      "inherited_buffers": {
+        "mean": {
+          "passed": true
+        },
+        "scale": {
+          "passed": true
+        }
+      }
+    },
+    "43": {
+      "shape": [
+        4789,
+        768
+      ],
+      "independent_refit_max_abs": {
+        "mean": 0.0,
+        "scale": 0.0
+      },
+      "inherited_buffers": {
+        "mean": {
+          "passed": true
+        },
+        "scale": {
+          "passed": true
+        }
+      }
+    }
+  },
+  "local_scalers": {
+    "matches_original_prefix_archive": true,
+    "recomputed_vs_original_max_abs": {
+      "mean": 8.881784197001252e-15,
+      "scale": 2.55351295663786e-14,
+      "count": 0.0,
+      "delta_scale": 0.0
+    },
+    "local_raw_arrays_in_archive": false
+  },
+  "resume": {
+    "42": {
+      "updates": 4,
+      "history_equal_excluding_seconds": true,
+      "rng_probes_equal": true,
+      "error_arrays_equal": true,
+      "distinct_processes": {
+        "pid": 1770,
+        "previous_pid": 1710,
+        "checkpoint_sha256": "6d4071800a3bc70237880d377d29cff04496f9dbf16aefdcf8249ce7931f052f"
+      },
+      "best_epoch": 0,
+      "last_worst_retention_ratio": 13.298926865033637,
+      "gpu_checkpoint_tensor_comparison": {
+        "last.pt": {
+          "passed": true,
+          "mismatches": {}
+        },
+        "best.pt": {
+          "passed": true,
+          "mismatches": {}
+        },
+        "rng_before_epoch1.json": {
+          "passed": true,
+          "mismatches": {}
+        },
+        "rng_before_epoch2.json": {
+          "passed": true,
+          "mismatches": {}
+        },
+        "train_rows": {
+          "passed": true
+        }
+      }
+    },
+    "43": {
+      "updates": 4,
+      "history_equal_excluding_seconds": true,
+      "rng_probes_equal": true,
+      "error_arrays_equal": true,
+      "distinct_processes": {
+        "pid": 1947,
+        "previous_pid": 1892,
+        "checkpoint_sha256": "2ba78b81c96be16df0d1efcb8e2a4db78a52ed77e4a3220a2f9fa1ac9a8308ed"
+      },
+      "best_epoch": 0,
+      "last_worst_retention_ratio": 7.8665597381302765,
+      "gpu_checkpoint_tensor_comparison": {
+        "last.pt": {
+          "passed": true,
+          "mismatches": {}
+        },
+        "best.pt": {
+          "passed": true,
+          "mismatches": {}
+        },
+        "rng_before_epoch1.json": {
+          "passed": true,
+          "mismatches": {}
+        },
+        "rng_before_epoch2.json": {
+          "passed": true,
+          "mismatches": {}
+        },
+        "train_rows": {
+          "passed": true
+        }
+      }
+    }
+  },
+  "cpu_independent_recomputations": {
+    "validation_means": 192,
+    "error_values_checked": 375552,
+    "sampling_fingerprints": 16,
+    "state_scalar_comparisons": 3072
+  },
+  "execution": {
+    "optimizer_updates": 8,
+    "window_exposures": 1024,
+    "state_exposures": 5120,
+    "audit_seconds": 755.6112510561943,
+    "startup_total_seconds": 763.5533747673035,
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "torch": "2.8.0+cu128",
+    "old_failure": "V14 real-weight execution requires AutoDL CUDA",
+    "old_failure_optimizer_updates": 0
+  },
+  "limits": [
+    "No real weights loaded/executed locally;8 pt files intentionally omitted. Final model/optimizer/RNG tensor equality relies on hash-bound CUDA comparator, corroborated by exact local histories, RNG draws and validation error arrays.",
+    "Local raw y/mask absent; local target reconstruction not independently rerun on laptop. Recorded differences independently checked against original Prefix archive; source arrays/index bound to prior Coverage lineage.",
+    "Only selected scaler families and this worker committed epoch boundary on RTX3080Ti/PyTorch2.8cu128 covered; not every historical module or arbitrary mid-step recovery.",
+    "Tiny first128-row two-step diagnostics failed model retention and all best stayed epoch0. This was not a model-improvement study; no promotion or causal architectural claim.",
+    "V13 independent final generalization remains untested."
+  ],
+  "review": {
+    "purpose": {
+      "status": "pass_for_scope",
+      "evidence": "完成已登记V14三个剩余证据缺口，复用Coverage输入/目标原始复算；按纠错责任关闭，不拿模型性能提升作关闭条件。",
+      "remaining": "因果状态的均衡保留与通用用途尚未完成；V13独立验收保留。"
+    },
+    "architecture": {
+      "status": "pass_for_scope",
+      "evidence": "原control600状态重算原scaler；Macro97/94继承float32 buffers严格相同。恢复审计使用原768/4/8编码器/查询头，无新架构或头。",
+      "remaining": "这些检查不证明信息保留完整，也不证明四层最优。"
+    },
+    "validation": {
+      "status": "pass_for_scope",
+      "evidence": "独立复算3072个状态统计分量、192个验证均值和16个采样hash，核对375552个导出误差值；两路径历史/RNG探针/误差数组完全一致，991条已导出审计判据通过。",
+      "remaining": "8份pt省略；最终参数/优化器/RNG张量相同依赖已绑定CUDA比较器，未本地运行真实权重。验证集不是独立留出。"
+    },
+    "data": {
+      "status": "pass_for_scope",
+      "evidence": "两组4789×768原训练状态独立复算与原统计差0；局部目标统计与原Prefix档案匹配，最大差2.554e-14。原scaler/index/fit/bundle来源逐项核对，同SHA Coverage证据保留。",
+      "remaining": "本包无原train y/mask，本地不重新生成局部目标；其独立算法运行依赖已绑定远端记录。没有声称全部历史数据处理已穷尽验证。"
+    },
+    "engineering": {
+      "status": "pass_for_scope",
+      "evidence": "158次文件引用hash核验，98份根清单文件在包中，8份pt按协议省略；实现/协议/startup hash匹配，两个种子真实不同PID已提交断点续跑通过。旧CUDA不可用失败为0更新且保留归档。",
+      "remaining": "只验证本入口、RTX3080Ti/Torch2.8cu128、已提交轮次边界；不推广至任意中途断电、其他设备或所有旧worker。"
+    },
+    "training": {
+      "status": "pass_for_scope",
+      "evidence": "四路径各2更新，合计8更新/1024窗口/5120位置，755.611秒，含startup763.553秒；同种子起点/采样/LR/更新一致。best全部0；诊断副本未通过保护，不晋升。",
+      "remaining": "前128训练子集两步只验连续性，不用于评价新优化方案；局部/近端能力没有改善。"
+    }
+  },
+  "decision": {
+    "V14": "closed_for_declared_scaler_and_committed_resume_scope",
+    "main_model": "unchanged Macro control 768/4/8 s42 epoch97 s43 epoch94",
+    "affected_prior_conclusions": "支持原统计与该恢复实现按限定范围使用；不翻转RS/R1/V06失败或早先撤回的解释。",
+    "next": "已登记纠错V01-V12/V14结案；归档后重新审视单一核心研究方案，F01-F12保留未启动，V13冻结后独立验收。"
+  }
+}
