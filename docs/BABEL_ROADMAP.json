@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-10",
-  "current_iteration": "F11_history_state_interface_code_ready",
-  "current_iteration_scope": "固定历史状态研究API和一次零训练资格入口完成；66项本地合成/回归通过，真实CUDA待验。已有可恢复性结论不变、Macro不变、完整F11退出未过。",
+  "current_iteration": "F11_interface_pending_V13_plan_locked_no_fresh_data",
+  "current_iteration_scope": "F11接口真实资格等待报告；F11/V13有限验收卡已锁定，本地数据盘点完成且用户确认远端未更新，V13评分入口未实现且不启动。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -439,13 +439,13 @@
         "docs/BABEL_RECONSTRUCTION_EXIT.md"
       ],
       "depends_on": [],
-      "next_action": "接口收尾后F11/V13准备限定历史能力的独立验收卡与数据资格清单；先锁来源/范围/基线/门槛/预算，再决定是否有足够未研究数据评分。当前不启动新训练或复跑旧快照。",
-      "human_status": "等待最终验收",
+      "next_action": "第10节有限历史状态验收卡已准备；本地盘点及用户确认当前无新行情，等待独立快照，评分入口尚未实现。不得复跑旧数据冒充独立验证。",
+      "human_status": "验收卡已准备；当前无新数据，未执行",
       "original_problem": "反复用于设计的研究集不能再充当最终独立测试集。",
       "completed_work": "已纠正数据集身份和结论表述；没有完成最终独立验收。",
       "completion_rule": "冻结模型、用途和门槛后，完成真正独立数据的验收。此项不计作当前代码已修复。",
       "closed": false,
-      "remaining_work": "接口收尾后F11/V13准备限定历史能力的独立验收卡与数据资格清单；先锁来源/范围/基线/门槛/预算，再决定是否有足够未研究数据评分。当前不启动新训练或复跑旧快照。"
+      "remaining_work": "独立数据到位后冻结快照/用途/预算并实现验收入口，再执行与审报告；目前不启动评分。"
     },
     {
       "id": "V14",
@@ -670,7 +670,7 @@
         "docs/BABEL_STATE_COVERAGE768_REVIEW.json",
         "docs/BABEL_STATE_READABILITY768_REVIEW.json"
       ],
-      "next_action": "F11完成既定零训练接口资格并归档；随后F11/V13冻结有限历史能力声明，准备独立验收卡和未参与研究的数据资格清单。未锁新评分预算，不新增训练；不得把旧完整门槛未过改为通过。"
+      "next_action": "只需完成既定F11接口检查并交回报告；随后归档有限接口能力。V13卡已准备但无新数据，不运行旧快照、不新增训练。未来数据到位后先锁身份/支持与评分入口；其他模型分支按缺口另立项。"
     },
     {
       "id": "F12",
@@ -692,7 +692,7 @@
       "F11"
     ]
   ],
-  "next_after_active": "F11完成既定零训练接口资格并归档；随后F11/V13冻结有限历史能力声明，准备独立验收卡和未参与研究的数据资格清单。未锁新评分预算，不新增训练；不得把旧完整门槛未过改为通过。",
+  "next_after_active": "只需完成既定F11接口检查并交回报告；随后归档有限接口能力。V13卡已准备但无新数据，不运行旧快照、不新增训练。未来数据到位后先锁身份/支持与评分入口；其他模型分支按缺口另立项。",
   "active_training_budget": {
     "task_ids": [
       "F11"
@@ -749,7 +749,7 @@
   "blocked_followups": {
     "F_optimization": "F01/F11旧矩阵与F11零训练读取诊断均已完成；下一步先定有限研究接口与边界，其他优化/追加训练不自动启动。"
   },
-  "active_phase": "historical_state_interface_ready_cuda_qualification_pending",
+  "active_phase": "interface_qualification_pending_independent_confirmation_waiting_for_new_data",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -1765,7 +1765,7 @@
       "output": "checkpoints/babel_state_readability768",
       "archive": "/root/autodl-tmp/download/babel_state_readability768_reports.tar.gz"
     },
-    "next_action": "F11完成既定零训练接口资格并归档；随后F11/V13冻结有限历史能力声明，准备独立验收卡和未参与研究的数据资格清单。未锁新评分预算，不新增训练；不得把旧完整门槛未过改为通过。",
+    "next_action": "只需完成既定F11接口检查并交回报告；随后归档有限接口能力。V13卡已准备但无新数据，不运行旧快照、不新增训练。未来数据到位后先锁身份/支持与评分入口；其他模型分支按缺口另立项。",
     "latest_report": "docs/BABEL_STATE_READABILITY768_REVIEW.json",
     "results": {
       "archive_sha256": "2f458806236b8a9bb16423d187ee8390d2b3830d0eca403aef12f7269b818a4e",
@@ -2510,7 +2510,7 @@
       "output": "checkpoints/babel_history_state768",
       "archive": "/root/autodl-tmp/download/babel_history_state768_reports.tar.gz"
     },
-    "next_action": "F11完成既定零训练接口资格并归档；随后F11/V13冻结有限历史能力声明，准备独立验收卡和未参与研究的数据资格清单。未锁新评分预算，不新增训练；不得把旧完整门槛未过改为通过。"
+    "next_action": "只需完成既定F11接口检查并交回报告；随后归档有限接口能力。V13卡已准备但无新数据，不运行旧快照、不新增训练。未来数据到位后先锁身份/支持与评分入口；其他模型分支按缺口另立项。"
   },
   "direction_review": {
     "date": "2026-10-10",
@@ -2541,7 +2541,7 @@
           "V13"
         ],
         "stage": "限定成果冻结、独立验收卡与数据资格清单",
-        "execution": "not_prepared_not_run",
+        "execution": "plan_prepared_data_inventory_complete_no_fresh_data_no_runner",
         "new_training_budget": 0,
         "new_model_scoring_budget": 0,
         "launch_condition": "新卡、未参与设计的数据资格、资源预算全部锁定后才可评分"
@@ -2605,6 +2605,180 @@
       "progress_log": "append_only",
       "new_neural_execution": "none",
       "code_tests": "not_run_documentation_only"
+    },
+    "followup": "第10节随后完成验收卡与本地数据盘点；用户确认远端未更新，独立评分尚未执行。方向审查当时的事实范围与日志保留。"
+  },
+  "independent_confirmation_plan": {
+    "schema": "babel-independent-history-acceptance-plan-v1",
+    "task_ids": [
+      "F11",
+      "V13"
+    ],
+    "status": "plan_locked_data_unavailable_runner_not_implemented",
+    "implementation": "plan_only_no_new_runner",
+    "execution": "not_run_no_fresh_data",
+    "scientific_acceptance": "not_assessed",
+    "purpose": "确认有限历史价量状态在新时间队列的保真与可读取范围，并报告实际成本；不确认未来价格或通用表示全部需求。",
+    "source": {
+      "readability_completion": "cd2b0fe45a4faa4a10abe66b75d56f8ca91c0df2ea3e91d337fc95ffad21e477",
+      "coverage_completion": "eadd412ea5534a966d35094fb10d3a3dda61089d775991b505828693cd0388f5",
+      "models": {
+        "macro_s42": "original_best97",
+        "macro_s43": "original_best94",
+        "D_s42": "fixed_last120",
+        "D_s43": "fixed_last120"
+      },
+      "primary_reference": "Macro_both_seeds",
+      "research_comparison": "D_both_seeds",
+      "selection": "none_no_seed_stitching_no_promotion",
+      "binding": "resolve original selected weights/readout/scaler hashes from unchanged completion ancestry before scoring; API qualification receipt required"
+    },
+    "architecture": {
+      "encoder_width": 768,
+      "encoder_layers": 4,
+      "encoder_heads": 8,
+      "input_features": 28,
+      "history_rows": 128,
+      "output": "one endpoint state",
+      "decoder": "existing paired HistoryQuery768_to_4x192_2layers_4heads_7fields",
+      "allowed_pre_history": "causal EMA warmup from same contract; not decoder raw-target bypass"
+    },
+    "training": {
+      "updates": 0,
+      "fits": 0,
+      "new_heads": 0,
+      "optimizer": "none",
+      "loss": "none_in_this_confirmation",
+      "weights": "all frozen eval",
+      "precision": "FP32/context runtime, noAMP/TF32"
+    },
+    "data": {
+      "scope": "primary future-time original symbols; old cross symbols separate confirmation cohort",
+      "cutoff_floor": "2026-09-12 03:00:00 Asia/Shanghai",
+      "cutoff_rule": "max close over all registered research raw histories at new snapshot lock, never earlier than cutoff_floor",
+      "snapshot": "separate immutable extended snapshot; old source files retained, historical normalized prefix hashes must agree",
+      "window": "128 feature rows all bar starts strictly after cutoff, all bars closed by locked_asof; >=512 same-contract bars causal warmup; fixed stride128 anchored to file index127; original lagged main selection and masks",
+      "candidate_filter": "metadata/data validity only; exclusions with reasons before scoring; no selection by model error/volatility",
+      "sampling": "if cohort>1000 eligible endpoints, lowest SHA256 of v13-v1|key|end; shared rows/models; cohort max1000; no resampling to pass support",
+      "support": "per claim and cohort >=100 scored windows across >=6 calendar weeks; each week >=10 eligible scored windows; activity each of five fields/band separately meets window/week support; lack means insufficient",
+      "independence": "old unselected rows and repeatedly reviewed cross cohorts are not fresh holdouts; overlapping physical times across contracts/periods grouped by calendar week",
+      "current_inventory": {
+        "date": "2026-10-10",
+        "local_root": "/Users/bardan/private/obson/data/contracts",
+        "comparison_archive": "/Users/bardan/Downloads/babel_time_confirmation_v2_reports.tar.gz",
+        "archive_sha256": "0c7d9c2cf2ab2a4be1819d62b45731a352ea14fd0b892990cd3b590ca138500b",
+        "raw_audit_sha256": "f4dcccc62d2d317763586df70c132135022b63d1643a4aab70d9a845825f6104",
+        "eligible_periods": [
+          15,
+          30,
+          60
+        ],
+        "old_files": 1251,
+        "current_files": 1251,
+        "exact_byte_matches": 1251,
+        "changed_keys": [],
+        "new_keys": [],
+        "missing_keys": [],
+        "excluded_unsupported_files": [
+          "MA_roll_calendar.csv",
+          "RM_roll_calendar.csv",
+          "TA_roll_calendar.csv",
+          "ag_roll_calendar.csv",
+          "au_roll_calendar.csv",
+          "c_roll_calendar.csv",
+          "cs_roll_calendar.csv",
+          "cu_roll_calendar.csv",
+          "hc_roll_calendar.csv",
+          "i_roll_calendar.csv",
+          "j_roll_calendar.csv",
+          "jm_roll_calendar.csv",
+          "m_roll_calendar.csv",
+          "p_roll_calendar.csv",
+          "rb_roll_calendar.csv",
+          "ru_roll_calendar.csv",
+          "sr_roll_calendar.csv",
+          "y_roll_calendar.csv"
+        ],
+        "sorted_current_inventory_sha256": "35571250eb6e34a7932acdeb546299db7246905fb6e4704a4158f2d1ce8cb8bf",
+        "qualification": "inventory_only_no_neural_execution",
+        "remote_inventory": "user_confirmed_unchanged_2026-10-10; no remote filesystem inspection",
+        "registered_rows": 4360913,
+        "registered_cutoff": "2026-09-12 03:00:00",
+        "later_rows": 0,
+        "conclusion": "local_supported_snapshot_identical_to_previously_inspected_data; no new supported local history",
+        "scope": "当前支持的15/30/60单合约目录；18份roll_calendar不是额外行情，不纳入模型样本；未把外盘日线/连续合约等不同输入自动作为验收数据。"
+      }
+    },
+    "evaluation": {
+      "target_coordinate": "same original age1..127 scaled log-percent offset/current-close-zero and train-only field scales/masks; current0 is coordinate not restored price",
+      "history": "existing price=(0.4path+0.2change1+0.1body)/0.7 and activity; near1..16/mid17..64/far65..127, overall/P50/P95, per field, symbol and period",
+      "descriptors": "16/64 efficiency and logRMS four primary; trendR2 and direction ±0.2 confusion diagnostic; original floor1e-8 preserved",
+      "baselines": "zero relative path/zero query in original train coordinates (train means for body/activity); original train-mean descriptor values; directly computed observed descriptors are truth/cost reference, not an imperfect baseline to beat",
+      "old_probes": "if reporting existing Ridge/raw/PCA/current, reuse completion-bound fits only, descriptive not a new gate or retraining opportunity",
+      "intervals": "2000 draws seed20261010; paired calendar-week clusters primary, contract-period-week sensitivity; 95percent two-sided intervals, upper bound for error differences; no treating correlated endpoints as independent",
+      "prospective_retention_gate": "for each model/seed/cohort, all3 price bands and all3 aggregate activity bands: upperCI mean(error_model -0.95*error_constant)<=0 in both groupings; activity fields separately support-qualified and no field/band upperCI mean(error_model-1.10*error_constant)>0; zero baseline uses differences not ratios",
+      "prospective_recoverability_gate": "four descriptor point R2>=0.50; upperCI utility NMSE difference versus0.95*original_train_mean<=0 and each direction/volatility family difference versus1.10*mean<=0 in both groupings",
+      "tail_gate": "overall price and activity P95 no worse than1.10*constant P95 under both clustered bootstrap upper bounds; unsupported fields cannot disappear into favorable averages",
+      "interpretation": "price/activity/descriptor claims reported separately; combined historical-state limited acceptance requires all scopes/both Macro seeds for supported cohorts; D separate, never automatically replaces Macro; lowerCI beyond threshold => unfavorable, interval crossing => unconfirmed, lack support => insufficient",
+      "low_motion": "retain floor<=1e-8, low<=1e-4, above1e-4; descriptive stratification, no general low-motion certification without support; no dropping flat windows"
+    },
+    "cost": {
+      "latent_bytes_float32": 3072,
+      "prepared_window_bytes_float32": 14336,
+      "raw6field_window_bytes_float32": 3072,
+      "comparison_limit": "4.67x only versus redundant28-feature window, not demonstrated versus raw OHLCVOI; include shared encoder/decoder parameters and original cache/EMA maintenance",
+      "measure": "same-device bounded warmup/measure inference encode/decode/descriptor separately and batch1/8; compare direct descriptor arithmetic CPU separately with hardware noted; accuracy-cost tradeoff report, no speedup assertion without measurements"
+    },
+    "budget": {
+      "active_training_updates": 0,
+      "active_model_scoring": 0,
+      "reserved_design_unique_endpoints_max": 8000,
+      "singleton_checks_max": 24,
+      "models": 4,
+      "cohorts_max": 2,
+      "windows_per_cohort_max": 1000,
+      "micro": 8,
+      "workers": 1,
+      "prospective_cumulative_seconds": 7200,
+      "disk_GiB_min": 2,
+      "preflight": "bound measured time estimate must fit cap; no automatic precision/sample/count changes",
+      "status": "design_envelope_only_not_launched",
+      "timing_extra_endpoints_max": 256,
+      "timing_rule": "each model first32 locked endpoints batch1 and8, max256 extra full forwards; report separately; no new data selection"
+    },
+    "stop": "no fresh data/support/lineage/API qualification => no model scoring; numeric/nonfinite/resource fail => save diagnostic and stop; original protocol changes require recorded reason before any future scores; no threshold tuning/retrain/repeated snapshots",
+    "delivery": "existing F11 API report still required once; V13 no runnable command; on future implementation success/fail/stopped reports must export download",
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "F11有限历史状态原型与V13确认的声明分开；价量历史保留、方向/波动可恢复和使用代价分别交账，不以接口或规则拟合取代总目标。",
+        "remaining": "同一状态的多用途复用/迁移优势仍未验证；不宣布完整F11通过。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "锁Macro97/94与D_last120双种子、原768/4/8及其配套查询；只用各物理端点最后128特征的末端状态，EMA前史显式声明。",
+        "remaining": "当前无新模型执行；接口真实报告仍待交回，未验全OHLC/任意长历史/单前向早期状态。"
+      },
+      "training": {
+        "status": "not_applicable",
+        "evidence": "0训练/0拟合/0新选择；不改原Q/S损失、原归一化、原读头或历史判据。",
+        "remaining": "新独立卡的门槛是前瞻范围定义，不回改旧失败，不证明原训练最优。"
+      },
+      "validation": {
+        "status": "open",
+        "evidence": "锁定新时间队列、先数据后评分、原源哈希、价格/活动分带、四描述与基线、同时报告双种子、区间/支持不足/停止规则。",
+        "remaining": "独立评分入口未实现；该卡没有运行；目前无合格新数据，不能给独立泛化结论。"
+      },
+      "data": {
+        "status": "blocked",
+        "evidence": "本地1251/1251文件哈希与旧快照完全一致，4360913行，无新key/改动/缺失；用户确认AutoDL仍为旧数据。",
+        "remaining": "V13需要真正未参与设计的新增历史快照；不能将旧未抽中的行或旧cross研究集重新称独立。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "只更新roadmap双格式和追加日志；本地CPU哈希盘点，无真实权重；F11接口源码/协议/预算保持不变，避免并行运行重复矩阵。",
+        "remaining": "未来评分前仍须实现新来源锁与CPU/合成准入、AutoDL资源预检；不提供未就绪的V13命令。"
+      }
     }
   }
 }
