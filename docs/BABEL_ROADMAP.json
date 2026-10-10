@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-10",
-  "current_iteration": "F01_F11_state_coverage_report_reviewed",
-  "current_iteration_scope": "从头2x2真实报告复核完成：重建改善、冻结用途未共同升级；停止本配方，Macro不变。",
+  "current_iteration": "F11_state_readability_code_ready",
+  "current_iteration_scope": "冻结现有10模型与既有读头，比较直接线性读取和历史解码后计算；新训练/拟合0，代码已备，等待AutoDL。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -661,7 +661,7 @@
         "V04",
         "V05"
       ],
-      "status": "本轮退出验收未过，未交付替代模型；当前字段可读/历史重建收益与完整用途资格分开归档",
+      "status": "上一矩阵完整退出失败保留；本轮零训练读取通路诊断代码就绪，真实执行待办",
       "reentry_or_acceptance": "锁同一权重做当前字段/方向/波动/结构和强基线比较；达到用途条件即停止追零误差；若未过则限定预算收束而非宣布胜利，独立确认归V13",
       "evidence": [
         "docs/BABEL_RECONSTRUCTION_EXIT.md",
@@ -669,7 +669,7 @@
         "docs/BABEL_VOLATILITY_TRANSFER768_REVIEW.md",
         "docs/BABEL_STATE_COVERAGE768_REVIEW.json"
       ],
-      "next_action": "F11先设计冻结现有状态/既有查询头的内容恢复与线性用途可读性对照；不训练新头，不自动追加当前组轮数或扩层。正式协议/预算待设计，无新GPU命令。"
+      "next_action": "运行F11已有读取通路诊断，复核逐样本内容恢复与直接读取差异后再决定核心改动；不自动新训练或改选候选。"
     },
     {
       "id": "F12",
@@ -691,16 +691,16 @@
       "F11"
     ]
   ],
-  "next_after_active": "F11先设计冻结现有状态/既有查询头的内容恢复与线性用途可读性对照；不训练新头，不自动追加当前组轮数或扩层。正式协议/预算待设计，无新GPU命令。",
+  "next_after_active": "运行F11已有读取通路诊断，复核逐样本内容恢复与直接读取差异后再决定核心改动；不自动新训练或改选候选。",
   "active_training_budget": {
     "task_ids": [
       "F11"
     ],
-    "status": "previous_matrix_completed_no_new_training_authorized_by_plan",
+    "status": "zero_training_frozen_diagnostic_only",
     "jobs_max": 0,
     "worker_epochs_max": 0,
     "optimizer_updates_max": 0,
-    "reason": "已完成F01/F11固定矩阵；停止规则触发正常归档，不因loss下降追加。"
+    "reason": "上一矩阵已完成收束；F11本轮仅原模型与原读头冻结执行。"
   },
   "aliases": {
     "R0": [
@@ -746,9 +746,9 @@
     "F11"
   ],
   "blocked_followups": {
-    "F_optimization": "F01/F11设计已完成，允许实现；真实执行须新入口/合成检查/源数据与资源准入。其余F分支保留不自动启动。"
+    "F_optimization": "F01/F11上一矩阵已完成收束；仅F11既有读取通路零训练诊断已备好。其他优化／追加训练不自动启动。"
   },
-  "active_phase": "coverage_recipe_closed_information_readability_question_open",
+  "active_phase": "frozen_existing_readout_routes_pending_cuda",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -1587,9 +1587,182 @@
     },
     "next_review_question": {
       "task_id": "F11",
-      "status": "question_identified_protocol_not_yet_locked",
+      "status": "protocol_locked_code_ready_cuda_pending",
       "question": "现有共享查询头恢复的历史能否支持用途描述，而线性读取仍不行？区分可恢复内容与直接易读性。",
-      "constraints": "冻结已有模型/查询头，无新训练/拟合，不把非线性解码与Ridge当等容量对照，不重开旧读取网格；具体指标/源码与运行预算下轮先锁定。"
+      "constraints": "冻结已有模型/查询头，无新训练/拟合，不把非线性解码与Ridge当等容量对照，不重开旧读取网格；协议/指标/预算已锁定在readability_plan。",
+      "entrypoint": "scripts/babel_state_readability768_autodl.sh",
+      "human_entry": "docs/BABEL_ROADMAP.md#8-2026-10-10f11同一状态的两种已有读取方式"
     }
+  },
+  "readability_plan": {
+    "task_ids": [
+      "F11"
+    ],
+    "requirement_ids": [
+      "N01",
+      "N02",
+      "N03",
+      "N04",
+      "N05",
+      "N07",
+      "N08",
+      "N09"
+    ],
+    "implementation": "code_ready",
+    "execution": "pending_AutoDL",
+    "scientific_acceptance": "not_evaluated",
+    "human_entry": "docs/BABEL_ROADMAP.md section8",
+    "protocol": {
+      "schema": "babel-state-readability768-v1",
+      "task_ids": [
+        "F11"
+      ],
+      "source_completion": "eadd412ea5534a966d35094fb10d3a3dda61089d775991b505828693cd0388f5",
+      "models": [
+        "A_s42",
+        "A_s43",
+        "B_s42",
+        "B_s43",
+        "C_s42",
+        "C_s43",
+        "D_s42",
+        "D_s43",
+        "macro_s42",
+        "macro_s43"
+      ],
+      "splits": {
+        "val": 978,
+        "test": 984,
+        "cross_research": 439
+      },
+      "position": 128,
+      "optimizer_updates": 0,
+      "readout_fits": 0,
+      "query_endpoints": 24010,
+      "endpoint_budget_meaning": "unique planned endpoints; uncommitted inference may repeat within cumulative time cap",
+      "encoder_replays": 60,
+      "query_batch": 64,
+      "session_seconds": 7200,
+      "primary": "D existing decoder versus same D existing Ridge: utility gain5%, families retain10%; both seeds/cohorts/groupings",
+      "recoverability": "four R2>=0.5; utility gain5% versus train mean and within-contract half-rotation",
+      "reference": "D versus A decoded gain5%/families10%; versus Macro decoded retain5%/families10%",
+      "inference": "2000 bootstrap draws seed20261009;>=100 parents/6groups; exploratory repeated cohorts",
+      "no_amplitude_calibration": true,
+      "no_new_selection": true,
+      "old_exit_qualification_unchanged": true,
+      "promoted": false
+    },
+    "source": {
+      "directory": "checkpoints/babel_state_coverage768",
+      "archive_sha256": "4db1e9b7d2bc8fd979fa98d52184512ee5c238e69ebc5dbaeb3e6b311ad02cf1",
+      "completion_sha256": "eadd412ea5534a966d35094fb10d3a3dda61089d775991b505828693cd0388f5",
+      "checkpoints": "A/B/C/D last120 x42/43, Macro original97/94",
+      "require_all_bound_file_verification": true
+    },
+    "architecture": {
+      "encoder": "existing768/4layers/8heads; same weights, source adapter differences retained",
+      "query": "existing single state ->4x192 slots,2layers4heads,127x7",
+      "frozen": [
+        "encoder",
+        "query",
+        "selected_Ridge"
+      ],
+      "readout_capacity_matched": false,
+      "information_path": "cached p128state to existingquery; raw inputs used for replay/scoring only"
+    },
+    "coordinate": "reverse age1..127, multiply original delta_scale[0]*sqrt(age), divide100, append current0; no smoothing/amplitude fitting/absolute anchor input",
+    "targets": "same past-only 16/64 close descriptors using15/63 internal returns; primary efficiency/logRMS four, trendR2 two diagnostic; no new activity/current evaluation",
+    "baselines": [
+      "existing_Ridge",
+      "existing_raw3584",
+      "existing_PCA768",
+      "existing_current28",
+      "train_mean",
+      "flat_path",
+      "same_contract_period_half_rotation_without_self"
+    ],
+    "qualification": {
+      "source": "all completion hashes, historical implementation/protocol/scalers/indices and actual row identity",
+      "fresh_encoder_samples": "first2 permodel/split,60 planned",
+      "query_replay": "research first2 original examples plus all endpoint aggregate reconstruction metrics",
+      "Ridge_replay": "all10models/all13targets no refit",
+      "labels": "old targets/masks and independent doubleclose descriptors",
+      "state_atol": 0.0001,
+      "state_rtol": 0.0002,
+      "metric_atol": 1e-06,
+      "metric_rtol": 2e-05,
+      "CSV_rebuild": "not repeated; prior reviewed raw qualification inherited"
+    },
+    "budget": {
+      "unique_query_endpoints": 24010,
+      "fresh_state_samples": 60,
+      "optimizer_updates": 0,
+      "readout_fits": 0,
+      "cumulative_seconds": 7200,
+      "default_workers": 1,
+      "minimum_disk_GiB": 2,
+      "query_batch": 64,
+      "precision": "FP32, context backend, noAMP/TF32",
+      "retries": "uncommitted inference only; reservations journaled; accumulated time not reset"
+    },
+    "selection": "none; D remains primary, A and Macro fixed references; val qualification only",
+    "stop": "qualification/nonfinite/resource failure or cumulative2h; export success/failure/stopped; no automatic extension or promotion",
+    "limits": [
+      "decoder and Ridge different capacity/training history",
+      "only originalp128 endpoints",
+      "repeat research notV13",
+      "wrongstate can retain temporal correlation",
+      "old activity/current/allposition qualification unchanged",
+      "failure does not prove information absence"
+    ],
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "同一冻结状态的原Ridge／原历史解码通路对照；判定不晋升、不覆盖旧退出资格。",
+        "remaining": "尚无真实结果；历史可恢复不代表未来预测或通用语义。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "合成价格年龄／尺度／时间方向与零坐标、实际小模型无旁路管线测试通过；原模型／读头冻结。",
+        "remaining": "p128范围；非等容量或等预训练预算；真实缓存状态／解码回放待CUDA。"
+      },
+      "training": {
+        "status": "pass_for_scope",
+        "evidence": "新增更新0、拟合0；已有系数复用，eval/禁梯度/前后签名检查实现。",
+        "remaining": "不检验重新训练不同读头的效果。"
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "10模型合成全管线、固定Ridge复放、错配、支持数和判据／断点检查通过；全量逐样本输出可复算。",
+        "remaining": "两研究集重复使用，多重诊断探索性；不覆盖旧活动／全位置门槛，V13开放；错配仍时间相关。"
+      },
+      "data": {
+        "status": "open",
+        "evidence": "非平凡尺度独立路径描述与原目标一致；既有包完成指纹、原源码和协议精确匹配。",
+        "remaining": "远端需核对全部绑定文件／原输入与状态缓存；不重建CSV，继承原始行情审查；只抽查60状态前向。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "13新测试+66相关回归共79通过；Ruff/shell通过；累计超时、来源隔离、提交恢复、篡改拒绝、失败先保存及导出覆盖；后续日志改动13定向测试通过。",
+        "remaining": "真实CUDA资源与数值待执行；保留每次失败状态，未提交推理重试受累计2h约束，唯一端点数不是重试总调用数。"
+      }
+    },
+    "checks": {
+      "new_synthetic_tests": 13,
+      "related_regression_tests": 66,
+      "total_passed": 79,
+      "post_logging_targeted_tests": 13,
+      "ruff": "passed",
+      "shell_syntax": "passed",
+      "real_neural_execution": "none_local"
+    },
+    "entrypoint": {
+      "module": "obson.babel.state_readability_run",
+      "script": "scripts/babel_state_readability768_autodl.sh",
+      "source": "checkpoints/babel_state_coverage768",
+      "output": "checkpoints/babel_state_readability768",
+      "archive": "/root/autodl-tmp/download/babel_state_readability768_reports.tar.gz"
+    },
+    "next_action": "运行F11已有读取通路诊断，复核逐样本内容恢复与直接读取差异后再决定核心改动；不自动新训练或改选候选。"
   }
 }
