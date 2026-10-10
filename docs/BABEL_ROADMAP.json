@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-10",
-  "current_iteration": "F11_state_readability_reviewed",
-  "current_iteration_scope": "零训练读取对照复核完成：已有解码通路较线性读取更准确，可恢复性通过；不是新模型升级，Macro不变，F11完整退出仍开放。",
+  "current_iteration": "F11_history_state_interface_code_ready",
+  "current_iteration_scope": "固定历史状态研究API和一次零训练资格入口完成；66项本地合成/回归通过，真实CUDA待验。已有可恢复性结论不变、Macro不变、完整F11退出未过。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -661,7 +661,7 @@
         "V04",
         "V05"
       ],
-      "status": "已有解码通路可恢复四历史描述的有限证据已通过；旧完整退出未过，未替换Macro",
+      "status": "既有历史可恢复性有限通过；固定研究API代码就绪，真实数值资格待验；完整退出未过，Macro不变",
       "reentry_or_acceptance": "锁同一权重做当前字段/方向/波动/结构和强基线比较；达到用途条件即停止追零误差；若未过则限定预算收束而非宣布胜利，独立确认归V13",
       "evidence": [
         "docs/BABEL_RECONSTRUCTION_EXIT.md",
@@ -670,7 +670,7 @@
         "docs/BABEL_STATE_COVERAGE768_REVIEW.json",
         "docs/BABEL_STATE_READABILITY768_REVIEW.json"
       ],
-      "next_action": "F11先整理冻结历史状态研究接口及近乎平盘/低波动适用边界；下一实验协议尚未锁定，不新训练、不新拟合，不重复已完成诊断。"
+      "next_action": "F11运行固定历史状态API的零训练资格检查；核对原来源与全部9604端点，报告平盘/低波动证据不足，收到报告后归档接口边界并收束。无新增训练或拟合。"
     },
     {
       "id": "F12",
@@ -692,16 +692,16 @@
       "F11"
     ]
   ],
-  "next_after_active": "F11先整理冻结历史状态研究接口及近乎平盘/低波动适用边界；下一实验协议尚未锁定，不新训练、不新拟合，不重复已完成诊断。",
+  "next_after_active": "F11运行固定历史状态API的零训练资格检查；核对原来源与全部9604端点，报告平盘/低波动证据不足，收到报告后归档接口边界并收束。无新增训练或拟合。",
   "active_training_budget": {
     "task_ids": [
       "F11"
     ],
-    "status": "diagnostic_complete_no_new_training",
+    "status": "no_training_interface_qualification_only",
     "jobs_max": 0,
     "worker_epochs_max": 0,
     "optimizer_updates_max": 0,
-    "reason": "读取诊断与旧训练矩阵均已完成收束；无新增训练或拟合预算。"
+    "reason": "9604端点+24单例为冻结推理预算，非训练；累计2h安全上限，零更新零拟合。"
   },
   "aliases": {
     "R0": [
@@ -749,7 +749,7 @@
   "blocked_followups": {
     "F_optimization": "F01/F11旧矩阵与F11零训练读取诊断均已完成；下一步先定有限研究接口与边界，其他优化/追加训练不自动启动。"
   },
-  "active_phase": "readability_diagnostic_closed_research_interface_scope_open",
+  "active_phase": "historical_state_interface_ready_cuda_qualification_pending",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -1765,7 +1765,7 @@
       "output": "checkpoints/babel_state_readability768",
       "archive": "/root/autodl-tmp/download/babel_state_readability768_reports.tar.gz"
     },
-    "next_action": "F11先整理冻结历史状态研究接口及近乎平盘/低波动适用边界；下一实验协议尚未锁定，不新训练、不新拟合，不重复已完成诊断。",
+    "next_action": "F11运行固定历史状态API的零训练资格检查；核对原来源与全部9604端点，报告平盘/低波动证据不足，收到报告后归档接口边界并收束。无新增训练或拟合。",
     "latest_report": "docs/BABEL_STATE_READABILITY768_REVIEW.json",
     "results": {
       "archive_sha256": "2f458806236b8a9bb16423d187ee8390d2b3830d0eca403aef12f7269b818a4e",
@@ -2139,10 +2139,377 @@
     },
     "next_question": {
       "task_id": "F11",
-      "status": "question_scoped_no_new_run_protocol",
+      "status": "implemented_protocol_locked_cuda_pending",
       "question": "把已有解码读取能力整理成固定的历史状态研究接口，并单列近乎平盘/低波动可靠性；明确线性方便性与历史可恢复性的不同验收含义。",
       "source": "Macro保持参照，D只作研究比较；不得按本轮分数重选种子或候选",
       "constraints": "不新拟合头，不自动追加120轮，不用新接口追溯修改旧门槛；新实验若需训练须另锁定协议/预算；V13独立验收继续开放"
     }
+  },
+  "history_state_interface_plan": {
+    "task_ids": [
+      "F11"
+    ],
+    "requirement_ids": [
+      "N01",
+      "N02",
+      "N03",
+      "N04",
+      "N05",
+      "N07",
+      "N08",
+      "N09"
+    ],
+    "implementation": "ready_local_tests_passed",
+    "execution": "not_run_on_real_weights",
+    "conclusion": "pending_interface_qualification_not_new_model_acceptance",
+    "protocol": {
+      "schema": "babel-history-state-delivery-v1",
+      "task_ids": [
+        "F11"
+      ],
+      "source_completion": "cd2b0fe45a4faa4a10abe66b75d56f8ca91c0df2ea3e91d337fc95ffad21e477",
+      "models": [
+        "macro_s42",
+        "macro_s43",
+        "D_s42",
+        "D_s43"
+      ],
+      "splits": {
+        "val": 978,
+        "test": 984,
+        "cross_research": 439
+      },
+      "position": 128,
+      "planned_unique_endpoints": 9604,
+      "single_example_checks": 24,
+      "micro": 8,
+      "session_seconds": 7200,
+      "optimizer_updates": 0,
+      "readout_fits": 0,
+      "strata_RMS_log_return": [
+        1e-08,
+        0.0001
+      ],
+      "direction_threshold": 0.2,
+      "source_tensor_tolerance": [
+        0.0001,
+        0.0002
+      ],
+      "acceptance": "all numerical/source/frozen identity checks; interface parity only, not reliability certification",
+      "selection": "none; both Macro seeds as references, both D seeds as research comparison",
+      "strata": "observed-only audit, no replacement/filter/calibration; >=100 rows/6months for support, descriptive not new hypothesis test",
+      "stop": "qualification/nonfinite/resource failure or cumulative2h; uncommitted inference may repeat within cap",
+      "promoted": false,
+      "quality_assured": false
+    },
+    "implementation_binding": {
+      "inherited": {
+        "inherited": {
+          "inherited": {
+            "inherited": {
+              "interface": {
+                "r1": {
+                  "modules": {
+                    "architecture.py": "6feaf96d4bbb657eb7cb79825a8a6777dfddbea0d56415373a17c22ed510fc7f",
+                    "state_combination.py": "a7f4c3a8faa43282e9d2b9a7aeb0d13382684d21d4d0b021444f279b5c7f5f7f",
+                    "state_holdout.py": "8bfe39c9689d3d5e8df0fbb27ebf1701429366d52ef6e3f7ff55b0bbc5a52055",
+                    "state_transfer.py": "48bca4aeb877d834da2540dfccda69dece5d9b13f3c7c1ce87216c2e5492e62a",
+                    "ae_extend.py": "901df775eabffdeb81f868f7cd1f47dbb6626637225670322e82fa3dde09b385",
+                    "ar_reconstruction.py": "1547f7885eb73a5574e6df1cf30376dcd0c1cfb498dab4c38aa10e2ecfce8661",
+                    "history_autoencoder.py": "d304386d9ed98da7281580d11351e14da4aaf6dae7a55cdd61d7ba35a4274969",
+                    "architecture_benchmark.py": "29377e5b55bb210a50be18a6696890dbd40c29850749454a9ed65a412aa33f62",
+                    "capacity.py": "eed6d39a4b2822b2e1be5d277f42f0068d624ff2fd74c065ce2cf8670ed8edd3",
+                    "capacity_benchmark.py": "f9359a56a4478e303f754e72f3a975412a51570e87628d7d7d6d26ddd556dd84",
+                    "pca_teacher.py": "3d7c6896c3616be7f90f895d279f67fa37013c9e80bfbd16b7e33d726f4af07c",
+                    "pca_teacher_benchmark.py": "cbc278bbcaf3e9e1bcd883a551bee2f36406177f8a7a43d74e0e75dee1938992",
+                    "pca_anneal_benchmark.py": "0657e9b7e150c68ea30c365e7d889f9f8d1067ebf94e341349e38c99abd72592",
+                    "window_sampling.py": "e87c78be6bc99a49ccd7034911041df63421e0f6df691156eb882267c8526bb6",
+                    "coverage_audit.py": "6a6422fc5bb59efbf7a53c78287c65fe6eab17d6d316281ac824100d6df5fd78",
+                    "data.py": "094bf46b6e52762765df71777bb1216a3d24634775e20fb3ad74609e143360e7",
+                    "ae_context.py": "4c1fa44b703ad5ded5cb929a926a16339948c1a55d560c16fff5ff7c3099cd47",
+                    "activity_ablation.py": "41f5ed4180598d4bcbe57b2bd0344534929413afa9765ad96939cc777c40be53",
+                    "ar_codec.py": "4df9216cbeca8768a073864684c9e3a302eb010796419f32fed5b402e4ebcffd",
+                    "representation.py": "35e87a731d7eec037ef387ba8c38da32afb24dad0c245c64174ee160fb9fa672",
+                    "sampling_benchmark.py": "332f41a6d24b10713e70205e7dd80b168d407635335ed15e89ef5e91fcf3993b",
+                    "prefix_readout.py": "5e2d8a72df4a9da6495626462153afcee0ea5543daf937667b0f13825b1cfcfc",
+                    "prefix_readout_benchmark.py": "dd0ae3ec8a9495ed80f0160eeaae0e7ef074fd9e98c2dc99204527be477ae1da",
+                    "shared_readout.py": "ff98ed0c8b34493ee0f1fd0bd28f9feb30d55033bd4660e38deac17d09b74618",
+                    "shared_readout_benchmark.py": "be8b208f8cd9ff95824042c9eeef115ac8974329d6df8e2c90063ea468ebfa7f",
+                    "bar_alignment.py": "9e967839cb1cc529c3bae755c5407dc7a0a63e7ae3833a70a19c78bc6ba5ad7f",
+                    "bar_alignment_benchmark.py": "447f94df322ebda9c21cca8e0d6dd70a23c0724bd3619f7c436294c68d0068cb",
+                    "endpoint_readout.py": "36dc6b283a13120052b2f6a0530c928a07f545d541f1cffb8bfeb9e89122678a",
+                    "endpoint_readout_audit.py": "f80966db6ed85633caab1ae4b0311b466cfa0f4101ec72c5464a478470775c9b",
+                    "path_feature.py": "5230a5d1a7cce540b34948c6c1425f210624c9170bc8dce76ba0cc849a6d2e7a",
+                    "path_feature_benchmark.py": "76cc55b6636fede109d81e99b0e1936cf3aa4eb7a5b5deffde21d59176beef6e",
+                    "streaming.py": "21ed4674f0573d9d39a9f0112cd34064ddf8d0f343963770ea7509ae7fc0038e",
+                    "window_state.py": "09136e11f75a8336d526a8501f367a7d0347148b0dca23c21ad88bfc1194573a",
+                    "window_state_cli.py": "a7ea47f215cf7e8178cbe04eec47264ede9342ae9a9cb729e36464dc1d78bbd0",
+                    "window_state_delivery.py": "4d30e5fe1de4e5a79bbb855ed513ba39be7c0bec64e0b91e35303d1e1b05adc0",
+                    "window_state_probe.py": "cc495daeebf9fbf348232fda98d2158919004f2d0223e5255a87c8272167d9cb",
+                    "window_state_probe_run.py": "b48f5324ca6c25fc813c51f4b95306f4344eb1ea07b8a90453a8a288bc4d1165",
+                    "utility_probe.py": "cfc989660702d8f55a278202518b95ddd190c3ba72b685b257c57156626fb45f",
+                    "utility_probe_run.py": "a9ba55a98ae0f7567a202b1799dbe074d1770ee4285efd38e567d2a66e43fe76",
+                    "overlap_diagnostic.py": "1bc3588ac1bb0c70a12ac5bb22432fb65a26da717f335372d69b3c841160dc52",
+                    "overlap_diagnostic_run.py": "5c38b7d219d38e5149934cb12af32b0676271eadca0197398695eaca93035f02",
+                    "overlap_consistency.py": "462f62f51191095644df86b5438687d58a6d0851f1ce1af0ea9dc51e64b83be3",
+                    "overlap_consistency_evaluate.py": "02f89921e9430d4494a546ebaaab881d5564753d85e1b93ecbbeda11c05c49f9",
+                    "overlap_consistency_run.py": "f0421650c77f1ac4caa109d993a55a18ceaf46c2dd7fae599be31c828f15e351",
+                    "consistency_readout.py": "a50a45f75432f2140d48d9c2d617ff33e6d77601b4e8d173a1bb438ac0e26a2f",
+                    "capacity_growth.py": "45367062c1c1db35e6b7ac489d830af5ab02d1f0160785adc0aa1d3ee67cb7dc",
+                    "capacity_growth_evaluate.py": "ce106eaf33bd22b29d487842e436351395b0bced88da9777da664242967678fb",
+                    "capacity_growth_run.py": "052ffbc35f47ed34b65504837752af04de70859851358e4eceb07a035bbadfa6",
+                    "local_readapt.py": "52961f22c869f12011b7aa3b2981cd1cae819d5f1bcf864adf7f33fc5f2e7d95",
+                    "local_readapt_run.py": "b49e136e2983ebef3d722328fad91f178f01deb8d230708d33e6d35ca9ee4994",
+                    "cross_period_consistency.py": "0ed4adae4b50bb50b77252263b325ac762e6812c04bbc95e4b9ea8c3a5da1365",
+                    "cross_period_data.py": "24c0af28157fa7398aa7a6f2272d9d145746c3c8c7b2e7dabb96fae259a801a0",
+                    "cross_period_audit.py": "0fb169d3096519ac3a7d0d4aad9861c7ebf5a8d4904bbadd77945882eefc7476",
+                    "cross_period_evaluate.py": "39267ca90c232f7ab9e8626d7e9440dab5c31fd5162bbdb0e87e57703438186b",
+                    "cross_period_run.py": "45b42700f0eca30b76c57e34f22958aaf11fe76aae44c964746ce9d520ecb2e4",
+                    "cross_period_recheck.py": "3e7a97b1b93c5feac612739994b5ce03358bde92d63b69e1010f7efb93d55bb4",
+                    "local_warmstart_run.py": "2c35601c38e3bd750b17775173ff62707da1d3a3979e6295af4ce286ff4d8c93",
+                    "research_state.py": "fa8a63775d805a6a4bc799de61269cb447b1bf6e879126ff86866e97ec5c9a5b",
+                    "research_state_cli.py": "dfbd6074612a854208fb07bca6825fcd02d2eb03ea3365ea4aae746d2a3a44c3",
+                    "research_state_view.py": "cd9d4ebf7c77cb56003317f65234b42548d6a091f4b7bfbd3be7e5e23a32c019",
+                    "research_state_delivery.py": "554d8878b2fd6b6cb319e694a23938b55a23e6b125b6c66d0ef7de28fe294ace",
+                    "research_state_view.html": "cbdf226d76bec1be33be0ffe73bf14baa373d10bfdb2e4a8ee6691db18cda61c",
+                    "history_query.py": "90a6bfad9f65954d6800b455ddf146f750cd32b2154617c59fbb16c825d14b12",
+                    "history_query_evaluate.py": "772cfa009059c85b6cce5fa4e6f18f54c0c174fdd9e18aac1ee5f1a59ed160fa",
+                    "history_query_run.py": "3d10d65443007bb7dc64be7e9f864e3aebee5990c1d5b3787fbd751a06e8eca3",
+                    "bar_semantics.py": "60d0cb1c7c5b9d85eefd4fbb8aa98824625c4f4253e39ccbbdaa7c48b1434bcd",
+                    "bar_semantics_evaluate.py": "24fa003c331f18b32837aa9a908e34f08ac6a85f76c5a5353388566108289575",
+                    "bar_semantics_run.py": "4b505605d6817f1ffd5e3fd3185184c141e2c675f4ffd4b0fa62b8563f6f15ea",
+                    "history_structure.py": "59ac9a00d1707d52f52442a324970c44088447461f35d53042dbab570f4635b8",
+                    "history_structure_evaluate.py": "b80b08d88273c24780949103331619b8ad36b7747cad47e9df73aa08b84dad1a",
+                    "history_structure_run.py": "8c401b7c8b765f7f29b77dfb8370430c70f71eedd52092ca8dc27d2ba6847268",
+                    "causal_pool.py": "d90cdcfd6d97dca019240f6a1b1ef45be29d642da0bf0fb955f416541b8ed06a",
+                    "causal_pool_evaluate.py": "7e962154bd7431898385df4d9f2b6efcc9a33b938d8bbbd3a56cce8adf039251",
+                    "causal_pool_run.py": "50a39a860ab156207a965a6fa2c461272e7ccb832e13ff1d9e8816d17d156cb1",
+                    "depth_scaling.py": "9c4a7a25216ec7808cb019be92e62db08f128d1ac99119211d6190d4f501f109",
+                    "depth_scaling_evaluate.py": "1fb2b7227931aa53a476710af7ff2ca7392aa7dd12793b3335011340c6311636",
+                    "depth_scaling_run.py": "a62a38630747a0aa0ba67d92b2eac8aac25b3cdb3e4c7a1efbb3fc6590904319",
+                    "activity_weight.py": "aff739139bad1179186f9df2cf375c04973546c3d6ec1dcd73645505ee55f867",
+                    "activity_weight_evaluate.py": "1522f92c0262a98f3b86bac892b05161b935035e1adde2eb46ba5c6dda997707",
+                    "activity_weight_run.py": "00f31a96894f453d965f851a6c15ef1ad324e62012dc999e8e2fe8fdeea8ea5e",
+                    "shared_history.py": "236638bc1e058856cc07d909d7171a976649bae50458fb86fd7749369ef49681",
+                    "shared_history_data.py": "b9bb5d7d79ba0ba7a254800f7259784cce30e169b5fe07701eb0f422ab2d3bc6",
+                    "shared_history_evaluate.py": "7ca9228e87e97bf36f03d24ccef68215f5eeef2d5a4e5975e6c6b33b59ada0c7",
+                    "shared_history_run.py": "3cd2462bfbabe5a48748323b500baf9484fc105eef759685dee395369bd8e042",
+                    "grounded_history.py": "896c14d338a31c24f292a8bcb0ee08e9c972dca7a8263890169761adc97208b6",
+                    "grounded_history_data.py": "e4bc87f410e7da3c5795ce4810b753bcc2ca9d7cfbc8dd08ed19370e7a34dcaa",
+                    "grounded_history_warmup.py": "cc32eff2d36e21c2dc591d45917e901383571d4df82c850597944fd3f09a42b8",
+                    "grounded_history_evaluate.py": "16833bde36e7bc54f5389fc582bc5668a5795cd6f4462ef40d570ff32d62b116",
+                    "grounded_history_run.py": "fa10f7422aaa1fa32916bbf7074b7dd9da95039678f3386f876bb7900713688c",
+                    "grounded_readout_audit.py": "96fc4e5dd153b9ebd9865bd4057d01cbcaa509f9de7940e8fc8442b94ee10c1d",
+                    "macro_history.py": "35426f6687395eb72278a1b9676c3b81c5f8facd4e4d07e40fec302fec69b027",
+                    "macro_history_data.py": "e6db6c21d1946e360f46eb966f48e9865692cb1b8e28aa722e0b7667c2af7cbd",
+                    "macro_history_evaluate.py": "c42365c8ffa9399c561e2311587ad2f2793fb00d88259a4a70ac42f2bf1fa092",
+                    "macro_history_run.py": "57d2460f384547c39c5aa64c2ef389e169f9300bbbb4d2f88e51684621882e37",
+                    "linear_history.py": "04de9caef82860a1c751722b40db988e987e187e7ea3330a29cca0235cf5872d",
+                    "linear_history_evaluate.py": "4943ed405f4dbc9b71c2b68f4f1615d55e409c349519bd6fc5f5ef260c14d0fd",
+                    "linear_history_run.py": "0d441b1d56f01b12fb32db4eb16933378513ab1adc07d60e61f27ca3a9c15402",
+                    "uniform_context.py": "229e587b61c02e8d3aaf48406aaf967a029d853e7ad1495dd95b54a796a5abaf",
+                    "uniform_context_data.py": "020d0027ee5a71e6918c8ca25ac2f0988b00edbbcfcc2e316a0b60bba35ab75f",
+                    "uniform_context_evaluate.py": "50460be35a827362372a5f3c365179be4020c7d8110c43ee427a0af193d25cfa",
+                    "state_rollout_data.py": "d62a381f19d137a1fa9a9f1c7f76fd47d4c730601e8ab52ad884b105a3244af0",
+                    "uniform_context_run.py": "38a5f5fede42df547d42b3823b1d2e51acde4f2d459811a2871a9c40342e5b51",
+                    "context_transfer.py": "9ab81bc8d407a58df346ab5e523eb42fdc66b0c192def243aebfb6312551dc6a",
+                    "context_transfer_data.py": "0035e1e6ab602bf8079ed6e7815a512e96775539fd4dfdf64f3f390a2eca655c",
+                    "context_transfer_evaluate.py": "88a7d88a75da571ece7a80902c3ec27793af2eda6998ba78ae32b5f1b4e48ee7",
+                    "context_transfer_run.py": "01c3fc2d4630421f8f922328201b0c0efb6efc1d7336d790c74723ebb5ccc260",
+                    "recovery_audit.py": "444443fce51339cbf3ed68864adb135b74fab072a72c60a8f23f6224c56e558a",
+                    "recovery_qualification.py": "fd3b3c890e544a67007cfd0bc0e6bba57fb2128d151de606dff813d571c07f6d",
+                    "recovery_objectives.py": "2352e6712217ea26c1d76dd548f68737264c32c54cde6e570ed65f1f7b8bd47e",
+                    "recovery_lr.py": "4a5ac937f1eab0691389f5c33880d01e057406c9a678761027621010111650fd"
+                  },
+                  "script": "14401e2f75d1a6e5e8ab1388d6e7a962ca052a90e7b34f54d571a2dffa8a4fd1",
+                  "protocol": "16302023ebad7d70dd5c375972bc0e1dc1b5fc303431043f0aabe17506738c41"
+                },
+                "module": "0b8d40c068137f762128af3cd6889a925033f186ab944c7f431dacb0f3397d6e",
+                "script": "3f0f8357a1ffc0e79100e8d1e328d21ea2ab88e500e13a8fe7422e5ccabbe542",
+                "protocol": "49784d0f17c65d48b3cc1ed07b5abaf530ceb8b3e9f5be20457b478e532b8453"
+              },
+              "modules": {
+                "recovery_rs.py": "607f80acfb64d5a58cf73c4733641b3dd513b6e41e48a52646b49db2cc824ee3",
+                "recovery_rs_evaluate.py": "87abda093b91cde5ed5f41dceb63ae6e2f68e62441afc323e85f3cde983e7f74"
+              },
+              "script": "bf242890576c424819ed1b678322d5978061df582db14f5ef7de58cb0b76973b",
+              "protocol": "b5dd984b803c603d7895f503a455caf24e8337cb2737472ba9c724a5da6a117d"
+            },
+            "modules": {
+              "recovery_context_run.py": "3c6c5a6e1d1d1913bff3d665f8e421ae648cbae6266b40573f3abeedb81ac823",
+              "recovery_context.py": "0622649a88dc66ae571349a731fb665c139ea5a646335ff5525b1d15e1af6058",
+              "recovery_context_evaluate.py": "665dd4554b27da53db09f70cfceaeb84a6ca38447b497585826851331f630d1a"
+            },
+            "script": "417425bbb5ce67e601dab9c32d558e2a632fb8a05dc7aabbdbd1dc8ba24b8c38",
+            "protocol": {
+              "task": "V06; V03 training controls; V14 source provenance scope",
+              "source": "Original Macro control s42/s43 best97/94; 768/4/8; no RS trained weights",
+              "arms": {
+                "A_prefix_common": {
+                  "native_input": true,
+                  "native_target": true
+                },
+                "B_full_common": {
+                  "native_input": false,
+                  "native_target": true
+                },
+                "C_full_extended": {
+                  "native_input": false,
+                  "native_target": false
+                }
+              },
+              "epochs": 60,
+              "seeds": [
+                42,
+                43
+              ],
+              "batch": 128,
+              "micro": 8,
+              "jobs": 6,
+              "worker_epochs": 360,
+              "updates": 13680,
+              "session_seconds": 43200,
+              "train_rows": 4789,
+              "val_rows": 978,
+              "input": "Bound255 causal rows; same contract/partition, original endpoint inventories and train-only frozen statistics; causal EMA feature prehistory remains, prefix is a feature-row context, not zero information about earlier raw history",
+              "sampling": "Original Context deterministic order, four uniformly sampled distinct interior prefixes from original non-held-out set plus128, same seed/epoch stream across arms",
+              "optimizer": "Fresh AdamW, betas .9/.999, eps1e-8; decay encoder .01/query .0001; no inherited optimizer; combined clip1; eval-mode autograd, FP32, no AMP",
+              "rates": {
+                "42": [
+                  3.066380815642346e-06,
+                  3.0663808156423456e-05
+                ],
+                "43": [
+                  3.2648704606900738e-06,
+                  3.2648704606900735e-05
+                ]
+              },
+              "loss": "Original query(.4path+.2change1+.1body+.3activity)+remote structure1; identical reductions. No extra local gradient or head fitting",
+              "comparison": "Equal60 epochs/updates, not equal compute. A/B identical labels/masks/effective weights; B/C identical inputs, target expansion includes weight changes",
+              "selection": "Original24 validation guard<=1.10 and full-context price minimax; epoch0 allowed for best ONLY. Primary inference uses fixed last60, best secondary. All six locked before research",
+              "evaluation": "Every model/source evaluated under A/B/C at32/64/96/128, support masks exported. A/B deployed common-task effect plus common fixed-interface contrasts; source policy gap and difference-in-differences separate. Both seeds and reused test/cross research; monthly and contract-month paired bootstrap",
+              "decision": "No automatic promotion. Completed controlled evidence closes attribution only; B last60 must beat deployed A AND source under B by>=5% on common interior price in BOTH seeds/cohorts; both month and contract-month supported paired upper bounds<=0, and all24 source measures<=1.10 for retention. C-B contrasts are secondary and include support/weight expansion. No claim of global architecture superiority or independent final generalization",
+              "stop": "No extra LR/weight/depth/grid/epoch extension. Nonfinite, identity/control/replay failure stop and export. Incomplete or unsupported intervals remain inconclusive",
+              "data_gap": "V14 input/target statistics linked by exact SHA to reviewed Coverage raw-data refit; no refit in this run. State-vector/local scaler ancestry not independently refit; do not mark full data ancestry accepted"
+            }
+          },
+          "modules": {
+            "state_coverage.py": "9a5856547b9848d3d45c6e9fefdacdd1af56d205d170b87afe17e8715205f51c",
+            "state_coverage_data.py": "b0fd823b9cc4bd1dc3133c01fb6bc1dc92faee8d731852339c3c6df48fc86005",
+            "state_coverage_evaluate.py": "114990c38fde26e278fd6acd2be19d224a417c2cf28f800481b65b0bd3f72549",
+            "utility_probe.py": "cfc989660702d8f55a278202518b95ddd190c3ba72b685b257c57156626fb45f",
+            "window_state_probe.py": "cc495daeebf9fbf348232fda98d2158919004f2d0223e5255a87c8272167d9cb",
+            "utility_probe_run.py": "a9ba55a98ae0f7567a202b1799dbe074d1770ee4285efd38e567d2a66e43fe76",
+            "state_coverage_run.py": "eb403caadc692b4376709445cde36d58150354a3490da7bf6e9c3e2fe5698627"
+          },
+          "script": "8d6d15320b340e9e240f63b889a7d14be6f2052585b65a1174a86b99a428c020"
+        },
+        "modules": {
+          "state_readability.py": "4fb0c09722a1b5090d1c501999d7c23bff222013c6ff7ebc4287493032ae6a7e",
+          "state_readability_run.py": "9b060829dd2bdf9a651256b113a869554df59b19a0ac697621acf1f6b3630054"
+        },
+        "script": "8ab695c021d5fdae9958d200f7a32ba23db84a0eea36e51a4d14d4d0d4b1b092"
+      },
+      "modules": {
+        "history_state_api.py": "148ee36013ca1992511c2f370699fec704a1feb020a2db90e3f558ca36990d23",
+        "history_state_delivery.py": "6397d6b772bb5142058cf24215ddd3ea538cac945bea9de37e0e1e952c401c97"
+      },
+      "script": "a77a0d78686d71a2fcf9452ce30ddfceb561f11ef76526024f45543d6bcff962"
+    },
+    "input": "float32 prepared causal N128x28 with exact source statistics, single contract/period/closed endpoint provenance; source EMA prehistory can precede window",
+    "outputs": "frozen768 state; chronological128 relative log closes;16/64 historical descriptors and direction; optional observed audit separate",
+    "source": "checkpoints/babel_state_readability768",
+    "source_report_review": "docs/BABEL_STATE_READABILITY768_REVIEW.json",
+    "known_cohort_support": {
+      "val": {
+        "16": [
+          0,
+          0,
+          978
+        ],
+        "64": [
+          0,
+          0,
+          978
+        ]
+      },
+      "test": {
+        "16": [
+          1,
+          0,
+          983
+        ],
+        "64": [
+          0,
+          0,
+          984
+        ]
+      },
+      "cross_research": {
+        "16": [
+          0,
+          0,
+          439
+        ],
+        "64": [
+          0,
+          0,
+          439
+        ]
+      }
+    },
+    "support_order": [
+      "floor_at_most_1e-8",
+      "low_to_1bp",
+      "above_1bp"
+    ],
+    "support_limit": "Only1 floor sample and0 low_to_1bp across all cohorts; thresholds locked before CPU inventory; cannot certify low volatility reliability",
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "F11只固化既有状态→历史→描述研究接口；Macro42/43与D42/43显式选择，零晋升。",
+        "remaining": "接口一致不等于完整用途合格；V13和其他保留分支不改变。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "冻结原768维编码器与原查询头；输入128×28准备特征，只取末端状态。合成测试确认可选真实历史核对不改变模型输出、模型状态身份不混用。",
+        "remaining": "AutoDL完整前向9604端点与24单例检查尚未执行；原查询结构未优化；不提供原CSV/流式适配。"
+      },
+      "training": {
+        "status": "not_applicable",
+        "evidence": "无损失、优化器、梯度更新、新拟合、选模或集成；原选定权重不变。",
+        "remaining": "本轮不产生新训练收益，原训练结论不改判。"
+      },
+      "validation": {
+        "status": "open",
+        "evidence": "已锁源状态/查询容差与独立描述算术核对，批/单例、失败前诊断、篡改拒绝测试通过；不删样本。",
+        "remaining": "真实CUDA数值资格待验；平盘仅1例、低波动区间0例，不能认证低波动可靠性；反复研究集不是独立验收。"
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "绑定已复核readability完成SHA及原coverage/统计/行身份；CPU既有真值路径清点978/984/439行，固定分组无事后改阈值。",
+        "remaining": "不在本地重建原CSV；prepared输入是否正确须由调用方保证，身份标记不能证明任意新数据无错；EMA可有窗口前历史。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "11项新合成测试+55项相关回归共66通过；ruff和shell语法通过。含整段extract合成管线、恢复/篡改/数值失败、累计超时和成功失败打包。历史绑定实现未修改。",
+        "remaining": "未本地运行真实权重；AutoDL还需原来源权重/缓存目录，API为源码接口，不是独立可搬运权重包。"
+      }
+    },
+    "checks": {
+      "new_synthetic": 11,
+      "related_regression": 55,
+      "total_passed": 66,
+      "ruff": "passed",
+      "shell_syntax": "passed",
+      "local_real_weights": "none"
+    },
+    "entrypoint": {
+      "module": "obson.babel.history_state_delivery",
+      "script": "scripts/babel_history_state768_autodl.sh",
+      "output": "checkpoints/babel_history_state768",
+      "archive": "/root/autodl-tmp/download/babel_history_state768_reports.tar.gz"
+    },
+    "next_action": "F11运行固定历史状态API的零训练资格检查；核对原来源与全部9604端点，报告平盘/低波动证据不足，收到报告后归档接口边界并收束。无新增训练或拟合。"
   }
 }
