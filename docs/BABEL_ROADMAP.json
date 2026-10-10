@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-10",
-  "current_iteration": "F11_interface_pending_V13_plan_locked_no_fresh_data",
-  "current_iteration_scope": "F11接口真实资格等待报告；F11/V13有限验收卡已锁定，本地数据盘点完成且用户确认远端未更新，V13评分入口未实现且不启动。",
+  "current_iteration": "F11_history_state_interface_reviewed",
+  "current_iteration_scope": "接口真实资格及独立复算通过，工程交付收束；发现并单列1个平盘价格真值标签数值问题，未来V13原始价格真值准入待实现。无模型晋升，无新数据/新GPU任务。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -661,16 +661,17 @@
         "V04",
         "V05"
       ],
-      "status": "既有历史可恢复性有限通过；固定研究API代码就绪，真实数值资格待验；完整退出未过，Macro不变",
+      "status": "固定研究API真实数值资格已通过并收束；原完整用途未过，平盘失败/真值标签限制单列，Macro不变",
       "reentry_or_acceptance": "锁同一权重做当前字段/方向/波动/结构和强基线比较；达到用途条件即停止追零误差；若未过则限定预算收束而非宣布胜利，独立确认归V13",
       "evidence": [
         "docs/BABEL_RECONSTRUCTION_EXIT.md",
         "docs/BABEL_UTILITY768_REVIEW.md",
         "docs/BABEL_VOLATILITY_TRANSFER768_REVIEW.md",
         "docs/BABEL_STATE_COVERAGE768_REVIEW.json",
-        "docs/BABEL_STATE_READABILITY768_REVIEW.json"
+        "docs/BABEL_STATE_READABILITY768_REVIEW.json",
+        "docs/BABEL_HISTORY_STATE768_REVIEW.json"
       ],
-      "next_action": "只需完成既定F11接口检查并交回报告；随后归档有限接口能力。V13卡已准备但无新数据，不运行旧快照、不新增训练。未来数据到位后先锁身份/支持与评分入口；其他模型分支按缺口另立项。"
+      "next_action": "F11本接口交付已验收并收束，不重跑。新发现的平盘真值舍入问题已用原CSV独立复算限定影响；未来价格验收须用raw真值并覆盖平盘回归，V13仍因无新数据不运行。当前无新增GPU任务，其他分支不自动启动。"
     },
     {
       "id": "F12",
@@ -692,16 +693,16 @@
       "F11"
     ]
   ],
-  "next_after_active": "只需完成既定F11接口检查并交回报告；随后归档有限接口能力。V13卡已准备但无新数据，不运行旧快照、不新增训练。未来数据到位后先锁身份/支持与评分入口；其他模型分支按缺口另立项。",
+  "next_after_active": "F11本接口交付已验收并收束，不重跑。新发现的平盘真值舍入问题已用原CSV独立复算限定影响；未来价格验收须用raw真值并覆盖平盘回归，V13仍因无新数据不运行。当前无新增GPU任务，其他分支不自动启动。",
   "active_training_budget": {
     "task_ids": [
       "F11"
     ],
-    "status": "no_training_interface_qualification_only",
+    "status": "interface_complete_no_new_training_or_scoring",
     "jobs_max": 0,
     "worker_epochs_max": 0,
     "optimizer_updates_max": 0,
-    "reason": "9604端点+24单例为冻结推理预算，非训练；累计2h安全上限，零更新零拟合。"
+    "reason": "本轮215.532秒、9604+24端点零更新完成；V13无新数据。发现近零目标问题后未来真值规则修正，不启动新优化分支。"
   },
   "aliases": {
     "R0": [
@@ -749,7 +750,7 @@
   "blocked_followups": {
     "F_optimization": "F01/F11旧矩阵与F11零训练读取诊断均已完成；下一步先定有限研究接口与边界，其他优化/追加训练不自动启动。"
   },
-  "active_phase": "interface_qualification_pending_independent_confirmation_waiting_for_new_data",
+  "active_phase": "interface_delivery_closed_raw_truth_guard_required_before_future_acceptance",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -1765,7 +1766,7 @@
       "output": "checkpoints/babel_state_readability768",
       "archive": "/root/autodl-tmp/download/babel_state_readability768_reports.tar.gz"
     },
-    "next_action": "只需完成既定F11接口检查并交回报告；随后归档有限接口能力。V13卡已准备但无新数据，不运行旧快照、不新增训练。未来数据到位后先锁身份/支持与评分入口；其他模型分支按缺口另立项。",
+    "next_action": "F11本接口交付已验收并收束，不重跑。新发现的平盘真值舍入问题已用原CSV独立复算限定影响；未来价格验收须用raw真值并覆盖平盘回归，V13仍因无新数据不运行。当前无新增GPU任务，其他分支不自动启动。",
     "latest_report": "docs/BABEL_STATE_READABILITY768_REVIEW.json",
     "results": {
       "archive_sha256": "2f458806236b8a9bb16423d187ee8390d2b3830d0eca403aef12f7269b818a4e",
@@ -2160,8 +2161,8 @@
       "N09"
     ],
     "implementation": "ready_local_tests_passed",
-    "execution": "not_run_on_real_weights",
-    "conclusion": "pending_interface_qualification_not_new_model_acceptance",
+    "execution": "complete_reviewed_215.532_seconds_9604_plus24",
+    "conclusion": "source_bound_interface_numeric_qualification_accepted_not_model_quality",
     "protocol": {
       "schema": "babel-history-state-delivery-v1",
       "task_ids": [
@@ -2467,33 +2468,33 @@
     "review": {
       "purpose": {
         "status": "pass_for_scope",
-        "evidence": "F11只固化既有状态→历史→描述研究接口；Macro42/43与D42/43显式选择，零晋升。",
-        "remaining": "接口一致不等于完整用途合格；V13和其他保留分支不改变。"
+        "evidence": "F11历史状态API完成固定来源数值资格；不将接口一致当模型升级/交易信号。",
+        "remaining": "完整F11用途仍未过，V13没有独立数据；平盘模型误差仍在。"
       },
       "architecture": {
         "status": "pass_for_scope",
-        "evidence": "冻结原768维编码器与原查询头；输入128×28准备特征，只取末端状态。合成测试确认可选真实历史核对不改变模型输出、模型状态身份不混用。",
-        "remaining": "AutoDL完整前向9604端点与24单例检查尚未执行；原查询结构未优化；不提供原CSV/流式适配。"
+        "evidence": "四固定Macro/D权重各2401完整128特征末端，合计9604端点与24批/单例检查；状态/查询/冻结签名CUDA记录通过。",
+        "remaining": "权重和原状态缓存未附，本机没有真实神经前向；只覆盖prepared-feature p128研究接口。"
       },
       "training": {
         "status": "not_applicable",
-        "evidence": "无损失、优化器、梯度更新、新拟合、选模或集成；原选定权重不变。",
-        "remaining": "本轮不产生新训练收益，原训练结论不改判。"
+        "evidence": "一次215.532秒，0训练0拟合；12唯一模型/集合回执，无选模或晋升，既有源码/来源/尺度绑定一致。",
+        "remaining": "这不是新训练收益；原Macro与D科学结论未改判。"
       },
       "validation": {
-        "status": "open",
-        "evidence": "已锁源状态/查询容差与独立描述算术核对，批/单例、失败前诊断、篡改拒绝测试通过；不删样本。",
-        "remaining": "真实CUDA数值资格待验；平盘仅1例、低波动区间0例，不能认证低波动可靠性；反复研究集不是独立验收。"
+        "status": "pass_for_scope",
+        "evidence": "120报告检查通过；独立复算11495580数组元素、168标量、78144离散值与全部分层/混淆；源query最大差5.531311e-5，方向输出变化0。",
+        "remaining": "正式资格只针对旧绑定数值；发现1个平盘真值方向被反标准化舍入污染，旧物理解释须限制；未来验收必须用原CSV真值，不能放宽阈值掩盖。"
       },
       "data": {
         "status": "pass_for_scope",
-        "evidence": "绑定已复核readability完成SHA及原coverage/统计/行身份；CPU既有真值路径清点978/984/439行，固定分组无事后改阈值。",
-        "remaining": "不在本地重建原CSV；prepared输入是否正确须由调用方保证，身份标记不能证明任意新数据无错；EMA可有窗口前历史。"
+        "evidence": "978/984/439行与已审来源相同；349份CSV逐文件SHA匹配，独立核对2401原物理窗口价格路径/描述，方向标签仅test171近16一处不同；真值为完全平盘。",
+        "remaining": "不是活动/全部历史CSV/新数据重建；低至1bp组0样本、平盘1例，仍不能证实低波动可靠性。"
       },
       "engineering": {
         "status": "pass_for_scope",
-        "evidence": "11项新合成测试+55项相关回归共66通过；ruff和shell语法通过。含整段extract合成管线、恢复/篡改/数值失败、累计超时和成功失败打包。历史绑定实现未修改。",
-        "remaining": "未本地运行真实权重；AutoDL还需原来源权重/缓存目录，API为源码接口，不是独立可搬运权重包。"
+        "evidence": "56/56完成绑定文件齐全hash通过，运行协议/实现匹配；RTX3080Ti、Torch2.8.0+cu128、FP32 context；成功结束，旧启动失败日志已与本次区分。",
+        "remaining": "源权重目录仍必须保留；新原始价格真值规则尚未接入未来V13评分入口，该入口目前未实现。"
       }
     },
     "checks": {
@@ -2510,7 +2511,25 @@
       "output": "checkpoints/babel_history_state768",
       "archive": "/root/autodl-tmp/download/babel_history_state768_reports.tar.gz"
     },
-    "next_action": "只需完成既定F11接口检查并交回报告；随后归档有限接口能力。V13卡已准备但无新数据，不运行旧快照、不新增训练。未来数据到位后先锁身份/支持与评分入口；其他模型分支按缺口另立项。"
+    "next_action": "F11本接口交付已验收并收束，不重跑。新发现的平盘真值舍入问题已用原CSV独立复算限定影响；未来价格验收须用raw真值并覆盖平盘回归，V13仍因无新数据不运行。当前无新增GPU任务，其他分支不自动启动。",
+    "latest_report": "docs/BABEL_HISTORY_STATE768_REVIEW.json",
+    "results": {
+      "archive_sha256": "c41cb6abeb04c9103b100abc55159fb22312efb0106aa4dd4680413c97184ba8",
+      "completion_sha256": "a192bf5f0e733375bc36bb2af26e250561f1ddb664202b2dcb1107156d25b7d0",
+      "duration_seconds": 215.53205787576735,
+      "bound_files": 56,
+      "reported_cuda_checks": 120,
+      "unique_endpoints": 9604,
+      "single_checks": 24,
+      "independent_counts": {
+        "array_elements": 11495580,
+        "numeric_scalars": 168,
+        "discrete_values": 78144
+      },
+      "max_source_query_abs": 5.53131103515625e-05,
+      "max_source_descriptor_abs": 2.2427522990142723e-05,
+      "total_direction_changes": 0
+    }
   },
   "direction_review": {
     "date": "2026-10-10",
@@ -2532,7 +2551,7 @@
           "F11"
         ],
         "stage": "已授权API数值资格与归档",
-        "execution": "pending_report",
+        "execution": "complete_reviewed_interface_closed",
         "budget": "unchanged_history_state_interface_protocol"
       },
       {
@@ -2557,7 +2576,7 @@
       "1 floor and0 low_to_1bp samples cannot certify low volatility reliability",
       "old snapshot had no fresh data; present independent data availability unknown"
     ],
-    "next_action": "F11完成既定零训练接口资格并归档；随后F11/V13冻结有限历史能力声明，准备独立验收卡和未参与研究的数据资格清单。未锁新评分预算，不新增训练；不得把旧完整门槛未过改为通过。",
+    "next_action": "F11本接口交付已验收并收束，不重跑。新发现的平盘真值舍入问题已用原CSV独立复算限定影响；未来价格验收须用raw真值并覆盖平盘回归，V13仍因无新数据不运行。当前无新增GPU任务，其他分支不自动启动。",
     "review": {
       "purpose": {
         "status": "pass_for_scope",
@@ -2606,7 +2625,7 @@
       "new_neural_execution": "none",
       "code_tests": "not_run_documentation_only"
     },
-    "followup": "第10节随后完成验收卡与本地数据盘点；用户确认远端未更新，独立评分尚未执行。方向审查当时的事实范围与日志保留。"
+    "followup": "第9节接口真实报告已通过并收束；第10节卡已准备但无新数据。发现1例平盘物理真值数值问题，raw独立复算已归档，未来入口保护待实现。"
   },
   "independent_confirmation_plan": {
     "schema": "babel-independent-history-acceptance-plan-v1",
@@ -2707,7 +2726,8 @@
         "later_rows": 0,
         "conclusion": "local_supported_snapshot_identical_to_previously_inspected_data; no new supported local history",
         "scope": "当前支持的15/30/60单合约目录；18份roll_calendar不是额外行情，不纳入模型样本；未把外盘日线/连续合约等不同输入自动作为验收数据。"
-      }
+      },
+      "price_truth": "future physical128 path and16/64 descriptor truth computed directly from positive float64 raw CSV closes; do not derive physical trend labels from inverse normalized float32 features; original numerical replay remains separate"
     },
     "evaluation": {
       "target_coordinate": "same original age1..127 scaled log-percent offset/current-close-zero and train-only field scales/masks; current0 is coordinate not restored price",
@@ -2779,6 +2799,22 @@
         "evidence": "只更新roadmap双格式和追加日志；本地CPU哈希盘点，无真实权重；F11接口源码/协议/预算保持不变，避免并行运行重复矩阵。",
         "remaining": "未来评分前仍须实现新来源锁与CPU/合成准入、AutoDL资源预检；不提供未就绪的V13命令。"
       }
+    },
+    "revision": {
+      "reason": "F11 report raw oracle confirmed one exact-flat sample had efficiency1/R2~1 after float32 zero roundtrip; avoid carrying this target artifact into future independent acceptance",
+      "old_numeric_scores": "preserved; no promotion or threshold changes",
+      "new_data_scores_seen": false,
+      "required_before_runner": "flat path->efficiency0/linearity0; scale invariance, near-zero finite guard, raw/cache price-coordinate consistency, same truth for all methods; all before future scoring",
+      "implementation": "future runner not implemented; raw oracle recomputation complete for this report only"
     }
+  },
+  "evaluation_target_issue": {
+    "task_id": "F11",
+    "status": "localized_and_raw_oracle_recomputed_future_runner_guard_pending",
+    "evidence": "docs/BABEL_HISTORY_STATE768_REVIEW.json",
+    "scope": "all2401 current cohort windows;1 near16 direction label differs; does not establish full older experiment impact",
+    "source": "float32 normalized zero in price gap/body inverse transform gives1.498772e-12 log-return; efficiency normalizes it to1",
+    "decision": "interface numeric closure valid; retract physical-up interpretation of exact-flat source sample; preserve old protocol scores, no retraining/rerun; future price truth raw-only",
+    "blocking": "new independent direction/structure acceptance cannot launch until raw truth guard implemented; no broader model optimization activated"
   }
 }
