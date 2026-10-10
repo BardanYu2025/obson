@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-10",
-  "current_iteration": "F11_raw_price_truth_component_verified",
-  "current_iteration_scope": "修正新物理价格评价答案通路：原CSV float64、2401窗口和9604已保存预测CPU复核完成；1处平盘方向标签纠正，模型输出/旧绑定代码不变。V13完整入口未实现且无新数据，无训练或GPU重跑。",
+  "current_iteration": "F03_evidence_review_and_physical_overlap_component",
+  "current_iteration_scope": "复盘已有逐根/粗结构/Macro一致性证据；限定一次当前固定模型的共同/新进入/移出内容诊断。CPU坐标与价格组件完成；AutoDL入口未完成，未训练/未执行真实模型。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -543,13 +543,17 @@
         "V04",
         "V05"
       ],
-      "status": "保留既有重叠稳定性收益；未证明相邻状态差等同新增行情语义",
+      "status": "已重新进入证据复盘与固定模型诊断准备；价格组件/CPU几何完成，AutoDL入口与真实结论未完成",
       "reentry_or_acceptance": "先比同一物理共同内容及新旧信息进入/退出；相似度、距离单调、整个向量强制相等均不作为语义判据",
       "evidence": [
         "docs/BABEL_OVERLAP768_REVIEW.md",
         "docs/BABEL_CONSISTENCY_READOUT768_REVIEW.md",
-        "docs/BABEL_NEXT_CORE_REASONING.md"
-      ]
+        "docs/BABEL_NEXT_CORE_REASONING.md",
+        "docs/BABEL_CONSISTENCY768_REVIEW.md",
+        "docs/BABEL_HISTORY_STRUCTURE768_REVIEW.md",
+        "docs/BABEL_MACRO_HISTORY768_REVIEW.md"
+      ],
+      "next_action": "完成F03一次固定模型诊断入口及六方面检查，再给唯一完整AutoDL命令；不重跑旧一致性训练，V13等新数据但不阻塞现有数据研究。"
     },
     {
       "id": "F04",
@@ -688,17 +692,21 @@
       ]
     }
   ],
-  "active_order": [],
-  "next_after_active": "F11原始价格真值组件已完成并用2401原窗口验证，限定缺陷收束；旧API工程交付不重跑。下一已计划执行项V13仍因无新数据不启动，未来入口必须显式接入新raw真值组件并核对完整字段；当前无GPU任务，不自动开启新架构/读头实验。",
+  "active_order": [
+    [
+      "F03"
+    ]
+  ],
+  "next_after_active": "完成F03一次固定模型诊断入口及六方面检查，再给唯一完整AutoDL命令；不重跑旧一致性训练，V13等新数据但不阻塞现有数据研究。",
   "active_training_budget": {
     "task_ids": [
-      "F11"
+      "F03"
     ],
-    "status": "raw_truth_component_complete_no_gpu_jobs",
+    "status": "diagnostic_only_no_training_authorized_by_this_card",
     "jobs_max": 0,
     "worker_epochs_max": 0,
     "optimizer_updates_max": 0,
-    "reason": "本轮仅已有CSV与预测的CPU算术，0神经前向/更新/拟合；原接口已完成，不重复。"
+    "reason": "F03只规划冻结推理预算，见f03_overlap_reentry_plan.budget；本轮只CPU组件/几何检查。"
   },
   "aliases": {
     "R0": [
@@ -741,12 +749,12 @@
   "progress_log": "docs/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "current_task_ids": [
-    "F11"
+    "F03"
   ],
   "blocked_followups": {
-    "F_optimization": "已登记历史纠错、有限接口交付及本次价格真值补丁均已按范围收束；未来核心改动须针对明确缺口单独立项，不因等待V13自动追加训练。"
+    "F_optimization": "用户已允许F03证据复盘和诊断设计；训练仍须根据明确缺口锁定新对照，不能因V13无数据而停止全部研究，也不能自动追加旧损失。"
   },
-  "active_phase": "raw_truth_component_closed_independent_acceptance_waits_for_new_data",
+  "active_phase": "f03_plan_and_price_component_ready_runner_pending",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -2621,7 +2629,7 @@
       "new_neural_execution": "none",
       "code_tests": "not_run_documentation_only"
     },
-    "followup": "F11原始价格真值组件已完成并用2401原窗口验证，限定缺陷收束；旧API工程交付不重跑。下一已计划执行项V13仍因无新数据不启动，未来入口必须显式接入新raw真值组件并核对完整字段；当前无GPU任务，不自动开启新架构/读头实验。"
+    "followup": "完成F03一次固定模型诊断入口及六方面检查，再给唯一完整AutoDL命令；不重跑旧一致性训练，V13等新数据但不阻塞现有数据研究。"
   },
   "independent_confirmation_plan": {
     "schema": "babel-independent-history-acceptance-plan-v1",
@@ -2884,6 +2892,244 @@
         "command": ".venv/bin/pytest -q tests/babel/test_history_price_truth.py tests/babel/test_history_state_api.py tests/babel/test_state_readability.py",
         "ruff": "passed"
       }
+    }
+  },
+  "f03_overlap_reentry_plan": {
+    "task_id": "F03",
+    "requirements": [
+      "N01",
+      "N02",
+      "N03",
+      "N04",
+      "N07",
+      "N08",
+      "N09"
+    ],
+    "title": "当前固定状态的共同历史、新进入与移出内容诊断",
+    "status": "evidence_review_and_price_component_complete_runner_not_implemented",
+    "authorization": "用户确认没有新数据仍继续研究，并同意先复盘F03证据、再决定核心改动；V13仍未完成但不阻塞本研究诊断。",
+    "question": "当前Macro/D窗口移动时，误差主要来自共同历史分歧、双方共同偏差，还是新进入/移出部分未保留？晚状态变化是否在纠正早状态错误？",
+    "hypotheses": [
+      "共同历史的不同读出可能是实际不稳定，也可能是晚状态纠错；二者需真实答案区分。",
+      "一致性变好不保证真实内容更准；相同错误可让差异为零。",
+      "相邻状态差同时包含新信息、移出信息、位置及上下文变化，不等于新增bar语义。"
+    ],
+    "not_answered": [
+      "F04跨周期训练",
+      "F06状态更新映射/F07无新行情预测",
+      "latent信息论充分性",
+      "Macro或D哪项架构造成差别",
+      "V13独立泛化",
+      "新训练收益"
+    ],
+    "evidence": [
+      {
+        "source": "docs/BABEL_OVERLAP768_REVIEW.md",
+        "finding": "早期2层control的shift1共同路径均差11.96–16.33bp，超过数值底噪；shift64较晚状态有时更准。",
+        "disposition": "保留窗口依赖观测；不能归因当前4层版本或强求整个向量相同。"
+      },
+      {
+        "source": "docs/BABEL_CONSISTENCY768_REVIEW.md",
+        "finding": "逐根一致性训练：训练位移差异降17.77–23.79%，held64降10.85–11.94%，全局误差代价0.135–0.656%；旧固定读头未保住。",
+        "disposition": "保留稳定性有限收益与原no_full_upgrade，不重跑旧0.10配方。"
+      },
+      {
+        "source": "docs/BABEL_CONSISTENCY_READOUT768_REVIEW.md",
+        "finding": "同复杂度Ridge重新校准，52/52恢复条件通过；原完整用途协议仍未过。",
+        "disposition": "旧接口漂移不能等同信息丢失；不能把恢复当成当前模型的额外收益。"
+      },
+      {
+        "source": "docs/BABEL_HISTORY_STRUCTURE768_REVIEW.md",
+        "finding": "粗结构有增益但近端同预算代价14–35%；consistent较structure没有改变用途未升级结论。",
+        "disposition": "保留近远取舍及V04/V05已纠正的解释；不重复远端偏重配方。"
+      },
+      {
+        "source": "docs/BABEL_MACRO_HISTORY768_REVIEW.md",
+        "finding": "固定头真实内容监督改善旧接口稳定性，aligned对content的32项额外一致性改善条件0通过。",
+        "disposition": "不能仅凭早期成功继续叠一致性；冻结旧头偏好与状态本身的信息分开。"
+      },
+      {
+        "source": "docs/BABEL_STATE_COVERAGE768_REVIEW.json",
+        "finding": "当前D是从头uniform rolling128/Q无S，Macro是旧control97/94；全位置导出保存误差，没有全队列逐位置配对查询曲线。",
+        "disposition": "当前预测间差异无法由边际误差还原；需要限定一次原模型配对提取，不能冒称已有缓存足够或重复旧版本结果。"
+      }
+    ],
+    "source": {
+      "history_interface_completion_sha256": "a192bf5f0e733375bc36bb2af26e250561f1ddb664202b2dcb1107156d25b7d0",
+      "readability_completion_sha256": "cd2b0fe45a4faa4a10abe66b75d56f8ca91c0df2ea3e91d337fc95ffad21e477",
+      "coverage_completion_sha256": "eadd412ea5534a966d35094fb10d3a3dda61089d775991b505828693cd0388f5",
+      "models": {
+        "macro_s42": "best97",
+        "macro_s43": "best94",
+        "D_s42": "last120",
+        "D_s43": "last120"
+      },
+      "selection": "fixed before scoring; Macro remains reference; D comparison only; no best/last or seed picking",
+      "binding": "reuse reviewed interface/readability/coverage immutable source chains, original weights, source indexes and train statistics; raw CSV fingerprints use original inventory"
+    },
+    "architecture": {
+      "encoder": "existing 768/4/8, each endpoint separately reads128 prepared causal feature rows; EMA may summarize older history",
+      "decoder": "existing shared history query 768->4x192,2layers/4heads,7fields,ages1..127",
+      "inputs": "only own state + query age; no truth or other state into decoder",
+      "frozen": "all encoder/query parameters and buffers; eval FP32 context backend; verify signatures before/after"
+    },
+    "training": {
+      "updates": 0,
+      "fits": 0,
+      "optimizer": null,
+      "loss_changes": null,
+      "new_parameters": 0
+    },
+    "data": {
+      "splits": {
+        "val": 978,
+        "test": 984,
+        "cross_research": 439
+      },
+      "primary": "test and cross_research separately; val engineering checks only, no selection",
+      "shifts": [
+        1,
+        16,
+        64
+      ],
+      "positions": [
+        64,
+        112,
+        127,
+        128
+      ],
+      "geometry": "B at original255-block p128; A at p128-d; each separately has128 rows within same255 block; row-index offsets not clock offsets",
+      "common_predicted_counts": {
+        "1": 126,
+        "16": 111,
+        "64": 63
+      },
+      "entered_b": "d predicted historical bars, includes old A current bar; excludes new B current zero",
+      "leaving_a": "d oldest A predicted bars; no claim that B must recall outside128",
+      "raw_truth": "new history_price_truth raw-close component; check physical overlap identity before models; never invert float32 features for physical close truth",
+      "pair_eligibility": "all7203 pairs verified on CPU; runtime mismatch stops instead of silent dropping",
+      "activity": "retain bound observed activity definitions/masks and original training scales; report per field with support; no full raw-activity correctness claim"
+    },
+    "evaluation": {
+      "price": "same physical common prices centered by each own common mean, with separate endpoint-anchored errors/offset; no true-anchor correction of predictions",
+      "identity": "E=(errorA+errorB)/2=error(mean_prediction)+disagreement/4; scalar arithmetic identity only, not causal attribution or an online ensemble",
+      "entry_exit": "new B and leaving A absolute log-price errors/RMSE and flat baseline gain; separate d and original training-scale field/band errors, no unnormalized near-far ranking",
+      "common": "A error, B error, B-A paired difference, disagreement, shared bias, flat shape baseline; same support and counts",
+      "activity_guard": "same overlap/entry/exit mapping for existing body/activity predictions; standardize using original train scales; per-field valid counts/mean/P95, no missing zeros",
+      "statistics": "2000 paired bootstrap draws seed20261010, month primary plus contract-period-month sensitivity; >=100 parents/6groups else insufficient; group all overlapping endpoints of parent together; no independent-sample claim",
+      "baselines": "constant current-close shape/level plus source training-mean activity; identity/oracle is code check only, not learned baseline",
+      "selection": "no model selection, no promotion, no new probe fit; four fixed versions fully reported",
+      "diagnostic_policy": "no synthetic or arithmetic acceptance of real model; no numerical-difference gate relaxed to make pass; price and activity quality not inferred from consistency alone"
+    },
+    "budget": {
+      "models": 4,
+      "physical_windows": 2401,
+      "endpoints_per_window": 4,
+      "planned_main_encoder_query_endpoints": 38416,
+      "additional_single_checks_max": 24,
+      "optimizer_updates": 0,
+      "readout_fits": 0,
+      "jobs": 1,
+      "micro": 8,
+      "session_seconds": 7200,
+      "minimum_free_disk_gib": 2,
+      "export": "all paired query predictions, raw-price truth/row hashes/masks, scalar metrics/intervals and receipts; no weights",
+      "runtime": "measured device-memory/time preflight and cumulative attempted-forward accounting required; stop and export on cap, no automatic micro/protocol change"
+    },
+    "stop_and_next": [
+      "完成一次四模型诊断即结束；不自动追加shift、拟合新头或训练。",
+      "若双方共同错误主导、分歧小：不以一致性损失为优先，审视历史内容保留/训练信息分配。",
+      "若晚状态显著更准：承认纠错，不要求晚状态模仿早状态；单向复制旧答案方案不进入训练。",
+      "若分歧伴随真实误差、进入/移出内容保留且数值底噪排除：才另锁一次有真实内容保护的配对训练对照；当前不给权重/轮数试验预算。",
+      "混合、不确定或支持不足：记录该范围，不用追加诊断或权重搜索凑结论；必须具体说明下一核心问题的信息增量。"
+    ],
+    "delivery": {
+      "price_component": "src/obson/babel/overlap_content_audit.py",
+      "tests": "tests/babel/test_overlap_content_audit.py",
+      "runner": "not implemented",
+      "run_commands": "none until complete entrypoint + source guards + bounded resume/export tests",
+      "export_required": "/root/autodl-tmp/download, success/failed/stopped"
+    },
+    "cpu_geometry": {
+      "scope": "CPU raw paired-row geometry only; raw truth substituted as oracle prediction; no neural execution or model-quality claim",
+      "cohorts": {
+        "val": {
+          "1": 978,
+          "16": 978,
+          "64": 978
+        },
+        "test": {
+          "1": 984,
+          "16": 984,
+          "64": 984
+        },
+        "cross_research": {
+          "1": 439,
+          "16": 439,
+          "64": 439
+        }
+      },
+      "paired_rows": 7203,
+      "verified_csv_files": 349,
+      "block_identity": "all2401 input_start == raw row end-254; A/B full128 remain within same255 block",
+      "no_pair_exclusions": true,
+      "maximum_oracle_disagreement_mse": 1.0280033207124091e-32,
+      "old_archive_identity_checks": [
+        {
+          "path": "/Users/bardan/Downloads/babel_overlap768_reports.tar.gz",
+          "sha256": "4d8db23221e5e8768dff8eddb9479db24327d5399d045b487e081fbd52d83e97",
+          "role": "previously reviewed evidence reused; no new experiment or full re-review"
+        },
+        {
+          "path": "/Users/bardan/Downloads/babel_consistency768_reports.tar.gz",
+          "sha256": "8459dda3dfce739261f770d0e35ff4f0e00aef47c26cc9e499e891270ede8e44",
+          "role": "previously reviewed evidence reused; no new experiment or full re-review"
+        },
+        {
+          "path": "/Users/bardan/Downloads/babel_consistency_readout768_reports.tar.gz",
+          "sha256": "59b710f9da2cd3ee30da3d4e8d952612ad2f2d5bc665a9382e333064068bb659",
+          "role": "previously reviewed evidence reused; no new experiment or full re-review"
+        }
+      ]
+    },
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "F03检验同一历史在窗口移动后的事实保留；已登记修复收束后按用户允许恢复现有数据研究，V13不再作为全部研究前置。",
+        "remaining": "不把小解码差异当通用表示价值，不回答预测或交易用途。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "四固定源模型与既有头，独立rolling128输入；共有历史/新进入/移出部分按物理行对齐，当前零锚点不当重建值。",
+        "remaining": "真实模型配对提取未运行；Macro与D完整配方不同，不能归因某一结构或一致性损失。"
+      },
+      "training": {
+        "status": "not_applicable",
+        "evidence": "下一诊断0优化器、0拟合、0选模；本轮仅CPU算术/组件，没有新增训练矩阵。",
+        "remaining": "是否值得训练一致性或调整信息分配需诊断后另锁对照，不自动加轮/扫权重。"
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "新增组件分开共同错误与分歧，保留原锚点/偏移、新进入/移出及flat基线；合成测试验证共同错误不能伪装成功。",
+        "remaining": "只有价格评价组件完成；活动分字段与原尺度/支持保护、分组区间、全部真实评分入口待接入。"
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "349CSV旧SHA匹配；2401原255块身份和7203配对的原始共同收盘相同，均不跨源分区或合约，排除0；保留会话间隔，不用分钟算索引。",
+        "remaining": "CPU真值几何不是模型验收；都是已反复研究的数据，不是V13独立确认。"
+      },
+      "engineering": {
+        "status": "open",
+        "evidence": "9项新增价格几何测试，含raw真值/接口回归共35通过，ruff通过；旧三报告SHA复用核对，无旧绑定代码修改。",
+        "remaining": "AutoDL来源/运行恢复/资源上限/异常导出入口尚未完成，不发运行命令；完成入口后做全链合成检查。"
+      }
+    },
+    "component_tests": {
+      "new_price_geometry_tests": 9,
+      "with_raw_truth_and_interface_regression": 35,
+      "passed": true,
+      "ruff": "passed",
+      "scope": "synthetic and CPU arithmetic only; no real weights"
     }
   }
 }
