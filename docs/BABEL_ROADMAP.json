@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-10",
-  "current_iteration": "F03_evidence_review_and_physical_overlap_component",
-  "current_iteration_scope": "复盘已有逐根/粗结构/Macro一致性证据；限定一次当前固定模型的共同/新进入/移出内容诊断。CPU坐标与价格组件完成；AutoDL入口未完成，未训练/未执行真实模型。",
+  "current_iteration": "F03_overlap_content_runner_ready",
+  "current_iteration_scope": "路线再审后完成一次固定Macro/D共同历史诊断入口；零训练/拟合，CPU数据与合成测试通过，等待AutoDL真实执行。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -543,7 +543,7 @@
         "V04",
         "V05"
       ],
-      "status": "已重新进入证据复盘与固定模型诊断准备；价格组件/CPU几何完成，AutoDL入口与真实结论未完成",
+      "status": "固定模型诊断入口已就绪；CPU/合成准入通过，AutoDL未执行，科学结论待报告",
       "reentry_or_acceptance": "先比同一物理共同内容及新旧信息进入/退出；相似度、距离单调、整个向量强制相等均不作为语义判据",
       "evidence": [
         "docs/BABEL_OVERLAP768_REVIEW.md",
@@ -553,7 +553,7 @@
         "docs/BABEL_HISTORY_STRUCTURE768_REVIEW.md",
         "docs/BABEL_MACRO_HISTORY768_REVIEW.md"
       ],
-      "next_action": "完成F03一次固定模型诊断入口及六方面检查，再给唯一完整AutoDL命令；不重跑旧一致性训练，V13等新数据但不阻塞现有数据研究。"
+      "next_action": "运行F03唯一新入口并复核配对报告；分清共同错误/读出分歧/晚状态纠错后选择一项核心改动，不自动扩诊断矩阵或追加旧损失。"
     },
     {
       "id": "F04",
@@ -675,7 +675,7 @@
         "docs/BABEL_STATE_READABILITY768_REVIEW.json",
         "docs/BABEL_HISTORY_STATE768_REVIEW.json"
       ],
-      "next_action": "F11原始价格真值组件已完成并用2401原窗口验证，限定缺陷收束；旧API工程交付不重跑。下一已计划执行项V13仍因无新数据不启动，未来入口必须显式接入新raw真值组件并核对完整字段；当前无GPU任务，不自动开启新架构/读头实验。"
+      "next_action": "接口与raw价格真值组件已归档，无需重跑；当前研究执行项为F03，V13等待新独立数据但不阻塞研究；完整用途未过保留。"
     },
     {
       "id": "F12",
@@ -697,7 +697,7 @@
       "F03"
     ]
   ],
-  "next_after_active": "完成F03一次固定模型诊断入口及六方面检查，再给唯一完整AutoDL命令；不重跑旧一致性训练，V13等新数据但不阻塞现有数据研究。",
+  "next_after_active": "运行F03唯一新入口并复核配对报告；分清共同错误/读出分歧/晚状态纠错后选择一项核心改动，不自动扩诊断矩阵或追加旧损失。",
   "active_training_budget": {
     "task_ids": [
       "F03"
@@ -706,7 +706,7 @@
     "jobs_max": 0,
     "worker_epochs_max": 0,
     "optimizer_updates_max": 0,
-    "reason": "F03只规划冻结推理预算，见f03_overlap_reentry_plan.budget；本轮只CPU组件/几何检查。"
+    "reason": "F03完整诊断入口已就绪；只执行冻结推理预算，仍无训练/拟合预算。"
   },
   "aliases": {
     "R0": [
@@ -754,7 +754,7 @@
   "blocked_followups": {
     "F_optimization": "用户已允许F03证据复盘和诊断设计；训练仍须根据明确缺口锁定新对照，不能因V13无数据而停止全部研究，也不能自动追加旧损失。"
   },
-  "active_phase": "f03_plan_and_price_component_ready_runner_pending",
+  "active_phase": "f03_code_ready_cuda_not_run_scientific_result_pending",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -2906,7 +2906,7 @@
       "N09"
     ],
     "title": "当前固定状态的共同历史、新进入与移出内容诊断",
-    "status": "evidence_review_and_price_component_complete_runner_not_implemented",
+    "status": "runner_implemented_synthetic_and_raw_cpu_checks_passed_cuda_pending",
     "authorization": "用户确认没有新数据仍继续研究，并同意先复盘F03证据、再决定核心改动；V13仍未完成但不阻塞本研究诊断。",
     "question": "当前Macro/D窗口移动时，误差主要来自共同历史分歧、双方共同偏差，还是新进入/移出部分未保留？晚状态变化是否在纠正早状态错误？",
     "hypotheses": [
@@ -3045,10 +3045,25 @@
     ],
     "delivery": {
       "price_component": "src/obson/babel/overlap_content_audit.py",
-      "tests": "tests/babel/test_overlap_content_audit.py",
-      "runner": "not implemented",
-      "run_commands": "none until complete entrypoint + source guards + bounded resume/export tests",
-      "export_required": "/root/autodl-tmp/download, success/failed/stopped"
+      "field_metrics": "src/obson/babel/overlap_content_metrics.py",
+      "raw_inventory": "src/obson/babel/overlap_content_inventory.json",
+      "runner": "src/obson/babel/overlap_content_run.py",
+      "script": "scripts/babel_overlap_content768_autodl.sh",
+      "tests": [
+        "tests/babel/test_overlap_content_run.py",
+        "tests/babel/test_overlap_content_audit.py"
+      ],
+      "default_source": "checkpoints/babel_history_state768",
+      "default_output": "checkpoints/babel_overlap_content768",
+      "raw_root": "/root/autodl-tmp/data/contracts",
+      "run_commands": {
+        "run": "bash scripts/babel_overlap_content768_autodl.sh all",
+        "export": "bash scripts/babel_overlap_content768_autodl.sh export",
+        "complete_copyable_commands": "docs/BABEL_ROADMAP.md section11"
+      },
+      "export_required": "/root/autodl-tmp/download/babel_overlap_content768_reports.tar.gz, success/failed/stopped",
+      "execution": "not_run_on_AutoDL",
+      "scientific_acceptance": "not_assessed"
     },
     "cpu_geometry": {
       "scope": "CPU raw paired-row geometry only; raw truth substituted as oracle prediction; no neural execution or model-quality claim",
@@ -3095,41 +3110,117 @@
     "review": {
       "purpose": {
         "status": "pass_for_scope",
-        "evidence": "F03检验同一历史在窗口移动后的事实保留；已登记修复收束后按用户允许恢复现有数据研究，V13不再作为全部研究前置。",
-        "remaining": "不把小解码差异当通用表示价值，不回答预测或交易用途。"
+        "evidence": "再次审核路线：F03限定一次共同内容/新进入/移出诊断，区分共同错误与读出分歧，不用稳定但错误当成功。",
+        "remaining": "不识别编码器/解码器唯一根因，不证明通用价量状态或未来预测成功；报告后选一个核心改动。"
       },
       "architecture": {
         "status": "pass_for_scope",
-        "evidence": "四固定源模型与既有头，独立rolling128输入；共有历史/新进入/移出部分按物理行对齐，当前零锚点不当重建值。",
-        "remaining": "真实模型配对提取未运行；Macro与D完整配方不同，不能归因某一结构或一致性损失。"
+        "evidence": "固定原Macro97/94及D_last120，768/4/8与原query，每端点独立完整128，模型仅读自身准备特征；合成未来扰动不影响早端点，buffer变化阻止提交。",
+        "remaining": "本地未执行真实权重；CUDA一致性仍待AutoDL；来源训练经历不同不作单因素归因。"
       },
       "training": {
         "status": "not_applicable",
-        "evidence": "下一诊断0优化器、0拟合、0选模；本轮仅CPU算术/组件，没有新增训练矩阵。",
-        "remaining": "是否值得训练一致性或调整信息分配需诊断后另锁对照，不自动加轮/扫权重。"
+        "evidence": "0训练/0拟合/0新增参数/0选模；原Q/S与历史失败保持；38416主前向+24单例额度未扩大。",
+        "remaining": "是否改损失需真实诊断与新对照，不由准入测试决定。"
       },
       "validation": {
         "status": "pass_for_scope",
-        "evidence": "新增组件分开共同错误与分歧，保留原锚点/偏移、新进入/移出及flat基线；合成测试验证共同错误不能伪装成功。",
-        "remaining": "只有价格评价组件完成；活动分字段与原尺度/支持保护、分组区间、全部真实评分入口待接入。"
+        "evidence": "保存全部配对query与原始答案；共同错误/分歧分解、原锚点偏移、MAE/RMSE基点、flat/均值基线、实体/活动mask支持、近中远、P50/P95及双聚类均值区间；独立重采样与合成反例通过。",
+        "remaining": "原近远聚合另标original；P95是描述性而非显著性判据。未运行真实科学评分，不作晋升。"
       },
       "data": {
         "status": "pass_for_scope",
-        "evidence": "349CSV旧SHA匹配；2401原255块身份和7203配对的原始共同收盘相同，均不跨源分区或合约，排除0；保留会话间隔，不用分钟算索引。",
-        "remaining": "CPU真值几何不是模型验收；都是已反复研究的数据，不是V13独立确认。"
+        "evidence": "CPU重新编码349份SHA匹配CSV，2401父窗口/9604端点/7203配对验证；raw/cache价格目标最大差4.663204574484325e-6，沿原atol1e-5/rtol2e-5通过。",
+        "remaining": "活动沿已绑定特征/mask，不称全部raw活动验证；重复研究集合不是独立数据。"
       },
       "engineering": {
-        "status": "open",
-        "evidence": "9项新增价格几何测试，含raw真值/接口回归共35通过，ruff通过；旧三报告SHA复用核对，无旧绑定代码修改。",
-        "remaining": "AutoDL来源/运行恢复/资源上限/异常导出入口尚未完成，不发运行命令；完成入口后做全链合成检查。"
+        "status": "pass_for_scope",
+        "evidence": "15项新增及相关回归共50通过，ruff/bash通过；实际合成抽取路径、尾批/已提交恢复/未提交重试拒绝/错误数值/冻结/超时/全流程组装/三状态导出均覆盖；原F11绑定源码协议完全一致。",
+        "remaining": "AutoDL设备和真实权重未运行；未提交前向中断不自动重算，需保留失败报告；首批资源测量只作估计。"
       }
     },
     "component_tests": {
-      "new_price_geometry_tests": 9,
-      "with_raw_truth_and_interface_regression": 35,
+      "new_runner_tests": 15,
+      "with_price_geometry_raw_truth_and_interface_regression": 50,
       "passed": true,
       "ruff": "passed",
-      "scope": "synthetic and CPU arithmetic only; no real weights"
+      "bash_syntax": "passed",
+      "scope": "synthetic CPU model/orchestration and CPU data arithmetic; no real weights/CUDA"
+    },
+    "route_review": {
+      "date": "2026-10-10",
+      "reason_to_proceed": "F01重建进步与F11读取差距已知；当前模型共同历史曲线尚缺。一次真实配对可区分共同错误、表达分歧及晚状态纠错，避免先加一致性损失。",
+      "limit": "测的是当前编码+读取通路，不能单独识别编码器/解码器根因；不能要求整向量相等。",
+      "convergence": "这次诊断即收束；报告后选一项有信息依据的核心改动，不以未知为由自动扩shift/读头/权重网格。",
+      "retained": [
+        "F01_dense128",
+        "F02",
+        "F04",
+        "F05",
+        "F06",
+        "F07",
+        "F08",
+        "F09",
+        "F10",
+        "F12"
+      ],
+      "V13": "新数据缺失不阻塞F03；独立确认仍未完成。",
+      "status_correction": "同步F11.next_action中旧V13优先描述，使其符合此前已授权的F03队列；没有新增队列/预算。"
+    },
+    "engineering_details": {
+      "inventory_sha256": "007e788425787f60c115ff559796a36448908d0800e53c23986e7a04b5b2b0f1",
+      "inventory_source_sha256": "f4dcccc62d2d317763586df70c132135022b63d1643a4aab70d9a845825f6104",
+      "inventory_source": "previously reviewed time_confirmation_v2 raw audit;349 required keys copied as hashes, no extra old-directory dependency",
+      "resume": "reserve attempted main/single counts before actual forward; numerical/frozen checks before chunk commit; committed chunks reused; uncommitted attempts export-only; no silent repeats beyond38416+24",
+      "resource": "first main chunk reused; remaining measured cost*1.5+600seconds must fit cumulative7200seconds and2GiB; no extra warmup forwards",
+      "statistics": "paired mean intervals at original parent cluster level; P50/P95 are descriptive parent-error quantiles; no P95 significance or model selection",
+      "historical_source": "original F11 implementation/protocol exactly matches reviewed report; historical bound code untouched"
+    },
+    "cpu_integration": {
+      "scope": "CPU real raw data/feature geometry arithmetic only, zero real model forwards",
+      "verified_csv_files": 349,
+      "cohorts": {
+        "val": {
+          "parents": 978,
+          "physical_endpoints": 3912,
+          "pairs": 2934,
+          "raw_cache_coordinate": {
+            "passed": true,
+            "max_abs": 1.058299121226014e-06,
+            "atol": 1e-05,
+            "rtol": 2e-05,
+            "finite": true
+          },
+          "max_source_roundtrip_vs_raw_price_mse": 5.2841647635029024e-17
+        },
+        "test": {
+          "parents": 984,
+          "physical_endpoints": 3936,
+          "pairs": 2952,
+          "raw_cache_coordinate": {
+            "passed": true,
+            "max_abs": 4.663204574484325e-06,
+            "atol": 1e-05,
+            "rtol": 2e-05,
+            "finite": true
+          },
+          "max_source_roundtrip_vs_raw_price_mse": 3.9123074144356296e-16
+        },
+        "cross_research": {
+          "parents": 439,
+          "physical_endpoints": 1756,
+          "pairs": 1317,
+          "raw_cache_coordinate": {
+            "passed": true,
+            "max_abs": 1.7576239326189125e-06,
+            "atol": 1e-05,
+            "rtol": 2e-05,
+            "finite": true
+          },
+          "max_source_roundtrip_vs_raw_price_mse": 2.3473541993799475e-17
+        }
+      },
+      "seconds": 3.3114998340024613
     }
   },
   "training_architecture_coverage_review": {
