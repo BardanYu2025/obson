@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-10",
-  "current_iteration": "F11_history_state_interface_reviewed",
-  "current_iteration_scope": "接口真实资格及独立复算通过，工程交付收束；发现并单列1个平盘价格真值标签数值问题，未来V13原始价格真值准入待实现。无模型晋升，无新数据/新GPU任务。",
+  "current_iteration": "F11_raw_price_truth_component_verified",
+  "current_iteration_scope": "修正新物理价格评价答案通路：原CSV float64、2401窗口和9604已保存预测CPU复核完成；1处平盘方向标签纠正，模型输出/旧绑定代码不变。V13完整入口未实现且无新数据，无训练或GPU重跑。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -661,7 +661,7 @@
         "V04",
         "V05"
       ],
-      "status": "固定研究API真实数值资格已通过并收束；原完整用途未过，平盘失败/真值标签限制单列，Macro不变",
+      "status": "固定研究API真实资格收束；新raw价格真值组件完成/CPU验证，1处平盘标签纠正；原完整用途未过，Macro不变",
       "reentry_or_acceptance": "锁同一权重做当前字段/方向/波动/结构和强基线比较；达到用途条件即停止追零误差；若未过则限定预算收束而非宣布胜利，独立确认归V13",
       "evidence": [
         "docs/BABEL_RECONSTRUCTION_EXIT.md",
@@ -671,7 +671,7 @@
         "docs/BABEL_STATE_READABILITY768_REVIEW.json",
         "docs/BABEL_HISTORY_STATE768_REVIEW.json"
       ],
-      "next_action": "F11本接口交付已验收并收束，不重跑。新发现的平盘真值舍入问题已用原CSV独立复算限定影响；未来价格验收须用raw真值并覆盖平盘回归，V13仍因无新数据不运行。当前无新增GPU任务，其他分支不自动启动。"
+      "next_action": "F11原始价格真值组件已完成并用2401原窗口验证，限定缺陷收束；旧API工程交付不重跑。下一已计划执行项V13仍因无新数据不启动，未来入口必须显式接入新raw真值组件并核对完整字段；当前无GPU任务，不自动开启新架构/读头实验。"
     },
     {
       "id": "F12",
@@ -688,21 +688,17 @@
       ]
     }
   ],
-  "active_order": [
-    [
-      "F11"
-    ]
-  ],
-  "next_after_active": "F11本接口交付已验收并收束，不重跑。新发现的平盘真值舍入问题已用原CSV独立复算限定影响；未来价格验收须用raw真值并覆盖平盘回归，V13仍因无新数据不运行。当前无新增GPU任务，其他分支不自动启动。",
+  "active_order": [],
+  "next_after_active": "F11原始价格真值组件已完成并用2401原窗口验证，限定缺陷收束；旧API工程交付不重跑。下一已计划执行项V13仍因无新数据不启动，未来入口必须显式接入新raw真值组件并核对完整字段；当前无GPU任务，不自动开启新架构/读头实验。",
   "active_training_budget": {
     "task_ids": [
       "F11"
     ],
-    "status": "interface_complete_no_new_training_or_scoring",
+    "status": "raw_truth_component_complete_no_gpu_jobs",
     "jobs_max": 0,
     "worker_epochs_max": 0,
     "optimizer_updates_max": 0,
-    "reason": "本轮215.532秒、9604+24端点零更新完成；V13无新数据。发现近零目标问题后未来真值规则修正，不启动新优化分支。"
+    "reason": "本轮仅已有CSV与预测的CPU算术，0神经前向/更新/拟合；原接口已完成，不重复。"
   },
   "aliases": {
     "R0": [
@@ -748,9 +744,9 @@
     "F11"
   ],
   "blocked_followups": {
-    "F_optimization": "F01/F11旧矩阵与F11零训练读取诊断均已完成；下一步先定有限研究接口与边界，其他优化/追加训练不自动启动。"
+    "F_optimization": "已登记历史纠错、有限接口交付及本次价格真值补丁均已按范围收束；未来核心改动须针对明确缺口单独立项，不因等待V13自动追加训练。"
   },
-  "active_phase": "interface_delivery_closed_raw_truth_guard_required_before_future_acceptance",
+  "active_phase": "raw_truth_component_closed_independent_acceptance_waits_for_new_data",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -2625,7 +2621,7 @@
       "new_neural_execution": "none",
       "code_tests": "not_run_documentation_only"
     },
-    "followup": "第9节接口真实报告已通过并收束；第10节卡已准备但无新数据。发现1例平盘物理真值数值问题，raw独立复算已归档，未来入口保护待实现。"
+    "followup": "F11原始价格真值组件已完成并用2401原窗口验证，限定缺陷收束；旧API工程交付不重跑。下一已计划执行项V13仍因无新数据不启动，未来入口必须显式接入新raw真值组件并核对完整字段；当前无GPU任务，不自动开启新架构/读头实验。"
   },
   "independent_confirmation_plan": {
     "schema": "babel-independent-history-acceptance-plan-v1",
@@ -2805,16 +2801,89 @@
       "old_numeric_scores": "preserved; no promotion or threshold changes",
       "new_data_scores_seen": false,
       "required_before_runner": "flat path->efficiency0/linearity0; scale invariance, near-zero finite guard, raw/cache price-coordinate consistency, same truth for all methods; all before future scoring",
-      "implementation": "future runner not implemented; raw oracle recomputation complete for this report only"
+      "implementation": "Raw-close component implemented and CPU validated on all2401 existing windows; future V13 runner not implemented/integrated. Full OHLC/activity and new-data qualification still belong to that runner."
     }
   },
   "evaluation_target_issue": {
     "task_id": "F11",
-    "status": "localized_and_raw_oracle_recomputed_future_runner_guard_pending",
+    "status": "raw_truth_component_implemented_and_verified_on_all2401_existing_windows",
     "evidence": "docs/BABEL_HISTORY_STATE768_REVIEW.json",
     "scope": "all2401 current cohort windows;1 near16 direction label differs; does not establish full older experiment impact",
     "source": "float32 normalized zero in price gap/body inverse transform gives1.498772e-12 log-return; efficiency normalizes it to1",
-    "decision": "interface numeric closure valid; retract physical-up interpretation of exact-flat source sample; preserve old protocol scores, no retraining/rerun; future price truth raw-only",
-    "blocking": "new independent direction/structure acceptance cannot launch until raw truth guard implemented; no broader model optimization activated"
+    "decision": "已纠正一处完全平盘的物理方向标签；保留旧协议数值，模型预测与平盘重建失败不变；新组件结果单列，不重新判旧完整门槛或晋升D",
+    "blocking": "component guard complete; future V13 runner must explicitly integrate it and verify remaining OHLC/activity truth; runner absent and no new independent data",
+    "implementation": "src/obson/babel/history_price_truth.py: RawCloseWindows / from_raw_closes / audit_prediction; legacy observed_audit untouched",
+    "execution": "CPU349 hash-bound CSV files,2401 physical windows,9604 existing prediction rows;39 tests pass; no real model execution",
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "F11修正历史价格评价答案来源，2401窗口原CSV复核；不训练、不把标签修复叫模型改善。",
+        "remaining": "有限历史状态原型仍未完成通用复用/独立验收。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "新增纯NumPy/CSV组件；只给已完成的预测评分，无模型输入旁路；旧接口递归实现指纹与报告一致。",
+        "remaining": "不改变Macro/D编码器或查询头；旧API observed_audit仍为绑定特征反算值，物理评价必须显式调用新组件。"
+      },
+      "training": {
+        "status": "not_applicable",
+        "evidence": "0神经前向、0更新、0拟合、0重新选择；同四组已保存预测共享同一原始价格答案。",
+        "remaining": "无新训练结论；原训练损失和源数据处理保持。"
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "15项新回归+相关共39通过；9604条已导出预测CPU评分，方向准确率与此前独立raw复算完全一致，R²在1e-10内一致。",
+        "remaining": "仅价格路径和16/64描述；不回算旧完整判据、不扩为所有历史实验无影响，不证明低波动可靠。"
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "349源CSV逐文件SHA、978/984/439端点行号/时间/已收盘检查；原始路径与独立log比值算法最大差1.11e-16，方向标签仅1处改变。",
+        "remaining": "无新增数据；不验证活动/OHLC全部字段或特征流水线，V13独立性未成立。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "平盘、真实微小变化、缩放、无效值、截止时刻、未来后缀、指纹篡改与行身份测试；ruff通过，56原绑定文件/历史源码不变。",
+        "remaining": "独立验收完整运行入口仍未实现；本轮组件完成，不提供GPU启动命令。"
+      }
+    },
+    "validation_summary": {
+      "schema": "babel-raw-history-price-truth-v1",
+      "scope": "CPU raw-price component validation; no weights, training, new source selection or old gate reclassification",
+      "asof": "2026-09-12 03:00:00",
+      "report_archive_sha256": "c41cb6abeb04c9103b100abc55159fb22312efb0106aa4dd4680413c97184ba8",
+      "raw_inventory_archive_sha256": "0c7d9c2cf2ab2a4be1819d62b45731a352ea14fd0b892990cd3b590ca138500b",
+      "raw_inventory_member_sha256": "f4dcccc62d2d317763586df70c132135022b63d1643a4aab70d9a845825f6104",
+      "verified_report_files": 56,
+      "legacy_implementation_unchanged": true,
+      "model_forwards": 0,
+      "optimizer_updates": 0,
+      "fits": 0,
+      "label_changes": [
+        {
+          "split": "test",
+          "row_index": 171,
+          "horizon": 16,
+          "key": "ag/15/SHFE.ag2606",
+          "end": "2026-02-02 13:30:00",
+          "legacy_label": 2,
+          "raw_label": 1
+        }
+      ],
+      "max_path_difference_from_legacy_truth": 4.005048492849994e-08,
+      "max_difference_from_independent_log_ratio_oracle": 1.1102230246251565e-16,
+      "max_model_descriptor_difference_from_export": 8.881784197001252e-16,
+      "score_agreement_with_prior_cpu_raw_audit": true,
+      "verified_csv_files": 349,
+      "physical_windows": 2401,
+      "prediction_windows_scored": 9604,
+      "component_sha256": "87674d91b6a11de66308955b0f162e7e65dddbe68d3d0184a9289ffdb83438a7",
+      "tests_sha256": "8055405f4da0a6c967d383d5d45458675cb89872ab11a410be62e4f387ff5c26",
+      "tests": {
+        "new_physical_price_regressions": 15,
+        "new_and_related_tests_passed": 39,
+        "command": ".venv/bin/pytest -q tests/babel/test_history_price_truth.py tests/babel/test_history_state_api.py tests/babel/test_state_readability.py",
+        "ruff": "passed"
+      }
+    }
   }
 }

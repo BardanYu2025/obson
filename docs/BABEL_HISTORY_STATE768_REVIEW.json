@@ -1060,5 +1060,321 @@
     "prior_scores": "old numeric protocol observations retained; near-flat physical direction/R2 label not valid evidence, no retroactive promotion or gate recalculation",
     "new_issue": "F11 near-zero raw-price truth;1 of2401 windows in this cohort, outside historical full impact not claimed",
     "next": "V13 price truths must be raw float64 closes; new entrypoint must test flat/scale/near-zero before scoring; no new data or GPU task"
+  },
+  "raw_truth_component_followup": {
+    "date": "2026-10-10",
+    "task_ids": [
+      "F11"
+    ],
+    "implementation": "component_complete",
+    "execution": "CPU_existing_raw_data_and_exported_predictions_complete",
+    "scientific_acceptance": "not_a_new_model_or_independent_acceptance",
+    "validation": {
+      "schema": "babel-raw-history-price-truth-v1",
+      "scope": "CPU raw-price component validation; no weights, training, new source selection or old gate reclassification",
+      "asof": "2026-09-12 03:00:00",
+      "report_archive_sha256": "c41cb6abeb04c9103b100abc55159fb22312efb0106aa4dd4680413c97184ba8",
+      "raw_inventory_archive_sha256": "0c7d9c2cf2ab2a4be1819d62b45731a352ea14fd0b892990cd3b590ca138500b",
+      "raw_inventory_member_sha256": "f4dcccc62d2d317763586df70c132135022b63d1643a4aab70d9a845825f6104",
+      "verified_report_files": 56,
+      "legacy_implementation_unchanged": true,
+      "model_forwards": 0,
+      "optimizer_updates": 0,
+      "fits": 0,
+      "cohorts": {
+        "val": {
+          "windows": 978,
+          "physical_truth_shared_across_models": true,
+          "scores": {
+            "macro_s42": {
+              "raw_target_r2": [
+                0.9932310551338047,
+                0.9796003723873765,
+                0.9888850741072084,
+                0.9955859646844166,
+                0.9966989627674905,
+                0.9885729994598917
+              ],
+              "raw_target_direction_accuracy": [
+                0.967280163599182,
+                0.9785276073619632
+              ],
+              "path_rmse16_64_mean": [
+                0.0003820885102131913,
+                0.0006068241073646967
+              ]
+            },
+            "macro_s43": {
+              "raw_target_r2": [
+                0.9979987244418848,
+                0.9946668587512077,
+                0.9972505658808459,
+                0.998317465586019,
+                0.9984615788013305,
+                0.9951791426893893
+              ],
+              "raw_target_direction_accuracy": [
+                0.9826175869120655,
+                0.9867075664621677
+              ],
+              "path_rmse16_64_mean": [
+                0.00019511216252608265,
+                0.0003780336127295127
+              ]
+            },
+            "D_s42": {
+              "raw_target_r2": [
+                0.9971929304065393,
+                0.991437580819105,
+                0.995833688611227,
+                0.9964314164369079,
+                0.9958169065805984,
+                0.9919742496536775
+              ],
+              "raw_target_direction_accuracy": [
+                0.9826175869120655,
+                0.9815950920245399
+              ],
+              "path_rmse16_64_mean": [
+                0.000238194775157358,
+                0.0005989972993964388
+              ]
+            },
+            "D_s43": {
+              "raw_target_r2": [
+                0.9968974011331798,
+                0.990717012358092,
+                0.9956868122196983,
+                0.9967117146558048,
+                0.9960940824822235,
+                0.9910228088812346
+              ],
+              "raw_target_direction_accuracy": [
+                0.9805725971370143,
+                0.9846625766871165
+              ],
+              "path_rmse16_64_mean": [
+                0.00026724861758793244,
+                0.0006334264812897748
+              ]
+            }
+          }
+        },
+        "test": {
+          "windows": 984,
+          "physical_truth_shared_across_models": true,
+          "scores": {
+            "macro_s42": {
+              "raw_target_r2": [
+                0.9929352521987523,
+                0.9829529995669728,
+                0.7810777777290684,
+                0.9960378886407787,
+                0.996048019679906,
+                0.9904789893630096
+              ],
+              "raw_target_direction_accuracy": [
+                0.9654471544715447,
+                0.983739837398374
+              ],
+              "path_rmse16_64_mean": [
+                0.0004975468760614652,
+                0.0008531873150836958
+              ]
+            },
+            "macro_s43": {
+              "raw_target_r2": [
+                0.9975535222310845,
+                0.9947965095755222,
+                0.7929910861964069,
+                0.9981415853919272,
+                0.9978757978721579,
+                0.99530836907353
+              ],
+              "raw_target_direction_accuracy": [
+                0.983739837398374,
+                0.9827235772357723
+              ],
+              "path_rmse16_64_mean": [
+                0.0002530665235720037,
+                0.0005517379322040838
+              ]
+            },
+            "D_s42": {
+              "raw_target_r2": [
+                0.9970881965910329,
+                0.993566726832799,
+                0.7816292252073918,
+                0.9967928064828315,
+                0.9946414317934434,
+                0.9942562430563008
+              ],
+              "raw_target_direction_accuracy": [
+                0.9817073170731707,
+                0.9857723577235772
+              ],
+              "path_rmse16_64_mean": [
+                0.00030295539688462406,
+                0.0007771548948709451
+              ]
+            },
+            "D_s43": {
+              "raw_target_r2": [
+                0.996798891282579,
+                0.9905135620868902,
+                0.7845749362268363,
+                0.9964331769989,
+                0.9947449619453387,
+                0.9920414322743679
+              ],
+              "raw_target_direction_accuracy": [
+                0.9735772357723578,
+                0.9776422764227642
+              ],
+              "path_rmse16_64_mean": [
+                0.0003281692975069608,
+                0.0008376820333959244
+              ]
+            }
+          }
+        },
+        "cross_research": {
+          "windows": 439,
+          "physical_truth_shared_across_models": true,
+          "scores": {
+            "macro_s42": {
+              "raw_target_r2": [
+                0.9900000924272356,
+                0.9679053015593816,
+                0.9882978849305918,
+                0.9932008284397849,
+                0.9934793117607285,
+                0.9852830238556561
+              ],
+              "raw_target_direction_accuracy": [
+                0.9681093394077449,
+                0.958997722095672
+              ],
+              "path_rmse16_64_mean": [
+                0.00038415203918952594,
+                0.0005924827339271542
+              ]
+            },
+            "macro_s43": {
+              "raw_target_r2": [
+                0.9972379991834045,
+                0.9943127002242922,
+                0.9967886127669764,
+                0.9968429789616456,
+                0.997818681270768,
+                0.993883305090332
+              ],
+              "raw_target_direction_accuracy": [
+                0.9681093394077449,
+                0.9772209567198178
+              ],
+              "path_rmse16_64_mean": [
+                0.0002014541965244502,
+                0.00036936102612801215
+              ]
+            },
+            "D_s42": {
+              "raw_target_r2": [
+                0.9956624602800994,
+                0.9881580810583732,
+                0.9941379773625469,
+                0.9942506577976019,
+                0.9915442455717196,
+                0.9887217548068661
+              ],
+              "raw_target_direction_accuracy": [
+                0.9681093394077449,
+                0.9544419134396356
+              ],
+              "path_rmse16_64_mean": [
+                0.0002522474375346501,
+                0.0005797833343294179
+              ]
+            },
+            "D_s43": {
+              "raw_target_r2": [
+                0.9950469994436376,
+                0.9896759503365935,
+                0.9936200996442632,
+                0.9943271291299602,
+                0.9914568247279809,
+                0.9871306426705201
+              ],
+              "raw_target_direction_accuracy": [
+                0.9658314350797267,
+                0.9681093394077449
+              ],
+              "path_rmse16_64_mean": [
+                0.00028069187501372127,
+                0.0006215387467110869
+              ]
+            }
+          }
+        }
+      },
+      "label_changes": [
+        {
+          "split": "test",
+          "row_index": 171,
+          "horizon": 16,
+          "key": "ag/15/SHFE.ag2606",
+          "end": "2026-02-02 13:30:00",
+          "legacy_label": 2,
+          "raw_label": 1
+        }
+      ],
+      "max_path_difference_from_legacy_truth": 4.005048492849994e-08,
+      "max_difference_from_independent_log_ratio_oracle": 1.1102230246251565e-16,
+      "max_model_descriptor_difference_from_export": 8.881784197001252e-16,
+      "score_agreement_with_prior_cpu_raw_audit": true,
+      "verified_csv_files": 349,
+      "physical_windows": 2401,
+      "prediction_windows_scored": 9604,
+      "component_sha256": "87674d91b6a11de66308955b0f162e7e65dddbe68d3d0184a9289ffdb83438a7",
+      "tests_sha256": "8055405f4da0a6c967d383d5d45458675cb89872ab11a410be62e4f387ff5c26",
+      "tests": {
+        "new_physical_price_regressions": 15,
+        "new_and_related_tests_passed": 39,
+        "command": ".venv/bin/pytest -q tests/babel/test_history_price_truth.py tests/babel/test_history_state_api.py tests/babel/test_state_readability.py",
+        "ruff": "passed"
+      }
+    },
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "F11修正历史价格评价答案来源，2401窗口原CSV复核；不训练、不把标签修复叫模型改善。",
+        "remaining": "有限历史状态原型仍未完成通用复用/独立验收。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "新增纯NumPy/CSV组件；只给已完成的预测评分，无模型输入旁路；旧接口递归实现指纹与报告一致。",
+        "remaining": "不改变Macro/D编码器或查询头；旧API observed_audit仍为绑定特征反算值，物理评价必须显式调用新组件。"
+      },
+      "training": {
+        "status": "not_applicable",
+        "evidence": "0神经前向、0更新、0拟合、0重新选择；同四组已保存预测共享同一原始价格答案。",
+        "remaining": "无新训练结论；原训练损失和源数据处理保持。"
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "15项新回归+相关共39通过；9604条已导出预测CPU评分，方向准确率与此前独立raw复算完全一致，R²在1e-10内一致。",
+        "remaining": "仅价格路径和16/64描述；不回算旧完整判据、不扩为所有历史实验无影响，不证明低波动可靠。"
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "349源CSV逐文件SHA、978/984/439端点行号/时间/已收盘检查；原始路径与独立log比值算法最大差1.11e-16，方向标签仅1处改变。",
+        "remaining": "无新增数据；不验证活动/OHLC全部字段或特征流水线，V13独立性未成立。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "平盘、真实微小变化、缩放、无效值、截止时刻、未来后缀、指纹篡改与行身份测试；ruff通过，56原绑定文件/历史源码不变。",
+        "remaining": "独立验收完整运行入口仍未实现；本轮组件完成，不提供GPU启动命令。"
+      }
+    }
   }
 }
