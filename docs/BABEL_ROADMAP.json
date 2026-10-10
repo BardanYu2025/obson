@@ -3131,5 +3131,136 @@
       "ruff": "passed",
       "scope": "synthetic and CPU arithmetic only; no real weights"
     }
+  },
+  "training_architecture_coverage_review": {
+    "date": "2026-10-10",
+    "task_ids": [
+      "F01",
+      "F05",
+      "F10",
+      "F11"
+    ],
+    "requirement_ids": [
+      "N01",
+      "N02",
+      "N03",
+      "N04",
+      "N05",
+      "N07",
+      "N09"
+    ],
+    "scope": "用户要求核对训练、损失、架构及历史覆盖；只做静态代码/既有报告与CPU采样/构造张量算术，不是新模型实验或全面代码验收。",
+    "human_entry": "docs/BABEL_ROADMAP.md#12-训练损失与架构还有哪些缺口2026-10-10需求核对",
+    "reference_unchanged": true,
+    "active_f03_card_and_budget_unchanged": true,
+    "coverage": {
+      "historical_targets": "一个状态重建此前1..127根；当前收盘作零锚点，活动缺失mask；不是全128根OHLCV/OI同等重建。",
+      "macro_training": "native前缀4个抽样＋固定128；原Q+远端S；该阶段局部头从detach状态训练。",
+      "d_training": "从头，1..128均匀不放回抽5，每状态独立滚动128历史，Q无S；不是每步显式128。",
+      "dense_prior_evidence": "Position Supervision已做密集匹配权重/2..128等权，Macro续训native短上下文；不能否定从头完整历史显式128。",
+      "dense_full_context_from_scratch": "retained_not_run",
+      "evaluation": "F01研究重建遍历128位置，冻结用途及当前字段主要是原p128；D的48/80/112不再是训练留出位置。",
+      "sampling_expectation": "固定参数时5位置均值是全128等权目标/梯度无偏估计；非相同Adam/裁剪轨迹。",
+      "state_exposure_multiplier_if_dense_same_parent_batch": 25.6,
+      "multiplier_limit": "不是耗时比或收益保证；父窗口重叠，新增曝光不等于新增独立数据。",
+      "cpu_schedule": {
+        "epochs": [
+          1,
+          120
+        ],
+        "parents": 4789,
+        "states_per_parent_epoch": 5,
+        "per_seed": {
+          "42": {
+            "parent_position_pairs": 612992,
+            "draws": 2873400,
+            "mean": 4.6875,
+            "never_sampled_parent_position_pairs": 5178,
+            "zero_percent": 0.8447092294842347,
+            "min": 0,
+            "max": 18,
+            "p128_mean": 4.680935477135101,
+            "scope": "window-position pairs; overlapping parents can refer to the same physical bar, so zeros are NOT necessarily unseen physical states"
+          },
+          "43": {
+            "parent_position_pairs": 612992,
+            "draws": 2873400,
+            "mean": 4.6875,
+            "never_sampled_parent_position_pairs": 5100,
+            "zero_percent": 0.8319847567341825,
+            "min": 0,
+            "max": 16,
+            "p128_mean": 4.713092503654208,
+            "scope": "window-position pairs; overlapping parents can refer to the same physical bar, so zeros are NOT necessarily unseen physical states"
+          }
+        }
+      }
+    },
+    "loss": {
+      "query_weights": {
+        "path": 0.4,
+        "change1": 0.2,
+        "body": 0.1,
+        "activity": 0.3
+      },
+      "bands": [
+        [
+          1,
+          16
+        ],
+        [
+          17,
+          64
+        ],
+        [
+          65,
+          127
+        ]
+      ],
+      "aggregation": "各有效带内平均后带间等权；活动平均有效5字段，不能当逐bar等权；0.3不是梯度/容量占比。",
+      "path_scale": "train delta_scale[0] * sqrt(age)",
+      "training_vs_report": "SmoothL1训练，平方误差与价格MAE另报。",
+      "current_edge": "change1仅年龄1..127之间126条边；age1路径目标已监督上一收盘相对当前收盘，不能称最新变化无监督。",
+      "current_fields": "主查询无age0实体/活动目标；冻结当前7字段读取28/28条件通过，所以不能据此说当前信息丢失。",
+      "factor_price_error_percent": {
+        "B_minus_A_uniform_with_S": [
+          4.055689213257252,
+          5.423585443858192
+        ],
+        "D_minus_C_uniform_without_S": [
+          -9.445757957313827,
+          -5.112249802420276
+        ],
+        "C_minus_A_remove_S_legacy": [
+          -57.92189752159644,
+          -41.03374179160794
+        ]
+      },
+      "factor_limit": "双种子/两个研究集合原点估计；D收益不能全归因位置覆盖，不证明所有S无用或完整用途升级。",
+      "synthetic_boundary_check": {
+        "scope": "CPU constructed tensors only; no model instantiated or forwarded",
+        "construction": "all target values zero; predicted physical close offset +1 at ages1..127",
+        "metrics": {
+          "path": 0.08350377834509702,
+          "body": 0.0,
+          "activity": 0.0,
+          "change1": 2.2760619702557298e-33,
+          "close_mae_bps": 100.0,
+          "primary": 0.03340151133803881
+        },
+        "interpretation": "historical adjacent differences cancel constant offset; path still penalizes it. This is a loss-boundary check, not evidence of model error."
+      }
+    },
+    "remaining_by_task": {
+      "F01": "显式全128未做；密度、任务权重、独立训练样本覆盖需区分。",
+      "F05": "四层不是全局最优；2→4及8/12已试，768主线头数未作充分独立对照；4个192槽不天然对应4段历史，各query间无注意力，不能据此断言性能瓶颈。",
+      "F10": "历史活动与当前字段已有证据，但当前bar联合目标与更细交易机制未完成；无逐笔/盘口不赋予主动买卖开平含义。",
+      "F11": "全位置重建不等于全位置用途；价量复用/迁移与成本收益仍待证明。",
+      "F03_F04": "旧一致性/跨周期并非没试；现固定Macro/D共同曲线尚未提取，按第11节一次限定诊断。",
+      "F02_F06_F07": "长短记忆/历史AR/未来外推均有旧证据；当前滚动128不等于可持续状态更新或自由外推成功。",
+      "V13": "缺新独立数据不阻塞研究；旧重复研究集不能改称独立确认。"
+    },
+    "decision": "不重开已关闭纠错，不重跑全部历史，不晋升D，不增加训练或读头矩阵；F03顺序/来源/预算不变。F03只回答其中共同历史问题，不替所有缺口销项。",
+    "reporting": "按为什么做→此前证据→本轮具体问题→结论影响→下一步汇报。"
   }
 }
