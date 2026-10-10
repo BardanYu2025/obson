@@ -1,0 +1,2881 @@
+{
+  "archive": {
+    "path": "/Users/bardan/Downloads/babel_state_coverage768_reports.tar.gz",
+    "sha256": "4db1e9b7d2bc8fd979fa98d52184512ee5c238e69ebc5dbaeb3e6b311ad02cf1"
+  },
+  "task_ids": [
+    "F01",
+    "F11"
+  ],
+  "date": "2026-10-10",
+  "run_directory": "/root/autodl-tmp/obson/checkpoints/babel_state_coverage768",
+  "source": "/root/autodl-tmp/obson/checkpoints/babel_recovery_context",
+  "source_completion_sha256": "d794c37e0fd8fe5717b1617a4225ffc9e39f667c4945c05254170eca985c01f2",
+  "manifest_sha256": "bf83499bba6c36ae2dfe5917f9bc44c5099e256bbd14fb95277e6851594db4d9",
+  "protocol": {
+    "task_ids": [
+      "F01",
+      "F11"
+    ],
+    "arms": {
+      "A": {
+        "sampling": "legacy",
+        "extra_structure": true
+      },
+      "B": {
+        "sampling": "uniform",
+        "extra_structure": true
+      },
+      "C": {
+        "sampling": "legacy",
+        "extra_structure": false
+      },
+      "D": {
+        "sampling": "uniform",
+        "extra_structure": false
+      }
+    },
+    "epochs": 120,
+    "seeds": [
+      42,
+      43
+    ],
+    "batch": 128,
+    "micro": 8,
+    "updates": 36480,
+    "session_seconds": 129600,
+    "source": "V06 qualified data; random rolling768/4/8; original Macro97/94 frozen reference only",
+    "targets": "all endpoints1..128 independently see128; past ages1..127; inherited Q with optional S; no new local head",
+    "uniform_sampling": "5 without replacement estimates equal128 objective; not dense128 per step",
+    "selection": "fixed last120 primary; best validation Q diagnostic only; no research checkpoint selection",
+    "readouts": "13 representations x13 targets x5 alphas=845; train fit/val choose; no encoder gradient",
+    "primary": "D vs A utility gain5%; family and endpoint/interior age-band price/activity and window priceP95 retention10%; both seeds/cohorts/month and contract-period-month intervals",
+    "candidate": "primary plus old absolute utility/current criteria, raw/PCA/current baselines and Macro utility5%/history10% retention; no promotion",
+    "inference": "paired2000 draws seed20261009; >=100 parents/6groups; reused research cohorts; V13 open",
+    "stop": "fixed budget; no automatic extension; committed-boundary resume only; failed/stopped exports"
+  },
+  "execution": {
+    "status": "f01_f11_complete_requires_review",
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "torch": "2.8.0+cu128",
+    "duration_seconds": 68416.38823197223,
+    "updates": 36480,
+    "parent_exposures": 4597440,
+    "state_exposures": 22987200,
+    "readout_candidates": 845,
+    "inventory_counts": {
+      "train": 4789,
+      "val": 978,
+      "test": 984,
+      "cross_research": 439
+    },
+    "recorded_passed_cuda_checks": 1280,
+    "workers": {
+      "A_s42": {
+        "best_epoch": 120,
+        "last_query": 0.12388570167108767,
+        "last20_query_percent": -4.987698782921523,
+        "clipped_steps": 330,
+        "total_steps": 4560
+      },
+      "A_s43": {
+        "best_epoch": 120,
+        "last_query": 0.13421633086063078,
+        "last20_query_percent": -6.402166583761226,
+        "clipped_steps": 319,
+        "total_steps": 4560
+      },
+      "B_s42": {
+        "best_epoch": 120,
+        "last_query": 0.13079888784133292,
+        "last20_query_percent": -5.5692675033783505,
+        "clipped_steps": 258,
+        "total_steps": 4560
+      },
+      "B_s43": {
+        "best_epoch": 120,
+        "last_query": 0.1404256233722605,
+        "last20_query_percent": -6.396760641451504,
+        "clipped_steps": 290,
+        "total_steps": 4560
+      },
+      "C_s42": {
+        "best_epoch": 119,
+        "last_query": 0.07308399856274488,
+        "last20_query_percent": -8.691363993822698,
+        "clipped_steps": 886,
+        "total_steps": 4560
+      },
+      "C_s43": {
+        "best_epoch": 120,
+        "last_query": 0.07212206988448319,
+        "last20_query_percent": -8.175877211749993,
+        "clipped_steps": 576,
+        "total_steps": 4560
+      },
+      "D_s42": {
+        "best_epoch": 120,
+        "last_query": 0.07181682847383021,
+        "last20_query_percent": -8.285990418460509,
+        "clipped_steps": 843,
+        "total_steps": 4560
+      },
+      "D_s43": {
+        "best_epoch": 120,
+        "last_query": 0.06883076093049516,
+        "last20_query_percent": -8.230091955194762,
+        "clipped_steps": 710,
+        "total_steps": 4560
+      }
+    }
+  },
+  "verification": {
+    "numbers": 296448,
+    "booleans_strings": 70335,
+    "file_hashes": 168,
+    "max_abs_numeric_difference": 9.5367431640625e-07,
+    "implementation_binding": "exact_match_current_committed_code",
+    "source_inventories": "exact_match_reviewed_context_archive",
+    "independent_intervals": "all main gates and factorial contrasts,2000 calendar-month/contract-month draws",
+    "omitted_bound_files": [
+      "A_s42/last.pt",
+      "A_s42/best.pt",
+      "A_s43/last.pt",
+      "A_s43/best.pt",
+      "B_s42/last.pt",
+      "B_s42/best.pt",
+      "B_s43/last.pt",
+      "B_s43/best.pt",
+      "C_s42/last.pt",
+      "C_s42/best.pt",
+      "C_s43/last.pt",
+      "C_s43/best.pt",
+      "D_s42/last.pt",
+      "D_s42/best.pt",
+      "D_s43/last.pt",
+      "D_s43/best.pt",
+      "cache/train_A_s42.npz",
+      "cache/train_A_s43.npz",
+      "cache/train_B_s42.npz",
+      "cache/train_B_s43.npz",
+      "cache/train_C_s42.npz",
+      "cache/train_C_s43.npz",
+      "cache/train_D_s42.npz",
+      "cache/train_D_s43.npz",
+      "cache/train_macro_s42.npz",
+      "cache/test_C_s43.npz",
+      "cache/test_D_s42.npz",
+      "cache/train_macro_s43.npz",
+      "cache/train_states.npz",
+      "cache/val_A_s42.npz",
+      "cache/val_A_s43.npz",
+      "cache/val_B_s42.npz",
+      "cache/val_B_s43.npz",
+      "cache/val_C_s42.npz",
+      "cache/val_C_s43.npz",
+      "cache/val_D_s42.npz",
+      "cache/val_D_s43.npz",
+      "cache/test_D_s43.npz",
+      "cache/val_macro_s42.npz",
+      "cache/val_macro_s43.npz",
+      "cache/val_states.npz",
+      "cache/cross_research_A_s43.npz",
+      "cache/test_A_s42.npz",
+      "cache/test_A_s43.npz",
+      "cache/test_B_s42.npz",
+      "cache/test_B_s43.npz",
+      "cache/test_C_s42.npz",
+      "cache/test_macro_s42.npz",
+      "cache/cross_research_B_s42.npz",
+      "cache/test_macro_s43.npz",
+      "cache/test_states.npz",
+      "cache/cross_research_B_s43.npz",
+      "cache/cross_research_A_s42.npz",
+      "cache/cross_research_C_s42.npz",
+      "cache/cross_research_C_s43.npz",
+      "cache/cross_research_D_s42.npz",
+      "cache/cross_research_D_s43.npz",
+      "cache/cross_research_macro_s42.npz",
+      "cache/cross_research_macro_s43.npz",
+      "cache/cross_research_states.npz",
+      "readouts/pca.npz",
+      "readouts/raw3584.npz",
+      "readouts/pca768.npz",
+      "readouts/current28.npz",
+      "readouts/A_s42.npz",
+      "readouts/A_s43.npz",
+      "readouts/B_s42.npz",
+      "readouts/B_s43.npz",
+      "readouts/C_s42.npz",
+      "readouts/C_s43.npz",
+      "readouts/D_s42.npz",
+      "readouts/D_s43.npz",
+      "readouts/macro_s42.npz",
+      "readouts/macro_s43.npz"
+    ],
+    "limits": [
+      "No real-weight inference or neural training locally.",
+      "Neural weights and state/input arrays omitted; initial epoch0 validation only in omitted checkpoint, so epoch0 comparison not independently reconstructible.",
+      "All128 reconstruction means and tails recomputed from exported per-parent errors; full raw reconstruction predictions only two examples per model, so errors cannot all be recomputed from raw outputs.",
+      "Ridge selected validation errors/alpha choices recomputed; unselected candidates and raw target generation not independently refitted/rebuilt locally.",
+      "Reused research cohorts; no independent V13 confirmation or multiplicity correction."
+    ],
+    "numeric_review_policy": {
+      "general_atol": 1e-10,
+      "general_rtol": 1e-08,
+      "reconstruction_quantile_atol": 1e-06,
+      "reconstruction_quantile_rtol": 2e-05,
+      "explanation": "本机与远端NumPy对float32分位数舍入不同：最大9.5367e-7位于test/macro_s42/body/P95；仅该汇总复核沿既有标量容差，科学门槛未改变。LR跨平台cos复算最大差5.421e-20，组间日志LR精确相同。"
+    }
+  },
+  "summary": {
+    "test": {
+      "42": {
+        "utility_by_model": {
+          "A_s42": {
+            "utility": 0.14116891499098988,
+            "direction": 0.05058099591052738,
+            "volatility": 0.23175683407145245,
+            "trend_diagnostic": 0.7807944425648339
+          },
+          "B_s42": {
+            "utility": 0.13881775613429656,
+            "direction": 0.04944751289943968,
+            "volatility": 0.22818799936915346,
+            "trend_diagnostic": 0.7689504761494279
+          },
+          "C_s42": {
+            "utility": 0.1460508699120909,
+            "direction": 0.06229051486960444,
+            "volatility": 0.2298112249545774,
+            "trend_diagnostic": 0.8622087537002486
+          },
+          "D_s42": {
+            "utility": 0.14109517427280496,
+            "direction": 0.06250718317078381,
+            "volatility": 0.21968316537482613,
+            "trend_diagnostic": 0.8692910720856897
+          },
+          "macro_s42": {
+            "utility": 0.1604930276505591,
+            "direction": 0.05665360527524878,
+            "volatility": 0.2643324500258694,
+            "trend_diagnostic": 0.873749888971005
+          },
+          "raw3584": {
+            "utility": 0.14878555150046247,
+            "direction": 0.05043475112751016,
+            "volatility": 0.2471363518734148,
+            "trend_diagnostic": 1.0430153644653668
+          },
+          "pca768": {
+            "utility": 0.16077591625133197,
+            "direction": 0.05382362293146069,
+            "volatility": 0.2677282095712033,
+            "trend_diagnostic": 1.0134700154985188
+          },
+          "current28": {
+            "utility": 0.3217366055714613,
+            "direction": 0.3182717940042506,
+            "volatility": 0.3252014171386719,
+            "trend_diagnostic": 0.9884655767724739
+          }
+        },
+        "D_vs_A_percent": {
+          "price": -44.23039554327496,
+          "near": -45.05603868833703,
+          "mid": -62.877037571841335,
+          "far": -32.71693890778805,
+          "activity": -35.81326834435039
+        },
+        "D_vs_A_utility_percent": -0.05223580431260588,
+        "history_gates_passed": 15,
+        "research_progress": false,
+        "limited_candidate": false,
+        "macro_checks_passed": 11,
+        "absolute_passed": false,
+        "current_checks_passed": 7,
+        "utility_r2": [
+          0.904868628738343,
+          0.7144303262964307,
+          0.9579066067275198,
+          0.9895026208726634
+        ]
+      },
+      "43": {
+        "utility_by_model": {
+          "A_s43": {
+            "utility": 0.1303348820101796,
+            "direction": 0.05226634860078063,
+            "volatility": 0.20840341541957857,
+            "trend_diagnostic": 0.7657761850592614
+          },
+          "B_s43": {
+            "utility": 0.14268765614157872,
+            "direction": 0.049702396472092424,
+            "volatility": 0.23567291581106492,
+            "trend_diagnostic": 0.7802671704427807
+          },
+          "C_s43": {
+            "utility": 0.1391503750138677,
+            "direction": 0.05751065122403707,
+            "volatility": 0.22079009880369846,
+            "trend_diagnostic": 0.8388916724689419
+          },
+          "D_s43": {
+            "utility": 0.14174432730298425,
+            "direction": 0.062301978025330274,
+            "volatility": 0.2211866765806382,
+            "trend_diagnostic": 0.8953375436112853
+          },
+          "macro_s43": {
+            "utility": 0.14101443120681503,
+            "direction": 0.054477863480198285,
+            "volatility": 0.2275509989334317,
+            "trend_diagnostic": 0.7906658127145769
+          },
+          "raw3584": {
+            "utility": 0.14878555150046247,
+            "direction": 0.05043475112751016,
+            "volatility": 0.2471363518734148,
+            "trend_diagnostic": 1.0430153644653668
+          },
+          "pca768": {
+            "utility": 0.16077591625133197,
+            "direction": 0.05382362293146069,
+            "volatility": 0.2677282095712033,
+            "trend_diagnostic": 1.0134700154985188
+          },
+          "current28": {
+            "utility": 0.3217366055714613,
+            "direction": 0.3182717940042506,
+            "volatility": 0.3252014171386719,
+            "trend_diagnostic": 0.9884655767724739
+          }
+        },
+        "D_vs_A_percent": {
+          "price": -57.09199109567613,
+          "near": -52.18260792133299,
+          "mid": -65.004628634256,
+          "far": -52.12986513395812,
+          "activity": -37.22979579460903
+        },
+        "D_vs_A_utility_percent": 8.753946078620412,
+        "history_gates_passed": 15,
+        "research_progress": false,
+        "limited_candidate": false,
+        "macro_checks_passed": 2,
+        "absolute_passed": false,
+        "current_checks_passed": 7,
+        "utility_r2": [
+          0.9050411956929488,
+          0.7110462786036589,
+          0.9581820811406071,
+          0.9908382481291234
+        ]
+      }
+    },
+    "cross_research": {
+      "42": {
+        "utility_by_model": {
+          "A_s42": {
+            "utility": 0.04295492896469412,
+            "direction": 0.04273019028144796,
+            "volatility": 0.04317966764794027,
+            "trend_diagnostic": 0.7993917429842347
+          },
+          "B_s42": {
+            "utility": 0.04089548845756102,
+            "direction": 0.040387679397509715,
+            "volatility": 0.04140329751761231,
+            "trend_diagnostic": 0.7770407815643097
+          },
+          "C_s42": {
+            "utility": 0.05569489320806411,
+            "direction": 0.05716968782459821,
+            "volatility": 0.054220098591530014,
+            "trend_diagnostic": 0.8439907418794793
+          },
+          "D_s42": {
+            "utility": 0.05166856491298401,
+            "direction": 0.050509861222842865,
+            "volatility": 0.052827268603125144,
+            "trend_diagnostic": 0.8756962289395553
+          },
+          "macro_s42": {
+            "utility": 0.044036093035781945,
+            "direction": 0.04174842160867027,
+            "volatility": 0.046323764462893637,
+            "trend_diagnostic": 0.8260553294804368
+          },
+          "raw3584": {
+            "utility": 0.05136243969443566,
+            "direction": 0.043882523168282804,
+            "volatility": 0.05884235622058852,
+            "trend_diagnostic": 1.04391154718078
+          },
+          "pca768": {
+            "utility": 0.09743723494011382,
+            "direction": 0.04845349455691185,
+            "volatility": 0.1464209753233158,
+            "trend_diagnostic": 1.0182508474756158
+          },
+          "current28": {
+            "utility": 0.20174987218714752,
+            "direction": 0.29594076517270024,
+            "volatility": 0.10755897920159485,
+            "trend_diagnostic": 0.9901812585767117
+          }
+        },
+        "D_vs_A_percent": {
+          "price": -48.81713890778448,
+          "near": -56.74001653452858,
+          "mid": -65.8887728874353,
+          "far": -38.09116933073374,
+          "activity": -36.93715496631058
+        },
+        "D_vs_A_utility_percent": 20.28553220388718,
+        "history_gates_passed": 15,
+        "research_progress": false,
+        "limited_candidate": false,
+        "macro_checks_passed": 11,
+        "absolute_passed": false,
+        "current_checks_passed": 7,
+        "utility_r2": [
+          0.9311655483698504,
+          0.8876650408254949,
+          0.9678924886205753,
+          0.9800310976784781
+        ]
+      },
+      "43": {
+        "utility_by_model": {
+          "A_s43": {
+            "utility": 0.042952724569417296,
+            "direction": 0.045245603396979486,
+            "volatility": 0.040659845741855084,
+            "trend_diagnostic": 0.7967674465297928
+          },
+          "B_s43": {
+            "utility": 0.04178289824584276,
+            "direction": 0.040917943311777845,
+            "volatility": 0.04264785317990768,
+            "trend_diagnostic": 0.7587234136324045
+          },
+          "C_s43": {
+            "utility": 0.053209349361775744,
+            "direction": 0.056265198862797065,
+            "volatility": 0.05015349986075442,
+            "trend_diagnostic": 0.892211840684459
+          },
+          "D_s43": {
+            "utility": 0.05293698431936661,
+            "direction": 0.053639363014514586,
+            "volatility": 0.052234605624218625,
+            "trend_diagnostic": 0.8833920662296745
+          },
+          "macro_s43": {
+            "utility": 0.04410718083597308,
+            "direction": 0.046228402620353215,
+            "volatility": 0.04198595905159295,
+            "trend_diagnostic": 0.8403732009868876
+          },
+          "raw3584": {
+            "utility": 0.05136243969443566,
+            "direction": 0.043882523168282804,
+            "volatility": 0.05884235622058852,
+            "trend_diagnostic": 1.04391154718078
+          },
+          "pca768": {
+            "utility": 0.09743723494011382,
+            "direction": 0.04845349455691185,
+            "volatility": 0.1464209753233158,
+            "trend_diagnostic": 1.0182508474756158
+          },
+          "current28": {
+            "utility": 0.20174987218714752,
+            "direction": 0.29594076517270024,
+            "volatility": 0.10755897920159485,
+            "trend_diagnostic": 0.9901812585767117
+          }
+        },
+        "D_vs_A_percent": {
+          "price": -61.896493234736916,
+          "near": -61.96997505961019,
+          "mid": -68.5021773126852,
+          "far": -57.16489607194851,
+          "activity": -37.56467710356836
+        },
+        "D_vs_A_utility_percent": 23.244764680325282,
+        "history_gates_passed": 15,
+        "research_progress": false,
+        "limited_candidate": false,
+        "macro_checks_passed": 2,
+        "absolute_passed": false,
+        "current_checks_passed": 7,
+        "utility_r2": [
+          0.9246883617216086,
+          0.8865365267641495,
+          0.9682164519779575,
+          0.9825405254117422
+        ]
+      }
+    }
+  },
+  "factor_contrasts": {
+    "test": {
+      "s42/B-A": {
+        "percent": {
+          "price": 4.055689213257252,
+          "near": 3.928984931257107,
+          "mid": 0.4753420262167518,
+          "far": 6.385809423303845,
+          "activity": 5.460903534253414
+        },
+        "utility_percent": -1.6654933253849702,
+        "intervals": {
+          "utility": {
+            "month": {
+              "delta": -0.0023511588566933078,
+              "low": -0.006632763573859308,
+              "high": 0.0014534263234798448,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.0023511588566933078,
+              "low": -0.0060138042581817045,
+              "high": 0.0010123130528362726,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "price": {
+            "month": {
+              "delta": 0.0063403505036461645,
+              "low": 0.004184386474782396,
+              "high": 0.008768687468149497,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.0063403505036461645,
+              "low": 0.005225845276722521,
+              "high": 0.0076340042872719924,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "near": {
+            "month": {
+              "delta": 0.0017505824482535635,
+              "low": 0.0007457705849419177,
+              "high": 0.0032055200455216202,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.0017505824482535635,
+              "low": 0.0010184163105072207,
+              "high": 0.0026652595045475827,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "mid": {
+            "month": {
+              "delta": 0.0007702510735872475,
+              "low": -6.053356807275337e-05,
+              "high": 0.0017617687569007217,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.0007702510735872475,
+              "low": -8.329058968319622e-05,
+              "high": 0.0015819761423610987,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "far": {
+            "month": {
+              "delta": 0.016928700512919035,
+              "low": 0.011577534511977572,
+              "high": 0.022570150569602335,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.016928700512919035,
+              "low": 0.014082549544069222,
+              "high": 0.02001598021084935,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "activity": {
+            "month": {
+              "delta": 0.014486433256690094,
+              "low": 0.013961797568928062,
+              "high": 0.014922386824373031,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.014486433256690094,
+              "low": 0.013986199727476533,
+              "high": 0.014999138714009846,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "structure": {
+            "month": {
+              "delta": -0.00037221150121342477,
+              "low": -0.0007956907369482798,
+              "high": -0.00011035092068083269,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.00037221150121342477,
+              "low": -0.0006047232912659945,
+              "high": -0.0002010636103504115,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          }
+        }
+      },
+      "s42/D-C": {
+        "percent": {
+          "price": -5.421157537874899,
+          "near": -7.769783885089576,
+          "mid": 3.798886844283955,
+          "far": -7.816359369206694,
+          "activity": -1.0830861805641079
+        },
+        "utility_percent": -3.393129833645503,
+        "intervals": {
+          "utility": {
+            "month": {
+              "delta": -0.004955695639285981,
+              "low": -0.012788967187606156,
+              "high": -0.000476028235486455,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.004955695639285981,
+              "low": -0.012047565613363623,
+              "high": -0.0004562407234212901,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "price": {
+            "month": {
+              "delta": -0.004997400973948513,
+              "low": -0.007701302292302015,
+              "high": -0.002641898050728959,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.004997400973948513,
+              "low": -0.006593685590685909,
+              "high": -0.0036106721762809635,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "near": {
+            "month": {
+              "delta": -0.002062328707594039,
+              "low": -0.0039564143734663005,
+              "high": -0.0008832553658528159,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.002062328707594039,
+              "low": -0.003073934260021448,
+              "high": -0.001276989166979849,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "mid": {
+            "month": {
+              "delta": 0.002201569431926501,
+              "low": 0.001109871713783429,
+              "high": 0.003542799413519237,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.002201569431926501,
+              "low": 0.0015054167179104044,
+              "high": 0.0030748605785312455,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "far": {
+            "month": {
+              "delta": -0.015123909607198135,
+              "low": -0.02286534173320193,
+              "high": -0.0081441321229658,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.015123909607198135,
+              "low": -0.019579204589795722,
+              "high": -0.011192203617933051,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "activity": {
+            "month": {
+              "delta": -0.001864391984796621,
+              "low": -0.0021589698294987745,
+              "high": -0.001538545372632786,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.001864391984796621,
+              "low": -0.002089163279388533,
+              "high": -0.0016541477269427193,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "structure": {
+            "month": {
+              "delta": -0.0025978659939308833,
+              "low": -0.0045782128754546635,
+              "high": -0.0009594400931814291,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.0025978659939308833,
+              "low": -0.003739419756185476,
+              "high": -0.0016222151879506886,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          }
+        }
+      },
+      "s42/C-A": {
+        "percent": {
+          "price": -41.03374179160794,
+          "near": -40.42737442661111,
+          "mid": -64.23568348680901,
+          "far": -27.011928980231115,
+          "activity": -35.11045868978804
+        },
+        "utility_percent": 3.458236483161059,
+        "intervals": {
+          "utility": {
+            "month": {
+              "delta": 0.004881954921101038,
+              "low": -0.004164775865795577,
+              "high": 0.011371488107579751,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.004881954921101038,
+              "low": -0.004614680652175547,
+              "high": 0.011675471947753608,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "price": {
+            "month": {
+              "delta": -0.06414897487323919,
+              "low": -0.08571377454208667,
+              "high": -0.04420824979938646,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.06414897487323919,
+              "low": -0.07439211085531462,
+              "high": -0.05439512182093378,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "near": {
+            "month": {
+              "delta": -0.018012655517504503,
+              "low": -0.02942441178110896,
+              "high": -0.008270764825911138,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.018012655517504503,
+              "low": -0.023510230306617266,
+              "high": -0.013047507215409744,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "mid": {
+            "month": {
+              "delta": -0.1040884277835022,
+              "low": -0.14432177449189615,
+              "high": -0.06831523559526759,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.1040884277835022,
+              "low": -0.12309182865610302,
+              "high": -0.08600449435141985,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "far": {
+            "month": {
+              "delta": -0.0716082841924194,
+              "low": -0.0892317259405535,
+              "high": -0.05508481473043575,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.0716082841924194,
+              "low": -0.08007443975089874,
+              "high": -0.06313740672787833,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "activity": {
+            "month": {
+              "delta": -0.09313980689105707,
+              "low": -0.09668971408206985,
+              "high": -0.08846706087006206,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.09313980689105707,
+              "low": -0.0962494624109269,
+              "high": -0.09026165155016719,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "structure": {
+            "month": {
+              "delta": 0.010040337875221806,
+              "low": 0.004440741431359483,
+              "high": 0.016727792514725177,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.010040337875221806,
+              "low": 0.006730938942888894,
+              "high": 0.0139618096563327,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          }
+        }
+      },
+      "s42/D-B": {
+        "percent": {
+          "price": -46.40407950935979,
+          "near": -47.133168530410295,
+          "mid": -63.05266378842256,
+          "far": -36.7556054167939,
+          "activity": -39.13694126961283
+        },
+        "utility_percent": 1.6405812930048835,
+        "intervals": {
+          "utility": {
+            "month": {
+              "delta": 0.002277418138508363,
+              "low": -0.01609708128635316,
+              "high": 0.01299748047476689,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.002277418138508363,
+              "low": -0.016147808147616204,
+              "high": 0.012421697775002545,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "price": {
+            "month": {
+              "delta": -0.07548672635083385,
+              "low": -0.10214150678275184,
+              "high": -0.050730901989048324,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.07548672635083385,
+              "low": -0.08806715740132544,
+              "high": -0.06348835647956777,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "near": {
+            "month": {
+              "delta": -0.021825566673352104,
+              "low": -0.036179219831176,
+              "high": -0.009978640343529412,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.021825566673352104,
+              "low": -0.028781890349881333,
+              "high": -0.015532350205719732,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "mid": {
+            "month": {
+              "delta": -0.10265710942516296,
+              "low": -0.1420750856802263,
+              "high": -0.06758210910495026,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.10265710942516296,
+              "low": -0.121300207521944,
+              "high": -0.08491473374520327,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "far": {
+            "month": {
+              "delta": -0.10366089431253656,
+              "low": -0.1335424561358926,
+              "high": -0.07548260245186879,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.10366089431253656,
+              "low": -0.11796818627463229,
+              "high": -0.089506392399081,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "activity": {
+            "month": {
+              "delta": -0.10949063213254379,
+              "low": -0.11359823067927018,
+              "high": -0.10407331363248605,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.10949063213254379,
+              "low": -0.11305363952847854,
+              "high": -0.10606376073717474,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "structure": {
+            "month": {
+              "delta": 0.007814683382504347,
+              "low": 0.0035814442781224682,
+              "high": 0.012880906291780644,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.007814683382504347,
+              "low": 0.005307271737691598,
+              "high": 0.01073959961047894,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          }
+        }
+      },
+      "s43/B-A": {
+        "percent": {
+          "price": 4.784687146339883,
+          "near": 6.3016257646784535,
+          "mid": 7.489913620516342,
+          "far": 2.4384697599740157,
+          "activity": 3.0804450512387227
+        },
+        "utility_percent": 9.477719196027913,
+        "intervals": {
+          "utility": {
+            "month": {
+              "delta": 0.012352774131399088,
+              "low": -0.0034684529117753405,
+              "high": 0.045143655600901306,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.012352774131399088,
+              "low": -0.002611167519194076,
+              "high": 0.04620694104959862,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "price": {
+            "month": {
+              "delta": 0.008420507654944684,
+              "low": 0.005736265134204187,
+              "high": 0.011317188113718681,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.008420507654944684,
+              "low": 0.007138037215163258,
+              "high": 0.009772059093161983,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "near": {
+            "month": {
+              "delta": 0.0031181826087610665,
+              "low": 0.0009912723486888318,
+              "high": 0.005766804153375931,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.0031181826087610665,
+              "low": 0.0018321533258679563,
+              "high": 0.00466039689850332,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "mid": {
+            "month": {
+              "delta": 0.015512988462903428,
+              "low": 0.011000848309352279,
+              "high": 0.020404998795550692,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.015512988462903428,
+              "low": 0.013261064264537194,
+              "high": 0.01782923029236976,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "far": {
+            "month": {
+              "delta": 0.006689639488506685,
+              "low": 0.004864251507041417,
+              "high": 0.008681025566412806,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.006689639488506685,
+              "low": 0.005696294420397631,
+              "high": 0.0076748002948863825,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "activity": {
+            "month": {
+              "delta": 0.008623074755314888,
+              "low": 0.008075741096431145,
+              "high": 0.009065120368800859,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.008623074755314888,
+              "low": 0.008260630335144204,
+              "high": 0.009015458309899619,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "structure": {
+            "month": {
+              "delta": -0.0005681272619786382,
+              "low": -0.001184266240600507,
+              "high": -0.0001468215162239188,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.0005681272619786382,
+              "low": -0.0008812554540139446,
+              "high": -0.00031571744351400045,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          }
+        }
+      },
+      "s43/D-C": {
+        "percent": {
+          "price": -7.472623249052923,
+          "near": 1.6975555918621987,
+          "mid": 1.0464356454979562,
+          "far": -13.015507231981093,
+          "activity": -1.8162186070150854
+        },
+        "utility_percent": 1.8641360390570627,
+        "intervals": {
+          "utility": {
+            "month": {
+              "delta": 0.0025939522891165524,
+              "low": -0.002300616450336959,
+              "high": 0.009414874716149015,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.0025939522891165524,
+              "low": -0.001156730571512356,
+              "high": 0.0076775184650402645,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "price": {
+            "month": {
+              "delta": -0.006098540722688191,
+              "low": -0.008163321949996624,
+              "high": -0.004162594385363004,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.006098540722688191,
+              "low": -0.007369656188923095,
+              "high": -0.004947128058135556,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "near": {
+            "month": {
+              "delta": 0.0003949556349944414,
+              "low": -0.00017952790778432462,
+              "high": 0.0014974001895088779,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.0003949556349944414,
+              "low": -6.0834531480897894e-05,
+              "high": 0.0010696538515310408,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "mid": {
+            "month": {
+              "delta": 0.0007506211430970579,
+              "low": 0.0001133485454684684,
+              "high": 0.001537211806411565,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.0007506211430970579,
+              "low": 7.424112831688392e-05,
+              "high": 0.00153948228738843,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "far": {
+            "month": {
+              "delta": -0.01965030308049185,
+              "low": -0.027049590115607734,
+              "high": -0.012830117607439611,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.01965030308049185,
+              "low": -0.023548840660895402,
+              "high": -0.015926109639130836,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "activity": {
+            "month": {
+              "delta": -0.0032503656982406366,
+              "low": -0.0034928509031593416,
+              "high": -0.0029997135290195137,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.0032503656982406366,
+              "low": -0.003445892028719672,
+              "high": -0.003073242673574869,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "structure": {
+            "month": {
+              "delta": -0.001616092718173812,
+              "low": -0.002796187709111469,
+              "high": -0.000696046331757486,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.001616092718173812,
+              "low": -0.0022031946091554235,
+              "high": -0.0010939910775033183,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          }
+        }
+      },
+      "s43/C-A": {
+        "percent": {
+          "price": -53.626688218106565,
+          "near": -52.98078523089562,
+          "mid": -65.36704026996205,
+          "far": -44.96704717965312,
+          "activity": -36.06866295549317
+        },
+        "utility_percent": 6.7637250041777675,
+        "intervals": {
+          "utility": {
+            "month": {
+              "delta": 0.0088154930036881,
+              "low": 0.0019355850961931178,
+              "high": 0.01788260876064251,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.0088154930036881,
+              "low": 0.002779572186424262,
+              "high": 0.018649491258682545,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "price": {
+            "month": {
+              "delta": -0.09437689964647517,
+              "low": -0.12866816295972705,
+              "high": -0.06294520864351442,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.09437689964647517,
+              "low": -0.11062880344389603,
+              "high": -0.0788551741500908,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "near": {
+            "month": {
+              "delta": -0.02621605428101985,
+              "low": -0.044207728732648395,
+              "high": -0.011719158353940523,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.02621605428101985,
+              "low": -0.03506558283682617,
+              "high": -0.018429539564152102,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "mid": {
+            "month": {
+              "delta": -0.13538716104607887,
+              "low": -0.1845774213198153,
+              "high": -0.09067876379993346,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.13538716104607887,
+              "low": -0.15977167960528302,
+              "high": -0.11264138383351295,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "far": {
+            "month": {
+              "delta": -0.1233615193562039,
+              "low": -0.16139563443217345,
+              "high": -0.08770580848214056,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.1233615193562039,
+              "low": -0.14294751313019186,
+              "high": -0.10497940473050921,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "activity": {
+            "month": {
+              "delta": -0.10096707516842014,
+              "low": -0.10542976280481593,
+              "high": -0.09535803558905806,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.10096707516842014,
+              "low": -0.10469083910147725,
+              "high": -0.0975641149321212,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "structure": {
+            "month": {
+              "delta": 0.007630596769002303,
+              "low": 0.003419185928178609,
+              "high": 0.012855423448108447,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.007630596769002303,
+              "low": 0.005131408398776415,
+              "high": 0.010547758842826405,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          }
+        }
+      },
+      "s43/D-B": {
+        "percent": {
+          "price": -59.05126018613815,
+          "near": -55.017252337681924,
+          "mid": -67.4431114631908,
+          "far": -53.26937723864138,
+          "activity": -39.10561389777716
+        },
+        "utility_percent": -0.6611145379376571,
+        "intervals": {
+          "utility": {
+            "month": {
+              "delta": -0.0009433288385944326,
+              "low": -0.02470454234240801,
+              "high": 0.011657438521392987,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.0009433288385944326,
+              "low": -0.024783628911145657,
+              "high": 0.011859435486698409,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "price": {
+            "month": {
+              "delta": -0.10889594802410804,
+              "low": -0.14778604753469235,
+              "high": -0.07289927086201825,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.10889594802410804,
+              "low": -0.12764736829797835,
+              "high": -0.09112420841304361,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "near": {
+            "month": {
+              "delta": -0.028939281254786477,
+              "low": -0.048801885580285705,
+              "high": -0.012726757380621097,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.028939281254786477,
+              "low": -0.03860690195244015,
+              "high": -0.02033947727826657,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "mid": {
+            "month": {
+              "delta": -0.1501495283658853,
+              "low": -0.20357541478587693,
+              "high": -0.10132037787813877,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.1501495283658853,
+              "low": -0.1762778254169065,
+              "high": -0.1256595337976159,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "far": {
+            "month": {
+              "delta": -0.14970146192520245,
+              "low": -0.19687388719314972,
+              "high": -0.10570449260606751,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.14970146192520245,
+              "low": -0.17388420786051598,
+              "high": -0.12691615345808444,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "activity": {
+            "month": {
+              "delta": -0.11284051562197567,
+              "low": -0.11758844162200137,
+              "high": -0.10679934203826069,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.11284051562197567,
+              "low": -0.11683041876144559,
+              "high": -0.10917719104035811,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "structure": {
+            "month": {
+              "delta": 0.006582631312807129,
+              "low": 0.0028703605447945226,
+              "high": 0.011141118158401091,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.006582631312807129,
+              "low": 0.004381337303052885,
+              "high": 0.009223339058829718,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          }
+        }
+      }
+    },
+    "cross_research": {
+      "s42/B-A": {
+        "percent": {
+          "price": 4.462305387244347,
+          "near": 4.432880404406103,
+          "mid": 0.9093179168137233,
+          "far": 6.6586478197425025,
+          "activity": 5.5177467707463235
+        },
+        "utility_percent": -4.794421866756704,
+        "intervals": {
+          "utility": {
+            "month": {
+              "delta": -0.002059440507133103,
+              "low": -0.005091652866763242,
+              "high": 0.0009920466645939345,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.002059440507133103,
+              "low": -0.005019669951478142,
+              "high": 0.0010112638911107786,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "price": {
+            "month": {
+              "delta": 0.0022629578689208497,
+              "low": 0.0016974240919376666,
+              "high": 0.0030591755393017533,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.0022629578689208497,
+              "low": 0.0018803814184668469,
+              "high": 0.002737605562238424,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "near": {
+            "month": {
+              "delta": 0.0004398025052968123,
+              "low": 0.0002173670588854949,
+              "high": 0.0007311453606185208,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.0004398025052968123,
+              "low": 0.0002878222462824347,
+              "high": 0.0006290027639076842,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "mid": {
+            "month": {
+              "delta": 0.0004780056733349774,
+              "low": 0.0003323515243410677,
+              "high": 0.0006401611785564588,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.0004780056733349774,
+              "low": 0.00027025611969532925,
+              "high": 0.0006710905414914037,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "far": {
+            "month": {
+              "delta": 0.006031403542059826,
+              "low": 0.004487178604677557,
+              "high": 0.008187680009010602,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.006031403542059826,
+              "low": 0.004990208564687761,
+              "high": 0.007316680226206384,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "activity": {
+            "month": {
+              "delta": 0.016371942224969623,
+              "low": 0.01562395145273839,
+              "high": 0.01706979428058162,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.016371942224969623,
+              "low": 0.015409221542219834,
+              "high": 0.017414547745323902,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "structure": {
+            "month": {
+              "delta": -2.484272402784961e-05,
+              "low": -6.454080714657641e-05,
+              "high": 1.8688168075019304e-06,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -2.484272402784961e-05,
+              "low": -4.583240796544706e-05,
+              "high": -7.54268290488163e-06,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          }
+        }
+      },
+      "s42/D-C": {
+        "percent": {
+          "price": -5.112249802420276,
+          "near": -11.961236654130225,
+          "mid": 2.7888830940126397,
+          "far": -6.834428538023962,
+          "activity": -1.2692568999018161
+        },
+        "utility_percent": -7.229259386562803,
+        "intervals": {
+          "utility": {
+            "month": {
+              "delta": -0.004026328295080114,
+              "low": -0.006723246205737682,
+              "high": -0.0015412225681961328,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.004026328295080114,
+              "low": -0.007005677387768615,
+              "high": -0.0010747934768712219,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "price": {
+            "month": {
+              "delta": -0.0013984394146144992,
+              "low": -0.0022030874474999896,
+              "high": -0.000837331106385689,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.0013984394146144992,
+              "low": -0.0018667217026772877,
+              "high": -0.0010242532008247426,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "near": {
+            "month": {
+              "delta": -0.0005831230154162188,
+              "low": -0.0009166115415004365,
+              "high": -0.00034338158604420955,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.0005831230154162188,
+              "low": -0.0007933358111006532,
+              "high": -0.0004222827534091566,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "mid": {
+            "month": {
+              "delta": 0.0004865178830994527,
+              "low": 0.00036446526020514586,
+              "high": 0.000632972548192909,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.0004865178830994527,
+              "low": 0.00038290841647377447,
+              "high": 0.0006034890140510284,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "far": {
+            "month": {
+              "delta": -0.00411369128942788,
+              "low": -0.00638138947928154,
+              "high": -0.0025672297381149315,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.00411369128942788,
+              "low": -0.005395443161184718,
+              "high": -0.003093939734881835,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "activity": {
+            "month": {
+              "delta": -0.0024055052455302524,
+              "low": -0.002695273089832569,
+              "high": -0.002062024822918087,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.0024055052455302524,
+              "low": -0.00286580191525286,
+              "high": -0.0020036122255561143,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "structure": {
+            "month": {
+              "delta": -0.0004599872852259791,
+              "low": -0.0007338996497911527,
+              "high": -0.0002679623264277345,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.0004599872852259791,
+              "low": -0.0006175706415953342,
+              "high": -0.0003328432276025689,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          }
+        }
+      },
+      "s42/C-A": {
+        "percent": {
+          "price": -46.05956934837199,
+          "near": -50.86257255168396,
+          "mid": -66.81428371843876,
+          "far": -33.54966894124263,
+          "activity": -36.12643533964578
+        },
+        "utility_percent": 29.65891121328901,
+        "intervals": {
+          "utility": {
+            "month": {
+              "delta": 0.012739964243369999,
+              "low": 0.009873798126538182,
+              "high": 0.01566259573992118,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.012739964243369999,
+              "low": 0.008954160603964463,
+              "high": 0.016596448585880805,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "price": {
+            "month": {
+              "delta": -0.023358075221375767,
+              "low": -0.030230699798947682,
+              "high": -0.01828366173357111,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.023358075221375767,
+              "low": -0.027569486561164466,
+              "high": -0.01991933240968192,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "near": {
+            "month": {
+              "delta": -0.005046264458620915,
+              "low": -0.007777487569739323,
+              "high": -0.003014667599102775,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.005046264458620915,
+              "low": -0.00673814649281432,
+              "high": -0.0037030910582405664,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "mid": {
+            "month": {
+              "delta": -0.03512259693412447,
+              "low": -0.045184811712573734,
+              "high": -0.02776514715086494,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.03512259693412447,
+              "low": -0.04130489622967707,
+              "high": -0.030109049128722195,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "far": {
+            "month": {
+              "delta": -0.030389291875023587,
+              "low": -0.03846882683151557,
+              "high": -0.024024265608461336,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.030389291875023587,
+              "low": -0.03567266682979021,
+              "high": -0.026061686421351263,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "activity": {
+            "month": {
+              "delta": -0.10719247416917718,
+              "low": -0.11304244880343904,
+              "high": -0.10169925407625481,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.10719247416917718,
+              "low": -0.11411318991449997,
+              "high": -0.10091635361534265,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "structure": {
+            "month": {
+              "delta": 0.002255447610466114,
+              "low": 0.0015635591078284594,
+              "high": 0.003165692279817308,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.002255447610466114,
+              "low": 0.0017767626185161201,
+              "high": 0.0028523982701227717,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          }
+        }
+      },
+      "s42/D-B": {
+        "percent": {
+          "price": -51.003511838572415,
+          "near": -58.57628047991077,
+          "mid": -66.19615728580699,
+          "far": -41.95610769987004,
+          "activity": -40.23484488282028
+        },
+        "utility_percent": 26.342946035728776,
+        "intervals": {
+          "utility": {
+            "month": {
+              "delta": 0.010773076455422987,
+              "low": 0.0059791643742405694,
+              "high": 0.01542723187177025,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.010773076455422987,
+              "low": 0.006803953871961083,
+              "high": 0.015034876772207497,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "price": {
+            "month": {
+              "delta": -0.02701947250491112,
+              "low": -0.035423530480367046,
+              "high": -0.020845806276795026,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.02701947250491112,
+              "low": -0.032098007822274795,
+              "high": -0.02288339401455329,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "near": {
+            "month": {
+              "delta": -0.006069189979333945,
+              "low": -0.009382050036268344,
+              "high": -0.003619305003954948,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.006069189979333945,
+              "low": -0.008134708537986625,
+              "high": -0.004447240297215716,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "mid": {
+            "month": {
+              "delta": -0.035114084724360006,
+              "low": -0.04506379634634064,
+              "high": -0.027853648110140794,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.035114084724360006,
+              "low": -0.041263030069884285,
+              "high": -0.030132300933513705,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "far": {
+            "month": {
+              "delta": -0.04053438670651129,
+              "low": -0.05296390611713954,
+              "high": -0.03107049673861495,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.04053438670651129,
+              "low": -0.048440674436070336,
+              "high": -0.03419483449977266,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "activity": {
+            "month": {
+              "delta": -0.12596992163967707,
+              "low": -0.13260488509145535,
+              "high": -0.11946735874086956,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.12596992163967707,
+              "low": -0.13416638777974774,
+              "high": -0.11863582303606697,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "structure": {
+            "month": {
+              "delta": 0.0018203030492679843,
+              "low": 0.0012907912009627325,
+              "high": 0.002504378353081384,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.0018203030492679843,
+              "low": 0.0014498902056121132,
+              "high": 0.002273453140322985,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          }
+        }
+      },
+      "s43/B-A": {
+        "percent": {
+          "price": 5.423585443858192,
+          "near": 5.796824422004709,
+          "mid": 8.651172195186007,
+          "far": 2.974810765533853,
+          "activity": 3.1126173136897473
+        },
+        "utility_percent": -2.723520650439626,
+        "intervals": {
+          "utility": {
+            "month": {
+              "delta": -0.0011698263235745273,
+              "low": -0.004122067973226458,
+              "high": 0.0016864373670625672,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.0011698263235745273,
+              "low": -0.0036592944865215253,
+              "high": 0.0013539478463755607,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "price": {
+            "month": {
+              "delta": 0.0031156668291433013,
+              "low": 0.0023249001713280294,
+              "high": 0.004234211667515837,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.0031156668291433013,
+              "low": 0.002598643846105536,
+              "high": 0.003735803550353683,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "near": {
+            "month": {
+              "delta": 0.0006505460334810451,
+              "low": 0.0005530877663809259,
+              "high": 0.00075824024807939,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.0006505460334810451,
+              "low": 0.0005479733447094756,
+              "high": 0.0007786532167063151,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "mid": {
+            "month": {
+              "delta": 0.005942446440298053,
+              "low": 0.004381260958337408,
+              "high": 0.00811081770961892,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.005942446440298053,
+              "low": 0.004966390189017033,
+              "high": 0.007171484898185199,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "far": {
+            "month": {
+              "delta": 0.0027810750979509915,
+              "low": 0.0020237483643997666,
+              "high": 0.003880172438540394,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.0027810750979509915,
+              "low": 0.002253259206025451,
+              "high": 0.0034102239304922882,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "activity": {
+            "month": {
+              "delta": 0.009691914386521169,
+              "low": 0.009081870149951907,
+              "high": 0.01025091911279107,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.009691914386521169,
+              "low": 0.009019294451150458,
+              "high": 0.010409568717031527,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "structure": {
+            "month": {
+              "delta": -7.530547948050582e-05,
+              "low": -0.00011009477499989983,
+              "high": -5.105093811751805e-05,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -7.530547948050582e-05,
+              "low": -0.00010015617272148801,
+              "high": -5.7889737724418474e-05,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          }
+        }
+      },
+      "s43/D-C": {
+        "percent": {
+          "price": -9.445757957313827,
+          "near": 0.5338535915361486,
+          "mid": 0.627392262885107,
+          "far": -14.979842828581713,
+          "activity": -1.764948113302378
+        },
+        "utility_percent": -0.5118744086820115,
+        "intervals": {
+          "utility": {
+            "month": {
+              "delta": -0.0002723650424091322,
+              "low": -0.004898353973097697,
+              "high": 0.0033702978571238476,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.0002723650424091322,
+              "low": -0.0037770360254523612,
+              "high": 0.003108496226577929,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "price": {
+            "month": {
+              "delta": -0.002283271122189167,
+              "low": -0.0029641482238933897,
+              "high": -0.0017798479879225448,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.002283271122189167,
+              "low": -0.0026852096868990004,
+              "high": -0.0019389096825486395,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "near": {
+            "month": {
+              "delta": 2.2663362008463143e-05,
+              "low": -4.354669234620114e-05,
+              "high": 0.0001104096393582378,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 2.2663362008463143e-05,
+              "low": -2.89628339809981e-05,
+              "high": 8.163525346335862e-05,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "mid": {
+            "month": {
+              "delta": 0.0001348943606110897,
+              "low": 4.033741203167861e-05,
+              "high": 0.00025392699466940367,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.0001348943606110897,
+              "low": 3.317837420253512e-05,
+              "high": 0.0002477534338780687,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "far": {
+            "month": {
+              "delta": -0.007055674707588056,
+              "low": -0.0092812676234961,
+              "high": -0.005438464468732131,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.007055674707588056,
+              "low": -0.008376013981345116,
+              "high": -0.005956273706550511,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "activity": {
+            "month": {
+              "delta": -0.00349286743407912,
+              "low": -0.0038997707961793567,
+              "high": -0.0030779365054033124,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.00349286743407912,
+              "low": -0.003821829947009145,
+              "high": -0.003186729623633111,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "structure": {
+            "month": {
+              "delta": -0.0003562511521382707,
+              "low": -0.0005061162891530485,
+              "high": -0.0002475583366758238,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.0003562511521382707,
+              "low": -0.0004439136448541382,
+              "high": -0.0002843622384926164,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          }
+        }
+      },
+      "s43/C-A": {
+        "percent": {
+          "price": -57.92189752159644,
+          "near": -62.171921614679334,
+          "mid": -68.6985601246349,
+          "far": -49.61770790227189,
+          "activity": -36.44292775612994
+        },
+        "utility_percent": 23.87886890803024,
+        "intervals": {
+          "utility": {
+            "month": {
+              "delta": 0.010256624792358457,
+              "low": 0.006454138690009408,
+              "high": 0.014345368952039514,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.010256624792358457,
+              "low": 0.006103472364065421,
+              "high": 0.014664700950836844,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "price": {
+            "month": {
+              "delta": -0.03327417566426277,
+              "low": -0.043638144636805654,
+              "high": -0.02563456057576437,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.03327417566426277,
+              "low": -0.039470973830345236,
+              "high": -0.0282087149384697,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "near": {
+            "month": {
+              "delta": -0.0069772161542089,
+              "low": -0.01085143798169979,
+              "high": -0.004136351815966582,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.0069772161542089,
+              "low": -0.009344716863278448,
+              "high": -0.005137071292092344,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "mid": {
+            "month": {
+              "delta": -0.04718869360771757,
+              "low": -0.061237333930500855,
+              "high": -0.0369363111063928,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.04718869360771757,
+              "low": -0.055748396364349806,
+              "high": -0.040368478199507875,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "far": {
+            "month": {
+              "delta": -0.046386336053093585,
+              "low": -0.05990012689656418,
+              "high": -0.03597963448103991,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.046386336053093585,
+              "low": -0.05471502729847164,
+              "high": -0.03943037922305117,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "activity": {
+            "month": {
+              "delta": -0.11347469656912776,
+              "low": -0.11866989936714961,
+              "high": -0.10815303821853967,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.11347469656912776,
+              "low": -0.12079172848206644,
+              "high": -0.1069786172881829,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "structure": {
+            "month": {
+              "delta": 0.0017530593375594094,
+              "low": 0.0012404552776379269,
+              "high": 0.002436876336213895,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.0017530593375594094,
+              "low": 0.0013954681236387774,
+              "high": 0.0021995214446078643,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          }
+        }
+      },
+      "s43/D-B": {
+        "percent": {
+          "price": -63.85675311189776,
+          "near": -64.05371791813448,
+          "mid": -71.01014001880198,
+          "far": -58.402347516244625,
+          "activity": -39.44938599852376
+        },
+        "utility_percent": 26.695338384367908,
+        "intervals": {
+          "utility": {
+            "month": {
+              "delta": 0.01115408607352385,
+              "low": 0.007681573144302953,
+              "high": 0.014169204592584606,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.01115408607352385,
+              "low": 0.007650500688263006,
+              "high": 0.01480232861825737,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "price": {
+            "month": {
+              "delta": -0.038673113615595237,
+              "low": -0.05086131375492137,
+              "high": -0.029749960653725163,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.038673113615595237,
+              "low": -0.0458698173148922,
+              "high": -0.03277141090912958,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "near": {
+            "month": {
+              "delta": -0.007605098825681483,
+              "low": -0.011540408099347518,
+              "high": -0.004689499917183916,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.007605098825681483,
+              "low": -0.010014366796088069,
+              "high": -0.00570552889526692,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "mid": {
+            "month": {
+              "delta": -0.05299624568740453,
+              "low": -0.0690617676715231,
+              "high": -0.04126159668854129,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.05299624568740453,
+              "low": -0.06271858777894602,
+              "high": -0.04524987748007856,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "far": {
+            "month": {
+              "delta": -0.05622308585863263,
+              "low": -0.07318710753803562,
+              "high": -0.0434781408433888,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.05622308585863263,
+              "low": -0.06662849768427065,
+              "high": -0.047659718433708906,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "activity": {
+            "month": {
+              "delta": -0.12665947838972805,
+              "low": -0.13262739069877982,
+              "high": -0.12053769553322463,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.12665947838972805,
+              "low": -0.13483764796155193,
+              "high": -0.119322637657072,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "structure": {
+            "month": {
+              "delta": 0.0014721136649016445,
+              "low": 0.001042446484796182,
+              "high": 0.002040538148675335,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.0014721136649016445,
+              "low": 0.0011649874838660346,
+              "high": 0.001863256806406195,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "supplementary_D_vs_A_utility_zero_margin": {
+    "test": {
+      "42": {
+        "month": {
+          "delta": -7.374071818494612e-05,
+          "low": -0.01646275467580527,
+          "high": 0.008213717994030362,
+          "groups": 13,
+          "windows": 984,
+          "supported": true
+        },
+        "contract_month": {
+          "delta": -7.374071818494612e-05,
+          "low": -0.016197335965575183,
+          "high": 0.008928215979177034,
+          "groups": 498,
+          "windows": 984,
+          "supported": true
+        }
+      },
+      "43": {
+        "month": {
+          "delta": 0.011409445292804653,
+          "low": 0.005229078430842539,
+          "high": 0.02130190396763149,
+          "groups": 13,
+          "windows": 984,
+          "supported": true
+        },
+        "contract_month": {
+          "delta": 0.011409445292804653,
+          "low": 0.004860251736926614,
+          "high": 0.02067998676747476,
+          "groups": 498,
+          "windows": 984,
+          "supported": true
+        }
+      }
+    },
+    "cross_research": {
+      "42": {
+        "month": {
+          "delta": 0.008713635948289885,
+          "low": 0.005157589657359697,
+          "high": 0.012167160052448531,
+          "groups": 13,
+          "windows": 439,
+          "supported": true
+        },
+        "contract_month": {
+          "delta": 0.008713635948289885,
+          "low": 0.004862895292004887,
+          "high": 0.01245444625381173,
+          "groups": 206,
+          "windows": 439,
+          "supported": true
+        }
+      },
+      "43": {
+        "month": {
+          "delta": 0.009984259749949325,
+          "low": 0.006408397320918753,
+          "high": 0.014040781962774867,
+          "groups": 13,
+          "windows": 439,
+          "supported": true
+        },
+        "contract_month": {
+          "delta": 0.009984259749949325,
+          "low": 0.006422047617574511,
+          "high": 0.013507792321105001,
+          "groups": 206,
+          "windows": 439,
+          "supported": true
+        }
+      }
+    }
+  },
+  "exported_decision": {
+    "research_progress_supported": false,
+    "limited_candidate": false,
+    "promoted": false,
+    "stop": "Finite matrix finished. No automatic extensions. V13 independent validation remains open."
+  },
+  "review": {
+    "purpose": {
+      "status": "pass_for_scope",
+      "evidence": "F01/F11主候选D的历史保留60/60通过，但冻结用途增益0/4，替换资格0/4；按用途标准拒绝晋升。",
+      "remaining": "不把更低重建误差称通用表示成功；尚无V13独立验收。"
+    },
+    "architecture": {
+      "status": "pass_for_scope",
+      "evidence": "四组同从头rolling768/4/8和共享查询头，配对初始签名一致；报告1280项CUDA通路/标签/源复放检查通过。",
+      "remaining": "权重未附，本机未前向；用途仅原末端p128，不能概括每根bar所有用途；不认定信息已丢失。"
+    },
+    "training": {
+      "status": "pass_for_scope",
+      "evidence": "八组120轮、36480更新、4597440父窗口/22987200状态曝光；960轮采样/位置计数/LR/分项损失复算一致，删S与采样分开比较。",
+      "remaining": "末20轮验证Q仍下降约5%–8.7%，不声称充分收敛；删S改变优化/裁剪。epoch0验证存在省略checkpoint，不能独立复算该候选。"
+    },
+    "validation": {
+      "status": "pass_for_scope",
+      "evidence": "845次Ridge选择核对，逐样本用途分数/分组分数复算；主门槛和因素对照以独立月/合约月bootstrap算法重算，判定一致。",
+      "remaining": "均为复用研究集；未校正多重比较。现有线性读取失败不证明所有解码方式失败；未按研究结果改选B/C。"
+    },
+    "data": {
+      "status": "pass_for_scope",
+      "evidence": "4789/978/984/439共同行与既有Context上传包索引及行身份完全相同；报告原CSV回放差0、全位置独立标签最大差2.84e-14。",
+      "remaining": "本地未再次读原CSV重建所有标签；跨品种439是原完整255行资格后的共同队列，453只是预检的保守耗时估计。"
+    },
+    "engineering": {
+      "status": "pass_for_scope",
+      "evidence": "完成退出0、一次约19h00m16s；168份可用绑定文件hash通过，历史/新模块实现绑定精确一致；无自动追加/改预算。",
+      "remaining": "74份绑定二进制未附（16权重、58数组）；全量重建误差只能由导出逐父块误差复算聚合，不能独立重算全部网络输出。"
+    }
+  },
+  "conclusion": {
+    "F01": "本轮从头均匀五位置×额外S矩阵完整完成，组合方案重建更好但未获得共同冻结用途收益；这套有限配方收束。均匀覆盖的作用依赖S，不能单因归功；显式同时128仍未检验。",
+    "F11": "所有D研究进展/有限候选判定均未通过；28/28当前字段条件通过，60/60对A历史保护通过，但0/4完整退出资格。Macro不变，不意味着模型毫无信息。",
+    "scope": "损失继续下降不是追加理由；未证明收敛、深度最优或近期信息丢失。",
+    "next": "F11先锁下一项问题：冻结既有编码器和已训练查询头，区分历史内容可恢复性与有限线性用途可读性；正式协议/预算待设计，新增GPU更新0。其他分支不自动启动。"
+  },
+  "decision_impact": {
+    "promote": false,
+    "reference": "Macro control s42 best97 / s43 best94 retained",
+    "recipe": "stop_no_extension",
+    "new_training_budget": 0,
+    "future_hypotheses_preserved": [
+      "F01_dense128",
+      "F02",
+      "F03",
+      "F04",
+      "F05",
+      "F06",
+      "F07",
+      "F08",
+      "F09",
+      "F10",
+      "F12",
+      "V13"
+    ]
+  }
+}

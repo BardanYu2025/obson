@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
-  "updated": "2026-10-09",
-  "current_iteration": "F01_F11_state_coverage_code_ready",
-  "current_iteration_scope": "从头2x2完整入口及合成测试就绪；AutoDL来源/资源/数值准入、真实训练和科学判定尚未执行。",
+  "updated": "2026-10-10",
+  "current_iteration": "F01_F11_state_coverage_report_reviewed",
+  "current_iteration_scope": "从头2x2真实报告复核完成：重建改善、冻结用途未共同升级；停止本配方，Macro不变。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -508,14 +508,15 @@
         "V06",
         "V08"
       ],
-      "status": "完整矩阵入口就绪/真实执行待跑：均匀抽5估计全128目标×S；显式同时128保留未做",
+      "status": "本轮均匀抽5×S从头矩阵已完成并收束：重建改善，完整用途未过；显式同时128仍保留未做",
       "reentry_or_acceptance": "在匹配起点/预算下区分密度、位置权重和完整历史；不能把旧warm-start失败当否定证据；1～128指bar位置而非向量维度，完整上下文方案的首个受监督位置需额外已知历史，历史不足显式mask",
       "evidence": [
         "docs/BABEL_STATE_ROLLOUT768_PLAN.md",
         "docs/BABEL_POSITION_SUPERVISION768_REVIEW.md",
-        "docs/BABEL_UNIFORM_CONTEXT768_REVIEW.md"
+        "docs/BABEL_UNIFORM_CONTEXT768_REVIEW.md",
+        "docs/BABEL_STATE_COVERAGE768_REVIEW.json"
       ],
-      "next_action": "AutoDL完成F01/F11固定矩阵；先验证来源/资源再更新。"
+      "next_action": "不追加当前配方，保留密集128猜测；后续需信息用途依据与独立协议。"
     },
     {
       "id": "F02",
@@ -660,14 +661,15 @@
         "V04",
         "V05"
       ],
-      "status": "分层判定代码与合成流程就绪；真实用途/重建退出资格未知",
+      "status": "本轮退出验收未过，未交付替代模型；当前字段可读/历史重建收益与完整用途资格分开归档",
       "reentry_or_acceptance": "锁同一权重做当前字段/方向/波动/结构和强基线比较；达到用途条件即停止追零误差；若未过则限定预算收束而非宣布胜利，独立确认归V13",
       "evidence": [
         "docs/BABEL_RECONSTRUCTION_EXIT.md",
         "docs/BABEL_UTILITY768_REVIEW.md",
-        "docs/BABEL_VOLATILITY_TRANSFER768_REVIEW.md"
+        "docs/BABEL_VOLATILITY_TRANSFER768_REVIEW.md",
+        "docs/BABEL_STATE_COVERAGE768_REVIEW.json"
       ],
-      "next_action": "复核同一固定last的845次读头机会及历史保留；不重复旧网格，不自动晋升。"
+      "next_action": "F11先设计冻结现有状态/既有查询头的内容恢复与线性用途可读性对照；不训练新头，不自动追加当前组轮数或扩层。正式协议/预算待设计，无新GPU命令。"
     },
     {
       "id": "F12",
@@ -686,23 +688,19 @@
   ],
   "active_order": [
     [
-      "F01",
       "F11"
     ]
   ],
-  "next_after_active": "运行本轮F01/F11固定矩阵并复核报告；不自动晋升Macro或开启其他分支。",
+  "next_after_active": "F11先设计冻结现有状态/既有查询头的内容恢复与线性用途可读性对照；不训练新头，不自动追加当前组轮数或扩层。正式协议/预算待设计，无新GPU命令。",
   "active_training_budget": {
     "task_ids": [
-      "F01",
       "F11"
     ],
-    "status": "code_ready_conditional_on_autodl_qualification",
-    "jobs_max": 8,
-    "worker_epochs_max": 960,
-    "optimizer_updates_max": 36480,
-    "session_seconds_max": 129600,
-    "real_updates_observed": 0,
-    "reason": "独立新预算；所有来源/目标/资源准入通过才更新；历史纠错预算不挪用。"
+    "status": "previous_matrix_completed_no_new_training_authorized_by_plan",
+    "jobs_max": 0,
+    "worker_epochs_max": 0,
+    "optimizer_updates_max": 0,
+    "reason": "已完成F01/F11固定矩阵；停止规则触发正常归档，不因loss下降追加。"
   },
   "aliases": {
     "R0": [
@@ -745,13 +743,12 @@
   "progress_log": "docs/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "current_task_ids": [
-    "F11",
-    "F01"
+    "F11"
   ],
   "blocked_followups": {
     "F_optimization": "F01/F11设计已完成，允许实现；真实执行须新入口/合成检查/源数据与资源准入。其余F分支保留不自动启动。"
   },
-  "active_phase": "post_repair_core_code_ready_cuda_pending",
+  "active_phase": "coverage_recipe_closed_information_readability_question_open",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -1093,6 +1090,16 @@
       "seconds": 755.6112510561943,
       "startup_seconds": 763.5533747673035,
       "promoted": false
+    },
+    {
+      "task_ids": [
+        "F01",
+        "F11"
+      ],
+      "study": "state_coverage768",
+      "epochs": 960,
+      "optimizer_updates": 36480,
+      "report_sha256": "4db1e9b7d2bc8fd979fa98d52184512ee5c238e69ebc5dbaeb3e6b311ad02cf1"
     }
   ],
   "next_repair_cards": {
@@ -1259,10 +1266,10 @@
       "N08",
       "N09"
     ],
-    "status": "code_ready_cuda_execution_pending",
+    "status": "completed_recipe_closed_no_utility_upgrade",
     "implementation": "complete_local_synthetic_and_regression_checks_passed",
-    "execution": "not_run",
-    "scientific_acceptance": "unknown",
+    "execution": "complete_8x120_epochs_36480_updates_reviewed",
+    "scientific_acceptance": "primary_hypothesis_and_limited_candidate_not_accepted",
     "human_entry": "docs/BABEL_ROADMAP.md#7-2026-10-09从纠错归档转入状态到底保留了什么",
     "reason_for_order": "用户要求修复先结案后重新审视核心目标；既有回读改善未带来共同用途提升，F11定义用途/退出，F01检验从头覆盖并设S对照，避免混杂。",
     "source": {
@@ -1474,33 +1481,33 @@
     "review": {
       "purpose": {
         "status": "pass_for_scope",
-        "evidence": "冻结用途/历史保留分层，合成反例检查仅重建改善不能通过；不以模型更新作为纠错结案。",
-        "remaining": "真实用途收益未知；有限历史规则不等于市场语义/未来预测。"
+        "evidence": "F01/F11主候选D的历史保留60/60通过，但冻结用途增益0/4，替换资格0/4；按用途标准拒绝晋升。",
+        "remaining": "不把更低重建误差称通用表示成功；尚无V13独立验收。"
       },
       "architecture": {
         "status": "pass_for_scope",
-        "evidence": "合成全128标签/抽取，单状态因果、独立滚动、查询批独立与单年龄检查；真实模型每次抽取再资格化。",
-        "remaining": "本机无768维真实权重执行；CUDA实际通路准入待跑。"
+        "evidence": "四组同从头rolling768/4/8和共享查询头，配对初始签名一致；报告1280项CUDA通路/标签/源复放检查通过。",
+        "remaining": "权重未附，本机未前向；用途仅原末端p128，不能概括每根bar所有用途；不认定信息已丢失。"
       },
       "training": {
         "status": "pass_for_scope",
-        "evidence": "Q/S实际梯度路线、SGD隔离尾batch累积、Adam连续与原子提交恢复一致；配对采样、逐步账本、末轮固定。",
-        "remaining": "无真实优化更新；预算不保证收敛，S还影响裁剪，密集128仍未实验。"
+        "evidence": "八组120轮、36480更新、4597440父窗口/22987200状态曝光；960轮采样/位置计数/LR/分项损失复算一致，删S与采样分开比较。",
+        "remaining": "末20轮验证Q仍下降约5%–8.7%，不声称充分收敛；删S改变优化/裁剪。epoch0验证存在省略checkpoint，不能独立复算该候选。"
       },
       "validation": {
         "status": "pass_for_scope",
-        "evidence": "845次真实闭式Ridge选择在合成数据跑通；锁定/防篡改/研究输出以及重建无用途收益、组数不足反例通过。",
-        "remaining": "合成管线不是科学证据；研究集复用，用途只验p128，V13未做。"
+        "evidence": "845次Ridge选择核对，逐样本用途分数/分组分数复算；主门槛和因素对照以独立月/合约月bootstrap算法重算，判定一致。",
+        "remaining": "均为复用研究集；未校正多重比较。现有线性读取失败不证明所有解码方式失败；未按研究结果改选B/C。"
       },
       "data": {
-        "status": "open",
-        "evidence": "独立逐窗口反向收益标签、标准化及零哨兵/OI、旧目标精确兼容测试；旧报告字段人工核对；原始CSV恢复重新验身份。",
-        "remaining": "AutoDL原CSV和缓存全255复放、来源/尺度与所有真实数据仍需准入。"
+        "status": "pass_for_scope",
+        "evidence": "4789/978/984/439共同行与既有Context上传包索引及行身份完全相同；报告原CSV回放差0、全位置独立标签最大差2.84e-14。",
+        "remaining": "本地未再次读原CSV重建所有标签；跨品种439是原完整255行资格后的共同队列，453只是预检的保守耗时估计。"
       },
       "engineering": {
         "status": "pass_for_scope",
-        "evidence": "16项新测试+110项相关回归=126通过；Ruff/bash语法/CLI检查；无更新预检、累计超时、断点和失败导出。",
-        "remaining": "真实CUDA显存/磁盘/耗时/数值验证待跑；不放宽门槛或静默缩水。"
+        "evidence": "完成退出0、一次约19h00m16s；168份可用绑定文件hash通过，历史/新模块实现绑定精确一致；无自动追加/改预算。",
+        "remaining": "74份绑定二进制未附（16权重、58数组）；全量重建误差只能由导出逐父块误差复算聚合，不能独立重算全部网络输出。"
       }
     },
     "local_plan_checks": {
@@ -1538,6 +1545,51 @@
       "累积正确性用SGD隔离测试，Adam恢复独立实测；不以近零梯度经过Adam的舍入差异放宽比较容差。",
       "已提交抽取逐模型恢复，示例包含已完成模型；未提交Ridge拟合不自动重算。",
       "旧来源/代码不变，无新解释文档；六方面review写回当前入口。"
-    ]
+    ],
+    "latest_report": "docs/BABEL_STATE_COVERAGE768_REVIEW.json",
+    "results": {
+      "archive_sha256": "4db1e9b7d2bc8fd979fa98d52184512ee5c238e69ebc5dbaeb3e6b311ad02cf1",
+      "duration_seconds": 68416.38823197223,
+      "counts": {
+        "train": 4789,
+        "val": 978,
+        "test": 984,
+        "cross_research": 439
+      },
+      "D_vs_A_price_error_change_percent": [
+        -44.2304,
+        -57.092,
+        -48.8171,
+        -61.8965
+      ],
+      "D_vs_A_frozen_utility_error_change_percent": [
+        -0.0522,
+        8.7539,
+        20.2855,
+        23.2448
+      ],
+      "order": [
+        "test_s42",
+        "test_s43",
+        "cross_s42",
+        "cross_s43"
+      ],
+      "history_retention_checks_passed": 60,
+      "history_retention_checks_total": 60,
+      "utility_gain_checks_passed": 0,
+      "utility_gain_checks_total": 4,
+      "current_field_checks_passed": 28,
+      "current_field_checks_total": 28,
+      "limited_candidates_passed": 0,
+      "limited_candidates_total": 4,
+      "decision": "no_promotion_no_extension",
+      "source_reference_unchanged": true
+    },
+    "next_review_question": {
+      "task_id": "F11",
+      "status": "question_identified_protocol_not_yet_locked",
+      "question": "现有共享查询头恢复的历史能否支持用途描述，而线性读取仍不行？区分可恢复内容与直接易读性。",
+      "constraints": "冻结已有模型/查询头，无新训练/拟合，不把非线性解码与Ridge当等容量对照，不重开旧读取网格；具体指标/源码与运行预算下轮先锁定。"
+    }
   }
 }
