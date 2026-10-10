@@ -1,0 +1,1978 @@
+{
+  "archive_sha256": "2f458806236b8a9bb16423d187ee8390d2b3830d0eca403aef12f7269b818a4e",
+  "completion_sha256": "cd2b0fe45a4faa4a10abe66b75d56f8ca91c0df2ea3e91d337fc95ffad21e477",
+  "manifest_sha256": "c615f571bdd823ddeaa1bc9a4765836873f396d068ace6b7df282d07581922b6",
+  "counts": {
+    "discrete": 15940,
+    "scalars": 12563,
+    "hashes": 139,
+    "CUDA_report_checks": 399,
+    "array_elements": 3750362,
+    "model_receipts": 30
+  },
+  "maximum_scalar_difference": 4.440892098500626e-16,
+  "budget": {
+    "used_seconds": 285.23423559218645,
+    "attempts": [
+      {
+        "started_unix": 1791614454.4492812,
+        "reserved_seconds": 7200.0,
+        "elapsed_seconds": 285.23423559218645,
+        "exit_code": 0
+      }
+    ]
+  },
+  "runtime": {
+    "policy": {
+      "profile": "context",
+      "effective": {
+        "mha_fastpath": false,
+        "matmul_tf32": false,
+        "cudnn_tf32": false,
+        "cudnn_benchmark": false,
+        "threads": 4
+      }
+    },
+    "torch": "2.8.0+cu128",
+    "gpu": "NVIDIA GeForce RTX 3080 Ti",
+    "precision": "FP32_no_AMP"
+  },
+  "source_completion": "eadd412ea5534a966d35094fb10d3a3dda61089d775991b505828693cd0388f5",
+  "results": {
+    "test": {
+      "seeds": {
+        "42": {
+          "route_checks": {
+            "utility": {
+              "factor": 0.95,
+              "intervals": {
+                "month": {
+                  "delta": -0.04739408309593215,
+                  "low": -0.05764222929207828,
+                  "high": -0.038444592385418905,
+                  "groups": 13,
+                  "windows": 984,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.04739408309593215,
+                  "low": -0.05688037914962826,
+                  "high": -0.04040234652681527,
+                  "groups": 498,
+                  "windows": 984,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.08664633246323253,
+              "reference_mean": 0.14109517427280496,
+              "relative_mean_change": -0.3859015171156498,
+              "passed": true
+            },
+            "direction": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.06173392919015701,
+                  "low": -0.073919392275228,
+                  "high": -0.04989531480025725,
+                  "groups": 13,
+                  "windows": 984,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.06173392919015701,
+                  "low": -0.07156761320022721,
+                  "high": -0.05328315467640521,
+                  "groups": 498,
+                  "windows": 984,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.007023972297705195,
+              "reference_mean": 0.06250718317078381,
+              "relative_mean_change": -0.8876293580769092,
+              "passed": true
+            },
+            "volatility": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.0753827892835488,
+                  "low": -0.15358131067442554,
+                  "high": -0.038964361498003745,
+                  "groups": 13,
+                  "windows": 984,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.0753827892835488,
+                  "low": -0.1608739202933975,
+                  "high": -0.039771878558384585,
+                  "groups": 498,
+                  "windows": 984,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.1662686926287599,
+              "reference_mean": 0.21968316537482613,
+              "relative_mean_change": -0.24314322244460473,
+              "passed": true
+            }
+          },
+          "decoded_versus_A": {
+            "utility": {
+              "factor": 0.95,
+              "intervals": {
+                "month": {
+                  "delta": -0.00707821971423785,
+                  "low": -0.016071654583202935,
+                  "high": 0.012118276064602782,
+                  "groups": 13,
+                  "windows": 984,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.00707821971423785,
+                  "low": -0.01599860100363389,
+                  "high": 0.01388584995450642,
+                  "groups": 498,
+                  "windows": 984,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.08664633246323253,
+              "reference_mean": 0.09865742334470569,
+              "relative_mean_change": -0.12174543459853815,
+              "passed": false
+            },
+            "direction": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.009795683937970215,
+                  "low": -0.013275380191905887,
+                  "high": -0.0071762089057241935,
+                  "groups": 13,
+                  "windows": 984,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.009795683937970215,
+                  "low": -0.012775014900690362,
+                  "high": -0.007803313247153259,
+                  "groups": 498,
+                  "windows": 984,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.007023972297705195,
+              "reference_mean": 0.015290596577886733,
+              "relative_mean_change": -0.5406345159963695,
+              "passed": true
+            },
+            "volatility": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.033957982493917224,
+                  "low": -0.05273951490634539,
+                  "high": -0.023265256398477065,
+                  "groups": 13,
+                  "windows": 984,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.033957982493917224,
+                  "low": -0.05190551438620066,
+                  "high": -0.02492491962553885,
+                  "groups": 498,
+                  "windows": 984,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.1662686926287599,
+              "reference_mean": 0.18202425011152465,
+              "relative_mean_change": -0.08655746403631082,
+              "passed": true
+            }
+          },
+          "decoded_versus_Macro": {
+            "utility": {
+              "factor": 1.05,
+              "intervals": {
+                "month": {
+                  "delta": -0.007347867595334661,
+                  "low": -0.016994867938446633,
+                  "high": -0.002549389685992956,
+                  "groups": 13,
+                  "windows": 984,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.007347867595334661,
+                  "low": -0.016529364711422672,
+                  "high": -0.003244144235285856,
+                  "groups": 498,
+                  "windows": 984,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.08664633246323253,
+              "reference_mean": 0.08951828577006399,
+              "relative_mean_change": -0.03208230901794007,
+              "passed": true
+            },
+            "direction": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.003441504480086705,
+                  "low": -0.005691449330207299,
+                  "high": -0.001997752520002606,
+                  "groups": 13,
+                  "windows": 984,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.003441504480086705,
+                  "low": -0.005435206132612208,
+                  "high": -0.0021598180975900454,
+                  "groups": 498,
+                  "windows": 984,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.007023972297705195,
+              "reference_mean": 0.009514069797992634,
+              "relative_mean_change": -0.2617278991176649,
+              "passed": true
+            },
+            "volatility": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.020206059287589048,
+                  "low": -0.057465712048677585,
+                  "high": -0.003536467494946296,
+                  "groups": 13,
+                  "windows": 984,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.020206059287589048,
+                  "low": -0.06018407425382315,
+                  "high": -0.004711720909546391,
+                  "groups": 498,
+                  "windows": 984,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.1662686926287599,
+              "reference_mean": 0.16952250174213543,
+              "relative_mean_change": -0.01919396587436495,
+              "passed": true
+            }
+          },
+          "decoder_route_advantage": true,
+          "four_r2_at_least_half": true,
+          "versus_train_mean": {
+            "factor": 0.95,
+            "intervals": {
+              "month": {
+                "delta": -1.088167291246398,
+                "low": -1.1502162562640947,
+                "high": -1.0228865780370353,
+                "groups": 13,
+                "windows": 984,
+                "supported": true
+              },
+              "contract_month": {
+                "delta": -1.088167291246398,
+                "low": -1.1627111034197464,
+                "high": -1.017196879017299,
+                "groups": 498,
+                "windows": 984,
+                "supported": true
+              }
+            },
+            "candidate_mean": 0.08664633246323253,
+            "reference_mean": 1.2366459196943482,
+            "relative_mean_change": -0.9299344047610263,
+            "passed": true
+          },
+          "versus_wrong_state": {
+            "factor": 0.95,
+            "intervals": {
+              "month": {
+                "delta": -1.2375261786780452,
+                "low": -1.2962375556915482,
+                "high": -1.1667407011105055,
+                "groups": 13,
+                "windows": 955,
+                "supported": true
+              },
+              "contract_month": {
+                "delta": -1.2375261786780452,
+                "low": -1.3091133819676877,
+                "high": -1.1657892332787796,
+                "groups": 469,
+                "windows": 955,
+                "supported": true
+              }
+            },
+            "candidate_mean": 0.08916096535480522,
+            "reference_mean": 1.396512783192474,
+            "relative_mean_change": -0.9361545655522177,
+            "passed": true
+          },
+          "recoverability_qualification": true,
+          "original_exit_qualification_changed": false,
+          "promoted": false
+        },
+        "43": {
+          "route_checks": {
+            "utility": {
+              "factor": 0.95,
+              "intervals": {
+                "month": {
+                  "delta": -0.04803819997682304,
+                  "low": -0.06390261790158092,
+                  "high": -0.03675237003604489,
+                  "groups": 13,
+                  "windows": 984,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.04803819997682304,
+                  "low": -0.06364642145185742,
+                  "high": -0.0382777188047801,
+                  "groups": 498,
+                  "windows": 984,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.086618910961012,
+              "reference_mean": 0.14174432730298425,
+              "relative_mean_change": -0.3889073897408214,
+              "passed": true
+            },
+            "direction": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.06104655921089874,
+                  "low": -0.07466390371552732,
+                  "high": -0.04792042870468368,
+                  "groups": 13,
+                  "windows": 984,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.06104655921089874,
+                  "low": -0.07338089365823275,
+                  "high": -0.051155452189040905,
+                  "groups": 498,
+                  "windows": 984,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.007485616616964563,
+              "reference_mean": 0.062301978025330274,
+              "relative_mean_change": -0.8798494549575758,
+              "passed": true
+            },
+            "volatility": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.07755313893364267,
+                  "low": -0.16777544192211608,
+                  "high": -0.03719038849880438,
+                  "groups": 13,
+                  "windows": 984,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.07755313893364267,
+                  "low": -0.17622490490272052,
+                  "high": -0.03696950801789816,
+                  "groups": 498,
+                  "windows": 984,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.16575220530505938,
+              "reference_mean": 0.2211866765806382,
+              "relative_mean_change": -0.25062301279873445,
+              "passed": true
+            }
+          },
+          "decoded_versus_A": {
+            "utility": {
+              "factor": 0.95,
+              "intervals": {
+                "month": {
+                  "delta": -0.03227060313757907,
+                  "low": -0.03711832473670885,
+                  "high": -0.028416092741991413,
+                  "groups": 13,
+                  "windows": 984,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.03227060313757907,
+                  "low": -0.03507328665472769,
+                  "high": -0.029902739443572118,
+                  "groups": 498,
+                  "windows": 984,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.086618910961012,
+              "reference_mean": 0.12514685694588534,
+              "relative_mean_change": -0.3078618746416715,
+              "passed": true
+            },
+            "direction": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.018842419982356227,
+                  "low": -0.02660793663664943,
+                  "high": -0.014349505708188607,
+                  "groups": 13,
+                  "windows": 984,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.018842419982356227,
+                  "low": -0.025676633252032743,
+                  "high": -0.014982146122967539,
+                  "groups": 498,
+                  "windows": 984,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.007485616616964563,
+              "reference_mean": 0.02393457872665526,
+              "relative_mean_change": -0.6872467778750564,
+              "passed": true
+            },
+            "volatility": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.08324284337656757,
+                  "low": -0.1488703692029758,
+                  "high": -0.05156200704121523,
+                  "groups": 13,
+                  "windows": 984,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.08324284337656757,
+                  "low": -0.15224800548259643,
+                  "high": -0.055242117565894325,
+                  "groups": 498,
+                  "windows": 984,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.16575220530505938,
+              "reference_mean": 0.2263591351651154,
+              "relative_mean_change": -0.2677467813077078,
+              "passed": true
+            }
+          },
+          "decoded_versus_Macro": {
+            "utility": {
+              "factor": 1.05,
+              "intervals": {
+                "month": {
+                  "delta": 3.344897840617344e-05,
+                  "low": -0.00503302713989285,
+                  "high": 0.0024698937439646077,
+                  "groups": 13,
+                  "windows": 984,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": 3.344897840617344e-05,
+                  "low": -0.0056402441268271816,
+                  "high": 0.0024904711890877933,
+                  "groups": 498,
+                  "windows": 984,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.086618910961012,
+              "reference_mean": 0.08246234474533891,
+              "relative_mean_change": 0.05040562730188469,
+              "passed": false
+            },
+            "direction": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.001176699722704637,
+                  "low": -0.006965341593773977,
+                  "high": 0.001447542635581969,
+                  "groups": 13,
+                  "windows": 984,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.001176699722704637,
+                  "low": -0.007596386665155198,
+                  "high": 0.00139966597109104,
+                  "groups": 498,
+                  "windows": 984,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.007485616616964563,
+              "reference_mean": 0.007874833036062907,
+              "relative_mean_change": -0.04942535509209178,
+              "passed": false
+            },
+            "volatility": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.007002636795016911,
+                  "low": -0.03140803041272782,
+                  "high": 0.0035326939884382197,
+                  "groups": 13,
+                  "windows": 984,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.007002636795016911,
+                  "low": -0.033912077977338834,
+                  "high": 0.0035391932321822864,
+                  "groups": 498,
+                  "windows": 984,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.16575220530505938,
+              "reference_mean": 0.15704985645461483,
+              "relative_mean_change": 0.05541137729698842,
+              "passed": false
+            }
+          },
+          "decoder_route_advantage": true,
+          "four_r2_at_least_half": true,
+          "versus_train_mean": {
+            "factor": 0.95,
+            "intervals": {
+              "month": {
+                "delta": -1.0881947127486187,
+                "low": -1.1506344159883073,
+                "high": -1.0229271184188335,
+                "groups": 13,
+                "windows": 984,
+                "supported": true
+              },
+              "contract_month": {
+                "delta": -1.0881947127486187,
+                "low": -1.1632016147216633,
+                "high": -1.0166761919610319,
+                "groups": 498,
+                "windows": 984,
+                "supported": true
+              }
+            },
+            "candidate_mean": 0.086618910961012,
+            "reference_mean": 1.2366459196943482,
+            "relative_mean_change": -0.9299565788545028,
+            "passed": true
+          },
+          "versus_wrong_state": {
+            "factor": 0.95,
+            "intervals": {
+              "month": {
+                "delta": -1.233902579784563,
+                "low": -1.291470182667654,
+                "high": -1.1631565889917739,
+                "groups": 13,
+                "windows": 955,
+                "supported": true
+              },
+              "contract_month": {
+                "delta": -1.233902579784563,
+                "low": -1.3063705203067038,
+                "high": -1.1617740071460554,
+                "groups": 469,
+                "windows": 955,
+                "supported": true
+              }
+            },
+            "candidate_mean": 0.08915206643673163,
+            "reference_mean": 1.3926891012855733,
+            "relative_mean_change": -0.9359856651750657,
+            "passed": true
+          },
+          "recoverability_qualification": true,
+          "original_exit_qualification_changed": false,
+          "promoted": false
+        }
+      },
+      "wrong_state_included": 955,
+      "wrong_state_excluded": 29
+    },
+    "cross_research": {
+      "seeds": {
+        "42": {
+          "route_checks": {
+            "utility": {
+              "factor": 0.95,
+              "intervals": {
+                "month": {
+                  "delta": -0.04308969905479559,
+                  "low": -0.049980656323649945,
+                  "high": -0.03687247217609302,
+                  "groups": 13,
+                  "windows": 439,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.04308969905479559,
+                  "low": -0.04985057770543051,
+                  "high": -0.03697117840344911,
+                  "groups": 206,
+                  "windows": 439,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.00599543761253921,
+              "reference_mean": 0.05166856491298401,
+              "relative_mean_change": -0.8839635352242463,
+              "passed": true
+            },
+            "direction": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.05056979101921555,
+                  "low": -0.058157550447254465,
+                  "high": -0.042476951124372296,
+                  "groups": 13,
+                  "windows": 439,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.05056979101921555,
+                  "low": -0.05895207146402462,
+                  "high": -0.04296582206254662,
+                  "groups": 206,
+                  "windows": 439,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.0049910563259116,
+              "reference_mean": 0.050509861222842865,
+              "relative_mean_change": -0.9011864969517197,
+              "passed": true
+            },
+            "volatility": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.05111017656427083,
+                  "low": -0.0642136807424876,
+                  "high": -0.040711872912559094,
+                  "groups": 13,
+                  "windows": 439,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.05111017656427083,
+                  "low": -0.06192205755774721,
+                  "high": -0.0415051900620948,
+                  "groups": 206,
+                  "windows": 439,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.006999818899166821,
+              "reference_mean": 0.052827268603125144,
+              "relative_mean_change": -0.8674961041095218,
+              "passed": true
+            }
+          },
+          "decoded_versus_A": {
+            "utility": {
+              "factor": 0.95,
+              "intervals": {
+                "month": {
+                  "delta": -0.012997178843004248,
+                  "low": -0.014876211709650766,
+                  "high": -0.011235939523985555,
+                  "groups": 13,
+                  "windows": 439,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.012997178843004248,
+                  "low": -0.0151444416775686,
+                  "high": -0.01096520933811363,
+                  "groups": 206,
+                  "windows": 439,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.00599543761253921,
+              "reference_mean": 0.019992227847940483,
+              "relative_mean_change": -0.7001115804531592,
+              "passed": true
+            },
+            "direction": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.008279946327143867,
+                  "low": -0.00976841790219923,
+                  "high": -0.006661062900410363,
+                  "groups": 13,
+                  "windows": 439,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.008279946327143867,
+                  "low": -0.00999826876363982,
+                  "high": -0.0065788967520580425,
+                  "groups": 206,
+                  "windows": 439,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.0049910563259116,
+              "reference_mean": 0.01206454786641406,
+              "relative_mean_change": -0.5863039061906354,
+              "passed": true
+            },
+            "volatility": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.023712079713246778,
+                  "low": -0.027078165998680962,
+                  "high": -0.02072022737405222,
+                  "groups": 13,
+                  "windows": 439,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.023712079713246778,
+                  "low": -0.02790122426558916,
+                  "high": -0.01995631884532993,
+                  "groups": 206,
+                  "windows": 439,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.006999818899166821,
+              "reference_mean": 0.027919907829466902,
+              "relative_mean_change": -0.7492893263859863,
+              "passed": true
+            }
+          },
+          "decoded_versus_Macro": {
+            "utility": {
+              "factor": 1.05,
+              "intervals": {
+                "month": {
+                  "delta": -0.004039989359851457,
+                  "low": -0.005483821921029642,
+                  "high": -0.0027955274566009306,
+                  "groups": 13,
+                  "windows": 439,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.004039989359851457,
+                  "low": -0.0054196322076404835,
+                  "high": -0.0027070977111577875,
+                  "groups": 206,
+                  "windows": 439,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.00599543761253921,
+              "reference_mean": 0.009557549497514922,
+              "relative_mean_change": -0.3727013797733304,
+              "passed": true
+            },
+            "direction": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.004220084364981807,
+                  "low": -0.005641190440785146,
+                  "high": -0.00272706541652886,
+                  "groups": 13,
+                  "windows": 439,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.004220084364981807,
+                  "low": -0.005611237119652339,
+                  "high": -0.0028225257598798103,
+                  "groups": 206,
+                  "windows": 439,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.0049910563259116,
+              "reference_mean": 0.008373764264448552,
+              "relative_mean_change": -0.4039650307447147,
+              "passed": true
+            },
+            "volatility": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.004815649304472598,
+                  "low": -0.00764139507993854,
+                  "high": -0.002583183658235906,
+                  "groups": 13,
+                  "windows": 439,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.004815649304472598,
+                  "low": -0.0069090232756038586,
+                  "high": -0.002769692468117644,
+                  "groups": 206,
+                  "windows": 439,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.006999818899166821,
+              "reference_mean": 0.01074133473058129,
+              "relative_mean_change": -0.3483287622312081,
+              "passed": true
+            }
+          },
+          "decoder_route_advantage": true,
+          "four_r2_at_least_half": true,
+          "versus_train_mean": {
+            "factor": 0.95,
+            "intervals": {
+              "month": {
+                "delta": -1.1137408400141078,
+                "low": -1.194013149911171,
+                "high": -1.0407724277826462,
+                "groups": 13,
+                "windows": 439,
+                "supported": true
+              },
+              "contract_month": {
+                "delta": -1.1137408400141078,
+                "low": -1.2094469561542838,
+                "high": -1.0164115710910344,
+                "groups": 206,
+                "windows": 439,
+                "supported": true
+              }
+            },
+            "candidate_mean": 0.00599543761253921,
+            "reference_mean": 1.1786697659227863,
+            "relative_mean_change": -0.9949133864413283,
+            "passed": true
+          },
+          "versus_wrong_state": {
+            "factor": 0.95,
+            "intervals": {
+              "month": {
+                "delta": -1.2902768148294936,
+                "low": -1.4183950156238287,
+                "high": -1.1620143466165715,
+                "groups": 13,
+                "windows": 432,
+                "supported": true
+              },
+              "contract_month": {
+                "delta": -1.2902768148294936,
+                "low": -1.4301150822140782,
+                "high": -1.16136987152227,
+                "groups": 199,
+                "windows": 432,
+                "supported": true
+              }
+            },
+            "candidate_mean": 0.0060496991117411315,
+            "reference_mean": 1.3645542252012999,
+            "relative_mean_change": -0.9955665381411657,
+            "passed": true
+          },
+          "recoverability_qualification": true,
+          "original_exit_qualification_changed": false,
+          "promoted": false
+        },
+        "43": {
+          "route_checks": {
+            "utility": {
+              "factor": 0.95,
+              "intervals": {
+                "month": {
+                  "delta": -0.04372464400747754,
+                  "low": -0.05052543716691239,
+                  "high": -0.03690207484819247,
+                  "groups": 13,
+                  "windows": 439,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.04372464400747754,
+                  "low": -0.050708544559098345,
+                  "high": -0.03745990451421178,
+                  "groups": 206,
+                  "windows": 439,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.006565491095920734,
+              "reference_mean": 0.05293698431936661,
+              "relative_mean_change": -0.8759753472862867,
+              "passed": true
+            },
+            "direction": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.0537370515554789,
+                  "low": -0.06415621964794818,
+                  "high": -0.043498627985181976,
+                  "groups": 13,
+                  "windows": 439,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.0537370515554789,
+                  "low": -0.06258684691703639,
+                  "high": -0.04562002091993031,
+                  "groups": 206,
+                  "windows": 439,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.005266247760487146,
+              "reference_mean": 0.053639363014514586,
+              "relative_mean_change": -0.9018212099375207,
+              "passed": true
+            },
+            "volatility": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.049593331755286185,
+                  "low": -0.057983950001232916,
+                  "high": -0.041283470219857274,
+                  "groups": 13,
+                  "windows": 439,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.049593331755286185,
+                  "low": -0.05941244165923577,
+                  "high": -0.040289086784806645,
+                  "groups": 206,
+                  "windows": 439,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.007864734431354324,
+              "reference_mean": 0.052234605624218625,
+              "relative_mean_change": -0.8494344058432437,
+              "passed": true
+            }
+          },
+          "decoded_versus_A": {
+            "utility": {
+              "factor": 0.95,
+              "intervals": {
+                "month": {
+                  "delta": -0.026343832196929224,
+                  "low": -0.0306665475509588,
+                  "high": -0.02303700801640742,
+                  "groups": 13,
+                  "windows": 439,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.026343832196929224,
+                  "low": -0.02952535775456638,
+                  "high": -0.023193424462990185,
+                  "groups": 206,
+                  "windows": 439,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.006565491095920734,
+              "reference_mean": 0.034641392939842065,
+              "relative_mean_change": -0.8104726588990718,
+              "passed": true
+            },
+            "direction": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.014333247536741528,
+                  "low": -0.017093353647423377,
+                  "high": -0.011427908377982304,
+                  "groups": 13,
+                  "windows": 439,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.014333247536741528,
+                  "low": -0.016881807579298733,
+                  "high": -0.01192208340216877,
+                  "groups": 206,
+                  "windows": 439,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.005266247760487146,
+              "reference_mean": 0.01781772299748061,
+              "relative_mean_change": -0.7044376679763299,
+              "passed": true
+            },
+            "volatility": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": -0.04874683473906955,
+                  "low": -0.05669219258385929,
+                  "high": -0.04262400737223284,
+                  "groups": 13,
+                  "windows": 439,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": -0.04874683473906955,
+                  "low": -0.05486919465064219,
+                  "high": -0.04283549644317549,
+                  "groups": 206,
+                  "windows": 439,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.007864734431354324,
+              "reference_mean": 0.05146506288220351,
+              "relative_mean_change": -0.8471830404763009,
+              "passed": true
+            }
+          },
+          "decoded_versus_Macro": {
+            "utility": {
+              "factor": 1.05,
+              "intervals": {
+                "month": {
+                  "delta": 0.0030255783380285723,
+                  "low": 0.002242983889941692,
+                  "high": 0.0036651994458604432,
+                  "groups": 13,
+                  "windows": 439,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": 0.0030255783380285723,
+                  "low": 0.0021885859207092075,
+                  "high": 0.003901119381527755,
+                  "groups": 206,
+                  "windows": 439,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.006565491095920734,
+              "reference_mean": 0.0033713454837068207,
+              "relative_mean_change": 0.9474394207448371,
+              "passed": false
+            },
+            "direction": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": 0.0020392857567710435,
+                  "low": 0.0008683650072872504,
+                  "high": 0.0029715169030521535,
+                  "groups": 13,
+                  "windows": 439,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": 0.0020392857567710435,
+                  "low": 0.0011108101215571377,
+                  "high": 0.0029779900022003434,
+                  "groups": 206,
+                  "windows": 439,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.005266247760487146,
+              "reference_mean": 0.0029336018215600926,
+              "relative_mean_change": 0.7951474265469844,
+              "passed": false
+            },
+            "volatility": {
+              "factor": 1.1,
+              "intervals": {
+                "month": {
+                  "delta": 0.003674736370915419,
+                  "low": 0.0024421690385105967,
+                  "high": 0.0049646371155582,
+                  "groups": 13,
+                  "windows": 439,
+                  "supported": true
+                },
+                "contract_month": {
+                  "delta": 0.003674736370915419,
+                  "low": 0.002430186123373152,
+                  "high": 0.005098206256596178,
+                  "groups": 206,
+                  "windows": 439,
+                  "supported": true
+                }
+              },
+              "candidate_mean": 0.007864734431354324,
+              "reference_mean": 0.003809089145853548,
+              "relative_mean_change": 1.064728372113743,
+              "passed": false
+            }
+          },
+          "decoder_route_advantage": true,
+          "four_r2_at_least_half": true,
+          "versus_train_mean": {
+            "factor": 0.95,
+            "intervals": {
+              "month": {
+                "delta": -1.113170786530726,
+                "low": -1.1939251395345365,
+                "high": -1.040007315690882,
+                "groups": 13,
+                "windows": 439,
+                "supported": true
+              },
+              "contract_month": {
+                "delta": -1.113170786530726,
+                "low": -1.2091192972707112,
+                "high": -1.0156326712855497,
+                "groups": 206,
+                "windows": 439,
+                "supported": true
+              }
+            },
+            "candidate_mean": 0.006565491095920734,
+            "reference_mean": 1.1786697659227863,
+            "relative_mean_change": -0.9944297450518037,
+            "passed": true
+          },
+          "versus_wrong_state": {
+            "factor": 0.95,
+            "intervals": {
+              "month": {
+                "delta": -1.3034985181892784,
+                "low": -1.432831041114657,
+                "high": -1.1734643983711952,
+                "groups": 13,
+                "windows": 432,
+                "supported": true
+              },
+              "contract_month": {
+                "delta": -1.3034985181892784,
+                "low": -1.4427562751662744,
+                "high": -1.1728895940082982,
+                "groups": 199,
+                "windows": 432,
+                "supported": true
+              }
+            },
+            "candidate_mean": 0.0066384483248579495,
+            "reference_mean": 1.3790915436990911,
+            "relative_mean_change": -0.9951863613730443,
+            "passed": true
+          },
+          "recoverability_qualification": true,
+          "original_exit_qualification_changed": false,
+          "promoted": false
+        }
+      },
+      "wrong_state_included": 432,
+      "wrong_state_excluded": 7
+    }
+  },
+  "readable_results": {
+    "test": {
+      "42": {
+        "decoded_utility": 0.08664633246323253,
+        "direct_utility": 0.14109517427280496,
+        "decoded_R2": [
+          0.987759919396039,
+          0.9818209750393387,
+          0.7816287618624256,
+          0.9967928185076538,
+          0.994641470074794,
+          0.994256258917884
+        ],
+        "decoded_direction": {
+          "16": {
+            "classes": [
+              "down",
+              "mixed",
+              "up"
+            ],
+            "confusion": [
+              [
+                255,
+                7,
+                0
+              ],
+              [
+                4,
+                429,
+                0
+              ],
+              [
+                0,
+                8,
+                281
+              ]
+            ],
+            "support": [
+              262,
+              433,
+              289
+            ],
+            "balanced_accuracy_present": 0.9787876355199181,
+            "macro_f1_present": 0.9810623007567103,
+            "accuracy": 0.9806910569105691,
+            "all_classes_present": true
+          },
+          "64": {
+            "classes": [
+              "down",
+              "mixed",
+              "up"
+            ],
+            "confusion": [
+              [
+                124,
+                2,
+                0
+              ],
+              [
+                5,
+                725,
+                2
+              ],
+              [
+                0,
+                5,
+                121
+              ]
+            ],
+            "support": [
+              126,
+              732,
+              126
+            ],
+            "balanced_accuracy_present": 0.97829386763813,
+            "macro_f1_present": 0.9782912427595306,
+            "accuracy": 0.9857723577235772,
+            "all_classes_present": true
+          }
+        },
+        "route_percent": {
+          "utility": -38.59015171156498,
+          "direction": -88.76293580769092,
+          "volatility": -24.314322244460474
+        },
+        "versus_A_percent": -12.174543459853815,
+        "versus_Macro_percent": -3.208230901794007
+      },
+      "43": {
+        "decoded_utility": 0.086618910961012,
+        "direct_utility": 0.14174432730298425,
+        "decoded_R2": [
+          0.987106962337848,
+          0.9872389250479213,
+          0.7845748851551395,
+          0.9964331792873957,
+          0.9947449963068978,
+          0.9920414308055964
+        ],
+        "decoded_direction": {
+          "16": {
+            "classes": [
+              "down",
+              "mixed",
+              "up"
+            ],
+            "confusion": [
+              [
+                254,
+                8,
+                0
+              ],
+              [
+                3,
+                418,
+                12
+              ],
+              [
+                0,
+                4,
+                285
+              ]
+            ],
+            "support": [
+              262,
+              433,
+              289
+            ],
+            "balanced_accuracy_present": 0.973660928690857,
+            "macro_f1_present": 0.9734051432773061,
+            "accuracy": 0.9725609756097561,
+            "all_classes_present": true
+          },
+          "64": {
+            "classes": [
+              "down",
+              "mixed",
+              "up"
+            ],
+            "confusion": [
+              [
+                120,
+                6,
+                0
+              ],
+              [
+                5,
+                720,
+                7
+              ],
+              [
+                0,
+                4,
+                122
+              ]
+            ],
+            "support": [
+              126,
+              732,
+              126
+            ],
+            "balanced_accuracy_present": 0.9680804926706567,
+            "macro_f1_present": 0.965996721428619,
+            "accuracy": 0.9776422764227642,
+            "all_classes_present": true
+          }
+        },
+        "route_percent": {
+          "utility": -38.89073897408214,
+          "direction": -87.98494549575759,
+          "volatility": -25.062301279873445
+        },
+        "versus_A_percent": -30.78618746416715,
+        "versus_Macro_percent": 5.040562730188469
+      }
+    },
+    "cross_research": {
+      "42": {
+        "decoded_utility": 0.00599543761253921,
+        "direct_utility": 0.05166856491298401,
+        "decoded_R2": [
+          0.995662449609723,
+          0.9881581912281402,
+          0.9941380116740457,
+          0.9942506632931055,
+          0.9915442260025716,
+          0.9887217241278418
+        ],
+        "decoded_direction": {
+          "16": {
+            "classes": [
+              "down",
+              "mixed",
+              "up"
+            ],
+            "confusion": [
+              [
+                125,
+                4,
+                0
+              ],
+              [
+                5,
+                165,
+                3
+              ],
+              [
+                0,
+                2,
+                135
+              ]
+            ],
+            "support": [
+              129,
+              173,
+              137
+            ],
+            "balanced_accuracy_present": 0.9693836444498519,
+            "macro_f1_present": 0.9687904908835141,
+            "accuracy": 0.9681093394077449,
+            "all_classes_present": true
+          },
+          "64": {
+            "classes": [
+              "down",
+              "mixed",
+              "up"
+            ],
+            "confusion": [
+              [
+                51,
+                7,
+                0
+              ],
+              [
+                3,
+                306,
+                0
+              ],
+              [
+                0,
+                10,
+                62
+              ]
+            ],
+            "support": [
+              58,
+              309,
+              72
+            ],
+            "balanced_accuracy_present": 0.9102375726915399,
+            "macro_f1_present": 0.9348139501407969,
+            "accuracy": 0.9544419134396356,
+            "all_classes_present": true
+          }
+        },
+        "route_percent": {
+          "utility": -88.39635352242463,
+          "direction": -90.11864969517197,
+          "volatility": -86.74961041095219
+        },
+        "versus_A_percent": -70.01115804531592,
+        "versus_Macro_percent": -37.27013797733304
+      },
+      "43": {
+        "decoded_utility": 0.006565491095920734,
+        "direct_utility": 0.05293698431936661,
+        "decoded_R2": [
+          0.995047000404598,
+          0.9896756595901974,
+          0.9936201319371355,
+          0.9943271251932794,
+          0.9914568397313412,
+          0.987130643908844
+        ],
+        "decoded_direction": {
+          "16": {
+            "classes": [
+              "down",
+              "mixed",
+              "up"
+            ],
+            "confusion": [
+              [
+                124,
+                5,
+                0
+              ],
+              [
+                1,
+                164,
+                8
+              ],
+              [
+                0,
+                1,
+                136
+              ]
+            ],
+            "support": [
+              129,
+              173,
+              137
+            ],
+            "balanced_accuracy_present": 0.9673059728724146,
+            "macro_f1_present": 0.96687256819312,
+            "accuracy": 0.9658314350797267,
+            "all_classes_present": true
+          },
+          "64": {
+            "classes": [
+              "down",
+              "mixed",
+              "up"
+            ],
+            "confusion": [
+              [
+                53,
+                5,
+                0
+              ],
+              [
+                0,
+                308,
+                1
+              ],
+              [
+                0,
+                8,
+                64
+              ]
+            ],
+            "support": [
+              58,
+              309,
+              72
+            ],
+            "balanced_accuracy_present": 0.9331485821274907,
+            "macro_f1_present": 0.9556797673585994,
+            "accuracy": 0.9681093394077449,
+            "all_classes_present": true
+          }
+        },
+        "route_percent": {
+          "utility": -87.59753472862867,
+          "direction": -90.18212099375206,
+          "volatility": -84.94344058432436
+        },
+        "versus_A_percent": -81.04726588990718,
+        "versus_Macro_percent": 94.74394207448371
+      }
+    }
+  },
+  "zero_margin_diagnostic_not_new_gate": {
+    "test": {
+      "42": {
+        "versus_A_zero_margin": {
+          "factor": 1.0,
+          "intervals": {
+            "month": {
+              "delta": -0.012011090881473133,
+              "low": -0.01717461468388813,
+              "high": -0.0026896754798373277,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.012011090881473133,
+              "low": -0.01706399612215082,
+              "high": -0.002364470353909543,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "candidate_mean": 0.08664633246323253,
+          "reference_mean": 0.09865742334470569,
+          "relative_mean_change": -0.12174543459853815,
+          "passed": true
+        },
+        "versus_Macro_zero_margin": {
+          "factor": 1.0,
+          "intervals": {
+            "month": {
+              "delta": -0.002871953306831461,
+              "low": -0.004557336490539647,
+              "high": -0.0015587400613876073,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.002871953306831461,
+              "low": -0.004246529587463172,
+              "high": -0.0011363011854917764,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "candidate_mean": 0.08664633246323253,
+          "reference_mean": 0.08951828577006399,
+          "relative_mean_change": -0.03208230901794007,
+          "passed": true
+        }
+      },
+      "43": {
+        "versus_A_zero_margin": {
+          "factor": 1.0,
+          "intervals": {
+            "month": {
+              "delta": -0.03852794598487335,
+              "low": -0.05361993763507459,
+              "high": -0.03018962001923991,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.03852794598487335,
+              "low": -0.05185558636671295,
+              "high": -0.0318036804217588,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "candidate_mean": 0.086618910961012,
+          "reference_mean": 0.12514685694588534,
+          "relative_mean_change": -0.3078618746416715,
+          "passed": true
+        },
+        "versus_Macro_zero_margin": {
+          "factor": 1.0,
+          "intervals": {
+            "month": {
+              "delta": 0.004156566215673121,
+              "low": 0.001879270638194322,
+              "high": 0.00898206357862682,
+              "groups": 13,
+              "windows": 984,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.004156566215673121,
+              "low": 0.0019256078241221242,
+              "high": 0.009284143061426069,
+              "groups": 498,
+              "windows": 984,
+              "supported": true
+            }
+          },
+          "candidate_mean": 0.086618910961012,
+          "reference_mean": 0.08246234474533891,
+          "relative_mean_change": 0.05040562730188469,
+          "passed": false
+        }
+      }
+    },
+    "cross_research": {
+      "42": {
+        "versus_A_zero_margin": {
+          "factor": 1.0,
+          "intervals": {
+            "month": {
+              "delta": -0.013996790235401272,
+              "low": -0.0159456458179908,
+              "high": -0.012154371070251238,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.013996790235401272,
+              "low": -0.016256822261200236,
+              "high": -0.01187567150222834,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "candidate_mean": 0.00599543761253921,
+          "reference_mean": 0.019992227847940483,
+          "relative_mean_change": -0.7001115804531592,
+          "passed": true
+        },
+        "versus_Macro_zero_margin": {
+          "factor": 1.0,
+          "intervals": {
+            "month": {
+              "delta": -0.0035621118849757092,
+              "low": -0.0049497794000636,
+              "high": -0.0023685518207426965,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.0035621118849757092,
+              "low": -0.004876414468245047,
+              "high": -0.002279485242402222,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "candidate_mean": 0.00599543761253921,
+          "reference_mean": 0.009557549497514922,
+          "relative_mean_change": -0.3727013797733304,
+          "passed": true
+        }
+      },
+      "43": {
+        "versus_A_zero_margin": {
+          "factor": 1.0,
+          "intervals": {
+            "month": {
+              "delta": -0.028075901843921326,
+              "low": -0.03259809690294974,
+              "high": -0.024614795940599607,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": -0.028075901843921326,
+              "low": -0.03142743583129168,
+              "high": -0.024759961288951075,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "candidate_mean": 0.006565491095920734,
+          "reference_mean": 0.034641392939842065,
+          "relative_mean_change": -0.8104726588990718,
+          "passed": true
+        },
+        "versus_Macro_zero_margin": {
+          "factor": 1.0,
+          "intervals": {
+            "month": {
+              "delta": 0.0031941456122139135,
+              "low": 0.002427111903676873,
+              "high": 0.003834174520835417,
+              "groups": 13,
+              "windows": 439,
+              "supported": true
+            },
+            "contract_month": {
+              "delta": 0.0031941456122139135,
+              "low": 0.0023668033756658086,
+              "high": 0.004070587699108304,
+              "groups": 206,
+              "windows": 439,
+              "supported": true
+            }
+          },
+          "candidate_mean": 0.006565491095920734,
+          "reference_mean": 0.0033713454837068207,
+          "relative_mean_change": 0.9474394207448371,
+          "passed": false
+        }
+      }
+    }
+  },
+  "tail_attribution_not_exclusion": {
+    "test": {
+      "42": {
+        "top16vol_row": {
+          "key": "ag/15/SHFE.ag2606",
+          "symbol": "ag",
+          "period": 15,
+          "row": 5759,
+          "end": "2026-02-02 13:30:00",
+          "month": "2026-02",
+          "week": "2026-02-02/2026-02-08",
+          "original_index": 171,
+          "input_start": "2026-01-22 14:45:00"
+        },
+        "truth_logRMS": -18.420680743952367,
+        "predicted_logRMS": -6.585564460090496,
+        "row_share_of_16vol_error": 0.9900599273293725,
+        "row_share_of_four_utility_error": 0.9498022889341508,
+        "floor_count": 1,
+        "true16close_range": 2.2481599915025186e-11,
+        "predicted_RMS": 0.0013801481091644632
+      },
+      "43": {
+        "top16vol_row": {
+          "key": "ag/15/SHFE.ag2606",
+          "symbol": "ag",
+          "period": 15,
+          "row": 5759,
+          "end": "2026-02-02 13:30:00",
+          "month": "2026-02",
+          "week": "2026-02-02/2026-02-08",
+          "original_index": 171,
+          "input_start": "2026-01-22 14:45:00"
+        },
+        "truth_logRMS": -18.420680743952367,
+        "predicted_logRMS": -6.66646029032591,
+        "row_share_of_16vol_error": 0.9899270484809678,
+        "row_share_of_four_utility_error": 0.9384298077910448,
+        "floor_count": 1,
+        "true16close_range": 2.2481599915025186e-11,
+        "predicted_RMS": 0.0012728964699502134
+      }
+    },
+    "cross_research": {
+      "42": {
+        "top16vol_row": {
+          "key": "cs/15/DCE.cs2601",
+          "symbol": "cs",
+          "period": 15,
+          "row": 4351,
+          "end": "2025-11-04 09:15:00",
+          "month": "2025-11",
+          "week": "2025-11-03/2025-11-09",
+          "original_index": 300,
+          "input_start": "2025-10-20 09:00:00"
+        },
+        "truth_logRMS": -6.8936869057732615,
+        "predicted_logRMS": -7.053805996482766,
+        "row_share_of_16vol_error": 0.028295534744841304,
+        "row_share_of_four_utility_error": 0.007994761603630461,
+        "floor_count": 0,
+        "true16close_range": 0.004073325202623351,
+        "predicted_RMS": 0.0008641138763771902
+      },
+      "43": {
+        "top16vol_row": {
+          "key": "c/15/DCE.c2605",
+          "symbol": "c",
+          "period": 15,
+          "row": 4735,
+          "end": "2026-03-25 22:30:00",
+          "month": "2026-03",
+          "week": "2026-03-23/2026-03-29",
+          "original_index": 235,
+          "input_start": "2026-03-10 22:15:00"
+        },
+        "truth_logRMS": -7.296415057859295,
+        "predicted_logRMS": -7.0900881830752915,
+        "row_share_of_16vol_error": 0.04316945116683244,
+        "row_share_of_four_utility_error": 0.01270561117218892,
+        "floor_count": 0,
+        "true16close_range": 0.0025231300774998795,
+        "predicted_RMS": 0.000833323877304317
+      }
+    }
+  },
+  "schema": "babel-state-readability768-review-v1",
+  "date": "2026-10-10",
+  "task_ids": [
+    "F11"
+  ],
+  "requirement_ids": [
+    "N01",
+    "N02",
+    "N03",
+    "N04",
+    "N05",
+    "N07",
+    "N08",
+    "N09"
+  ],
+  "archive_path": "/Users/bardan/Downloads/babel_state_readability768_reports.tar.gz",
+  "run": "babel_state_readability768",
+  "source_run": "babel_state_coverage768",
+  "source_code_commit": "1d8a764",
+  "archive_members": 148,
+  "available_bound_files": 139,
+  "missing_bound_files": [],
+  "optimizer_updates": 0,
+  "readout_fits": 0,
+  "implementation": "complete",
+  "execution": "complete",
+  "scientific_acceptance": "existing_decoder_route_advantage_supported_not_overall_model_promotion",
+  "review": {
+    "purpose": {
+      "status": "pass_for_scope",
+      "evidence": "既有D解码路线对同一D直接Ridge四用途优势4/4成立，可恢复性4/4成立；编码器信息保留与线性可读性分开判定。",
+      "remaining": "仅既定历史描述量；不能泛化为全部信息、未来预测或完整F11退出。"
+    },
+    "architecture": {
+      "status": "pass_for_scope",
+      "evidence": "来源单状态到原查询头，价格年龄/尺度反变换后计算描述；30份模型集合回执、60个状态前向抽查及已有输出回放报告通过。",
+      "remaining": "原查询与Ridge容量/训练目标不同；只有p128，缓存前向为抽查；本机未加载真实权重。"
+    },
+    "training": {
+      "status": "pass_for_scope",
+      "evidence": "一次285.234秒，零优化更新、零拟合、零选模；10固定模型及已有读头、train尺度哈希链匹配。",
+      "remaining": "本轮是读法诊断，不是新训练提升；不能归因于具体容量或改写原120轮对照。"
+    },
+    "validation": {
+      "status": "pass_for_scope",
+      "evidence": "从全量导出曲线/预测独立复算六描述、分数/混淆及2000次月/合约月区间，所有正式判定一致；D对A预定收益3/4，对Macro保护2/4。",
+      "remaining": "反复使用研究集、探索性多项对照，非V13；近乎平盘窗口主导原品种log波动误差，未删除/改尺度/改门槛。"
+    },
+    "data": {
+      "status": "pass_for_scope",
+      "evidence": "978/984/439行身份与原报告完全一致，train统计/输入索引绑定一致，旧目标/直接预测逐项一致；真值路径描述独立还原。",
+      "remaining": "没有本地原CSV或源缓存/权重重放；沿用已复核的原始行情审查。近乎平盘样本物理原因尚未由原CSV再核验，不能宣称是坏数据。"
+    },
+    "engineering": {
+      "status": "pass_for_scope",
+      "evidence": "139个完成绑定文件全附且hash通过，原/新实现和协议匹配；30次唯一提交，24010查询端点/60状态抽查预约，一次退出0；399个报告数值检查通过。",
+      "remaining": "完成包证明一致性和本次执行，不证明所有历史代码或所有输入均正确；GPU算子未本地重跑。"
+    }
+  },
+  "method": {
+    "local_scope": "CPU report arithmetic only; no source real-weight execution",
+    "independent_recompute": "age reversed scaled log-price output ->chronological128 relative closes; separate descriptor algebra; six-field NMSE/R2/bias/direction confusion; paired bootstrap using independent group-count weight matrices with locked RNG; no project decision/scoring functions called",
+    "numbers_checked": {
+      "discrete": 15940,
+      "scalars": 12563,
+      "hashes": 139,
+      "CUDA_report_checks": 399,
+      "array_elements": 3750362,
+      "model_receipts": 30
+    },
+    "review_script_sha256": "88fd7c003010ddca3e81d881962f80be3c04d98a70a3eb9e21033a1fb91e7c6a",
+    "source_checks": "readability sourcecompletion/manifest/model-lock/readout-lock/train scales/row inventory/predictions matched prior reviewed coverage export",
+    "limits": "raw targets reconstructed only from exported relative closes; underlying original raw CSV/encoder state not locally rerun; body/activity aggregate errors checked to old report, not independently reconstructed from raw bars"
+  },
+  "decision_disposition": [
+    {
+      "claim": "D已有解码通路对直接Ridge是否有共同优势",
+      "status": "supported",
+      "fact": "四用途误差test s42/s43下降38.590%/38.891%；cross下降88.396%/87.598%；四组合均过5%收益与族10%保护",
+      "impact": "限定历史信息可经既有解码恢复的正面证据；原线性读头不是信息存在性的充分检验"
+    },
+    {
+      "claim": "可恢复性而非均值/错配巧合",
+      "status": "supported_for_registered_targets",
+      "fact": "四组合的四个目标R2均>=0.5，训练均值/错配对照均过；错配仅955/432行，研究主比较仍984/439",
+      "impact": "错配仍时间相关，不证明普适充分统计量"
+    },
+    {
+      "claim": "原F01/F11线性用途未升级",
+      "status": "retained",
+      "fact": "原直接预测逐样本复放一致；本次没有重新拟合或改变线性读取评价",
+      "impact": "原结论保留，不能把其外推成历史信息没有学到"
+    },
+    {
+      "claim": "D已整体优于Macro并可替换",
+      "status": "not_supported",
+      "fact": "解码对Macro保护仅2/4；s42更好，s43更差；原活动/全位置/完整退出未被本次覆盖",
+      "impact": "Macro继续研究参照，D不晋升，不按种子切换拼最优"
+    },
+    {
+      "claim": "本次重建任务是否可以无限追加",
+      "status": "no_extension",
+      "fact": "本次读取诊断完成，无新训练；旧120轮配方已按预算收束",
+      "impact": "后续先确定有限用途接口与适用边界；F01显式全128等保留分支不启动"
+    }
+  ],
+  "posthoc_diagnostics": {
+    "zero_margin": "用于区分明确变差/改善与未达预定幅度，不替代正式门槛。D对A四组零差区间均支持改善，但原品种s42的5%收益区间不通过；D对Macro s42改善、s43退化均有零差支持。",
+    "flat_tail": "原品种ag/15/SHFE.ag2606于2026-02-02 13:30:00，原还原16close范围2.248e-11(log坐标)，波动触发1e-8下限；D重建RMS约0.00127~0.00138，存在实际偏差，log评分同时放大它。该行贡献D近16波动误差约99%、四用途误差93.84%~94.98%。保留正式样本/尺度，不称坏数据，不删样本改判。"
+  },
+  "next_action": {
+    "task_id": "F11",
+    "status": "question_scoped_no_new_run_protocol",
+    "question": "把已有解码读取能力整理成固定的历史状态研究接口，并单列近乎平盘/低波动可靠性；明确线性方便性与历史可恢复性的不同验收含义。",
+    "source": "Macro保持参照，D只作研究比较；不得按本轮分数重选种子或候选",
+    "constraints": "不新拟合头，不自动追加120轮，不用新接口追溯修改旧门槛；新实验若需训练须另锁定协议/预算；V13独立验收继续开放"
+  }
+}

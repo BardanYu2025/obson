@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-10",
-  "current_iteration": "F11_state_readability_code_ready",
-  "current_iteration_scope": "冻结现有10模型与既有读头，比较直接线性读取和历史解码后计算；新训练/拟合0，代码已备，等待AutoDL。",
+  "current_iteration": "F11_state_readability_reviewed",
+  "current_iteration_scope": "零训练读取对照复核完成：已有解码通路较线性读取更准确，可恢复性通过；不是新模型升级，Macro不变，F11完整退出仍开放。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -661,15 +661,16 @@
         "V04",
         "V05"
       ],
-      "status": "上一矩阵完整退出失败保留；本轮零训练读取通路诊断代码就绪，真实执行待办",
+      "status": "已有解码通路可恢复四历史描述的有限证据已通过；旧完整退出未过，未替换Macro",
       "reentry_or_acceptance": "锁同一权重做当前字段/方向/波动/结构和强基线比较；达到用途条件即停止追零误差；若未过则限定预算收束而非宣布胜利，独立确认归V13",
       "evidence": [
         "docs/BABEL_RECONSTRUCTION_EXIT.md",
         "docs/BABEL_UTILITY768_REVIEW.md",
         "docs/BABEL_VOLATILITY_TRANSFER768_REVIEW.md",
-        "docs/BABEL_STATE_COVERAGE768_REVIEW.json"
+        "docs/BABEL_STATE_COVERAGE768_REVIEW.json",
+        "docs/BABEL_STATE_READABILITY768_REVIEW.json"
       ],
-      "next_action": "运行F11已有读取通路诊断，复核逐样本内容恢复与直接读取差异后再决定核心改动；不自动新训练或改选候选。"
+      "next_action": "F11先整理冻结历史状态研究接口及近乎平盘/低波动适用边界；下一实验协议尚未锁定，不新训练、不新拟合，不重复已完成诊断。"
     },
     {
       "id": "F12",
@@ -691,16 +692,16 @@
       "F11"
     ]
   ],
-  "next_after_active": "运行F11已有读取通路诊断，复核逐样本内容恢复与直接读取差异后再决定核心改动；不自动新训练或改选候选。",
+  "next_after_active": "F11先整理冻结历史状态研究接口及近乎平盘/低波动适用边界；下一实验协议尚未锁定，不新训练、不新拟合，不重复已完成诊断。",
   "active_training_budget": {
     "task_ids": [
       "F11"
     ],
-    "status": "zero_training_frozen_diagnostic_only",
+    "status": "diagnostic_complete_no_new_training",
     "jobs_max": 0,
     "worker_epochs_max": 0,
     "optimizer_updates_max": 0,
-    "reason": "上一矩阵已完成收束；F11本轮仅原模型与原读头冻结执行。"
+    "reason": "读取诊断与旧训练矩阵均已完成收束；无新增训练或拟合预算。"
   },
   "aliases": {
     "R0": [
@@ -746,9 +747,9 @@
     "F11"
   ],
   "blocked_followups": {
-    "F_optimization": "F01/F11上一矩阵已完成收束；仅F11既有读取通路零训练诊断已备好。其他优化／追加训练不自动启动。"
+    "F_optimization": "F01/F11旧矩阵与F11零训练读取诊断均已完成；下一步先定有限研究接口与边界，其他优化/追加训练不自动启动。"
   },
-  "active_phase": "frozen_existing_readout_routes_pending_cuda",
+  "active_phase": "readability_diagnostic_closed_research_interface_scope_open",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -1587,11 +1588,12 @@
     },
     "next_review_question": {
       "task_id": "F11",
-      "status": "protocol_locked_code_ready_cuda_pending",
+      "status": "answered_existing_decoder_more_accurate_than_Ridge",
       "question": "现有共享查询头恢复的历史能否支持用途描述，而线性读取仍不行？区分可恢复内容与直接易读性。",
-      "constraints": "冻结已有模型/查询头，无新训练/拟合，不把非线性解码与Ridge当等容量对照，不重开旧读取网格；协议/指标/预算已锁定在readability_plan。",
+      "constraints": "零训练读法对照已完成并归档，不重开旧头网格；不将相对Ridge收益冒充等容量比较。",
       "entrypoint": "scripts/babel_state_readability768_autodl.sh",
-      "human_entry": "docs/BABEL_ROADMAP.md#8-2026-10-10f11同一状态的两种已有读取方式"
+      "human_entry": "docs/BABEL_ROADMAP.md#8-2026-10-10f11同一状态的两种已有读取方式",
+      "evidence": "docs/BABEL_STATE_READABILITY768_REVIEW.json"
     }
   },
   "readability_plan": {
@@ -1609,8 +1611,8 @@
       "N09"
     ],
     "implementation": "code_ready",
-    "execution": "pending_AutoDL",
-    "scientific_acceptance": "not_evaluated",
+    "execution": "complete",
+    "scientific_acceptance": "existing_decoder_route_advantage_supported_not_overall_model_promotion",
     "human_entry": "docs/BABEL_ROADMAP.md section8",
     "protocol": {
       "schema": "babel-state-readability768-v1",
@@ -1718,33 +1720,33 @@
     "review": {
       "purpose": {
         "status": "pass_for_scope",
-        "evidence": "同一冻结状态的原Ridge／原历史解码通路对照；判定不晋升、不覆盖旧退出资格。",
-        "remaining": "尚无真实结果；历史可恢复不代表未来预测或通用语义。"
+        "evidence": "既有D解码路线对同一D直接Ridge四用途优势4/4成立，可恢复性4/4成立；编码器信息保留与线性可读性分开判定。",
+        "remaining": "仅既定历史描述量；不能泛化为全部信息、未来预测或完整F11退出。"
       },
       "architecture": {
         "status": "pass_for_scope",
-        "evidence": "合成价格年龄／尺度／时间方向与零坐标、实际小模型无旁路管线测试通过；原模型／读头冻结。",
-        "remaining": "p128范围；非等容量或等预训练预算；真实缓存状态／解码回放待CUDA。"
+        "evidence": "来源单状态到原查询头，价格年龄/尺度反变换后计算描述；30份模型集合回执、60个状态前向抽查及已有输出回放报告通过。",
+        "remaining": "原查询与Ridge容量/训练目标不同；只有p128，缓存前向为抽查；本机未加载真实权重。"
       },
       "training": {
         "status": "pass_for_scope",
-        "evidence": "新增更新0、拟合0；已有系数复用，eval/禁梯度/前后签名检查实现。",
-        "remaining": "不检验重新训练不同读头的效果。"
+        "evidence": "一次285.234秒，零优化更新、零拟合、零选模；10固定模型及已有读头、train尺度哈希链匹配。",
+        "remaining": "本轮是读法诊断，不是新训练提升；不能归因于具体容量或改写原120轮对照。"
       },
       "validation": {
         "status": "pass_for_scope",
-        "evidence": "10模型合成全管线、固定Ridge复放、错配、支持数和判据／断点检查通过；全量逐样本输出可复算。",
-        "remaining": "两研究集重复使用，多重诊断探索性；不覆盖旧活动／全位置门槛，V13开放；错配仍时间相关。"
+        "evidence": "从全量导出曲线/预测独立复算六描述、分数/混淆及2000次月/合约月区间，所有正式判定一致；D对A预定收益3/4，对Macro保护2/4。",
+        "remaining": "反复使用研究集、探索性多项对照，非V13；近乎平盘窗口主导原品种log波动误差，未删除/改尺度/改门槛。"
       },
       "data": {
-        "status": "open",
-        "evidence": "非平凡尺度独立路径描述与原目标一致；既有包完成指纹、原源码和协议精确匹配。",
-        "remaining": "远端需核对全部绑定文件／原输入与状态缓存；不重建CSV，继承原始行情审查；只抽查60状态前向。"
+        "status": "pass_for_scope",
+        "evidence": "978/984/439行身份与原报告完全一致，train统计/输入索引绑定一致，旧目标/直接预测逐项一致；真值路径描述独立还原。",
+        "remaining": "没有本地原CSV或源缓存/权重重放；沿用已复核的原始行情审查。近乎平盘样本物理原因尚未由原CSV再核验，不能宣称是坏数据。"
       },
       "engineering": {
         "status": "pass_for_scope",
-        "evidence": "13新测试+66相关回归共79通过；Ruff/shell通过；累计超时、来源隔离、提交恢复、篡改拒绝、失败先保存及导出覆盖；后续日志改动13定向测试通过。",
-        "remaining": "真实CUDA资源与数值待执行；保留每次失败状态，未提交推理重试受累计2h约束，唯一端点数不是重试总调用数。"
+        "evidence": "139个完成绑定文件全附且hash通过，原/新实现和协议匹配；30次唯一提交，24010查询端点/60状态抽查预约，一次退出0；399个报告数值检查通过。",
+        "remaining": "完成包证明一致性和本次执行，不证明所有历史代码或所有输入均正确；GPU算子未本地重跑。"
       }
     },
     "checks": {
@@ -1763,6 +1765,384 @@
       "output": "checkpoints/babel_state_readability768",
       "archive": "/root/autodl-tmp/download/babel_state_readability768_reports.tar.gz"
     },
-    "next_action": "运行F11已有读取通路诊断，复核逐样本内容恢复与直接读取差异后再决定核心改动；不自动新训练或改选候选。"
+    "next_action": "F11先整理冻结历史状态研究接口及近乎平盘/低波动适用边界；下一实验协议尚未锁定，不新训练、不新拟合，不重复已完成诊断。",
+    "latest_report": "docs/BABEL_STATE_READABILITY768_REVIEW.json",
+    "results": {
+      "archive_sha256": "2f458806236b8a9bb16423d187ee8390d2b3830d0eca403aef12f7269b818a4e",
+      "duration_seconds": 285.23423559218645,
+      "optimizer_updates": 0,
+      "readout_fits": 0,
+      "counts": {
+        "val": 978,
+        "test": 984,
+        "cross_research": 439
+      },
+      "decoder_route_passed": 4,
+      "recoverability_passed": 4,
+      "decoded_D_vs_A_registered_passed": 3,
+      "decoded_D_vs_Macro_registered_passed": 2,
+      "decision": "no_promotion_original_exit_unchanged",
+      "details": {
+        "test": {
+          "42": {
+            "decoded_utility": 0.08664633246323253,
+            "direct_utility": 0.14109517427280496,
+            "decoded_R2": [
+              0.987759919396039,
+              0.9818209750393387,
+              0.7816287618624256,
+              0.9967928185076538,
+              0.994641470074794,
+              0.994256258917884
+            ],
+            "decoded_direction": {
+              "16": {
+                "classes": [
+                  "down",
+                  "mixed",
+                  "up"
+                ],
+                "confusion": [
+                  [
+                    255,
+                    7,
+                    0
+                  ],
+                  [
+                    4,
+                    429,
+                    0
+                  ],
+                  [
+                    0,
+                    8,
+                    281
+                  ]
+                ],
+                "support": [
+                  262,
+                  433,
+                  289
+                ],
+                "balanced_accuracy_present": 0.9787876355199181,
+                "macro_f1_present": 0.9810623007567103,
+                "accuracy": 0.9806910569105691,
+                "all_classes_present": true
+              },
+              "64": {
+                "classes": [
+                  "down",
+                  "mixed",
+                  "up"
+                ],
+                "confusion": [
+                  [
+                    124,
+                    2,
+                    0
+                  ],
+                  [
+                    5,
+                    725,
+                    2
+                  ],
+                  [
+                    0,
+                    5,
+                    121
+                  ]
+                ],
+                "support": [
+                  126,
+                  732,
+                  126
+                ],
+                "balanced_accuracy_present": 0.97829386763813,
+                "macro_f1_present": 0.9782912427595306,
+                "accuracy": 0.9857723577235772,
+                "all_classes_present": true
+              }
+            },
+            "route_percent": {
+              "utility": -38.59015171156498,
+              "direction": -88.76293580769092,
+              "volatility": -24.314322244460474
+            },
+            "versus_A_percent": -12.174543459853815,
+            "versus_Macro_percent": -3.208230901794007
+          },
+          "43": {
+            "decoded_utility": 0.086618910961012,
+            "direct_utility": 0.14174432730298425,
+            "decoded_R2": [
+              0.987106962337848,
+              0.9872389250479213,
+              0.7845748851551395,
+              0.9964331792873957,
+              0.9947449963068978,
+              0.9920414308055964
+            ],
+            "decoded_direction": {
+              "16": {
+                "classes": [
+                  "down",
+                  "mixed",
+                  "up"
+                ],
+                "confusion": [
+                  [
+                    254,
+                    8,
+                    0
+                  ],
+                  [
+                    3,
+                    418,
+                    12
+                  ],
+                  [
+                    0,
+                    4,
+                    285
+                  ]
+                ],
+                "support": [
+                  262,
+                  433,
+                  289
+                ],
+                "balanced_accuracy_present": 0.973660928690857,
+                "macro_f1_present": 0.9734051432773061,
+                "accuracy": 0.9725609756097561,
+                "all_classes_present": true
+              },
+              "64": {
+                "classes": [
+                  "down",
+                  "mixed",
+                  "up"
+                ],
+                "confusion": [
+                  [
+                    120,
+                    6,
+                    0
+                  ],
+                  [
+                    5,
+                    720,
+                    7
+                  ],
+                  [
+                    0,
+                    4,
+                    122
+                  ]
+                ],
+                "support": [
+                  126,
+                  732,
+                  126
+                ],
+                "balanced_accuracy_present": 0.9680804926706567,
+                "macro_f1_present": 0.965996721428619,
+                "accuracy": 0.9776422764227642,
+                "all_classes_present": true
+              }
+            },
+            "route_percent": {
+              "utility": -38.89073897408214,
+              "direction": -87.98494549575759,
+              "volatility": -25.062301279873445
+            },
+            "versus_A_percent": -30.78618746416715,
+            "versus_Macro_percent": 5.040562730188469
+          }
+        },
+        "cross_research": {
+          "42": {
+            "decoded_utility": 0.00599543761253921,
+            "direct_utility": 0.05166856491298401,
+            "decoded_R2": [
+              0.995662449609723,
+              0.9881581912281402,
+              0.9941380116740457,
+              0.9942506632931055,
+              0.9915442260025716,
+              0.9887217241278418
+            ],
+            "decoded_direction": {
+              "16": {
+                "classes": [
+                  "down",
+                  "mixed",
+                  "up"
+                ],
+                "confusion": [
+                  [
+                    125,
+                    4,
+                    0
+                  ],
+                  [
+                    5,
+                    165,
+                    3
+                  ],
+                  [
+                    0,
+                    2,
+                    135
+                  ]
+                ],
+                "support": [
+                  129,
+                  173,
+                  137
+                ],
+                "balanced_accuracy_present": 0.9693836444498519,
+                "macro_f1_present": 0.9687904908835141,
+                "accuracy": 0.9681093394077449,
+                "all_classes_present": true
+              },
+              "64": {
+                "classes": [
+                  "down",
+                  "mixed",
+                  "up"
+                ],
+                "confusion": [
+                  [
+                    51,
+                    7,
+                    0
+                  ],
+                  [
+                    3,
+                    306,
+                    0
+                  ],
+                  [
+                    0,
+                    10,
+                    62
+                  ]
+                ],
+                "support": [
+                  58,
+                  309,
+                  72
+                ],
+                "balanced_accuracy_present": 0.9102375726915399,
+                "macro_f1_present": 0.9348139501407969,
+                "accuracy": 0.9544419134396356,
+                "all_classes_present": true
+              }
+            },
+            "route_percent": {
+              "utility": -88.39635352242463,
+              "direction": -90.11864969517197,
+              "volatility": -86.74961041095219
+            },
+            "versus_A_percent": -70.01115804531592,
+            "versus_Macro_percent": -37.27013797733304
+          },
+          "43": {
+            "decoded_utility": 0.006565491095920734,
+            "direct_utility": 0.05293698431936661,
+            "decoded_R2": [
+              0.995047000404598,
+              0.9896756595901974,
+              0.9936201319371355,
+              0.9943271251932794,
+              0.9914568397313412,
+              0.987130643908844
+            ],
+            "decoded_direction": {
+              "16": {
+                "classes": [
+                  "down",
+                  "mixed",
+                  "up"
+                ],
+                "confusion": [
+                  [
+                    124,
+                    5,
+                    0
+                  ],
+                  [
+                    1,
+                    164,
+                    8
+                  ],
+                  [
+                    0,
+                    1,
+                    136
+                  ]
+                ],
+                "support": [
+                  129,
+                  173,
+                  137
+                ],
+                "balanced_accuracy_present": 0.9673059728724146,
+                "macro_f1_present": 0.96687256819312,
+                "accuracy": 0.9658314350797267,
+                "all_classes_present": true
+              },
+              "64": {
+                "classes": [
+                  "down",
+                  "mixed",
+                  "up"
+                ],
+                "confusion": [
+                  [
+                    53,
+                    5,
+                    0
+                  ],
+                  [
+                    0,
+                    308,
+                    1
+                  ],
+                  [
+                    0,
+                    8,
+                    64
+                  ]
+                ],
+                "support": [
+                  58,
+                  309,
+                  72
+                ],
+                "balanced_accuracy_present": 0.9331485821274907,
+                "macro_f1_present": 0.9556797673585994,
+                "accuracy": 0.9681093394077449,
+                "all_classes_present": true
+              }
+            },
+            "route_percent": {
+              "utility": -87.59753472862867,
+              "direction": -90.18212099375206,
+              "volatility": -84.94344058432436
+            },
+            "versus_A_percent": -81.04726588990718,
+            "versus_Macro_percent": 94.74394207448371
+          }
+        }
+      }
+    },
+    "next_question": {
+      "task_id": "F11",
+      "status": "question_scoped_no_new_run_protocol",
+      "question": "把已有解码读取能力整理成固定的历史状态研究接口，并单列近乎平盘/低波动可靠性；明确线性方便性与历史可恢复性的不同验收含义。",
+      "source": "Macro保持参照，D只作研究比较；不得按本轮分数重选种子或候选",
+      "constraints": "不新拟合头，不自动追加120轮，不用新接口追溯修改旧门槛；新实验若需训练须另锁定协议/预算；V13独立验收继续开放"
+    }
   }
 }
