@@ -439,13 +439,13 @@
         "docs/BABEL_RECONSTRUCTION_EXIT.md"
       ],
       "depends_on": [],
-      "next_action": "修复阶段结束且方案冻结后，在未参与设计的数据上验收；当前不为补几天数据启动新训练。",
+      "next_action": "接口收尾后F11/V13准备限定历史能力的独立验收卡与数据资格清单；先锁来源/范围/基线/门槛/预算，再决定是否有足够未研究数据评分。当前不启动新训练或复跑旧快照。",
       "human_status": "等待最终验收",
       "original_problem": "反复用于设计的研究集不能再充当最终独立测试集。",
       "completed_work": "已纠正数据集身份和结论表述；没有完成最终独立验收。",
       "completion_rule": "冻结模型、用途和门槛后，完成真正独立数据的验收。此项不计作当前代码已修复。",
       "closed": false,
-      "remaining_work": "修复阶段结束且方案冻结后，在未参与设计的数据上验收；当前不为补几天数据启动新训练。"
+      "remaining_work": "接口收尾后F11/V13准备限定历史能力的独立验收卡与数据资格清单；先锁来源/范围/基线/门槛/预算，再决定是否有足够未研究数据评分。当前不启动新训练或复跑旧快照。"
     },
     {
       "id": "V14",
@@ -670,7 +670,7 @@
         "docs/BABEL_STATE_COVERAGE768_REVIEW.json",
         "docs/BABEL_STATE_READABILITY768_REVIEW.json"
       ],
-      "next_action": "F11运行固定历史状态API的零训练资格检查；核对原来源与全部9604端点，报告平盘/低波动证据不足，收到报告后归档接口边界并收束。无新增训练或拟合。"
+      "next_action": "F11完成既定零训练接口资格并归档；随后F11/V13冻结有限历史能力声明，准备独立验收卡和未参与研究的数据资格清单。未锁新评分预算，不新增训练；不得把旧完整门槛未过改为通过。"
     },
     {
       "id": "F12",
@@ -692,7 +692,7 @@
       "F11"
     ]
   ],
-  "next_after_active": "F11运行固定历史状态API的零训练资格检查；核对原来源与全部9604端点，报告平盘/低波动证据不足，收到报告后归档接口边界并收束。无新增训练或拟合。",
+  "next_after_active": "F11完成既定零训练接口资格并归档；随后F11/V13冻结有限历史能力声明，准备独立验收卡和未参与研究的数据资格清单。未锁新评分预算，不新增训练；不得把旧完整门槛未过改为通过。",
   "active_training_budget": {
     "task_ids": [
       "F11"
@@ -1765,7 +1765,7 @@
       "output": "checkpoints/babel_state_readability768",
       "archive": "/root/autodl-tmp/download/babel_state_readability768_reports.tar.gz"
     },
-    "next_action": "F11运行固定历史状态API的零训练资格检查；核对原来源与全部9604端点，报告平盘/低波动证据不足，收到报告后归档接口边界并收束。无新增训练或拟合。",
+    "next_action": "F11完成既定零训练接口资格并归档；随后F11/V13冻结有限历史能力声明，准备独立验收卡和未参与研究的数据资格清单。未锁新评分预算，不新增训练；不得把旧完整门槛未过改为通过。",
     "latest_report": "docs/BABEL_STATE_READABILITY768_REVIEW.json",
     "results": {
       "archive_sha256": "2f458806236b8a9bb16423d187ee8390d2b3830d0eca403aef12f7269b818a4e",
@@ -2510,6 +2510,101 @@
       "output": "checkpoints/babel_history_state768",
       "archive": "/root/autodl-tmp/download/babel_history_state768_reports.tar.gz"
     },
-    "next_action": "F11运行固定历史状态API的零训练资格检查；核对原来源与全部9604端点，报告平盘/低波动证据不足，收到报告后归档接口边界并收束。无新增训练或拟合。"
+    "next_action": "F11完成既定零训练接口资格并归档；随后F11/V13冻结有限历史能力声明，准备独立验收卡和未参与研究的数据资格清单。未锁新评分预算，不新增训练；不得把旧完整门槛未过改为通过。"
+  },
+  "direction_review": {
+    "date": "2026-10-10",
+    "task_ids": [
+      "F11",
+      "V13"
+    ],
+    "status": "documentation_review_complete_no_new_execution",
+    "reason_for_queue_clarification": "用户要求审视路线是否走偏；最近解码恢复证据与线性失败并存，接口检查是工程收尾而非科研升级，原下一步缺少独立验收准备出口。",
+    "judgment": "目标保留，局部验证/接口工程存在挤占主线风险；有限研究原型成立，通用状态与独立确认未完成。",
+    "three_distinct_claims": [
+      "historical_information_recoverability",
+      "readout_cost_and_accessibility",
+      "value_for_declared_use"
+    ],
+    "sequence": [
+      {
+        "task_ids": [
+          "F11"
+        ],
+        "stage": "已授权API数值资格与归档",
+        "execution": "pending_report",
+        "budget": "unchanged_history_state_interface_protocol"
+      },
+      {
+        "task_ids": [
+          "F11",
+          "V13"
+        ],
+        "stage": "限定成果冻结、独立验收卡与数据资格清单",
+        "execution": "not_prepared_not_run",
+        "new_training_budget": 0,
+        "new_model_scoring_budget": 0,
+        "launch_condition": "新卡、未参与设计的数据资格、资源预算全部锁定后才可评分"
+      }
+    ],
+    "retain_old_failures": true,
+    "promote_model": false,
+    "new_experiment_launched": false,
+    "known_limits": [
+      "historical rule reconstruction is not practical advantage over directly computing those rules",
+      "p128 utility is not all-bar utility",
+      "4789 parent windows and overlapping exposures are not independent sample counts",
+      "1 floor and0 low_to_1bp samples cannot certify low volatility reliability",
+      "old snapshot had no fresh data; present independent data availability unknown"
+    ],
+    "next_action": "F11完成既定零训练接口资格并归档；随后F11/V13冻结有限历史能力声明，准备独立验收卡和未参与研究的数据资格清单。未锁新评分预算，不新增训练；不得把旧完整门槛未过改为通过。",
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "逐项对照N01-N09及F01-F12；分开信息保留、读取方便性、用途价值，接口诊断设结束点。",
+        "remaining": "价量通用复用价值未验收，不能只凭四历史规则宣布实现最终目标。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "核对既有rolling768/4/8、28输入与原查询头；保留EMA前史和p128用途范围，重叠/跨周期仅共同内容对齐。",
+        "remaining": "不判定4层最优或全状态语义一致，不新增结构。"
+      },
+      "training": {
+        "status": "not_applicable",
+        "evidence": "零训练/拟合，保留原Q/S矩阵结果和预算；接口protocol逐字段不变。",
+        "remaining": "不证明原损失最优，不启动保留分支。"
+      },
+      "validation": {
+        "status": "open",
+        "evidence": "旧线性用途失败、有限恢复性通过、API待验、V13未完成分开；下一交付明确为验收卡。",
+        "remaining": "独立数据/任务/实际代价/阈值与预算尚未形成完整新卡，未实施新的科学验收。"
+      },
+      "data": {
+        "status": "open",
+        "evidence": "复核4789父窗口与曝光区别、原低波动支持缺口；读取旧时间确认无新行情结论及范围。",
+        "remaining": "未在本轮盘点新行情；不推断今天数据仍无更新，不能宣称未研究数据已经可用。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "仅同步roadmap MD/JSON并追加日志；不改历史协议、源码与接口预算；当前工程状态继续待AutoDL。",
+        "remaining": "文档审查不替代GPU一致性测试，没有新V13可执行入口。"
+      }
+    },
+    "evidence": [
+      "docs/BABEL_STATE_COVERAGE768_REVIEW.json",
+      "docs/BABEL_STATE_READABILITY768_REVIEW.json",
+      "docs/BABEL_RECONSTRUCTION_EXIT.md",
+      "docs/BABEL_STATE_ROLLOUT768_REVIEW.md",
+      "docs/BABEL_TIME_CONFIRMATION_REVIEW.md"
+    ],
+    "checks": {
+      "historical_results_and_source": "unchanged",
+      "active_protocol_and_budget": "unchanged",
+      "all_requirement_repair_future_ids": "retained",
+      "six_aspect_review": "synchronized",
+      "progress_log": "append_only",
+      "new_neural_execution": "none",
+      "code_tests": "not_run_documentation_only"
+    }
   }
 }
