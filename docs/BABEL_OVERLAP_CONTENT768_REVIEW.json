@@ -1,0 +1,1426 @@
+{
+  "integrity": {
+    "bound_files_verified": 3694,
+    "implementation_and_protocol_exact": true,
+    "previous_interface_completion_exact": true,
+    "completion_sha256": "835cce0452c27173f808b530871624b59041dceb71552074bf32e4c722e4139d",
+    "manifest_sha256": "eb443ed6111a8b95555252c44d66fa6b208dfd386674b5731f592bdefa3d6882"
+  },
+  "execution": {
+    "ledger_chunks": 1204,
+    "main": 38416,
+    "single": 24,
+    "qualification_counts": {
+      "source_query": 1204,
+      "source_state": 1204,
+      "frozen_tensors": 1204,
+      "single_p64/state": 12,
+      "single_p64/query": 12,
+      "single_p127/state": 12,
+      "single_p127/query": 12
+    },
+    "qualification_max_abs": {
+      "source_query": 0.0,
+      "source_state": 0.0,
+      "frozen_tensors": 0.0,
+      "single_p64/state": 3.3117830753326416e-06,
+      "single_p64/query": 2.47955322265625e-05,
+      "single_p127/state": 3.069639205932617e-06,
+      "single_p127/query": 2.47955322265625e-05
+    },
+    "frozen_final_files": 12,
+    "budget": {
+      "used_seconds": 821.7798976106569,
+      "attempts": [
+        {
+          "started_unix": 1791628463.8596745,
+          "reserved_seconds": 7200.0,
+          "elapsed_seconds": 821.7798976106569,
+          "exit_code": 0
+        }
+      ]
+    },
+    "runtime": {
+      "runtime": {
+        "profile": "context",
+        "effective": {
+          "mha_fastpath": false,
+          "matmul_tf32": false,
+          "cudnn_tf32": false,
+          "cudnn_benchmark": false,
+          "threads": 4
+        }
+      },
+      "torch": "2.8.0+cu128",
+      "gpu": "NVIDIA GeForce RTX 3080 Ti"
+    },
+    "started_shanghai": "2026-10-10T18:34:23.859674+08:00"
+  },
+  "raw_data": {
+    "verified_csvs": 349,
+    "windows": 9604,
+    "common_pairs": 7203,
+    "max_raw_path_abs": 1.1102230246251565e-15,
+    "max_source_target_abs": 4.663204560273471e-06
+  },
+  "recomputations": {
+    "checks": {
+      "raw_log_path": 3,
+      "raw_vs_source_cache": 3,
+      "independent_source_fields": 4824,
+      "independent_physical": 1476,
+      "source_original_replay": 672,
+      "summary_recompute": 6684,
+      "summary_original_float32_compat": 288,
+      "bootstrap_recompute": 1584,
+      "accounting_recompute": 36
+    },
+    "max_abs_differences": {
+      "raw_log_path": 1.1102230246251565e-15,
+      "raw_vs_source_cache": 4.663204560273471e-06,
+      "independent_source_fields": 0.0,
+      "independent_physical": 1.1795009413617663e-12,
+      "source_original_replay": 3.814697265625e-06,
+      "summary_recompute": 9.50794998288984e-13,
+      "summary_original_float32_compat": 0.0,
+      "bootstrap_recompute": 3.3306690738754696e-15,
+      "accounting_recompute": 6.661338147750939e-16
+    },
+    "note": "Physical geometry, masks, original CSV windows, distributions and both cluster bootstraps independently recomputed. Original Q/bands use source implementation on saved arrays, not an independent definition. No real model loaded locally; CUDA single checks and freeze attestations use report receipts."
+  },
+  "results": {
+    "test_macro_s42": {
+      "1": {
+        "consensus_fraction": 0.8683143550775794,
+        "earlier_shape_rmse_parent_mean_bps": 13.19711700410907,
+        "later_shape_rmse_parent_mean_bps": 13.164282361533317,
+        "disagreement_rmse_parent_mean_bps": 11.381842534382777,
+        "disagreement_rmse_parent_p95_bps": 27.221842257134504,
+        "later_minus_earlier": {
+          "month": {
+            "mean": -2.2172573916390333e-07,
+            "low": -5.093477492050144e-07,
+            "high": -2.0018436729912505e-08,
+            "parents": 984,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": -2.2172573916390333e-07,
+            "low": -6.569648008069932e-07,
+            "high": 1.383936301201686e-07,
+            "parents": 984,
+            "groups": 498,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.5050813008130082,
+        "baseline_mse_gains": {
+          "common": 0.9895723690947557,
+          "entered": 0.9927612754537593,
+          "leaving": 0.9960954124780732
+        },
+        "anchored_later_to_earlier_mse_ratio": 0.9320198417271874,
+        "shape_later_to_earlier_mse_ratio": 0.9546630580223227
+      },
+      "16": {
+        "consensus_fraction": 0.7598419399851091,
+        "earlier_shape_rmse_parent_mean_bps": 12.273491052115828,
+        "later_shape_rmse_parent_mean_bps": 13.779329626319994,
+        "disagreement_rmse_parent_mean_bps": 13.457805752104493,
+        "disagreement_rmse_parent_p95_bps": 31.92501356668374,
+        "later_minus_earlier": {
+          "month": {
+            "mean": 2.9629581359590243e-07,
+            "low": -1.0591433464454994e-06,
+            "high": 1.1667535926914237e-06,
+            "parents": 984,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 2.9629581359590243e-07,
+            "low": -1.3531202843767754e-06,
+            "high": 1.4067053650470068e-06,
+            "parents": 984,
+            "groups": 498,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.18699186991869918,
+        "baseline_mse_gains": {
+          "common": 0.9879428800028183,
+          "entered": 0.9953956535326696,
+          "leaving": 0.9968012697566723
+        },
+        "anchored_later_to_earlier_mse_ratio": 0.9109418644547898,
+        "shape_later_to_earlier_mse_ratio": 1.0613881146759117
+      },
+      "64": {
+        "consensus_fraction": 0.7019941503819559,
+        "earlier_shape_rmse_parent_mean_bps": 7.9127194165149,
+        "later_shape_rmse_parent_mean_bps": 15.96099552178048,
+        "disagreement_rmse_parent_mean_bps": 15.92099786214299,
+        "disagreement_rmse_parent_p95_bps": 37.975958292763956,
+        "later_minus_earlier": {
+          "month": {
+            "mean": 4.009038934397231e-06,
+            "low": 2.144209133990908e-06,
+            "high": 6.254378995526147e-06,
+            "parents": 984,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 4.009038934397231e-06,
+            "low": 2.891655984809939e-06,
+            "high": 5.390313134594546e-06,
+            "parents": 984,
+            "groups": 498,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.003048780487804878,
+        "baseline_mse_gains": {
+          "common": 0.9790243045649719,
+          "entered": 0.9964653100467149,
+          "leaving": 0.9947422628888505
+        },
+        "anchored_later_to_earlier_mse_ratio": 2.684921468462534,
+        "shape_later_to_earlier_mse_ratio": 2.5512328258953594
+      }
+    },
+    "test_macro_s43": {
+      "1": {
+        "consensus_fraction": 0.9001212712555268,
+        "earlier_shape_rmse_parent_mean_bps": 10.572897353446077,
+        "later_shape_rmse_parent_mean_bps": 10.625339407350737,
+        "disagreement_rmse_parent_mean_bps": 8.716013988457227,
+        "disagreement_rmse_parent_p95_bps": 22.48030581546452,
+        "later_minus_earlier": {
+          "month": {
+            "mean": -1.3003012580463115e-07,
+            "low": -6.13711216627954e-07,
+            "high": 1.752214353150815e-07,
+            "parents": 984,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": -1.3003012580463115e-07,
+            "low": -6.147627748747475e-07,
+            "high": 2.428987426992912e-07,
+            "parents": 984,
+            "groups": 498,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.48272357723577236,
+        "baseline_mse_gains": {
+          "common": 0.9917673367871261,
+          "entered": 0.9951049202207082,
+          "leaving": 0.9935624245057907
+        },
+        "anchored_later_to_earlier_mse_ratio": 0.8108103650920819,
+        "shape_later_to_earlier_mse_ratio": 0.966126126231328
+      },
+      "16": {
+        "consensus_fraction": 0.8112807814644745,
+        "earlier_shape_rmse_parent_mean_bps": 8.016867865479044,
+        "later_shape_rmse_parent_mean_bps": 11.158609213449704,
+        "disagreement_rmse_parent_mean_bps": 10.332787696320786,
+        "disagreement_rmse_parent_p95_bps": 25.187936997097705,
+        "later_minus_earlier": {
+          "month": {
+            "mean": 1.6746263063559427e-06,
+            "low": 6.697007428926661e-07,
+            "high": 3.069101686912331e-06,
+            "parents": 984,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 1.6746263063559427e-06,
+            "low": 1.0219343107416058e-06,
+            "high": 2.4734245446054087e-06,
+            "parents": 984,
+            "groups": 498,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.028455284552845527,
+        "baseline_mse_gains": {
+          "common": 0.9921874932098,
+          "entered": 0.9987019521921683,
+          "leaving": 0.9956285062776932
+        },
+        "anchored_later_to_earlier_mse_ratio": 1.9700412928089173,
+        "shape_later_to_earlier_mse_ratio": 1.70182167911221
+      },
+      "64": {
+        "consensus_fraction": 0.6817930526541344,
+        "earlier_shape_rmse_parent_mean_bps": 4.9477069662755655,
+        "later_shape_rmse_parent_mean_bps": 13.198105967127473,
+        "disagreement_rmse_parent_mean_bps": 12.924210830385794,
+        "disagreement_rmse_parent_p95_bps": 31.20601276278116,
+        "later_minus_earlier": {
+          "month": {
+            "mean": 3.9630104411999015e-06,
+            "low": 1.637025631291614e-06,
+            "high": 7.227332751185821e-06,
+            "parents": 984,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 3.9630104411999015e-06,
+            "low": 2.5079790255475255e-06,
+            "high": 5.8358417260066e-06,
+            "parents": 984,
+            "groups": 498,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.0,
+        "baseline_mse_gains": {
+          "common": 0.9847130858125973,
+          "entered": 0.9981560347448404,
+          "leaving": 0.9946830036123622
+        },
+        "anchored_later_to_earlier_mse_ratio": 4.098273834868757,
+        "shape_later_to_earlier_mse_ratio": 3.907827065799995
+      }
+    },
+    "test_D_s42": {
+      "1": {
+        "consensus_fraction": 0.8661843793855619,
+        "earlier_shape_rmse_parent_mean_bps": 13.1556048152347,
+        "later_shape_rmse_parent_mean_bps": 13.276337935000777,
+        "disagreement_rmse_parent_mean_bps": 11.78780668363749,
+        "disagreement_rmse_parent_p95_bps": 26.050140273456325,
+        "later_minus_earlier": {
+          "month": {
+            "mean": -3.201865390206381e-07,
+            "low": -9.654230638778512e-07,
+            "high": 8.189062549754966e-08,
+            "parents": 984,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": -3.201865390206381e-07,
+            "low": -1.1235681719175302e-06,
+            "high": 2.378250542868399e-07,
+            "parents": 984,
+            "groups": 498,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.4695121951219512,
+        "baseline_mse_gains": {
+          "common": 0.9907477554242425,
+          "entered": 0.9977383332575364,
+          "leaving": 0.9960789187661155
+        },
+        "anchored_later_to_earlier_mse_ratio": 0.9225827249560428,
+        "shape_later_to_earlier_mse_ratio": 0.9272482438619101
+      },
+      "16": {
+        "consensus_fraction": 0.786700253417716,
+        "earlier_shape_rmse_parent_mean_bps": 12.524092267832575,
+        "later_shape_rmse_parent_mean_bps": 13.97204103693115,
+        "disagreement_rmse_parent_mean_bps": 14.179171874105144,
+        "disagreement_rmse_parent_p95_bps": 32.16200325098882,
+        "later_minus_earlier": {
+          "month": {
+            "mean": 7.820550123313619e-07,
+            "low": 3.083692501817249e-07,
+            "high": 1.5918672429436762e-06,
+            "parents": 984,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 7.820550123313619e-07,
+            "low": 1.7221216363434161e-07,
+            "high": 1.504072991388152e-06,
+            "parents": 984,
+            "groups": 498,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.25914634146341464,
+        "baseline_mse_gains": {
+          "common": 0.9899790544972884,
+          "entered": 0.9985413444162646,
+          "leaving": 0.9975574766854466
+        },
+        "anchored_later_to_earlier_mse_ratio": 1.2212276968419489,
+        "shape_later_to_earlier_mse_ratio": 1.2089046828612382
+      },
+      "64": {
+        "consensus_fraction": 0.6637194137169208,
+        "earlier_shape_rmse_parent_mean_bps": 7.07438802763373,
+        "later_shape_rmse_parent_mean_bps": 16.29130480698779,
+        "disagreement_rmse_parent_mean_bps": 16.38697832625348,
+        "disagreement_rmse_parent_p95_bps": 38.546800287600135,
+        "later_minus_earlier": {
+          "month": {
+            "mean": 5.0946890215201845e-06,
+            "low": 2.326514782341291e-06,
+            "high": 8.808555901789955e-06,
+            "parents": 984,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 5.0946890215201845e-06,
+            "low": 3.5224386613648636e-06,
+            "high": 7.086070506976169e-06,
+            "parents": 984,
+            "groups": 498,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.0,
+        "baseline_mse_gains": {
+          "common": 0.9821048865986715,
+          "entered": 0.9979536869823304,
+          "leaving": 0.9948042037288735
+        },
+        "anchored_later_to_earlier_mse_ratio": 4.9065318725601506,
+        "shape_later_to_earlier_mse_ratio": 4.725156485109328
+      }
+    },
+    "test_D_s43": {
+      "1": {
+        "consensus_fraction": 0.8739725878177357,
+        "earlier_shape_rmse_parent_mean_bps": 12.5781097491733,
+        "later_shape_rmse_parent_mean_bps": 12.534755333478905,
+        "disagreement_rmse_parent_mean_bps": 11.596964849091739,
+        "disagreement_rmse_parent_p95_bps": 26.470161885828954,
+        "later_minus_earlier": {
+          "month": {
+            "mean": -4.903686863447749e-08,
+            "low": -2.0875225980221723e-07,
+            "high": 8.685736311617273e-08,
+            "parents": 984,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": -4.903686863447749e-08,
+            "low": -2.666252692724931e-07,
+            "high": 1.738485377346941e-07,
+            "parents": 984,
+            "groups": 498,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.5040650406504065,
+        "baseline_mse_gains": {
+          "common": 0.9907795049759907,
+          "entered": 0.995813762939008,
+          "leaving": 0.9952777985357518
+        },
+        "anchored_later_to_earlier_mse_ratio": 0.9298142729948549,
+        "shape_later_to_earlier_mse_ratio": 0.988464506144321
+      },
+      "16": {
+        "consensus_fraction": 0.7782803973126934,
+        "earlier_shape_rmse_parent_mean_bps": 11.06560224660529,
+        "later_shape_rmse_parent_mean_bps": 13.169634670428097,
+        "disagreement_rmse_parent_mean_bps": 13.673908710310267,
+        "disagreement_rmse_parent_p95_bps": 31.817285079394505,
+        "later_minus_earlier": {
+          "month": {
+            "mean": 1.4711004071326526e-06,
+            "low": 5.680200055336501e-07,
+            "high": 2.746939259952134e-06,
+            "parents": 984,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 1.4711004071326526e-06,
+            "low": 6.508763167146634e-07,
+            "high": 2.7200029431564122e-06,
+            "parents": 984,
+            "groups": 498,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.20020325203252032,
+        "baseline_mse_gains": {
+          "common": 0.9904640809311618,
+          "entered": 0.9986701548927317,
+          "leaving": 0.9958140780392026
+        },
+        "anchored_later_to_earlier_mse_ratio": 1.439275769539538,
+        "shape_later_to_earlier_mse_ratio": 1.4598692603259826
+      },
+      "64": {
+        "consensus_fraction": 0.7079089958083635,
+        "earlier_shape_rmse_parent_mean_bps": 7.96171461632788,
+        "later_shape_rmse_parent_mean_bps": 14.790298939609785,
+        "disagreement_rmse_parent_mean_bps": 14.853390145774723,
+        "disagreement_rmse_parent_p95_bps": 37.38663088819031,
+        "later_minus_earlier": {
+          "month": {
+            "mean": 4.737500924598652e-06,
+            "low": 1.7685529544554828e-06,
+            "high": 8.953039808548834e-06,
+            "parents": 984,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 4.737500924598652e-06,
+            "low": 2.9132059529327513e-06,
+            "high": 7.153413820510901e-06,
+            "parents": 984,
+            "groups": 498,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.008130081300813009,
+        "baseline_mse_gains": {
+          "common": 0.9812800681310107,
+          "entered": 0.997540758821341,
+          "leaving": 0.9957430066774487
+        },
+        "anchored_later_to_earlier_mse_ratio": 3.954035486587718,
+        "shape_later_to_earlier_mse_ratio": 3.7436935678012158
+      }
+    },
+    "cross_research_macro_s42": {
+      "1": {
+        "consensus_fraction": 0.7749707192609812,
+        "earlier_shape_rmse_parent_mean_bps": 8.868806794222467,
+        "later_shape_rmse_parent_mean_bps": 8.91611269011495,
+        "disagreement_rmse_parent_mean_bps": 8.763146765858751,
+        "disagreement_rmse_parent_p95_bps": 14.315186819554379,
+        "later_minus_earlier": {
+          "month": {
+            "mean": 5.742879541486047e-09,
+            "low": -3.8158873943875105e-08,
+            "high": 5.1117138342383275e-08,
+            "parents": 439,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 5.742879541486047e-09,
+            "low": -3.500882496070976e-08,
+            "high": 5.376804746365763e-08,
+            "parents": 439,
+            "groups": 206,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.4783599088838269,
+        "baseline_mse_gains": {
+          "common": 0.9939033055653449,
+          "entered": 0.9942039323958876,
+          "leaving": 0.9940329270173587
+        },
+        "anchored_later_to_earlier_mse_ratio": 0.9743038500558735,
+        "shape_later_to_earlier_mse_ratio": 1.00574965165343
+      },
+      "16": {
+        "consensus_fraction": 0.7197234845653807,
+        "earlier_shape_rmse_parent_mean_bps": 8.286216984257342,
+        "later_shape_rmse_parent_mean_bps": 9.310738614320023,
+        "disagreement_rmse_parent_mean_bps": 9.780676960389714,
+        "disagreement_rmse_parent_p95_bps": 16.06605765796934,
+        "later_minus_earlier": {
+          "month": {
+            "mean": 1.9998053022828262e-07,
+            "low": 1.462036699173926e-07,
+            "high": 2.691257356011642e-07,
+            "parents": 439,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 1.9998053022828262e-07,
+            "low": 1.4750632032626951e-07,
+            "high": 2.526991670151895e-07,
+            "parents": 439,
+            "groups": 206,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.21184510250569477,
+        "baseline_mse_gains": {
+          "common": 0.9930094394830704,
+          "entered": 0.9967844550496964,
+          "leaving": 0.9971622122015593
+        },
+        "anchored_later_to_earlier_mse_ratio": 1.2093884078936301,
+        "shape_later_to_earlier_mse_ratio": 1.2225566941250823
+      },
+      "64": {
+        "consensus_fraction": 0.5875505234157761,
+        "earlier_shape_rmse_parent_mean_bps": 5.481553799130369,
+        "later_shape_rmse_parent_mean_bps": 10.853875651402241,
+        "disagreement_rmse_parent_mean_bps": 11.443755747122788,
+        "disagreement_rmse_parent_p95_bps": 20.314256160689087,
+        "later_minus_earlier": {
+          "month": {
+            "mean": 1.1486467142831698e-06,
+            "low": 8.34058340290296e-07,
+            "high": 1.6194643318044386e-06,
+            "parents": 439,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 1.1486467142831698e-06,
+            "low": 9.310207619777995e-07,
+            "high": 1.4341849170618673e-06,
+            "parents": 439,
+            "groups": 206,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.004555808656036446,
+        "baseline_mse_gains": {
+          "common": 0.988708214052568,
+          "entered": 0.9982283692292306,
+          "leaving": 0.9977713479202269
+        },
+        "anchored_later_to_earlier_mse_ratio": 3.73582818286505,
+        "shape_later_to_earlier_mse_ratio": 3.9288529196250437
+      }
+    },
+    "cross_research_macro_s43": {
+      "1": {
+        "consensus_fraction": 0.7851184013192212,
+        "earlier_shape_rmse_parent_mean_bps": 6.753018478608875,
+        "later_shape_rmse_parent_mean_bps": 6.931086794827482,
+        "disagreement_rmse_parent_mean_bps": 6.606890022032286,
+        "disagreement_rmse_parent_p95_bps": 11.089618529387796,
+        "later_minus_earlier": {
+          "month": {
+            "mean": 3.7757622284759723e-08,
+            "low": 1.8622092514613056e-08,
+            "high": 6.096665081615028e-08,
+            "parents": 439,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 3.7757622284759723e-08,
+            "low": 9.142143553133837e-09,
+            "high": 7.362329169856241e-08,
+            "parents": 439,
+            "groups": 206,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.43735763097949887,
+        "baseline_mse_gains": {
+          "common": 0.9963133711050298,
+          "entered": 0.9975636763814777,
+          "leaving": 0.9963085492718262
+        },
+        "anchored_later_to_earlier_mse_ratio": 1.1157063892906283,
+        "shape_later_to_earlier_mse_ratio": 1.064340751742746
+      },
+      "16": {
+        "consensus_fraction": 0.687693038780201,
+        "earlier_shape_rmse_parent_mean_bps": 5.285344943670512,
+        "later_shape_rmse_parent_mean_bps": 7.279200292483929,
+        "disagreement_rmse_parent_mean_bps": 7.4434568081179515,
+        "disagreement_rmse_parent_p95_bps": 12.908892451751159,
+        "later_minus_earlier": {
+          "month": {
+            "mean": 3.144232810115482e-07,
+            "low": 2.4163174704832494e-07,
+            "high": 4.1369482745020556e-07,
+            "parents": 439,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 3.144232810115482e-07,
+            "low": 2.5695245437810253e-07,
+            "high": 3.9400917850504763e-07,
+            "parents": 439,
+            "groups": 206,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.03416856492027335,
+        "baseline_mse_gains": {
+          "common": 0.9962857095396367,
+          "entered": 0.9990038072135758,
+          "leaving": 0.997021813563423
+        },
+        "anchored_later_to_earlier_mse_ratio": 1.8231413306769848,
+        "shape_later_to_earlier_mse_ratio": 1.8421733466449826
+      },
+      "64": {
+        "consensus_fraction": 0.562425775074716,
+        "earlier_shape_rmse_parent_mean_bps": 3.352701969137019,
+        "later_shape_rmse_parent_mean_bps": 8.787194828754206,
+        "disagreement_rmse_parent_mean_bps": 9.034534711120862,
+        "disagreement_rmse_parent_p95_bps": 16.311259337373343,
+        "later_minus_earlier": {
+          "month": {
+            "mean": 8.69068553661997e-07,
+            "low": 6.31473879520371e-07,
+            "high": 1.212432105309975e-06,
+            "parents": 439,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 8.69068553661997e-07,
+            "low": 7.062148296076588e-07,
+            "high": 1.074990377019922e-06,
+            "parents": 439,
+            "groups": 206,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.0,
+        "baseline_mse_gains": {
+          "common": 0.9931855892844353,
+          "entered": 0.9992523446395315,
+          "leaving": 0.998480314131533
+        },
+        "anchored_later_to_earlier_mse_ratio": 6.951474660775998,
+        "shape_later_to_earlier_mse_ratio": 6.842996055937081
+      }
+    },
+    "cross_research_D_s42": {
+      "1": {
+        "consensus_fraction": 0.7813966456353123,
+        "earlier_shape_rmse_parent_mean_bps": 9.416876578630971,
+        "later_shape_rmse_parent_mean_bps": 9.406825941945772,
+        "disagreement_rmse_parent_mean_bps": 9.292214727756006,
+        "disagreement_rmse_parent_p95_bps": 14.854343130991907,
+        "later_minus_earlier": {
+          "month": {
+            "mean": -1.0376592380201199e-08,
+            "low": -8.89493638575197e-08,
+            "high": 6.678982969935326e-08,
+            "parents": 439,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": -1.0376592380201199e-08,
+            "low": -7.554742984695222e-08,
+            "high": 4.4617766379468564e-08,
+            "parents": 439,
+            "groups": 206,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.5170842824601367,
+        "baseline_mse_gains": {
+          "common": 0.9932052296542461,
+          "entered": 0.9970618158476695,
+          "leaving": 0.9978227389776022
+        },
+        "anchored_later_to_earlier_mse_ratio": 1.0185087876553005,
+        "shape_later_to_earlier_mse_ratio": 0.9907482084855187
+      },
+      "16": {
+        "consensus_fraction": 0.6966019738980687,
+        "earlier_shape_rmse_parent_mean_bps": 8.658753774909723,
+        "later_shape_rmse_parent_mean_bps": 9.872635161915353,
+        "disagreement_rmse_parent_mean_bps": 10.74620818382476,
+        "disagreement_rmse_parent_p95_bps": 18.46910360287637,
+        "later_minus_earlier": {
+          "month": {
+            "mean": 2.99087790384179e-07,
+            "low": 1.903716021768115e-07,
+            "high": 4.456013593964436e-07,
+            "parents": 439,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 2.99087790384179e-07,
+            "low": 2.1602936073868948e-07,
+            "high": 3.861357253002407e-07,
+            "parents": 439,
+            "groups": 206,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.2437357630979499,
+        "baseline_mse_gains": {
+          "common": 0.9924504990073962,
+          "entered": 0.9984887503065701,
+          "leaving": 0.9972424211785892
+        },
+        "anchored_later_to_earlier_mse_ratio": 1.3682938148403805,
+        "shape_later_to_earlier_mse_ratio": 1.3219990352681925
+      },
+      "64": {
+        "consensus_fraction": 0.5788588799864218,
+        "earlier_shape_rmse_parent_mean_bps": 5.426081371149202,
+        "later_shape_rmse_parent_mean_bps": 11.4564692620911,
+        "disagreement_rmse_parent_mean_bps": 11.95092757562474,
+        "disagreement_rmse_parent_p95_bps": 20.601684180500158,
+        "later_minus_earlier": {
+          "month": {
+            "mean": 1.3857892039887801e-06,
+            "low": 9.396091929728458e-07,
+            "high": 1.9599855873204256e-06,
+            "parents": 439,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 1.3857892039887801e-06,
+            "low": 1.0964807470145217e-06,
+            "high": 1.7307140408024169e-06,
+            "parents": 439,
+            "groups": 206,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.0,
+        "baseline_mse_gains": {
+          "common": 0.9877752928737572,
+          "entered": 0.9984236257279271,
+          "leaving": 0.9974621038878375
+        },
+        "anchored_later_to_earlier_mse_ratio": 5.204226693043597,
+        "shape_later_to_earlier_mse_ratio": 4.920593641338974
+      }
+    },
+    "cross_research_D_s43": {
+      "1": {
+        "consensus_fraction": 0.7479654994074899,
+        "earlier_shape_rmse_parent_mean_bps": 8.712343267052454,
+        "later_shape_rmse_parent_mean_bps": 8.82934645439431,
+        "disagreement_rmse_parent_mean_bps": 9.305181868033205,
+        "disagreement_rmse_parent_p95_bps": 15.11086430119845,
+        "later_minus_earlier": {
+          "month": {
+            "mean": 3.4397172385456447e-08,
+            "low": 2.5344264074839686e-10,
+            "high": 7.353235783053454e-08,
+            "parents": 439,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 3.4397172385456447e-08,
+            "low": -2.3611070557132273e-08,
+            "high": 9.047530342289504e-08,
+            "parents": 439,
+            "groups": 206,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.489749430523918,
+        "baseline_mse_gains": {
+          "common": 0.9940277362367543,
+          "entered": 0.9963694353862791,
+          "leaving": 0.9963626120811783
+        },
+        "anchored_later_to_earlier_mse_ratio": 1.0154884160106008,
+        "shape_later_to_earlier_mse_ratio": 1.0356798291586087
+      },
+      "16": {
+        "consensus_fraction": 0.6406964456116909,
+        "earlier_shape_rmse_parent_mean_bps": 7.818991084025915,
+        "later_shape_rmse_parent_mean_bps": 9.25502310798912,
+        "disagreement_rmse_parent_mean_bps": 10.658695600677639,
+        "disagreement_rmse_parent_p95_bps": 16.923363651127463,
+        "later_minus_earlier": {
+          "month": {
+            "mean": 3.6492895262213573e-07,
+            "low": 2.2708669263920068e-07,
+            "high": 5.72390111333201e-07,
+            "parents": 439,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 3.6492895262213573e-07,
+            "low": 2.56914419949997e-07,
+            "high": 4.898522027991207e-07,
+            "parents": 439,
+            "groups": 206,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.214123006833713,
+        "baseline_mse_gains": {
+          "common": 0.9935675171233423,
+          "entered": 0.9983704700546138,
+          "leaving": 0.996748989877444
+        },
+        "anchored_later_to_earlier_mse_ratio": 1.4989818262739332,
+        "shape_later_to_earlier_mse_ratio": 1.4955792949615105
+      },
+      "64": {
+        "consensus_fraction": 0.5803498889320109,
+        "earlier_shape_rmse_parent_mean_bps": 5.79454590781561,
+        "later_shape_rmse_parent_mean_bps": 10.337963938212425,
+        "disagreement_rmse_parent_mean_bps": 11.089267890660773,
+        "disagreement_rmse_parent_p95_bps": 19.127336882440773,
+        "later_minus_earlier": {
+          "month": {
+            "mean": 1.0584746671019442e-06,
+            "low": 6.824283954735432e-07,
+            "high": 1.6323258024565004e-06,
+            "parents": 439,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 1.0584746671019442e-06,
+            "low": 7.88863321487953e-07,
+            "high": 1.3995963963862536e-06,
+            "parents": 439,
+            "groups": 206,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "better_later_parent_fraction": 0.022779043280182234,
+        "baseline_mse_gains": {
+          "common": 0.9891345460527152,
+          "entered": 0.9980832361064161,
+          "leaving": 0.9977759587970014
+        },
+        "anchored_later_to_earlier_mse_ratio": 3.9845126928655326,
+        "shape_later_to_earlier_mse_ratio": 3.641051177023821
+      }
+    }
+  },
+  "schema": "babel-overlap-content768-review-v1",
+  "date": "2026-10-12",
+  "task_ids": [
+    "F03"
+  ],
+  "requirement_ids": [
+    "N01",
+    "N02",
+    "N03",
+    "N04",
+    "N05",
+    "N07",
+    "N08",
+    "N09"
+  ],
+  "archive": {
+    "path": "/Users/bardan/Downloads/babel_overlap_content768_reports.tar.gz",
+    "sha256": "68aee6658481a2ab4a2fb0f85df94b494b52a330aa64f06f0153d8fecd0b4dc2",
+    "compressed_bytes": 359175021,
+    "members": 3704,
+    "duplicate": false,
+    "safe_member_checks": "Only relative regular files/directories; no traversal or links; extracted into a fresh temporary directory."
+  },
+  "source": {
+    "run": "/root/autodl-tmp/obson/checkpoints/babel_overlap_content768",
+    "interface": "/root/autodl-tmp/obson/checkpoints/babel_history_state768",
+    "interface_completion": "a192bf5f0e733375bc36bb2af26e250561f1ddb664202b2dcb1107156d25b7d0",
+    "models": {
+      "macro_s42": "original_best97",
+      "macro_s43": "original_best94",
+      "D_s42": "fixed_last120",
+      "D_s43": "fixed_last120"
+    },
+    "protocol": {
+      "schema": "babel-overlap-content768-v1",
+      "task_ids": [
+        "F03"
+      ],
+      "source_completion": "a192bf5f0e733375bc36bb2af26e250561f1ddb664202b2dcb1107156d25b7d0",
+      "models": [
+        "macro_s42",
+        "macro_s43",
+        "D_s42",
+        "D_s43"
+      ],
+      "splits": {
+        "val": 978,
+        "test": 984,
+        "cross_research": 439
+      },
+      "positions": [
+        64,
+        112,
+        127,
+        128
+      ],
+      "shifts": [
+        1,
+        16,
+        64
+      ],
+      "common_predicted_counts": [
+        126,
+        111,
+        63
+      ],
+      "inventory_sha256": "007e788425787f60c115ff559796a36448908d0800e53c23986e7a04b5b2b0f1",
+      "asof": "2026-09-12 03:00:00",
+      "micro": 8,
+      "jobs": 1,
+      "session_seconds": 7200,
+      "main_endpoints_max": 38416,
+      "single_endpoints_max": 24,
+      "optimizer_updates": 0,
+      "readout_fits": 0,
+      "promoted": false,
+      "raw_price_truth": "original float64 closes; physical price and source-cache scoring separate",
+      "activity": "original train scales and causal feature masks; no raw-activity certification",
+      "inference": "2000 paired month/contract-period-month cluster bootstrap; seed20261010; >=100 parents/6groups",
+      "tails": "P50/P95 across parent-window errors descriptive; intervals for paired mean contrasts",
+      "decision": "no winner/quality gate; distinguish shared error, disagreement and later correction; review then select one core change",
+      "resume": "committed chunks only; attempted forwards reserved before execution; interrupted uncommitted inference is export-only",
+      "resource": "first main chunk reused for timing/memory; projected remaining main cost*1.5+600s must fit remaining time; minimum2GiB disk",
+      "single_checks": "first parent p64 and p127, each model/cohort; no additional uncounted warmups"
+    },
+    "git_release": "b9c73d0"
+  },
+  "implementation": "complete_bound_code_and_protocol_match",
+  "execution_status": "complete_exit0_reviewed",
+  "scientific_conclusion": "current_paired_readout_instability_and_later_shape_error_increase_supported_no_model_promotion",
+  "promoted": false,
+  "local_real_model_execution": false,
+  "decision_summary": {
+    "1": {
+      "model_seed_cohort_cells": 8,
+      "disagreement_parent_mean_rmse_bps_range": [
+        6.606890022032286,
+        11.78780668363749
+      ],
+      "disagreement_parent_p95_rmse_bps_range": [
+        11.089618529387796,
+        27.221842257134504
+      ],
+      "consensus_error_fraction_range": [
+        0.7479654994074899,
+        0.9001212712555268
+      ],
+      "later_better_parent_fraction_range": [
+        0.43735763097949887,
+        0.5170842824601367
+      ],
+      "later_shape_worse_both_cluster_intervals": 1,
+      "flat_price_better_both_cluster_intervals": 24,
+      "flat_price_comparisons": 24
+    },
+    "16": {
+      "model_seed_cohort_cells": 8,
+      "disagreement_parent_mean_rmse_bps_range": [
+        7.4434568081179515,
+        14.179171874105144
+      ],
+      "disagreement_parent_p95_rmse_bps_range": [
+        12.908892451751159,
+        32.16200325098882
+      ],
+      "consensus_error_fraction_range": [
+        0.6406964456116909,
+        0.8112807814644745
+      ],
+      "later_better_parent_fraction_range": [
+        0.028455284552845527,
+        0.25914634146341464
+      ],
+      "later_shape_worse_both_cluster_intervals": 7,
+      "flat_price_better_both_cluster_intervals": 24,
+      "flat_price_comparisons": 24
+    },
+    "64": {
+      "model_seed_cohort_cells": 8,
+      "disagreement_parent_mean_rmse_bps_range": [
+        9.034534711120862,
+        16.38697832625348
+      ],
+      "disagreement_parent_p95_rmse_bps_range": [
+        16.311259337373343,
+        38.546800287600135
+      ],
+      "consensus_error_fraction_range": [
+        0.562425775074716,
+        0.7079089958083635
+      ],
+      "later_better_parent_fraction_range": [
+        0.0,
+        0.022779043280182234
+      ],
+      "later_shape_worse_both_cluster_intervals": 8,
+      "flat_price_better_both_cluster_intervals": 24,
+      "flat_price_comparisons": 24
+    }
+  },
+  "findings": [
+    "Only one-bar shift: 126 shared predicted closes have 6.61–11.79bp mean parent-centered RMS disagreement across eight research cells; not a price-offset-only artifact or numerical batch noise.",
+    "Mean-prediction error is 74.80–90.01% of mean true shape MSE at shift1, and 56.24–70.79% at shift64. This is an arithmetic decomposition, not common latent information, causal effect or removable error percentage.",
+    "At shift64 the SAME63 historical closes move from ages1..63 in A to ages65..127 in B. Later shape MSE increases in all8 research cells under both cluster intervals; this is independently re-encoded rolling context, not a recurrent forgetting experiment.",
+    "Shift1 correction is mixed; shift16 later deterioration has both-cluster support in7/8 cells. Do not claim every update is worse or compare shifts as a pure dose curve: each shift selects a different common span.",
+    "Price common/entered/leaving beat flat in72/72 descriptive comparisons; the MSE gain97.90–99.93% is against a weak baseline and is NOT reconstruction accuracy or information retained.",
+    "Activity entered/leaving five fields beat fixed train-mean baselines in240/240 supported two-cluster comparisons; body40/48, with8 inconclusive and no confirmed worse under both. These correlated comparisons are not independent successes or overall acceptance.",
+    "D does not automatically replace Macro. Source training histories differ; previously confirmed D/A original-loss reconstruction gains do not imply physical shape/overlap superiority over Macro."
+  ],
+  "old_conclusion_disposition": [
+    {
+      "claim": "Current learned states retain useful historical content",
+      "disposition": "retained_with_scope",
+      "evidence": "Physical price and activity versus flat/train-mean, with body tail/edge exceptions",
+      "impact": "No restart of previous reconstruction research; not a prediction claim."
+    },
+    {
+      "claim": "Earlier overlap experiment allowed later correction",
+      "disposition": "retained_for_old_sources_not_generalized",
+      "evidence": "Current shift1 mixed; current shift64 later shape is worse in8/8 cells",
+      "impact": "Old2-layer result remains; different source and centering forbid direct numerical progress comparison."
+    },
+    {
+      "claim": "More consistency necessarily makes representation better",
+      "disposition": "unsupported_do_not_adopt",
+      "evidence": "Substantial residual true error after averaging; older consistency recipes had incomplete upgrades",
+      "impact": "No pure consistency or entire-vector matching trial prioritized."
+    },
+    {
+      "claim": "Old V01–V12/V14 repair responsibility closed",
+      "disposition": "unchanged",
+      "evidence": "New frozen diagnostic; no newly identified production correctness failure",
+      "impact": "No mass rerun or altered old acceptance thresholds."
+    },
+    {
+      "claim": "Encoder/decoder/loss scale is the sole cause",
+      "disposition": "not_identified",
+      "evidence": "Age, context, input-position and endpoint all change together",
+      "impact": "Next controlled intervention may test a specific mechanism; no causal attribution from this diagnostic."
+    }
+  ],
+  "limits": [
+    "Weights/full feature caches are intentionally absent; locally available interface completion and p128 output arrays match exactly. Single-vs-batch/freeze and remote ancestry verification use bound CUDA receipts, not a local neural re-execution.",
+    "True price paths independently rebuilt from349 original hash-identical CSVs and all9604 endpoint windows. Activity truth is the bound original feature/mask target, not independent raw-activity recertification.",
+    "Research cohorts are repeatedly used; 13 month groups per research cohort. CIs are paired cluster diagnostics, not multiplicity-adjusted independent acceptance. V13 remains blocked on new data.",
+    "Centered shape can hide constant offsets; anchored errors and signed offsets were retained. Shape agreement does not measure fullOHLC, current-bar fields, future prediction, or all128-position utility.",
+    "Original Q/bands replay uses unchanged source functions on saved arrays; arithmetic maxima3.814697e-6 with FP32 reduction differences, within2e-6+2e-6relative replay check. Physical paired metrics/CI independently recomputed near machine precision; original float32 scalar quantiles reproduced exactly with original float32 virtual-index arithmetic. No source numerical gate was relaxed.",
+    "Descriptive P95 is across parent-window mean errors, not pooled bar errors or statistical tail certification."
+  ],
+  "next_action": {
+    "task_ids": [
+      "F03",
+      "F11"
+    ],
+    "stage": "one_core_intervention_design_next_not_an_executable_training_card",
+    "question": "Can age-independent physical-content supervision preserve the same observed historical segment as it moves from recent to older queries, while protecting new/recent price and activity?",
+    "reason": "Current true-error and arithmetic residual evidence prioritizes content fidelity. Pure agreement cannot remove shared error, and old macro/frozen-reader recipes did not provide balanced upgrades.",
+    "not_a_repeat_of_old_recipe": "Compare original seven-field loss with shared-coordinate true-content supervision through the existing trainable query. A possible extra consistency arm must be separable from content and compared only against content, not bundled as a single claimed cause. No frozen old answer as truth, no new coarse-only head. Exact formulation is pending design.",
+    "required_controls": [
+      "Same source per seed, same complete128 causal input and original partitions",
+      "Same paired windows, true targets, exposure/update/optimizer/selection opportunities",
+      "Original objective control versus actual-content supervision; do not misattribute combined changes to consistency",
+      "Measure real content, disagreement, original near/mid/far and price/activity, entering/leaving, both seeds/research cohorts",
+      "Predeclare source, objective scales, budget, acceptance/stopping before code/AutoDL run; no weight/epoch/shift search to rescue result"
+    ],
+    "source_selection": "Macro remains reference; trial initialization not silently substituted or promoted; exact trial source must be fixed in the next card",
+    "new_training_budget": 0,
+    "new_command": null,
+    "closed_current_diagnostic": true,
+    "retained": [
+      "F01_dense128",
+      "F02",
+      "F04",
+      "F05",
+      "F06",
+      "F07",
+      "F08",
+      "F09",
+      "F10",
+      "F12",
+      "V13_new_data"
+    ]
+  },
+  "review": {
+    "purpose": {
+      "status": "pass_for_scope",
+      "evidence": "F03 tests reusable known-history content versus mere agreement; findings mapped to prior conclusions and one next intervention question.",
+      "remaining": "General-purpose price/activity state, predictive value and original full exit are not accepted."
+    },
+    "architecture": {
+      "status": "pass_for_scope",
+      "evidence": "Fixed Macro97/94 and D_last120; original768/4/8 and own query, independently complete128 per endpoint. p128 outputs equal prior interface for all12model/cohorts.",
+      "remaining": "Age/context/position intertwined; no encoder/decoder unique cause, no recurrent update or future extrapolation."
+    },
+    "training": {
+      "status": "not_applicable",
+      "evidence": "Zero optimizer updates/fits/selection,38416main+24single forwards. No new model or auxiliary loss trained.",
+      "remaining": "Improvement from content or consistency supervision needs a new fully locked matched card; no experimental budget added."
+    },
+    "validation": {
+      "status": "pass_for_scope",
+      "evidence": "All physical per-parent errors, masks, distributions,1584 two-cluster intervals and36error-accounting records independently recomputed; original672Q/band arrays replayed separately.",
+      "remaining": "Research data reused;13month groups; P95 descriptive, flat/mean weak baselines; no overall quality gate or multiplicity-adjusted acceptance."
+    },
+    "data": {
+      "status": "pass_for_scope",
+      "evidence": "349rawCSV hashes;2401parent identities match old interface;9604raw128windows and7203overlaps match, original asof and row bounds checked. Physical path maxdiff1.11e-15.",
+      "remaining": "No fresh data and no independent raw-activity certification; feature EMA prehistory remains."
+    },
+    "engineering": {
+      "status": "pass_for_scope",
+      "evidence": "3694bound files, protocol/implementation exact;1204chunks concatenate exactly;3660chunk checks and12final freeze receipts pass; single-query maxdiff2.479553e-5; source_query/state diff0. One attempt821.78s on3080Ti exit0.",
+      "remaining": "No local real weights; CUDA receipts attest neural checks. Review only changes evidence/roadmap/log, not historical bound source. UserBABEL.md edit preserved."
+    }
+  },
+  "field_baseline_summary": {
+    "body": {
+      "comparisons": 48,
+      "supported_both": 48,
+      "improved_both": 40,
+      "baseline_mse_gain_range": [
+        -0.07987369416179613,
+        0.9888700295461987
+      ],
+      "valid_parent_count_range": [
+        439,
+        984
+      ]
+    },
+    "volume_vs_prior_ema32": {
+      "comparisons": 48,
+      "supported_both": 48,
+      "improved_both": 48,
+      "baseline_mse_gain_range": [
+        0.5267962521716847,
+        0.9967029463263337
+      ],
+      "valid_parent_count_range": [
+        439,
+        984
+      ]
+    },
+    "delta_log_volume": {
+      "comparisons": 48,
+      "supported_both": 48,
+      "improved_both": 48,
+      "baseline_mse_gain_range": [
+        0.18276933275628882,
+        0.9959558673444047
+      ],
+      "valid_parent_count_range": [
+        439,
+        984
+      ]
+    },
+    "oi_change_percent_asinh": {
+      "comparisons": 48,
+      "supported_both": 48,
+      "improved_both": 48,
+      "baseline_mse_gain_range": [
+        0.2260280780064492,
+        0.9936990804637506
+      ],
+      "valid_parent_count_range": [
+        439,
+        984
+      ]
+    },
+    "oi_per_volume_asinh": {
+      "comparisons": 48,
+      "supported_both": 48,
+      "improved_both": 48,
+      "baseline_mse_gain_range": [
+        0.3496820389541806,
+        0.9957176761931278
+      ],
+      "valid_parent_count_range": [
+        438,
+        984
+      ]
+    },
+    "turnover_asinh": {
+      "comparisons": 48,
+      "supported_both": 48,
+      "improved_both": 48,
+      "baseline_mse_gain_range": [
+        0.811402743935406,
+        0.9965933837688179
+      ],
+      "valid_parent_count_range": [
+        439,
+        984
+      ]
+    }
+  },
+  "field_baseline_inconclusive": [
+    {
+      "cell": "test_macro_s42",
+      "field_region": "shift1/body/entered_b",
+      "gain": 0.4872513721114541,
+      "intervals": {
+        "month": [
+          -0.6036939271469348,
+          0.01254112096709682
+        ],
+        "contract_period_month": [
+          -0.646512052600062,
+          0.050791628254341616
+        ]
+      }
+    },
+    {
+      "cell": "test_macro_s42",
+      "field_region": "shift1/body/leaving_a",
+      "gain": 0.07588358418187979,
+      "intervals": {
+        "month": [
+          -0.15370003507043922,
+          0.025130577520957893
+        ],
+        "contract_period_month": [
+          -0.14631295322044174,
+          0.01388291265342331
+        ]
+      }
+    },
+    {
+      "cell": "test_macro_s43",
+      "field_region": "shift1/body/leaving_a",
+      "gain": 0.06916792456124887,
+      "intervals": {
+        "month": [
+          -0.19212625221629692,
+          0.029926546435338805
+        ],
+        "contract_period_month": [
+          -0.1407732784497953,
+          0.014938620660937822
+        ]
+      }
+    },
+    {
+      "cell": "test_D_s42",
+      "field_region": "shift1/body/entered_b",
+      "gain": 0.5567215808674018,
+      "intervals": {
+        "month": [
+          -0.6541468368760556,
+          -0.033108979982830467
+        ],
+        "contract_period_month": [
+          -0.704113362359518,
+          0.029868076836753646
+        ]
+      }
+    },
+    {
+      "cell": "test_D_s43",
+      "field_region": "shift1/body/entered_b",
+      "gain": 0.3732329235557865,
+      "intervals": {
+        "month": [
+          -0.6340225766780946,
+          0.36196747216944747
+        ],
+        "contract_period_month": [
+          -0.6787740442587151,
+          0.40744545463578824
+        ]
+      }
+    },
+    {
+      "cell": "cross_research_macro_s42",
+      "field_region": "shift1/body/leaving_a",
+      "gain": -0.07987369416179613,
+      "intervals": {
+        "month": [
+          -0.0008755604960324881,
+          0.06695005714081084
+        ],
+        "contract_period_month": [
+          -0.004367882698902357,
+          0.061021892454122206
+        ]
+      }
+    },
+    {
+      "cell": "cross_research_macro_s43",
+      "field_region": "shift1/body/leaving_a",
+      "gain": -0.017880464959154407,
+      "intervals": {
+        "month": [
+          -0.022804096426236882,
+          0.04120165510927034
+        ],
+        "contract_period_month": [
+          -0.030047133060501777,
+          0.04123573187741771
+        ]
+      }
+    },
+    {
+      "cell": "cross_research_D_s43",
+      "field_region": "shift1/body/leaving_a",
+      "gain": 5.641392404465151e-05,
+      "intervals": {
+        "month": [
+          -0.04346651743655208,
+          0.06900039219087632
+        ],
+        "contract_period_month": [
+          -0.057870891711682845,
+          0.07750526504930969
+        ]
+      }
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
-  "updated": "2026-10-10",
-  "current_iteration": "F03_overlap_content_runner_ready",
-  "current_iteration_scope": "路线再审后完成一次固定Macro/D共同历史诊断入口；零训练/拟合，CPU数据与合成测试通过，等待AutoDL真实执行。",
+  "updated": "2026-10-12",
+  "current_iteration": "F03_overlap_content_report_reviewed_diagnostic_closed",
+  "current_iteration_scope": "当前Macro/D共同历史诊断完成并复核；固定四模型零训练。历史变老后的读出误差增大，共同错误与分歧并存；保留旧成果和Macro参照，下一项聚焦真实内容保留的匹配干预设计，尚无新训练卡。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -543,7 +543,7 @@
         "V04",
         "V05"
       ],
-      "status": "固定模型诊断入口已就绪；CPU/合成准入通过，AutoDL未执行，科学结论待报告",
+      "status": "本次四模型零训练诊断已完成并复核，结论归档；真实内容年龄保真为下一设计问题，F03总方向未全部完成",
       "reentry_or_acceptance": "先比同一物理共同内容及新旧信息进入/退出；相似度、距离单调、整个向量强制相等均不作为语义判据",
       "evidence": [
         "docs/BABEL_OVERLAP768_REVIEW.md",
@@ -551,9 +551,13 @@
         "docs/BABEL_NEXT_CORE_REASONING.md",
         "docs/BABEL_CONSISTENCY768_REVIEW.md",
         "docs/BABEL_HISTORY_STRUCTURE768_REVIEW.md",
-        "docs/BABEL_MACRO_HISTORY768_REVIEW.md"
+        "docs/BABEL_MACRO_HISTORY768_REVIEW.md",
+        "docs/BABEL_OVERLAP_CONTENT768_REVIEW.json"
       ],
-      "next_action": "运行F03唯一新入口并复核配对报告；分清共同错误/读出分歧/晚状态纠错后选择一项核心改动，不自动扩诊断矩阵或追加旧损失。"
+      "next_action": "F03诊断已完成收束，不重跑；下一步只设计同一真实历史在不同回看距离的内容保留训练对照，由F11保护原价量能力。新卡须先锁来源、精确目标、预算和停止规则，当前无新训练命令；不追加诊断矩阵。",
+      "implementation": "fixed_diagnostic_complete",
+      "execution": "completed_exit0_reviewed",
+      "conclusion": "共同历史存在真实读出变化；shift64晚形状误差在8/8研究条件中增大，仍不能识别唯一根因或晋升模型"
     },
     {
       "id": "F04",
@@ -675,7 +679,7 @@
         "docs/BABEL_STATE_READABILITY768_REVIEW.json",
         "docs/BABEL_HISTORY_STATE768_REVIEW.json"
       ],
-      "next_action": "接口与raw价格真值组件已归档，无需重跑；当前研究执行项为F03，V13等待新独立数据但不阻塞研究；完整用途未过保留。"
+      "next_action": "接口/raw价格真值已归档不重跑；F03诊断现已完成，下一核心干预设计须保护F11既有价量/当前/近中远能力。V13继续等待新独立数据，原完整用途未过。"
     },
     {
       "id": "F12",
@@ -694,19 +698,20 @@
   ],
   "active_order": [
     [
-      "F03"
+      "F03",
+      "F11"
     ]
   ],
-  "next_after_active": "运行F03唯一新入口并复核配对报告；分清共同错误/读出分歧/晚状态纠错后选择一项核心改动，不自动扩诊断矩阵或追加旧损失。",
+  "next_after_active": "F03诊断已完成收束，不重跑；下一步只设计同一真实历史在不同回看距离的内容保留训练对照，由F11保护原价量能力。新卡须先锁来源、精确目标、预算和停止规则，当前无新训练命令；不追加诊断矩阵。",
   "active_training_budget": {
     "task_ids": [
       "F03"
     ],
-    "status": "diagnostic_only_no_training_authorized_by_this_card",
+    "status": "diagnostic_completed_no_new_training_card",
     "jobs_max": 0,
     "worker_epochs_max": 0,
     "optimizer_updates_max": 0,
-    "reason": "F03完整诊断入口已就绪；只执行冻结推理预算，仍无训练/拟合预算。"
+    "reason": "冻结诊断额度已完成并归档，新增训练/拟合/推理预算均0；下一项是有依据的核心干预设计，非自动运行。"
   },
   "aliases": {
     "R0": [
@@ -754,7 +759,7 @@
   "blocked_followups": {
     "F_optimization": "用户已允许F03证据复盘和诊断设计；训练仍须根据明确缺口锁定新对照，不能因V13无数据而停止全部研究，也不能自动追加旧损失。"
   },
-  "active_phase": "f03_code_ready_cuda_not_run_scientific_result_pending",
+  "active_phase": "f03_diagnostic_closed_next_content_intervention_design_only",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -2906,7 +2911,7 @@
       "N09"
     ],
     "title": "当前固定状态的共同历史、新进入与移出内容诊断",
-    "status": "runner_implemented_synthetic_and_raw_cpu_checks_passed_cuda_pending",
+    "status": "diagnostic_completed_reviewed_no_promotion",
     "authorization": "用户确认没有新数据仍继续研究，并同意先复盘F03证据、再决定核心改动；V13仍未完成但不阻塞本研究诊断。",
     "question": "当前Macro/D窗口移动时，误差主要来自共同历史分歧、双方共同偏差，还是新进入/移出部分未保留？晚状态变化是否在纠正早状态错误？",
     "hypotheses": [
@@ -3059,11 +3064,13 @@
       "run_commands": {
         "run": "bash scripts/babel_overlap_content768_autodl.sh all",
         "export": "bash scripts/babel_overlap_content768_autodl.sh export",
-        "complete_copyable_commands": "docs/BABEL_ROADMAP.md section11"
+        "complete_copyable_commands": "docs/BABEL_ROADMAP.md section11",
+        "status": "historical_reproduction_only_completed_do_not_rerun"
       },
       "export_required": "/root/autodl-tmp/download/babel_overlap_content768_reports.tar.gz, success/failed/stopped",
-      "execution": "not_run_on_AutoDL",
-      "scientific_acceptance": "not_assessed"
+      "execution": "complete_on_AutoDL_reviewed",
+      "scientific_acceptance": "diagnostic_reviewed_not_model_promotion",
+      "current_command_required": false
     },
     "cpu_geometry": {
       "scope": "CPU raw paired-row geometry only; raw truth substituted as oracle prediction; no neural execution or model-quality claim",
@@ -3221,6 +3228,170 @@
         }
       },
       "seconds": 3.3114998340024613
+    },
+    "implementation": "complete",
+    "execution": "complete_exit0_one_attempt_821_7799_seconds",
+    "scientific_acceptance": "bounded_diagnostic_findings_supported_not_model_quality_acceptance",
+    "next_action": "F03诊断已完成收束，不重跑；下一步只设计同一真实历史在不同回看距离的内容保留训练对照，由F11保护原价量能力。新卡须先锁来源、精确目标、预算和停止规则，当前无新训练命令；不追加诊断矩阵。",
+    "latest_report": {
+      "path": "/Users/bardan/Downloads/babel_overlap_content768_reports.tar.gz",
+      "sha256": "68aee6658481a2ab4a2fb0f85df94b494b52a330aa64f06f0153d8fecd0b4dc2",
+      "completion_sha256": "835cce0452c27173f808b530871624b59041dceb71552074bf32e4c722e4139d",
+      "review": "docs/BABEL_OVERLAP_CONTENT768_REVIEW.json",
+      "execution": "complete_exit0",
+      "seconds": 821.7798976106569,
+      "updates": 0,
+      "fits": 0,
+      "selected_models": 0,
+      "main_forwards": 38416,
+      "single_forwards": 24,
+      "bound_files_verified": 3694
+    },
+    "results": {
+      "decision_summary": {
+        "1": {
+          "model_seed_cohort_cells": 8,
+          "disagreement_parent_mean_rmse_bps_range": [
+            6.606890022032286,
+            11.78780668363749
+          ],
+          "disagreement_parent_p95_rmse_bps_range": [
+            11.089618529387796,
+            27.221842257134504
+          ],
+          "consensus_error_fraction_range": [
+            0.7479654994074899,
+            0.9001212712555268
+          ],
+          "later_better_parent_fraction_range": [
+            0.43735763097949887,
+            0.5170842824601367
+          ],
+          "later_shape_worse_both_cluster_intervals": 1,
+          "flat_price_better_both_cluster_intervals": 24,
+          "flat_price_comparisons": 24
+        },
+        "16": {
+          "model_seed_cohort_cells": 8,
+          "disagreement_parent_mean_rmse_bps_range": [
+            7.4434568081179515,
+            14.179171874105144
+          ],
+          "disagreement_parent_p95_rmse_bps_range": [
+            12.908892451751159,
+            32.16200325098882
+          ],
+          "consensus_error_fraction_range": [
+            0.6406964456116909,
+            0.8112807814644745
+          ],
+          "later_better_parent_fraction_range": [
+            0.028455284552845527,
+            0.25914634146341464
+          ],
+          "later_shape_worse_both_cluster_intervals": 7,
+          "flat_price_better_both_cluster_intervals": 24,
+          "flat_price_comparisons": 24
+        },
+        "64": {
+          "model_seed_cohort_cells": 8,
+          "disagreement_parent_mean_rmse_bps_range": [
+            9.034534711120862,
+            16.38697832625348
+          ],
+          "disagreement_parent_p95_rmse_bps_range": [
+            16.311259337373343,
+            38.546800287600135
+          ],
+          "consensus_error_fraction_range": [
+            0.562425775074716,
+            0.7079089958083635
+          ],
+          "later_better_parent_fraction_range": [
+            0.0,
+            0.022779043280182234
+          ],
+          "later_shape_worse_both_cluster_intervals": 8,
+          "flat_price_better_both_cluster_intervals": 24,
+          "flat_price_comparisons": 24
+        }
+      },
+      "activity_supported_vs_mean": {
+        "both_cluster_better": 240,
+        "comparisons": 240
+      },
+      "body_supported_vs_mean": {
+        "both_cluster_better": 40,
+        "comparisons": 48,
+        "inconclusive": 8
+      },
+      "note": "These are correlated descriptive comparisons, not independent acceptance tests. Shared-error arithmetic does not identify causal mechanism or useful information percentage."
+    },
+    "report_review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "F03 tests reusable known-history content versus mere agreement; findings mapped to prior conclusions and one next intervention question.",
+        "remaining": "General-purpose price/activity state, predictive value and original full exit are not accepted."
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "Fixed Macro97/94 and D_last120; original768/4/8 and own query, independently complete128 per endpoint. p128 outputs equal prior interface for all12model/cohorts.",
+        "remaining": "Age/context/position intertwined; no encoder/decoder unique cause, no recurrent update or future extrapolation."
+      },
+      "training": {
+        "status": "not_applicable",
+        "evidence": "Zero optimizer updates/fits/selection,38416main+24single forwards. No new model or auxiliary loss trained.",
+        "remaining": "Improvement from content or consistency supervision needs a new fully locked matched card; no experimental budget added."
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "All physical per-parent errors, masks, distributions,1584 two-cluster intervals and36error-accounting records independently recomputed; original672Q/band arrays replayed separately.",
+        "remaining": "Research data reused;13month groups; P95 descriptive, flat/mean weak baselines; no overall quality gate or multiplicity-adjusted acceptance."
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "349rawCSV hashes;2401parent identities match old interface;9604raw128windows and7203overlaps match, original asof and row bounds checked. Physical path maxdiff1.11e-15.",
+        "remaining": "No fresh data and no independent raw-activity certification; feature EMA prehistory remains."
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "3694bound files, protocol/implementation exact;1204chunks concatenate exactly;3660chunk checks and12final freeze receipts pass; single-query maxdiff2.479553e-5; source_query/state diff0. One attempt821.78s on3080Ti exit0.",
+        "remaining": "No local real weights; CUDA receipts attest neural checks. Review only changes evidence/roadmap/log, not historical bound source. UserBABEL.md edit preserved."
+      }
+    },
+    "next_core_question": {
+      "task_ids": [
+        "F03",
+        "F11"
+      ],
+      "stage": "one_core_intervention_design_next_not_an_executable_training_card",
+      "question": "Can age-independent physical-content supervision preserve the same observed historical segment as it moves from recent to older queries, while protecting new/recent price and activity?",
+      "reason": "Current true-error and arithmetic residual evidence prioritizes content fidelity. Pure agreement cannot remove shared error, and old macro/frozen-reader recipes did not provide balanced upgrades.",
+      "not_a_repeat_of_old_recipe": "Compare original seven-field loss with shared-coordinate true-content supervision through the existing trainable query. A possible extra consistency arm must be separable from content and compared only against content, not bundled as a single claimed cause. No frozen old answer as truth, no new coarse-only head. Exact formulation is pending design.",
+      "required_controls": [
+        "Same source per seed, same complete128 causal input and original partitions",
+        "Same paired windows, true targets, exposure/update/optimizer/selection opportunities",
+        "Original objective control versus actual-content supervision; do not misattribute combined changes to consistency",
+        "Measure real content, disagreement, original near/mid/far and price/activity, entering/leaving, both seeds/research cohorts",
+        "Predeclare source, objective scales, budget, acceptance/stopping before code/AutoDL run; no weight/epoch/shift search to rescue result"
+      ],
+      "source_selection": "Macro remains reference; trial initialization not silently substituted or promoted; exact trial source must be fixed in the next card",
+      "new_training_budget": 0,
+      "new_command": null,
+      "closed_current_diagnostic": true,
+      "retained": [
+        "F01_dense128",
+        "F02",
+        "F04",
+        "F05",
+        "F06",
+        "F07",
+        "F08",
+        "F09",
+        "F10",
+        "F12",
+        "V13_new_data"
+      ]
     }
   },
   "training_architecture_coverage_review": {
@@ -3352,6 +3523,7 @@
       "V13": "缺新独立数据不阻塞研究；旧重复研究集不能改称独立确认。"
     },
     "decision": "不重开已关闭纠错，不重跑全部历史，不晋升D，不增加训练或读头矩阵；F03顺序/来源/预算不变。F03只回答其中共同历史问题，不替所有缺口销项。",
-    "reporting": "按为什么做→此前证据→本轮具体问题→结论影响→下一步汇报。"
+    "reporting": "按为什么做→此前证据→本轮具体问题→结论影响→下一步汇报。",
+    "subsequent_f03_status": "2026-10-12 fixed diagnostic completed and reviewed; prior coverage conclusions unchanged; see f03_overlap_reentry_plan.latest_report"
   }
 }
