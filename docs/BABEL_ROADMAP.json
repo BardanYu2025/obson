@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-12",
-  "current_iteration": "F01_F03_multiscale_price_objective_components",
-  "current_iteration_scope": "表示学习继续；两臂双种子主损失对照的设计与组件阶段，完整AutoDL入口未完成，不等待下游选择或人工标签。",
+  "current_iteration": "F01_F03_multiscale768_complete_AutoDL_release",
+  "current_iteration_scope": "表示学习继续；已交付两臂双种子主价格损失对照完整AutoDL入口。等待真实CUDA执行及报告，不以代码就绪宣布科学接纳。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -508,7 +508,7 @@
         "V06",
         "V08"
       ],
-      "status": "旧全位置矩阵已结束；第20节从头主价格损失对照设计及组件准备，显式同时128仍保留",
+      "status": "旧全位置矩阵已结束；第20节从头主价格损失对照完整入口就绪，等待AutoDL；显式同时128仍保留",
       "reentry_or_acceptance": "在匹配起点/预算下区分密度、位置权重和完整历史；不能把旧warm-start失败当否定证据；1～128指bar位置而非向量维度，完整上下文方案的首个受监督位置需额外已知历史，历史不足显式mask",
       "evidence": [
         "docs/BABEL_STATE_ROLLOUT768_PLAN.md",
@@ -516,7 +516,7 @@
         "docs/BABEL_UNIFORM_CONTEXT768_REVIEW.md",
         "docs/BABEL_STATE_COVERAGE768_REVIEW.json"
       ],
-      "next_action": "完成两臂主目标比较完整入口；不追加旧A/B/C/D训练轮数。"
+      "next_action": "运行第20节唯一multiscale入口，复核新主目标与同期control；不追加旧A/B/C/D轮数。"
     },
     {
       "id": "F02",
@@ -558,7 +558,8 @@
       "next_action": "旧H/G配方保持收束；第20节新主目标试验只对共同物理内容做保护与诊断，不新增G或宣称F03整体完成。",
       "implementation": "complete_remote_executed",
       "execution": "six_fixed60_workers_complete_reviewed",
-      "conclusion": "真实内容监督有稳定的共同形状收益，但保留保护未通过；额外一致性无预定增益，固定配方收束，不晋升。"
+      "conclusion": "真实内容监督有稳定的共同形状收益，但保留保护未通过；额外一致性无预定增益，固定配方收束，不晋升。",
+      "current_protection_role": "第20节新主目标比较中的共同物理内容保护，完整入口就绪，真实执行待报告；不改变旧H/G结论。"
     },
     {
       "id": "F04",
@@ -708,18 +709,19 @@
     "F01",
     "F03"
   ],
-  "next_after_active": "完成第20节的来源编排、CUDA资源预检、原子恢复、全128评价与分片导出，再发布唯一新运行命令；不运行旧F11接口或少样本方案。",
+  "next_after_active": "只运行 scripts/babel_multiscale768_autodl.sh all；收到报告后复核F01主收益与F03/价量保护，满预算收束。旧F11任务无需再跑。",
   "active_training_budget": {
     "task_ids": [
       "F01",
       "F03"
     ],
-    "status": "zero_launch_budget_until_full_entrypoint_verified",
-    "jobs_max": 0,
-    "worker_epochs_max": 0,
-    "optimizer_updates_max": 0,
+    "status": "released_subject_to_remote_zero_update_preflight",
+    "jobs_max": 4,
+    "worker_epochs_max": 480,
+    "optimizer_updates_max": 18240,
     "readout_fits": 0,
-    "reason": "计划矩阵单列multiscale_content_plan；本轮只实现核心组件，不能把计划上限当已开放GPU任务。"
+    "cumulative_seconds_cap": 129600,
+    "reason": "完整入口与合成检查补齐；仅开放原第20节已锁定矩阵，不追加实验量。"
   },
   "aliases": {
     "R0": [
@@ -763,13 +765,12 @@
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "current_task_ids": [
     "F01",
-    "F03",
-    "F11"
+    "F03"
   ],
   "blocked_followups": {
-    "F_optimization": "No new GPU queue. Use original prices/direct historical descriptions as factual chart reference and retain neural reconstruction as optional research view. Before another core training release define a concrete reuse/transfer use that raw/simple baselines do not already solve; do not default to forecasts or repeat readout grids."
+    "F_optimization": "第20节主价格损失有界对照已解除组件阶段的启动限制；除此之外不自动新增调参、加深、预测或下游标签分支。V13仍待独立数据。"
   },
-  "active_phase": "objective_training_metrics_components_no_runnable_AutoDL_entrypoint",
+  "active_phase": "complete_entrypoint_synthetic_checks_ready_AutoDL_pending",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -2680,7 +2681,7 @@
       "code_tests": "not_run_documentation_only"
     },
     "followup": "完成F03一次固定模型诊断入口及六方面检查，再给唯一完整AutoDL命令；不重跑旧一致性训练，V13等新数据但不阻塞现有数据研究。",
-    "followup_current": "2026-10-12最新第20节：纠正下游用途是表示训练前提的限制；F01/F03主损失对照组件准备，历史F11接口结束，完整GPU入口未完成。"
+    "followup_current": "2026-10-12第20节：F01/F03主价格目标完整入口与170项合成/关联检查就绪，等待AutoDL。旧F11任务结束，不需要重跑。"
   },
   "independent_confirmation_plan": {
     "schema": "babel-independent-history-acceptance-plan-v1",
@@ -13183,8 +13184,8 @@
       "N09"
     ],
     "human_entry": "docs/BABEL_ROADMAP.md#20-f01f03继续学习embedding先检验主目标的尺度分配2026-10-12",
-    "implementation": "objective_training_physical_metrics_components_complete_full_entrypoint_not_implemented",
-    "execution": "synthetic_only_no_real_model_execution",
+    "implementation": "complete_runner_data_preflight_resume_evaluation_export_local_verified",
+    "execution": "not_run_on_AutoDL_synthetic_only",
     "conclusion": "not_evaluated",
     "promoted": false,
     "hypothesis": "From scratch, replacing the main price metric with explicitly scaled orthogonal bands may improve balanced historical information retention; not evidence of a unique old-code error or added information.",
@@ -13359,54 +13360,52 @@
       "limit": "omitted fullquery shards prevent complete local per-prediction recomputation; aggregates only"
     },
     "stopping": "Source/coordinate/causal/nonfinite/resource failure stops; fixed last matrix, no extensions; committed-boundary resume only; uncommitted actual updates cannot be silently replayed; always export success/failed/stopped.",
-    "remaining_delivery": [
-      "source and train-scale provenance integration",
-      "CUDA gradient/resource preflight with actual disk/Adam/save margins",
-      "atomic checkpoint/resume and cumulative budget supervisor",
-      "all128 evaluation and dualcluster protection gates",
-      "bounded prediction shards plus download success/failed/stopped wrapper"
-    ],
+    "remaining_delivery": [],
     "review": {
       "purpose": {
         "status": "pass_for_scope",
-        "evidence": "Separate representation learning from optional task labels; narrow old rule-use closure; retain old failed trials and propose falsifiable information-retention comparison.",
-        "remaining": "No generic reuse or market-semantic success established."
+        "evidence": "Embedding information-retention experiment proceeds independently of optional downstream label choice; bounded F01/F03 fixed recipe.",
+        "remaining": "No generic semantic/use/forecast acceptance."
       },
       "architecture": {
         "status": "pass_for_scope",
-        "evidence": "Same scratch rolling768/4/8 and original127x7 query, full128 context, single-state readout; fixed transform used only in loss.",
-        "remaining": "Real CUDA causality/initialization/lineage checks await runner."
+        "evidence": "Original768/4/8 encoder/query, independent full128 context and no target bypass; pre/post trained causal audits wired.",
+        "remaining": "Real CUDA architecture/causal execution pending."
       },
       "training": {
-        "status": "open",
-        "evidence": "Matched initialization/order, independent whole-batch tail-gradient oracle, two-objective gradient paths, finite clipping and rawfloat64 labels verified synthetically. Fixed coefficients and scale support recorded.",
-        "remaining": "No real gradients, optimization outcomes or durable runner checkpoint/resume yet."
+        "status": "pass_for_scope",
+        "evidence": "Matched initialization/exposure and train-only scales; synthetic Adam/atomic-resume/uncertain-update rejection, fixed last120.",
+        "remaining": "Real gradient sizes and learning outcomes unknown."
       },
       "validation": {
-        "status": "open",
-        "evidence": "Locked physical MSE, all-position and p128 protection, body/activity fields, F03 shifts, dual clustered intervals, fixedlast120; mathematical price summary component.",
-        "remaining": "Full statistical acceptance and per-prediction export pipeline not implemented. No acceptance from synthetic checks."
+        "status": "pass_for_scope",
+        "evidence": "Physical errors all128 and separate endpoint; exact support/data pairing; two-cluster gates and F03; tiny four-model/two-cohort evaluation/export pipeline.",
+        "remaining": "No scientific acceptance; repeated research data, incomplete local full-prediction recomputation if shards omitted."
       },
       "data": {
-        "status": "open",
-        "evidence": "Original4789/978/984/439 full255 inventory, original raw float64 price targets, same field masks; train-only band RMS design.",
-        "remaining": "No new data; runner must bind actual training scale rows and source hashes. Passing split=train is not provenance proof."
+        "status": "pass_for_scope",
+        "evidence": "CPU checks actual four row inventories4789/978/984/439; complete255 train/val overlap0; immutable source/raw/scales and raw-root isolation.",
+        "remaining": "No new data; remote original CSV qualification still required."
       },
       "engineering": {
-        "status": "open",
-        "evidence": "59 new component tests plus32 associated tests passed; Ruff/format passed; no historical bound module edited. No real neural data or weights executed.",
-        "remaining": "AutoDL entrypoint, resource budget, atomic resume, full evaluator and download packaging remain; no new run command."
+        "status": "pass_for_scope",
+        "evidence": "Complete runner, supervised cumulative budget, independent worker deadline, atomic receipts, source/code locks and all-outcome download wrapper tested synthetically.",
+        "remaining": "Local tests are not AutoDL resource or real-model acceptance."
       }
     },
     "synthetic_verification": {
-      "new_tests": 59,
+      "new_delivery_tests": 79,
+      "previous_components_tests": 59,
       "associated_tests": 32,
-      "total_passed": 91,
+      "total_passed": 170,
+      "seconds": 22.59,
       "ruff": "passed",
       "format": "passed",
+      "shell_syntax": "passed",
       "real_weights_executed": false,
-      "CLI_ready": false,
-      "independent_component_review": "separate read-only review:59 synthetic checks passed, no blocker found for component scope; not independent model/data acceptance"
+      "CLI_ready": true,
+      "independent_component_review": "Independent CPU runner/data/evaluation reviews and tests; no remaining blocker found in delivered scope. CUDA performance/scientific acceptance pending.",
+      "scope": "tiny random CPU models, test orchestration with mocked CUDA/source boundaries; actual report rows checked arithmetically only"
     },
     "component_hashes": {
       "src/obson/babel/multiscale_content.py": "343b101d09275593347dd286b1a54e50fdbda8cd224ff45f85d62885010f59fa",
@@ -13415,6 +13414,77 @@
       "tests/babel/test_multiscale_content.py": "f914d119cfe2d1efb1ff725de0c449dc6d4724c703b3f2ff2784ee8059e670b9",
       "tests/babel/test_multiscale_training.py": "b3b86fccf8dddb1d1bd9ba75f1cc89f47edddb1011350168da43fdff042546eb",
       "tests/babel/test_multiscale_metrics.py": "4daafaac60ecbf273d599b344160709df0aaf4b543871af50e1947e0f68a9e00"
-    }
+    },
+    "prior_component_delivery_budget_note": "原planned_budget_not_launchable保留作上轮组件阶段记录；当前执行许可使用released_budget，数值未改变。",
+    "released_budget": {
+      "seeds": [
+        42,
+        43
+      ],
+      "arms": 2,
+      "epochs": 120,
+      "worker_epochs": 480,
+      "effective_batch": 128,
+      "micro": 8,
+      "states_per_parent": 5,
+      "steps_per_epoch": 38,
+      "optimizer_updates": 18240,
+      "parent_exposures": 2298720,
+      "state_exposures": 11493600,
+      "final_research_state_reads": 728576,
+      "workers_concurrent": 1,
+      "order": [
+        "control_s42",
+        "multiscale_s42",
+        "multiscale_s43",
+        "control_s43"
+      ],
+      "cumulative_seconds": 129600,
+      "readout_fits": 0
+    },
+    "entrypoint": {
+      "module": "obson.babel.multiscale_run",
+      "script": "scripts/babel_multiscale768_autodl.sh",
+      "command": "bash scripts/babel_multiscale768_autodl.sh all",
+      "export_command": "bash scripts/babel_multiscale768_autodl.sh export",
+      "archive": "/root/autodl-tmp/download/babel_multiscale768_reports.tar.gz",
+      "ready": true,
+      "training_executed": false,
+      "old_commands_needed": false
+    },
+    "remaining_acceptance": [
+      "AutoDL immutable source/raw replay and zero-update numeric/resource preflight",
+      "All four real workers and post-training causality checks",
+      "Locked all128 extraction and independent report review of finite gain/protections",
+      "V13 independent-data confirmation remains separate"
+    ],
+    "engineering_details": {
+      "manifest": "frozen before raw/scales; evaluation context separately adds scales",
+      "resume": "two-phase commit; pending future epoch always rejected even observed_steps0; fixed last only",
+      "budget": "36h cumulative supervisor reservation/settlement plus worker deadline; unresolved supervisor reservation fails closed",
+      "preflight": "both actual objectives backward,9-position validation,128-position reads,fsynced weight save; CUDA free+reserved reusable; Adam/temp margins; no updates",
+      "disk": "four full Adam states + one replacement + full128/fixed8 prediction artifacts +2GiB; no existing/unrelated file credit",
+      "export": "locked snapshot to download; old same-name archive preserved; success/fail/stopped/timeout; omitted weights/raw/full128 predictions hashed",
+      "evaluation_resume": "complete receipts verified without forwards; partial attempts export-only",
+      "code_changes": "new modules only; historical bound sources unchanged"
+    },
+    "release_hashes": {
+      "scripts/babel_multiscale768_autodl.sh": "21c94a33046113d419baaa235fdd8c47fc6b9b3826041cb1d005bad38fe41768",
+      "src/obson/babel/multiscale_data.py": "dcbf01af8ce03d6833bd703274adacdaed341076119dc158da656f5bc7358944",
+      "src/obson/babel/multiscale_evaluate.py": "c90351834fa05d7ad1866613565d3237d07a5b02eda6ca3c7cd8c3566b6976cc",
+      "src/obson/babel/multiscale_export.py": "f698447b60b1fe3f32d93fafc619e2b19b9646721c8336ddd598f1240e851fe7",
+      "src/obson/babel/multiscale_run.py": "61e81f158ca4f18e126d03b5108b5b87077d67c88b327cdae141899af1a3efb9",
+      "tests/babel/test_multiscale_data.py": "212d9389e7ec57092c30ee852bff98477ba7086c247741bc265881da689d25ca",
+      "tests/babel/test_multiscale_evaluate.py": "01f89c48cec8fee112ceb030ca61fade0dccca984bf573b001cc0c55b2a94bcb",
+      "tests/babel/test_multiscale_export.py": "e54078358c33cfe4255bc912d290df6fafef268b644edd4a55133dbc537f2543",
+      "tests/babel/test_multiscale_run.py": "5ef3ccb8537245ba8c642dec8819d9d47708e2b2218fa0ce5e606bd2c5e09392"
+    },
+    "known_operational_limits": [
+      "Resources are estimated from zero-update preflight, not guaranteed duration.",
+      "Resume disk gate conservatively requires full additional artifact allowance; no existing file credit.",
+      "Uncommitted updates or extraction attempts stop instead of being silently replayed.",
+      "Supervisor crash leaves its time reservation consumed; no automatic reset.",
+      "Only selected8 prediction payloads downloaded; full128 shards remain remote."
+    ]
   }
 }
