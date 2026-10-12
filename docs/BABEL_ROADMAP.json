@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-12",
-  "current_iteration": "F11_continuous_state_review_and_visual_delivery_complete",
-  "current_iteration_scope": "固定Macro连续原始bar回放完整，工程/指标复核通过；覆盖平均较好，压力/平盘持续失败保留；零训练，本轮收束。",
+  "current_iteration": "F11_current_history_use_cost_settlement_complete",
+  "current_iteration_scope": "Current price-history/rule use has no established need for neural reconstruction; stop optimizing reconstruction for this use. Retain multi-field representation research and all prior results.",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -670,7 +670,7 @@
         "V04",
         "V05"
       ],
-      "status": "有限研究原型、raw已收盘逐bar调用和连续可视化已交付；完整用途仍未过",
+      "status": "有限多字段研究原型和连续回放已交付；当前历史看盘用途/代价结算后停止这项用途的重建优化，完整用途未过",
       "reentry_or_acceptance": "锁同一权重做当前字段/方向/波动/结构和强基线比较；达到用途条件即停止追零误差；若未过则限定预算收束而非宣布胜利，独立确认归V13",
       "evidence": [
         "docs/BABEL_RECONSTRUCTION_EXIT.md",
@@ -680,9 +680,10 @@
         "docs/BABEL_STATE_READABILITY768_REVIEW.json",
         "docs/BABEL_HISTORY_STATE768_REVIEW.json",
         "docs/BABEL_CONTENT_RETENTION768_REVIEW.json",
-        "docs/BABEL_ROADMAP.md#17-f11连续使用结果"
+        "docs/BABEL_ROADMAP.md#17-f11连续使用结果",
+        "docs/BABEL_ROADMAP.md#18-f11用途与代价结算"
       ],
-      "next_action": "本轮结果复核和图/动画交付结束，执行队列清空，无新AutoDL命令。下一核心研究必须明确embedding相对同信息基线的额外用途和读取代价，再锁协议；不自动追加资格回放/训练。",
+      "next_action": "No new GPU queue. Use original prices/direct historical descriptions as factual chart reference and retain neural reconstruction as optional research view. Before another core training release define a concrete reuse/transfer use that raw/simple baselines do not already solve; do not default to forecasts or repeat readout grids.",
       "implementation": "fixed_closed_bar_adapter_and_bounded_replay_delivered",
       "execution": "complete_AutoDL_CUDA_and_report_reviewed",
       "conclusion": "连续接口数值资格通过；普通平均保真较高，压力/低波动失败保留，不等于可靠趋势或通用用途验收。"
@@ -703,15 +704,15 @@
     }
   ],
   "active_order": [],
-  "next_after_active": "本轮结果复核和图/动画交付结束，执行队列清空，无新AutoDL命令。下一核心研究必须明确embedding相对同信息基线的额外用途和读取代价，再锁协议；不自动追加资格回放/训练。",
+  "next_after_active": "No new GPU queue. Use original prices/direct historical descriptions as factual chart reference and retain neural reconstruction as optional research view. Before another core training release define a concrete reuse/transfer use that raw/simple baselines do not already solve; do not default to forecasts or repeat readout grids.",
   "active_training_budget": {
     "task_ids": [],
-    "status": "none_completed_bounded_inference",
+    "status": "none_current_history_use_settled",
     "jobs_max": 0,
     "worker_epochs_max": 0,
     "optimizer_updates_max": 0,
     "readout_fits": 0,
-    "reason": "F11连续推理已完整执行并复核；13728计划前向和826.348秒已交账，无新增任务。"
+    "reason": "F11 continuous delivery complete and user authorized professional continuation; cost/utility settlement is required before any new core optimization. Existing defined history functions have a direct reference, and older utility/volatility comparisons already lack full gains."
   },
   "aliases": {
     "R0": [
@@ -755,9 +756,9 @@
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "current_task_ids": [],
   "blocked_followups": {
-    "F_optimization": "第13节固定配方已收束；原F分支保留，后续须围绕具体用途/额外价值另锁有限问题。V13缺独立数据，不据此循环旧资格或重复旧训练。"
+    "F_optimization": "No new GPU queue. Use original prices/direct historical descriptions as factual chart reference and retain neural reconstruction as optional research view. Before another core training release define a concrete reuse/transfer use that raw/simple baselines do not already solve; do not default to forecasts or repeat readout grids."
   },
-  "active_phase": "scoped_continuous_research_prototype_delivered_no_queued_jobs",
+  "active_phase": "current_history_reconstruction_scope_closed_new_reuse_question_required",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -12808,5 +12809,228 @@
       }
     ],
     "next": "本轮结果复核和图/动画交付结束，执行队列清空，无新AutoDL命令。下一核心研究必须明确embedding相对同信息基线的额外用途和读取代价，再锁协议；不自动追加资格回放/训练。"
+  },
+  "state_value_settlement": {
+    "task_ids": [
+      "F11"
+    ],
+    "requirement_ids": [
+      "N02",
+      "N05",
+      "N07",
+      "N09"
+    ],
+    "question": "For observed close-shape and16/64 history direction/volatility, what extra utility does a768 state provide relative to the necessary raw information and cost?",
+    "implementation": "CPU_accounting_entrypoint_complete",
+    "execution": "local_CPU_only_complete_no_new_AutoDL_run",
+    "conclusion": "Current price-history/rule use has no established need for neural reconstruction; stop optimizing reconstruction for this use. Retain multi-field representation research and all prior results.",
+    "source_report_reused_not_new_experiment": {
+      "archive": "babel_continuous_state768_reports.tar.gz",
+      "sha256": "2c9222e340cddbb0b5cc30b2147f4e6e27c9711f909facafeedf68b31470b1f2",
+      "completion_sha256": "674efdd5690123022c925a1dcfda1e83a7e76ef3cf40e32f4ab8b88b767ba6ab",
+      "verified_members": 193
+    },
+    "source_reference": {
+      "model": "Macro control",
+      "seeds": [
+        42,
+        43
+      ],
+      "selected_epochs": [
+        97,
+        94
+      ],
+      "width": 768,
+      "layers": 4,
+      "heads": 8,
+      "claim": "Research reference only, not globally optimal or fully accepted"
+    },
+    "artifacts": [
+      {
+        "path": "reports/babel_state_value/state_value_audit.json",
+        "sha256": "75cbb17ec02b0f7ae655063db3816ae636fd4c2a3195efdca4862de348137629",
+        "role": "development_receipt_before_second_seed_dtype_guard"
+      },
+      {
+        "path": "reports/babel_state_value/state_value_audit_v2.json",
+        "sha256": "6a4acfa0e4ab24d5092e1fe53a6294484cbc9eb59c87c983232b86a801c765a4",
+        "role": "final"
+      }
+    ],
+    "implementation_hashes": {
+      "state_value_audit.py": "78cbda7885be039f06fe5051fc97f18aeb25da079ee6ce3870a0c83b42a08f9a",
+      "history_price_truth.py": "87674d91b6a11de66308955b0f162e7e65dddbe68d3d0184a9289ffdb83438a7"
+    },
+    "ledger": {
+      "endpoints": 512,
+      "single_window_bytes": {
+        "close128_float64": 1024,
+        "close64_float64_for_fixed16_64_descriptors": 512,
+        "latent768_float32": 3072,
+        "latent_with_absolute_price_anchor_float64": 3080,
+        "derived128x28_float32": 14336,
+        "raw128x6_float32_reference_only": 3072,
+        "six_history_descriptors_float64": 48,
+        "four_direction_volatility_descriptors_float64": 32
+      },
+      "consecutive_numeric_archive_bytes": {
+        "unique_close_rows": 639,
+        "close_float64": 5112,
+        "one_seed_dense_states_float32": 1572864,
+        "one_seed_states_plus_endpoint_anchors": 1576960,
+        "two_seed_dense_states_float32": 3145728,
+        "derived_rows_float32": 71568
+      },
+      "incremental_numeric_archive_bytes_per_bar_after_initial_window": {
+        "close_float64": 8,
+        "one_seed_dense_state_float32": 3072,
+        "one_seed_state_plus_anchor": 3080,
+        "derived_row_float32": 112
+      },
+      "excluded": [
+        "timestamps, contract/period identifiers, masks and file/container overhead",
+        "shared encoder/query weights, normalization statistics and model identity",
+        "live feature rings, EMA prefix state and original raw data for refresh",
+        "lossless file compression, quantization and any hypothetical latent delta codec"
+      ],
+      "information_limits": {
+        "close": "Exact original close history only; no OHLC/activity or EMA prefix.",
+        "latent": "Approximate multi-field history; also receives full-prefix EMA features.",
+        "raw6": "OHLCV/OI arithmetic reference, not a complete equivalent input. Opening OI, availability, timestamps and prefix state are additional.",
+        "descriptors": "Only six fixed historical summaries; cannot reconstruct arbitrary history.",
+        "derived": "Same prepared encoder input rows;28 channels contain derived redundancy."
+      },
+      "interpretation": "No equal-information whole-model compression advantage follows from these counts."
+    },
+    "totals": {
+      "physical_endpoints": 6656,
+      "raw_close_stream_bytes_separate_segments": 66456,
+      "one_seed_state_bytes": 20447232
+    },
+    "execution_budget": {
+      "neural_forwards": 0,
+      "optimizer_updates": 0,
+      "readout_fits": 0,
+      "local_implementation_runs": 2,
+      "measured_CPU_calls_total": 2496,
+      "untimed_CPU_warmups_total": 26,
+      "full_segment_summaries_total": 26,
+      "repeat_reason": "Tightened second-seed float64 raw validation after synthetic review; both outputs retained, no timing-based choice."
+    },
+    "final_cpu_timing": {
+      "count": 1248,
+      "p50": 3.75e-05,
+      "p95": 4.352554999999998e-05,
+      "machine": "arm64",
+      "processor": "arm",
+      "system": "Darwin",
+      "python": "3.14.5",
+      "numpy": "2.5.2",
+      "scope": "in-memory batch1 raw price path plus six past descriptors; excludes ingestion/UI/feature preparation"
+    },
+    "first_implementation_cpu_timing": {
+      "count": 1248,
+      "p50": 3.80835e-05,
+      "p95": 4.486064999999999e-05,
+      "machine": "arm64",
+      "processor": "arm",
+      "system": "Darwin",
+      "python": "3.14.5",
+      "numpy": "2.5.2",
+      "scope": "in-memory batch1 raw price path plus six past descriptors; excludes ingestion/UI/feature preparation"
+    },
+    "imported_AutoDL_timing": {
+      "macro_s42": {
+        "count": 6656,
+        "p50": 0.01063686702400446,
+        "p95": 0.01168139441870153
+      },
+      "macro_s43": {
+        "count": 6656,
+        "p50": 0.010619793087244034,
+        "p95": 0.01141038304194808
+      }
+    },
+    "imported_runtime": [
+      {
+        "cuda_total_memory_bytes": 12491292672,
+        "gpu": "NVIDIA GeForce RTX 3080 Ti",
+        "runtime": {
+          "effective": {
+            "cudnn_benchmark": false,
+            "cudnn_tf32": false,
+            "matmul_tf32": false,
+            "mha_fastpath": false,
+            "threads": 4
+          },
+          "profile": "context"
+        },
+        "torch": "2.8.0+cu128"
+      }
+    ],
+    "cost_caveats": [
+      "CPU and AutoDL timings are different hardware and different operations; no speedup ratio.",
+      "AutoDL timing includes incremental feature preparation, encoder, query and synchronized transfers; excludes startup and source checks.",
+      "Weight files are omitted; shared deployable tensor bytes are unknown, not zero. GPU peak is not a weight-file size.",
+      "Current runtime still maintains feature/raw rings and EMA prefix state; a latent is not a self-updating replacement for the stream.",
+      "Existing PCA/linear-utility results remain archived; no refitting or repeat utility grid is authorized by this audit."
+    ],
+    "tests": {
+      "new": 48,
+      "associated": 15,
+      "total_passed": 63,
+      "ruff": "passed",
+      "format": "passed",
+      "real_weights_executed_locally": false
+    },
+    "prior_comparisons_retained": [
+      "docs/BABEL_UTILITY768_REVIEW.md",
+      "docs/BABEL_VOLATILITY_TRANSFER768_REVIEW.md",
+      "docs/BABEL_ROADMAP.md#7",
+      "docs/BABEL_ROADMAP.md#13",
+      "docs/BABEL_ROADMAP.md#17"
+    ],
+    "PCA_scope": "input-PCA768 compresses the same3584 prepared inputs; target-PCA compresses observed reconstruction targets. No interchangeable scores or refitting.",
+    "decision": {
+      "current_history_descriptor_use": "Prefer direct raw calculation as factual reference; model is an optional research view.",
+      "embedding_reuse_advantage": "Not established by this cost ledger; historical multi-field evidence remains.",
+      "scientific_acceptance": false,
+      "promoted": false,
+      "next_gpu_jobs": []
+    },
+    "next_action": "No new GPU queue. Use original prices/direct historical descriptions as factual chart reference and retain neural reconstruction as optional research view. Before another core training release define a concrete reuse/transfer use that raw/simple baselines do not already solve; do not default to forecasts or repeat readout grids.",
+    "reason_for_order_change": "F11 continuous delivery complete and user authorized professional continuation; cost/utility settlement is required before any new core optimization. Existing defined history functions have a direct reference, and older utility/volatility comparisons already lack full gains.",
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "N02/N05: distinguish retained multi-field information from extra utility. Close current price-history/rule use optimization without model promotion.",
+        "remaining": "No demonstrated generic reuse/semantic/transfer advantage; future branches retained."
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "Macro42/43 best97/94 remains768/4/8; price-only/raw6/derived28/latent information footprints explicitly unequal. Runtime still needs stream rings and EMA.",
+        "remaining": "Shared deployable parameter bytes unavailable; no architecture mechanism inferred."
+      },
+      "training": {
+        "status": "not_applicable",
+        "evidence": "Zero neural execution, optimizer updates, readout fitting or selection; historical loss and thresholds unchanged.",
+        "remaining": "Cannot infer optimal loss/capacity from arithmetic."
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "193 bound files, two-seed physical identities,13 separate exact close round trips; definitions not claimed learned zero-error metrics; independent timing distributions reported without hardware ratio.",
+        "remaining": "Repeated research corpus; no new utility scoring, gate or V13 acceptance."
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "6656 physical endpoints, original float64 close preservation, no cross-segment dedup or seed doubling.",
+        "remaining": "Close-only payload not full activity/EMA-equivalent input."
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "48 new synthetic plus15 price truth tests passed; Ruff/format passed; hash/path/symlink/dtype/nonfinite/continuity/exclusive-output boundaries tested. New module only; bound historical modules unchanged.",
+        "remaining": "No weight reload or application-wide latency/memory benchmark."
+      }
+    }
   }
 }
