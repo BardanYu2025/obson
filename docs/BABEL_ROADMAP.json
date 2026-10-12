@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-12",
-  "current_iteration": "F11_current_history_use_cost_settlement_complete",
-  "current_iteration_scope": "Current price-history/rule use has no established need for neural reconstruction; stop optimizing reconstruction for this use. Retain multi-field representation research and all prior results.",
+  "current_iteration": "F11_next_use_scoping_proposed_preference_pending",
+  "current_iteration_scope": "用途方案与旧标签盘点完成；建议少样本形态/状态迁移，尚未选定实际用途/标签，不开启训练。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -681,9 +681,10 @@
         "docs/BABEL_HISTORY_STATE768_REVIEW.json",
         "docs/BABEL_CONTENT_RETENTION768_REVIEW.json",
         "docs/BABEL_ROADMAP.md#17-f11连续使用结果",
-        "docs/BABEL_ROADMAP.md#18-f11用途与代价结算"
+        "docs/BABEL_ROADMAP.md#18-f11用途与代价结算",
+        "docs/BABEL_ROADMAP.md#19-f11n05下一用途"
       ],
-      "next_action": "No new GPU queue. Use original prices/direct historical descriptions as factual chart reference and retain neural reconstruction as optional research view. Before another core training release define a concrete reuse/transfer use that raw/simple baselines do not already solve; do not default to forecasts or repeat readout grids.",
+      "next_action": "等待用途偏好；明确一项实际识别/检索/预测问题与合格标签后，才锁完整比较协议。第18节当前规则用途的重建优化仍收束，不默认重训或要求人工标注。",
       "implementation": "fixed_closed_bar_adapter_and_bounded_replay_delivered",
       "execution": "complete_AutoDL_CUDA_and_report_reviewed",
       "conclusion": "连续接口数值资格通过；普通平均保真较高，压力/低波动失败保留，不等于可靠趋势或通用用途验收。"
@@ -704,7 +705,7 @@
     }
   ],
   "active_order": [],
-  "next_after_active": "No new GPU queue. Use original prices/direct historical descriptions as factual chart reference and retain neural reconstruction as optional research view. Before another core training release define a concrete reuse/transfer use that raw/simple baselines do not already solve; do not default to forecasts or repeat readout grids.",
+  "next_after_active": "等待用途偏好；明确一项实际识别/检索/预测问题与合格标签后，才锁完整比较协议。第18节当前规则用途的重建优化仍收束，不默认重训或要求人工标注。",
   "active_training_budget": {
     "task_ids": [],
     "status": "none_current_history_use_settled",
@@ -754,11 +755,13 @@
   "workflow": "docs/BABEL_EXPERIMENT_WORKFLOW.md",
   "progress_log": "docs/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
-  "current_task_ids": [],
+  "current_task_ids": [
+    "F11"
+  ],
   "blocked_followups": {
     "F_optimization": "No new GPU queue. Use original prices/direct historical descriptions as factual chart reference and retain neural reconstruction as optional research view. Before another core training release define a concrete reuse/transfer use that raw/simple baselines do not already solve; do not default to forecasts or repeat readout grids."
   },
-  "active_phase": "current_history_reconstruction_scope_closed_new_reuse_question_required",
+  "active_phase": "task_definition_only_no_GPU_queue",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -13030,6 +13033,120 @@
         "status": "pass_for_scope",
         "evidence": "48 new synthetic plus15 price truth tests passed; Ruff/format passed; hash/path/symlink/dtype/nonfinite/continuity/exclusive-output boundaries tested. New module only; bound historical modules unchanged.",
         "remaining": "No weight reload or application-wide latency/memory benchmark."
+      }
+    }
+  },
+  "next_use_scoping": {
+    "task_ids": [
+      "F11"
+    ],
+    "requirement_ids": [
+      "N02",
+      "N05",
+      "N07",
+      "N09"
+    ],
+    "status": "proposed_use_and_asset_inventory_complete_user_preference_pending",
+    "recommended_use": "Frozen representation few-example recognition of a concretely defined shape or current-history state",
+    "alternatives": [
+      "semantic similar-history retrieval",
+      "real-bar-updated probabilistic future task (F06/F09; not default)"
+    ],
+    "question_sent": "重建阶段已收束。下一阶段你更希望 embedding 帮你完成哪件具体的事？",
+    "user_answer": null,
+    "implementation": "not_started_no_task_specific_entrypoint",
+    "execution": "read_only_local_inventory_no_fitting_or_neural_execution",
+    "scientific_conclusion": "not_evaluated",
+    "reference": {
+      "model": "Macro control",
+      "seeds": [
+        42,
+        43
+      ],
+      "selected_epochs": [
+        97,
+        94
+      ],
+      "width": 768,
+      "layers": 4,
+      "heads": 8,
+      "claim": "Research reference only, not globally optimal or fully accepted"
+    },
+    "source_artifacts": [
+      {
+        "path": "reports/babel/human_metrics_round1.json",
+        "sha256": "1276cc4d5426b0b2eb56c0b2cd25f3066067654ff181d48ba6c41840f38316dd",
+        "role": "historical_summary_not_semantic_labels"
+      },
+      {
+        "path": "reports/babel/pair_metrics_round1.json",
+        "sha256": "f0060be7aa13827b1ee0457e3d98cf9a378cdb48ab908a675caeb7cb729cf5bf",
+        "role": "historical_summary_not_semantic_labels"
+      },
+      {
+        "path": "reports/babel/pair_gap_round1.json",
+        "sha256": "5676b7ae377d7b6b184d20f9e5f6ae51d6ea24101feb0261ab0d75cc55a3701c",
+        "role": "historical_summary_not_semantic_labels"
+      },
+      {
+        "path": "reports/babel/pair_ui_smoke/answer_key.json",
+        "sha256": "0be472796abd822fd1f77b0a87f156ddc0bcb56cab237902c05e035c46b4bf03",
+        "role": "synthetic_fixture_only"
+      }
+    ],
+    "label_findings": {
+      "real_pair_packet": "930a4ecf396417eb36ef",
+      "synthetic_fixture_packet": "060a028abb50120132ee",
+      "fixture_checkpoint": "synthetic-test-only",
+      "rating_kind": "retrieval relevance or relative pair preference, NOT reconstruction quality or per-window semantic class",
+      "original_files_at_supplied_download_paths": "not_present",
+      "classification_data_ready": false
+    },
+    "preference_boundary": "No selection assumed and no new manual-label workload imposed while response is pending; scoping is allowed, dependent experimental design is not finalized.",
+    "steps": [
+      "Define one practical use and its positive/negative/uncertain boundary.",
+      "Identify task-appropriate labels with raw source identity and information cutoff; assess their usability before fitting.",
+      "Lock one bounded comparison of fixed Macro, same-information raw/PCA and strong task-specific simple baseline with total label budget.",
+      "Group all overlapping and synchronous histories before sampling; distinguish old-market new-task exploration from V13.",
+      "Lock support, loss, fit/selection opportunities and acceptance/stopping rules before scoring; stop if labels inadequate or simple method sufficient."
+    ],
+    "budget": {
+      "neural_forwards": 0,
+      "optimizer_updates": 0,
+      "readout_fits": 0,
+      "human_labels_requested": 0,
+      "gpu_jobs": 0
+    },
+    "review": {
+      "purpose": {
+        "status": "open",
+        "evidence": "Recommend few-example shape/state transfer as distinct reuse question, after current price-rule purpose closure. Async use preference sent.",
+        "remaining": "User has not selected a use or a concrete identification target; no assumed consent to labeling."
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "Proposed fixed Macro42/43 best97/94,768/4/8; source and all prior results unchanged.",
+        "remaining": "Task-specific reader and actual label semantics must be locked before implementation."
+      },
+      "training": {
+        "status": "not_applicable",
+        "evidence": "Zero fitting, updates, forward passes or GPU budget; no fabricated semantic labels.",
+        "remaining": "Future loss/sampling/budget not fixed; not an executable experiment card."
+      },
+      "validation": {
+        "status": "open",
+        "evidence": "Same total label budget including validation, raw/PCA/simple-path baselines, physical interval grouping, uncertain labels and no post-score redefinition proposed.",
+        "remaining": "Classes, support, acceptance and statistics await a concrete use; no scientific result."
+      },
+      "data": {
+        "status": "open",
+        "evidence": "Four local source fingerprints checked; old ratings are retrieval relevance/preferences, synthetic UI packet identified, original user rating files absent at supplied paths.",
+        "remaining": "No qualified shape-classification labels; no new independent market data."
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "Docs-only plan update; no new code, fits or run commands; old retrieval model interface cannot directly restore current Macro.",
+        "remaining": "No labeling/extraction/training entrypoint implemented for new use."
       }
     }
   }
