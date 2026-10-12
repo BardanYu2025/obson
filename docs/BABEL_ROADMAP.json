@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-12",
-  "current_iteration": "F11_next_use_scoping_proposed_preference_pending",
-  "current_iteration_scope": "用途方案与旧标签盘点完成；建议少样本形态/状态迁移，尚未选定实际用途/标签，不开启训练。",
+  "current_iteration": "F01_F03_multiscale_price_objective_components",
+  "current_iteration_scope": "表示学习继续；两臂双种子主损失对照的设计与组件阶段，完整AutoDL入口未完成，不等待下游选择或人工标签。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -508,7 +508,7 @@
         "V06",
         "V08"
       ],
-      "status": "本轮均匀抽5×S从头矩阵已完成并收束：重建改善，完整用途未过；显式同时128仍保留未做",
+      "status": "旧全位置矩阵已结束；第20节从头主价格损失对照设计及组件准备，显式同时128仍保留",
       "reentry_or_acceptance": "在匹配起点/预算下区分密度、位置权重和完整历史；不能把旧warm-start失败当否定证据；1～128指bar位置而非向量维度，完整上下文方案的首个受监督位置需额外已知历史，历史不足显式mask",
       "evidence": [
         "docs/BABEL_STATE_ROLLOUT768_PLAN.md",
@@ -516,7 +516,7 @@
         "docs/BABEL_UNIFORM_CONTEXT768_REVIEW.md",
         "docs/BABEL_STATE_COVERAGE768_REVIEW.json"
       ],
-      "next_action": "不追加当前配方，保留密集128猜测；后续需信息用途依据与独立协议。"
+      "next_action": "完成两臂主目标比较完整入口；不追加旧A/B/C/D训练轮数。"
     },
     {
       "id": "F02",
@@ -555,7 +555,7 @@
         "docs/BABEL_OVERLAP_CONTENT768_REVIEW.json",
         "docs/BABEL_CONTENT_RETENTION768_REVIEW.json"
       ],
-      "next_action": "不重跑或加轮；本轮有限结论归档。重新进入须有新的具体用途/稳定性缺口和独立有限实验卡，不自动开启。",
+      "next_action": "旧H/G配方保持收束；第20节新主目标试验只对共同物理内容做保护与诊断，不新增G或宣称F03整体完成。",
       "implementation": "complete_remote_executed",
       "execution": "six_fixed60_workers_complete_reviewed",
       "conclusion": "真实内容监督有稳定的共同形状收益，但保留保护未通过；额外一致性无预定增益，固定配方收束，不晋升。"
@@ -684,7 +684,7 @@
         "docs/BABEL_ROADMAP.md#18-f11用途与代价结算",
         "docs/BABEL_ROADMAP.md#19-f11n05下一用途"
       ],
-      "next_action": "等待用途偏好；明确一项实际识别/检索/预测问题与合格标签后，才锁完整比较协议。第18节当前规则用途的重建优化仍收束，不默认重训或要求人工标注。",
+      "next_action": "保留原型和旧用途边界；第19节少样本仅可选用途，不能阻止F01/F03自监督学习。以后声明具体复用增益才锁任务与强基线。",
       "implementation": "fixed_closed_bar_adapter_and_bounded_replay_delivered",
       "execution": "complete_AutoDL_CUDA_and_report_reviewed",
       "conclusion": "连续接口数值资格通过；普通平均保真较高，压力/低波动失败保留，不等于可靠趋势或通用用途验收。"
@@ -704,16 +704,22 @@
       ]
     }
   ],
-  "active_order": [],
-  "next_after_active": "等待用途偏好；明确一项实际识别/检索/预测问题与合格标签后，才锁完整比较协议。第18节当前规则用途的重建优化仍收束，不默认重训或要求人工标注。",
+  "active_order": [
+    "F01",
+    "F03"
+  ],
+  "next_after_active": "完成第20节的来源编排、CUDA资源预检、原子恢复、全128评价与分片导出，再发布唯一新运行命令；不运行旧F11接口或少样本方案。",
   "active_training_budget": {
-    "task_ids": [],
-    "status": "none_current_history_use_settled",
+    "task_ids": [
+      "F01",
+      "F03"
+    ],
+    "status": "zero_launch_budget_until_full_entrypoint_verified",
     "jobs_max": 0,
     "worker_epochs_max": 0,
     "optimizer_updates_max": 0,
     "readout_fits": 0,
-    "reason": "F11 continuous delivery complete and user authorized professional continuation; cost/utility settlement is required before any new core optimization. Existing defined history functions have a direct reference, and older utility/volatility comparisons already lack full gains."
+    "reason": "计划矩阵单列multiscale_content_plan；本轮只实现核心组件，不能把计划上限当已开放GPU任务。"
   },
   "aliases": {
     "R0": [
@@ -756,12 +762,14 @@
   "progress_log": "docs/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "current_task_ids": [
+    "F01",
+    "F03",
     "F11"
   ],
   "blocked_followups": {
     "F_optimization": "No new GPU queue. Use original prices/direct historical descriptions as factual chart reference and retain neural reconstruction as optional research view. Before another core training release define a concrete reuse/transfer use that raw/simple baselines do not already solve; do not default to forecasts or repeat readout grids."
   },
-  "active_phase": "task_definition_only_no_GPU_queue",
+  "active_phase": "objective_training_metrics_components_no_runnable_AutoDL_entrypoint",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -2672,7 +2680,7 @@
       "code_tests": "not_run_documentation_only"
     },
     "followup": "完成F03一次固定模型诊断入口及六方面检查，再给唯一完整AutoDL命令；不重跑旧一致性训练，V13等新数据但不阻塞现有数据研究。",
-    "followup_current": "2026-10-12：诊断已复核，用户授权第13节内容干预；替代旧设计待办，不覆盖当时审查事实。"
+    "followup_current": "2026-10-12最新第20节：纠正下游用途是表示训练前提的限制；F01/F03主损失对照组件准备，历史F11接口结束，完整GPU入口未完成。"
   },
   "independent_confirmation_plan": {
     "schema": "babel-independent-history-acceptance-plan-v1",
@@ -4241,7 +4249,8 @@
     },
     "latest_report": "docs/BABEL_CONTENT_RETENTION768_REVIEW.json",
     "status": "stage_delivery_complete_full_scientific_acceptance_not_claimed",
-    "latest_delivery": "第17节F11逐根raw闭合bar、连续回放与图动画交付完成；无新训练或独立数据验收。"
+    "latest_delivery": "第17节F11逐根raw闭合bar、连续回放与图动画交付完成；无新训练或独立数据验收。",
+    "latest_route_correction": "第20节：原型交付完成不等于embedding学习完成。继续有界自监督信息保留假设，下游标签不是前置条件；无新能力结论。"
   },
   "current_market_description_use_case": {
     "date": "2026-10-12",
@@ -12811,7 +12820,9 @@
         "impact": "V13及跨周期/长历史/未来外推保留，不新增训练或自动排队。"
       }
     ],
-    "next": "本轮结果复核和图/动画交付结束，执行队列清空，无新AutoDL命令。下一核心研究必须明确embedding相对同信息基线的额外用途和读取代价，再锁协议；不自动追加资格回放/训练。"
+    "next": "本轮结果复核和图/动画交付结束，执行队列清空，无新AutoDL命令。下一核心研究必须明确embedding相对同信息基线的额外用途和读取代价，再锁协议；不自动追加资格回放/训练。",
+    "subsequent_scope_correction": "2026-10-12第20节：原报告与代价结论保留；要求先选下游用途才允许继续表示训练的建议已撤回。",
+    "next_action_superseded_by": "multiscale_content_plan and current top-level execution fields; original record retained"
   },
   "state_value_settlement": {
     "task_ids": [
@@ -13034,7 +13045,9 @@
         "evidence": "48 new synthetic plus15 price truth tests passed; Ruff/format passed; hash/path/symlink/dtype/nonfinite/continuity/exclusive-output boundaries tested. New module only; bound historical modules unchanged.",
         "remaining": "No weight reload or application-wide latency/memory benchmark."
       }
-    }
+    },
+    "subsequent_scope_correction": "2026-10-12第20节：原报告与代价结论保留；要求先选下游用途才允许继续表示训练的建议已撤回。",
+    "next_action_superseded_by": "multiscale_content_plan and current top-level execution fields; original record retained"
   },
   "next_use_scoping": {
     "task_ids": [
@@ -13046,7 +13059,7 @@
       "N07",
       "N09"
     ],
-    "status": "proposed_use_and_asset_inventory_complete_user_preference_pending",
+    "status": "optional_use_proposal_deferred_not_representation_learning_prerequisite",
     "recommended_use": "Frozen representation few-example recognition of a concretely defined shape or current-history state",
     "alternatives": [
       "semantic similar-history retrieval",
@@ -13102,7 +13115,7 @@
       "original_files_at_supplied_download_paths": "not_present",
       "classification_data_ready": false
     },
-    "preference_boundary": "No selection assumed and no new manual-label workload imposed while response is pending; scoping is allowed, dependent experimental design is not finalized.",
+    "preference_boundary": "用户澄清要继续embedding主线；旧用途问题不再待答阻塞，未选分类或同意标注。",
     "steps": [
       "Define one practical use and its positive/negative/uncertain boundary.",
       "Identify task-appropriate labels with raw source identity and information cutoff; assess their usability before fitting.",
@@ -13148,6 +13161,260 @@
         "evidence": "Docs-only plan update; no new code, fits or run commands; old retrieval model interface cannot directly restore current Macro.",
         "remaining": "No labeling/extraction/training entrypoint implemented for new use."
       }
+    },
+    "subsequent_scope_correction": "第20节启动表示学习目标对照组件准备；本节标签不足只限制可选分类试验。",
+    "next_action_superseded_by": "multiscale_content_plan and current top-level execution fields; original record retained"
+  },
+  "multiscale_content_plan": {
+    "task_ids": [
+      "F01",
+      "F03"
+    ],
+    "route_correction_task_ids": [
+      "F11"
+    ],
+    "requirement_ids": [
+      "N01",
+      "N02",
+      "N03",
+      "N04",
+      "N07",
+      "N08",
+      "N09"
+    ],
+    "human_entry": "docs/BABEL_ROADMAP.md#20-f01f03继续学习embedding先检验主目标的尺度分配2026-10-12",
+    "implementation": "objective_training_physical_metrics_components_complete_full_entrypoint_not_implemented",
+    "execution": "synthetic_only_no_real_model_execution",
+    "conclusion": "not_evaluated",
+    "promoted": false,
+    "hypothesis": "From scratch, replacing the main price metric with explicitly scaled orthogonal bands may improve balanced historical information retention; not evidence of a unique old-code error or added information.",
+    "reason_for_order_change": "User clarified embedding learning is not finished. Downstream task/label choice is not prerequisite. Prior Q/S and H results motivate objective allocation; old G and shared-latent recipes are not rerun.",
+    "source": {
+      "completion_sha256": "835cce0452c27173f808b530871624b59041dceb71552074bf32e4c722e4139d",
+      "run": "babel_overlap_content768",
+      "data_lineage": "coverage -> reviewed V06 qualified full255 data",
+      "model_initialization": "random per seed, matched between arms; no source weights/Adam",
+      "reference_unchanged": {
+        "model": "Macro control",
+        "seeds": [
+          42,
+          43
+        ],
+        "selected_epochs": [
+          97,
+          94
+        ],
+        "width": 768,
+        "layers": 4,
+        "heads": 8,
+        "claim": "Research reference only, not globally optimal or fully accepted"
+      }
+    },
+    "data": {
+      "counts": {
+        "train": 4789,
+        "val": 978,
+        "test": 984,
+        "cross_research": 439
+      },
+      "input": "causal28 features;255 parent block; each selected endpoint independently sees128; full-prefix EMA",
+      "price": "source CSVfloat64 stable100log(close/current), price targets shared by botharms",
+      "other_targets": "original body/five activity and masks; current excluded",
+      "independence": "reused research corpus, not V13"
+    },
+    "architecture": {
+      "width": 768,
+      "layers": 4,
+      "heads": 8,
+      "ff": 3072,
+      "query": "original4x192,2layers4heads,seven fields for ages1..127",
+      "new_heads": 0,
+      "encoder_query_trainable": true
+    },
+    "arms": {
+      "control": "original Q .4path+.2change1+.1body+.3activity",
+      "multiscale": ".6mean8_scaled_Haar_Huber+.1body+.3activity"
+    },
+    "transform": {
+      "input": "chronological128 log-percent path, current0 appended known coordinate, not scored",
+      "bands": [
+        1,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "scale_fit": "RMS per coefficient pooled within band, all4789x128 training endpoints, streaming, no per-window centering/scaling",
+      "scale_floor": "original train delta_scale[0]*1e-3",
+      "coefficient_linear_slope": ".6/(8*n_b*s_b)",
+      "limits": [
+        "No information added by invertible transform",
+        "uniform-scale sum square equals original path square by Parseval",
+        "recipe changes age weights, band weights, Huber scale and delta basis together",
+        "finest64 adjacent pairs include age1-age0 but not all126 old differences",
+        "grid shifts across windows; no inherent shift invariance",
+        "coarse/fine is not truth/noise and coefficient weights are not encoder gradient fractions"
+      ],
+      "coefficient_quadratic_curvature": ".6/(8*n_b*s_b^2)",
+      "coefficient_quadratic_loss_factor": "0.5 times curvature"
+    },
+    "planned_budget_not_launchable": {
+      "seeds": [
+        42,
+        43
+      ],
+      "arms": 2,
+      "epochs": 120,
+      "worker_epochs": 480,
+      "effective_batch": 128,
+      "micro": 8,
+      "states_per_parent": 5,
+      "steps_per_epoch": 38,
+      "optimizer_updates": 18240,
+      "parent_exposures": 2298720,
+      "state_exposures": 11493600,
+      "final_research_state_reads": 728576,
+      "workers_concurrent": 1,
+      "order": [
+        "control_s42",
+        "multiscale_s42",
+        "multiscale_s43",
+        "control_s43"
+      ],
+      "cumulative_seconds": 129600,
+      "readout_fits": 0
+    },
+    "optimizer": {
+      "kind": "AdamW new",
+      "lr_peak": 0.0003,
+      "warmup_epochs": 10,
+      "schedule": "original cosine120 to5percent",
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.01,
+      "clip": 1.0,
+      "precision": "FP32 noAMP noTF32",
+      "dropout": 0.0
+    },
+    "selection": {
+      "primary": "fixedlast120",
+      "epoch0": "diagnostic only",
+      "val_positions": [
+        1,
+        16,
+        32,
+        48,
+        64,
+        80,
+        96,
+        112,
+        128
+      ],
+      "validation_epochs": "0 and every5 including120",
+      "research_selection": false
+    },
+    "evaluation": {
+      "primary": "parent mean over128 states of equal3ageband physical log-percent price MSE; never score known0 anchor",
+      "gain": ".95 relative to concurrentcontrol;bothseeds/cohorts/twocluster95percentCIupper<=0",
+      "protection": "each near/mid/far price,body,fiveactivity fields; all128/interior/endpoint separately; <=1.10control with same pairedCIs",
+      "tail": "P95 of parent composite physicalpriceMSE <=1.10control; descriptive point gate",
+      "f03": "shift1/16/64 usingp127/112/64 pairedp128; commonphysical early/late truthshape, anchoredtrutherror and outputdifference; protection1.10 sameCIs; no new F03gain gate",
+      "clusters": [
+        "calendar_month",
+        "contract_period_month"
+      ],
+      "bootstrap_draws": 2000,
+      "bootstrap_seed": 20261012,
+      "support_min_parents": 100,
+      "support_min_clusters": 6,
+      "insufficient_support": "not passed",
+      "not_claimed": [
+        "generic downstream upgrade",
+        "current7 new qualification",
+        "future forecasting",
+        "V13",
+        "Macro replacement"
+      ]
+    },
+    "artifacts_plan": {
+      "download": "allposition perparent error rows and identity; fixed8 position predictions/targets/masks/rawclose255",
+      "fixed_positions": [
+        1,
+        32,
+        64,
+        80,
+        96,
+        112,
+        127,
+        128
+      ],
+      "remote_only": "all128 query shards and weights with hashes and explicit omission receipt",
+      "all_embeddings_saved": false,
+      "limit": "omitted fullquery shards prevent complete local per-prediction recomputation; aggregates only"
+    },
+    "stopping": "Source/coordinate/causal/nonfinite/resource failure stops; fixed last matrix, no extensions; committed-boundary resume only; uncommitted actual updates cannot be silently replayed; always export success/failed/stopped.",
+    "remaining_delivery": [
+      "source and train-scale provenance integration",
+      "CUDA gradient/resource preflight with actual disk/Adam/save margins",
+      "atomic checkpoint/resume and cumulative budget supervisor",
+      "all128 evaluation and dualcluster protection gates",
+      "bounded prediction shards plus download success/failed/stopped wrapper"
+    ],
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "Separate representation learning from optional task labels; narrow old rule-use closure; retain old failed trials and propose falsifiable information-retention comparison.",
+        "remaining": "No generic reuse or market-semantic success established."
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "Same scratch rolling768/4/8 and original127x7 query, full128 context, single-state readout; fixed transform used only in loss.",
+        "remaining": "Real CUDA causality/initialization/lineage checks await runner."
+      },
+      "training": {
+        "status": "open",
+        "evidence": "Matched initialization/order, independent whole-batch tail-gradient oracle, two-objective gradient paths, finite clipping and rawfloat64 labels verified synthetically. Fixed coefficients and scale support recorded.",
+        "remaining": "No real gradients, optimization outcomes or durable runner checkpoint/resume yet."
+      },
+      "validation": {
+        "status": "open",
+        "evidence": "Locked physical MSE, all-position and p128 protection, body/activity fields, F03 shifts, dual clustered intervals, fixedlast120; mathematical price summary component.",
+        "remaining": "Full statistical acceptance and per-prediction export pipeline not implemented. No acceptance from synthetic checks."
+      },
+      "data": {
+        "status": "open",
+        "evidence": "Original4789/978/984/439 full255 inventory, original raw float64 price targets, same field masks; train-only band RMS design.",
+        "remaining": "No new data; runner must bind actual training scale rows and source hashes. Passing split=train is not provenance proof."
+      },
+      "engineering": {
+        "status": "open",
+        "evidence": "59 new component tests plus32 associated tests passed; Ruff/format passed; no historical bound module edited. No real neural data or weights executed.",
+        "remaining": "AutoDL entrypoint, resource budget, atomic resume, full evaluator and download packaging remain; no new run command."
+      }
+    },
+    "synthetic_verification": {
+      "new_tests": 59,
+      "associated_tests": 32,
+      "total_passed": 91,
+      "ruff": "passed",
+      "format": "passed",
+      "real_weights_executed": false,
+      "CLI_ready": false,
+      "independent_component_review": "separate read-only review:59 synthetic checks passed, no blocker found for component scope; not independent model/data acceptance"
+    },
+    "component_hashes": {
+      "src/obson/babel/multiscale_content.py": "343b101d09275593347dd286b1a54e50fdbda8cd224ff45f85d62885010f59fa",
+      "src/obson/babel/multiscale_training.py": "4150c0b540a724126329e7c9d0799b5d5f160eb4ab2f1d1ad08faedc56725928",
+      "src/obson/babel/multiscale_metrics.py": "9a8d8b25cfec8de848ef33f0652a336c5113ae4a8d2b3ad72c260933ee2b34e2",
+      "tests/babel/test_multiscale_content.py": "f914d119cfe2d1efb1ff725de0c449dc6d4724c703b3f2ff2784ee8059e670b9",
+      "tests/babel/test_multiscale_training.py": "b3b86fccf8dddb1d1bd9ba75f1cc89f47edddb1011350168da43fdff042546eb",
+      "tests/babel/test_multiscale_metrics.py": "4daafaac60ecbf273d599b344160709df0aaf4b543871af50e1947e0f68a9e00"
     }
   }
 }
