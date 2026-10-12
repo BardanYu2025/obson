@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-12",
-  "current_iteration": "F03_F11_content_retention_code_ready_cuda_pending",
-  "current_iteration_scope": "F03诊断收束后，用户允许按目的/数据/架构/训练/评价梳理并继续；锁定D_last120起点三组匹配续训，真实共同内容为主、一致性增量单列。Macro参照不变，无真实新训练结果。",
+  "current_iteration": "F03_F11_content_retention_reviewed_scoped_stage_delivered",
+  "current_iteration_scope": "真实内容形状收益通过，近期/活动保护未过，额外一致性无增益；固定配方结束，阶段有限研究原型及边界已交账。Macro参照和历史纠错结案不变，无新任务开跑。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -543,7 +543,7 @@
         "V04",
         "V05"
       ],
-      "status": "真实诊断已归档；匹配内容干预代码就绪，CUDA未执行，F03方向未整体完成",
+      "status": "受控干预已完成：共同形状有收益但保护未过；额外一致性无预定增益，固定配方收束，方向保留",
       "reentry_or_acceptance": "先比同一物理共同内容及新旧信息进入/退出；相似度、距离单调、整个向量强制相等均不作为语义判据",
       "evidence": [
         "docs/BABEL_OVERLAP768_REVIEW.md",
@@ -552,12 +552,13 @@
         "docs/BABEL_CONSISTENCY768_REVIEW.md",
         "docs/BABEL_HISTORY_STRUCTURE768_REVIEW.md",
         "docs/BABEL_MACRO_HISTORY768_REVIEW.md",
-        "docs/BABEL_OVERLAP_CONTENT768_REVIEW.json"
+        "docs/BABEL_OVERLAP_CONTENT768_REVIEW.json",
+        "docs/BABEL_CONTENT_RETENTION768_REVIEW.json"
       ],
-      "next_action": "执行第13节唯一新入口 babel_content_retention768_autodl.sh all；三组×双种子各60轮固定last，报告回传后逐项审查F03真实内容与F11保护；旧overlap/history_state不重跑，不自动加轮或晋升。",
-      "implementation": "content_retention_entrypoint_ready",
-      "execution": "new_intervention_not_started",
-      "conclusion": "第11节原诊断结论保留；新H/G收益待实验，不晋升"
+      "next_action": "不重跑或加轮；本轮有限结论归档。重新进入须有新的具体用途/稳定性缺口和独立有限实验卡，不自动开启。",
+      "implementation": "complete_remote_executed",
+      "execution": "six_fixed60_workers_complete_reviewed",
+      "conclusion": "真实内容监督有稳定的共同形状收益，但保留保护未通过；额外一致性无预定增益，固定配方收束，不晋升。"
     },
     {
       "id": "F04",
@@ -669,7 +670,7 @@
         "V04",
         "V05"
       ],
-      "status": "固定研究API真实资格收束；新raw价格真值组件完成/CPU验证，1处平盘标签纠正；原完整用途未过，Macro不变",
+      "status": "有限历史状态研究原型阶段交账完成；原完整用途/退出门槛未过仍保留，Macro不变",
       "reentry_or_acceptance": "锁同一权重做当前字段/方向/波动/结构和强基线比较；达到用途条件即停止追零误差；若未过则限定预算收束而非宣布胜利，独立确认归V13",
       "evidence": [
         "docs/BABEL_RECONSTRUCTION_EXIT.md",
@@ -677,9 +678,13 @@
         "docs/BABEL_VOLATILITY_TRANSFER768_REVIEW.md",
         "docs/BABEL_STATE_COVERAGE768_REVIEW.json",
         "docs/BABEL_STATE_READABILITY768_REVIEW.json",
-        "docs/BABEL_HISTORY_STATE768_REVIEW.json"
+        "docs/BABEL_HISTORY_STATE768_REVIEW.json",
+        "docs/BABEL_CONTENT_RETENTION768_REVIEW.json"
       ],
-      "next_action": "第13节用原价量近中远/尾部/解码历史量保护约束F03；不是新当前字段或冻结外部用途验收，不因本卡通过宣布完整F11完成。原接口已归档不重跑，V13等新数据。"
+      "next_action": "阶段交账已完成，不自动追加实验；未来围绕一个具体用途及读取代价另定F11问题和同信息raw/PCA/简单特征基线，原F分支保留，V13只在数据合格时进入。",
+      "implementation": "existing_API_qualified_for_scope",
+      "execution": "stage_evidence_and_boundary_delivery_complete",
+      "conclusion": "原型可以研究调用，不是通用表示或预测验收成功；本轮候选保护未过，不替换参照。"
     },
     {
       "id": "F12",
@@ -696,29 +701,16 @@
       ]
     }
   ],
-  "active_order": [
-    [
-      "F03",
-      "F11"
-    ]
-  ],
-  "next_after_active": "执行第13节唯一新入口 babel_content_retention768_autodl.sh all；三组×双种子各60轮固定last，报告回传后逐项审查F03真实内容与F11保护；旧overlap/history_state不重跑，不自动加轮或晋升。 有效报告复核后先完成阶段原型与能力边界交账，不追加新训练作为本次交付前置。",
+  "active_order": [],
+  "next_after_active": "阶段交账已完成，不自动追加实验；未来围绕一个具体用途及读取代价另定F11问题和同信息raw/PCA/简单特征基线，原F分支保留，V13只在数据合格时进入。",
   "active_training_budget": {
-    "task_ids": [
-      "F03",
-      "F11"
-    ],
-    "status": "authorized_fixed_card_code_ready_not_executed",
-    "jobs_max": 6,
-    "concurrent_jobs_max": 2,
-    "worker_epochs_max": 360,
-    "epochs_per_job": 60,
-    "optimizer_updates_max": 13680,
-    "train_state_exposures_max": 3448080,
-    "session_seconds_max": 86400,
+    "task_ids": [],
+    "status": "none_all_current_authorized_jobs_completed",
+    "jobs_max": 0,
+    "worker_epochs_max": 0,
+    "optimizer_updates_max": 0,
     "readout_fits": 0,
-    "primary_selection": "fixed last60, not best",
-    "reason": "用户在F03真实诊断复核后同意梳理并继续；只增加一轮三臂matched干预，不默默追加原D训练，不重开历史纠错。"
+    "reason": "第13节已完成并复核，按既定阶段终点交账；没有自动续训、调权、扩层或新增诊断。"
   },
   "aliases": {
     "R0": [
@@ -760,14 +752,11 @@
   "workflow": "docs/BABEL_EXPERIMENT_WORKFLOW.md",
   "progress_log": "docs/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
-  "current_task_ids": [
-    "F03",
-    "F11"
-  ],
+  "current_task_ids": [],
   "blocked_followups": {
-    "F_optimization": "第13节F03/F11干预已获用户授权并实现；除此之外的保留分支不自动开跑。V13无新数据不阻塞本卡，旧失败与历史结案不改。"
+    "F_optimization": "第13节固定配方已收束；原F分支保留，后续须围绕具体用途/额外价值另锁有限问题。V13缺独立数据，不据此循环旧资格或重复旧训练。"
   },
-  "active_phase": "content_retention_training_and_evaluation_ready_remote_pending",
+  "active_phase": "scoped_research_prototype_stage_delivered_no_queued_training",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -913,6 +902,17 @@
       "decision": "限定范围通过、纠错关闭；模型不晋升",
       "evidence": "docs/BABEL_RECOVERY_PROVENANCE_REVIEW.json",
       "archive_sha256": "e6ad648e81f996eb6de49f1cee3497932e6a9dca7a36295e42f8c8b41498dcb9"
+    },
+    {
+      "task_ids": [
+        "F03",
+        "F11"
+      ],
+      "disposition": "有限收益及取舍归档，固定配方收束；阶段原型交付完成",
+      "conclusion": "真实内容监督有稳定的共同形状收益，但保留保护未通过；额外一致性无预定增益，固定配方收束，不晋升。",
+      "evidence": "docs/BABEL_CONTENT_RETENTION768_REVIEW.json",
+      "archive_sha256": "d15fd377b7d96fff7497c21e87a3df6f4b04a0f3eab85760dadbcf8db6459370",
+      "reference_changed": false
     }
   ],
   "documentation_review_task_ids": [
@@ -1119,6 +1119,30 @@
       "epochs": 960,
       "optimizer_updates": 36480,
       "report_sha256": "4db1e9b7d2bc8fd979fa98d52184512ee5c238e69ebc5dbaeb3e6b311ad02cf1"
+    },
+    {
+      "task_ids": [
+        "F03",
+        "F11"
+      ],
+      "status": "completed_reviewed_recipe_closed",
+      "jobs_max": 6,
+      "concurrent_jobs_max": 2,
+      "worker_epochs_max": 360,
+      "epochs_per_job": 60,
+      "optimizer_updates_max": 13680,
+      "train_state_exposures_max": 3448080,
+      "session_seconds_max": 86400,
+      "readout_fits": 0,
+      "primary_selection": "fixed last60, not best",
+      "reason": "用户在F03真实诊断复核后同意梳理并继续；只增加一轮三臂matched干预，不默默追加原D训练，不重开历史纠错。",
+      "study": "content_retention768",
+      "actual_worker_epochs": 360,
+      "actual_optimizer_updates": 13680,
+      "actual_train_state_exposures": 3448080,
+      "actual_session_seconds": 12257.360238301568,
+      "report_sha256": "d15fd377b7d96fff7497c21e87a3df6f4b04a0f3eab85760dadbcf8db6459370",
+      "review": "docs/BABEL_CONTENT_RETENTION768_REVIEW.json"
     }
   ],
   "next_repair_cards": {
@@ -3871,9 +3895,9 @@
       },
       "script": "7304d38bbad1af2522e29f16ef2dc4ec993766ff79481b32d25b4ceb6ef85c79"
     },
-    "implementation": "complete_local_synthetic_tests",
-    "execution": "not_started_AutoDL_only",
-    "scientific_acceptance": "pending_no_promotion",
+    "implementation": "complete_remote_executed",
+    "execution": "completed_and_report_reviewed",
+    "scientific_acceptance": "limited_shape_gain_with_tradeoffs_no_balanced_upgrade_recipe_closed",
     "source_archive_sha256": "68aee6658481a2ab4a2fb0f85df94b494b52a330aa64f06f0153d8fecd0b4dc2",
     "delivery": {
       "script": "scripts/babel_content_retention768_autodl.sh",
@@ -3886,9 +3910,39 @@
         "all",
         "export"
       ],
-      "default_jobs": 2
+      "default_jobs": 2,
+      "run_required": false
     },
-    "review": {
+    "next_action": "无重跑/续训；本配方归档，有限研究原型阶段交账完成，未来用途问题另行锁定。",
+    "checks": {
+      "pytest": {
+        "passed": 89,
+        "failed": 0,
+        "seconds": 17.42,
+        "suites": [
+          "test_content_retention",
+          "test_overlap_content_audit",
+          "test_overlap_content_run",
+          "test_history_price_truth",
+          "test_state_coverage",
+          "test_state_readability"
+        ]
+      },
+      "scope": "synthetic CPU and report/data arithmetic only; no real weights",
+      "ruff": "passed",
+      "shell_syntax": "passed",
+      "roadmap_mirror": "protocol/fingerprint exact; requirements/repairs/aliases/reference/other branches unchanged",
+      "historical_bound_code": "unchanged"
+    },
+    "preserved": [
+      "V01-V12/V14 closed",
+      "V13 missing new data",
+      "Macro97/94 research reference",
+      "old D full utility not passed",
+      "all F01-F12 branches and H1-H5 hypotheses retained"
+    ],
+    "stage_delivery_followup": "已履行：阶段身份、接口、支持范围、分项/尾部、失败与未验用途见第13节末和stage_progress_assessment.delivery。",
+    "implementation_review": {
       "purpose": {
         "status": "pass_for_scope",
         "evidence": "用同一真实历史保留回答F03，不以latent接近或规则读出代替通用价量目的；Macro和旧失败保留。",
@@ -3920,35 +3974,87 @@
         "remaining": "真实CUDA未执行，资源预检可能停止；权重不随报告包导出。"
       }
     },
-    "next_action": "执行第13节唯一新入口 babel_content_retention768_autodl.sh all；三组×双种子各60轮固定last，报告回传后逐项审查F03真实内容与F11保护；旧overlap/history_state不重跑，不自动加轮或晋升。",
-    "checks": {
-      "pytest": {
-        "passed": 89,
-        "failed": 0,
-        "seconds": 17.42,
-        "suites": [
-          "test_content_retention",
-          "test_overlap_content_audit",
-          "test_overlap_content_run",
-          "test_history_price_truth",
-          "test_state_coverage",
-          "test_state_readability"
-        ]
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "F03真实共同内容形状主收益16/16通过，F11保护未过；按已承诺有限阶段终点归档研究原型，不把重建收益当通用用途或预测成功。",
+        "remaining": "通用价量复用、实际用途额外价值和未来收益尚未验收；不追加本配方。"
       },
-      "scope": "synthetic CPU and report/data arithmetic only; no real weights",
-      "ruff": "passed",
-      "shell_syntax": "passed",
-      "roadmap_mirror": "protocol/fingerprint exact; requirements/repairs/aliases/reference/other branches unchanged",
-      "historical_bound_code": "unchanged"
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "原768/4/8及原七字段query，完整滚动128，无新头；报告初始/末轮各132项因果/批量资格均通过。",
+        "remaining": "这些是真实CUDA回执，本地未加载权重；encoder和query共同更新不能唯一定位瓶颈，不证明层数不足或潜在信息完整。"
+      },
+      "training": {
+        "status": "pass_for_scope",
+        "evidence": "6组各60轮/2280更新；同种子起点、采样顺序、配对、LR与选模机会匹配；固定last60。报告梯度和核对差1.86e-8；360轮损失组合算术复核通过。",
+        "remaining": "H/G是既定任务与尺度配方，系数不是梯度份额；训练样本仍4789父块，同更新不等同FLOPs。权重/Adam张量未随包导出。"
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "24组八位置输出、原Q和物理/字段/历史描述复算；6208个决策bootstrap区间复算一致。content相对control有20个门槛外不利区间，88个保护未确认；相对D有41个未确认、0个双区间确认超过10%。",
+        "remaining": "8位置非全128用途资格；P95为描述性点门槛；重复研究队列、相关多指标、13个月非独立最终认证。原Q复算沿绑定评分函数，独立算术不替代神经回放。"
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "CPU核对921份原CSV指纹、7190个255-bar父块和19208个评价128窗口；完整train/val跨度无重叠，raw价格目标坐标最大差4.67e-6，在原容差内。",
+        "remaining": "没有新行情；活动沿原目标/mask而非本次全量raw活动重认证；EMA仍可包含更早因果历史，样本曝光不是独立新数据。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "安全解包188成员，172个可用绑定文件SHA一致、协议/源码指纹一致；退出0，单次12257秒，预算内，6个pt明确省略。仅更新报告复核、roadmap镜像和日志。",
+        "remaining": "权重哈希与优化器步数依赖远端回执，未重放真实模型；既有API依赖祖先目录与特征准备，不是自包含生产包。"
+      }
     },
-    "preserved": [
-      "V01-V12/V14 closed",
-      "V13 missing new data",
-      "Macro97/94 research reference",
-      "old D full utility not passed",
-      "all F01-F12 branches and H1-H5 hypotheses retained"
-    ],
-    "stage_delivery_followup": "本轮第13节按既定预算结束，有效报告复核后阶段归档/交付已有有限原型及边界，不将后续新训练作为这次交付前置。失败配方同样收束；执行报错另记未完成。"
+    "latest_report": "docs/BABEL_CONTENT_RETENTION768_REVIEW.json",
+    "report_sha256": "d15fd377b7d96fff7497c21e87a3df6f4b04a0f3eab85760dadbcf8db6459370",
+    "results": {
+      "content_primary_passed": 16,
+      "content_primary_total": 16,
+      "content_shape_mse_ratio_vs_control": [
+        0.7160684389869693,
+        0.8710622328145051
+      ],
+      "content_shape_mse_ratio_vs_frozen_D": [
+        0.641425810053136,
+        0.772742884078723
+      ],
+      "aligned_increment_passed": 0,
+      "aligned_increment_total": 12,
+      "aligned_disagreement_ratio_vs_content_shift64": [
+        1.020654837311148,
+        1.2811396499877623
+      ],
+      "protection_summary": {
+        "content_vs_control": {
+          "confirmed_beyond_10pct": 20,
+          "not_demonstrated_within_10pct": 88,
+          "tail_point_gates_passed": 8,
+          "guard_cells": 612
+        },
+        "content_vs_source": {
+          "confirmed_beyond_10pct": 0,
+          "not_demonstrated_within_10pct": 41,
+          "tail_point_gates_passed": 8,
+          "guard_cells": 612
+        },
+        "aligned_vs_content": {
+          "confirmed_beyond_10pct": 55,
+          "not_demonstrated_within_10pct": 74,
+          "tail_point_gates_passed": 8,
+          "guard_cells": 612
+        }
+      },
+      "decision": {
+        "content_supported": false,
+        "alignment_increment_supported": false,
+        "conclusion": "no_balanced_content_gain",
+        "scope": "fixed finite recipe, repeated research cohorts, eight endpoint positions; no model promotion or full F11/current-field/all128 utility acceptance",
+        "promoted": false,
+        "fit_count": 0
+      },
+      "scope": "形状MSE为共同段各减自身均值后的误差；不是完整价格误差或还原百分比。保护失败细胞有相关性，计数不是独立发现数；区间未作多重比较校正。"
+    }
   },
   "stage_progress_assessment": {
     "date": "2026-10-12",
@@ -3970,7 +4076,8 @@
         "item": "historical_price_activity_compression",
         "status": "research_evidence_obtained",
         "evidence": "D_vs_matched_A price error -44%..-62%, activity -36%..-38%; existing decoder can recover selected historical descriptors",
-        "gap": "非还原率或全面胜Macro，跨窗口年龄保真不足"
+        "gap": "非还原率或全面胜Macro，跨窗口年龄保真不足",
+        "latest_evidence": "本轮content vs matched control共同形状MSE改善12.9%-28.4%，保护未过；不晋升。"
       },
       {
         "item": "reusable_representation_advantage",
@@ -3983,14 +4090,14 @@
         "gap": "无新数据；没有可靠未来预测收益证据"
       }
     ],
-    "near_term_exit": "本轮第13节按既定预算结束，有效报告复核后阶段归档/交付已有有限原型及边界，不将后续新训练作为这次交付前置。失败配方同样收束；执行报错另记未完成。",
+    "near_term_exit": "已达到：第13节完整报告已复核，固定配方收束，已有有限研究原型与边界已归档交付；不增加训练前置条件。",
     "deliverable": "在现有roadmap归档来源/权重/接口、价格活动与历史范围、分项/尾部/失败例及用途限制；Macro不变，D/新配方按资格比较，不另建状态解释文档。",
     "next_stage": "若继续，只选择一个检验表示额外价值的问题，配同信息基线和明确预算后另锁协议；没有自动新GPU任务或保证成功的轮数。",
     "current_protocol_changed": false,
     "additional_training_jobs": 0,
     "additional_optimizer_updates": 0,
     "new_entrypoint": false,
-    "review": {
+    "review_before_report": {
       "purpose": {
         "status": "pass_for_scope",
         "evidence": "以原始可复用因果价量状态目的核对，区分已有有限压缩原型与尚未证实的用途优势，明确当前轮结束即可阶段归档。",
@@ -4021,6 +4128,113 @@
         "evidence": "仅现有roadmap MD/JSON和进度日志；校验全部绑定源码及协议、原纠错/需求/固定分支未变。",
         "remaining": "无真实权重执行，也没有新产品/生产认证。"
       }
-    }
+    },
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "F03真实共同内容形状主收益16/16通过，F11保护未过；按已承诺有限阶段终点归档研究原型，不把重建收益当通用用途或预测成功。",
+        "remaining": "通用价量复用、实际用途额外价值和未来收益尚未验收；不追加本配方。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "原768/4/8及原七字段query，完整滚动128，无新头；报告初始/末轮各132项因果/批量资格均通过。",
+        "remaining": "这些是真实CUDA回执，本地未加载权重；encoder和query共同更新不能唯一定位瓶颈，不证明层数不足或潜在信息完整。"
+      },
+      "training": {
+        "status": "pass_for_scope",
+        "evidence": "6组各60轮/2280更新；同种子起点、采样顺序、配对、LR与选模机会匹配；固定last60。报告梯度和核对差1.86e-8；360轮损失组合算术复核通过。",
+        "remaining": "H/G是既定任务与尺度配方，系数不是梯度份额；训练样本仍4789父块，同更新不等同FLOPs。权重/Adam张量未随包导出。"
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "24组八位置输出、原Q和物理/字段/历史描述复算；6208个决策bootstrap区间复算一致。content相对control有20个门槛外不利区间，88个保护未确认；相对D有41个未确认、0个双区间确认超过10%。",
+        "remaining": "8位置非全128用途资格；P95为描述性点门槛；重复研究队列、相关多指标、13个月非独立最终认证。原Q复算沿绑定评分函数，独立算术不替代神经回放。"
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "CPU核对921份原CSV指纹、7190个255-bar父块和19208个评价128窗口；完整train/val跨度无重叠，raw价格目标坐标最大差4.67e-6，在原容差内。",
+        "remaining": "没有新行情；活动沿原目标/mask而非本次全量raw活动重认证；EMA仍可包含更早因果历史，样本曝光不是独立新数据。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "安全解包188成员，172个可用绑定文件SHA一致、协议/源码指纹一致；退出0，单次12257秒，预算内，6个pt明确省略。仅更新报告复核、roadmap镜像和日志。",
+        "remaining": "权重哈希与优化器步数依赖远端回执，未重放真实模型；既有API依赖祖先目录与特征准备，不是自包含生产包。"
+      }
+    },
+    "delivery": {
+      "status": "scoped_research_prototype_stage_closed_not_full_F11_acceptance",
+      "date": "2026-10-12",
+      "reference_unchanged": {
+        "model": "Macro control",
+        "seeds": [
+          42,
+          43
+        ],
+        "epochs": [
+          97,
+          94
+        ],
+        "width": 768,
+        "layers": 4,
+        "heads": 8,
+        "weight_identity_from_reviewed_receipts": [
+          {
+            "consumer": "/root/autodl-tmp/obson/checkpoints/babel_context_transfer768",
+            "seed": 42,
+            "role": "loaded_weight",
+            "path": "/root/autodl-tmp/obson/checkpoints/babel_macro_history768/control_s42/e100_best.pt",
+            "sha256": "eb1743b178d680caae8376fc61c016431555a9007d98b35113af34821a022b28",
+            "bytes": 126263695
+          },
+          {
+            "consumer": "/root/autodl-tmp/obson/checkpoints/babel_context_transfer768",
+            "seed": 43,
+            "role": "loaded_weight",
+            "path": "/root/autodl-tmp/obson/checkpoints/babel_macro_history768/control_s43/e100_best.pt",
+            "sha256": "70578bf63518c4815406b7e349b1e27608a5e8e1623e32343719ebbf3d167915",
+            "bytes": 126263695
+          }
+        ]
+      },
+      "comparators": "D_s42/D_s43 fixed last120 retained as research comparisons; content/aligned last60 are archived tradeoff experiments, not promoted",
+      "interface": {
+        "file": "src/obson/babel/history_state_api.py",
+        "entry": "open_reader(source, model, device=\"cuda\")",
+        "source": "/root/autodl-tmp/obson/checkpoints/babel_state_readability768",
+        "source_completion": "cd2b0fe45a4faa4a10abe66b75d56f8ca91c0df2ea3e91d337fc95ffad21e477",
+        "models": [
+          "macro_s42",
+          "macro_s43",
+          "D_s42",
+          "D_s43"
+        ],
+        "input": "prepared float32 Nx128x28 single-contract15/30/60 features with exact train normalization, causal EMA and closed endpoint identities; or Nx768 matching state_signature",
+        "output": "endpoint768 state; original127x7 history query; relative close path; estimated past16/64 direction/volatility summaries",
+        "dependency": "requires retained readability/coverage/ancestor weights and caches, not a stand-alone archive or raw/live-bar adapter",
+        "observed_audit_limit": "old optional observed_audit inherits cached truth; near-flat label issue is archived, use history_price_truth for correct raw-price evaluation"
+      },
+      "evidence": [
+        "docs/BABEL_STATE_COVERAGE768_REVIEW.json",
+        "docs/BABEL_STATE_READABILITY768_REVIEW.json",
+        "docs/BABEL_HISTORY_STATE768_REVIEW.json",
+        "docs/BABEL_OVERLAP_CONTENT768_REVIEW.json",
+        "docs/BABEL_CONTENT_RETENTION768_REVIEW.json"
+      ],
+      "supported": "A callable causal historical-state research prototype and scoped reconstruction/descriptor recovery evidence, with known tradeoffs. Reference is not globally best.",
+      "limits": [
+        "No validated universal reusable advantage",
+        "No reliable future forecast or trading performance evidence",
+        "Current age0 body/activity and full wicks not newly qualified",
+        "Physical quantity reconstruction is not implied by normalized activity fields",
+        "Flat/low-motion failure and insufficient support retained",
+        "No independent new-market-data confirmation; V13 remains open",
+        "Local and far-history protection can conflict; tail mean does not protect every field"
+      ],
+      "new_training_jobs": 0,
+      "new_fits": 0,
+      "next": "阶段交账已完成，不自动追加实验；未来围绕一个具体用途及读取代价另定F11问题和同信息raw/PCA/简单特征基线，原F分支保留，V13只在数据合格时进入。"
+    },
+    "latest_report": "docs/BABEL_CONTENT_RETENTION768_REVIEW.json",
+    "status": "stage_delivery_complete_full_scientific_acceptance_not_claimed"
   }
 }
