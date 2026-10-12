@@ -4236,5 +4236,368 @@
     },
     "latest_report": "docs/BABEL_CONTENT_RETENTION768_REVIEW.json",
     "status": "stage_delivery_complete_full_scientific_acceptance_not_claimed"
+  },
+  "current_market_description_use_case": {
+    "date": "2026-10-12",
+    "task_ids": [
+      "F11"
+    ],
+    "requirement_ids": [
+      "N01",
+      "N02",
+      "N03",
+      "N05",
+      "N06",
+      "N07",
+      "N09"
+    ],
+    "user_clarification": "对于未来预测没有抱很大期待；希望高保真历史embedding在看盘时描述当前行情处于趋势还是震荡。",
+    "priority": "近期用途优先当前已发生行情的状态描述；未来预测保留为可选用途，不作为历史状态交付前提。",
+    "source": "Macro control s42/s43 best97/94; unchanged768/4/8",
+    "scores": {
+      "test/macro_s42": {
+        "parents": 984,
+        "full127_path_rmse_bps_mean": 13.789919177132075,
+        "full127_path_rmse_bps_median": 8.941406077609507,
+        "full127_path_rmse_bps_p95": 35.586621199669985,
+        "classification": {
+          "16": {
+            "accuracy": 0.9654471544715447,
+            "balanced_accuracy": 0.964401589386199,
+            "class_recall": [
+              0.9694656488549618,
+              0.9723502304147466,
+              0.9513888888888888
+            ],
+            "support": [
+              262,
+              434,
+              288
+            ],
+            "confusion": [
+              [
+                254,
+                8,
+                0
+              ],
+              [
+                7,
+                422,
+                5
+              ],
+              [
+                0,
+                14,
+                274
+              ]
+            ],
+            "majority_baseline_accuracy": 0.4410569105691057
+          },
+          "64": {
+            "accuracy": 0.983739837398374,
+            "balanced_accuracy": 0.970812733107815,
+            "class_recall": [
+              0.9603174603174603,
+              0.9918032786885246,
+              0.9603174603174603
+            ],
+            "support": [
+              126,
+              732,
+              126
+            ],
+            "confusion": [
+              [
+                121,
+                5,
+                0
+              ],
+              [
+                5,
+                726,
+                1
+              ],
+              [
+                0,
+                5,
+                121
+              ]
+            ],
+            "majority_baseline_accuracy": 0.7439024390243902
+          }
+        }
+      },
+      "test/macro_s43": {
+        "parents": 984,
+        "full127_path_rmse_bps_mean": 11.431063500026083,
+        "full127_path_rmse_bps_median": 6.872844245656344,
+        "full127_path_rmse_bps_p95": 28.00497152406017,
+        "classification": {
+          "16": {
+            "accuracy": 0.983739837398374,
+            "balanced_accuracy": 0.9845262768572914,
+            "class_recall": [
+              0.9847328244274809,
+              0.9792626728110599,
+              0.9895833333333334
+            ],
+            "support": [
+              262,
+              434,
+              288
+            ],
+            "confusion": [
+              [
+                258,
+                4,
+                0
+              ],
+              [
+                3,
+                425,
+                6
+              ],
+              [
+                0,
+                3,
+                285
+              ]
+            ],
+            "majority_baseline_accuracy": 0.4410569105691057
+          },
+          "64": {
+            "accuracy": 0.9827235772357723,
+            "balanced_accuracy": 0.9703573597016221,
+            "class_recall": [
+              0.9603174603174603,
+              0.9904371584699454,
+              0.9603174603174603
+            ],
+            "support": [
+              126,
+              732,
+              126
+            ],
+            "confusion": [
+              [
+                121,
+                5,
+                0
+              ],
+              [
+                3,
+                725,
+                4
+              ],
+              [
+                0,
+                5,
+                121
+              ]
+            ],
+            "majority_baseline_accuracy": 0.7439024390243902
+          }
+        }
+      },
+      "cross_research/macro_s42": {
+        "parents": 439,
+        "full127_path_rmse_bps_mean": 9.399868381038628,
+        "full127_path_rmse_bps_median": 8.239247737725165,
+        "full127_path_rmse_bps_p95": 16.47187660435823,
+        "classification": {
+          "16": {
+            "accuracy": 0.9681093394077449,
+            "balanced_accuracy": 0.9673584134469407,
+            "class_recall": [
+              0.9689922480620154,
+              0.976878612716763,
+              0.9562043795620438
+            ],
+            "support": [
+              129,
+              173,
+              137
+            ],
+            "confusion": [
+              [
+                125,
+                4,
+                0
+              ],
+              [
+                2,
+                169,
+                2
+              ],
+              [
+                0,
+                6,
+                131
+              ]
+            ],
+            "majority_baseline_accuracy": 0.3940774487471526
+          },
+          "64": {
+            "accuracy": 0.958997722095672,
+            "balanced_accuracy": 0.9146300636089723,
+            "class_recall": [
+              0.9137931034482759,
+              0.9967637540453075,
+              0.8333333333333334
+            ],
+            "support": [
+              58,
+              309,
+              72
+            ],
+            "confusion": [
+              [
+                53,
+                5,
+                0
+              ],
+              [
+                1,
+                308,
+                0
+              ],
+              [
+                0,
+                12,
+                60
+              ]
+            ],
+            "majority_baseline_accuracy": 0.7038724373576309
+          }
+        }
+      },
+      "cross_research/macro_s43": {
+        "parents": 439,
+        "full127_path_rmse_bps_mean": 7.394674589254694,
+        "full127_path_rmse_bps_median": 6.283805551024802,
+        "full127_path_rmse_bps_p95": 12.93052823564188,
+        "classification": {
+          "16": {
+            "accuracy": 0.9681093394077449,
+            "balanced_accuracy": 0.9687264473952898,
+            "class_recall": [
+              0.9612403100775194,
+              0.9595375722543352,
+              0.9854014598540146
+            ],
+            "support": [
+              129,
+              173,
+              137
+            ],
+            "confusion": [
+              [
+                124,
+                5,
+                0
+              ],
+              [
+                2,
+                166,
+                5
+              ],
+              [
+                0,
+                2,
+                135
+              ]
+            ],
+            "majority_baseline_accuracy": 0.3940774487471526
+          },
+          "64": {
+            "accuracy": 0.9772209567198178,
+            "balanced_accuracy": 0.9492337164750957,
+            "class_recall": [
+              0.9310344827586207,
+              1.0,
+              0.9166666666666666
+            ],
+            "support": [
+              58,
+              309,
+              72
+            ],
+            "confusion": [
+              [
+                54,
+                4,
+                0
+              ],
+              [
+                0,
+                309,
+                0
+              ],
+              [
+                0,
+                6,
+                66
+              ]
+            ],
+            "majority_baseline_accuracy": 0.7038724373576309
+          }
+        }
+      }
+    },
+    "metric_definitions": {
+      "price": "per-parent RMSE of reconstructed vs raw relative-log-close over127 non-current history positions; x10000 in bp; summarize mean, median and descriptiveP95; no mean recentering or amplitude correction",
+      "direction": "past16/64 bars including current endpoint, signed net log change / total absolute log changes; <-0.2 down, >0.2 up, otherwise mixed; flat uses0",
+      "balanced_accuracy": "mean of each of three class recalls, so majority mixed does not dominate",
+      "scope": "supplementary CPU description of already reviewed outputs, not a new experiment, gate or model promotion"
+    },
+    "evidence": {
+      "interface_archive": "/Users/bardan/Downloads/babel_history_state768_reports.tar.gz",
+      "archive_sha256": "c41cb6abeb04c9103b100abc55159fb22312efb0106aa4dd4680413c97184ba8",
+      "review": "docs/BABEL_HISTORY_STATE768_REVIEW.json",
+      "raw_price_source_review": "docs/BABEL_CONTENT_RETENTION768_REVIEW.json",
+      "arrays_scored": 4,
+      "new_model_forwards": 0
+    },
+    "limitations": [
+      "not a universal reconstruction percentage or complete OHLCV recovery",
+      "rule-based direction mixture is not a full trading regime definition",
+      "only closed endpoints qualified, not intrabar partial updates",
+      "same-history direct calculation remains the required baseline and has no reconstruction error",
+      "no new independent data or calibrated confidence",
+      "low-motion failure retained"
+    ],
+    "next_scope": "若进入应用工作，先固定多尺度当前状态的含义和可观察边界，对照原始行情直接计算，展示原始/重建/状态及分歧；连续切换/低波动可靠性另定资格。此处未新开实验卡或GPU任务。",
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "用户明确近期用途是看盘时描述当前趋势/震荡，不依赖未来预测成功。F11以该用途收敛，原价量embedding总目标保留。",
+        "remaining": "用途描述仍须避免把简单规则复现冒充完整市场状态识别；本次只明确范围，没有新训练卡。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "沿固定Macro42/43和已有历史查询，只核对已导出路径；每个已收盘bar滚动128输入、768末端状态，不改模型。",
+        "remaining": "实时原始行情接入和未收盘bar的部分信息没有当前接口验收。"
+      },
+      "training": {
+        "status": "not_applicable",
+        "evidence": "0训练、0拟合、0选模；没有改损失或打开新GPU预算。",
+        "remaining": "不由用途澄清自动恢复content/aligned训练。"
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "Macro在984/439研究父窗口的原始收盘三类描述核对，准确率与既有raw复核一致；补算每类等权准确率、混淆、127点路径均方根误差及P95。",
+        "remaining": "固定方向效率阈值±0.2的历史一致性；mixed不等于可靠震荡区间。误差数字不是统一还原百分比，新数据/连续状态切换稳定性未验收。"
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "旧接口包SHA与8个数据/行成员SHA核验，行与最新已核验raw255完全一致，使用末尾128原始收盘；当前零锚点不计入127点误差。",
+        "remaining": "旧研究集反复使用，平盘/低波动失败保留，不扩为独立泛化证据。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "仅现有roadmap两格式与进度日志更新；价格/分类补算为CPU数组运算，无神经权重执行。",
+        "remaining": "已有接口消费prepared features，不是本次已完成实盘看板/行情接入。"
+      }
+    }
   }
 }
