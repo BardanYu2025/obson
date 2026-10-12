@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-12",
-  "current_iteration": "F03_F11_content_retention_reviewed_scoped_stage_delivered",
-  "current_iteration_scope": "真实内容形状收益通过，近期/活动保护未过，额外一致性无增益；固定配方结束，阶段有限研究原型及边界已交账。Macro参照和历史纠错结案不变，无新任务开跑。",
+  "current_iteration": "F11_current_market_snapshot_view_delivered",
+  "current_iteration_scope": "复用固定Macro真实报告交付全部1423历史快照、raw对照与多尺度状态；0训练/拟合/神经前向，不修改原研究结论。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -670,7 +670,7 @@
         "V04",
         "V05"
       ],
-      "status": "有限历史状态研究原型阶段交账完成；原完整用途/退出门槛未过仍保留，Macro不变",
+      "status": "有限研究原型及全部1423历史快照界面已交付；完整用途/退出门槛未过，Macro不变",
       "reentry_or_acceptance": "锁同一权重做当前字段/方向/波动/结构和强基线比较；达到用途条件即停止追零误差；若未过则限定预算收束而非宣布胜利，独立确认归V13",
       "evidence": [
         "docs/BABEL_RECONSTRUCTION_EXIT.md",
@@ -681,10 +681,10 @@
         "docs/BABEL_HISTORY_STATE768_REVIEW.json",
         "docs/BABEL_CONTENT_RETENTION768_REVIEW.json"
       ],
-      "next_action": "阶段交账已完成，不自动追加实验；未来围绕一个具体用途及读取代价另定F11问题和同信息raw/PCA/简单特征基线，原F分支保留，V13只在数据合格时进入。",
-      "implementation": "existing_API_qualified_for_scope",
-      "execution": "stage_evidence_and_boundary_delivery_complete",
-      "conclusion": "原型可以研究调用，不是通用表示或预测验收成功；本轮候选保护未过，不替换参照。"
+      "next_action": "F11已收盘raw-to-state适配与连续状态切换检查尚未实现；另锁有限执行计划再给CUDA命令，不新增训练；V13仍待合格新行情。",
+      "implementation": "existing_prepared_API_qualified_and_offline_snapshot_view_complete",
+      "execution": "existing_outputs_reused_CPU_and_UI_checked_no_new_neural_execution",
+      "conclusion": "已有历史输出可以直观检查，不是通用表示、实时状态或预测验收；旧未过保留。"
     },
     {
       "id": "F12",
@@ -702,7 +702,7 @@
     }
   ],
   "active_order": [],
-  "next_after_active": "阶段交账已完成，不自动追加实验；未来围绕一个具体用途及读取代价另定F11问题和同信息raw/PCA/简单特征基线，原F分支保留，V13只在数据合格时进入。",
+  "next_after_active": "F11已收盘raw-to-state适配与连续状态切换检查尚未实现；另锁有限执行计划再给CUDA命令，不新增训练；V13仍待合格新行情。",
   "active_training_budget": {
     "task_ids": [],
     "status": "none_all_current_authorized_jobs_completed",
@@ -710,7 +710,7 @@
     "worker_epochs_max": 0,
     "optimizer_updates_max": 0,
     "readout_fits": 0,
-    "reason": "第13节已完成并复核，按既定阶段终点交账；没有自动续训、调权、扩层或新增诊断。"
+    "reason": "F11历史快照界面仅复用报告，工程交付完成；未开新的CUDA或训练任务。"
   },
   "aliases": {
     "R0": [
@@ -756,7 +756,7 @@
   "blocked_followups": {
     "F_optimization": "第13节固定配方已收束；原F分支保留，后续须围绕具体用途/额外价值另锁有限问题。V13缺独立数据，不据此循环旧资格或重复旧训练。"
   },
-  "active_phase": "scoped_research_prototype_stage_delivered_no_queued_training",
+  "active_phase": "scoped_research_prototype_with_offline_view_no_queued_training",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -4599,5 +4599,112 @@
         "remaining": "已有接口消费prepared features，不是本次已完成实盘看板/行情接入。"
       }
     }
+  },
+  "current_market_view_delivery": {
+    "date": "2026-10-12",
+    "task_ids": [
+      "F11"
+    ],
+    "requirement_ids": [
+      "N01",
+      "N02",
+      "N03",
+      "N05",
+      "N06",
+      "N07",
+      "N09"
+    ],
+    "question": "已有因果历史embedding能读出哪些当前方向/波动，哪些快照失败，如何直观看到？",
+    "implementation": "complete_new_offline_report_viewer",
+    "execution": "CPU_report_build_and_browser_checks_complete_no_neural_execution",
+    "conclusion": "已有研究结果可交互检查；没有新增模型能力或科学验收，不是实时系统。",
+    "scope": {
+      "models": "Macro s42 best97 / s43 best94,768/4/8",
+      "source_archive_sha256": "c41cb6abeb04c9103b100abc55159fb22312efb0106aa4dd4680413c97184ba8",
+      "completion_sha256": "a192bf5f0e733375bc36bb2af26e250561f1ddb664202b2dcb1107156d25b7d0",
+      "inventory_sha256": "007e788425787f60c115ff559796a36448908d0800e53c23986e7a04b5b2b0f1",
+      "source_hash_policy": "archive/completion/consumed members/used raw CSV immutable",
+      "data": "test984+cross_research439;220 hash-bound single-contract CSVs; complete128 raw bars per endpoint",
+      "variable": "presentation only",
+      "controls": "both fixed models and same-history direct raw calculation",
+      "budget": {
+        "neural_forwards": 0,
+        "updates": 0,
+        "fits": 0,
+        "model_selection": 0
+      },
+      "acceptance": "identity and exact output preservation; arithmetic parity and UI checks, not model promotion",
+      "stopping": "deliver bounded viewer once checks pass; stop build on identity failure"
+    },
+    "artifacts": {
+      "code": "src/obson/babel/current_market_view.py",
+      "template": "src/obson/babel/current_market_view.html",
+      "tests": "tests/babel/test_current_market_view.py",
+      "html": "reports/babel_current_market/current-market.html",
+      "receipt": "reports/babel_current_market/current-market.json",
+      "html_sha256": "746685877609e00cd8603cef8e51c7948e75f18b6621dadd7529cd6848294a17",
+      "html_bytes": 26075201,
+      "screenshots": [
+        "reports/babel_current_market/overview.png",
+        "reports/babel_current_market/flat-failure.png"
+      ]
+    },
+    "checks": {
+      "cpu_tests_passed": 31,
+      "raw_files_verified": 220,
+      "windows": 1423,
+      "model_arrays_exact": 4,
+      "direction_disagreement_windows": 117,
+      "low_motion_cases": [
+        "test:171"
+      ],
+      "aggregate_tolerance_bps": 1e-10,
+      "ui": [
+        "128/64/16 crop leaves state unchanged",
+        "keyboard age1 tooltip",
+        "disagreement and low-motion filters",
+        "empty cohort still has full cohort stats",
+        "next window",
+        "error sorting",
+        "raw volume and OI",
+        "360px no horizontal overflow",
+        "1200px full layout",
+        "zero console errors"
+      ],
+      "file_protocol_test": "blocked by browser URL security policy; localhost UI and self-contained assets checked"
+    },
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "F11将固定模型真实历史输出和raw基线并排展示，全部1423例包含失败/分歧。",
+        "remaining": "工程交付不证明通用用途、真实震荡识别或预测/交易收益。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "Macro原768/4/8，s42/s43 best97/94；报告输出不变，原始收盘只作价格坐标和对照。",
+        "remaining": "页面不是raw实时推理适配器；悬停历史点不代表获取其当时embedding。"
+      },
+      "training": {
+        "status": "not_applicable",
+        "evidence": "0训练/拟合/选模/真实神经前向；网络和损失未改。",
+        "remaining": "不重启已收束的content/aligned或其他旧配方。"
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "31 CPU tests通过，4组模型数组与tar逐点一致；raw独立log1p和旧汇总核对；界面范围/分歧/空筛选/导航/键盘/活动/360和1200布局通过。",
+        "remaining": "反复研究的稀疏样本；mixed不是震荡真值，未验证连续切换、独立泛化或实盘。"
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "原包、completion、6个消费成员、固定inventory和220原CSV指纹核验，1423例ID唯一；117分歧和test:171平盘保留。",
+        "remaining": "原2026-09-12截止数据，没有新样本；不作V13验收。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "Ruff/JS syntax和浏览器检查通过、无console error；来源保护、源码防覆盖、safe JSON内嵌和空筛选统计已检查；历史绑定代码未改。",
+        "remaining": "file:被内置浏览器策略阻止，界面交互在localhost实测；未声称实测双击本地HTML。"
+      }
+    },
+    "next_action": "F11已收盘raw-to-state适配与连续状态切换检查尚未实现；另锁有限执行计划再给CUDA命令，不新增训练；V13仍待合格新行情。"
   }
 }

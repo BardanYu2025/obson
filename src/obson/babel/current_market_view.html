@@ -1,0 +1,1044 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'"
+    />
+    <title>Babel · 当前行情研究</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f4f6f9;
+        --paper: #fff;
+        --fg: #172331;
+        --muted: #536373;
+        --border: #dce3eb;
+        --blue: #2563eb;
+        --orange: #b95c0b;
+        --up: #c64043;
+        --down: #168373;
+        --soft: #edf2f7;
+        --focus: #315fbe;
+        --warning: #7c4b11;
+        --warnbg: #fff4e1;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #141a22;
+          --paper: #1c2530;
+          --fg: #edf2f7;
+          --muted: #b0bdcc;
+          --border: #3b4858;
+          --blue: #80afff;
+          --orange: #ffb36a;
+          --up: #f78889;
+          --down: #69cdb8;
+          --soft: #263342;
+          --focus: #9abdff;
+          --warning: #ffd298;
+          --warnbg: #3d3021;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font:
+          15px/1.55 system-ui,
+          -apple-system,
+          "PingFang SC",
+          sans-serif;
+      }
+      main {
+        max-width: 1240px;
+        margin: auto;
+        padding: 28px 24px 40px;
+      }
+      h1 {
+        font-size: 28px;
+        line-height: 1.25;
+        letter-spacing: -0.5px;
+        margin: 6px 0 10px;
+        font-weight: 650;
+      }
+      h2 {
+        font-size: 17px;
+        margin: 0 0 12px;
+      }
+      p {
+        margin: 8px 0;
+      }
+      .muted,
+      small {
+        color: var(--muted);
+      }
+      small {
+        font-size: 12px;
+      }
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 1.4px;
+        color: var(--muted);
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        align-items: flex-start;
+      }
+      .status {
+        background: var(--soft);
+        padding: 7px 12px;
+        border-radius: 20px;
+        white-space: nowrap;
+        font-size: 13px;
+      }
+      .controls {
+        display: grid;
+        grid-template-columns: 180px 1fr 190px;
+        gap: 12px;
+        margin: 24px 0 12px;
+      }
+      label {
+        display: block;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      select,
+      input,
+      button {
+        font: inherit;
+        color: var(--fg);
+        background: var(--paper);
+        border: 1px solid var(--border);
+        border-radius: 7px;
+        min-height: 38px;
+      }
+      select {
+        width: 100%;
+        padding: 8px 26px 8px 10px;
+        max-width: 100%;
+      }
+      button {
+        padding: 7px 12px;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.45;
+        cursor: default;
+      }
+      button:hover:not(:disabled) {
+        background: var(--soft);
+      }
+      button[aria-pressed="true"] {
+        background: var(--fg);
+        color: var(--paper);
+        border-color: var(--fg);
+      }
+      :focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 3px;
+      }
+      .sample-nav {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        gap: 8px;
+        align-items: end;
+      }
+      .sample-nav label {
+        min-width: 0;
+      }
+      .count {
+        margin: 9px 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .panel {
+        background: var(--paper);
+        padding: 20px 22px;
+        margin-top: 16px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+      }
+      .chart-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+      .chart-options {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .chart-options button {
+        font-size: 13px;
+        min-height: 32px;
+        padding: 4px 10px;
+      }
+      .identity {
+        font-size: 14px;
+        color: var(--muted);
+        margin-top: 5px;
+        word-break: break-word;
+      }
+      .legend {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+        font-size: 13px;
+        margin: 14px 0 2px;
+      }
+      .swatch {
+        display: inline-block;
+        width: 22px;
+        vertical-align: middle;
+        border-top: 2px solid;
+        margin-right: 6px;
+      }
+      .raw {
+        color: var(--muted);
+      }
+      .m42 {
+        color: var(--blue);
+      }
+      .m43 {
+        color: var(--orange);
+      }
+      svg {
+        width: 100%;
+        display: block;
+        overflow: visible;
+      }
+      svg text {
+        font:
+          12px system-ui,
+          sans-serif;
+        fill: var(--muted);
+      }
+      svg .grid {
+        stroke: var(--border);
+        stroke-width: 1;
+        opacity: 0.6;
+      }
+      svg .axis {
+        stroke: var(--border);
+        fill: none;
+      }
+      .plot-box {
+        position: relative;
+      }
+      .tooltip {
+        position: absolute;
+        max-width: 300px;
+        background: var(--paper);
+        color: var(--fg);
+        border: 1px solid var(--border);
+        padding: 10px 13px;
+        border-radius: 8px;
+        font-size: 12px;
+        pointer-events: none;
+        z-index: 4;
+        box-shadow: 0 4px 16px #0002;
+        white-space: pre-line;
+      }
+      .metrics-line {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+        margin: 6px 0 0;
+        font-size: 13px;
+        font-variant-numeric: tabular-nums;
+      }
+      .states {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .states .panel {
+        min-width: 0;
+      }
+      .states table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      .states th {
+        font-weight: 500;
+        color: var(--muted);
+        font-size: 12px;
+        text-align: right;
+        padding: 6px 0;
+      }
+      .states th:first-child,
+      .states td:first-child {
+        text-align: left;
+      }
+      .states td {
+        text-align: right;
+        padding: 9px 0;
+        border-top: 1px solid var(--border);
+        font-variant-numeric: tabular-nums;
+      }
+      .badge {
+        display: inline-block;
+        min-width: 65px;
+        padding: 3px 6px;
+        border-radius: 4px;
+        background: var(--soft);
+        font-weight: 500;
+      }
+      .up {
+        color: var(--up);
+      }
+      .down {
+        color: var(--down);
+      }
+      .mixed {
+        color: var(--muted);
+      }
+      .warning {
+        background: var(--warnbg);
+        color: var(--warning);
+        border-radius: 7px;
+        padding: 11px 14px;
+        margin-top: 12px;
+        font-size: 13px;
+      }
+      .summary {
+        margin-top: 14px;
+        padding-top: 12px;
+        border-top: 1px solid var(--border);
+        font-size: 14px;
+      }
+      .secondary-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .secondary-top select {
+        width: 190px;
+        font-size: 13px;
+      }
+      .empty {
+        padding: 50px;
+        text-align: center;
+        background: var(--paper);
+        margin-top: 18px;
+        border-radius: 10px;
+      }
+      .empty[hidden],
+      [hidden] {
+        display: none !important;
+      }
+      details {
+        margin-top: 18px;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: 500;
+      }
+      details p {
+        font-size: 13px;
+      }
+      .evidence {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .stat {
+        padding: 14px;
+        background: var(--soft);
+        border-radius: 8px;
+        font-size: 13px;
+      }
+      .stat strong {
+        display: block;
+        font-size: 21px;
+        font-variant-numeric: tabular-nums;
+        font-weight: 600;
+      }
+      .hash {
+        overflow-wrap: anywhere;
+        font-family: ui-monospace, monospace;
+        font-size: 11px;
+      }
+      footer {
+        padding-top: 16px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      @media (max-width: 720px) {
+        .secondary-top {
+          flex-wrap: wrap;
+        }
+        main {
+          padding: 18px 12px;
+        }
+        h1 {
+          font-size: 23px;
+        }
+        .header {
+          display: block;
+        }
+        .status {
+          display: inline-block;
+          margin-top: 8px;
+        }
+        .controls {
+          grid-template-columns: 1fr 1fr;
+        }
+        .controls label:nth-child(2) {
+          grid-column: 1/3;
+          grid-row: 2;
+        }
+        .states {
+          grid-template-columns: 1fr;
+          gap: 0;
+        }
+        .panel {
+          padding: 16px 12px;
+        }
+        .sample-nav {
+          grid-template-columns: 1fr auto auto;
+        }
+        .sample-nav button {
+          padding: 7px;
+        }
+        .chart-options {
+          gap: 4px;
+        }
+        .evidence {
+          grid-template-columns: 1fr;
+        }
+        .tooltip {
+          max-width: 230px;
+        }
+        .states td,
+        .states th {
+          font-size: 12px;
+        }
+        .legend {
+          gap: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="header">
+        <div>
+          <div class="eyebrow">BABEL / F11</div>
+          <h1>当前行情，在不同尺度下是什么样？</h1>
+          <p class="muted">
+            比较真实走势与768维状态回读的历史，看清方向、波动与分歧。
+          </p>
+        </div>
+        <span class="status">历史快照 · 固定模型 · 已收盘</span>
+      </header>
+      <div class="controls">
+        <label
+          >研究队列<select id="cohort">
+            <option value="test">原品种 · 984个窗口</option>
+            <option value="cross_research">跨品种 · 439个窗口</option>
+          </select></label
+        >
+        <label
+          >合约／周期<select id="contract">
+            <option value="all">全部合约与周期</option>
+          </select></label
+        >
+        <label
+          >查看样本<select id="filter">
+            <option value="all">全部 · 原始顺序</option>
+            <option value="disagree">存在方向分歧</option>
+            <option value="low">真实低波动／平盘</option>
+            <option value="error">重建误差从大到小</option>
+          </select></label
+        >
+      </div>
+      <div class="sample-nav">
+        <label>已导出的窗口<select id="sample"></select></label
+        ><button id="prev" aria-label="上一个历史快照">← 上一个</button
+        ><button id="next" aria-label="下一个历史快照">下一个 →</button>
+      </div>
+      <div class="count" id="count" role="status" aria-live="polite"></div>
+      <div id="empty" class="empty" hidden>
+        此筛选下没有样本。没有低波动样本不代表模型已通过低波动验证。
+      </div>
+      <div id="content">
+        <section class="panel">
+          <div class="chart-top">
+            <div>
+              <h2 id="heading">原始K线与重建收盘线</h2>
+              <div class="identity" id="identity"></div>
+            </div>
+            <div class="chart-options" role="group" aria-label="展示范围">
+              <button data-range="128" aria-pressed="true">128根</button
+              ><button data-range="64" aria-pressed="false">64根</button
+              ><button data-range="16" aria-pressed="false">16根</button>
+            </div>
+          </div>
+          <div class="legend">
+            <span><i class="swatch raw"></i>原始K线／收盘</span
+            ><span><i class="swatch m42"></i>Macro 42 · 重建收盘</span
+            ><span><i class="swatch m43"></i>Macro 43 · 重建收盘</span>
+          </div>
+          <div class="plot-box" id="price-box">
+            <svg
+              id="price"
+              role="img"
+              aria-label="原始OHLC与两个固定模型的历史收盘重建"
+            ></svg>
+            <div id="tooltip" class="tooltip" hidden></div>
+          </div>
+          <div class="metrics-line" id="errors"></div>
+          <small
+            >末端收盘是已知坐标锚点，不计入误差；模型只画重建收盘线，没有补画预测影线。红涨、绿跌为原始K线。</small
+          >
+        </section>
+        <div class="states">
+          <section class="panel">
+            <h2>短尺度 · 最近16根</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>来源</th>
+                  <th>方向</th>
+                  <th>方向效率</th>
+                  <th>波动 / bp</th>
+                </tr>
+              </thead>
+              <tbody id="state16"></tbody>
+            </table>
+            <small>16根收盘，15次相邻变化。</small>
+          </section>
+          <section class="panel">
+            <h2>中尺度 · 最近64根</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>来源</th>
+                  <th>方向</th>
+                  <th>方向效率</th>
+                  <th>波动 / bp</th>
+                </tr>
+              </thead>
+              <tbody id="state64"></tbody>
+            </table>
+            <small>64根收盘，63次相邻变化。</small>
+          </section>
+        </div>
+        <div class="summary" id="description"></div>
+        <div id="warning" class="warning" hidden></div>
+        <section class="panel">
+          <div class="secondary-top">
+            <h2 id="lower-heading">重建价格偏差</h2>
+            <label
+              >辅助观察<select id="secondary">
+                <option value="error">重建价格偏差 / bp</option>
+                <option value="volume">原始成交量</option>
+                <option value="oi">原始持仓量</option>
+              </select></label
+            >
+          </div>
+          <svg
+            id="secondary-chart"
+            role="img"
+            aria-label="重建误差或原始成交持仓"
+          ></svg
+          ><small id="lower-note"></small>
+        </section>
+      </div>
+      <details class="panel">
+        <summary>这个页面能说明什么？</summary>
+        <p>
+          “偏上／偏下／方向混合”来自固定历史描述：净log涨跌 ÷
+          累计绝对log涨跌，阈值为±0.2。方向效率接近0表示来回运动相对多，不能直接等同边界明确的震荡区间；直线上涨但幅度极小时，也不一定有显著趋势。
+        </p>
+        <p>
+          波动是这段历史内部单步log收益的均方根，1bp约为0.01%。低至1bp范围在现有研究数据中缺乏支持；平盘失败样本保留。模型42与43是两个固定训练版本，它们的分歧不等于经过校准的置信度。
+        </p>
+        <p>
+          这些是非连续、反复用于研究的历史样本。切换样本只更换独立快照，不模拟逐根行情；图内悬停也不会产生那个历史时刻的embedding。盘中未收完bar、实时行情接入、状态持续性和切换滞后尚未验证。
+        </p>
+        <p>
+          真实数据直接计算是必要基线；规则一致率衡量重建保真，不证明模型比原始行情更会识别市场。当前页面不生成未来走势、开仓信号或“总体还原率”。
+        </p>
+        <h2>整个当前队列的已有成绩</h2>
+        <div class="evidence" id="cohort-stats"></div>
+        <p class="muted">
+          上述统计不随样本筛选改变。价格误差为每窗口127个历史点RMSE，再跨窗口汇总；P95为描述性分位数。固定模型仍为Macro
+          768维／4层／8头，42选原第97轮、43选原第94轮。
+        </p>
+        <p id="provenance" class="hash"></p>
+      </details>
+      <footer>
+        历史信息压缩研究原型。所有方向描述只使用该窗口端点及此前已发生的信息。此页面已内置数据，可以离线打开。
+      </footer>
+    </main>
+    <script id="market-data" type="application/json">
+      __MARKET_DATA__
+    </script>
+    <script>
+      "use strict";
+      const report = JSON.parse(
+        document.getElementById("market-data").textContent,
+      );
+      const $ = (id) => document.getElementById(id),
+        names = ["偏下", "方向混合", "偏上"],
+        classes = ["down", "mixed", "up"];
+      const modelKeys = ["macro_s42", "macro_s43"],
+        labels = { raw: "真实计算", macro_s42: "模型42", macro_s43: "模型43" };
+      let shown = [],
+        range = 128,
+        selected = null;
+      const css = (name) =>
+        getComputedStyle(document.documentElement)
+          .getPropertyValue(name)
+          .trim();
+      const finite = (a) => a.filter((v) => v !== null && Number.isFinite(v));
+      const fmt = (v) =>
+        Number.isFinite(v)
+          ? v.toLocaleString("zh-CN", { maximumFractionDigits: 2 })
+          : "缺失";
+      function el(tag, text, cls) {
+        const e = document.createElement(tag);
+        if (text !== undefined) e.textContent = text;
+        if (cls) e.className = cls;
+        return e;
+      }
+      function remember() {
+        try {
+          localStorage.setItem(
+            "babel-market-v1",
+            JSON.stringify({
+              cohort: $("cohort").value,
+              contract: $("contract").value,
+              filter: $("filter").value,
+              id: selected?.id,
+              range,
+              secondary: $("secondary").value,
+            }),
+          );
+        } catch {}
+      }
+      function contracts() {
+        const saved = $("contract").value,
+          keys = [
+            ...new Set(
+              report.cases
+                .filter((c) => c.split === $("cohort").value)
+                .map((c) => c.row.key),
+            ),
+          ].sort();
+        $("contract").replaceChildren(
+          new Option("全部合约与周期", "all"),
+          ...keys.map((k) => new Option(k, k)),
+        );
+        if (keys.includes(saved)) $("contract").value = saved;
+      }
+      function refill(wanted) {
+        shown = report.cases.filter(
+          (c) =>
+            c.split === $("cohort").value &&
+            ($("contract").value === "all" ||
+              c.row.key === $("contract").value),
+        );
+        const f = $("filter").value;
+        if (f === "disagree")
+          shown = shown.filter((c) => c.direction_disagreement);
+        if (f === "low") shown = shown.filter((c) => c.observed_low_motion);
+        if (f === "error")
+          shown.sort(
+            (a, b) =>
+              Math.max(...modelKeys.map((m) => b.errors[m].rmse_bps[2])) -
+              Math.max(...modelKeys.map((m) => a.errors[m].rmse_bps[2])),
+          );
+        $("sample").replaceChildren(
+          ...shown.map(
+            (c) => new Option(`${c.row.key} · ${c.closed_at}`, c.id),
+          ),
+        );
+        if (shown.some((c) => c.id === wanted)) $("sample").value = wanted;
+        draw();
+      }
+      function stateTable(h) {
+        const idx = h === 16 ? 0 : 1;
+        $(h === 16 ? "state16" : "state64").replaceChildren(
+          ...["raw", ...modelKeys].map((k) => {
+            const s = selected.summary[k],
+              tr = el("tr");
+            tr.append(el("td", labels[k]));
+            const td = el("td");
+            td.append(
+              el(
+                "span",
+                names[s.direction[idx]],
+                "badge " + classes[s.direction[idx]],
+              ),
+            );
+            tr.append(
+              td,
+              el("td", s.efficiency[idx].toFixed(3)),
+              el("td", fmt(s.rms_bps[idx])),
+            );
+            return tr;
+          }),
+        );
+      }
+      function summary() {
+        const s = selected.summary;
+        let text = `真实历史：近64根${names[s.raw.direction[1]]}，近16根${names[s.raw.direction[0]]}。`;
+        if (s.raw.direction[1] === 2 && s.raw.direction[0] === 0)
+          text += " 两个观察尺度方向相反，可见中尺度偏上、短尺度回落的组合。";
+        if (s.raw.direction[1] === 0 && s.raw.direction[0] === 2)
+          text += " 两个观察尺度方向相反，可见中尺度偏下、短尺度反弹的组合。";
+        if (s.raw.direction.some((d) => d === 1))
+          text += " “方向混合”不自动等于震荡区间。";
+        $("description").textContent = text;
+        const warnings = [];
+        if (selected.direction_disagreement)
+          warnings.push("模型与真实历史的方向描述存在分歧，请对照原始走势。");
+        if (selected.observed_low_motion)
+          warnings.push(
+            "真实历史存在平盘／低至1bp范围，当前模型在这个范围没有可靠性资格，可能重建出不存在的波动。",
+          );
+        if (
+          s.macro_s42.direction.some((d, i) => d !== s.macro_s43.direction[i])
+        )
+          warnings.push("两个固定模型版本的方向判断也有分歧。");
+        $("warning").hidden = !warnings.length;
+        $("warning").textContent = warnings.join(" ");
+      }
+      function cohortStats() {
+        const spec = report.cohorts[$("cohort").value];
+        $("cohort-stats").replaceChildren(
+          ...modelKeys.map((k) => {
+            const v = spec[k],
+              d = el("div", undefined, "stat");
+            d.append(
+              el("div", `${labels[k]} · ${v.windows}窗口`),
+              el("strong", `${v.mean_rmse_bps.toFixed(2)} bp`),
+              el(
+                "div",
+                `路径RMSE窗口均值；P95 ${v.p95_rmse_bps.toFixed(2)} bp`,
+              ),
+              el(
+                "div",
+                `16／64方向一致率 ${v.classification.map((c) => (c.accuracy * 100).toFixed(2) + "%").join(" ／ ")}`,
+              ),
+              el(
+                "div",
+                `三类等权 ${v.classification.map((c) => (c.balanced_accuracy * 100).toFixed(2) + "%").join(" ／ ")}`,
+              ),
+            );
+            return d;
+          }),
+        );
+      }
+      function frame(svg, height, values, unit) {
+        const width = Math.max(280, svg.parentElement.clientWidth),
+          L = width < 480 ? 58 : 72,
+          R = 16,
+          T = 28,
+          B = 45,
+          plotW = width - L - R,
+          plotH = height - T - B;
+        svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+        svg.style.height = height + "px";
+        const v = finite(values);
+        if (!v.length) {
+          svg.innerHTML = `<text x="${L}" y="60">该字段没有有效观测</text>`;
+          return null;
+        }
+        let lo = Math.min(...v),
+          hi = Math.max(...v),
+          pad = Math.max((hi - lo) * 0.1, Math.abs(hi) * 0.00001, 1e-8);
+        lo -= pad;
+        hi += pad;
+        const X = (i) => L + ((i + 0.5) / range) * plotW,
+          Y = (v) => T + ((hi - v) / (hi - lo)) * plotH;
+        let html = `<title>${unit}；历史快照，当前端点固定</title><defs><clipPath id="${svg.id}-clip"><rect x="${L}" y="${T}" width="${plotW}" height="${plotH}"/></clipPath></defs>`;
+        for (let i = 0; i < 5; i++) {
+          const y = lo + ((hi - lo) * i) / 4,
+            yy = Y(y);
+          html += `<line class="grid" x1="${L}" x2="${width - R}" y1="${yy}" y2="${yy}"/><text x="${L - 8}" y="${yy + 4}" text-anchor="end">${fmt(y)}</text>`;
+        }
+        const ticks = [
+          0,
+          Math.round((range - 1) / 3),
+          Math.round((2 * (range - 1)) / 3),
+          range - 1,
+        ];
+        for (const i of ticks)
+          html += `<text x="${X(i)}" y="${height - 23}" text-anchor="middle">${i - range + 1}</text>`;
+        html += `<text x="${L}" y="15">${unit}</text><text x="${width - R}" y="${height - 3}" text-anchor="end">距当前已收盘bar（根）</text><rect class="axis" x="${L}" y="${T}" width="${plotW}" height="${plotH}"/>`;
+        svg.innerHTML = html;
+        return { width, height, L, R, T, B, plotW, plotH, X, Y };
+      }
+      function line(values, f, color, width = 2) {
+        let d = "",
+          active = false;
+        values.forEach((v, i) => {
+          if (v === null || !Number.isFinite(v)) {
+            active = false;
+            return;
+          }
+          d += (active ? "L" : "M") + f.X(i) + "," + f.Y(v);
+          active = true;
+        });
+        return `<path d="${d}" stroke="${color}" stroke-width="${width}" fill="none"/>`;
+      }
+      function charts() {
+        $("tooltip").hidden = true;
+        if (!selected) return;
+        const start = 128 - range,
+          ohlc = selected.ohlc.slice(start),
+          anchor = selected.ohlc[127][3],
+          pred = modelKeys.map((m) =>
+            selected.model_log[m].slice(start).map((v) => anchor * Math.exp(v)),
+          ),
+          svg = $("price");
+        const f = frame(
+          svg,
+          window.innerWidth < 720 ? 310 : 380,
+          [...ohlc.flat(), ...pred.flat()],
+          "价格",
+        );
+        if (!f) return;
+        let markup = `<g clip-path="url(#price-clip)">`;
+        const bw = Math.min(8, (f.plotW / range) * 0.66);
+        ohlc.forEach((v, i) => {
+          const [o, h, l, c] = v,
+            x = f.X(i),
+            color = c >= o ? css("--up") : css("--down"),
+            top = Math.min(f.Y(o), f.Y(c)),
+            height = Math.max(1, Math.abs(f.Y(o) - f.Y(c)));
+          markup += `<line x1="${x}" x2="${x}" y1="${f.Y(h)}" y2="${f.Y(l)}" stroke="${color}" stroke-opacity=".55"/><rect x="${x - bw / 2}" y="${top}" width="${bw}" height="${height}" fill="${color}" fill-opacity=".32"/>`;
+        });
+        markup +=
+          line(
+            ohlc.map((v) => v[3]),
+            f,
+            css("--muted"),
+            1,
+          ) +
+          line(pred[0], f, css("--blue")) +
+          line(pred[1], f, css("--orange")) +
+          "</g>";
+        markup += `<line id="hover-line" x1="0" x2="0" y1="${f.T}" y2="${f.T + f.plotH}" stroke="${css("--muted")}" stroke-dasharray="3 4" visibility="hidden"/><rect id="hit" x="${f.L}" y="${f.T}" width="${f.plotW}" height="${f.plotH}" fill="transparent" tabindex="0" aria-label="使用左右方向键查看历史bar数值"/>`;
+        svg.insertAdjacentHTML("beforeend", markup);
+        let hover = range - 1;
+        function tooltipAt(i) {
+          hover = i;
+          const ix = start + i,
+            x = f.X(i),
+            v = ohlc[i],
+            err = pred.map((p) => (Math.log(p[i] / v[3]) * 10000).toFixed(2));
+          $("hover-line").setAttribute("x1", x);
+          $("hover-line").setAttribute("x2", x);
+          $("hover-line").setAttribute("visibility", "visible");
+          const tip = $("tooltip");
+          tip.hidden = false;
+          tip.textContent = `bar开始：${selected.time[ix]}\n距当前 ${127 - ix} 根${ix === 127 ? " · 已知锚点" : ""}\n开 ${fmt(v[0])}　高 ${fmt(v[1])}\n低 ${fmt(v[2])}　收 ${fmt(v[3])}\n模型42 ${fmt(pred[0][i])}　偏差 ${err[0]} bp\n模型43 ${fmt(pred[1][i])}　偏差 ${err[1]} bp`;
+          const max = Math.max(
+            0,
+            svg.parentElement.clientWidth - tip.offsetWidth - 5,
+          );
+          tip.style.left = Math.max(0, Math.min(max, x + 12)) + "px";
+          tip.style.top = "32px";
+        }
+        $("hit").addEventListener("pointermove", (event) => {
+          const b = svg.getBoundingClientRect(),
+            x = ((event.clientX - b.left) / b.width) * f.width;
+          tooltipAt(
+            Math.min(
+              range - 1,
+              Math.max(0, Math.floor(((x - f.L) / f.plotW) * range)),
+            ),
+          );
+        });
+        $("hit").addEventListener("pointerleave", () => {
+          $("tooltip").hidden = true;
+          $("hover-line").setAttribute("visibility", "hidden");
+        });
+        $("hit").addEventListener("keydown", (event) => {
+          if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+            event.preventDefault();
+            tooltipAt(
+              Math.max(
+                0,
+                Math.min(
+                  range - 1,
+                  hover + (event.key === "ArrowRight" ? 1 : -1),
+                ),
+              ),
+            );
+          }
+        });
+        const pos = range === 16 ? 0 : range === 64 ? 1 : 2;
+        $("errors").replaceChildren(
+          ...modelKeys.map((k) =>
+            el(
+              "span",
+              `${labels[k]} · 此范围价格RMSE ${selected.errors[k].rmse_bps[pos].toFixed(2)} bp`,
+            ),
+          ),
+        );
+        const mode = $("secondary").value,
+          ss = $("secondary-chart");
+        let vals, unit;
+        if (mode === "error") {
+          vals = modelKeys.map((m) =>
+            selected.model_log[m]
+              .slice(start)
+              .map((p, i) => (p - selected.actual_log[start + i]) * 10000),
+          );
+          unit = "相对真实价格的log偏差 / bp";
+          $("lower-heading").textContent = "重建价格偏差";
+          $("lower-note").textContent =
+            "零线表示与真实收盘相同；这里没有平移校正，也没有用真实走势修正模型。";
+        } else {
+          vals = [
+            selected[mode === "volume" ? "volume" : "open_interest"].slice(
+              start,
+            ),
+          ];
+          unit =
+            mode === "volume"
+              ? "成交量（原始CSV单位）"
+              : "持仓量（原始CSV单位）";
+          $("lower-heading").textContent =
+            mode === "volume" ? "原始成交量" : "原始持仓量";
+          $("lower-note").textContent =
+            "仅显示原始观测，未显示模型重建的成交／持仓；缺失值留空，不填零。";
+        }
+        const sf = frame(
+          ss,
+          180,
+          [...vals.flat(), ...(mode === "error" ? [0] : [])],
+          unit,
+        );
+        if (sf) {
+          let h = `<g clip-path="url(#secondary-chart-clip)">`;
+          if (mode === "error") {
+            h += `<line x1="${sf.L}" x2="${sf.width - sf.R}" y1="${sf.Y(0)}" y2="${sf.Y(0)}" stroke="${css("--muted")}" stroke-dasharray="3 3"/>`;
+            h +=
+              line(vals[0], sf, css("--blue"), 1.5) +
+              line(vals[1], sf, css("--orange"), 1.5);
+          } else h += line(vals[0], sf, css("--muted"), 1.5);
+          ss.insertAdjacentHTML("beforeend", h + "</g>");
+        }
+      }
+      function draw() {
+        const id = $("sample").value;
+        selected = shown.find((c) => c.id === id) || null;
+        $("empty").hidden = !!selected;
+        $("content").hidden = !selected;
+        $("prev").disabled = !selected || shown.indexOf(selected) === 0;
+        $("next").disabled =
+          !selected || shown.indexOf(selected) === shown.length - 1;
+        $("count").textContent =
+          `筛选后 ${shown.length} 个历史快照 · 原始队列 ${report.cohorts[$("cohort").value].macro_s42.windows} 个 · 样本不连续，不作实时回放`;
+        cohortStats();
+        $("sample").disabled = !selected;
+        if (!selected) return;
+        $("identity").textContent =
+          `${selected.row.key}　｜　截至 ${selected.closed_at}（北京时间，已收盘）`;
+        $("tooltip").hidden = true;
+        stateTable(16);
+        stateTable(64);
+        summary();
+        charts();
+      }
+      $("cohort").addEventListener("change", () => {
+        contracts();
+        refill();
+        remember();
+      });
+      ["contract", "filter"].forEach((id) =>
+        $(id).addEventListener("change", () => {
+          refill();
+          remember();
+        }),
+      );
+      $("sample").addEventListener("change", () => {
+        draw();
+        remember();
+      });
+      $("secondary").addEventListener("change", () => {
+        charts();
+        remember();
+      });
+      ["prev", "next"].forEach((id) =>
+        $(id).addEventListener("click", () => {
+          const i = shown.indexOf(selected) + (id === "next" ? 1 : -1);
+          if (shown[i]) {
+            $("sample").value = shown[i].id;
+            draw();
+            remember();
+          }
+        }),
+      );
+      document.querySelectorAll("[data-range]").forEach((b) =>
+        b.addEventListener("click", () => {
+          range = Number(b.dataset.range);
+          document
+            .querySelectorAll("[data-range]")
+            .forEach((x) =>
+              x.setAttribute(
+                "aria-pressed",
+                String(Number(x.dataset.range) === range),
+              ),
+            );
+          charts();
+          remember();
+        }),
+      );
+      $("provenance").textContent =
+        `报告SHA256：${report.source_archive_sha256}　｜　原始数据截止：${report.asof}　｜　模型与影线未新增训练。`;
+      let saved = {};
+      try {
+        saved = JSON.parse(localStorage.getItem("babel-market-v1") || "{}");
+      } catch {}
+      if (!saved || typeof saved !== "object") saved = {};
+      if (["test", "cross_research"].includes(saved.cohort))
+        $("cohort").value = saved.cohort;
+      contracts();
+      if ([...$("contract").options].some((o) => o.value === saved.contract))
+        $("contract").value = saved.contract;
+      if (["all", "disagree", "low", "error"].includes(saved.filter))
+        $("filter").value = saved.filter;
+      if ([16, 64, 128].includes(saved.range)) range = saved.range;
+      if (["error", "volume", "oi"].includes(saved.secondary))
+        $("secondary").value = saved.secondary;
+      document
+        .querySelectorAll("[data-range]")
+        .forEach((x) =>
+          x.setAttribute(
+            "aria-pressed",
+            String(Number(x.dataset.range) === range),
+          ),
+        );
+      refill(saved.id);
+      let pending;
+      new ResizeObserver(() => {
+        cancelAnimationFrame(pending);
+        pending = requestAnimationFrame(charts);
+      }).observe($("price-box"));
+      matchMedia("(prefers-color-scheme:dark)").addEventListener(
+        "change",
+        charts,
+      );
+    </script>
+  </body>
+</html>
