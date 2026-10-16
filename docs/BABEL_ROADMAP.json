@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
-  "updated": "2026-10-16",
-  "current_iteration": "F01_F03_multiscale768_startup_side_effect_fix",
-  "current_iteration_scope": "修复首次来源核验的落盘副作用与目录生命周期；原实验配置不变。该次AutoDL启动在worker前失败，等待修复版v2启动。",
+  "updated": "2026-10-17",
+  "current_iteration": "F01_F03_multiscale768_report_review_recipe_closed",
+  "current_iteration_scope": "真实四组训练完成；多尺度主损失有远端收益但近中端、活动及共同历史保护未全过，固定配方收束。不替换Macro，不追加GPU。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -508,15 +508,19 @@
         "V06",
         "V08"
       ],
-      "status": "旧全位置矩阵已结束；第20节从头主价格损失对照完整入口就绪，等待AutoDL；显式同时128仍保留",
+      "status": "第20节从头双种子120轮比较已完成；远端收益不能抵消近中端/活动代价，该主损失配方收束；同时128假设继续保留",
       "reentry_or_acceptance": "在匹配起点/预算下区分密度、位置权重和完整历史；不能把旧warm-start失败当否定证据；1～128指bar位置而非向量维度，完整上下文方案的首个受监督位置需额外已知历史，历史不足显式mask",
       "evidence": [
         "docs/BABEL_STATE_ROLLOUT768_PLAN.md",
         "docs/BABEL_POSITION_SUPERVISION768_REVIEW.md",
         "docs/BABEL_UNIFORM_CONTEXT768_REVIEW.md",
-        "docs/BABEL_STATE_COVERAGE768_REVIEW.json"
+        "docs/BABEL_STATE_COVERAGE768_REVIEW.json",
+        "docs/BABEL_ROADMAP.md#20-f01f03继续学习embedding先检验主目标的尺度分配2026-10-12"
       ],
-      "next_action": "运行第20节唯一multiscale入口，复核新主目标与同期control；不追加旧A/B/C/D轮数。"
+      "next_action": "完成下一核心机制设计审查，先与旧Q/S/H/G及容量/汇聚证据去重；不自动加轮、调权或激活同时128。",
+      "implementation": "complete",
+      "execution": "four_fixed120_workers_complete_reviewed",
+      "conclusion": "本多尺度配方综合价格MSE升7.27%–24.78%，4项主收益0通过，均衡升级未成立。"
     },
     {
       "id": "F02",
@@ -555,11 +559,11 @@
         "docs/BABEL_OVERLAP_CONTENT768_REVIEW.json",
         "docs/BABEL_CONTENT_RETENTION768_REVIEW.json"
       ],
-      "next_action": "旧H/G配方保持收束；第20节新主目标试验只对共同物理内容做保护与诊断，不新增G或宣称F03整体完成。",
+      "next_action": "旧H/G和第20节loss配方均保持收束；方向保留，未增新G、未宣称F03整体完成。",
       "implementation": "complete_remote_executed",
       "execution": "six_fixed60_workers_complete_reviewed",
       "conclusion": "真实内容监督有稳定的共同形状收益，但保留保护未通过；额外一致性无预定增益，固定配方收束，不晋升。",
-      "current_protection_role": "第20节新主目标比较中的共同物理内容保护，完整入口就绪，真实执行待报告；不改变旧H/G结论。"
+      "current_protection_role": "第20节真实评价已复核：共同历史保护34/60通过；分歧下降不能替代双方真实内容保真。本配方收束，旧H/G结论保持。"
     },
     {
       "id": "F04",
@@ -705,23 +709,24 @@
       ]
     }
   ],
-  "active_order": [
-    "F01",
-    "F03"
-  ],
-  "next_after_active": "使用第20节v2完整命令重启同一F01/F03矩阵；保留旧失败目录和tar，先确认来源核验与资源预检通过，再等待报告。",
+  "active_order": [],
+  "next_after_active": "先做F01/F05下一核心机制的设计审查，与旧Q/S/H/G、活动权重、汇聚和容量证据去重；尚未锁新配方或GPU预算。表示学习继续，旧多尺度矩阵不再运行。",
   "active_training_budget": {
     "task_ids": [
       "F01",
       "F03"
     ],
-    "status": "released_subject_to_remote_zero_update_preflight",
+    "status": "completed_and_closed_no_additional_training_authorized",
     "jobs_max": 4,
     "worker_epochs_max": 480,
     "optimizer_updates_max": 18240,
     "readout_fits": 0,
     "cumulative_seconds_cap": 129600,
-    "reason": "完整入口与合成检查补齐；仅开放原第20节已锁定矩阵，不追加实验量。"
+    "reason": "原上限与历史记录保留；四组固定last120已执行并复核，按预定规则收束，不追加轮数或预算。",
+    "actual_jobs": 4,
+    "actual_worker_epochs": 480,
+    "actual_optimizer_updates": 18240,
+    "actual_seconds": 33336.220780201256
   },
   "aliases": {
     "R0": [
@@ -768,9 +773,9 @@
     "F03"
   ],
   "blocked_followups": {
-    "F_optimization": "第20节主价格损失有界对照已解除组件阶段的启动限制；除此之外不自动新增调参、加深、预测或下游标签分支。V13仍待独立数据。"
+    "F_optimization": "第20节矩阵已完成并收束，禁止自动追加同配方轮数/权重/种子。F01/F05下一机制仍须完整设计审查及有界实验卡；当前无新GPU队列。V13仍待独立数据。"
   },
-  "active_phase": "startup_fix_locally_verified_ready_for_same_experiment_AutoDL_restart",
+  "active_phase": "report_review_complete_recipe_closed_no_new_GPU_queue",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -13185,8 +13190,8 @@
     ],
     "human_entry": "docs/BABEL_ROADMAP.md#20-f01f03继续学习embedding先检验主目标的尺度分配2026-10-12",
     "implementation": "startup_side_effect_fix_complete_191_local_checks_passed_AutoDL_restart_pending",
-    "execution": "AutoDL_initial_start_failed_before_request_budget_worker_and_optimizer; fixed_restart_pending",
-    "conclusion": "not_evaluated",
+    "execution": "complete_AutoDL_CUDA_four_last120_workers_and_all128_evaluation_report_reviewed",
+    "conclusion": "rejected_balanced_gain_far_history_improves_but_near_mid_and_activity_protections_fail_recipe_closed",
     "promoted": false,
     "hypothesis": "From scratch, replacing the main price metric with explicitly scaled orthogonal bands may improve balanced historical information retention; not evidence of a unique old-code error or added information.",
     "reason_for_order_change": "User clarified embedding learning is not finished. Downstream task/label choice is not prerequisite. Prior Q/S and H results motivate objective allocation; old G and shared-latent recipes are not rerun.",
@@ -13445,18 +13450,22 @@
     "entrypoint": {
       "module": "obson.babel.multiscale_run",
       "script": "scripts/babel_multiscale768_autodl.sh",
-      "command": "BABEL_MULTISCALE_RUN=checkpoints/babel_multiscale768_v2 BABEL_MULTISCALE_LOG=logs/babel_multiscale768_v2.log bash scripts/babel_multiscale768_autodl.sh all",
+      "command": null,
       "export_command": "BABEL_MULTISCALE_RUN=checkpoints/babel_multiscale768_v2 BABEL_MULTISCALE_LOG=logs/babel_multiscale768_v2.log bash scripts/babel_multiscale768_autodl.sh export",
       "archive": "/root/autodl-tmp/download/babel_multiscale768_v2_reports.tar.gz",
       "ready": true,
-      "training_executed": false,
-      "old_commands_needed": false
+      "training_executed": true,
+      "old_commands_needed": false,
+      "historical_run_command": "BABEL_MULTISCALE_RUN=checkpoints/babel_multiscale768_v2 BABEL_MULTISCALE_LOG=logs/babel_multiscale768_v2.log bash scripts/babel_multiscale768_autodl.sh all",
+      "training_completed": true,
+      "repeat_training_required": false,
+      "new_training_authorized": false,
+      "status": "complete_recipe_closed_export_only"
     },
     "remaining_acceptance": [
-      "AutoDL immutable source/raw replay and zero-update numeric/resource preflight",
-      "All four real workers and post-training causality checks",
-      "Locked all128 extraction and independent report review of finite gain/protections",
-      "V13 independent-data confirmation remains separate"
+      "No remaining required run for this fixed recipe; balanced-gain gates failed and recipe is closed.",
+      "Missing full128 prediction/weight/raw-cache replay remains a review scope limit, not a new required experiment.",
+      "V13 independent-data confirmation remains separate."
     ],
     "engineering_details": {
       "manifest": "frozen before raw/scales; evaluation context separately adds scales",
@@ -13614,7 +13623,459 @@
         "archives": 11,
         "distinct_absolute_source_roots": 29,
         "scope": "CPU JSON path inspection only; no weight loading or new report scientific review"
+      },
+      "subsequent_real_execution": {
+        "date": "2026-10-17",
+        "archive_sha256": "8b4fdb27d5c11559a95b474b35ef9538017e50fa64b0b821cd7e176c6417d05b",
+        "startup_source_verification_passed": true,
+        "real_training_complete": true,
+        "scientific_acceptance": false
       }
+    },
+    "report_review": {
+      "schema": "babel-multiscale768-report-review-v1",
+      "date": "2026-10-17",
+      "task_ids": [
+        "F01",
+        "F03"
+      ],
+      "archive": {
+        "path": "/Users/bardan/Downloads/babel_multiscale768_v2_reports.tar.gz",
+        "sha256": "8b4fdb27d5c11559a95b474b35ef9538017e50fa64b0b821cd7e176c6417d05b",
+        "duplicate": false,
+        "run": "babel_multiscale768_v2",
+        "safe_members": 103
+      },
+      "source": {
+        "path": "/root/autodl-tmp/obson/checkpoints/babel_overlap_content768",
+        "completion_sha256": "fc85ee15c4763df4d581b2cd16ed4820175fbbba549b6ebdf6a1de1a6402a4bf",
+        "training_start": "fresh random same-seed tensors; no Macro or D optimizer/model warmstart",
+        "code_commit": "cc06edc",
+        "manifest_sha256": "7fd5e3ffbccb0fda36ef8eb412c04b443a843a7a092a1a5e835fc4de4cc8c46f",
+        "metrics_sha256": "a9aaff06c87bc7f12e5ef9d47fa8c6bf9e2d8a56d5bcaeaf552f250a783c048e"
+      },
+      "execution": {
+        "command_exit_code": 0,
+        "status": "complete_requires_review",
+        "epochs_per_job": 120,
+        "jobs": 4,
+        "selection": "last120",
+        "updates": 18240,
+        "parent_exposures": 2298720,
+        "state_exposures": 11493600,
+        "research_state_reads": 728576,
+        "seconds": 33336.220780201256,
+        "attempts": 1,
+        "readout_fits": 0,
+        "startup_fix_passed_in_real_execution": true
+      },
+      "provenance": {
+        "checks": 69,
+        "passed": true,
+        "facts": {
+          "archive_sha256": "8b4fdb27d5c11559a95b474b35ef9538017e50fa64b0b821cd7e176c6417d05b",
+          "source_root": "/root/autodl-tmp/obson/checkpoints/babel_overlap_content768",
+          "status": "complete_requires_review",
+          "included_files": 101,
+          "omitted_counts": {
+            "weights_or_optimizer_state": 4,
+            "lock_or_uncommitted_temporary": 3,
+            "full128_prediction_shard": 712,
+            "raw_or_feature_cache_or_full_predictions": 4
+          },
+          "training_totals": {
+            "updates": 18240,
+            "examples": 2298720,
+            "supervised_states": 11493600,
+            "epochs": 480,
+            "recorded_epoch_seconds": 29613.987696923316
+          },
+          "evaluation_states": 728576,
+          "elapsed_hours": 9.260061327833682,
+          "historical_manifests_available": 30,
+          "historical_manifests_bound": 31
+        },
+        "limits": [
+          "Weights/optimizer tensors omitted: recorded parameter signatures, initialization, fresh Adam and post-training causality receipts cannot be independently reproduced from this download.",
+          "712 complete128 prediction shards omitted: coverage/size/hash inventories can be reconciled, but full128 model predictions cannot be independently replayed here; fixed8 predictions are present.",
+          "Raw train/validation feature and price caches omitted: scaler count/RMS/floor arithmetic and source indices checked, not a complete raw scaler refit from this archive.",
+          "Historical source hashes verified against available prior reports; this is not a new end-to-end replay of every historical source model.",
+          "Causal audit records use two training parents at six query endpoints, not every possible input. Raw activity certification remains explicitly false; feature replay passed, no economic identifiability claim.",
+          "Metadata receipts document execution rather than provide cryptographic proof of the remote process; scientific thresholds are reviewed separately."
+        ]
+      },
+      "metric_verification": {
+        "checks": 7851,
+        "numeric_elements": 9857484,
+        "passed": true,
+        "failures": [],
+        "largest_absolute_differences": [
+          {
+            "name": "test/control_s42/raw_labels",
+            "passed": true,
+            "kind": "numeric",
+            "elements": 999744,
+            "max_abs": 1.7053025658242404e-13,
+            "atol": 1e-11,
+            "rtol": 1e-10
+          },
+          {
+            "name": "test/control_s43/raw_labels",
+            "passed": true,
+            "kind": "numeric",
+            "elements": 999744,
+            "max_abs": 1.7053025658242404e-13,
+            "atol": 1e-11,
+            "rtol": 1e-10
+          },
+          {
+            "name": "test/multiscale_s42/raw_labels",
+            "passed": true,
+            "kind": "numeric",
+            "elements": 999744,
+            "max_abs": 1.7053025658242404e-13,
+            "atol": 1e-11,
+            "rtol": 1e-10
+          },
+          {
+            "name": "test/multiscale_s43/raw_labels",
+            "passed": true,
+            "kind": "numeric",
+            "elements": 999744,
+            "max_abs": 1.7053025658242404e-13,
+            "atol": 1e-11,
+            "rtol": 1e-10
+          },
+          {
+            "name": "test/control_s43/fixed8_error/price/far",
+            "passed": true,
+            "kind": "numeric",
+            "elements": 7872,
+            "max_abs": 1.6697754290362354e-13,
+            "atol": 5e-11,
+            "rtol": 5e-10
+          },
+          {
+            "name": "test/control_s42/fixed8_error/price/far",
+            "passed": true,
+            "kind": "numeric",
+            "elements": 7872,
+            "max_abs": 1.2079226507921703e-13,
+            "atol": 5e-11,
+            "rtol": 5e-10
+          },
+          {
+            "name": "test/multiscale_s42/fixed8_error/price/far",
+            "passed": true,
+            "kind": "numeric",
+            "elements": 7872,
+            "max_abs": 1.1013412404281553e-13,
+            "atol": 5e-11,
+            "rtol": 5e-10
+          },
+          {
+            "name": "test/control_s43/fixed8_error/price/composite",
+            "passed": true,
+            "kind": "numeric",
+            "elements": 7872,
+            "max_abs": 7.549516567451064e-14,
+            "atol": 5e-11,
+            "rtol": 5e-10
+          }
+        ]
+      },
+      "core_table": [
+        {
+          "cohort_seed": "test/s42",
+          "control_mse": 0.038246568935628875,
+          "candidate_mse": 0.041026572720874926,
+          "mse_change_percent": 7.268635756386299,
+          "control_rmse_bps": 19.55673002718728,
+          "candidate_rmse_bps": 20.25501733420017,
+          "gain": "fail",
+          "full_price_ratios": {
+            "near": 4.536260361123124,
+            "mid": 1.8478126656605511,
+            "far": 0.5690200775136454
+          },
+          "endpoint_price_ratios": {
+            "near": 8.75212753112868,
+            "mid": 2.1749641303281857,
+            "far": 0.558783278047709
+          },
+          "p95_ratio": 1.0287968310402458,
+          "gate_counts": {
+            "fail": 46,
+            "pass": 33
+          },
+          "f03_counts": {
+            "pass": 9,
+            "fail": 6
+          },
+          "nonprice_counts": {
+            "fail": 33,
+            "pass": 21
+          },
+          "definite_harm": 41
+        },
+        {
+          "cohort_seed": "test/s43",
+          "control_mse": 0.0361625496055185,
+          "candidate_mse": 0.042795302628306504,
+          "mse_change_percent": 18.341497198460345,
+          "control_rmse_bps": 19.01645329853033,
+          "candidate_rmse_bps": 20.687025554271088,
+          "gain": "fail",
+          "full_price_ratios": {
+            "near": 4.948426770530468,
+            "mid": 1.8051323765101983,
+            "far": 0.6631455875053472
+          },
+          "endpoint_price_ratios": {
+            "near": 8.938457466531235,
+            "mid": 1.8187077033637893,
+            "far": 0.5550499285796334
+          },
+          "p95_ratio": 1.0616927995343508,
+          "gate_counts": {
+            "fail": 49,
+            "pass": 30
+          },
+          "f03_counts": {
+            "pass": 9,
+            "fail": 6
+          },
+          "nonprice_counts": {
+            "fail": 36,
+            "pass": 18
+          },
+          "definite_harm": 43
+        },
+        {
+          "cohort_seed": "cross_research/s42",
+          "control_mse": 0.009208502330563213,
+          "candidate_mse": 0.010860806834896736,
+          "mse_change_percent": 17.943249021607887,
+          "control_rmse_bps": 9.596094169277004,
+          "candidate_rmse_bps": 10.421519483691778,
+          "gain": "fail",
+          "full_price_ratios": {
+            "near": 7.014348548174207,
+            "mid": 2.2655613054208756,
+            "far": 0.6580700593351012
+          },
+          "endpoint_price_ratios": {
+            "near": 6.449699266649299,
+            "mid": 2.4999472629083703,
+            "far": 0.7129871172365017
+          },
+          "p95_ratio": 1.141320620561235,
+          "gate_counts": {
+            "fail": 46,
+            "pass": 33
+          },
+          "f03_counts": {
+            "pass": 9,
+            "fail": 6
+          },
+          "nonprice_counts": {
+            "fail": 33,
+            "pass": 21
+          },
+          "definite_harm": 40
+        },
+        {
+          "cohort_seed": "cross_research/s43",
+          "control_mse": 0.00854003004646759,
+          "candidate_mse": 0.010655967154180528,
+          "mse_change_percent": 24.776693948379624,
+          "control_rmse_bps": 9.241228298482616,
+          "candidate_rmse_bps": 10.322774411068242,
+          "gain": "fail",
+          "full_price_ratios": {
+            "near": 6.841644491660425,
+            "mid": 2.041464135940987,
+            "far": 0.7256937017272115
+          },
+          "endpoint_price_ratios": {
+            "near": 6.018768282642969,
+            "mid": 1.8725883647464934,
+            "far": 0.7489010792201062
+          },
+          "p95_ratio": 1.2761087446357633,
+          "gate_counts": {
+            "fail": 51,
+            "pass": 28
+          },
+          "f03_counts": {
+            "fail": 8,
+            "pass": 7
+          },
+          "nonprice_counts": {
+            "fail": 36,
+            "pass": 18
+          },
+          "definite_harm": 44
+        }
+      ],
+      "aggregate_gate_counts": {
+        "primary": {
+          "fail": 4
+        },
+        "price_protection": {
+          "fail": 24,
+          "pass": 12
+        },
+        "body_protection": {
+          "fail": 30,
+          "pass": 6
+        },
+        "activity_protection": {
+          "fail": 108,
+          "pass": 72
+        },
+        "F03_protection": {
+          "pass": 34,
+          "fail": 26
+        }
+      },
+      "tail_passed": 2,
+      "tail_total": 4,
+      "interpretation_of_protection_failures": {
+        "total": 188,
+        "both_CIs_entirely_beyond_ten_percent": 168,
+        "cannot_confirm_protection_but_not_proven_harm": 20,
+        "insufficient_support": 0
+      },
+      "shared_validation_objective": {
+        "scope": "same validation cohort, same score, fixedlast120; descriptive, not alternate selection",
+        "s42": {
+          "candidate_objective_control": 0.03117199849453628,
+          "candidate_objective_multiscale": 0.03835212469669293,
+          "haar_price_control": 0.0076833234720859005,
+          "haar_price_multiscale": 0.009185505974424794
+        },
+        "s43": {
+          "candidate_objective_control": 0.03145623068613695,
+          "candidate_objective_multiscale": 0.03875659885990753,
+          "haar_price_control": 0.00625101395905667,
+          "haar_price_multiscale": 0.009504947516075042
+        },
+        "inference_limit": "This locked training recipe did not win, even on its own validation objective. Not evidence of a globally inferior loss family, fully optimized solution, unavoidable tradeoff or inadequate capacity."
+      },
+      "posthoc_offset_diagnostic": {
+        "scope": "Exploratory fixed8 prediction arithmetic. Subtracting mean error uses truth and is NOT a deployable correction or alternate acceptance gate.",
+        "endpoint_near_centered_mse_ratios": {
+          "test/s42": 6.6408636721165815,
+          "test/s43": 7.4002509552614555,
+          "cross_research/s42": 7.155167542000243,
+          "cross_research/s43": 7.158771562646829
+        },
+        "conclusion": "Near-history error cannot be explained solely by a constant per-window offset; even oracle mean-error removal leaves6.64–7.40x centered MSE. No postprocessing proposed or gate changed."
+      },
+      "disposition": {
+        "F01": "Reject finite multiscale-loss balanced-gain hypothesis at this fixed120 schedule; complete and close this recipe. Simultaneous128 supervision remains retained but is not answered or automatically queued.",
+        "F03": "Far/common older-content gains and reduced disagreement are partial diagnostics;34/60 protection checks pass. Do not promote or overwrite old H/G findings.",
+        "F05": "No unique capacity or architecture limitation established; no automatic extra layers, heads or width.",
+        "F11": "Existing limited historical-state prototype remains; this comparison neither revokes it nor establishes general-purpose utility.",
+        "V13": "Still pending independent eligible market data. Reused research scores do not satisfy it."
+      },
+      "accepted": false,
+      "promoted": false,
+      "recipe_closed": true,
+      "new_GPU_jobs": 0,
+      "next_action": {
+        "status": "design_review_only_no_locked_experiment",
+        "task_ids": [
+          "F01",
+          "F05"
+        ],
+        "question": "Which information-organization or optimization change addresses a supported gap while preserving recent price and activity? Distinguish it from already tested Q/S/H/G, activity weights, pooling and capacity before locking a single bounded comparison.",
+        "not_selected": [
+          "another Haar weight sweep",
+          "candidate-only longer training",
+          "automatic simultaneous128 training",
+          "automatic larger model",
+          "downstream labels as prerequisite"
+        ],
+        "training_budget": 0,
+        "entrypoint": null,
+        "reason": "The completed comparison rejects this recipe but does not uniquely locate the cause. Preserve base embedding research and avoid turning a failed loss trial into automatic capacity or coverage work."
+      },
+      "review": {
+        "purpose": {
+          "status": "pass_for_scope",
+          "evidence": "F01/F03 same-budget historical information-retention test completed. Reject this finite balanced-gain hypothesis; distinguish real far-history gains from whole-state utility. Macro and all prior research conclusions retained.",
+          "remaining": "Generic reuse, transfer and market-state semantic advantage remain unproved. The embedding research program is not closed."
+        },
+        "architecture": {
+          "status": "pass_for_scope",
+          "evidence": "Same scratch768/4/8 and seven-field single-state query; same-seed initial signatures; eight pre/post causal receipts pass. No architecture intervention or new readout fitting.",
+          "remaining": "Weights omitted; causal receipts checked, not independently rerun. Audits sampled two parents/six positions; no unique capacity or decoder bottleneck identified."
+        },
+        "training": {
+          "status": "pass_for_scope",
+          "evidence": "Four120-epoch histories,18240 updates,2298720 parent and11493600 state exposures; source/scale/order/position/LR locks checked. Fixedlast120. Same validation objective favors control too, preventing claims that Haar was optimally solved.",
+          "remaining": "Matched updates/exposure, not matched FLOPs or loss-specific optimal hyperparameters. Both curves still improve; original stop budget remains binding, no selective extension."
+        },
+        "validation": {
+          "status": "pass_for_scope",
+          "evidence": "Independent fixed8 raw-price/field/overlap recomputation, all128 error-row aggregation, all316 declared gates and dual2000-draw intervals agree. Primary0/4; price12/36,body6/36,activity72/180,F0334/60 protections pass; tail2/4. Of188 protection failures,168 clearly exceed10% in both CIs and20 are unconfirmed protection.",
+          "remaining": "Full128 prediction shards omitted, so full128 is error-row reaggregation, not full prediction replay. Reused research cohorts are not independent confirmation; body/activity labels are supplied targets."
+        },
+        "data": {
+          "status": "pass_for_scope",
+          "evidence": "4789/978/984/439 original parent rows, same full128 rolling context, stable rawfloat64 price truth; train612992 contexts for band RMS. Original source qualification identity and30 locally available ancestor manifests match.",
+          "remaining": "One of31 bound ancestor manifest originals unavailable locally; full raw train cache/scaler refit and independently regenerated volume/OI labels not covered. No new market data."
+        },
+        "engineering": {
+          "status": "pass_for_scope",
+          "evidence": "Startup fix confirmed in a successful AutoDL run;101 included files and completion/export manifests reconcile,69 provenance checks pass,7851 CPU metric checks agree. Single attempt33336.22s;8 committed extraction runs cover728576 states. No production source edits this review.",
+          "remaining": "Four weight/Adam files,four raw caches,712 full prediction shards omitted by protocol; recorded hashes do not replace replay of omitted bytes."
+        }
+      },
+      "audit_artifacts": [
+        {
+          "path": "reports/multiscale_review_8b4fdb27d5c1/provenance_review.py",
+          "sha256": "49e573de75285ab762ee506f88200ffee70f376db6a1a0013fdd4978335f7568"
+        },
+        {
+          "path": "reports/multiscale_review_8b4fdb27d5c1/provenance_review.json",
+          "sha256": "4274dc56c91fb820f02913ac9f552124acc7e10e5fc68abcae8a81053caa3eab"
+        },
+        {
+          "path": "reports/multiscale_review_8b4fdb27d5c1/metric_review.py",
+          "sha256": "b93c39911ad3d3d5f1a848fb6052d4d83da63b929d413be178f0d69727c8bfd6"
+        },
+        {
+          "path": "reports/multiscale_review_8b4fdb27d5c1/metric_review.json",
+          "sha256": "d62101d4a3d4ae6e9755429b990577ccd24d9b3d641ad255dfefb2c07b9abad4"
+        },
+        {
+          "path": "reports/multiscale_review_8b4fdb27d5c1/scientific_review.json",
+          "sha256": "24d212764e4f944f84741974caef07d00d42366ee8adfd3d51108d696c24e30c"
+        },
+        {
+          "path": "reports/multiscale_review_8b4fdb27d5c1/offset_diagnostic.py",
+          "sha256": "5e75a8958bde13afa4c27bd7e7791d0126946c63601ad1e0aa663b7a6cd98ab9"
+        },
+        {
+          "path": "reports/multiscale_review_8b4fdb27d5c1/offset_diagnostic.json",
+          "sha256": "321f49673d7b1aceafc42af10742feaaa65e437063ce4695bc9499664e32a352"
+        },
+        {
+          "path": "reports/multiscale_review_8b4fdb27d5c1/plot_summary.py",
+          "sha256": "20a1db758e4b27a4ab4a611a1ee89a5a5a646d133fc07b0f9966b8fd1f990ece"
+        },
+        {
+          "path": "reports/multiscale_review_8b4fdb27d5c1/result_overview.png",
+          "sha256": "b08e47be22ba204517cec3ce188c18605128700a0c4607dba815761aecda7804"
+        },
+        {
+          "path": "reports/multiscale_review_8b4fdb27d5c1/result_overview.svg",
+          "sha256": "7a980932bb4c7102e4972a2812d9b80a9a667056790ab59ca6b91567091d952d"
+        }
+      ]
     }
   }
 }
