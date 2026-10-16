@@ -401,6 +401,220 @@ def test_supervisor_changed_protocol_rejects_before_launch(tmp_path, monkeypatch
         run.supervise(source, out)
 
 
+@pytest.fixture
+def writing_source_verifier(tmp_path, monkeypatch):
+    """Keep the production adapter; emulate legacy verification's real file contract."""
+    names = (
+        "source",
+        "history_state",
+        "readability",
+        "coverage",
+        "v06",
+        "v07",
+        "r1",
+        "context",
+        "qualification",
+        "raw",
+    )
+    roots = {name: tmp_path / name for name in names}
+    for name, root in roots.items():
+        root.mkdir()
+        write(root / "manifest.json", {"synthetic": name})
+    for current, parent in zip(names[:7], names[1:8], strict=True):
+        write(roots[current] / "manifest.json", {"source": str(roots[parent])})
+    write(
+        roots["r1"] / "manifest.json",
+        {"source": str(roots["context"]), "qualification": str(roots["qualification"])},
+    )
+    write(roots["source"] / "completion.json", {"synthetic": True})
+    meta = {
+        "coverage": str(roots["coverage"]),
+        "coverage_meta": {
+            "context": str(roots["context"]),
+            "statistics": copy.deepcopy(STATS),
+            "source_meta": {
+                "identity": {
+                    "manifest": {"identity": {"training_manifest": {"raw_root": str(roots["raw"])}}}
+                }
+            },
+        },
+        "statistics": copy.deepcopy(STATS),
+    }
+    identity = {"source": str(roots["context"]), "synthetic_identity": True}
+    calls, fail_after_write = [], []
+
+    def legacy_verify(source, directory):
+        assert source == roots["source"] and directory.is_dir()
+        assert directory not in roots.values()
+        calls.append(directory)
+        # Same deterministic sibling-temp write and subsequent read/hash as R0/R1.
+        run.atomic_json(identity, directory / "identity.json")
+        assert run.read_json(directory / "identity.json") == identity
+        assert len(run.sha256(directory / "identity.json")) == 64
+        if fail_after_write:
+            raise ValueError("Synthetic qualification mismatch after identity write")
+        return copy.deepcopy(meta)
+
+    def snapshot():
+        return {
+            str(path): (path.read_bytes(), path.stat().st_mtime_ns)
+            for root in roots.values()
+            for path in root.rglob("*")
+            if path.is_file()
+        }
+
+    monkeypatch.setattr(run.data.original, "verify", legacy_verify)
+    monkeypatch.setattr(run, "implementation", lambda: {"synthetic": True})
+    return SimpleNamespace(
+        source=roots["source"],
+        roots=roots,
+        meta=meta,
+        identity=identity,
+        calls=calls,
+        fail_after_write=fail_after_write,
+        snapshot=snapshot,
+    )
+
+
+@pytest.mark.parametrize("already_exists", [False, True])
+def test_startup_real_adapter_isolates_legacy_write_and_passes_output_guard(
+    tmp_path, monkeypatch, writing_source_verifier, already_exists
+):
+    fixture = writing_source_verifier
+    out = tmp_path / "new_experiment"
+    if already_exists:
+        out.mkdir()
+    before = fixture.snapshot()
+    first = run.data.verify(fixture.source, out)
+    assert out.exists() == already_exists
+    assert not out.exists() or not list(out.iterdir())
+    assert first["source_verification"]["identity"] == fixture.identity
+    assert (
+        str(fixture.roots["qualification"] / "manifest.json")
+        in first["source_verification"]["source_manifests"]
+    )
+    launches = []
+
+    def popen(command, **kwargs):
+        request = run.read_json(out / "request.json")
+        assert request["source"] == str(fixture.source)
+        assert request["output"] == str(out)
+        assert run.read_json(out / "budget.json")["used_seconds"] == run.SESSION_CAP
+        assert not (out / "identity.json").exists()
+        launches.append(command)
+        return SimpleNamespace(pid=99001, wait=lambda timeout: 0)
+
+    monkeypatch.setattr(run.subprocess, "Popen", popen)
+    assert run.supervise(fixture.source, out) == 0
+    assert run.supervise(fixture.source, out) == 0
+    assert len(launches) == 2 and all("--worker" in command for command in launches)
+    assert len(run.read_json(out / "budget.json")["attempts"]) == 2
+    assert run.data.verify(fixture.source, out) == first
+    assert fixture.snapshot() == before
+    assert fixture.calls and all(not directory.exists() for directory in fixture.calls)
+    assert not (out / "identity.json").exists()
+
+
+@pytest.mark.parametrize("forbidden", ["raw", "history_state", "v06", "qualification"])
+def test_startup_rejects_raw_and_intermediate_source_before_output_mutation(
+    tmp_path, monkeypatch, writing_source_verifier, forbidden
+):
+    fixture = writing_source_verifier
+    before = fixture.snapshot()
+    monkeypatch.setattr(
+        run.subprocess, "Popen", lambda *a, **k: pytest.fail("Forbidden output must not launch")
+    )
+    root = fixture.roots[forbidden]
+    for out in (root, root / "child_experiment"):
+        with pytest.raises(ValueError, match="separate"):
+            run.supervise(fixture.source, out)
+        assert fixture.snapshot() == before
+        assert not (root / "child_experiment").exists()
+        assert not (root / "request.json").exists()
+    assert all(not directory.exists() for directory in fixture.calls)
+
+
+def test_failed_legacy_audit_never_creates_output_request_or_budget(
+    tmp_path, monkeypatch, writing_source_verifier
+):
+    fixture = writing_source_verifier
+    fixture.fail_after_write.append(True)
+    before = fixture.snapshot()
+    out = tmp_path / "not_created"
+    monkeypatch.setattr(
+        run.subprocess, "Popen", lambda *a, **k: pytest.fail("Failed audit must not launch")
+    )
+    with pytest.raises(ValueError, match="qualification mismatch"):
+        run.supervise(fixture.source, out)
+    assert not out.exists() and fixture.snapshot() == before
+    assert len(fixture.calls) == 1 and not fixture.calls[0].exists()
+
+
+def test_unbound_existing_output_is_not_adopted_or_identity_rewritten(
+    tmp_path, monkeypatch, writing_source_verifier
+):
+    fixture = writing_source_verifier
+    out = tmp_path / "unbound"
+    out.mkdir()
+    identity = out / "identity.json"
+    write(identity, {"unrelated_existing_evidence": True})
+    protected = tmp_path / "protected.txt"
+    protected.write_text("preserve this target")
+    (out / "identity.json.tmp").symlink_to(protected)
+    before = (identity.read_bytes(), identity.stat().st_mtime_ns, fixture.snapshot())
+    monkeypatch.setattr(
+        run.subprocess, "Popen", lambda *a, **k: pytest.fail("Unbound output must not launch")
+    )
+    with pytest.raises(ValueError, match="Existing output lacks this run request"):
+        run.supervise(fixture.source, out)
+    assert (identity.read_bytes(), identity.stat().st_mtime_ns, fixture.snapshot()) == before
+    assert protected.read_text() == "preserve this target"
+    assert (out / "identity.json.tmp").is_symlink()
+    assert not (out / "request.json").exists() and not (out / "budget.json").exists()
+
+
+def test_readonly_reverification_preserves_completed_evidence_and_detects_tampering(
+    tmp_path, monkeypatch, writing_source_verifier
+):
+    fixture = writing_source_verifier
+    out = tmp_path / "completed"
+    out.mkdir()
+    verified = run.data.verify(fixture.source, out)
+    write(out / "manifest.json", verified)
+    write(out / "identity.json", {"already_bound_evidence": True})
+    write(
+        out / "request.json",
+        {
+            "schema": run.SCHEMA,
+            "source": str(fixture.source),
+            "output": str(out),
+            "protocol": run.protocol(),
+            "implementation": run.implementation(),
+        },
+    )
+    write(
+        out / "completion.json",
+        {
+            "files": {
+                name: run.sha256(out / name)
+                for name in ("manifest.json", "identity.json", "request.json")
+            }
+        },
+    )
+    before = {p.name: (p.read_bytes(), p.stat().st_mtime_ns) for p in out.iterdir()}
+    assert run.data.verify(fixture.source, out) == verified
+    assert {p.name: (p.read_bytes(), p.stat().st_mtime_ns) for p in out.iterdir()} == before
+    monkeypatch.setattr(run, "reserve_budget", lambda *a: pytest.fail("Completion reserves none"))
+    monkeypatch.setattr(
+        run.subprocess, "Popen", lambda *a, **k: pytest.fail("Completion must not launch")
+    )
+    assert run.supervise(fixture.source, out) == 0
+    write(out / "identity.json", {"tampered_evidence": True})
+    with pytest.raises(ValueError, match="artifact changed"):
+        run.supervise(fixture.source, out)
+    assert run.read_json(out / "identity.json") == {"tampered_evidence": True}
+
+
 def test_worker_cuda_guard_saves_failure_before_source_or_model_access(tmp_path, monkeypatch):
     monkeypatch.setattr(torch.cuda, "is_available", lambda: False)
     monkeypatch.setattr(

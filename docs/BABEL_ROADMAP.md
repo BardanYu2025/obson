@@ -1,6 +1,6 @@
 # Babel 研究路线图：目标、当前行动与结论归档
 
-更新：2026-10-12。本页是当前唯一工作入口；旧协议和报告只作证据，旧日志里的“下一步”不覆盖本页。
+更新：2026-10-16。本页是当前唯一工作入口；旧协议和报告只作证据，旧日志里的“下一步”不覆盖本页。
 
 ## 当前主线：先看目标、成果和下一步（2026-10-12更新）
 
@@ -46,7 +46,7 @@
 
 阶段交账已列出固定来源/权重身份和接口、支持的价格/活动/历史范围、分项与尾部误差、已知失败范围及用途限制；见第13节末，机器证据见[BABEL_CONTENT_RETENTION768_REVIEW.json](BABEL_CONTENT_RETENTION768_REVIEW.json)，没有另建状态解释文档。Macro97/94保持参照；D及本轮结果按各自资格保留研究比较。**无需再做若干轮模型优化，才允许承认或交付已有成果。**
 
-“获得更有用的通用表示”属于下一阶段的科学问题，无法保证再做一两轮就成功。第20节先检验一个信息保留假设；将来声明特定用途优势时，再配同信息raw/PCA/简单特征和相同读取预算。两类证据不能互代，也不能以未选下游任务阻止自监督研究。第13节旧门槛不变；第20节预算是新研究的计划上限，尚未开放GPU运行。
+“获得更有用的通用表示”属于下一阶段的科学问题，无法保证再做一两轮就成功。第20节先检验一个信息保留假设；将来声明特定用途优势时，再配同信息raw/PCA/简单特征和相同读取预算。两类证据不能互代，也不能以未选下游任务阻止自监督研究。第13节旧门槛不变；第20节是已锁定的新研究预算；2026-10-16启动故障修复与当前命令见该节，尚无新训练科学结论。
 
 六方面复查：目的——有限阶段交付与用途成功分开；架构——原结构不变，不作唯一瓶颈归因；训练——六组预算/采样/固定last已核对；评价——主收益与保护逐项复算，不改门槛；数据——921原CSV和完整父块价格身份核对，无新独立数据；工程——172可用绑定文件核对，权重省略边界明确。均为报告复核范围的 `pass_for_scope`；详细证据和剩余缺口见第13节末，通用用途和独立验收仍开放。
 
@@ -1412,6 +1412,17 @@ cd /root/autodl-tmp/obson && bash scripts/babel_content_retention768_autodl.sh e
 | 数据 | `pass_for_scope`：实际报告行身份、原完整跨度隔离已CPU核对；raw／统计／尺度／实现独立绑定。没有补新行情，远端CSV复核仍须运行时通过。 |
 | 工程 | `pass_for_scope`：入口、恢复／失败／超时、模型矩阵锁定、研究分片、下载包和目录隔离有合成检查；本轮79项新交付检查＋原59项组件＋32项关联检查，共170项通过（22.59秒）；Ruff、格式和shell语法检查通过。CUDA显存／耗时与科学门槛尚未执行，不由本地测试冒充。 |
 
+### 2026-10-16：启动故障修复，实验配置不变
+
+**本次对应F01／F03工程修复。** 用户日志显示首次来源核验写`identity.json.tmp`时，输出目录尚不存在，调用在request／预算登记／worker启动之前退出；该次调用没有训练更新。错误来自我把旧来源核验当作无写入操作，合成测试又用不写文件的替代函数掩盖了这个行为。原170项通过记录保留，但它未覆盖这条真实启动路径，不能继续用它证明入口已验证完整。
+
+- **修了什么：** 旧核验完整放入已存在的独立临时目录，继续保留写identity、读回内容、比对原hash的真实行为；实际输出目录不受影响。成功后把identity内容、原字节SHA与来源manifest指纹纳入新manifest。临时目录无论成功失败都会清理，不把临时路径写进实验身份。
+- **连带问题一并处理：** 只提前mkdir会触发“无request但目录非空”的第二处阻断，因此不采用。隔离后仍检查实际输出与history-state、readability、coverage、V06、V07、R1、qualification、context及行情目录的关系，不能因换scratch而漏掉旧来源保护。重复核验不覆盖实际目录里的identity或其临时文件。
+- **影响哪些结论：** 收窄原工程就绪声明；本轮尚无科学结果，因此不推翻旧模型结论、不重开历史修复或修改Macro。原来源、768/4/8、两臂损失、同种子控制、四组120轮、last选择和全部评价门槛保持。
+- **六方面复查：** 目的、架构、损失训练、验证策略均未变；数据继续通过原完整哈希核验且保留全部来源隔离；工程新增21项回归，包含真实写入／读回／hash行为的启动集成检查。完整关联组191项通过（21.85秒），Ruff、格式、shell语法和差异空白检查通过；源码指纹见JSON及追加日志。真实AutoDL启动仍待用户执行，本地测试不等于真实模型验收。
+
+本次使用`babel_multiscale768_v2`新输出目录保留先前失败证据。它是同一实验的入口修复重启，不增加训练预算，也不改已有request／checkpoint绑定来强行续跑。
+
 ### 本轮唯一运行入口
 
 旧F11／重建接口与第13节配方已收束，不需要再次启动。现在运行的是**F01主价格目标比较，F03共同历史保护**；不是预测训练，也不是重跑历史修复。
@@ -1424,17 +1435,21 @@ cd /root/autodl-tmp/obson && bash scripts/babel_content_retention768_autodl.sh e
   git pull --ff-only origin features/babel
   test -f scripts/babel_multiscale768_autodl.sh
   mkdir -p logs /root/autodl-tmp/download
-  nohup bash scripts/babel_multiscale768_autodl.sh all > logs/babel_multiscale768.log 2>&1 &
+  export BABEL_MULTISCALE_RUN=checkpoints/babel_multiscale768_v2
+  export BABEL_MULTISCALE_LOG=logs/babel_multiscale768_v2.log
+  nohup bash scripts/babel_multiscale768_autodl.sh all > "$BABEL_MULTISCALE_LOG" 2>&1 &
   echo "F01/F03 PID=$!"
-  tail -f logs/babel_multiscale768.log
+  tail -f "$BABEL_MULTISCALE_LOG"
 )
 ```
 
-`git pull`失败时这段不会启动旧代码。日志先显示来源与数据准备，随后显示零更新资源预检和预计耗时；四组顺序运行。`Ctrl+C`退出`tail`不会停止`nohup`训练。完成或失败自动生成`/root/autodl-tmp/download/babel_multiscale768_reports.tar.gz`。若只是重新打包，**等worker已停止后**执行：
+`git pull`失败时这段不会启动旧代码。日志先显示来源与数据准备，随后显示零更新资源预检和预计耗时；四组顺序运行。`Ctrl+C`退出`tail`不会停止`nohup`训练。完成或失败自动生成`/root/autodl-tmp/download/babel_multiscale768_v2_reports.tar.gz`。若只是重新打包，**等worker已停止后**执行：
 
 ```bash
 cd /root/autodl-tmp/obson
+BABEL_MULTISCALE_RUN=checkpoints/babel_multiscale768_v2 \
+BABEL_MULTISCALE_LOG=logs/babel_multiscale768_v2.log \
 bash scripts/babel_multiscale768_autodl.sh export
 ```
 
-中断后仍使用`all`，程序只接受已提交边界；不手删pending／预算／失败文件来绕过检查。`evaluate`只供四组训练全部完成而研究提取尚未启动／已完整提交的情况，不能修复一半提取。收到报告后逐项更新F01/F03：是否有平衡收益、哪些保护失败或证据不足；本配方满预算后收束，不自动加轮、加层或替换Macro。
+中断后重复上面的v2完整启动命令，程序只接受已提交边界；不手删pending／预算／失败文件来绕过检查。`evaluate`只供四组训练全部完成而研究提取尚未启动／已完整提交的情况，不能修复一半提取。收到报告后逐项更新F01/F03：是否有平衡收益、哪些保护失败或证据不足；本配方满预算后收束，不自动加轮、加层或替换Macro。

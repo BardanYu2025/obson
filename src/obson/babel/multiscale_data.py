@@ -7,6 +7,7 @@ does not restore any source neural model or optimizer.
 import hashlib
 import json
 import os
+import tempfile
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -64,18 +65,74 @@ def _separate_data(out, meta):
             raise ValueError("Output must be separate from every source and raw data root")
 
 
+def _source_manifests(source, meta, out):
+    """Retain real-output isolation when legacy verification writes in scratch.
+
+    Follow only named source roots in the verified manifest chain. In particular,
+    R1's qualification is a separate branch, not its primary `source` edge.
+    The collected hashes are evidence, not a replacement for legacy verification.
+    """
+    fields = {"source", "qualification", "context", "coverage", "raw_root", "training_source"}
+
+    def references(value):
+        if isinstance(value, dict):
+            for key, item in value.items():
+                if key in fields and isinstance(item, str) and Path(item).is_absolute():
+                    yield safe_path(item)
+                elif isinstance(item, (dict, list)):
+                    yield from references(item)
+        elif isinstance(value, list):
+            for item in value:
+                yield from references(item)
+
+    pending = [source, *references(meta)]
+    seen, manifests = set(), {}
+    while pending:
+        root = pending.pop()
+        if root in seen:
+            continue
+        seen.add(root)
+        if out == root or out in root.parents or root in out.parents:
+            raise ValueError("Output must be separate from every ancestral source root")
+        if root.is_dir():
+            manifest = safe_path(root / "manifest.json")
+            if manifest.is_file():
+                manifests[str(manifest)] = sha256(manifest)
+                pending.extend(references(read_json(manifest)))
+    return dict(sorted(manifests.items()))
+
+
 def verify(source, out):
+    """Read sources without writing into the caller's output directory.
+
+    The historical verifier writes identity.json and then reads its exact bytes
+    for qualification checks. Keep that behavior in an existing private scratch
+    directory; do not pretend that the inherited function has no side effects.
+    """
     source, out = safe_path(source), safe_path(out)
     if not source.is_dir() or source == out or source in out.parents or out in source.parents:
         raise ValueError("Separate source and output directories required")
     for name in ("completion.json", "manifest.json"):
         if not safe_path(source / name).is_file():
             raise ValueError(f"Missing immutable source {name}")
-    result = original.verify(source, out)
-    _separate_data(out, result)
-    if result["statistics"] != result["coverage_meta"]["statistics"]:
-        raise ValueError("Source training statistics differ")
-    return result
+    temporary_root = safe_path(Path(tempfile.gettempdir()).resolve())
+    with tempfile.TemporaryDirectory(prefix="babel_multiscale_source_", dir=temporary_root) as name:
+        scratch = safe_path(name)
+        result = original.verify(source, scratch)
+        _separate_data(out, result)
+        manifests = _source_manifests(source, result, out)
+        if result["statistics"] != result["coverage_meta"]["statistics"]:
+            raise ValueError("Source training statistics differ")
+        identity = safe_path(scratch / "identity.json")
+        if not identity.is_file():
+            raise ValueError("Inherited source verifier did not produce its identity evidence")
+        return result | {
+            "source_verification": {
+                "identity_sha256": sha256(identity),
+                "identity": read_json(identity),
+                "source_manifests": manifests,
+            }
+        }
 
 
 def _manifest(meta, out):

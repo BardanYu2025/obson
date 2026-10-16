@@ -964,7 +964,8 @@ def supervise(source, out, evaluate_only=False):
     if source == out or source in out.parents or out in source.parents:
         raise ValueError("Separate source/output required")
     if not (out / "request.json").exists():
-        # Reject inherited raw/source roots before creating even request files.
+        # The data adapter confines legacy identity writes to private scratch.
+        # Reject actual raw/ancestor outputs before creating any run files.
         data.verify(source, out)
     out.mkdir(parents=True, exist_ok=True)
     request = {

@@ -2,6 +2,7 @@
 
 import copy
 import json
+from pathlib import Path
 from unittest.mock import patch
 
 import numpy as np
@@ -18,6 +19,46 @@ STATS = {
     "y_scale": [1.0] * 7,
     "delta_scale": [0.1, 0.2, 0.4, 0.8],
 }
+
+
+def source_directory(tmp_path, manifest=None):
+    source = tmp_path / "source"
+    source.mkdir()
+    atomic_json({} if manifest is None else manifest, source / "manifest.json")
+    atomic_json({}, source / "completion.json")
+    return source
+
+
+def legacy_verifier(meta, scratch_paths, *, fail=None, write_identity=True):
+    """Model the inherited write -> read -> exact-byte-hash verification chain."""
+
+    def verify(source, scratch):
+        assert scratch.is_dir()
+        assert scratch == scratch.resolve()
+        scratch_paths.append(scratch)
+        if write_identity:
+            identity = {
+                "source": str(source),
+                "manifest_sha256": sha256(source / "manifest.json"),
+                "selected_weight_edges": [],
+            }
+            atomic_json(identity, scratch / "identity.json")
+            expected_hash = sha256(scratch / "identity.json")
+            # These two consumers represent qualification JSON replay and the
+            # downstream immutable source check. Both require the real file.
+            assert json.loads((scratch / "identity.json").read_text()) == identity
+            assert sha256(scratch / "identity.json") == expected_hash
+        if fail is not None:
+            raise ValueError(fail)
+        return copy.deepcopy(meta)
+
+    return verify
+
+
+def tree_bytes(root):
+    return {
+        str(path.relative_to(root)): path.read_bytes() for path in root.rglob("*") if path.is_file()
+    }
 
 
 def rows(split, n):
@@ -90,12 +131,14 @@ def prepared(tmp_path, monkeypatch):
 
 def test_manifest_first_and_source_destination_edges(tmp_path, prepared, monkeypatch):
     meta, out, _ = prepared
-    source = tmp_path / "source"
-    source.mkdir()
-    atomic_json({}, source / "manifest.json")
-    atomic_json({}, source / "completion.json")
-    monkeypatch.setattr(data.original, "verify", lambda source, out: meta)
-    assert data.verify(source, out) == meta
+    source = source_directory(tmp_path)
+    scratch_paths = []
+    monkeypatch.setattr(data.original, "verify", legacy_verifier(meta, scratch_paths))
+    result = data.verify(source, out)
+    assert {key: value for key, value in result.items() if key != "source_verification"} == meta
+    assert result["source_verification"]["source_manifests"] == {
+        str(source / "manifest.json"): sha256(source / "manifest.json")
+    }
     for wrong in (data.raw_root(meta), data.raw_root(meta) / "nested"):
         with pytest.raises(ValueError, match="raw data root"):
             data.verify(source, wrong)
@@ -115,6 +158,132 @@ def test_manifest_first_and_source_destination_edges(tmp_path, prepared, monkeyp
     ):
         data.prepare(meta, out, ("train", "val"))
     delegated.assert_not_called()
+    assert all(not path.exists() for path in scratch_paths)
+
+
+def test_first_verify_creates_only_temporary_audit_and_retains_its_evidence(
+    tmp_path, prepared, monkeypatch
+):
+    meta, _, _ = prepared
+    source = source_directory(tmp_path)
+    out = tmp_path / "not_created" / "run"
+    scratch_paths = []
+    monkeypatch.setattr(data.original, "verify", legacy_verifier(meta, scratch_paths))
+
+    result = data.verify(source, out)
+
+    assert not out.parent.exists()
+    assert len(scratch_paths) == 1 and not scratch_paths[0].exists()
+    evidence = result["source_verification"]
+    assert evidence["identity"] == {
+        "source": str(source),
+        "manifest_sha256": sha256(source / "manifest.json"),
+        "selected_weight_edges": [],
+    }
+    expected = tmp_path / "expected_identity.json"
+    atomic_json(evidence["identity"], expected)
+    assert evidence["identity_sha256"] == sha256(expected)
+    assert str(scratch_paths[0]) not in json.dumps(result)
+
+
+def test_repeated_verify_preserves_existing_output_and_has_stable_evidence(
+    tmp_path, prepared, monkeypatch
+):
+    meta, out, _ = prepared
+    source = source_directory(tmp_path)
+    (out / "unrelated.txt").write_text("preserve existing evidence")
+    before = tree_bytes(out)
+    scratch_paths = []
+    monkeypatch.setattr(data.original, "verify", legacy_verifier(meta, scratch_paths))
+
+    first = data.verify(source, out)
+    second = data.verify(source, out)
+
+    assert first == second
+    assert tree_bytes(out) == before
+    assert len(set(scratch_paths)) == 2
+    assert all(not path.exists() for path in scratch_paths)
+    assert all(str(path) not in json.dumps(first) for path in scratch_paths)
+
+
+@pytest.mark.parametrize("fault", ("source", "statistics", "missing_identity"))
+def test_invalid_source_audit_cleans_scratch_and_never_creates_output(
+    fault, tmp_path, prepared, monkeypatch
+):
+    meta, _, _ = prepared
+    meta = copy.deepcopy(meta)
+    if fault == "statistics":
+        meta["statistics"] = copy.deepcopy(meta["statistics"])
+        meta["statistics"]["x_scale"][0] *= 2
+    source = source_directory(tmp_path)
+    out = tmp_path / "not_created" / "run"
+    scratch_paths = []
+    monkeypatch.setattr(
+        data.original,
+        "verify",
+        legacy_verifier(
+            meta,
+            scratch_paths,
+            fail="Forged source identity" if fault == "source" else None,
+            write_identity=fault != "missing_identity",
+        ),
+    )
+    message = {
+        "source": "Forged source",
+        "statistics": "statistics differ",
+        "missing_identity": "identity evidence",
+    }[fault]
+    with pytest.raises(ValueError, match=message):
+        data.verify(source, out)
+    assert not out.parent.exists()
+    assert len(scratch_paths) == 1 and not scratch_paths[0].exists()
+
+
+@pytest.mark.parametrize(
+    "field", ("source", "qualification", "context", "coverage", "training_source", "raw_root")
+)
+def test_all_ancestral_manifest_branches_remain_protected(field, tmp_path, prepared, monkeypatch):
+    meta, _, _ = prepared
+    ancestor = tmp_path / "ancestor"
+    ancestor.mkdir()
+    source = source_directory(tmp_path, {"nested": [{field: str(ancestor)}]})
+    # Exercise a cycle too: source roots may recur in nested identity manifests.
+    atomic_json({"source": str(source)}, ancestor / "manifest.json")
+    before = tree_bytes(ancestor)
+    scratch_paths = []
+    monkeypatch.setattr(data.original, "verify", legacy_verifier(meta, scratch_paths))
+    for out in (ancestor, ancestor / "new_run"):
+        with pytest.raises(ValueError, match="ancestral source"):
+            data.verify(source, out)
+        assert tree_bytes(ancestor) == before
+        assert not (ancestor / "new_run").exists()
+    assert all(not path.exists() for path in scratch_paths)
+
+
+def test_ancestor_graph_collects_manifest_hashes_once_despite_cycles(
+    tmp_path, prepared, monkeypatch
+):
+    meta, out, _ = prepared
+    ancestor = tmp_path / "ancestor"
+    qualification = tmp_path / "qualification"
+    ancestor.mkdir()
+    qualification.mkdir()
+    source = source_directory(tmp_path, {"source": str(ancestor)})
+    atomic_json({"qualification": str(qualification)}, ancestor / "manifest.json")
+    atomic_json({"identity": {"source": str(source)}}, qualification / "manifest.json")
+    scratch_paths = []
+    monkeypatch.setattr(data.original, "verify", legacy_verifier(meta, scratch_paths))
+
+    result = data.verify(source, out)
+
+    assert result["source_verification"]["source_manifests"] == {
+        str(root / "manifest.json"): sha256(root / "manifest.json")
+        for root in (source, ancestor, qualification)
+    }
+    assert all(
+        Path(name).is_absolute() for name in result["source_verification"]["source_manifests"]
+    )
+    assert all(not path.exists() for path in scratch_paths)
 
 
 def test_source_constant_and_verified_completion_required(tmp_path):
@@ -125,6 +294,7 @@ def test_source_constant_and_verified_completion_required(tmp_path):
     atomic_json({}, root / "manifest.json")
     with pytest.raises(ValueError, match="reviewed overlap"):
         data.verify(root, tmp_path / "new_run")
+    assert not (tmp_path / "new_run").exists()
 
 
 def test_full255_train_val_overlap_fails_before_raw_prepare(prepared):
