@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
-  "updated": "2026-10-17",
-  "current_iteration": "F05_observed_history768_mask_comparison_ready",
-  "current_iteration_scope": "只改每个已收盘128窗口内部的注意力可见图；原Q/768/4/8/query与同预算保持。代码和合成验证完成，真实CUDA未执行，无晋升。",
+  "updated": "2026-10-18",
+  "current_iteration": "F05_observed_history768_reviewed_recipe_closed",
+  "current_iteration_scope": "四组120轮真实训练/评价完成并复核；只换历史内部mask未均衡提升，固定配方收束。修正导出残差误判，无需重训；Macro不变，无新增GPU任务。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -517,11 +517,11 @@
         "docs/BABEL_STATE_COVERAGE768_REVIEW.json",
         "docs/BABEL_ROADMAP.md#20-f01f03继续学习embedding先检验主目标的尺度分配2026-10-12"
       ],
-      "next_action": "配合F05同曝光对照；显式同时128保留，不因本轮重新打开旧损失配方。",
+      "next_action": "配合F05设计审查；显式同时128保留，不自动加曝光、重开旧损失配方或锁新GPU任务。",
       "implementation": "complete",
       "execution": "four_fixed120_workers_complete_reviewed",
       "conclusion": "本多尺度配方综合价格MSE升7.27%–24.78%，4项主收益0通过，均衡升级未成立。",
-      "current_role": "第21节固定沿用uniform5和每端点完整128；不是显式同时128新试验，不改第20节失败结论。"
+      "current_role": "第21节同采样/曝光与每端点完整128已核验；未检验显式同时128，不改第20节结论。"
     },
     {
       "id": "F02",
@@ -564,7 +564,7 @@
       "implementation": "complete_remote_executed",
       "execution": "six_fixed60_workers_complete_reviewed",
       "conclusion": "真实内容监督有稳定的共同形状收益，但保留保护未通过；额外一致性无预定增益，固定配方收束，不晋升。",
-      "current_protection_role": "第21节只作shift1/16/64真实共同内容及分歧保护；没有新G训练项、不宣称方向整体完成。第20节34/60保护结果保留。"
+      "current_protection_role": "第21节shift1/16/64真实共同内容及分歧保护2/60通过，未满足必要条件；未增新G，不推翻第13节有限内容收益。第20节34/60结果保留。"
     },
     {
       "id": "F04",
@@ -592,7 +592,7 @@
         "V05",
         "V10"
       ],
-      "status": "第21节核心信息传递对照入口就绪：原三角编码器 vs 已收盘窗口内部全注意力，真实执行待AutoDL。",
+      "status": "第21节四组120轮内部注意力对照完成并复核；未均衡升级，固定配方收束，信息组织方向保留。",
       "reentry_or_acceptance": "基线可靠后固定问题，分别控制深度/宽度/头数/训练预算；不拿短训深层与长训浅层作单因素结论",
       "evidence": [
         "docs/BABEL_GROWTH768_REVIEW.md",
@@ -600,10 +600,10 @@
         "docs/BABEL_CAUSAL_POOL768_REVIEW.md",
         "docs/BABEL_ROADMAP.md#21-f05让已经发生的历史在编码器内部充分交流2026-10-17"
       ],
-      "implementation": "complete_synthetic_verified",
-      "execution": "not_started_real_CUDA",
-      "conclusion": "待验证；不宣称旧三角是错误、唯一瓶颈或新方式更好。",
-      "next_action": "运行唯一observed_history768矩阵并按固定120末轮/物理门槛复核；不自动扩层或换query。"
+      "implementation": "complete_with_separate_export_fix",
+      "execution": "four_fixed120_CUDA_workers_complete_reviewed",
+      "conclusion": "完成真实训练/评价；全历史注意力综合价格MSE增加6.82%～14.44%，主收益0/4，保护未全过。本固定配方收束，不晋升。近段实体收益和中段代价同时保留。",
+      "next_action": "One evidence table linking age-band tradeoffs and train/validation curves to earlier controlled studies; distinguish unidentified causes from supported gaps, identify the proposed input-organization/state-compression/readout intervention and its falsifying matched control before any new budget. 当前新增训练预算0。"
     },
     {
       "id": "F06",
@@ -717,31 +717,40 @@
     }
   ],
   "active_order": [
+    "F01",
     "F05"
   ],
-  "next_after_active": "收到observed_history768报告后按第21节锁定判据核对执行/保真/保护，接受有限假设或收束配方；不自动增加第二架构矩阵、不替换Macro。",
+  "next_after_active": {
+    "status": "design_review_only_no_locked_experiment",
+    "task_ids": [
+      "F01",
+      "F05"
+    ],
+    "question": "Across the two recent matched studies and earlier capacity/pooling/readout studies, which supported information-retention gap can the next single intervention test?",
+    "deliverable": "One evidence table linking age-band tradeoffs and train/validation curves to earlier controlled studies; distinguish unidentified causes from supported gaps, identify the proposed input-organization/state-compression/readout intervention and its falsifying matched control before any new budget.",
+    "training_budget": 0,
+    "entrypoint": null,
+    "not_selected": [
+      "mask or Haar grid",
+      "candidate-only extra epochs",
+      "new best selection",
+      "automatic deeper/wider model",
+      "automatic simultaneous128 exposure",
+      "downstream labels as prerequisite"
+    ],
+    "reason": "The locked120-epoch mask recipe failed balanced gates. Both losses still decrease, and mixed local gains do not identify a unique bottleneck; close the recipe without closing representation research."
+  },
   "active_training_budget": {
     "task_ids": [
-      "F05",
       "F01",
-      "F03"
+      "F05"
     ],
-    "study": "observed_history768",
-    "status": "entrypoint_ready_pending_AutoDL_zero_update_preflight",
-    "jobs_max": 4,
-    "concurrent_jobs_max": 1,
-    "epochs_per_job": 120,
-    "worker_epochs_max": 480,
-    "optimizer_updates_max": 18240,
-    "parent_exposures_max": 2298720,
-    "train_state_exposures_max": 11493600,
-    "research_state_reads": 728576,
+    "status": "design_review_only_no_new_training",
+    "jobs_max": 0,
+    "worker_epochs_max": 0,
+    "optimizer_updates_max": 0,
     "readout_fits": 0,
-    "cumulative_seconds_cap": 129600,
-    "actual_jobs": 0,
-    "actual_optimizer_updates": 0,
-    "reason": "用户在多尺度配方收束后授权继续核心设计审查；历史去重后仅选择已收盘窗口内部attention mask这一变量，另锁四组同预算对照，不复用耗尽的旧配额，不预设提升。",
-    "selection": "fixed last120; validation diagnostics only; no extra seeds or candidate-only extension"
+    "reason": "The locked120-epoch mask recipe failed balanced gates. Both losses still decrease, and mixed local gains do not identify a unique bottleneck; close the recipe without closing representation research."
   },
   "aliases": {
     "R0": [
@@ -789,9 +798,9 @@
     "F03"
   ],
   "blocked_followups": {
-    "F_optimization": "仅第21节F05 observed-history四组120轮已另行锁定；旧Haar/H/G配方不再追加。其余容量/槽/patch/同时128/跨周期/未来分支保持条件触发，未自动排队。V13仍待独立数据。"
+    "F_optimization": "第20/21节固定矩阵均已完成并收束；当前仅F01/F05设计审查，无新增GPU预算。未自动选择mask/Haar网格、扩层、全128、跨周期或未来分支；V13仍待独立数据。"
   },
-  "active_phase": "entrypoint_ready_pending_AutoDL_and_scientific_review",
+  "active_phase": "report_review_complete_next_design_only_no_GPU_budget",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -1197,6 +1206,35 @@
       "actual_seconds": 33336.220780201256,
       "study": "multiscale768",
       "report_sha256": "8b4fdb27d5c11559a95b474b35ef9538017e50fa64b0b821cd7e176c6417d05b"
+    },
+    {
+      "task_ids": [
+        "F05",
+        "F01",
+        "F03"
+      ],
+      "study": "observed_history768",
+      "status": "completed_and_closed_no_additional_training_authorized",
+      "jobs_max": 4,
+      "concurrent_jobs_max": 1,
+      "epochs_per_job": 120,
+      "worker_epochs_max": 480,
+      "optimizer_updates_max": 18240,
+      "parent_exposures_max": 2298720,
+      "train_state_exposures_max": 11493600,
+      "research_state_reads": 728576,
+      "readout_fits": 0,
+      "cumulative_seconds_cap": 129600,
+      "actual_jobs": 4,
+      "actual_optimizer_updates": 18240,
+      "reason": "用户在多尺度配方收束后授权继续核心设计审查；历史去重后仅选择已收盘窗口内部attention mask这一变量，另锁四组同预算对照，不复用耗尽的旧配额，不预设提升。",
+      "selection": "fixed last120; validation diagnostics only; no extra seeds or candidate-only extension",
+      "actual_worker_epochs": 480,
+      "actual_parent_exposures": 2298720,
+      "actual_train_state_exposures": 11493600,
+      "actual_seconds": 30647.010391816497,
+      "report_sha256": "cecb3cc2963619d2f979b4f2d2d18b51b11439f3d6e58ea11ec374a1ed1dd577",
+      "closure_reason": "按锁定last120和预定门槛收束；保留原预算上限与选择，不延长候选训练或切换best。"
     }
   ],
   "next_repair_cards": {
@@ -14135,9 +14173,9 @@
       "N09"
     ],
     "human_entry": "docs/BABEL_ROADMAP.md#21-f05让已经发生的历史在编码器内部充分交流2026-10-17",
-    "implementation": "complete_synthetic_verified",
-    "execution": "not_started_real_CUDA",
-    "conclusion": "unmeasured",
+    "implementation": "complete_with_separate_locally_verified_export_v2",
+    "execution": "four_fixed120_CUDA_workers_and_all128_evaluation_complete_reviewed",
+    "conclusion": "no_accepted_balanced_gain_recipe_closed",
     "promoted": false,
     "hypothesis": "Does full internal communication among the exact same already-observed128 features improve balanced price/activity retention in one endpoint768 state under the same Q, initialization and update budget?",
     "reason_for_selection": "Loss-weighting and pooling/capacity trials already have tradeoffs. The latest candidate lost even on its own validation objective; no unique capacity diagnosis. Endpoint already sees all128 under causal mask; test later-layer contextualization, not supposedly missing historical access.",
@@ -14762,7 +14800,11 @@
       ],
       "download": "/root/autodl-tmp/download/babel_observed_history768_reports.tar.gz",
       "complete": true,
-      "old_multiscale_all_command_needed": false
+      "old_multiscale_all_command_needed": false,
+      "new_run_required": false,
+      "report_reupload_required": false,
+      "historical_export_defect": "Old bound exporter omits signed near-zero identity_residual parent banks; use separately versioned CPU exporter only if re-export is desired. Existing download suffices for current review.",
+      "optional_repaired_export_module": "obson.babel.observed_history_export_v2"
     },
     "evaluation": {
       "inheritance": "unchanged physical gates from multiscale_evaluate; no Haar fitting/scoring for selection",
@@ -14800,33 +14842,33 @@
     "review": {
       "purpose": {
         "status": "pass_for_scope",
-        "evidence": "F05 tests a single historical information-routing change, with F01 coverage and F03 protection fixed. Prior Q/S/H/G, activity, pooling and depth/capacity trials were checked for duplication. No change to final causal reusable price/activity purpose or Macro reference.",
-        "remaining": "No new scientific result, generic representation utility, future prediction or model promotion."
+        "evidence": "Matched F05 information-routing study completed, F01 coverage fixed and F03 protection measured. The finite balanced-retention hypothesis failed; no promotion or forecast/semantic claim.",
+        "remaining": "Generic reusable price/activity representation is not accepted or closed. Macro97/94, all earlier failures and retained hypotheses remain."
       },
       "architecture": {
         "status": "pass_for_scope",
-        "evidence": "Same scratch tensors/768/4/8/query, explicit same-sized bool masks. Control output and gradients match old rolling in synthetic tests. Only a separate exact128 window endpoint is public; outside-window values/gradients, internal-token semantics, checkpoint recomputation and mode bindings tested.",
-        "remaining": "Actual768 CUDA/SDPA and trained-weight audits remain remote. Earlier internal full-attention tokens are not causal states for those earlier times; no255 full pass or old-token cache reuse."
+        "evidence": "Same scratch768/4/8 plus original HistoryQuery; same-seed tensors identical. Only explicit internal128 attention mask differs. Eight pre/post CUDA causal receipts pass; each public state independently gathers128 observed feature rows and returns only its endpoint.",
+        "remaining": "Weights omitted and not locally replayed. Causal receipts cover fixed samples, not all inputs; no unique capacity/decoder bottleneck or globally optimal causal mask established."
       },
       "training": {
         "status": "pass_for_scope",
-        "evidence": "Both arms same original Q and float64 raw price labels. Paired initialization/sampling/LR/Adam, exact micro/tail reduction, both-network gradients, callbacks and epoch-boundary resume verified on tiny random models. No Haar scale fitting or old weights/Adam loaded.",
-        "remaining": "Four real120-epoch runs not executed. Same parameters/updates/exposure does not imply equal wall time or optimized hyperparameters per architecture; fixed budget may undertrain both."
+        "evidence": "Four120-epoch histories reconcile18240 updates,2298720 parent exposures,11493600 state exposures. Shared Q/raw-price targets, paired initialization/sampling/LR/fresh Adam and fixedlast120 verified. Control matches prior same-recipe loss and signatures exactly.",
+        "remaining": "Both train/validation curves still decrease. Equal updates/exposure is not equal compute or separately optimized hyperparameters; no candidate-only extension, new best selection or independent replication claim."
       },
       "validation": {
         "status": "pass_for_scope",
-        "evidence": "Original physical full128 metrics, fixed8 evidence, dual2000 cluster intervals, all field/age/population/F03 protections and P95 reused unchanged. Four tiny models/two cohorts complete extract-decision-export. Insufficient support remains unaccepted; data digest excludes model-mode differences while binding one matrix.",
-        "remaining": "Repeated research data is exploratory, not V13. Download supports fixed8 prediction recalculation and full128 error-row aggregation; omitted full predictions require remote shards. No new age0/precise-wick acceptance."
+        "evidence": "Independent fixed8 raw-price/field/overlap arithmetic and full128 position-row aggregation reconstruct111 parent metric families. All316 dual2000-bootstrap gates and4 P95 gates agree. Primary0/4; protections171/312; P95 2/4. Of141 failed protections,58 exceed10% at both per-metric lower bounds and83 merely lack protection confirmation.",
+        "remaining": "Highly correlated metrics, no familywise correction or independent market confirmation. Missing parent NPZ original bytes/per-parent values cannot be compared directly; full128 prediction shards omitted. Body/activity use supplied targets; no new age0 or wick qualification."
       },
       "data": {
         "status": "pass_for_scope",
-        "evidence": "Original completed overlap-content source, train statistics,255 blocks,4789/978/984/439 rows and raw float64 adapter retained. Legacy identity writes/readback/hash kept in private scratch; source/raw/output protections tested. No split/normalizer refit.",
-        "remaining": "Remote original CSV/source verification must still pass. EMA includes earlier causal history; no new market data or independent full activity-label regeneration this release."
+        "evidence": "Original4789/978/984/439 parent identities, train statistics, single-contract full255 feature intervals and raw receipts verified;30 available ancestor manifests match. Stable rawfloat64 prices independently checked at fixed8 positions.",
+        "remaining": "One old ancestor manifest unavailable locally; raw training/validation caches omitted. No full independent activity-label regeneration or new data. EMA carries earlier causal prehistory; V13 remains waiting for qualified data."
       },
       "engineering": {
         "status": "pass_for_scope",
-        "evidence": "248 synthetic/related tests passed in21.23s; Ruff/format/shell/CLI/diff checks pass. Same-shaped checkpoint mode mismatch rejects; two actual tiny-mask models measured in preflight, transactions/uncertain updates/deadlines/source locks and all exit exports tested. Independent read-only review found no P1/P2 blockers. Historical bound code left unchanged.",
-        "remaining": "No real CUDA memory/latency/efficacy evidence.36h cumulative cap and conservative disk estimate do not guarantee completion; uncommitted steps/extraction are export-only, not arbitrarily resumable."
+        "evidence": "78 provenance checks and5587 independent arithmetic checks pass;91 included files reconcile. Export defect precisely identified: signed near-zero identity_residual rejected as a nonnegative MSE, excluding8 parent arrays. Existing evidence is enough for this scientific review; no retraining or replacement archive needed. Separate v2 exporter now passes53 regressions and16 real/derived score-bank checks; original bound modules unchanged.",
+        "remaining": "Original archive lacks8 parent NPZ bytes; original full predictions/weights remain omitted. Repaired v2 exporter is locally verified, not run on AutoDL; independent report reconstruction suffices, no new user run needed."
       }
     },
     "synthetic_verification": {
@@ -14859,6 +14901,1299 @@
       "Same-path exact causal perturbations avoid strided/gather numeric false alarms; actual CUDA still must pass.",
       "Shared raw adapter intentionally retains multiscale_raw receipt filenames, unrelated to this study loss.",
       "Historical source dependency chain remains required; this is not a self-contained production model bundle."
-    ]
+    ],
+    "code_ready_review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "F05 tests a single historical information-routing change, with F01 coverage and F03 protection fixed. Prior Q/S/H/G, activity, pooling and depth/capacity trials were checked for duplication. No change to final causal reusable price/activity purpose or Macro reference.",
+        "remaining": "No new scientific result, generic representation utility, future prediction or model promotion."
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "Same scratch tensors/768/4/8/query, explicit same-sized bool masks. Control output and gradients match old rolling in synthetic tests. Only a separate exact128 window endpoint is public; outside-window values/gradients, internal-token semantics, checkpoint recomputation and mode bindings tested.",
+        "remaining": "Actual768 CUDA/SDPA and trained-weight audits remain remote. Earlier internal full-attention tokens are not causal states for those earlier times; no255 full pass or old-token cache reuse."
+      },
+      "training": {
+        "status": "pass_for_scope",
+        "evidence": "Both arms same original Q and float64 raw price labels. Paired initialization/sampling/LR/Adam, exact micro/tail reduction, both-network gradients, callbacks and epoch-boundary resume verified on tiny random models. No Haar scale fitting or old weights/Adam loaded.",
+        "remaining": "Four real120-epoch runs not executed. Same parameters/updates/exposure does not imply equal wall time or optimized hyperparameters per architecture; fixed budget may undertrain both."
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "Original physical full128 metrics, fixed8 evidence, dual2000 cluster intervals, all field/age/population/F03 protections and P95 reused unchanged. Four tiny models/two cohorts complete extract-decision-export. Insufficient support remains unaccepted; data digest excludes model-mode differences while binding one matrix.",
+        "remaining": "Repeated research data is exploratory, not V13. Download supports fixed8 prediction recalculation and full128 error-row aggregation; omitted full predictions require remote shards. No new age0/precise-wick acceptance."
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "Original completed overlap-content source, train statistics,255 blocks,4789/978/984/439 rows and raw float64 adapter retained. Legacy identity writes/readback/hash kept in private scratch; source/raw/output protections tested. No split/normalizer refit.",
+        "remaining": "Remote original CSV/source verification must still pass. EMA includes earlier causal history; no new market data or independent full activity-label regeneration this release."
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "248 synthetic/related tests passed in21.23s; Ruff/format/shell/CLI/diff checks pass. Same-shaped checkpoint mode mismatch rejects; two actual tiny-mask models measured in preflight, transactions/uncertain updates/deadlines/source locks and all exit exports tested. Independent read-only review found no P1/P2 blockers. Historical bound code left unchanged.",
+        "remaining": "No real CUDA memory/latency/efficacy evidence.36h cumulative cap and conservative disk estimate do not guarantee completion; uncommitted steps/extraction are export-only, not arbitrarily resumable."
+      }
+    },
+    "report_review": {
+      "schema": "babel-observed-history768-review-v1",
+      "date": "2026-10-18",
+      "task_ids": [
+        "F05",
+        "F01",
+        "F03"
+      ],
+      "archive": {
+        "path": "/Users/bardan/Downloads/babel_observed_history768_reports.tar.gz",
+        "sha256": "cecb3cc2963619d2f979b4f2d2d18b51b11439f3d6e58ea11ec374a1ed1dd577",
+        "bytes": 356864958,
+        "duplicate_policy": "Same SHA uploaded twice in conversation; one reviewed experiment."
+      },
+      "source": {
+        "roadmap_section": 21,
+        "schema": "babel-observed-history768-v1",
+        "source_identity": {
+          "completion": "835cce0452c27173f808b530871624b59041dceb71552074bf32e4c722e4139d",
+          "manifest": "eb443ed6111a8b95555252c44d66fa6b208dfd386674b5731f592bdefa3d6882"
+        },
+        "manifest_sha256": "d8246106b4ea5b59aabf35603c90e98569417b1cf1ec84bb1156e46411f33f6c",
+        "metrics_sha256": "f5c0de2cfab670db2d5cc34159de4c72a269ca0a02354c6b1f4de71120befb58",
+        "completion_sha256": "f3fc47547482a6d212738e8070d5adefca6d7099ef713bc49b217c2b19c99ca8",
+        "bound_commit": "4cfcba0d6218b48015be7306b100febb1c952bf6",
+        "remote_run": "/root/autodl-tmp/obson/checkpoints/babel_observed_history768"
+      },
+      "execution": {
+        "command_exit_code": 0,
+        "status": "complete_requires_review",
+        "jobs": 4,
+        "epochs_per_job": 120,
+        "selection": "fixed last120",
+        "worker_epochs": 480,
+        "updates": 18240,
+        "parent_exposures": 2298720,
+        "state_exposures": 11493600,
+        "research_state_reads": 728576,
+        "seconds": 30647.010391816497,
+        "attempts": 1,
+        "readout_fits": 0,
+        "new_training_jobs_in_review": 0,
+        "real_neural_execution_local": false
+      },
+      "provenance": {
+        "checks": 78,
+        "failures": [],
+        "included_files": 91,
+        "omitted_counts": {
+          "weights_or_optimizer_state": 4,
+          "invalid_score_evidence: Finite-or-missing nonnegative errors required": 8,
+          "lock_or_uncommitted_temporary": 3,
+          "full128_prediction_shard": 712,
+          "raw_or_feature_cache_or_full_predictions": 4
+        },
+        "historical_manifests_available": 30,
+        "historical_manifests_bound": 31,
+        "limitations": [
+          "Weights/optimizer tensors omitted: recorded parameter signatures, initialization, fresh Adam and post-training causality receipts cannot be independently reproduced from this download.",
+          "712 complete128 prediction shards omitted: coverage/size/hash inventories can be reconciled, but full128 model predictions cannot be independently replayed here; fixed8 predictions are present.",
+          "Raw train/validation feature and price caches omitted: original source rows/index hashes and remote replay receipts checked, not independent full raw/feature reconstruction; this experiment fits no new scales.",
+          "Historical source hashes verified against available prior reports; this is not a new end-to-end replay of every historical source model.",
+          "Causal audit records use two training parents at six query endpoints, not every possible input. Raw activity certification remains explicitly false; feature replay passed, no economic identifiability claim.",
+          "All eight parent_rows.npz were excluded by the exporter negative-error guard; their reported original hashes reconcile with completion, but bytes were not downloaded. Do not misclassify completed training as failed; scientific reconstruction is reviewed separately.",
+          "Control reproducibility on unchanged data/recipe does not add independent market evidence.",
+          "Metadata receipts document execution rather than provide cryptographic proof of the remote process; scientific thresholds are reviewed separately."
+        ]
+      },
+      "metric_verification": {
+        "checks": 5587,
+        "numeric_elements": 9225672,
+        "passed": true,
+        "failures": [],
+        "largest_absolute_differences": [
+          {
+            "name": "test/control_s42/raw_labels",
+            "passed": true,
+            "kind": "numeric",
+            "elements": 999744,
+            "max_abs": 1.7053025658242404e-13,
+            "atol": 1e-11,
+            "rtol": 1e-10
+          },
+          {
+            "name": "test/control_s43/raw_labels",
+            "passed": true,
+            "kind": "numeric",
+            "elements": 999744,
+            "max_abs": 1.7053025658242404e-13,
+            "atol": 1e-11,
+            "rtol": 1e-10
+          },
+          {
+            "name": "test/full_history_s42/raw_labels",
+            "passed": true,
+            "kind": "numeric",
+            "elements": 999744,
+            "max_abs": 1.7053025658242404e-13,
+            "atol": 1e-11,
+            "rtol": 1e-10
+          },
+          {
+            "name": "test/full_history_s43/raw_labels",
+            "passed": true,
+            "kind": "numeric",
+            "elements": 999744,
+            "max_abs": 1.7053025658242404e-13,
+            "atol": 1e-11,
+            "rtol": 1e-10
+          },
+          {
+            "name": "test/control_s43/fixed8_error/price/far",
+            "passed": true,
+            "kind": "numeric",
+            "elements": 7872,
+            "max_abs": 1.6697754290362354e-13,
+            "atol": 5e-11,
+            "rtol": 5e-10
+          },
+          {
+            "name": "test/control_s42/fixed8_error/price/far",
+            "passed": true,
+            "kind": "numeric",
+            "elements": 7872,
+            "max_abs": 1.2079226507921703e-13,
+            "atol": 5e-11,
+            "rtol": 5e-10
+          },
+          {
+            "name": "test/full_history_s42/fixed8_error/price/far",
+            "passed": true,
+            "kind": "numeric",
+            "elements": 7872,
+            "max_abs": 7.815970093361102e-14,
+            "atol": 5e-11,
+            "rtol": 5e-10
+          },
+          {
+            "name": "test/full_history_s43/fixed8_error/price/far",
+            "passed": true,
+            "kind": "numeric",
+            "elements": 7872,
+            "max_abs": 7.72715225139109e-14,
+            "atol": 5e-11,
+            "rtol": 5e-10
+          }
+        ]
+      },
+      "core_table": [
+        {
+          "cohort_seed": "test/s42",
+          "control_mse": 0.038246568935628875,
+          "candidate_mse": 0.043033560591698584,
+          "mse_change_percent": 12.516133575606435,
+          "control_rmse_bps": 19.55673002718728,
+          "candidate_rmse_bps": 20.744531952227454,
+          "gain": "fail",
+          "full_price_ratios": {
+            "near": 0.8918145499953685,
+            "mid": 1.1788042229958824,
+            "far": 1.1316449022623671
+          },
+          "endpoint_price_ratios": {
+            "near": 0.908441824416505,
+            "mid": 1.36641593115748,
+            "far": 1.196454968629256
+          },
+          "p95_ratio": 1.2281284344271102,
+          "gate_counts": {
+            "fail": 43,
+            "pass": 36
+          },
+          "f03_counts": {
+            "fail": 15
+          },
+          "nonprice_counts": {
+            "pass": 34,
+            "fail": 20
+          },
+          "full_nonprice_ratios": {
+            "body/near": 0.8297363860245287,
+            "body/mid": 1.1727704388039792,
+            "body/far": 1.0599758486254283,
+            "volume_vs_prior_ema32/near": 0.9236578509416231,
+            "volume_vs_prior_ema32/mid": 1.3112299861015082,
+            "volume_vs_prior_ema32/far": 1.0667257370333056,
+            "delta_log_volume/near": 1.0108694052504503,
+            "delta_log_volume/mid": 1.3803547984252291,
+            "delta_log_volume/far": 1.0393050985832568,
+            "oi_change_percent_asinh/near": 0.915774363204802,
+            "oi_change_percent_asinh/mid": 1.142438219268424,
+            "oi_change_percent_asinh/far": 1.0207650752050401,
+            "oi_per_volume_asinh/near": 0.926696882019328,
+            "oi_per_volume_asinh/mid": 1.1100397982221515,
+            "oi_per_volume_asinh/far": 1.0130878511946344,
+            "turnover_asinh/near": 0.9665059887413099,
+            "turnover_asinh/mid": 1.2465316156556587,
+            "turnover_asinh/far": 1.0560686618893684
+          },
+          "f03_ratios": {
+            "shift1/shape_a_mse": 1.159961668764479,
+            "shift1/shape_b_mse": 1.2171090128175626,
+            "shift1/common_anchored_a_mse": 1.1829939620160241,
+            "shift1/common_anchored_b_mse": 1.2194564619621702,
+            "shift1/disagreement_mse": 1.2429370299977205,
+            "shift16/shape_a_mse": 1.0818003620351848,
+            "shift16/shape_b_mse": 1.2211419693058898,
+            "shift16/common_anchored_a_mse": 1.130585737726927,
+            "shift16/common_anchored_b_mse": 1.2217373907252733,
+            "shift16/disagreement_mse": 1.2479215024605559,
+            "shift64/shape_a_mse": 1.1089625897413338,
+            "shift64/shape_b_mse": 1.1684738591551127,
+            "shift64/common_anchored_a_mse": 1.0979550958175914,
+            "shift64/common_anchored_b_mse": 1.196454968629257,
+            "shift64/disagreement_mse": 1.1687742440774063
+          },
+          "definite_harm": 23
+        },
+        {
+          "cohort_seed": "test/s43",
+          "control_mse": 0.0361625496055185,
+          "candidate_mse": 0.03882254020413562,
+          "mse_change_percent": 7.355650051320506,
+          "control_rmse_bps": 19.01645329853033,
+          "candidate_rmse_bps": 19.70343630033493,
+          "gain": "fail",
+          "full_price_ratios": {
+            "near": 1.0677790971981886,
+            "mid": 1.1718274256279193,
+            "far": 1.0422833375038745
+          },
+          "endpoint_price_ratios": {
+            "near": 1.287214795225872,
+            "mid": 1.3042144803094062,
+            "far": 0.9576397958933971
+          },
+          "p95_ratio": 1.0063880778006513,
+          "gate_counts": {
+            "fail": 32,
+            "pass": 47
+          },
+          "f03_counts": {
+            "fail": 14,
+            "pass": 1
+          },
+          "nonprice_counts": {
+            "pass": 45,
+            "fail": 9
+          },
+          "full_nonprice_ratios": {
+            "body/near": 0.8599052088629738,
+            "body/mid": 1.1000549417623235,
+            "body/far": 1.1405186797390272,
+            "volume_vs_prior_ema32/near": 1.0236418242723748,
+            "volume_vs_prior_ema32/mid": 0.9779073544041049,
+            "volume_vs_prior_ema32/far": 1.0105878418058498,
+            "delta_log_volume/near": 0.9680864213411272,
+            "delta_log_volume/mid": 0.9566659487188697,
+            "delta_log_volume/far": 0.9943584930657908,
+            "oi_change_percent_asinh/near": 1.033009011594147,
+            "oi_change_percent_asinh/mid": 1.0042675723615784,
+            "oi_change_percent_asinh/far": 0.9851018192109752,
+            "oi_per_volume_asinh/near": 1.000002922403584,
+            "oi_per_volume_asinh/mid": 1.0023341345355552,
+            "oi_per_volume_asinh/far": 0.9838598252931877,
+            "turnover_asinh/near": 1.036268618799672,
+            "turnover_asinh/mid": 0.9855450339766786,
+            "turnover_asinh/far": 1.0133484565415365
+          },
+          "f03_ratios": {
+            "shift1/shape_a_mse": 1.0537425917592598,
+            "shift1/shape_b_mse": 1.0204363098015032,
+            "shift1/common_anchored_a_mse": 1.0356554853725628,
+            "shift1/common_anchored_b_mse": 1.0207630315541263,
+            "shift1/disagreement_mse": 1.0839869399949436,
+            "shift16/shape_a_mse": 1.0320080594569325,
+            "shift16/shape_b_mse": 1.0197498937187668,
+            "shift16/common_anchored_a_mse": 1.0402262260471107,
+            "shift16/common_anchored_b_mse": 1.0192874116996424,
+            "shift16/disagreement_mse": 1.0905058287879854,
+            "shift64/shape_a_mse": 1.0550747649257808,
+            "shift64/shape_b_mse": 0.9712346106450199,
+            "shift64/common_anchored_a_mse": 1.0811144214082948,
+            "shift64/common_anchored_b_mse": 0.9576397958933968,
+            "shift64/disagreement_mse": 1.040030927902876
+          },
+          "definite_harm": 6
+        },
+        {
+          "cohort_seed": "cross_research/s42",
+          "control_mse": 0.009208502330563213,
+          "candidate_mse": 0.010538359743208056,
+          "mse_change_percent": 14.441625412104408,
+          "control_rmse_bps": 9.596094169277004,
+          "candidate_rmse_bps": 10.265651339884895,
+          "gain": "fail",
+          "full_price_ratios": {
+            "near": 0.9813536181760711,
+            "mid": 1.2626085926773782,
+            "far": 1.1241737501852311
+          },
+          "endpoint_price_ratios": {
+            "near": 0.7974594540912059,
+            "mid": 1.4421674343250908,
+            "far": 1.1336910393746447
+          },
+          "p95_ratio": 1.1744868212375086,
+          "gate_counts": {
+            "fail": 42,
+            "pass": 37
+          },
+          "f03_counts": {
+            "fail": 15
+          },
+          "nonprice_counts": {
+            "pass": 34,
+            "fail": 20
+          },
+          "full_nonprice_ratios": {
+            "body/near": 0.7305048973694365,
+            "body/mid": 1.1849513489227077,
+            "body/far": 1.0526336965746221,
+            "volume_vs_prior_ema32/near": 0.917268426796079,
+            "volume_vs_prior_ema32/mid": 1.3632168234251265,
+            "volume_vs_prior_ema32/far": 1.0912661064161275,
+            "delta_log_volume/near": 1.0026585184811483,
+            "delta_log_volume/mid": 1.4445868154438906,
+            "delta_log_volume/far": 1.0479027252468316,
+            "oi_change_percent_asinh/near": 0.9327320800521925,
+            "oi_change_percent_asinh/mid": 1.1793549641250545,
+            "oi_change_percent_asinh/far": 1.0205324391095487,
+            "oi_per_volume_asinh/near": 0.9090259577387299,
+            "oi_per_volume_asinh/mid": 1.1154608731568985,
+            "oi_per_volume_asinh/far": 1.0089596188806904,
+            "turnover_asinh/near": 0.9784645000316352,
+            "turnover_asinh/mid": 1.2465730438758746,
+            "turnover_asinh/far": 1.072980335046095
+          },
+          "f03_ratios": {
+            "shift1/shape_a_mse": 1.1098749024068084,
+            "shift1/shape_b_mse": 1.1324022115290109,
+            "shift1/common_anchored_a_mse": 1.1543406331770119,
+            "shift1/common_anchored_b_mse": 1.172887688396407,
+            "shift1/disagreement_mse": 1.0734449290100014,
+            "shift16/shape_a_mse": 1.137662848694037,
+            "shift16/shape_b_mse": 1.1342674857639188,
+            "shift16/common_anchored_a_mse": 1.1576645686826106,
+            "shift16/common_anchored_b_mse": 1.1773731632809579,
+            "shift16/disagreement_mse": 1.1238380527705167,
+            "shift64/shape_a_mse": 1.2735574030905035,
+            "shift64/shape_b_mse": 1.1002852300478914,
+            "shift64/common_anchored_a_mse": 1.3009913617932076,
+            "shift64/common_anchored_b_mse": 1.1336910393746438,
+            "shift64/disagreement_mse": 1.0913768686057492
+          },
+          "definite_harm": 22
+        },
+        {
+          "cohort_seed": "cross_research/s43",
+          "control_mse": 0.00854003004646759,
+          "candidate_mse": 0.009122072834689418,
+          "mse_change_percent": 6.815465344440774,
+          "control_rmse_bps": 9.241228298482616,
+          "candidate_rmse_bps": 9.55095431603011,
+          "gain": "fail",
+          "full_price_ratios": {
+            "near": 1.0653990767772434,
+            "mid": 1.2064573693234462,
+            "far": 1.0251343329784743
+          },
+          "endpoint_price_ratios": {
+            "near": 0.9030961839869577,
+            "mid": 1.2989003792204004,
+            "far": 1.0847155061517026
+          },
+          "p95_ratio": 0.9770519494461248,
+          "gate_counts": {
+            "fail": 28,
+            "pass": 51
+          },
+          "f03_counts": {
+            "fail": 14,
+            "pass": 1
+          },
+          "nonprice_counts": {
+            "pass": 47,
+            "fail": 7
+          },
+          "full_nonprice_ratios": {
+            "body/near": 0.8486133490872694,
+            "body/mid": 1.1101672995225178,
+            "body/far": 1.1486299229522199,
+            "volume_vs_prior_ema32/near": 1.0392958868425024,
+            "volume_vs_prior_ema32/mid": 0.9609108142180222,
+            "volume_vs_prior_ema32/far": 1.001551657092903,
+            "delta_log_volume/near": 0.9690309147278635,
+            "delta_log_volume/mid": 0.9507506917737968,
+            "delta_log_volume/far": 0.9937034651974118,
+            "oi_change_percent_asinh/near": 1.063881549596127,
+            "oi_change_percent_asinh/mid": 0.9978582363760716,
+            "oi_change_percent_asinh/far": 0.9842684702191181,
+            "oi_per_volume_asinh/near": 1.01773943666879,
+            "oi_per_volume_asinh/mid": 0.995269521983882,
+            "oi_per_volume_asinh/far": 0.9832311283572407,
+            "turnover_asinh/near": 1.0514505045076064,
+            "turnover_asinh/mid": 0.9782229630664137,
+            "turnover_asinh/far": 1.0036768792377968
+          },
+          "f03_ratios": {
+            "shift1/shape_a_mse": 1.125100344389824,
+            "shift1/shape_b_mse": 1.0884903453186106,
+            "shift1/common_anchored_a_mse": 1.1427882579611872,
+            "shift1/common_anchored_b_mse": 1.1247969554793034,
+            "shift1/disagreement_mse": 1.0914578657876748,
+            "shift16/shape_a_mse": 1.1361483142501252,
+            "shift16/shape_b_mse": 1.083211305675539,
+            "shift16/common_anchored_a_mse": 1.147672252110911,
+            "shift16/common_anchored_b_mse": 1.12748755650079,
+            "shift16/disagreement_mse": 1.0296341464665288,
+            "shift64/shape_a_mse": 1.1944539791510054,
+            "shift64/shape_b_mse": 1.0408284473249354,
+            "shift64/common_anchored_a_mse": 1.1808816028460078,
+            "shift64/common_anchored_b_mse": 1.084715506151703,
+            "shift64/disagreement_mse": 1.1452869156192382
+          },
+          "definite_harm": 7
+        }
+      ],
+      "aggregate_gate_counts": {
+        "primary": {
+          "fail": 4
+        },
+        "price_protection": {
+          "pass": 9,
+          "fail": 27
+        },
+        "body_protection": {
+          "pass": 17,
+          "fail": 19
+        },
+        "activity_protection": {
+          "pass": 143,
+          "fail": 37
+        },
+        "F03_protection": {
+          "fail": 58,
+          "pass": 2
+        }
+      },
+      "total_counts": {
+        "formal_gates": 316,
+        "status_counts": {
+          "fail": 145,
+          "pass": 171
+        },
+        "p95": {
+          "fail": 2,
+          "pass": 2
+        },
+        "unconfirmed_protection_failures": 83,
+        "definite_protection_harm": 58
+      },
+      "protection_failure_interpretation": "58/141 failed protections exceed10% at both per-metric CI lower bounds;83 are unconfirmed protection, not proved harm. Correlated metrics without familywise correction are not independent discoveries. Four P95 point guards are separate from316 interval gates.",
+      "shared_objective": {
+        "42": {
+          "same_initial_parameter_signature": true,
+          "all120_sampling_lr_exposure_equal": true,
+          "candidate_control_final_train_q_ratio": 1.116289908161752,
+          "candidate_control_final_validation_q_ratio": 1.1134103869732632
+        },
+        "43": {
+          "same_initial_parameter_signature": true,
+          "all120_sampling_lr_exposure_equal": true,
+          "candidate_control_final_train_q_ratio": 1.0783228646999463,
+          "candidate_control_final_validation_q_ratio": 1.052562955863433
+        }
+      },
+      "training_curves": {
+        "control_s42": {
+          "epochs": 120,
+          "updates": 4560,
+          "examples": 574680,
+          "supervised_states": 2873400,
+          "train_q100": 0.045226784192585245,
+          "train_q120": 0.04124108779608909,
+          "train_q100_to120_decline_percent": 8.812690240199728,
+          "validation_q100": 0.03501543485651813,
+          "validation_q120": 0.03216132870810456,
+          "validation_q100_to120_decline_percent": 8.150994440334024,
+          "final_validation_components": {
+            "path": 0.00047332561115801084,
+            "body": 0.04651360362181901,
+            "activity": 0.07303548016367614,
+            "change1": 0.027049970261783074,
+            "close_mae_bps": 6.01527683602145,
+            "primary": 0.03216132870810456,
+            "objective": 0.03216132870810456,
+            "query": 0.03216132870810456
+          },
+          "diagnostic_validation_q": {
+            "5": 0.16030338359564247,
+            "10": 0.14731482062622067,
+            "15": 0.12882323920143923,
+            "20": 0.1136069567638824,
+            "25": 0.09694073943278045,
+            "30": 0.08758058281624417,
+            "35": 0.07834763919341659,
+            "40": 0.07352229927360064,
+            "45": 0.0672660369581734,
+            "50": 0.0624992441368708,
+            "55": 0.05718805011793518,
+            "60": 0.05486344036688043,
+            "65": 0.052180179087560424,
+            "70": 0.0472653216093446,
+            "75": 0.04543204562053391,
+            "80": 0.04205850342315741,
+            "85": 0.0395997452780308,
+            "90": 0.04064171575440101,
+            "95": 0.0363357301391663,
+            "100": 0.03501543485651813,
+            "105": 0.03399966339395996,
+            "110": 0.033234063610605054,
+            "115": 0.03270402508288036,
+            "120": 0.03216132870810456
+          },
+          "mean_epoch_seconds": 56.609612303661805,
+          "total_clipped_steps": 818,
+          "selection": "fixed last120; diagnostic curve minima are not new choices"
+        },
+        "full_history_s42": {
+          "epochs": 120,
+          "updates": 4560,
+          "examples": 574680,
+          "supervised_states": 2873400,
+          "train_q100": 0.050117744301307346,
+          "train_q120": 0.046037010108387046,
+          "train_q100_to120_decline_percent": 8.142294210982381,
+          "validation_q100": 0.038855377009837065,
+          "validation_q120": 0.03580875744246501,
+          "validation_q100_to120_decline_percent": 7.840921390624356,
+          "final_validation_components": {
+            "path": 0.0005248994248383965,
+            "body": 0.052078198256639174,
+            "activity": 0.0801995521062846,
+            "change1": 0.03165556107490183,
+            "close_mae_bps": 6.43602989567823,
+            "primary": 0.03580875744246501,
+            "objective": 0.03580875744246501,
+            "query": 0.03580875744246501
+          },
+          "diagnostic_validation_q": {
+            "5": 0.1605031426239977,
+            "10": 0.15094916371390105,
+            "15": 0.13206279458188397,
+            "20": 0.11657465505262182,
+            "25": 0.10006171354103174,
+            "30": 0.09201856545926197,
+            "35": 0.08099232294586971,
+            "40": 0.0764221933391309,
+            "45": 0.07048343705250608,
+            "50": 0.06534901409431286,
+            "55": 0.061520939884853146,
+            "60": 0.05848031709526779,
+            "65": 0.054523088761012514,
+            "70": 0.05183458157913363,
+            "75": 0.04835501227924728,
+            "80": 0.0458935258953755,
+            "85": 0.04387774697206048,
+            "90": 0.04299384377745685,
+            "95": 0.040390823745668096,
+            "100": 0.038855377009837065,
+            "105": 0.037693076734382325,
+            "110": 0.03684983650591595,
+            "115": 0.03633306821824934,
+            "120": 0.03580875744246501
+          },
+          "mean_epoch_seconds": 56.531302846533556,
+          "total_clipped_steps": 493,
+          "selection": "fixed last120; diagnostic curve minima are not new choices"
+        },
+        "full_history_s43": {
+          "epochs": 120,
+          "updates": 4560,
+          "examples": 574680,
+          "supervised_states": 2873400,
+          "train_q100": 0.04806604498170441,
+          "train_q120": 0.04342762377363309,
+          "train_q100_to120_decline_percent": 9.65009958659354,
+          "validation_q100": 0.03903031993183334,
+          "validation_q120": 0.03378964319356221,
+          "validation_q100_to120_decline_percent": 13.427193903160417,
+          "final_validation_components": {
+            "path": 0.0005049968445136926,
+            "body": 0.04886832919275116,
+            "activity": 0.07778318810207523,
+            "change1": 0.026829275529295194,
+            "close_mae_bps": 6.263550613723563,
+            "primary": 0.03378964319356221,
+            "objective": 0.03378964319356221,
+            "query": 0.03378964319356221
+          },
+          "diagnostic_validation_q": {
+            "5": 0.1593165831442132,
+            "10": 0.14918408936153219,
+            "15": 0.13595745510164087,
+            "20": 0.11374087973874501,
+            "25": 0.10090609869332742,
+            "30": 0.09135899252545536,
+            "35": 0.08137801081600171,
+            "40": 0.07640468324880362,
+            "45": 0.07073693800998246,
+            "50": 0.06659207530077096,
+            "55": 0.0629488543887473,
+            "60": 0.05864223011662292,
+            "65": 0.053495766562992327,
+            "70": 0.04963015028567928,
+            "75": 0.04773835261780827,
+            "80": 0.04434396643076035,
+            "85": 0.04271145076823751,
+            "90": 0.03991774235862407,
+            "95": 0.038642562025556014,
+            "100": 0.03903031993183334,
+            "105": 0.0357719879891478,
+            "110": 0.03486285778565117,
+            "115": 0.034313432903737714,
+            "120": 0.03378964319356221
+          },
+          "mean_epoch_seconds": 56.59154341531296,
+          "total_clipped_steps": 461,
+          "selection": "fixed last120; diagnostic curve minima are not new choices"
+        },
+        "control_s43": {
+          "epochs": 120,
+          "updates": 4560,
+          "examples": 574680,
+          "supervised_states": 2873400,
+          "train_q100": 0.04438183965085452,
+          "train_q120": 0.040273303289100934,
+          "train_q100_to120_decline_percent": 9.25724664429155,
+          "validation_q100": 0.03487247505907453,
+          "validation_q120": 0.032102253841761,
+          "validation_q100_to120_decline_percent": 7.94386177815235,
+          "final_validation_components": {
+            "path": 0.00044240528879751497,
+            "body": 0.04046975683442313,
+            "activity": 0.07886215542420213,
+            "change1": 0.02109834707769513,
+            "close_mae_bps": 5.777067205209389,
+            "primary": 0.032102253841761,
+            "objective": 0.032102253841761,
+            "query": 0.032102253841761
+          },
+          "diagnostic_validation_q": {
+            "5": 0.1592011856758735,
+            "10": 0.1480257271656414,
+            "15": 0.13250769509616045,
+            "20": 0.1135910526603062,
+            "25": 0.09936166567242509,
+            "30": 0.0886500644979284,
+            "35": 0.079884263426761,
+            "40": 0.07406040230753194,
+            "45": 0.06930784410602679,
+            "50": 0.06583274373235455,
+            "55": 0.060007847979689784,
+            "60": 0.05654123063704449,
+            "65": 0.05284322103286097,
+            "70": 0.046660930926050705,
+            "75": 0.045247055630834865,
+            "80": 0.044402913057059665,
+            "85": 0.03980416400748773,
+            "90": 0.037974411320765386,
+            "95": 0.036330863185779765,
+            "100": 0.03487247505907453,
+            "105": 0.03384553820610998,
+            "110": 0.03313976155479102,
+            "115": 0.032580562422603924,
+            "120": 0.032102253841761
+          },
+          "mean_epoch_seconds": 57.042763645015654,
+          "total_clipped_steps": 626,
+          "selection": "fixed last120; diagnostic curve minima are not new choices"
+        }
+      },
+      "old_control_reproducibility": {
+        "control_s42": {
+          "prior_archive_sha256": "8b4fdb27d5c11559a95b474b35ef9538017e50fa64b0b821cd7e176c6417d05b",
+          "initial_tensor_signature_exact": true,
+          "last120_tensor_signature_exact": true,
+          "all120_loss_scalars_exact": true,
+          "all120_loss_max_abs": 0.0,
+          "all120_sampling_and_lr_exact": true,
+          "fixed8_prediction_comparisons": {
+            "test": {
+              "values": 6998208,
+              "equal_values": 6998208,
+              "max_abs": 0.0,
+              "rms": 0.0,
+              "allclose_atol1e-6_rtol2e-5": true,
+              "raw_targets_masks_positions_exact": true
+            },
+            "cross_research": {
+              "values": 3122168,
+              "equal_values": 3122168,
+              "max_abs": 0.0,
+              "rms": 0.0,
+              "allclose_atol1e-6_rtol2e-5": true,
+              "raw_targets_masks_positions_exact": true
+            }
+          }
+        },
+        "control_s43": {
+          "prior_archive_sha256": "8b4fdb27d5c11559a95b474b35ef9538017e50fa64b0b821cd7e176c6417d05b",
+          "initial_tensor_signature_exact": true,
+          "last120_tensor_signature_exact": true,
+          "all120_loss_scalars_exact": true,
+          "all120_loss_max_abs": 0.0,
+          "all120_sampling_and_lr_exact": true,
+          "fixed8_prediction_comparisons": {
+            "test": {
+              "values": 6998208,
+              "equal_values": 6998208,
+              "max_abs": 0.0,
+              "rms": 0.0,
+              "allclose_atol1e-6_rtol2e-5": true,
+              "raw_targets_masks_positions_exact": true
+            },
+            "cross_research": {
+              "values": 3122168,
+              "equal_values": 3122168,
+              "max_abs": 0.0,
+              "rms": 0.0,
+              "allclose_atol1e-6_rtol2e-5": true,
+              "raw_targets_masks_positions_exact": true
+            }
+          }
+        }
+      },
+      "export_evidence_recovery": {
+        "original_parent_arrays_available": 0,
+        "independently_reconstructed": 8,
+        "source_archive_unchanged": true,
+        "evidence_types": "full128 errors/support + fixed8 predictions/raw255 + summaries + final gate decisions",
+        "diagnosis": "Exporter applied a nonnegative-error check to signed floating-point identity_residual, thereby omitting entire parent-row archives. That diagnostic is not among the scientific gates; its valid signed values do not indicate negative MSE or model corruption.",
+        "scientific_recovery_scope": "All111 scalar metric families per parent can be independently reconstructed from available evidence. No claim of matching missing original NPZ bytes; original per-parent F03 equality unavailable, while all saved F03 summaries and gate intervals agree within recorded arithmetic tolerances."
+      },
+      "reconstructed_parent_rows": {
+        "test/control_s42": {
+          "path": "reconstructed/test_control_s42_parent_rows.npz",
+          "sha256": "ee30fcc120bfa679ba8cc849c163d9080bb355c054694f3934273820585cc826",
+          "origin": "Independent NumPy reconstruction from exported full128 error/support rows and fixed8 predictions/raw truth; NOT original report bytes",
+          "original_file_absent": true,
+          "original_recorded_sha256": "36cfc293fab1b0a60cd371ff6639a6d58d2b7b2b9d07692b794089216715a970",
+          "inputs": {
+            "results/test_control_s42_predictions.npz": "a12747c5d29ac49a45989a4edb0f0e80ba6936c524a1ee955d9d7eaa1267c543",
+            "evaluation/control_s42/test/position_rows.npz": "0d326214ca2116fbb57b38465cccdb01ceb63a3afa9a1370a9b90032f899c8ea",
+            "evaluation/control_s42/test/rows.json": "7beae3a83c87fd8a480fd8a96f68aef01262e44677571c1235667b445cbd35fb",
+            "manifest.json": "d8246106b4ea5b59aabf35603c90e98569417b1cf1ec84bb1156e46411f33f6c"
+          },
+          "columns": {
+            "errors": 111,
+            "support": 111,
+            "contexts": 66
+          },
+          "signed_identity_residuals": {
+            "overlap/shift1/identity_residual": {
+              "min": -1.7957098481791167e-19,
+              "max": 1.8973538018496328e-19,
+              "negative_count": 467,
+              "nonfinite_count": 0
+            },
+            "overlap/shift16/identity_residual": {
+              "min": -3.3881317890172014e-20,
+              "max": 5.963111948670274e-19,
+              "negative_count": 463,
+              "nonfinite_count": 0
+            },
+            "overlap/shift64/identity_residual": {
+              "min": -3.9302328752599536e-19,
+              "max": 4.2351647362715017e-20,
+              "negative_count": 458,
+              "nonfinite_count": 0
+            }
+          },
+          "limitation": "No byte or per-parent equality assertion against omitted parent_rows; summary and gate agreement checked independently"
+        },
+        "test/control_s43": {
+          "path": "reconstructed/test_control_s43_parent_rows.npz",
+          "sha256": "b1cdaea5d28913dcd83910965bde321e0a4dc01eb085c2a092a8e812c15bd641",
+          "origin": "Independent NumPy reconstruction from exported full128 error/support rows and fixed8 predictions/raw truth; NOT original report bytes",
+          "original_file_absent": true,
+          "original_recorded_sha256": "b4cb2949936a2eebea54800987bfcf9003224305d52b33b0a71c50912b795357",
+          "inputs": {
+            "results/test_control_s43_predictions.npz": "973ac8ba6224fe3704899a5f1b75214d902cbb7aac1d06fd84f419f9145c05c4",
+            "evaluation/control_s43/test/position_rows.npz": "4938c26825c411f394bb10233b0958f222b4ab867acd84818ab9a6be773b8c75",
+            "evaluation/control_s43/test/rows.json": "7beae3a83c87fd8a480fd8a96f68aef01262e44677571c1235667b445cbd35fb",
+            "manifest.json": "d8246106b4ea5b59aabf35603c90e98569417b1cf1ec84bb1156e46411f33f6c"
+          },
+          "columns": {
+            "errors": 111,
+            "support": 111,
+            "contexts": 66
+          },
+          "signed_identity_residuals": {
+            "overlap/shift1/identity_residual": {
+              "min": -1.3044307387716225e-19,
+              "max": 1.215492279309921e-19,
+              "negative_count": 438,
+              "nonfinite_count": 0
+            },
+            "overlap/shift16/identity_residual": {
+              "min": -1.2197274440461925e-19,
+              "max": 2.371692252312041e-19,
+              "negative_count": 482,
+              "nonfinite_count": 0
+            },
+            "overlap/shift64/identity_residual": {
+              "min": -1.2197274440461925e-19,
+              "max": 4.0657581468206416e-20,
+              "negative_count": 458,
+              "nonfinite_count": 0
+            }
+          },
+          "limitation": "No byte or per-parent equality assertion against omitted parent_rows; summary and gate agreement checked independently"
+        },
+        "test/full_history_s42": {
+          "path": "reconstructed/test_full_history_s42_parent_rows.npz",
+          "sha256": "a5a2706b50f3e1c93b484dc2ad8d32e4284346de1b24519ac90caf698978d915",
+          "origin": "Independent NumPy reconstruction from exported full128 error/support rows and fixed8 predictions/raw truth; NOT original report bytes",
+          "original_file_absent": true,
+          "original_recorded_sha256": "974cc58b560aa2f1653f4d4d0ac5c3ed43173bd5700d721be16df0ec12eeda9c",
+          "inputs": {
+            "results/test_full_history_s42_predictions.npz": "8c3a3e4c662c64901f6dc75b954b39cd1cd5446c813b9312ecfce20d5419f782",
+            "evaluation/full_history_s42/test/position_rows.npz": "002e48284397cc8d9dcc935f649e09881c70c3200d364802dd2ce705fe918a9d",
+            "evaluation/full_history_s42/test/rows.json": "7beae3a83c87fd8a480fd8a96f68aef01262e44677571c1235667b445cbd35fb",
+            "manifest.json": "d8246106b4ea5b59aabf35603c90e98569417b1cf1ec84bb1156e46411f33f6c"
+          },
+          "columns": {
+            "errors": 111,
+            "support": 111,
+            "contexts": 66
+          },
+          "signed_identity_residuals": {
+            "overlap/shift1/identity_residual": {
+              "min": -1.8295911660692887e-19,
+              "max": 1.5415999640028266e-19,
+              "negative_count": 452,
+              "nonfinite_count": 0
+            },
+            "overlap/shift16/identity_residual": {
+              "min": -2.574980159653073e-19,
+              "max": 4.0657581468206416e-20,
+              "negative_count": 486,
+              "nonfinite_count": 0
+            },
+            "overlap/shift64/identity_residual": {
+              "min": -4.0657581468206416e-20,
+              "max": 1.4907779871675686e-19,
+              "negative_count": 453,
+              "nonfinite_count": 0
+            }
+          },
+          "limitation": "No byte or per-parent equality assertion against omitted parent_rows; summary and gate agreement checked independently"
+        },
+        "test/full_history_s43": {
+          "path": "reconstructed/test_full_history_s43_parent_rows.npz",
+          "sha256": "511ef546628f8791d234151001ac0bb94ee0e5a76bbc2450b5e0ffb322081411",
+          "origin": "Independent NumPy reconstruction from exported full128 error/support rows and fixed8 predictions/raw truth; NOT original report bytes",
+          "original_file_absent": true,
+          "original_recorded_sha256": "37c87f5608aa20d246c5118465983318e7aac68b47d757c184e09080b29683a4",
+          "inputs": {
+            "results/test_full_history_s43_predictions.npz": "7b427e23133fdc02d767f29b76d58dccf8b51d2264ce970b878e1a849e613049",
+            "evaluation/full_history_s43/test/position_rows.npz": "fe0ff2ae24a7ce00e7838b496908bd2db8e8f23e805162962bf7f5836bffe071",
+            "evaluation/full_history_s43/test/rows.json": "7beae3a83c87fd8a480fd8a96f68aef01262e44677571c1235667b445cbd35fb",
+            "manifest.json": "d8246106b4ea5b59aabf35603c90e98569417b1cf1ec84bb1156e46411f33f6c"
+          },
+          "columns": {
+            "errors": 111,
+            "support": 111,
+            "contexts": 66
+          },
+          "signed_identity_residuals": {
+            "overlap/shift1/identity_residual": {
+              "min": -2.642742795433417e-19,
+              "max": 3.5744790374131474e-19,
+              "negative_count": 469,
+              "nonfinite_count": 0
+            },
+            "overlap/shift16/identity_residual": {
+              "min": -8.809142651444724e-20,
+              "max": 1.8973538018496328e-19,
+              "negative_count": 466,
+              "nonfinite_count": 0
+            },
+            "overlap/shift64/identity_residual": {
+              "min": -6.776263578034403e-20,
+              "max": 2.710505431213761e-19,
+              "negative_count": 447,
+              "nonfinite_count": 0
+            }
+          },
+          "limitation": "No byte or per-parent equality assertion against omitted parent_rows; summary and gate agreement checked independently"
+        },
+        "cross_research/control_s42": {
+          "path": "reconstructed/cross_research_control_s42_parent_rows.npz",
+          "sha256": "7228be98c20256c08a75e566d6ef39c895b7b171f7ed3927d01ae1ab47ee53a9",
+          "origin": "Independent NumPy reconstruction from exported full128 error/support rows and fixed8 predictions/raw truth; NOT original report bytes",
+          "original_file_absent": true,
+          "original_recorded_sha256": "96b3435e625934284025b4ec9cbcd403ed8e9ff32e949dac80e40d57f03eabfb",
+          "inputs": {
+            "results/cross_research_control_s42_predictions.npz": "2b5e876e0f313c608f4a9733f1c41d939b35048447b7947c7297c63d5cdd17c3",
+            "evaluation/control_s42/cross_research/position_rows.npz": "17dffe70a28ab3ff4c12be478553df31d3b607a98ac0f913844c5dfff1b9c540",
+            "evaluation/control_s42/cross_research/rows.json": "ed26891b60da2426f7912ba1449ae1e102c204b7e9587757cdb1e7fd1d87cea8",
+            "manifest.json": "d8246106b4ea5b59aabf35603c90e98569417b1cf1ec84bb1156e46411f33f6c"
+          },
+          "columns": {
+            "errors": 111,
+            "support": 111,
+            "contexts": 66
+          },
+          "signed_identity_residuals": {
+            "overlap/shift1/identity_residual": {
+              "min": -1.7364175418713157e-20,
+              "max": 1.0164395367051604e-20,
+              "negative_count": 183,
+              "nonfinite_count": 0
+            },
+            "overlap/shift16/identity_residual": {
+              "min": -1.1858461261560205e-20,
+              "max": 1.1011428314305904e-20,
+              "negative_count": 199,
+              "nonfinite_count": 0
+            },
+            "overlap/shift64/identity_residual": {
+              "min": -5.082197683525802e-21,
+              "max": 6.776263578034403e-21,
+              "negative_count": 201,
+              "nonfinite_count": 0
+            }
+          },
+          "limitation": "No byte or per-parent equality assertion against omitted parent_rows; summary and gate agreement checked independently"
+        },
+        "cross_research/control_s43": {
+          "path": "reconstructed/cross_research_control_s43_parent_rows.npz",
+          "sha256": "7272973b5d29b39f54e9b0b9b7f50521a4655217d342a723eab2450b6b3e7d38",
+          "origin": "Independent NumPy reconstruction from exported full128 error/support rows and fixed8 predictions/raw truth; NOT original report bytes",
+          "original_file_absent": true,
+          "original_recorded_sha256": "671977080c0b4843ef80f37004654e35d64f86fadf984b719a4d7f28722d695f",
+          "inputs": {
+            "results/cross_research_control_s43_predictions.npz": "a667664b6c44d00da184e219c1321155244a8f2f2a713caf67d5a7e922a0c414",
+            "evaluation/control_s43/cross_research/position_rows.npz": "fc646cc05ba073573e2c10bde282517cc7852b806c770e39b95dc385d90afcf2",
+            "evaluation/control_s43/cross_research/rows.json": "ed26891b60da2426f7912ba1449ae1e102c204b7e9587757cdb1e7fd1d87cea8",
+            "manifest.json": "d8246106b4ea5b59aabf35603c90e98569417b1cf1ec84bb1156e46411f33f6c"
+          },
+          "columns": {
+            "errors": 111,
+            "support": 111,
+            "contexts": 66
+          },
+          "signed_identity_residuals": {
+            "overlap/shift1/identity_residual": {
+              "min": -1.6517142471458857e-20,
+              "max": 8.682087709356578e-21,
+              "negative_count": 208,
+              "nonfinite_count": 0
+            },
+            "overlap/shift16/identity_residual": {
+              "min": -1.1858461261560205e-20,
+              "max": 8.046812998915853e-21,
+              "negative_count": 203,
+              "nonfinite_count": 0
+            },
+            "overlap/shift64/identity_residual": {
+              "min": -1.5246593050577406e-20,
+              "max": 1.6940658945086007e-21,
+              "negative_count": 204,
+              "nonfinite_count": 0
+            }
+          },
+          "limitation": "No byte or per-parent equality assertion against omitted parent_rows; summary and gate agreement checked independently"
+        },
+        "cross_research/full_history_s42": {
+          "path": "reconstructed/cross_research_full_history_s42_parent_rows.npz",
+          "sha256": "e1772a61a1ff13fc42266a077623008d164de813af01faa3d54e4741ebcbf68d",
+          "origin": "Independent NumPy reconstruction from exported full128 error/support rows and fixed8 predictions/raw truth; NOT original report bytes",
+          "original_file_absent": true,
+          "original_recorded_sha256": "6e24c8cfe4bac0a394d6120c40213f4bb974b86ae5d30b07e49361166454d3d0",
+          "inputs": {
+            "results/cross_research_full_history_s42_predictions.npz": "1fc492f8d404911be57d7c598a0530e43c55158f87e0ecbccf8da03eaaddd525",
+            "evaluation/full_history_s42/cross_research/position_rows.npz": "29391184c557682988416496d1ab07303b39ff941db2a00d49146393046cb6d1",
+            "evaluation/full_history_s42/cross_research/rows.json": "ed26891b60da2426f7912ba1449ae1e102c204b7e9587757cdb1e7fd1d87cea8",
+            "manifest.json": "d8246106b4ea5b59aabf35603c90e98569417b1cf1ec84bb1156e46411f33f6c"
+          },
+          "columns": {
+            "errors": 111,
+            "support": 111,
+            "contexts": 66
+          },
+          "signed_identity_residuals": {
+            "overlap/shift1/identity_residual": {
+              "min": -2.0328790734103208e-20,
+              "max": 9.26442286059391e-21,
+              "negative_count": 215,
+              "nonfinite_count": 0
+            },
+            "overlap/shift16/identity_residual": {
+              "min": -1.3976043629695956e-20,
+              "max": 6.670384459627615e-21,
+              "negative_count": 203,
+              "nonfinite_count": 0
+            },
+            "overlap/shift64/identity_residual": {
+              "min": -6.776263578034403e-21,
+              "max": 1.0164395367051604e-20,
+              "negative_count": 205,
+              "nonfinite_count": 0
+            }
+          },
+          "limitation": "No byte or per-parent equality assertion against omitted parent_rows; summary and gate agreement checked independently"
+        },
+        "cross_research/full_history_s43": {
+          "path": "reconstructed/cross_research_full_history_s43_parent_rows.npz",
+          "sha256": "37e0afb41ef2fcbeb444eba4c5922b42e87ef65221cafcd1e17c86035552bc23",
+          "origin": "Independent NumPy reconstruction from exported full128 error/support rows and fixed8 predictions/raw truth; NOT original report bytes",
+          "original_file_absent": true,
+          "original_recorded_sha256": "9e758c05581dc10c3147b5bb10c5f321d367899b6bbd1962a253489983759391",
+          "inputs": {
+            "results/cross_research_full_history_s43_predictions.npz": "e678a82626ffa07908b05eeae4a7a82fb28fe84e86cf92f0fa547ed679d6a8b4",
+            "evaluation/full_history_s43/cross_research/position_rows.npz": "6922bf4e0924f219be7f9b8d825d0c3e99fd275af715a920461b2e74db3adcd0",
+            "evaluation/full_history_s43/cross_research/rows.json": "ed26891b60da2426f7912ba1449ae1e102c204b7e9587757cdb1e7fd1d87cea8",
+            "manifest.json": "d8246106b4ea5b59aabf35603c90e98569417b1cf1ec84bb1156e46411f33f6c"
+          },
+          "columns": {
+            "errors": 111,
+            "support": 111,
+            "contexts": 66
+          },
+          "signed_identity_residuals": {
+            "overlap/shift1/identity_residual": {
+              "min": -8.893845946170154e-21,
+              "max": 1.6093625997831706e-20,
+              "negative_count": 202,
+              "nonfinite_count": 0
+            },
+            "overlap/shift16/identity_residual": {
+              "min": -2.202285662861181e-20,
+              "max": 6.3527471044072525e-21,
+              "negative_count": 202,
+              "nonfinite_count": 0
+            },
+            "overlap/shift64/identity_residual": {
+              "min": -1.6940658945086007e-20,
+              "max": 8.470329472543003e-21,
+              "negative_count": 212,
+              "nonfinite_count": 0
+            }
+          },
+          "limitation": "No byte or per-parent equality assertion against omitted parent_rows; summary and gate agreement checked independently"
+        }
+      },
+      "disposition": "完成真实训练/评价；全历史注意力综合价格MSE增加6.82%～14.44%，主收益0/4，保护未全过。本固定配方收束，不晋升。近段实体收益和中段代价同时保留。",
+      "decision_impact": "Macro97/94和D角色、旧H/G及多尺度配方结论均不变；不是纠错重训，不证明全注意力无效或三角/容量/解码器最优；F01同时128和F03/F04等方向保留。",
+      "accepted": false,
+      "promoted": false,
+      "recipe_closed": true,
+      "next_action": {
+        "status": "design_review_only_no_locked_experiment",
+        "task_ids": [
+          "F01",
+          "F05"
+        ],
+        "question": "Across the two recent matched studies and earlier capacity/pooling/readout studies, which supported information-retention gap can the next single intervention test?",
+        "deliverable": "One evidence table linking age-band tradeoffs and train/validation curves to earlier controlled studies; distinguish unidentified causes from supported gaps, identify the proposed input-organization/state-compression/readout intervention and its falsifying matched control before any new budget.",
+        "training_budget": 0,
+        "entrypoint": null,
+        "not_selected": [
+          "mask or Haar grid",
+          "candidate-only extra epochs",
+          "new best selection",
+          "automatic deeper/wider model",
+          "automatic simultaneous128 exposure",
+          "downstream labels as prerequisite"
+        ],
+        "reason": "The locked120-epoch mask recipe failed balanced gates. Both losses still decrease, and mixed local gains do not identify a unique bottleneck; close the recipe without closing representation research."
+      },
+      "review": {
+        "purpose": {
+          "status": "pass_for_scope",
+          "evidence": "Matched F05 information-routing study completed, F01 coverage fixed and F03 protection measured. The finite balanced-retention hypothesis failed; no promotion or forecast/semantic claim.",
+          "remaining": "Generic reusable price/activity representation is not accepted or closed. Macro97/94, all earlier failures and retained hypotheses remain."
+        },
+        "architecture": {
+          "status": "pass_for_scope",
+          "evidence": "Same scratch768/4/8 plus original HistoryQuery; same-seed tensors identical. Only explicit internal128 attention mask differs. Eight pre/post CUDA causal receipts pass; each public state independently gathers128 observed feature rows and returns only its endpoint.",
+          "remaining": "Weights omitted and not locally replayed. Causal receipts cover fixed samples, not all inputs; no unique capacity/decoder bottleneck or globally optimal causal mask established."
+        },
+        "training": {
+          "status": "pass_for_scope",
+          "evidence": "Four120-epoch histories reconcile18240 updates,2298720 parent exposures,11493600 state exposures. Shared Q/raw-price targets, paired initialization/sampling/LR/fresh Adam and fixedlast120 verified. Control matches prior same-recipe loss and signatures exactly.",
+          "remaining": "Both train/validation curves still decrease. Equal updates/exposure is not equal compute or separately optimized hyperparameters; no candidate-only extension, new best selection or independent replication claim."
+        },
+        "validation": {
+          "status": "pass_for_scope",
+          "evidence": "Independent fixed8 raw-price/field/overlap arithmetic and full128 position-row aggregation reconstruct111 parent metric families. All316 dual2000-bootstrap gates and4 P95 gates agree. Primary0/4; protections171/312; P95 2/4. Of141 failed protections,58 exceed10% at both per-metric lower bounds and83 merely lack protection confirmation.",
+          "remaining": "Highly correlated metrics, no familywise correction or independent market confirmation. Missing parent NPZ original bytes/per-parent values cannot be compared directly; full128 prediction shards omitted. Body/activity use supplied targets; no new age0 or wick qualification."
+        },
+        "data": {
+          "status": "pass_for_scope",
+          "evidence": "Original4789/978/984/439 parent identities, train statistics, single-contract full255 feature intervals and raw receipts verified;30 available ancestor manifests match. Stable rawfloat64 prices independently checked at fixed8 positions.",
+          "remaining": "One old ancestor manifest unavailable locally; raw training/validation caches omitted. No full independent activity-label regeneration or new data. EMA carries earlier causal prehistory; V13 remains waiting for qualified data."
+        },
+        "engineering": {
+          "status": "pass_for_scope",
+          "evidence": "78 provenance checks and5587 independent arithmetic checks pass;91 included files reconcile. Export defect precisely identified: signed near-zero identity_residual rejected as a nonnegative MSE, excluding8 parent arrays. Existing evidence is enough for this scientific review; no retraining or replacement archive needed. Separate v2 exporter now passes53 regressions and16 real/derived score-bank checks; original bound modules unchanged.",
+          "remaining": "Original archive lacks8 parent NPZ bytes; original full predictions/weights remain omitted. Repaired v2 exporter is locally verified, not run on AutoDL; independent report reconstruction suffices, no new user run needed."
+        }
+      },
+      "audit_artifacts": [
+        {
+          "path": "reports/observed_history_review_cecb3cc29636/metric_review.py",
+          "sha256": "0f1ed02d89f4f2411e0eca6268470eea9f415142c653402723a6ff1384db430f"
+        },
+        {
+          "path": "reports/observed_history_review_cecb3cc29636/metric_review.json",
+          "sha256": "c44c083df45530133218553ec0570775ed63cd9adeb7c008461a8933b838c880"
+        },
+        {
+          "path": "reports/observed_history_review_cecb3cc29636/provenance_review.py",
+          "sha256": "1a2b1099103dd2a9cab562c2b08f8c847b41bc1f183815d23368306bf5c23535"
+        },
+        {
+          "path": "reports/observed_history_review_cecb3cc29636/provenance_review.json",
+          "sha256": "45f9e5616a18f101078b942b10b3fe77cea41c1b2f56a15ad1aa90a195e3c2ca"
+        },
+        {
+          "path": "reports/observed_history_review_cecb3cc29636/scientific_review.json",
+          "sha256": "405b82da8f9de3cfa599e39872108b73801b2ebd4d886d638e8e209e01eafabb"
+        }
+      ],
+      "export_fix_reference": "observed_history_plan.export_fix_20261018"
+    },
+    "next_design_disposition": {
+      "status": "design_review_only_no_locked_experiment",
+      "task_ids": [
+        "F01",
+        "F05"
+      ],
+      "question": "Across the two recent matched studies and earlier capacity/pooling/readout studies, which supported information-retention gap can the next single intervention test?",
+      "deliverable": "One evidence table linking age-band tradeoffs and train/validation curves to earlier controlled studies; distinguish unidentified causes from supported gaps, identify the proposed input-organization/state-compression/readout intervention and its falsifying matched control before any new budget.",
+      "training_budget": 0,
+      "entrypoint": null,
+      "not_selected": [
+        "mask or Haar grid",
+        "candidate-only extra epochs",
+        "new best selection",
+        "automatic deeper/wider model",
+        "automatic simultaneous128 exposure",
+        "downstream labels as prerequisite"
+      ],
+      "reason": "The locked120-epoch mask recipe failed balanced gates. Both losses still decrease, and mixed local gains do not identify a unique bottleneck; close the recipe without closing representation research."
+    },
+    "released_budget": {
+      "task_ids": [
+        "F05",
+        "F01",
+        "F03"
+      ],
+      "study": "observed_history768",
+      "status": "completed_and_closed_no_additional_training_authorized",
+      "jobs_max": 4,
+      "concurrent_jobs_max": 1,
+      "epochs_per_job": 120,
+      "worker_epochs_max": 480,
+      "optimizer_updates_max": 18240,
+      "parent_exposures_max": 2298720,
+      "train_state_exposures_max": 11493600,
+      "research_state_reads": 728576,
+      "readout_fits": 0,
+      "cumulative_seconds_cap": 129600,
+      "actual_jobs": 4,
+      "actual_optimizer_updates": 18240,
+      "reason": "用户在多尺度配方收束后授权继续核心设计审查；历史去重后仅选择已收盘窗口内部attention mask这一变量，另锁四组同预算对照，不复用耗尽的旧配额，不预设提升。",
+      "selection": "fixed last120; validation diagnostics only; no extra seeds or candidate-only extension",
+      "actual_worker_epochs": 480,
+      "actual_parent_exposures": 2298720,
+      "actual_train_state_exposures": 11493600,
+      "actual_seconds": 30647.010391816497,
+      "report_sha256": "cecb3cc2963619d2f979b4f2d2d18b51b11439f3d6e58ea11ec374a1ed1dd577",
+      "closure_reason": "按锁定last120和预定门槛收束；保留原预算上限与选择，不延长候选训练或切换best。"
+    },
+    "export_fix_20261018": {
+      "date": "2026-10-18",
+      "task_ids": [
+        "F05"
+      ],
+      "status": "implemented_and_locally_verified_no_remote_rerun_required",
+      "cause": "Original export nonnegative guard treated signed near-zero identity_residual as MSE and omitted8 parent_rows.npz.",
+      "changes": "Separate pure-CPU v2 exporter; exact score schema/support and only3 signed residual keys with64 float64 ULP scale bounds/formula checks; separate report_integrity; no historical-bound source mutations.",
+      "new_module": "obson.babel.observed_history_export_v2",
+      "historical_exporter_sha256": "7729aa07c990d20ad0d3bbe97f2402e9ff6bed27cba149f8ebb8008e2a32d485",
+      "tests": {
+        "passed": 53,
+        "seconds": 3.02,
+        "real_score_banks_checked": 16,
+        "torch_imported_by_export_check": false,
+        "synthetic_end_to_end_packaging": true,
+        "AutoDL_v2_export_executed": false
+      },
+      "artifacts": [
+        {
+          "path": "src/obson/babel/observed_history_export_v2.py",
+          "sha256": "83b9e6e4254d512e397f0aeb9c8aa6fb0c1383fb6f2c1ed032b52215481279bc"
+        },
+        {
+          "path": "tests/babel/test_observed_history_export_v2.py",
+          "sha256": "d0e3f1974bcde9be7e5d0071887a4bb363fc0c45b9c8d17c81005c2837f55ca1"
+        },
+        {
+          "path": "reports/observed_history_review_cecb3cc29636/export_fix_pytest.txt",
+          "sha256": "9fed4264fa3828ccfa4dc62dd912240cec6f83b2a9d98d738e30bd5a0e4dfbc6"
+        },
+        {
+          "path": "reports/observed_history_review_cecb3cc29636/export_fix_real_rows.json",
+          "sha256": "5b33a5368f2828f8be18e34fc3c30a20f04fc46fdf925862a5e2ba2009e25c26"
+        }
+      ],
+      "review": {
+        "purpose": {
+          "status": "pass_for_scope",
+          "evidence": "Fix F05 report omission so legitimate signed roundoff diagnostics are downloadable; completed report already supports unchanged negative scientific verdict.",
+          "remaining": "No new representation capability or training claim."
+        },
+        "architecture": {
+          "status": "not_applicable",
+          "evidence": "No encoder/decoder/attention/weight changes; historical bound code hashes preserved.",
+          "remaining": "Original real-model limitations remain."
+        },
+        "training": {
+          "status": "not_applicable",
+          "evidence": "No optimizer/forward/fitting or loss changes; original fixedlast120 and gates retained.",
+          "remaining": "No extra epochs or jobs authorized."
+        },
+        "validation": {
+          "status": "pass_for_scope",
+          "evidence": "Exact111/22 score schema, supports and three signed residuals checked against scale-aware float64 formula bounds. All other MSE nonnegative. Missing required score files/hash/count mismatches explicitly set report_integrity incomplete, separate from producer run_status.",
+          "remaining": "Exporter validates payload integrity, not scientific acceptance, data authenticity or omitted weight/prediction replay."
+        },
+        "data": {
+          "status": "pass_for_scope",
+          "evidence": "8 independently derived parent arrays and8 original position arrays pass CPU checks; all8 old residual rejections reproduced. Original archive/extracted source unchanged.",
+          "remaining": "Derived parent arrays are not original NPZ bytes; no raw feature/activity regeneration."
+        },
+        "engineering": {
+          "status": "pass_for_scope",
+          "evidence": "53 new+legacy export tests passed in3.02s; Ruff check/format,CLI help and diff checks pass; independent read-only review found no blocker. Read-only existing locks, private snapshot,inventory/hash checks and separate v2 archive/backup preserve sources.",
+          "remaining": "Full packaging validated synthetically plus real score arrays; new CLI not executed on AutoDL. Existing immutable exporter intentionally retains its old bug for hash provenance; optional v2 CLI is the repaired path."
+        }
+      },
+      "user_action_required": false,
+      "new_training_jobs": 0,
+      "new_archive_pattern": "/root/autodl-tmp/download/<run>_reports_v2.tar.gz"
+    }
   }
 }
