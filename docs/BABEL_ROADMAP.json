@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-18",
-  "current_iteration": "F05_observed_history768_reviewed_recipe_closed",
-  "current_iteration_scope": "四组120轮真实训练/评价完成并复核；只换历史内部mask未均衡提升，固定配方收束。修正导出残差误判，无需重训；Macro不变，无新增GPU任务。",
+  "current_iteration": "route_review_20261018_complete_next_core_design_decision_pending",
+  "current_iteration_scope": "F01/F05路线与F11成果边界复核完成；最近两项训练已收束，没有主模型晋升。防止重建调参循环，下一交付为明确设计决策；无新增GPU预算。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -727,7 +727,7 @@
       "F05"
     ],
     "question": "Across the two recent matched studies and earlier capacity/pooling/readout studies, which supported information-retention gap can the next single intervention test?",
-    "deliverable": "One evidence table linking age-band tradeoffs and train/validation curves to earlier controlled studies; distinguish unidentified causes from supported gaps, identify the proposed input-organization/state-compression/readout intervention and its falsifying matched control before any new budget.",
+    "deliverable": "在同一roadmap完成最多3候选的核心改动决策表：已有证据、仍未知问题、干预位置、与历史实验的实质区别、匹配对照、反证及停止条件；结尾必须推荐一项或明确不足以选择的理由，不能重复以继续分析结项。此表不是3个实验预算。",
     "training_budget": 0,
     "entrypoint": null,
     "not_selected": [
@@ -738,7 +738,9 @@
       "automatic simultaneous128 exposure",
       "downstream labels as prerequisite"
     ],
-    "reason": "The locked120-epoch mask recipe failed balanced gates. Both losses still decrease, and mixed local gains do not identify a unique bottleneck; close the recipe without closing representation research."
+    "reason": "The locked120-epoch mask recipe failed balanced gates. Both losses still decrease, and mixed local gains do not identify a unique bottleneck; close the recipe without closing representation research.",
+    "decision_requirement": "A concrete recommendation or a reasoned no-go; no training code before mechanism and falsifier are explicit.",
+    "reason_for_clarification": "用户再次要求核对路线并解释工作状态；近期固定配方失败并未定位根因，防止公平但低信息增量的重复重建调参和含糊审查循环。"
   },
   "active_training_budget": {
     "task_ids": [
@@ -793,14 +795,14 @@
   "progress_log": "docs/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "current_task_ids": [
-    "F05",
     "F01",
-    "F03"
+    "F05",
+    "F11"
   ],
   "blocked_followups": {
     "F_optimization": "第20/21节固定矩阵均已完成并收束；当前仅F01/F05设计审查，无新增GPU预算。未自动选择mask/Haar网格、扩层、全128、跨周期或未来分支；V13仍待独立数据。"
   },
-  "active_phase": "report_review_complete_next_design_only_no_GPU_budget",
+  "active_phase": "route_review_complete_next_core_design_decision_pending",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -2759,7 +2761,9 @@
       "code_tests": "not_run_documentation_only"
     },
     "followup": "完成F03一次固定模型诊断入口及六方面检查，再给唯一完整AutoDL命令；不重跑旧一致性训练，V13等新数据但不阻塞现有数据研究。",
-    "followup_current": "2026-10-12第20节：F01/F03主价格目标完整入口与170项合成/关联检查就绪，等待AutoDL。旧F11任务结束，不需要重跑。"
+    "followup_current": "此对象为2026-10-10历史记录。旧第20节等待AutoDL状态已结束；当前以顶层current_iteration/next_after_active及route_review_20261018为准，无待跑GPU任务。",
+    "followup_archived_20261012": "2026-10-12第20节：F01/F03主价格目标完整入口与170项合成/关联检查就绪，等待AutoDL。旧F11任务结束，不需要重跑。",
+    "historical_record_note": "Original review/sequence/followup retained as historical evidence, not executable current queue."
   },
   "independent_confirmation_plan": {
     "schema": "babel-independent-history-acceptance-plan-v1",
@@ -16081,7 +16085,7 @@
         "F05"
       ],
       "question": "Across the two recent matched studies and earlier capacity/pooling/readout studies, which supported information-retention gap can the next single intervention test?",
-      "deliverable": "One evidence table linking age-band tradeoffs and train/validation curves to earlier controlled studies; distinguish unidentified causes from supported gaps, identify the proposed input-organization/state-compression/readout intervention and its falsifying matched control before any new budget.",
+      "deliverable": "在同一roadmap完成最多3候选的核心改动决策表：已有证据、仍未知问题、干预位置、与历史实验的实质区别、匹配对照、反证及停止条件；结尾必须推荐一项或明确不足以选择的理由，不能重复以继续分析结项。此表不是3个实验预算。",
       "training_budget": 0,
       "entrypoint": null,
       "not_selected": [
@@ -16092,7 +16096,9 @@
         "automatic simultaneous128 exposure",
         "downstream labels as prerequisite"
       ],
-      "reason": "The locked120-epoch mask recipe failed balanced gates. Both losses still decrease, and mixed local gains do not identify a unique bottleneck; close the recipe without closing representation research."
+      "reason": "The locked120-epoch mask recipe failed balanced gates. Both losses still decrease, and mixed local gains do not identify a unique bottleneck; close the recipe without closing representation research.",
+      "decision_requirement": "A concrete recommendation or a reasoned no-go; no training code before mechanism and falsifier are explicit.",
+      "reason_for_clarification": "用户再次要求核对路线并解释工作状态；近期固定配方失败并未定位根因，防止公平但低信息增量的重复重建调参和含糊审查循环。"
     },
     "released_budget": {
       "task_ids": [
@@ -16195,5 +16201,168 @@
       "new_training_jobs": 0,
       "new_archive_pattern": "/root/autodl-tmp/download/<run>_reports_v2.tar.gz"
     }
+  },
+  "route_review_20261018": {
+    "date": "2026-10-18",
+    "task_ids": [
+      "F01",
+      "F05",
+      "F11"
+    ],
+    "requirement_ids": [
+      "N01",
+      "N02",
+      "N03",
+      "N04",
+      "N05",
+      "N07",
+      "N08",
+      "N09"
+    ],
+    "status": "route_review_complete_no_new_experiment",
+    "judgment": "目标仍在可复用因果价量状态主线上；近期两个候选未升级，推进方式仍有把重建代理目标当终点、反复试配方的风险。",
+    "recent_evidence": [
+      {
+        "task_ids": [
+          "F03"
+        ],
+        "question": "真实共同历史在窗口后移后能否保留",
+        "observation": "共同形状误差下降12.9%～28.4%，近期/活动代价仍在；额外一致性无预定增益",
+        "disposition": "有限收益保留、旧配方收束；不将一致等同准确",
+        "source": "docs/BABEL_CONTENT_RETENTION768_REVIEW.json"
+      },
+      {
+        "task_ids": [
+          "F01"
+        ],
+        "question": "改价格主损失能否改善远近分配",
+        "observation": "多尺度远端改善27.4%～43.1%，近端MSE约4.5～7倍；未均衡升级",
+        "disposition": "本配方收束；不能归因为768容量不足",
+        "source": "docs/BABEL_ROADMAP.json#multiscale_content_plan.report_review"
+      },
+      {
+        "task_ids": [
+          "F05"
+        ],
+        "question": "只换历史内部注意力连接能否改善",
+        "observation": "四项综合价格MSE增加6.82%～14.44%，近段实体改善但中段代价",
+        "disposition": "本固定120轮配方收束；不证明全注意力无效或原结构最优",
+        "source": "docs/BABEL_ROADMAP.json#observed_history_plan.report_review"
+      }
+    ],
+    "already_tested": [
+      "full-position uniform-five complete-context supervision",
+      "2-to4 and4/8/12-layer comparisons under different budgets",
+      "plain/full/scale pooling",
+      "history query and old-decoder parity",
+      "same-state existing-query readability versus linear readout"
+    ],
+    "model_roles": {
+      "Macro": "固定研究参照与已交付接口来源，s42/s43 best97/94；非全局最优声明",
+      "D": "从头均匀覆盖且无额外S的研究候选，有重建收益但未整体替换Macro",
+      "recent_control": "每轮从头匹配的Q/因果基线，不是Macro或D权重续训"
+    },
+    "unresolved": [
+      "optimization and gradient-path effects versus state-organization effects",
+      "single-state recoverable content versus query readout limits",
+      "general reusable advantage beyond reconstructing fixed historical quantities"
+    ],
+    "not_concluded": [
+      "768 insufficient",
+      "four layers optimal",
+      "all full-history attention ineffective",
+      "failed protection gates equal missing independent information types",
+      "future prediction now active"
+    ],
+    "next_action": {
+      "status": "design_review_only_no_locked_experiment",
+      "task_ids": [
+        "F01",
+        "F05"
+      ],
+      "question": "Across the two recent matched studies and earlier capacity/pooling/readout studies, which supported information-retention gap can the next single intervention test?",
+      "deliverable": "在同一roadmap完成最多3候选的核心改动决策表：已有证据、仍未知问题、干预位置、与历史实验的实质区别、匹配对照、反证及停止条件；结尾必须推荐一项或明确不足以选择的理由，不能重复以继续分析结项。此表不是3个实验预算。",
+      "training_budget": 0,
+      "entrypoint": null,
+      "not_selected": [
+        "mask or Haar grid",
+        "candidate-only extra epochs",
+        "new best selection",
+        "automatic deeper/wider model",
+        "automatic simultaneous128 exposure",
+        "downstream labels as prerequisite"
+      ],
+      "reason": "The locked120-epoch mask recipe failed balanced gates. Both losses still decrease, and mixed local gains do not identify a unique bottleneck; close the recipe without closing representation research.",
+      "decision_requirement": "A concrete recommendation or a reasoned no-go; no training code before mechanism and falsifier are explicit.",
+      "reason_for_clarification": "用户再次要求核对路线并解释工作状态；近期固定配方失败并未定位根因，防止公平但低信息增量的重复重建调参和含糊审查循环。"
+    },
+    "changes": [
+      "archive misleading nested followup_current waiting-for-AutoDL text",
+      "replace section6 stale F11-current summary",
+      "make next design decision deliverable finite and explicit"
+    ],
+    "new_training_jobs": 0,
+    "new_neural_forwards": 0,
+    "new_fits": 0,
+    "new_scores": 0,
+    "promoted": false,
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "Current F03/content, F01/loss and F05/mask studies address causal price/activity retention; prediction and rule classification have not replaced the goal. Explicitly separate reconstruction proxy, readable content and generic reuse.",
+        "remaining": "Generic usefulness unproved; repeated reconstruction tuning can still become process drift. Human labels are not a prerequisite for self-supervised research."
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "Macro reference, D research candidate and latest scratch controls are distinguished. Depth, pooling, history query and decoder parity already have bounded evidence;128/768/single-vector/4layers are implementation choices.",
+        "remaining": "No unique encoder, latent-capacity or decoder bottleneck identified; no next architecture selected by this audit."
+      },
+      "training": {
+        "status": "not_applicable",
+        "evidence": "No new updates, fitting, scores or selection. Existing fixed budgets, failed recipes and historical repair dispositions retained. Uniform-five complete-context training is not simultaneously128 training, but middle bars are already supervised.",
+        "remaining": "Current studies do not establish convergence or optimized per-architecture hyperparameters. Do not count repeated overlapping exposures as independent data."
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "Existing primary failures and localized gains retained.312 correlated protection gates qualify this particular recipe, not universal representation success/failure. Old linearly-unreadable results do not imply absent information.",
+        "remaining": "No new general-purpose acceptance metric introduced; future concrete utility claims require appropriate frozen tasks and baselines. No retrospective gate relaxation."
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "Existing4789 training parents, repeated research cohorts and causal EMA prehistory remain explicit. No new market data introduced or required for continuing exploratory work.",
+        "remaining": "V13 independent confirmation still awaits qualified data; original body/activity and rare-regime evidence limitations remain."
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "Documentation-only review. Archived stale nested waiting-for-AutoDL text and corrected section6 current-task pointer; source, training, export and historical bound protocols untouched.",
+        "remaining": "No new experiment entrypoint. Last export repair remains locally verified, not a new model capability or AutoDL execution."
+      }
+    },
+    "evidence": [
+      {
+        "path": "docs/BABEL_STATE_COVERAGE768_REVIEW.json",
+        "sha256": "f8dc6d7d0821d2e2f099c13c94272cea413978d68493a51035a393044afa87c1"
+      },
+      {
+        "path": "docs/BABEL_CONTENT_RETENTION768_REVIEW.json",
+        "sha256": "53bff2dfaac2b3ebdb68b9ef9e12fcac16e77ab71a24bf113eb5d332bfde6fb8"
+      },
+      {
+        "path": "docs/BABEL_DEPTH768_REVIEW.md",
+        "sha256": "c0e491330de97e297dbb7d645b6e58271b70f30003c3d7f637cc3c04865cc88c"
+      },
+      {
+        "path": "docs/BABEL_CAUSAL_POOL768_REVIEW.md",
+        "sha256": "3602a81e12de62d392e1748d21c3efcd79d9f98713d58d8739b280b92d1491c4"
+      },
+      {
+        "path": "docs/BABEL_HISTORY_QUERY768_REVIEW.md",
+        "sha256": "1a5aa77b5e8d3f1c0dd9f437c90715126639cc49600dfac3cee72fdf417440d8"
+      },
+      {
+        "path": "docs/BABEL_DECODER_PARITY768_REVIEW.md",
+        "sha256": "9499d6cb9079c0d5c30343eb9bb44148c484d7a11167b9bdf28392242117fa2d"
+      }
+    ]
   }
 }
