@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-18",
-  "current_iteration": "route_review_20261018_complete_next_core_design_decision_pending",
-  "current_iteration_scope": "F01/F05路线与F11成果边界复核完成；最近两项训练已收束，没有主模型晋升。防止重建调参循环，下一交付为明确设计决策；无新增GPU预算。",
+  "current_iteration": "bounded_Q_baseline_direction_selected_execution_card_pending",
+  "current_iteration_scope": "路线三选一完成：准备一次当前纯Q基线预算卡，F01职责不变，F11有限结算；不是新机制或训练错误确诊，无新GPU预算。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -517,7 +517,7 @@
         "docs/BABEL_STATE_COVERAGE768_REVIEW.json",
         "docs/BABEL_ROADMAP.md#20-f01f03继续学习embedding先检验主目标的尺度分配2026-10-12"
       ],
-      "next_action": "配合F05设计审查；显式同时128保留，不自动加曝光、重开旧损失配方或锁新GPU任务。",
+      "next_action": "配合F05基准卡固定全位置随机监督/完整上下文职责；同时128保留，非修复漏训，不自动启动。",
       "implementation": "complete",
       "execution": "four_fixed120_workers_complete_reviewed",
       "conclusion": "本多尺度配方综合价格MSE升7.27%–24.78%，4项主收益0通过，均衡升级未成立。",
@@ -603,7 +603,7 @@
       "implementation": "complete_with_separate_export_fix",
       "execution": "four_fixed120_CUDA_workers_complete_reviewed",
       "conclusion": "完成真实训练/评价；全历史注意力综合价格MSE增加6.82%～14.44%，主收益0/4，保护未全过。本固定配方收束，不晋升。近段实体收益和中段代价同时保留。",
-      "next_action": "One evidence table linking age-band tradeoffs and train/validation curves to earlier controlled studies; distinguish unidentified causes from supported gaps, identify the proposed input-organization/state-compression/readout intervention and its falsifying matched control before any new budget. 当前新增训练预算0。"
+      "next_action": "首页2026-10-18路线三选一完成：准备一次当前Q基线预算卡；当前无新增GPU预算、无入口，旧mask结论不变。"
     },
     {
       "id": "F06",
@@ -717,42 +717,42 @@
     }
   ],
   "active_order": [
-    "F01",
-    "F05"
+    "F05",
+    "F01"
   ],
   "next_after_active": {
-    "status": "design_review_only_no_locked_experiment",
+    "status": "execution_card_pending_no_runnable_entrypoint",
     "task_ids": [
+      "F05",
       "F01",
-      "F05"
+      "F11"
     ],
-    "question": "Across the two recent matched studies and earlier capacity/pooling/readout studies, which supported information-retention gap can the next single intervention test?",
-    "deliverable": "在同一roadmap完成最多3候选的核心改动决策表：已有证据、仍未知问题、干预位置、与历史实验的实质区别、匹配对照、反证及停止条件；结尾必须推荐一项或明确不足以选择的理由，不能重复以继续分析结项。此表不是3个实验预算。",
+    "question": "当前简化Q配方在一次固定额外优化预算后，能否均衡改善价量保真，为结构比较形成更充分的训练参照？",
+    "deliverable": "一次有界纯Q基线预算验证的完整卡和经检查入口；锁定来源/Adam/续段LR/总量/分项保护/有限冻结用途/资源和停止。不要求再做一轮泛路线审查。",
     "training_budget": 0,
     "entrypoint": null,
+    "selected_direction": "A_bounded_current_Q_training_budget_reference",
+    "reason": "用户要求重新专业梳理roadmap；前一轮训练优先是行动排序。进一步核对旧梯度/深度证据后，不足以直接选梯度处理或扩容，选择一次当前Q预算参照，明确其有限信息增量与一次性结束。",
     "not_selected": [
-      "mask or Haar grid",
-      "candidate-only extra epochs",
-      "new best selection",
-      "automatic deeper/wider model",
-      "automatic simultaneous128 exposure",
-      "downstream labels as prerequisite"
-    ],
-    "reason": "The locked120-epoch mask recipe failed balanced gates. Both losses still decrease, and mixed local gains do not identify a unique bottleneck; close the recipe without closing representation research.",
-    "decision_requirement": "A concrete recommendation or a reasoned no-go; no training code before mechanism and falsifier are explicit.",
-    "reason_for_clarification": "用户再次要求核对路线并解释工作状态；近期固定配方失败并未定位根因，防止公平但低信息增量的重复重建调参和含糊审查循环。"
+      "automatic extra epochs after this bounded study",
+      "gradient surgery without mechanism evidence",
+      "mask or Haar rerun",
+      "automatic depth/grid search",
+      "all128 as missing-supervision repair",
+      "labels or new data as prerequisite"
+    ]
   },
   "active_training_budget": {
     "task_ids": [
       "F01",
       "F05"
     ],
-    "status": "design_review_only_no_new_training",
+    "status": "direction_selected_no_locked_execution_budget",
     "jobs_max": 0,
     "worker_epochs_max": 0,
     "optimizer_updates_max": 0,
     "readout_fits": 0,
-    "reason": "The locked120-epoch mask recipe failed balanced gates. Both losses still decrease, and mixed local gains do not identify a unique bottleneck; close the recipe without closing representation research."
+    "reason": "用户要求重新专业梳理roadmap；前一轮训练优先是行动排序。进一步核对旧梯度/深度证据后，不足以直接选梯度处理或扩容，选择一次当前Q预算参照，明确其有限信息增量与一次性结束。"
   },
   "aliases": {
     "R0": [
@@ -795,14 +795,14 @@
   "progress_log": "docs/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "current_task_ids": [
-    "F01",
     "F05",
+    "F01",
     "F11"
   ],
   "blocked_followups": {
     "F_optimization": "第20/21节固定矩阵均已完成并收束；当前仅F01/F05设计审查，无新增GPU预算。未自动选择mask/Haar网格、扩层、全128、跨周期或未来分支；V13仍待独立数据。"
   },
-  "active_phase": "route_review_complete_next_core_design_decision_pending",
+  "active_phase": "bounded_Q_baseline_execution_card_pending",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -16079,26 +16079,26 @@
       "export_fix_reference": "observed_history_plan.export_fix_20261018"
     },
     "next_design_disposition": {
-      "status": "design_review_only_no_locked_experiment",
+      "status": "execution_card_pending_no_runnable_entrypoint",
       "task_ids": [
+        "F05",
         "F01",
-        "F05"
+        "F11"
       ],
-      "question": "Across the two recent matched studies and earlier capacity/pooling/readout studies, which supported information-retention gap can the next single intervention test?",
-      "deliverable": "在同一roadmap完成最多3候选的核心改动决策表：已有证据、仍未知问题、干预位置、与历史实验的实质区别、匹配对照、反证及停止条件；结尾必须推荐一项或明确不足以选择的理由，不能重复以继续分析结项。此表不是3个实验预算。",
+      "question": "当前简化Q配方在一次固定额外优化预算后，能否均衡改善价量保真，为结构比较形成更充分的训练参照？",
+      "deliverable": "一次有界纯Q基线预算验证的完整卡和经检查入口；锁定来源/Adam/续段LR/总量/分项保护/有限冻结用途/资源和停止。不要求再做一轮泛路线审查。",
       "training_budget": 0,
       "entrypoint": null,
+      "selected_direction": "A_bounded_current_Q_training_budget_reference",
+      "reason": "用户要求重新专业梳理roadmap；前一轮训练优先是行动排序。进一步核对旧梯度/深度证据后，不足以直接选梯度处理或扩容，选择一次当前Q预算参照，明确其有限信息增量与一次性结束。",
       "not_selected": [
-        "mask or Haar grid",
-        "candidate-only extra epochs",
-        "new best selection",
-        "automatic deeper/wider model",
-        "automatic simultaneous128 exposure",
-        "downstream labels as prerequisite"
-      ],
-      "reason": "The locked120-epoch mask recipe failed balanced gates. Both losses still decrease, and mixed local gains do not identify a unique bottleneck; close the recipe without closing representation research.",
-      "decision_requirement": "A concrete recommendation or a reasoned no-go; no training code before mechanism and falsifier are explicit.",
-      "reason_for_clarification": "用户再次要求核对路线并解释工作状态；近期固定配方失败并未定位根因，防止公平但低信息增量的重复重建调参和含糊审查循环。"
+        "automatic extra epochs after this bounded study",
+        "gradient surgery without mechanism evidence",
+        "mask or Haar rerun",
+        "automatic depth/grid search",
+        "all128 as missing-supervision repair",
+        "labels or new data as prerequisite"
+      ]
     },
     "released_budget": {
       "task_ids": [
@@ -16364,5 +16364,177 @@
         "sha256": "9499d6cb9079c0d5c30343eb9bb44148c484d7a11167b9bdf28392242117fa2d"
       }
     ]
+  },
+  "roadmap_execution_decision_20261018": {
+    "date": "2026-10-18",
+    "task_ids": [
+      "F05",
+      "F01",
+      "F11"
+    ],
+    "status": "direction_selected_execution_card_pending",
+    "question": "当前简化Q配方在一次固定额外优化预算后，能否均衡改善价量保真，为结构比较形成更充分的训练参照？",
+    "choice": "A_bounded_current_Q_training_budget_reference",
+    "not_a_claim": [
+      "unique training root cause",
+      "gradient conflict established",
+      "new representation mechanism",
+      "convergence",
+      "Macro replacement"
+    ],
+    "candidates": [
+      {
+        "option": "A",
+        "intervention": "固定现有Q/架构/数据的一次有界额外优化",
+        "decision": "recommend_card_preparation",
+        "evidence": "最新control跨执行精确复现，末20轮train/val下降；旧深度研究配方不同，不能替代。",
+        "falsifier_and_stop": "未获事前定义的均衡收益则收束；任何结果均不因loss仍下降再追加第二段。"
+      },
+      {
+        "option": "B",
+        "intervention": "改任务权重或梯度更新合成",
+        "decision": "not_selected",
+        "evidence": "历史损失实验有取舍，但固定小批未显示持续强反向冲突，不能凭此确诊或排除冲突。",
+        "falsifier_and_stop": "没有与旧调权/损失实验不同且受支持的机制，不启动新网格。"
+      },
+      {
+        "option": "C",
+        "intervention": "扩层或重组状态/读取",
+        "decision": "conditional_later_branch",
+        "evidence": "已有同曝光深度收益和有限pool/query/mask证据，唯一瓶颈未定位。",
+        "falsifier_and_stop": "针对具体残余缺口单独匹配对照，无均衡收益即收束；无需等待全部重建过关。"
+      }
+    ],
+    "proposed_source": {
+      "run": "/root/autodl-tmp/obson/checkpoints/babel_observed_history768",
+      "arms": [
+        "control_s42",
+        "control_s43"
+      ],
+      "checkpoint": "last120 with complete original Adam state",
+      "status": "proposed_not_remotely_restored_or_locked",
+      "on_missing": "停止并报告，不静默重置优化器或更换来源"
+    },
+    "proposed_invariants": [
+      "original Q and query",
+      "causal mask,768/4/8",
+      "original28features/train statistics/splits",
+      "uniform5 full128 per endpoint",
+      "no full_history or Haar continuation",
+      "independent new run preserving old results"
+    ],
+    "interpretation": "同配方纵向预算研究；epoch0不更新参照，两种子是重复而非两控制组。新增优化和预定续段LR效果不能拆成纯轮数或训练vs架构根因。",
+    "card_must_lock": [
+      "source/weight/Adam/scheduler fingerprints",
+      "fixed additional epochs/LR/updates/exposures",
+      "GPU and disk limits",
+      "fixed terminal main result and selection rules",
+      "physical-content primary gain and necessary protections",
+      "one bounded frozen reuse question with same-information baselines, or explicit reason not identifiable",
+      "stop/failure/export and real CUDA checks"
+    ],
+    "phase_order": [
+      {
+        "task_ids": [
+          "F05",
+          "F01"
+        ],
+        "deliverable": "本次推荐A的完整实验卡及入口",
+        "exit": "一次固定预算结束；收益/取舍/未确认均归档，不自动续第二段"
+      },
+      {
+        "task_ids": [
+          "F11"
+        ],
+        "deliverable": "同阶段有限冻结复用与成本结算",
+        "exit": "有限用途通过或不支持均交账，不扩大读头矩阵；不要求标签/新数据作为研究前置"
+      },
+      {
+        "task_ids": [
+          "F05",
+          "F01"
+        ],
+        "deliverable": "仅在具体剩余缺口支持时，选择一个信息组织/读取或采样估计干预",
+        "exit": "同更新/算力分别说明，不把预算失败当容量不足"
+      },
+      {
+        "task_ids": [
+          "F02",
+          "F03",
+          "F04",
+          "F10",
+          "F12"
+        ],
+        "deliverable": "按缺口择一扩展，非必跑队列",
+        "exit": "分别定义同物理内容/因果信息/资源和停止；保留旧失败"
+      },
+      {
+        "task_ids": [
+          "F06",
+          "F07",
+          "F08",
+          "F09",
+          "V13"
+        ],
+        "deliverable": "未来预测保持可选；独立验收等待合格数据",
+        "exit": "当前表示交付不以预测成功为前提；研究旧数据不冒充独立验收"
+      }
+    ],
+    "new_training_jobs": 0,
+    "new_neural_forwards": 0,
+    "new_fits": 0,
+    "new_scores": 0,
+    "entrypoint": null,
+    "reason_for_change": "用户要求重新专业梳理roadmap；前一轮训练优先是行动排序。进一步核对旧梯度/深度证据后，不足以直接选梯度处理或扩容，选择一次当前Q预算参照，明确其有限信息增量与一次性结束。",
+    "evidence": [
+      {
+        "path": "docs/BABEL_ACTIVITY_WEIGHT768_REVIEW.md",
+        "sha256": "4a9473b036f36b1bde12f2baeb1e7a062ea87f5c469ff16928c5ad3ebe9d1453"
+      },
+      {
+        "path": "docs/BABEL_RECOVERY_R0_REVIEW.md",
+        "sha256": "33ebaa68010eecc9f1188e710059193b025715f9fa2228b18e7c80b87994d7b7"
+      },
+      {
+        "path": "docs/BABEL_DEPTH768_REVIEW.md",
+        "sha256": "c0e491330de97e297dbb7d645b6e58271b70f30003c3d7f637cc3c04865cc88c"
+      },
+      {
+        "path": "src/obson/babel/history_query.py",
+        "sha256": "90a6bfad9f65954d6800b455ddf146f750cd32b2154617c59fbb16c825d14b12"
+      }
+    ],
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "选定一次基准定型准备，保持因果价量表示主线；内容保留、读取成本、冻结复用分账，不要求无损重建。",
+        "remaining": "通用复用未证明，预算研究不是新表示学习机制。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "拟固定现有768/4/8、因果mask和query，后续结构按具体缺口进入，不等全部重建过关。",
+        "remaining": "编码/容量/读取的唯一瓶颈仍未定位；没有模型被晋升。"
+      },
+      "validation": {
+        "status": "open",
+        "evidence": "同配方纵向预算研究，epoch0为不更新参照，两个种子是重复；保留全端点、近中远、活动、共同内容及尾部，有限冻结任务同读取机会。",
+        "remaining": "精确收益/保护阈值、任务与停止规则待完整卡锁定；重复研究集不是独立验收。"
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "单合约/原统计/原分区/EMA前史保持；额外曝光不是独立行情；无新数据不阻塞自监督研究。",
+        "remaining": "V13仍无合格独立数据；不由本轮重新认证原活动真值。"
+      },
+      "engineering": {
+        "status": "open",
+        "evidence": "仅更新roadmap和追加事件；旧来源/绑定代码和失败结论保留，当前GPU预算0。",
+        "remaining": "真实last120/Adam/调度状态尚未恢复验证，实验卡、入口、恢复及资源检查尚未实现。"
+      },
+      "training": {
+        "status": "open",
+        "evidence": "依据当前可复现纯Q配方与末段train/val下降，选择一次有界额外优化预算准备；旧梯度证据不足以直接立项梯度冲突修复。",
+        "remaining": "新增优化及续段LR是组合干预，不是纯轮数/唯一根因识别；精确轮数、LR、资源和选择规则尚未锁定。"
+      }
+    }
   }
 }
