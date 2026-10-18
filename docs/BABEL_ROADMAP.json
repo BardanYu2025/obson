@@ -2,7 +2,7 @@
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-18",
   "current_iteration": "bounded_Q_baseline_direction_selected_execution_card_pending",
-  "current_iteration_scope": "路线三选一完成：准备一次当前纯Q基线预算卡，F01职责不变，F11有限结算；不是新机制或训练错误确诊，无新GPU预算。",
+  "current_iteration_scope": "纯Q有界基线卡仍待准备；GitHub跨领域研究完成，优先审查中间层内容监督能否与基线同轮受控比较。候选尚未加入执行矩阵，无新GPU预算/入口；旧结论与模型身份不变。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -521,7 +521,14 @@
       "implementation": "complete",
       "execution": "four_fixed120_workers_complete_reviewed",
       "conclusion": "本多尺度配方综合价格MSE升7.27%–24.78%，4项主收益0通过，均衡升级未成立。",
-      "current_role": "第21节同采样/曝光与每端点完整128已核验；未检验显式同时128，不改第20节结论。"
+      "current_role": "第21节同采样/曝光与每端点完整128已核验；未检验显式同时128，不改第20节结论。",
+      "external_reference_20261018": {
+        "project_ids": [
+          "vjepa21"
+        ],
+        "status": "references_not_automatic_jobs",
+        "evidence": "external_research_20261018"
+      }
     },
     {
       "id": "F02",
@@ -538,7 +545,15 @@
         "docs/BABEL_MEMORY_ATTENTION.md",
         "docs/BABEL_DUAL_STATE.md",
         "docs/BABEL_STREAMING.md"
-      ]
+      ],
+      "external_reference_20261018": {
+        "project_ids": [
+          "hippo_s4",
+          "mamba"
+        ],
+        "status": "references_not_automatic_jobs",
+        "evidence": "external_research_20261018"
+      }
     },
     {
       "id": "F03",
@@ -564,7 +579,15 @@
       "implementation": "complete_remote_executed",
       "execution": "six_fixed60_workers_complete_reviewed",
       "conclusion": "真实内容监督有稳定的共同形状收益，但保留保护未通过；额外一致性无预定增益，固定配方收束，不晋升。",
-      "current_protection_role": "第21节shift1/16/64真实共同内容及分歧保护2/60通过，未满足必要条件；未增新G，不推翻第13节有限内容收益。第20节34/60结果保留。"
+      "current_protection_role": "第21节shift1/16/64真实共同内容及分歧保护2/60通过，未满足必要条件；未增新G，不推翻第13节有限内容收益。第20节34/60结果保留。",
+      "external_reference_20261018": {
+        "project_ids": [
+          "ts2vec",
+          "timemae"
+        ],
+        "status": "references_not_automatic_jobs",
+        "evidence": "external_research_20261018"
+      }
     },
     {
       "id": "F04",
@@ -581,7 +604,14 @@
         "docs/BABEL_CROSS_PERIOD_AUDIT_REVIEW.md",
         "docs/BABEL_CROSS_PERIOD768_REVIEW.md",
         "docs/BABEL_GROUNDED_HISTORY768_REVIEW.md"
-      ]
+      ],
+      "external_reference_20261018": {
+        "project_ids": [
+          "ts2vec"
+        ],
+        "status": "references_not_automatic_jobs",
+        "evidence": "external_research_20261018"
+      }
     },
     {
       "id": "F05",
@@ -603,7 +633,16 @@
       "implementation": "complete_with_separate_export_fix",
       "execution": "four_fixed120_CUDA_workers_complete_reviewed",
       "conclusion": "完成真实训练/评价；全历史注意力综合价格MSE增加6.82%～14.44%，主收益0/4，保护未全过。本固定配方收束，不晋升。近段实体收益和中段代价同时保留。",
-      "next_action": "首页2026-10-18路线三选一完成：准备一次当前Q基线预算卡；当前无新增GPU预算、无入口，旧mask结论不变。"
+      "next_action": "准备原A纯Q基准卡；优先审查中间层内容监督能否同发布匹配比较，候选未加入执行矩阵，无新GPU预算/入口；旧mask结论不变。",
+      "external_reference_20261018": {
+        "project_ids": [
+          "vjepa21",
+          "perceiver_io",
+          "moment"
+        ],
+        "status": "references_not_automatic_jobs",
+        "evidence": "external_research_20261018"
+      }
     },
     {
       "id": "F06",
@@ -614,7 +653,16 @@
       "reentry_or_acceptance": "先固定通过资格的表示版本与预测用途；每步只用当时已知真实bar刷新，明确下一步目标和简单基线",
       "evidence": [
         "docs/BABEL_STATE_ROLLOUT768_PLAN.md"
-      ]
+      ],
+      "external_reference_20261018": {
+        "project_ids": [
+          "dreamerv3",
+          "deepkoopman",
+          "koopa"
+        ],
+        "status": "references_not_automatic_jobs",
+        "evidence": "external_research_20261018"
+      }
     },
     {
       "id": "F07",
@@ -628,7 +676,15 @@
       "evidence": [
         "docs/BABEL_STATE_ROLLOUT768_PLAN.md",
         "docs/BABEL_STATE_ROLLOUT768_REVIEW.md"
-      ]
+      ],
+      "external_reference_20261018": {
+        "project_ids": [
+          "dreamerv3",
+          "deepkoopman"
+        ],
+        "status": "references_not_automatic_jobs",
+        "evidence": "external_research_20261018"
+      }
     },
     {
       "id": "F08",
@@ -646,7 +702,15 @@
         "docs/BABEL_STATE_ROLLOUT768_PLAN.md",
         "docs/BABEL_STATE_ROLLOUT768_REVIEW.md"
       ],
-      "trigger_mode": "Any qualifying localization evidence from F06 or F07; does not require running both again"
+      "trigger_mode": "Any qualifying localization evidence from F06 or F07; does not require running both again",
+      "external_reference_20261018": {
+        "project_ids": [
+          "dreamerv3",
+          "deepkoopman"
+        ],
+        "status": "references_not_automatic_jobs",
+        "evidence": "external_research_20261018"
+      }
     },
     {
       "id": "F09",
@@ -658,7 +722,15 @@
       "evidence": [
         "docs/BABEL_STATE_ROLLOUT768_PLAN.md",
         "docs/BABEL_RESIDUAL_FUSION.md"
-      ]
+      ],
+      "external_reference_20261018": {
+        "project_ids": [
+          "dreamerv3",
+          "koopa"
+        ],
+        "status": "references_not_automatic_jobs",
+        "evidence": "external_research_20261018"
+      }
     },
     {
       "id": "F10",
@@ -699,7 +771,14 @@
       "next_action": "保留原型和旧用途边界；第19节少样本仅可选用途，不能阻止F01/F03自监督学习。以后声明具体复用增益才锁任务与强基线。",
       "implementation": "fixed_closed_bar_adapter_and_bounded_replay_delivered",
       "execution": "complete_AutoDL_CUDA_and_report_reviewed",
-      "conclusion": "连续接口数值资格通过；普通平均保真较高，压力/低波动失败保留，不等于可靠趋势或通用用途验收。"
+      "conclusion": "连续接口数值资格通过；普通平均保真较高，压力/低波动失败保留，不等于可靠趋势或通用用途验收。",
+      "external_reference_20261018": {
+        "project_ids": [
+          "moment"
+        ],
+        "status": "references_not_automatic_jobs",
+        "evidence": "external_research_20261018"
+      }
     },
     {
       "id": "F12",
@@ -713,7 +792,15 @@
         "docs/BABEL_PCA_TEACHER_REVIEW.md",
         "docs/BABEL_PCA_ANNEAL_REVIEW.md",
         "docs/BABEL_WICK_ABLATION.md"
-      ]
+      ],
+      "external_reference_20261018": {
+        "project_ids": [
+          "timemae",
+          "ts_jepa"
+        ],
+        "status": "references_not_automatic_jobs",
+        "evidence": "external_research_20261018"
+      }
     }
   ],
   "active_order": [
@@ -740,7 +827,13 @@
       "automatic depth/grid search",
       "all128 as missing-supervision repair",
       "labels or new data as prerequisite"
-    ]
+    ],
+    "external_research_addendum": {
+      "status": "design_candidate_only_not_execution",
+      "candidate": "intermediate_encoder_history_content_supervision",
+      "evidence": "external_research_20261018",
+      "requirement": "准备原A卡时优先检查能否共用纯Q对照，并控制额外读头/总损失尺度/算力；本轮不预定新增worker或预算。"
+    }
   },
   "active_training_budget": {
     "task_ids": [
@@ -16098,7 +16191,13 @@
         "automatic depth/grid search",
         "all128 as missing-supervision repair",
         "labels or new data as prerequisite"
-      ]
+      ],
+      "external_research_addendum": {
+        "status": "design_candidate_only_not_execution",
+        "candidate": "intermediate_encoder_history_content_supervision",
+        "evidence": "external_research_20261018",
+        "requirement": "准备原A卡时优先检查能否共用纯Q对照，并控制额外读头/总损失尺度/算力；本轮不预定新增worker或预算。"
+      }
     },
     "released_budget": {
       "task_ids": [
@@ -16534,6 +16633,344 @@
         "status": "open",
         "evidence": "依据当前可复现纯Q配方与末段train/val下降，选择一次有界额外优化预算准备；旧梯度证据不足以直接立项梯度冲突修复。",
         "remaining": "新增优化及续段LR是组合干预，不是纯轮数/唯一根因识别；精确轮数、LR、资源和选择规则尚未锁定。"
+      }
+    }
+  },
+  "external_research_20261018": {
+    "date": "2026-10-18",
+    "task_ids": [
+      "F05",
+      "F01",
+      "F11"
+    ],
+    "status": "external_research_complete_candidate_design_only",
+    "user_request": "从GitHub研究跨时序、视觉、物理动力学与注意力机制的可迁移经验",
+    "method": "GitHub connector read-only source inspection plus primary-paper browsing; no third-party execution or weights",
+    "projects": [
+      {
+        "id": "vjepa21",
+        "repository": "https://github.com/facebookresearch/vjepa2",
+        "commit": "204698b45b3712590f06245fbfba32d3be539812",
+        "code": [
+          "https://github.com/facebookresearch/vjepa2/blob/204698b45b3712590f06245fbfba32d3be539812/app/vjepa_2_1/train.py",
+          "https://github.com/facebookresearch/vjepa2/blob/204698b45b3712590f06245fbfba32d3be539812/app/vjepa_2_1/models/vision_transformer.py",
+          "https://github.com/facebookresearch/vjepa2/blob/204698b45b3712590f06245fbfba32d3be539812/app/vjepa_2_1/models/predictor.py",
+          "https://github.com/facebookresearch/vjepa2/blob/204698b45b3712590f06245fbfba32d3be539812/configs/train_2_1/vitl16/pretrain-256px-16f.yaml"
+        ],
+        "papers": [
+          "https://arxiv.org/html/2603.14482v3"
+        ],
+        "license_observation": "MIT core; some utility components Apache-2.0; code license does not settle every weight/data license",
+        "task_ids": [
+          "F05",
+          "F01"
+        ],
+        "disposition": "prioritize_design_feasibility_not_execution",
+        "mechanism": "Multi-level encoder supervision improves a specific dense/global vision tradeoff. Babel candidate only borrows supervision placement.",
+        "limits": "Official encoder/predictor noncausal; not a proof of the same bottleneck in4-layer Babel. No multi-level public-state concatenation."
+      },
+      {
+        "id": "ts2vec",
+        "repository": "https://github.com/zhihanyue/ts2vec",
+        "commit": "b0088e14a99706c05451316dc6db8d3da9351163",
+        "code": [
+          "https://github.com/zhihanyue/ts2vec/blob/b0088e14a99706c05451316dc6db8d3da9351163/ts2vec.py",
+          "https://github.com/zhihanyue/ts2vec/blob/b0088e14a99706c05451316dc6db8d3da9351163/models/losses.py",
+          "https://github.com/zhihanyue/ts2vec/blob/b0088e14a99706c05451316dc6db8d3da9351163/models/dilated_conv.py"
+        ],
+        "papers": [
+          "https://arxiv.org/abs/2106.10466"
+        ],
+        "license_observation": "MIT",
+        "task_ids": [
+          "F03",
+          "F04"
+        ],
+        "disposition": "retained_reference_not_active_job",
+        "mechanism": "Align same timestamp in overlapping contexts, then hierarchical contrastive objectives.",
+        "limits": "Default convolutions bidirectional; causal flag alone insufficient without endpoint-safe sliding. Temporal negatives may repel similar nearby states; not complete-vector equality across different histories."
+      },
+      {
+        "id": "perceiver_io",
+        "repository": "https://github.com/google-deepmind/deepmind-research",
+        "commit": "f5de0ede8430809180254ee957abf36ed62579ef",
+        "code": [
+          "https://github.com/google-deepmind/deepmind-research/blob/f5de0ede8430809180254ee957abf36ed62579ef/perceiver/perceiver.py",
+          "https://github.com/google-deepmind/deepmind-research/blob/f5de0ede8430809180254ee957abf36ed62579ef/perceiver/README.md"
+        ],
+        "papers": [
+          "https://arxiv.org/abs/2107.14795"
+        ],
+        "license_observation": "Apache-2.0 code; included data/parameters separately CC BY4.0 per README",
+        "task_ids": [
+          "F05"
+        ],
+        "disposition": "conditional_architecture_candidate",
+        "mechanism": "Input-to-latent writing during encoding followed by output queries differs from splitting final768 inside the decoder.",
+        "limits": "Already cited by Babel causal-pool study; not newly discovered or a reason to rerun that recipe. Official default latent array far larger; disable raw-input concatenation and control total state/compute."
+      },
+      {
+        "id": "hippo_s4",
+        "repository": "https://github.com/state-spaces/s4",
+        "commit": "e757cef57d89e448c413de7325ed5601aceaac13",
+        "code": [
+          "https://github.com/state-spaces/s4/blob/e757cef57d89e448c413de7325ed5601aceaac13/src/models/hippo/hippo.py",
+          "https://github.com/state-spaces/s4/blob/e757cef57d89e448c413de7325ed5601aceaac13/models/s4/s4d.py",
+          "https://github.com/state-spaces/s4/blob/e757cef57d89e448c413de7325ed5601aceaac13/README.md"
+        ],
+        "papers": [
+          "https://arxiv.org/abs/2008.07669",
+          "https://arxiv.org/abs/2111.00396"
+        ],
+        "license_observation": "Apache-2.0",
+        "task_ids": [
+          "F02"
+        ],
+        "disposition": "retained_reference_not_active_job",
+        "mechanism": "Online approximation of past signal under explicit history measure; structured state dynamics.",
+        "limits": "Approximation optimality is measure-specific, not market semantic optimality. Special sensitive-parameter learning rates and weight-decay need an appropriate recipe."
+      },
+      {
+        "id": "mamba",
+        "repository": "https://github.com/state-spaces/mamba",
+        "commit": "e9594ce1c732d97440f0332fdc43170a2294dbfa",
+        "code": [
+          "https://github.com/state-spaces/mamba/blob/e9594ce1c732d97440f0332fdc43170a2294dbfa/mamba_ssm/modules/mamba_simple.py",
+          "https://github.com/state-spaces/mamba/blob/e9594ce1c732d97440f0332fdc43170a2294dbfa/README.md"
+        ],
+        "papers": [
+          "https://arxiv.org/abs/2312.00752",
+          "https://arxiv.org/abs/2405.21060"
+        ],
+        "license_observation": "Apache-2.0",
+        "task_ids": [
+          "F02"
+        ],
+        "disposition": "retained_reference_not_active_job",
+        "mechanism": "Input-dependent write/retain/read, with scan and single-step paths.",
+        "limits": "Public embedding size is not persistent memory size. Mamba1 d768 expand2 state16 conv4 needs30,720 stored numbers/layer; contract isolation and scan/step replay are required. Efficiency does not prove128-bar quality."
+      },
+      {
+        "id": "dreamerv3",
+        "repository": "https://github.com/danijar/dreamerv3",
+        "commit": "e01491fad6434b2245a3b8ca201dd7faedcc458c",
+        "code": [
+          "https://github.com/danijar/dreamerv3/blob/e01491fad6434b2245a3b8ca201dd7faedcc458c/dreamerv3/rssm.py",
+          "https://github.com/danijar/dreamerv3/blob/e01491fad6434b2245a3b8ca201dd7faedcc458c/dreamerv3/agent.py",
+          "https://github.com/danijar/dreamerv3/blob/e01491fad6434b2245a3b8ca201dd7faedcc458c/README.md"
+        ],
+        "papers": [
+          "https://arxiv.org/html/2301.04104v2"
+        ],
+        "license_observation": "MIT; author-maintained reimplementation, not Google/DeepMind official implementation",
+        "task_ids": [
+          "F06",
+          "F07",
+          "F08",
+          "F09"
+        ],
+        "disposition": "retained_reference_not_active_job",
+        "mechanism": "Observed posterior versus imagined prior, stochastic state, stop-gradient-separated dynamics and representation KL.",
+        "limits": "Action-conditioned control environments differ from markets. Old deterministic rollout failure remains; only a distinct probabilistic/correction question could reopen a branch."
+      },
+      {
+        "id": "deepkoopman",
+        "repository": "https://github.com/BethanyL/DeepKoopman",
+        "commit": "20a9f2a1e55ebc53ef1b5706c7a3ff8cc91fd879",
+        "code": [
+          "https://github.com/BethanyL/DeepKoopman/blob/20a9f2a1e55ebc53ef1b5706c7a3ff8cc91fd879/training.py",
+          "https://github.com/BethanyL/DeepKoopman/blob/20a9f2a1e55ebc53ef1b5706c7a3ff8cc91fd879/networkarch.py",
+          "https://github.com/BethanyL/DeepKoopman/blob/20a9f2a1e55ebc53ef1b5706c7a3ff8cc91fd879/LICENSE"
+        ],
+        "papers": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC6251871/"
+        ],
+        "license_observation": "MIT; old TensorFlow implementation",
+        "task_ids": [
+          "F06",
+          "F07",
+          "F08"
+        ],
+        "disposition": "retained_reference_not_active_job",
+        "mechanism": "Separately train/measure reconstruction, latent transition and decoded multistep prediction.",
+        "limits": "Do not assume partially observed market OHLCV has a finite deterministic Koopman closure; linear dynamics is a future baseline hypothesis, not recovered market physics."
+      },
+      {
+        "id": "koopa",
+        "repository": "https://github.com/thuml/Koopa",
+        "commit": "a2e0bb77ec7c1a25e8e0579ba517ffb41358b844",
+        "code": [
+          "https://github.com/thuml/Koopa/blob/a2e0bb77ec7c1a25e8e0579ba517ffb41358b844/models/Koopa.py",
+          "https://github.com/thuml/Koopa/blob/a2e0bb77ec7c1a25e8e0579ba517ffb41358b844/exp/exp_main.py",
+          "https://github.com/thuml/Koopa/blob/a2e0bb77ec7c1a25e8e0579ba517ffb41358b844/LICENSE"
+        ],
+        "papers": [
+          "https://arxiv.org/abs/2305.18803"
+        ],
+        "license_observation": "MIT",
+        "task_ids": [
+          "F06",
+          "F09"
+        ],
+        "disposition": "retained_reference_not_active_job",
+        "mechanism": "Frequency decomposition, global time-invariant operator and local least-squares time-varying dynamics.",
+        "limits": "Public training criterion is forecast MSE, not explicit historical autoencoder loss; window mean/std is a decoding side channel. Learned decomposition is not identified trend/noise, observed adaptation is not free rollout."
+      },
+      {
+        "id": "moment",
+        "repository": "https://github.com/moment-timeseries-foundation-model/moment",
+        "commit": "38f7310ad594100747ca2a8357e9c7ca7d323e0e",
+        "code": [
+          "https://github.com/moment-timeseries-foundation-model/moment/blob/38f7310ad594100747ca2a8357e9c7ca7d323e0e/momentfm/models/moment.py",
+          "https://github.com/moment-timeseries-foundation-model/moment/blob/38f7310ad594100747ca2a8357e9c7ca7d323e0e/momentfm/models/layers/revin.py"
+        ],
+        "papers": [
+          "https://arxiv.org/abs/2402.03885"
+        ],
+        "license_observation": "MIT application code",
+        "task_ids": [
+          "F05",
+          "F11"
+        ],
+        "disposition": "comparison_boundary_reference",
+        "mechanism": "Patch masking with reconstruction and separate embedding-pooling API.",
+        "limits": "Reconstructs from full patch token bank with RevIN scale side information; cannot compare as one pooled768-vector reconstruction."
+      },
+      {
+        "id": "timemae",
+        "repository": "https://github.com/ustc-time-series/TimeMAE",
+        "commit": "31690745c2149f41c33afd5879ab57da8894e5cc",
+        "code": [
+          "https://github.com/ustc-time-series/TimeMAE/blob/31690745c2149f41c33afd5879ab57da8894e5cc/model/TimeMAE.py",
+          "https://github.com/ustc-time-series/TimeMAE/blob/31690745c2149f41c33afd5879ab57da8894e5cc/loss.py"
+        ],
+        "papers": [
+          "https://arxiv.org/abs/2303.00320"
+        ],
+        "license_observation": "No LICENSE located in inspected tree/README; mechanism reference only",
+        "task_ids": [
+          "F12",
+          "F03"
+        ],
+        "disposition": "retained_reference_not_active_job",
+        "mechanism": "Visible encoder and masked cross-attention regressor; momentum targets and codeword objective.",
+        "limits": "Default bidirectional/classification-pooled representation; not a causal per-bar interface. Masking derived EMA features requires explicit anti-leakage design."
+      },
+      {
+        "id": "ts_jepa",
+        "repository": "https://github.com/Sennadir/TS_JEPA",
+        "commit": "830ee5c3a7d4e85623bd5a07992732be7fda9bc2",
+        "code": [
+          "https://github.com/Sennadir/TS_JEPA/blob/830ee5c3a7d4e85623bd5a07992732be7fda9bc2/pretrain.py",
+          "https://github.com/Sennadir/TS_JEPA/blob/830ee5c3a7d4e85623bd5a07992732be7fda9bc2/src/data_loaders/data_class.py"
+        ],
+        "papers": [],
+        "license_observation": "No LICENSE located in inspected tree/README; mechanism reference only",
+        "task_ids": [
+          "F12"
+        ],
+        "disposition": "mechanism_only_do_not_copy_evaluation",
+        "mechanism": "EMA teacher and masked latent L1 prediction.",
+        "limits": "Inspected version standardizes full CSV before splitting and EvaluationDataLoader assigns self.series=self.train_df. These implementation paths are not an evaluation template; no independent reproduction or paper-score re-audit performed."
+      }
+    ],
+    "vjepa_table1": {
+      "source": "https://arxiv.org/html/2603.14482v3",
+      "scope": "ViT-L ablation, not final scaled model; ADE mIoU / SSv2 accuracy",
+      "rows": [
+        {
+          "recipe": "V-JEPA2",
+          "ADE20K_mIoU": 22.2,
+          "SSv2_accuracy": 72.8
+        },
+        {
+          "recipe": "+context_loss",
+          "ADE20K_mIoU": 33.8,
+          "SSv2_accuracy": 62.5
+        },
+        {
+          "recipe": "+multi_level_prediction",
+          "ADE20K_mIoU": 38.6,
+          "SSv2_accuracy": 72.1
+        }
+      ],
+      "interpretation": "Specific dense/global tradeoff can respond to supervision placement; not proof of Babel root cause or expected effect size."
+    },
+    "historical_dedup": [
+      "docs/BABEL_CAUSAL_POOL768_DESIGN.md already cites Perceiver IO/AR; residual pooling is completed evidence, direct latent encoding is not its exact repetition.",
+      "uniform5 already supervises different temporal endpoints with own128; intermediate encoder-depth supervision is distinct.",
+      "Old decoded common-content H/G, mask/Haar, depth and deterministic20-arm rollout conclusions retained.",
+      "docs/archive/E10_ZDYNAMICS_DESIGN.md contains old JEPA/BYOL ideas outside current Babel mainline; it does not authorize latent forecasting now."
+    ],
+    "candidate": {
+      "name": "intermediate_encoder_history_content_supervision",
+      "status": "prioritize_feasibility_in_next_card_not_added_to_execution_matrix",
+      "task_ids": [
+        "F05",
+        "F01"
+      ],
+      "question": "Can explicit intermediate-depth historical-content supervision improve the final causal768 state without merely adding readout capacity?",
+      "proposed_control": "Retain previously selected bounded pure-Q continuation; prefer shared release if candidate has an adequately controlled design.",
+      "source": "Original A proposed observed_history control_s42/control_s43 last120 and complete Adam; not restored or locked.",
+      "invariants": [
+        "own128 at each endpoint and uniform position supervision",
+        "original data/statistics/splits and final public768 interface",
+        "evaluate final state only; no original-bar or multi-layer concatenation bypass",
+        "preserve existing scientific results and sources"
+      ],
+      "card_requirements": [
+        "fixed intermediate layer(s), head sharing versus capacity-matched control, layer statistics and initialization",
+        "effective total Q weighting and gradients; do not merely increase loss magnitude",
+        "optimizer restoration and new parameter states; missing original Adam stops preparation",
+        "same updates/exposure and explicit auxiliary parameter/compute costs, not equal-epochs-only fairness",
+        "fixed budget/selection/physical primary and protections plus bounded frozen-use scope",
+        "fixed stop regardless of auxiliary-loss decline; risk of early-layer overconstraint and final-state non-improvement"
+      ],
+      "not_selected": [
+        "full V-JEPA reproduction",
+        "simultaneous EMA teacher, mask and latent objective",
+        "automatic deeper model or Mamba replacement",
+        "new execution budget",
+        "reopening prior repairs or deterministic rollout"
+      ],
+      "gradient_clarification": "Current final-layer Q already backpropagates through all trainable encoder layers; new hypothesis adds direct intermediate-layer content readout, not missing-gradient repair."
+    },
+    "decision_impact": "Pure-Q baseline preparation remains active. External evidence prioritizes one intermediate-layer candidate for the same next design card; it is not silently an active arm. Other directions retained under existing IDs, not a mandatory queue.",
+    "new_training_jobs": 0,
+    "new_neural_forwards": 0,
+    "new_fits": 0,
+    "new_scores": 0,
+    "entrypoint": null,
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "External research maps mechanisms to causal reusable price/activity states; reconstruction, readout convenience and future dynamics remain distinct.",
+        "remaining": "No external benchmark proves Babel usefulness; generic reuse remains unconfirmed."
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "Checked intermediate-layer versus temporal-position supervision; token-bank versus single-state decoding; public768 versus recurrent cache. Perceiver historical citation and pool experiments preserved.",
+        "remaining": "4-layer Babel may not benefit from deep supervision; candidate head/statistics/parameter design not locked."
+      },
+      "training": {
+        "status": "open",
+        "evidence": "Original Q bounded baseline retained. One intermediate-content-supervision candidate receives design priority; no combined EMA/mask/latent/depth change selected.",
+        "remaining": "Exact layer/head sharing/total loss scale/gradient path/Adam continuation and matched compute must be fixed before any execution. Extra auxiliary fitting alone is not a mechanism control."
+      },
+      "validation": {
+        "status": "open",
+        "evidence": "External code and primary papers checked without running them. Final public state, physical near/mid/far/activity/common-history and bounded frozen-use evidence are required, not auxiliary loss alone.",
+        "remaining": "No Babel acceptance, independent data or locked new thresholds; fixed-budget card still pending. External reported results not independently reproduced."
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "Identified bidirectional context, whole-file scaling, token-bank and scale side channels, EMA leakage under masking; same historical timestamp does not imply identical whole state.",
+        "remaining": "Current research data unchanged; V13 unavailable. All endpoint cutoffs, derived features and train-only statistics need explicit checks for any adopted mechanism."
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "Read official/author GitHub code at11 fixed commits through connector, checked paper evidence and license availability; no third-party execution or weight download. Only roadmap MD/JSON and append-only event changed. Independent read-only review checked external-claim limits, prior causal-pool distinction, unchanged active budgets and pending fairness requirements; no blocker within documentation scope. JSON/mirror, immutable source refs, artifact hashes and append-only log checks passed.",
+        "remaining": "No implementation or runnable entrypoint, no AutoDL restoration/forward/training. Code licensing observations do not license all datasets or pretrained weights."
       }
     }
   }
