@@ -1,0 +1,4755 @@
+{
+  "schema": "babel-layer-supervision-report-review-v1",
+  "date": "2026-10-24",
+  "task_ids": [
+    "F05",
+    "F01",
+    "F11"
+  ],
+  "requirement_ids": [
+    "N01",
+    "N02",
+    "N03",
+    "N04",
+    "N05",
+    "N07",
+    "N08",
+    "N09"
+  ],
+  "archive": {
+    "path": "/Users/bardan/Downloads/babel_layer_supervision768_reports.tar.gz",
+    "sha256": "c95e373e9b9d5a30bbf2a4666279b87d53b5b4b63f3a49fc21ba8d34476056f6",
+    "bytes": 541932934,
+    "gzip_complete": true,
+    "safe_members": 166
+  },
+  "superseded_download": {
+    "path": "/Users/bardan/Downloads/babel_layer_supervision768_reports.tar.gz.crdownload",
+    "sha256": "5cdfcfe56d8da9843f0264635151563279c630064fc343a254c109d6a738879a",
+    "bytes": 382652255,
+    "status": "truncated_download_only_not_a_failed_or_separate_experiment"
+  },
+  "run": {
+    "path": "reports/layer_supervision_review_c95e373e9b9d/babel_layer_supervision768",
+    "remote": "/root/autodl-tmp/obson/checkpoints/babel_layer_supervision768",
+    "implementation_commit": "d896c08278a4dae116ce2660fb4d42b822b0967b",
+    "status": "completed_reviewed_recipe_closed",
+    "command_exit_code": 0
+  },
+  "protocol": {
+    "roadmap_key": "layer_supervision_plan.protocol",
+    "source_pins": {
+      "manifest": "d8246106b4ea5b59aabf35603c90e98569417b1cf1ec84bb1156e46411f33f6c",
+      "completion": "f3fc47547482a6d212738e8070d5adefca6d7099ef713bc49b217c2b19c99ca8",
+      "checkpoints": {
+        "42": "b0ed63644211d863b1a9af254165ab0bc5184d85b3772790f64beb76fa6ebb9d",
+        "43": "c4acde8cb6c8599ddd7959ad9db166e467e6b8f279be5c562ed377aeac3f1e36"
+      }
+    },
+    "unchanged_from_code_ready": true
+  },
+  "provenance": {
+    "passed": true,
+    "scope": "CPU provenance and report arithmetic only; no weights loaded, no neural execution, no Adam/RNG byte-level replay",
+    "archive_sha256": "c95e373e9b9d5a30bbf2a4666279b87d53b5b4b63f3a49fc21ba8d34476056f6",
+    "protocol_matches_code_and_roadmap": true,
+    "implementation_all_bound_groups_match_current": true,
+    "included_files_verified": 135,
+    "omitted_inventory": {
+      "weights_or_optimizer_state": 4,
+      "lock_or_uncommitted_temporary": 3,
+      "full128_prediction_shard": 1068,
+      "raw_or_feature_cache_or_full_predictions": 4
+    },
+    "root_completion_files": 1207,
+    "root_completion_available_verified": 131,
+    "root_completion_omitted_identity_matched": 1076,
+    "original_source_files_locally_verified": 15,
+    "original_source_files_unavailable": [
+      "control_s42/last.pt",
+      "control_s43/last.pt"
+    ],
+    "data_meta_keys_match_original": [
+      "coverage",
+      "coverage_meta",
+      "statistics",
+      "source_verification"
+    ],
+    "source_replay_checks": 46,
+    "causal_checks": 340,
+    "workers": {
+      "control_s42": {
+        "updates": 2280,
+        "training_seconds": 3772.552545681596,
+        "parent_exposures": 287340,
+        "state_exposures": 1436700,
+        "cumulative_updates": 6840,
+        "lr": 1.4999999999999999e-05,
+        "clipped_steps": 1776,
+        "preclip_max": 3.3518028259277344,
+        "first_final_Q": 0.041133455245410434,
+        "last_final_Q": 0.03692565236842041,
+        "first_aux_Q": 0.041133455245410434,
+        "last_aux_Q": 0.03692565236842041,
+        "initial_validation_final_Q": 0.03216132870810456,
+        "last_validation_final_Q": 0.029066667306079437
+      },
+      "layer2_s42": {
+        "updates": 2280,
+        "training_seconds": 3776.8043923452497,
+        "parent_exposures": 287340,
+        "state_exposures": 1436700,
+        "cumulative_updates": 6840,
+        "lr": 1.4999999999999999e-05,
+        "clipped_steps": 1398,
+        "preclip_max": 2.606062173843384,
+        "first_final_Q": 0.041173608820125975,
+        "last_final_Q": 0.03846436380782601,
+        "first_aux_Q": 0.22199090137554825,
+        "last_aux_Q": 0.13206139998263555,
+        "initial_validation_final_Q": 0.03216132870810456,
+        "last_validation_final_Q": 0.02984607135632723
+      },
+      "control_s43": {
+        "updates": 2280,
+        "training_seconds": 3733.3290009871125,
+        "parent_exposures": 287340,
+        "state_exposures": 1436700,
+        "cumulative_updates": 6840,
+        "lr": 1.4999999999999999e-05,
+        "clipped_steps": 1486,
+        "preclip_max": 2.618283987045288,
+        "first_final_Q": 0.04023378112285896,
+        "last_final_Q": 0.036001606282641284,
+        "first_aux_Q": 0.04023378112285896,
+        "last_aux_Q": 0.036001606282641284,
+        "initial_validation_final_Q": 0.032102253841761,
+        "last_validation_final_Q": 0.028942815398480315
+      },
+      "layer2_s43": {
+        "updates": 2280,
+        "training_seconds": 3799.8685714155436,
+        "parent_exposures": 287340,
+        "state_exposures": 1436700,
+        "cumulative_updates": 6840,
+        "lr": 1.4999999999999999e-05,
+        "clipped_steps": 979,
+        "preclip_max": 2.4812052249908447,
+        "first_final_Q": 0.04026484557681536,
+        "last_final_Q": 0.03689566197862572,
+        "first_aux_Q": 0.22769926360296694,
+        "last_aux_Q": 0.1440495709403577,
+        "initial_validation_final_Q": 0.032102253841761,
+        "last_validation_final_Q": 0.029658827578550588
+      }
+    },
+    "epochs": 240,
+    "new_updates": 9120,
+    "training_seconds": 15082.554510429502,
+    "total_elapsed_seconds": 17824.76462444663,
+    "attempts": 1,
+    "source_preflight": {
+      "gpu": "NVIDIA GeForce RTX 3080 Ti",
+      "torch": "2.8.0+cu128",
+      "peak_cuda_bytes": 590368256,
+      "parameter_count": 30187399,
+      "auxiliary_Q2_Q4_ratio": 4.251639080889981,
+      "zero_updates": true
+    },
+    "limits": [
+      "Actual Adam tensors, RNG states and weights omitted from download: restoration evidence is bound producer code plus receipts, not local tensor verification.",
+      "Full128 prediction shards omitted; this check verifies their identities, not values.",
+      "Source-control reports are available but original two source weights are not locally verified.",
+      "Preflight timings/memory concern source states and zero-update batch, not trained-candidate deployment benchmark.",
+      "No scientific acceptance decision computed by this provenance script."
+    ]
+  },
+  "verification": {
+    "all128_errors_aggregation_and_gates": {
+      "checks": 12545,
+      "numeric_elements": 1665396,
+      "passed": true,
+      "failures": [],
+      "largest_absolute_differences": [
+        {
+          "name": "test/layer2_s42/parent/full/nonprice/body/far",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 984,
+          "max_abs": 2.1316282072803006e-14,
+          "atol": 5e-11,
+          "rtol": 5e-10
+        },
+        {
+          "name": "test/layer2_s42/parent/interior/nonprice/body/far",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 984,
+          "max_abs": 1.7763568394002505e-14,
+          "atol": 5e-11,
+          "rtol": 5e-10
+        },
+        {
+          "name": "test/control_s43/parent/interior/nonprice/body/far",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 984,
+          "max_abs": 1.0658141036401503e-14,
+          "atol": 5e-11,
+          "rtol": 5e-10
+        },
+        {
+          "name": "test/control_s42/parent/full/nonprice/body/far",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 984,
+          "max_abs": 8.881784197001252e-15,
+          "atol": 5e-11,
+          "rtol": 5e-10
+        },
+        {
+          "name": "test/initial_s42/parent/full/nonprice/body/far",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 984,
+          "max_abs": 7.105427357601002e-15,
+          "atol": 5e-11,
+          "rtol": 5e-10
+        },
+        {
+          "name": "test/initial_s42/parent/interior/nonprice/body/far",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 984,
+          "max_abs": 7.105427357601002e-15,
+          "atol": 5e-11,
+          "rtol": 5e-10
+        },
+        {
+          "name": "test/initial_s42/parent/full/nonprice/body/mid",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 984,
+          "max_abs": 7.105427357601002e-15,
+          "atol": 5e-11,
+          "rtol": 5e-10
+        },
+        {
+          "name": "test/initial_s43/parent/interior/nonprice/body/far",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 984,
+          "max_abs": 7.105427357601002e-15,
+          "atol": 5e-11,
+          "rtol": 5e-10
+        }
+      ]
+    },
+    "fixed8_predictions_and_local_raw_prices": {
+      "checks": 3118,
+      "numeric_elements": 33363658,
+      "passed": true,
+      "failures": [],
+      "largest_absolute_differences": [
+        {
+          "name": "test/layer2_s42/fixed8/price/far",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 7872,
+          "max_abs": 2.504663143554353e-13,
+          "atol": 5e-11,
+          "rtol": 5e-10
+        },
+        {
+          "name": "test/initial_s42/raw_labels",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 999744,
+          "max_abs": 1.7053025658242404e-13,
+          "atol": 1e-11,
+          "rtol": 1e-10
+        },
+        {
+          "name": "test/initial_s43/raw_labels",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 999744,
+          "max_abs": 1.7053025658242404e-13,
+          "atol": 1e-11,
+          "rtol": 1e-10
+        },
+        {
+          "name": "test/control_s42/raw_labels",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 999744,
+          "max_abs": 1.7053025658242404e-13,
+          "atol": 1e-11,
+          "rtol": 1e-10
+        },
+        {
+          "name": "test/control_s42/fixed8/price/far",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 7872,
+          "max_abs": 1.7053025658242404e-13,
+          "atol": 5e-11,
+          "rtol": 5e-10
+        },
+        {
+          "name": "test/control_s43/raw_labels",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 999744,
+          "max_abs": 1.7053025658242404e-13,
+          "atol": 1e-11,
+          "rtol": 1e-10
+        },
+        {
+          "name": "test/layer2_s42/raw_labels",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 999744,
+          "max_abs": 1.7053025658242404e-13,
+          "atol": 1e-11,
+          "rtol": 1e-10
+        },
+        {
+          "name": "test/layer2_s43/raw_labels",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 999744,
+          "max_abs": 1.7053025658242404e-13,
+          "atol": 1e-11,
+          "rtol": 1e-10
+        }
+      ]
+    },
+    "local_csv_files": 220,
+    "parent_windows": 1423,
+    "state_predictions_checked": 68304,
+    "price_values_checked": 8674608,
+    "source_prediction_replay": {
+      "test/initial_s42": {
+        "source_prediction_exact": true,
+        "max_abs_prediction_difference": 0.0,
+        "rms_prediction_difference": 0.0
+      },
+      "test/initial_s43": {
+        "source_prediction_exact": true,
+        "max_abs_prediction_difference": 0.0,
+        "rms_prediction_difference": 0.0
+      },
+      "cross_research/initial_s42": {
+        "source_prediction_exact": true,
+        "max_abs_prediction_difference": 0.0,
+        "rms_prediction_difference": 0.0
+      },
+      "cross_research/initial_s43": {
+        "source_prediction_exact": true,
+        "max_abs_prediction_difference": 0.0,
+        "rms_prediction_difference": 0.0
+      }
+    },
+    "helpers": [
+      {
+        "path": "/Users/bardan/private/obson/reports/observed_history_review_cecb3cc29636/metric_review.py",
+        "sha256": "0f1ed02d89f4f2411e0eca6268470eea9f415142c653402723a6ff1384db430f"
+      },
+      {
+        "path": "reports/observed_history_review_cecb3cc29636/metric_review.py",
+        "sha256": "0f1ed02d89f4f2411e0eca6268470eea9f415142c653402723a6ff1384db430f"
+      }
+    ],
+    "limits": [
+      "No real model weights, forwards or updates locally.",
+      "All128 per-prediction outputs remain remote; this checks the12 exported fixed8 prediction sets, including raw-price identity, target price formulas, six nonprice field scoring and F03.",
+      "Body/activity scoring uses supplied targets/masks, not a new independent regeneration of every activity feature.",
+      "A raw source hash and prediction arithmetic audit is not independent V13 market validation."
+    ]
+  },
+  "results": {
+    "unit": "physical log-percent-squared price MSE; changes are error changes, not reconstruction percentage",
+    "core_tables": {
+      "layer2_vs_control": [
+        {
+          "cohort_seed": "test/s42",
+          "reference_mse": 0.03188810606253837,
+          "candidate_mse": 0.040042370353787986,
+          "mse_change_percent": 25.57149137442538,
+          "reference_rmse_bps": 17.857241125811786,
+          "candidate_rmse_bps": 20.01058978485841,
+          "gain": "fail",
+          "overall_passed": false,
+          "full_price_ratios": {
+            "near": 1.1209332619125962,
+            "mid": 1.2844023366575354,
+            "far": 1.2598753787210883
+          },
+          "endpoint_price_ratios": {
+            "near": 1.3355840732431443,
+            "mid": 1.5430006246477757,
+            "far": 1.311579323537158
+          },
+          "p95_ratio": 1.3089597141592286,
+          "p95_passed": false,
+          "protection_counts": {
+            "fail": 29,
+            "pass": 49
+          },
+          "f03_counts": {
+            "fail": 15
+          },
+          "nonprice_counts": {
+            "pass": 49,
+            "fail": 5
+          },
+          "definite_harm_protections": 23,
+          "unconfirmed_protections": 6,
+          "full_nonprice_ratios": {
+            "body/near": 1.0499911334052607,
+            "volume_vs_prior_ema32/near": 1.139279254229458,
+            "delta_log_volume/near": 1.0723373481808893,
+            "oi_change_percent_asinh/near": 1.088531396976206,
+            "oi_per_volume_asinh/near": 1.048387189238284,
+            "turnover_asinh/near": 1.0633462351096397,
+            "body/mid": 1.0037957741135957,
+            "volume_vs_prior_ema32/mid": 1.0605559444219468,
+            "delta_log_volume/mid": 1.0576296952012516,
+            "oi_change_percent_asinh/mid": 1.0262400569213863,
+            "oi_per_volume_asinh/mid": 1.0217674028395365,
+            "turnover_asinh/mid": 1.0499752406705383,
+            "body/far": 1.0071583021285118,
+            "volume_vs_prior_ema32/far": 1.0159489065964749,
+            "delta_log_volume/far": 1.0071565388470103,
+            "oi_change_percent_asinh/far": 1.003864108805235,
+            "oi_per_volume_asinh/far": 1.0066945830271425,
+            "turnover_asinh/far": 1.0158524695029443
+          },
+          "f03_ratios": {
+            "shift1/shape_a_mse": 1.1860787195797182,
+            "shift1/shape_b_mse": 1.2255197785353507,
+            "shift1/common_anchored_a_mse": 1.2897107794022777,
+            "shift1/common_anchored_b_mse": 1.3465744164055087,
+            "shift1/disagreement_mse": 1.157283998990889,
+            "shift16/shape_a_mse": 1.1524154726191693,
+            "shift16/shape_b_mse": 1.2107982997639803,
+            "shift16/common_anchored_a_mse": 1.1993038207405862,
+            "shift16/common_anchored_b_mse": 1.3466934647924445,
+            "shift16/disagreement_mse": 1.334751069881928,
+            "shift64/shape_a_mse": 1.255583480614388,
+            "shift64/shape_b_mse": 1.1234587399781106,
+            "shift64/common_anchored_a_mse": 1.3864009750968889,
+            "shift64/common_anchored_b_mse": 1.3115793235371578,
+            "shift64/disagreement_mse": 1.2429944618583801
+          },
+          "failed_protections": [
+            {
+              "key": "retain/full/price/near",
+              "ratio": 1.1209332619125962,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": 0.00012983368891121124,
+                  "low": -0.00044381636116022123,
+                  "high": 0.00040010680375748777,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.00012983368891121124,
+                  "low": -0.0002622518946257897,
+                  "high": 0.0003660296365888857,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/full/price/mid",
+              "ratio": 1.2844023366575354,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0034866222572629934,
+                  "low": 0.0015923683037816507,
+                  "high": 0.006232751791566822,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0034866222572629934,
+                  "low": 0.0024521981024615332,
+                  "high": 0.0047060113235623605,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/full/price/far",
+              "ratio": 1.2598753787210883,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.011279905108813116,
+                  "low": 0.0048142253080424935,
+                  "high": 0.021778391029162136,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.011279905108813116,
+                  "low": 0.006296304751523915,
+                  "high": 0.020636396221343632,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/price/near",
+              "ratio": 1.1202617795115712,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": 0.00012626351055091857,
+                  "low": -0.0004484791957895604,
+                  "high": 0.0003964213359882704,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.00012626351055091857,
+                  "low": -0.0002684703066983663,
+                  "high": 0.00036436753577052,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/price/mid",
+              "ratio": 1.2828495686953736,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0034636876377750403,
+                  "low": 0.0015451029430670895,
+                  "high": 0.006225125515891803,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0034636876377750403,
+                  "low": 0.0024073455696114695,
+                  "high": 0.004699834273388138,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/price/far",
+              "ratio": 1.2595206934956575,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.011266216218600435,
+                  "low": 0.0047868833692062945,
+                  "high": 0.021780097131338102,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.011266216218600435,
+                  "low": 0.006270416586871789,
+                  "high": 0.020644391521415534,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/price/near",
+              "ratio": 1.3355840732431443,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0005832463406684273,
+                  "low": 0.00020043089914204828,
+                  "high": 0.0009711129137779373,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0005832463406684273,
+                  "low": 0.00025713841103965714,
+                  "high": 0.0009931573554035659,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/price/mid",
+              "ratio": 1.5430006246477757,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.006399318932232962,
+                  "low": 0.0029950705928663696,
+                  "high": 0.010989067017143915,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.006399318932232962,
+                  "low": 0.0032212288193587874,
+                  "high": 0.010568573475416867,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/price/far",
+              "ratio": 1.311579323537158,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.01301839416582359,
+                  "low": 0.005608265616631903,
+                  "high": 0.02277385533641569,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.01301839416582359,
+                  "low": 0.008162109987201306,
+                  "high": 0.019144553756354578,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/full/nonprice/volume_vs_prior_ema32/near",
+              "ratio": 1.139279254229458,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0006831847489596933,
+                  "low": 0.0004675609992549895,
+                  "high": 0.0009948484752659416,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0006831847489596933,
+                  "low": 0.0005383556645017948,
+                  "high": 0.0008815109121717914,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/nonprice/volume_vs_prior_ema32/near",
+              "ratio": 1.139074762804887,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0006802360222460429,
+                  "low": 0.00046914826079206173,
+                  "high": 0.0009871828125805023,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0006802360222460429,
+                  "low": 0.0005377375656272839,
+                  "high": 0.0008728634869460124,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/nonprice/oi_change_percent_asinh/near",
+              "ratio": 1.0888554008222964,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": -0.00018481858163488818,
+                  "low": -0.0004604949112808206,
+                  "high": 4.1737193344317204e-07,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": -0.00018481858163488818,
+                  "low": -0.0003418863627939803,
+                  "high": -5.6356884573050103e-05,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/nonprice/volume_vs_prior_ema32/near",
+              "ratio": 1.1686046893301305,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.001057673041593331,
+                  "low": 0.0002790982046218771,
+                  "high": 0.0020540815626746744,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.001057673041593331,
+                  "low": 0.00033254380610295373,
+                  "high": 0.0020277793582161897,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/nonprice/delta_log_volume/near",
+              "ratio": 1.0798472840240734,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": -0.0004138912420405099,
+                  "low": -0.0010986763294504774,
+                  "high": 0.00048262054727181593,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": -0.0004138912420405099,
+                  "low": -0.0010793118591352925,
+                  "high": 0.00033473423972773023,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift1/shape_a_mse",
+              "ratio": 1.1860787195797182,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 3.1139013780097294e-07,
+                  "low": 1.8189375977379618e-07,
+                  "high": 4.847707211587486e-07,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 3.1139013780097294e-07,
+                  "low": 1.2406352368568064e-07,
+                  "high": 5.340687110260335e-07,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift1/shape_b_mse",
+              "ratio": 1.2255197785353507,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 4.2616591260231497e-07,
+                  "low": 2.3028634514006847e-07,
+                  "high": 6.34377954997733e-07,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 4.2616591260231497e-07,
+                  "low": 3.0070312490613376e-07,
+                  "high": 5.842000888415758e-07,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift1/common_anchored_a_mse",
+              "ratio": 1.2897107794022777,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 7.515171809413561e-07,
+                  "low": 3.253454301431232e-07,
+                  "high": 1.3477657969541088e-06,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 7.515171809413561e-07,
+                  "low": 3.168563932235777e-07,
+                  "high": 1.2908197876881493e-06,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift1/common_anchored_b_mse",
+              "ratio": 1.3465744164055087,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 9.019360241106213e-07,
+                  "low": 4.0894178722894716e-07,
+                  "high": 1.5594460753067731e-06,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 9.019360241106213e-07,
+                  "low": 5.654650371392973e-07,
+                  "high": 1.3540574015184755e-06,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift1/disagreement_mse",
+              "ratio": 1.157283998990889,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 1.1031598945639699e-07,
+                  "low": 7.073614894991592e-08,
+                  "high": 1.521460800640787e-07,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 1.1031598945639699e-07,
+                  "low": 5.775497740367406e-08,
+                  "high": 1.6753079722790504e-07,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift16/shape_a_mse",
+              "ratio": 1.1524154726191693,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": 1.6445109088208077e-07,
+                  "low": 3.4327112171771674e-08,
+                  "high": 2.996182725801801e-07,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 1.6445109088208077e-07,
+                  "low": -3.3461637086660774e-08,
+                  "high": 3.3887330134204855e-07,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift16/shape_b_mse",
+              "ratio": 1.2107982997639803,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 4.183013010049016e-07,
+                  "low": 2.2828724403489429e-07,
+                  "high": 6.302819415523479e-07,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 4.183013010049016e-07,
+                  "low": 2.8937498548476747e-07,
+                  "high": 5.745420492134125e-07,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift16/common_anchored_a_mse",
+              "ratio": 1.1993038207405862,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 3.433082382755583e-07,
+                  "low": 1.983673380472089e-07,
+                  "high": 5.789281578801886e-07,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 3.433082382755583e-07,
+                  "low": 8.636545644233557e-08,
+                  "high": 5.896896594594224e-07,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift16/common_anchored_b_mse",
+              "ratio": 1.3466934647924445,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 1.0156091362108728e-06,
+                  "low": 4.552380244606573e-07,
+                  "high": 1.7608618551471857e-06,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 1.0156091362108728e-06,
+                  "low": 6.32921196486924e-07,
+                  "high": 1.526547974149383e-06,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift16/disagreement_mse",
+              "ratio": 1.334751069881928,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 7.336438424499998e-07,
+                  "low": 3.690372857842856e-07,
+                  "high": 1.254286842239962e-06,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 7.336438424499998e-07,
+                  "low": 4.758800889225319e-07,
+                  "high": 1.096944007861179e-06,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift64/shape_a_mse",
+              "ratio": 1.255583480614388,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 1.8645490632133734e-07,
+                  "low": 6.648322403834306e-08,
+                  "high": 3.1420415389222133e-07,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 1.8645490632133734e-07,
+                  "low": 1.079525537699456e-08,
+                  "high": 3.1828607796503627e-07,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift64/shape_b_mse",
+              "ratio": 1.1234587399781106,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": 1.2828511250636084e-07,
+                  "low": -9.931685080440092e-08,
+                  "high": 2.908579345871503e-07,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 1.2828511250636084e-07,
+                  "low": -1.3565673498125138e-08,
+                  "high": 2.666526777083435e-07,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift64/common_anchored_a_mse",
+              "ratio": 1.3864009750968889,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 3.862437602971126e-07,
+                  "low": 1.6866682397901294e-07,
+                  "high": 6.709321997060997e-07,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 3.862437602971126e-07,
+                  "low": 7.815470457835343e-08,
+                  "high": 7.990805571608219e-07,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift64/common_anchored_b_mse",
+              "ratio": 1.3115793235371578,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 1.3018394165823593e-06,
+                  "low": 5.608265616631902e-07,
+                  "high": 2.277385533641568e-06,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 1.3018394165823593e-06,
+                  "low": 8.162109987201301e-07,
+                  "high": 1.9144553756354565e-06,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift64/disagreement_mse",
+              "ratio": 1.2429944618583801,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 6.529060828595058e-07,
+                  "low": 1.8960290946454518e-07,
+                  "high": 1.314045079315507e-06,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 6.529060828595058e-07,
+                  "low": 3.0583360084333683e-07,
+                  "high": 1.1184948242262692e-06,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            }
+          ],
+          "neutral_primary_difference": {
+            "month": {
+              "mean": 0.008154264291249614,
+              "low": 0.003792966339760398,
+              "high": 0.014147413344486605,
+              "parents": 984,
+              "groups": 13,
+              "valid_draws": 2000,
+              "supported": true
+            },
+            "contract_period_month": {
+              "mean": 0.008154264291249614,
+              "low": 0.005420909169007682,
+              "high": 0.012360253905999007,
+              "parents": 984,
+              "groups": 498,
+              "valid_draws": 2000,
+              "supported": true
+            }
+          }
+        },
+        {
+          "cohort_seed": "test/s43",
+          "reference_mse": 0.029213444626610633,
+          "candidate_mse": 0.038236456689785765,
+          "mse_change_percent": 30.886505095520423,
+          "reference_rmse_bps": 17.09194097421666,
+          "candidate_rmse_bps": 19.554144494143884,
+          "gain": "fail",
+          "overall_passed": false,
+          "full_price_ratios": {
+            "near": 1.2308399497681004,
+            "mid": 1.303628578037184,
+            "far": 1.3171300340834313
+          },
+          "endpoint_price_ratios": {
+            "near": 1.4824780268613909,
+            "mid": 1.2579292788430618,
+            "far": 1.2487213282458287
+          },
+          "p95_ratio": 1.36493595019408,
+          "p95_passed": false,
+          "protection_counts": {
+            "fail": 35,
+            "pass": 43
+          },
+          "f03_counts": {
+            "fail": 15
+          },
+          "nonprice_counts": {
+            "pass": 43,
+            "fail": 11
+          },
+          "definite_harm_protections": 23,
+          "unconfirmed_protections": 12,
+          "full_nonprice_ratios": {
+            "body/near": 1.0445502693301887,
+            "volume_vs_prior_ema32/near": 1.1027566123841894,
+            "delta_log_volume/near": 1.0816401953752353,
+            "oi_change_percent_asinh/near": 1.1278754958838573,
+            "oi_per_volume_asinh/near": 1.1609675171810476,
+            "turnover_asinh/near": 1.039379678133917,
+            "body/mid": 1.0110672848403097,
+            "volume_vs_prior_ema32/mid": 1.027106361057888,
+            "delta_log_volume/mid": 1.0231927829150336,
+            "oi_change_percent_asinh/mid": 1.0177866698478986,
+            "oi_per_volume_asinh/mid": 1.0174413851177795,
+            "turnover_asinh/mid": 1.028907662755591,
+            "body/far": 1.012181711868393,
+            "volume_vs_prior_ema32/far": 1.0148119520611982,
+            "delta_log_volume/far": 1.0097450938851358,
+            "oi_change_percent_asinh/far": 1.0141831817900786,
+            "oi_per_volume_asinh/far": 1.0096931859561142,
+            "turnover_asinh/far": 1.0136368425302555
+          },
+          "f03_ratios": {
+            "shift1/shape_a_mse": 1.1228622883582635,
+            "shift1/shape_b_mse": 1.152465768597636,
+            "shift1/common_anchored_a_mse": 1.173017733908483,
+            "shift1/common_anchored_b_mse": 1.2517534065543499,
+            "shift1/disagreement_mse": 1.1405535710379333,
+            "shift16/shape_a_mse": 1.225711050263782,
+            "shift16/shape_b_mse": 1.1354810481542945,
+            "shift16/common_anchored_a_mse": 1.3122610188903765,
+            "shift16/common_anchored_b_mse": 1.2503334993616975,
+            "shift16/disagreement_mse": 1.4789953379288314,
+            "shift64/shape_a_mse": 1.2735642962405993,
+            "shift64/shape_b_mse": 1.0587899224857598,
+            "shift64/common_anchored_a_mse": 1.4405194660412424,
+            "shift64/common_anchored_b_mse": 1.2487213282458285,
+            "shift64/disagreement_mse": 1.2681573214137865
+          },
+          "failed_protections": [
+            {
+              "key": "retain/full/price/near",
+              "ratio": 1.2308399497681004,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0006872320295243175,
+                  "low": 0.0005230877861145744,
+                  "high": 0.0008062542524338436,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0006872320295243175,
+                  "low": 0.0005709230275071644,
+                  "high": 0.0007931728809374546,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/full/price/mid",
+              "ratio": 1.303628578037184,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0040888791250451775,
+                  "low": 0.0023912780588034007,
+                  "high": 0.006357094830748192,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0040888791250451775,
+                  "low": 0.0031760354713773913,
+                  "high": 0.005252832247788469,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/full/price/far",
+              "ratio": 1.3171300340834313,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.013528891646972725,
+                  "low": 0.0076205470783271695,
+                  "high": 0.020866704070544303,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.013528891646972725,
+                  "low": 0.009899258926689065,
+                  "high": 0.018190962046226736,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/price/near",
+              "ratio": 1.2301026177993633,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0006867278008242795,
+                  "low": 0.0005170413061718333,
+                  "high": 0.000807882298758139,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0006867278008242795,
+                  "low": 0.0005692240815183424,
+                  "high": 0.0007931057759742715,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/price/mid",
+              "ratio": 1.3039617160148262,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.004097944012383398,
+                  "low": 0.002387320215696369,
+                  "high": 0.0063793302181552915,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.004097944012383398,
+                  "low": 0.00317900029583535,
+                  "high": 0.005273335552216467,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/price/far",
+              "ratio": 1.3177076086096464,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.013557225488286157,
+                  "low": 0.007624704671764416,
+                  "high": 0.02092266593604569,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.013557225488286157,
+                  "low": 0.009908082674566252,
+                  "high": 0.01828036593099554,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/price/near",
+              "ratio": 1.4824780268613909,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0007512690744291354,
+                  "low": 0.00044261768842761366,
+                  "high": 0.0012053576197431051,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0007512690744291354,
+                  "low": 0.00048285769926010826,
+                  "high": 0.0011268790369709132,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/price/mid",
+              "ratio": 1.2579292788430618,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0029376384330909427,
+                  "low": 0.0011532205157128985,
+                  "high": 0.004770187920367085,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0029376384330909427,
+                  "low": 0.0018111691442699335,
+                  "high": 0.004233392283122432,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/price/far",
+              "ratio": 1.2487213282458287,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.009930493800166654,
+                  "low": 0.00420376905288206,
+                  "high": 0.01687663779713764,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.009930493800166654,
+                  "low": 0.00467069000056331,
+                  "high": 0.016640946087467228,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/full/nonprice/volume_vs_prior_ema32/near",
+              "ratio": 1.1027566123841894,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": 4.605475751599555e-05,
+                  "low": -0.00018117119532279488,
+                  "high": 0.00016222352702097937,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 4.605475751599555e-05,
+                  "low": -0.00014165786246412657,
+                  "high": 0.00018654085946509145,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/full/nonprice/oi_change_percent_asinh/near",
+              "ratio": 1.1278754958838573,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0004153870573316144,
+                  "low": 0.0002139485244770104,
+                  "high": 0.0005554423574699983,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0004153870573316144,
+                  "low": 0.00021544983827080202,
+                  "high": 0.0005752611512745633,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/full/nonprice/oi_per_volume_asinh/near",
+              "ratio": 1.1609675171810476,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0007904843523030357,
+                  "low": 0.000503376935517784,
+                  "high": 0.0009683267340866549,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0007904843523030357,
+                  "low": 0.0005985311461332611,
+                  "high": 0.0009369813414842977,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/nonprice/volume_vs_prior_ema32/near",
+              "ratio": 1.102609871724745,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": 4.365231803356067e-05,
+                  "low": -0.00018965627446702242,
+                  "high": 0.00016257458041615418,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 4.365231803356067e-05,
+                  "low": -0.0001452600399482396,
+                  "high": 0.00018339028387985096,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/nonprice/oi_change_percent_asinh/near",
+              "ratio": 1.127886361087012,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0004153795119102175,
+                  "low": 0.00021321310049083003,
+                  "high": 0.0005557518595417327,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0004153795119102175,
+                  "low": 0.00021493358954884927,
+                  "high": 0.0005761425474283345,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/nonprice/oi_per_volume_asinh/near",
+              "ratio": 1.1608605511639565,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0007898240763022427,
+                  "low": 0.0004986422922002962,
+                  "high": 0.0009696976895692592,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0007898240763022427,
+                  "low": 0.0005968471764246824,
+                  "high": 0.000936458156310875,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/nonprice/body/near",
+              "ratio": 1.0094914216876003,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": -0.005745123699609347,
+                  "low": -0.01623627700873848,
+                  "high": 0.0003382721882045619,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": -0.005745123699609347,
+                  "low": -0.01660760197030038,
+                  "high": 0.00022606417987724013,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/nonprice/volume_vs_prior_ema32/near",
+              "ratio": 1.1245314212208037,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": 0.0003511645717852214,
+                  "low": -0.00012584354625232513,
+                  "high": 0.0010057939545217998,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0003511645717852214,
+                  "low": -0.0001617302700611609,
+                  "high": 0.001044747730006335,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/nonprice/delta_log_volume/near",
+              "ratio": 1.0965805402082818,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": -6.740724572077358e-05,
+                  "low": -0.0003180249971895869,
+                  "high": 0.00028301634015311415,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": -6.740724572077358e-05,
+                  "low": -0.0005288733654348597,
+                  "high": 0.000327212703691385,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/nonprice/oi_change_percent_asinh/near",
+              "ratio": 1.1265640931109848,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": 0.00041634532584902776,
+                  "low": 3.113888503129165e-05,
+                  "high": 0.0007734490210863302,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.00041634532584902776,
+                  "low": -0.00013017983716146232,
+                  "high": 0.0009279359721602318,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/nonprice/oi_per_volume_asinh/near",
+              "ratio": 1.1763653823423579,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0008743394044037552,
+                  "low": 0.0005769291429709876,
+                  "high": 0.0013106669770016222,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0008743394044037552,
+                  "low": 0.0006172849065728428,
+                  "high": 0.0011181439902501035,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift1/shape_a_mse",
+              "ratio": 1.1228622883582635,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": 8.682530774550787e-08,
+                  "low": -4.957790465471689e-07,
+                  "high": 3.745685230663076e-07,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 8.682530774550787e-08,
+                  "low": -2.30261138812459e-07,
+                  "high": 3.356742092263602e-07,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift1/shape_b_mse",
+              "ratio": 1.152465768597636,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": 1.994800256456575e-07,
+                  "low": -1.9550698798558997e-07,
+                  "high": 4.241308152727614e-07,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 1.994800256456575e-07,
+                  "low": -4.116610849324103e-08,
+                  "high": 4.1284975927103293e-07,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift1/common_anchored_a_mse",
+              "ratio": 1.173017733908483,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": 3.015308235807516e-07,
+                  "low": -2.874817924599055e-07,
+                  "high": 6.260023392525843e-07,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 3.015308235807516e-07,
+                  "low": -9.665883618903485e-08,
+                  "high": 6.485701597826952e-07,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift1/common_anchored_b_mse",
+              "ratio": 1.2517534065543499,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 6.179014626238485e-07,
+                  "low": 2.7412881577792355e-07,
+                  "high": 1.0366871600133445e-06,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 6.179014626238485e-07,
+                  "low": 3.3155245478977414e-07,
+                  "high": 9.689821479453139e-07,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift1/disagreement_mse",
+              "ratio": 1.1405535710379333,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": 8.479903883968923e-08,
+                  "low": -6.844466047902958e-08,
+                  "high": 2.186246826898813e-07,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 8.479903883968923e-08,
+                  "low": -2.50158459704439e-08,
+                  "high": 1.9886938106420738e-07,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift16/shape_a_mse",
+              "ratio": 1.225711050263782,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 3.656148752918345e-07,
+                  "low": 2.0383848542719235e-07,
+                  "high": 5.767346345478091e-07,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 3.656148752918345e-07,
+                  "low": 2.2251987219626838e-07,
+                  "high": 5.560116853103135e-07,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift16/shape_b_mse",
+              "ratio": 1.1354810481542945,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": 1.5093936543289175e-07,
+                  "low": -3.010436595907858e-07,
+                  "high": 3.9752103787339693e-07,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 1.5093936543289175e-07,
+                  "low": -1.2367666236446586e-07,
+                  "high": 3.832729109595537e-07,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift16/common_anchored_a_mse",
+              "ratio": 1.3122610188903765,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 6.675014073084255e-07,
+                  "low": 3.134224554610849e-07,
+                  "high": 1.1365734060005685e-06,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 6.675014073084255e-07,
+                  "low": 4.5065190924487814e-07,
+                  "high": 9.450069396687051e-07,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift16/common_anchored_b_mse",
+              "ratio": 1.2503334993616975,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 6.906556344133916e-07,
+                  "low": 2.983616666082873e-07,
+                  "high": 1.1663152585572044e-06,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 6.906556344133916e-07,
+                  "low": 3.6664547132849896e-07,
+                  "high": 1.0904179009772057e-06,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift16/disagreement_mse",
+              "ratio": 1.4789953379288314,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 1.1984554553957786e-06,
+                  "low": 4.876878335929327e-07,
+                  "high": 2.5032001397178784e-06,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 1.1984554553957786e-06,
+                  "low": 6.293954031637907e-07,
+                  "high": 2.1819785847730186e-06,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift64/shape_a_mse",
+              "ratio": 1.2735642962405993,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 2.4498448684207556e-07,
+                  "low": 1.3554017781199785e-07,
+                  "high": 3.9509444471481185e-07,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 2.4498448684207556e-07,
+                  "low": 5.657872094057527e-08,
+                  "high": 5.464470800419503e-07,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift64/shape_b_mse",
+              "ratio": 1.0587899224857598,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": -2.4092714843512406e-07,
+                  "low": -1.0434619062134952e-06,
+                  "high": 1.3619880574374286e-07,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": -2.4092714843512406e-07,
+                  "low": -8.172888586491619e-07,
+                  "high": 1.254710481044878e-07,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift64/common_anchored_a_mse",
+              "ratio": 1.4405194660412424,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 5.196778246984632e-07,
+                  "low": 1.679806956102732e-07,
+                  "high": 1.1378385712251128e-06,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 5.196778246984632e-07,
+                  "low": 1.0668905796366882e-07,
+                  "high": 1.2956099435888417e-06,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift64/common_anchored_b_mse",
+              "ratio": 1.2487213282458285,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 9.930493800166648e-07,
+                  "low": 4.203769052882046e-07,
+                  "high": 1.6876637797137654e-06,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 9.930493800166648e-07,
+                  "low": 4.670690000563281e-07,
+                  "high": 1.6640946087467246e-06,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift64/disagreement_mse",
+              "ratio": 1.2681573214137865,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 7.441773451218271e-07,
+                  "low": 2.6560445761342117e-07,
+                  "high": 1.6521056041186054e-06,
+                  "parents": 984,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 7.441773451218271e-07,
+                  "low": 2.5496186687038077e-07,
+                  "high": 1.6286344429108247e-06,
+                  "parents": 984,
+                  "groups": 498,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            }
+          ],
+          "neutral_primary_difference": {
+            "month": {
+              "mean": 0.009023012063175137,
+              "low": 0.004849058307607948,
+              "high": 0.01425008250923996,
+              "parents": 984,
+              "groups": 13,
+              "valid_draws": 2000,
+              "supported": true
+            },
+            "contract_period_month": {
+              "mean": 0.009023012063175137,
+              "low": 0.006739733886634934,
+              "high": 0.01204822130813886,
+              "parents": 984,
+              "groups": 498,
+              "valid_draws": 2000,
+              "supported": true
+            }
+          }
+        },
+        {
+          "cohort_seed": "cross_research/s42",
+          "reference_mse": 0.00792177793984199,
+          "candidate_mse": 0.011163561460326786,
+          "mse_change_percent": 40.922423540560104,
+          "reference_rmse_bps": 8.90043703412478,
+          "candidate_rmse_bps": 10.56577562714957,
+          "gain": "fail",
+          "overall_passed": false,
+          "full_price_ratios": {
+            "near": 1.3509574642978561,
+            "mid": 1.4584681304975387,
+            "far": 1.3990821078391458
+          },
+          "endpoint_price_ratios": {
+            "near": 1.4002904388830828,
+            "mid": 1.382531343481901,
+            "far": 1.3036922642289412
+          },
+          "p95_ratio": 1.290585610930936,
+          "p95_passed": false,
+          "protection_counts": {
+            "fail": 29,
+            "pass": 49
+          },
+          "f03_counts": {
+            "fail": 15
+          },
+          "nonprice_counts": {
+            "pass": 49,
+            "fail": 5
+          },
+          "definite_harm_protections": 25,
+          "unconfirmed_protections": 4,
+          "full_nonprice_ratios": {
+            "body/near": 1.0544315243602436,
+            "volume_vs_prior_ema32/near": 1.132341393357521,
+            "delta_log_volume/near": 1.078415885555005,
+            "oi_change_percent_asinh/near": 1.0826878835338383,
+            "oi_per_volume_asinh/near": 1.0373587623542269,
+            "turnover_asinh/near": 1.0602007670101403,
+            "body/mid": 0.9933770824234409,
+            "volume_vs_prior_ema32/mid": 1.0704285237645863,
+            "delta_log_volume/mid": 1.0715955613187909,
+            "oi_change_percent_asinh/mid": 1.027767514592032,
+            "oi_per_volume_asinh/mid": 1.0220854369287162,
+            "turnover_asinh/mid": 1.0425505231306795,
+            "body/far": 1.0022119270734944,
+            "volume_vs_prior_ema32/far": 1.0187438726457811,
+            "delta_log_volume/far": 1.0081463389052787,
+            "oi_change_percent_asinh/far": 1.0052457835693966,
+            "oi_per_volume_asinh/far": 1.0055840907151523,
+            "turnover_asinh/far": 1.0168176066552446
+          },
+          "f03_ratios": {
+            "shift1/shape_a_mse": 1.2757551478972529,
+            "shift1/shape_b_mse": 1.271416344409988,
+            "shift1/common_anchored_a_mse": 1.3336098309383684,
+            "shift1/common_anchored_b_mse": 1.317776312619551,
+            "shift1/disagreement_mse": 1.122763306223167,
+            "shift16/shape_a_mse": 1.3139444481019946,
+            "shift16/shape_b_mse": 1.264627216720009,
+            "shift16/common_anchored_a_mse": 1.3545197214792664,
+            "shift16/common_anchored_b_mse": 1.3167016725575162,
+            "shift16/disagreement_mse": 1.2754956820580656,
+            "shift64/shape_a_mse": 1.440712498339376,
+            "shift64/shape_b_mse": 1.1988404295752648,
+            "shift64/common_anchored_a_mse": 1.4355663432297445,
+            "shift64/common_anchored_b_mse": 1.3036922642289412,
+            "shift64/disagreement_mse": 1.2217507862825054
+          },
+          "failed_protections": [
+            {
+              "key": "retain/full/price/near",
+              "ratio": 1.3509574642978561,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0002498606800278187,
+                  "low": 0.00018341666380496387,
+                  "high": 0.00033892106616531276,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0002498606800278187,
+                  "low": 0.00020874182150249114,
+                  "high": 0.00029913558326210627,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/full/price/mid",
+              "ratio": 1.4584681304975387,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0017441428277595835,
+                  "low": 0.001299102150946902,
+                  "high": 0.0023589147257520593,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0017441428277595835,
+                  "low": 0.0014666406229285453,
+                  "high": 0.0020690724535573015,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/full/price/far",
+              "ratio": 1.3990821078391458,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.005354813671714383,
+                  "low": 0.0033280469146239277,
+                  "high": 0.009084771168394203,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.005354813671714383,
+                  "low": 0.0037409843670024963,
+                  "high": 0.007607251649845832,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/price/near",
+              "ratio": 1.3505070755029043,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.00024910194230380025,
+                  "low": 0.0001830890474403649,
+                  "high": 0.0003381419695476908,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.00024910194230380025,
+                  "low": 0.00020848650869208173,
+                  "high": 0.0002973811405788719,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/price/mid",
+              "ratio": 1.459034264285596,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0017476233661622054,
+                  "low": 0.001299835119260398,
+                  "high": 0.0023680644587313463,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0017476233661622054,
+                  "low": 0.0014680522160315373,
+                  "high": 0.0020759735490093567,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/price/far",
+              "ratio": 1.3998274675250786,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.005368479310617174,
+                  "low": 0.003330480832097822,
+                  "high": 0.0091142626544852,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.005368479310617174,
+                  "low": 0.0037465957442281783,
+                  "high": 0.007631020707663891,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/price/near",
+              "ratio": 1.4002904388830828,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.00034622037097815315,
+                  "low": 0.00015919795088587452,
+                  "high": 0.0006511046021904262,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.00034622037097815315,
+                  "low": 0.00018000845308119485,
+                  "high": 0.0005924295469418669,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/price/mid",
+              "ratio": 1.382531343481901,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0013021144506265491,
+                  "low": 0.0010484839494770896,
+                  "high": 0.0015767162809528315,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0013021144506265491,
+                  "low": 0.0009299847002702835,
+                  "high": 0.001665334301186164,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/price/far",
+              "ratio": 1.3036922642289412,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.003619277531059727,
+                  "low": 0.0024889705994144023,
+                  "high": 0.005408975174857368,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.003619277531059727,
+                  "low": 0.0025706735070961002,
+                  "high": 0.0048957045018116156,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/full/nonprice/volume_vs_prior_ema32/near",
+              "ratio": 1.132341393357521,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.00047150627577231406,
+                  "low": 0.0003907759976480308,
+                  "high": 0.0005577408078179087,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.00047150627577231406,
+                  "low": 0.00037733268339265635,
+                  "high": 0.0005649426680728269,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/nonprice/volume_vs_prior_ema32/near",
+              "ratio": 1.1325184840351417,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0004737973430374115,
+                  "low": 0.0003939077362400748,
+                  "high": 0.0005586947644452029,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0004737973430374115,
+                  "low": 0.0003794154682343975,
+                  "high": 0.0005685043223318273,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/nonprice/volume_vs_prior_ema32/near",
+              "ratio": 1.1114887804910178,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": 0.00018054073310489892,
+                  "low": -0.0003072008821846724,
+                  "high": 0.0006923589521805789,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.00018054073310489892,
+                  "low": -0.00025160771245495326,
+                  "high": 0.0006812223931116372,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/nonprice/delta_log_volume/near",
+              "ratio": 1.0842154642091704,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": -0.0002953552073581498,
+                  "low": -0.0010071269900753682,
+                  "high": 0.00033550627606812567,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": -0.0002953552073581498,
+                  "low": -0.0009558846255952136,
+                  "high": 0.00033216677353556357,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/nonprice/oi_change_percent_asinh/near",
+              "ratio": 1.0646426439000207,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": -0.0004367547261793859,
+                  "low": -0.0010600296074790418,
+                  "high": 0.00023410350926490972,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": -0.0004367547261793859,
+                  "low": -0.0009653106746107543,
+                  "high": 8.337867029749556e-05,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift1/shape_a_mse",
+              "ratio": 1.2757551478972529,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 1.6830931788682874e-07,
+                  "low": 1.2277909564763416e-07,
+                  "high": 2.3421205924189202e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 1.6830931788682874e-07,
+                  "low": 1.3069178659463635e-07,
+                  "high": 2.1363176538949247e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift1/shape_b_mse",
+              "ratio": 1.271416344409988,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 1.6671005802120874e-07,
+                  "low": 1.1656012651922783e-07,
+                  "high": 2.6373128452799644e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 1.6671005802120874e-07,
+                  "low": 1.2273881352964704e-07,
+                  "high": 2.24076895621805e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift1/common_anchored_a_mse",
+              "ratio": 1.3336098309383684,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 2.488122701561365e-07,
+                  "low": 1.8830813215197867e-07,
+                  "high": 3.24088590254055e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 2.488122701561365e-07,
+                  "low": 1.822775739349964e-07,
+                  "high": 3.1706134214646375e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift1/common_anchored_b_mse",
+              "ratio": 1.317776312619551,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 2.348637513976434e-07,
+                  "low": 1.7850801242711577e-07,
+                  "high": 3.2626075237496707e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 2.348637513976434e-07,
+                  "low": 1.7611271993428213e-07,
+                  "high": 3.053230870787065e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift1/disagreement_mse",
+              "ratio": 1.122763306223167,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": 2.1391676760588053e-08,
+                  "low": -1.1616315797616685e-08,
+                  "high": 5.5227633859977466e-08,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 2.1391676760588053e-08,
+                  "low": -4.4300242834202715e-09,
+                  "high": 4.7196464116203573e-08,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift16/shape_a_mse",
+              "ratio": 1.3139444481019946,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 1.6773095894311805e-07,
+                  "low": 9.794170691552401e-08,
+                  "high": 2.6420316237425217e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 1.6773095894311805e-07,
+                  "low": 1.159997762823907e-07,
+                  "high": 2.2905616659342882e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift16/shape_b_mse",
+              "ratio": 1.264627216720009,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 1.7712295288380246e-07,
+                  "low": 1.225972748438911e-07,
+                  "high": 2.8266264852405334e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 1.7712295288380246e-07,
+                  "low": 1.2873650811794196e-07,
+                  "high": 2.405070041546567e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift16/common_anchored_a_mse",
+              "ratio": 1.3545197214792664,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 2.2106018439486185e-07,
+                  "low": 1.4754374428531724e-07,
+                  "high": 3.187202291764759e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 2.2106018439486185e-07,
+                  "low": 1.5688811710918604e-07,
+                  "high": 2.962605009813387e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift16/common_anchored_b_mse",
+              "ratio": 1.3167016725575162,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 2.61726106384538e-07,
+                  "low": 1.9924369011929074e-07,
+                  "high": 3.61684686074391e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 2.61726106384538e-07,
+                  "low": 1.9365185636556912e-07,
+                  "high": 3.427317356324259e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift16/disagreement_mse",
+              "ratio": 1.2754956820580656,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 2.2004111282559689e-07,
+                  "low": 1.892799070946263e-07,
+                  "high": 2.596953291149238e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 2.2004111282559689e-07,
+                  "low": 1.7568073325743362e-07,
+                  "high": 2.6712707944182247e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift64/shape_a_mse",
+              "ratio": 1.440712498339376,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 1.0818904905590434e-07,
+                  "low": 8.280479691031839e-08,
+                  "high": 1.4365875756612386e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 1.0818904905590434e-07,
+                  "low": 8.634296629048437e-08,
+                  "high": 1.3526769740222498e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift64/shape_b_mse",
+              "ratio": 1.1988404295752648,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 1.5026493963748946e-07,
+                  "low": 6.440647943354404e-08,
+                  "high": 3.20200483746916e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 1.5026493963748946e-07,
+                  "low": 7.395722989855853e-08,
+                  "high": 2.53528230565622e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift64/common_anchored_a_mse",
+              "ratio": 1.4355663432297445,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 1.2359757724086035e-07,
+                  "low": 9.889489435097531e-08,
+                  "high": 1.5747701541538864e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 1.2359757724086035e-07,
+                  "low": 9.880148649045478e-08,
+                  "high": 1.5189034037887917e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift64/common_anchored_b_mse",
+              "ratio": 1.3036922642289412,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 3.6192775310597273e-07,
+                  "low": 2.488970599414402e-07,
+                  "high": 5.408975174857368e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 3.6192775310597273e-07,
+                  "low": 2.570673507096101e-07,
+                  "high": 4.895704501811617e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift64/disagreement_mse",
+              "ratio": 1.2217507862825054,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 1.9810900787414133e-07,
+                  "low": 1.2510865460177204e-07,
+                  "high": 3.344620594945303e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 1.9810900787414133e-07,
+                  "low": 1.1761608651091192e-07,
+                  "high": 3.152635059446778e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            }
+          ],
+          "neutral_primary_difference": {
+            "month": {
+              "mean": 0.0032417835204847944,
+              "low": 0.0022352825615572277,
+              "high": 0.004953821223915208,
+              "parents": 439,
+              "groups": 13,
+              "valid_draws": 2000,
+              "supported": true
+            },
+            "contract_period_month": {
+              "mean": 0.0032417835204847944,
+              "low": 0.002493616840343182,
+              "high": 0.0042330317560333635,
+              "parents": 439,
+              "groups": 206,
+              "valid_draws": 2000,
+              "supported": true
+            }
+          }
+        },
+        {
+          "cohort_seed": "cross_research/s43",
+          "reference_mse": 0.00740584582335657,
+          "candidate_mse": 0.0106472344578519,
+          "mse_change_percent": 43.767973460541576,
+          "reference_rmse_bps": 8.60572241206778,
+          "candidate_rmse_bps": 10.318543723729576,
+          "gain": "fail",
+          "overall_passed": false,
+          "full_price_ratios": {
+            "near": 1.6193218608739848,
+            "mid": 1.430410709867972,
+            "far": 1.4287385029415374
+          },
+          "endpoint_price_ratios": {
+            "near": 1.4004923777710443,
+            "mid": 1.3972696834291711,
+            "far": 1.438759924118988
+          },
+          "p95_ratio": 1.423841640682251,
+          "p95_passed": false,
+          "protection_counts": {
+            "fail": 36,
+            "pass": 42
+          },
+          "f03_counts": {
+            "fail": 15
+          },
+          "nonprice_counts": {
+            "fail": 12,
+            "pass": 42
+          },
+          "definite_harm_protections": 31,
+          "unconfirmed_protections": 5,
+          "full_nonprice_ratios": {
+            "body/near": 1.1088084542170829,
+            "volume_vs_prior_ema32/near": 1.0877690867312528,
+            "delta_log_volume/near": 1.1027779158943694,
+            "oi_change_percent_asinh/near": 1.1638552469723957,
+            "oi_per_volume_asinh/near": 1.1782606997980087,
+            "turnover_asinh/near": 1.0517446354821995,
+            "body/mid": 1.0117863529651923,
+            "volume_vs_prior_ema32/mid": 1.0288771929857627,
+            "delta_log_volume/mid": 1.0254027883695773,
+            "oi_change_percent_asinh/mid": 1.019314221879006,
+            "oi_per_volume_asinh/mid": 1.0133274989948753,
+            "turnover_asinh/mid": 1.026359598559424,
+            "body/far": 1.0044125228608598,
+            "volume_vs_prior_ema32/far": 1.0140881872871186,
+            "delta_log_volume/far": 1.010832512173524,
+            "oi_change_percent_asinh/far": 1.014915558246402,
+            "oi_per_volume_asinh/far": 1.0078416170794222,
+            "turnover_asinh/far": 1.0133945049711428
+          },
+          "f03_ratios": {
+            "shift1/shape_a_mse": 1.3318418559337901,
+            "shift1/shape_b_mse": 1.342673553904527,
+            "shift1/common_anchored_a_mse": 1.4413368647761438,
+            "shift1/common_anchored_b_mse": 1.4297293076065591,
+            "shift1/disagreement_mse": 1.1578512917536725,
+            "shift16/shape_a_mse": 1.3490609936543452,
+            "shift16/shape_b_mse": 1.3214910772304478,
+            "shift16/common_anchored_a_mse": 1.4178777967113838,
+            "shift16/common_anchored_b_mse": 1.4301483805391026,
+            "shift16/disagreement_mse": 1.3812569806046509,
+            "shift64/shape_a_mse": 1.436386258933432,
+            "shift64/shape_b_mse": 1.205509217738776,
+            "shift64/common_anchored_a_mse": 1.4839623198060683,
+            "shift64/common_anchored_b_mse": 1.438759924118988,
+            "shift64/disagreement_mse": 1.3349423475768059
+          },
+          "failed_protections": [
+            {
+              "key": "retain/full/price/near",
+              "ratio": 1.6193218608739848,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0005168886294395183,
+                  "low": 0.00044555733770884365,
+                  "high": 0.000616836669579803,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0005168886294395183,
+                  "low": 0.00046345110519834887,
+                  "high": 0.0005776239255282366,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/full/price/mid",
+              "ratio": 1.430410709867972,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.001770748888718792,
+                  "low": 0.0013587344059605643,
+                  "high": 0.0023583716101213577,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.001770748888718792,
+                  "low": 0.0015179268231214147,
+                  "high": 0.0020773465860815686,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/full/price/far",
+              "ratio": 1.4287385029415374,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.005214774638320708,
+                  "low": 0.0038879543627695886,
+                  "high": 0.007316027514697087,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.005214774638320708,
+                  "low": 0.004271178360780157,
+                  "high": 0.006409087238003721,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/price/near",
+              "ratio": 1.621268800866289,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0005183003433461643,
+                  "low": 0.00044633174770317054,
+                  "high": 0.0006193285121911055,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0005183003433461643,
+                  "low": 0.0004639986559559953,
+                  "high": 0.0005793781080300937,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/price/mid",
+              "ratio": 1.4306725073940778,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0017721071160245853,
+                  "low": 0.001357423541125968,
+                  "high": 0.0023619579899333953,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0017721071160245853,
+                  "low": 0.0015185692046186315,
+                  "high": 0.002079138739208129,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/price/far",
+              "ratio": 1.4286607132647642,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.005214118403980371,
+                  "low": 0.0038885807514320394,
+                  "high": 0.0073201353449043275,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.005214118403980371,
+                  "low": 0.0042706182371737966,
+                  "high": 0.0064104471970559485,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/price/near",
+              "ratio": 1.4004923777710443,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0003376009632954772,
+                  "low": 0.0002289965777162373,
+                  "high": 0.00042359899990459745,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0003376009632954772,
+                  "low": 0.00018928548573500487,
+                  "high": 0.00044635780763139664,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/price/mid",
+              "ratio": 1.3972696834291711,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0015982540208830693,
+                  "low": 0.0012370600334240798,
+                  "high": 0.00206467938139897,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0015982540208830693,
+                  "low": 0.0012436190080068773,
+                  "high": 0.0019965280598577876,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/price/far",
+              "ratio": 1.438759924118988,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0052981163995436216,
+                  "low": 0.0038492799215100485,
+                  "high": 0.007082432243479651,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0052981163995436216,
+                  "low": 0.003690407161536324,
+                  "high": 0.007244084549088454,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/full/nonprice/body/near",
+              "ratio": 1.1088084542170829,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": 0.00011901344265414936,
+                  "low": -0.00019119689962303988,
+                  "high": 0.000360081493316703,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.00011901344265414936,
+                  "low": -0.00011809343980915045,
+                  "high": 0.00032451515211049097,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/full/nonprice/delta_log_volume/near",
+              "ratio": 1.1027779158943694,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": 4.6365598147826755e-05,
+                  "low": -2.490553025613619e-05,
+                  "high": 0.00011579893037050701,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 4.6365598147826755e-05,
+                  "low": -4.132794510986679e-05,
+                  "high": 0.00013521961015991978,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/full/nonprice/oi_change_percent_asinh/near",
+              "ratio": 1.1638552469723957,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0005944960402983941,
+                  "low": 0.00047831458606727514,
+                  "high": 0.0007242247857720364,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0005944960402983941,
+                  "low": 0.0005035767059026637,
+                  "high": 0.0006908293100019245,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/full/nonprice/oi_per_volume_asinh/near",
+              "ratio": 1.1782606997980087,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.001004177354952259,
+                  "low": 0.0008674427519571997,
+                  "high": 0.0011408375282127424,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.001004177354952259,
+                  "low": 0.0008762433039755744,
+                  "high": 0.00113375712626789,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/nonprice/body/near",
+              "ratio": 1.1083352366766148,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": 0.00011245599887327526,
+                  "low": -0.00020376764805187056,
+                  "high": 0.00035553888768708754,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.00011245599887327526,
+                  "low": -0.0001306351401557826,
+                  "high": 0.0003201026225125235,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/nonprice/delta_log_volume/near",
+              "ratio": 1.1028721522967582,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": 4.7909035915927145e-05,
+                  "low": -2.43950531556946e-05,
+                  "high": 0.00011908694182626377,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 4.7909035915927145e-05,
+                  "low": -3.909782181653775e-05,
+                  "high": 0.0001387389921624304,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/nonprice/oi_change_percent_asinh/near",
+              "ratio": 1.1637119470109372,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.000592799893432937,
+                  "low": 0.00047767859367151244,
+                  "high": 0.0007204982436369367,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.000592799893432937,
+                  "low": 0.000502163280280134,
+                  "high": 0.000690194349050937,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/nonprice/oi_per_volume_asinh/near",
+              "ratio": 1.1781464745594123,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.001001972740281231,
+                  "low": 0.0008661871937125679,
+                  "high": 0.0011385910818924015,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.001001972740281231,
+                  "low": 0.0008760233378124726,
+                  "high": 0.0011333458076580466,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/nonprice/body/near",
+              "ratio": 1.159469236860928,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0009518088028252132,
+                  "low": 0.00014372280764241902,
+                  "high": 0.0019670247411186573,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0009518088028252132,
+                  "low": 0.0003033250414907098,
+                  "high": 0.0017374089246680745,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/nonprice/delta_log_volume/near",
+              "ratio": 1.0916826522899037,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": -0.00014965099840089007,
+                  "low": -0.0006204247999044406,
+                  "high": 0.00029954763290477524,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": -0.00014965099840089007,
+                  "low": -0.000729300129451575,
+                  "high": 0.00035821725595924016,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/nonprice/oi_change_percent_asinh/near",
+              "ratio": 1.18073489229873,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.0008099066922114647,
+                  "low": 0.0003179724695341368,
+                  "high": 0.0012869250869134206,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.0008099066922114647,
+                  "low": 0.00041425589067678237,
+                  "high": 0.0012070589239845243,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/nonprice/oi_per_volume_asinh/near",
+              "ratio": 1.1915159813824001,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 0.001284163418172836,
+                  "low": 0.0006968416872555558,
+                  "high": 0.0018705319431995724,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 0.001284163418172836,
+                  "low": 0.0008052171713399777,
+                  "high": 0.0017701802507906175,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift1/shape_a_mse",
+              "ratio": 1.3318418559337901,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 2.0450102476574073e-07,
+                  "low": 1.5467349588020288e-07,
+                  "high": 2.5624916380707434e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 2.0450102476574073e-07,
+                  "low": 1.6261434497264876e-07,
+                  "high": 2.5413613721358834e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift1/shape_b_mse",
+              "ratio": 1.342673553904527,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 2.193119253787046e-07,
+                  "low": 1.6938196482884723e-07,
+                  "high": 2.8917818442318007e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 2.193119253787046e-07,
+                  "low": 1.6144669671996018e-07,
+                  "high": 2.875134084513194e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift1/common_anchored_a_mse",
+              "ratio": 1.4413368647761438,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 3.4257034889433605e-07,
+                  "low": 2.2815788666159958e-07,
+                  "high": 4.760291821554113e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 3.4257034889433605e-07,
+                  "low": 2.549875014357835e-07,
+                  "high": 4.442524435865157e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift1/common_anchored_b_mse",
+              "ratio": 1.4297293076065591,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 3.3001679099515465e-07,
+                  "low": 2.4682472629584836e-07,
+                  "high": 4.358837139626521e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 3.3001679099515465e-07,
+                  "low": 2.4364336145139793e-07,
+                  "high": 4.3761719048288236e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift1/disagreement_mse",
+              "ratio": 1.1578512917536725,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 5.4522791514219065e-08,
+                  "low": 1.1209046647880059e-08,
+                  "high": 9.424040767204513e-08,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 5.4522791514219065e-08,
+                  "low": 1.8194794932874905e-08,
+                  "high": 9.030665864057037e-08,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift16/shape_a_mse",
+              "ratio": 1.3490609936543452,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 1.6689290674672605e-07,
+                  "low": 1.0870879215021324e-07,
+                  "high": 2.322507325452746e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 1.6689290674672605e-07,
+                  "low": 1.2026769904767035e-07,
+                  "high": 2.127579448130583e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift16/shape_b_mse",
+              "ratio": 1.3214910772304478,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 2.2170760388411897e-07,
+                  "low": 1.6861069004206756e-07,
+                  "high": 3.0087108867277947e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 2.2170760388411897e-07,
+                  "low": 1.5958530061244488e-07,
+                  "high": 2.955845067235792e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift16/common_anchored_a_mse",
+              "ratio": 1.4178777967113838,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 2.3807139969698798e-07,
+                  "low": 1.3819810883414362e-07,
+                  "high": 3.59982454525478e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 2.3807139969698798e-07,
+                  "low": 1.7170546128024272e-07,
+                  "high": 3.0627910718408964e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift16/common_anchored_b_mse",
+              "ratio": 1.4301483805391026,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 3.6981759114741937e-07,
+                  "low": 2.751989428252673e-07,
+                  "high": 4.891277185807157e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 3.6981759114741937e-07,
+                  "low": 2.713464666342324e-07,
+                  "high": 4.926346058731101e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift16/disagreement_mse",
+              "ratio": 1.3812569806046509,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 3.5177765334469365e-07,
+                  "low": 2.9159364111751354e-07,
+                  "high": 4.3615160757153257e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 3.5177765334469365e-07,
+                  "low": 2.919065628725562e-07,
+                  "high": 4.132693283528268e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift64/shape_a_mse",
+              "ratio": 1.436386258933432,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 1.301014005113595e-07,
+                  "low": 8.79253261647356e-08,
+                  "high": 1.9514209399111445e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 1.301014005113595e-07,
+                  "low": 9.677250691523158e-08,
+                  "high": 1.721504138876549e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift64/shape_b_mse",
+              "ratio": 1.205509217738776,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 1.3964064632760125e-07,
+                  "low": 6.180096585662152e-08,
+                  "high": 2.219623839422014e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 1.3964064632760125e-07,
+                  "low": 6.421060085139328e-08,
+                  "high": 2.2377228949159089e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift64/common_anchored_a_mse",
+              "ratio": 1.4839623198060683,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 1.6884023632141968e-07,
+                  "low": 1.0799877932258873e-07,
+                  "high": 2.7247680305550793e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 1.6884023632141968e-07,
+                  "low": 1.1660705637832898e-07,
+                  "high": 2.3768219411623617e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift64/common_anchored_b_mse",
+              "ratio": 1.438759924118988,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 5.298116399543623e-07,
+                  "low": 3.849279921510048e-07,
+                  "high": 7.082432243479653e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 5.298116399543623e-07,
+                  "low": 3.6904071615363286e-07,
+                  "high": 7.244084549088443e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/overlap/shift64/disagreement_mse",
+              "ratio": 1.3349423475768059,
+              "both_lower_bounds_exceed_10pct": true,
+              "intervals": {
+                "month": {
+                  "mean": 3.2499963613158087e-07,
+                  "low": 2.1908286492186234e-07,
+                  "high": 5.277239270879122e-07,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": 3.2499963613158087e-07,
+                  "low": 2.1404566096447385e-07,
+                  "high": 4.789750403539511e-07,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            }
+          ],
+          "neutral_primary_difference": {
+            "month": {
+              "mean": 0.003241388634495331,
+              "low": 0.0024818724139014543,
+              "high": 0.004425567710080948,
+              "parents": 439,
+              "groups": 13,
+              "valid_draws": 2000,
+              "supported": true
+            },
+            "contract_period_month": {
+              "mean": 0.003241388634495331,
+              "low": 0.0027195485542054437,
+              "high": 0.003874182576122511,
+              "parents": 439,
+              "groups": 206,
+              "valid_draws": 2000,
+              "supported": true
+            }
+          }
+        }
+      ],
+      "control_vs_initial": [
+        {
+          "cohort_seed": "test/s42",
+          "reference_mse": 0.03824656893562888,
+          "candidate_mse": 0.03188810606253837,
+          "mse_change_percent": -16.62492362071003,
+          "reference_rmse_bps": 19.556730027187285,
+          "candidate_rmse_bps": 17.857241125811786,
+          "gain": "pass",
+          "overall_passed": true,
+          "full_price_ratios": {
+            "near": 0.8329762046742464,
+            "mid": 0.8558700796983756,
+            "far": 0.8280832023442191
+          },
+          "endpoint_price_ratios": {
+            "near": 0.9564283379157165,
+            "mid": 0.8319842810148882,
+            "far": 0.8128001365784894
+          },
+          "p95_ratio": 0.8125375286988052,
+          "p95_passed": true,
+          "protection_counts": {
+            "pass": 78
+          },
+          "f03_counts": {
+            "pass": 15
+          },
+          "nonprice_counts": {
+            "pass": 54
+          },
+          "definite_harm_protections": 0,
+          "unconfirmed_protections": 0,
+          "full_nonprice_ratios": {
+            "body/near": 0.9161623177822306,
+            "volume_vs_prior_ema32/near": 0.974295969246142,
+            "delta_log_volume/near": 0.9986389579923792,
+            "oi_change_percent_asinh/near": 0.9659353888340773,
+            "oi_per_volume_asinh/near": 1.0283741654610503,
+            "turnover_asinh/near": 1.0086731464408552,
+            "body/mid": 0.9691987727532645,
+            "volume_vs_prior_ema32/mid": 0.8224276065856417,
+            "delta_log_volume/mid": 0.7387473515375713,
+            "oi_change_percent_asinh/mid": 0.8957516148769128,
+            "oi_per_volume_asinh/mid": 0.9123705759949807,
+            "turnover_asinh/mid": 0.868561885019375,
+            "body/far": 0.912649473484833,
+            "volume_vs_prior_ema32/far": 0.9120542210999497,
+            "delta_log_volume/far": 0.9251263025380714,
+            "oi_change_percent_asinh/far": 0.9714358495569023,
+            "oi_per_volume_asinh/far": 0.9717117060704105,
+            "turnover_asinh/far": 0.9193530851732014
+          },
+          "f03_ratios": {
+            "shift1/shape_a_mse": 0.8303450665226736,
+            "shift1/shape_b_mse": 0.8196716793175366,
+            "shift1/common_anchored_a_mse": 0.8359047040629939,
+            "shift1/common_anchored_b_mse": 0.8166766574227446,
+            "shift1/disagreement_mse": 0.9492961039320538,
+            "shift16/shape_a_mse": 0.8421372551874338,
+            "shift16/shape_b_mse": 0.8189643138965552,
+            "shift16/common_anchored_a_mse": 0.8406868130608136,
+            "shift16/common_anchored_b_mse": 0.8156538603393881,
+            "shift16/disagreement_mse": 0.935647372154425,
+            "shift64/shape_a_mse": 0.8323792951281467,
+            "shift64/shape_b_mse": 0.8142396615272085,
+            "shift64/common_anchored_a_mse": 0.832823102562779,
+            "shift64/common_anchored_b_mse": 0.8128001365784897,
+            "shift64/disagreement_mse": 0.8473107612499541
+          },
+          "failed_protections": [],
+          "neutral_primary_difference": {
+            "month": {
+              "mean": -0.006358462873090507,
+              "low": -0.011772091866069027,
+              "high": -0.002671783341720195,
+              "parents": 984,
+              "groups": 13,
+              "valid_draws": 2000,
+              "supported": true
+            },
+            "contract_period_month": {
+              "mean": -0.006358462873090507,
+              "low": -0.009316411111064918,
+              "high": -0.004128374375543338,
+              "parents": 984,
+              "groups": 498,
+              "valid_draws": 2000,
+              "supported": true
+            }
+          }
+        },
+        {
+          "cohort_seed": "test/s43",
+          "reference_mse": 0.03616254960551849,
+          "candidate_mse": 0.029213444626610633,
+          "mse_change_percent": -19.21630265208791,
+          "reference_rmse_bps": 19.016453298530326,
+          "candidate_rmse_bps": 17.09194097421666,
+          "gain": "pass",
+          "overall_passed": true,
+          "full_price_ratios": {
+            "near": 0.8037826506169078,
+            "mid": 0.8063047585902962,
+            "far": 0.8086760711247893
+          },
+          "endpoint_price_ratios": {
+            "near": 0.9041814252964516,
+            "mid": 0.8291654355128769,
+            "far": 0.8452496059234691
+          },
+          "p95_ratio": 0.819722891620954,
+          "p95_passed": true,
+          "protection_counts": {
+            "pass": 78
+          },
+          "f03_counts": {
+            "pass": 15
+          },
+          "nonprice_counts": {
+            "pass": 54
+          },
+          "definite_harm_protections": 0,
+          "unconfirmed_protections": 0,
+          "full_nonprice_ratios": {
+            "body/near": 0.9117425832989606,
+            "volume_vs_prior_ema32/near": 0.98210615319896,
+            "delta_log_volume/near": 0.9597841085318747,
+            "oi_change_percent_asinh/near": 0.9132159009950025,
+            "oi_per_volume_asinh/near": 0.9086896726273108,
+            "turnover_asinh/near": 1.0128136378610133,
+            "body/mid": 0.9468273599980179,
+            "volume_vs_prior_ema32/mid": 0.8802369491367592,
+            "delta_log_volume/mid": 0.8599425381356316,
+            "oi_change_percent_asinh/mid": 0.9241971196961384,
+            "oi_per_volume_asinh/mid": 0.9346056974963721,
+            "turnover_asinh/mid": 0.8930164906770138,
+            "body/far": 0.8949115495668817,
+            "volume_vs_prior_ema32/far": 0.9036300682210461,
+            "delta_log_volume/far": 0.9204667803668085,
+            "oi_change_percent_asinh/far": 0.953570350783242,
+            "oi_per_volume_asinh/far": 0.9655120078991953,
+            "turnover_asinh/far": 0.9109081669989265
+          },
+          "f03_ratios": {
+            "shift1/shape_a_mse": 0.8423529724315597,
+            "shift1/shape_b_mse": 0.8479716256565217,
+            "shift1/common_anchored_a_mse": 0.8275177989224873,
+            "shift1/common_anchored_b_mse": 0.8427309070419975,
+            "shift1/disagreement_mse": 0.9277121318133986,
+            "shift16/shape_a_mse": 0.8696524460577095,
+            "shift16/shape_b_mse": 0.8474515902378205,
+            "shift16/common_anchored_a_mse": 0.8627160565084316,
+            "shift16/common_anchored_b_mse": 0.8423886042328663,
+            "shift16/disagreement_mse": 0.8859338965380849,
+            "shift64/shape_a_mse": 0.8564943998202115,
+            "shift64/shape_b_mse": 0.8515327775970213,
+            "shift64/common_anchored_a_mse": 0.8582524754585386,
+            "shift64/common_anchored_b_mse": 0.8452496059234693,
+            "shift64/disagreement_mse": 0.8818052101696691
+          },
+          "failed_protections": [],
+          "neutral_primary_difference": {
+            "month": {
+              "mean": -0.0069491049789078664,
+              "low": -0.014022010413347066,
+              "high": -0.0025309116751874258,
+              "parents": 984,
+              "groups": 13,
+              "valid_draws": 2000,
+              "supported": true
+            },
+            "contract_period_month": {
+              "mean": -0.0069491049789078664,
+              "low": -0.010706424283726538,
+              "high": -0.004084519444173801,
+              "parents": 984,
+              "groups": 498,
+              "valid_draws": 2000,
+              "supported": true
+            }
+          }
+        },
+        {
+          "cohort_seed": "cross_research/s42",
+          "reference_mse": 0.009208502330563214,
+          "candidate_mse": 0.00792177793984199,
+          "mse_change_percent": -13.973221100792454,
+          "reference_rmse_bps": 9.596094169277006,
+          "candidate_rmse_bps": 8.90043703412478,
+          "gain": "pass",
+          "overall_passed": false,
+          "full_price_ratios": {
+            "near": 1.0088812088317336,
+            "mid": 0.96201880509129,
+            "far": 0.8296259572475456
+          },
+          "endpoint_price_ratios": {
+            "near": 0.9996716497679883,
+            "mid": 1.0196320242751924,
+            "far": 0.8511434626892657
+          },
+          "p95_ratio": 0.8078656662724114,
+          "p95_passed": true,
+          "protection_counts": {
+            "pass": 76,
+            "fail": 2
+          },
+          "f03_counts": {
+            "pass": 15
+          },
+          "nonprice_counts": {
+            "pass": 52,
+            "fail": 2
+          },
+          "definite_harm_protections": 0,
+          "unconfirmed_protections": 2,
+          "full_nonprice_ratios": {
+            "body/near": 0.9465844543755182,
+            "volume_vs_prior_ema32/near": 1.008301280117981,
+            "delta_log_volume/near": 1.0735340629271173,
+            "oi_change_percent_asinh/near": 1.0184706109677522,
+            "oi_per_volume_asinh/near": 1.060250341425648,
+            "turnover_asinh/near": 1.004408317729852,
+            "body/mid": 1.0028095221332693,
+            "volume_vs_prior_ema32/mid": 0.8054009734016342,
+            "delta_log_volume/mid": 0.7093156711349684,
+            "oi_change_percent_asinh/mid": 0.8809948919406506,
+            "oi_per_volume_asinh/mid": 0.908746877254008,
+            "turnover_asinh/mid": 0.869506506599759,
+            "body/far": 0.9160495893552939,
+            "volume_vs_prior_ema32/far": 0.903577584634089,
+            "delta_log_volume/far": 0.9213420460123875,
+            "oi_change_percent_asinh/far": 0.9663510473872485,
+            "oi_per_volume_asinh/far": 0.9729290420947575,
+            "turnover_asinh/far": 0.9140701901240285
+          },
+          "f03_ratios": {
+            "shift1/shape_a_mse": 0.8468789722663838,
+            "shift1/shape_b_mse": 0.8680400971905498,
+            "shift1/common_anchored_a_mse": 0.8559964645113527,
+            "shift1/common_anchored_b_mse": 0.8764842068991865,
+            "shift1/disagreement_mse": 0.9799907450723272,
+            "shift16/shape_a_mse": 0.8538316300126533,
+            "shift16/shape_b_mse": 0.8669870441537458,
+            "shift16/common_anchored_a_mse": 0.8547817972033754,
+            "shift16/common_anchored_b_mse": 0.875002462419781,
+            "shift16/disagreement_mse": 0.9532309203842237,
+            "shift64/shape_a_mse": 0.9552985763451234,
+            "shift64/shape_b_mse": 0.853413256527564,
+            "shift64/common_anchored_a_mse": 0.9734772339008629,
+            "shift64/common_anchored_b_mse": 0.8511434626892658,
+            "shift64/disagreement_mse": 0.8829775852212174
+          },
+          "failed_protections": [
+            {
+              "key": "retain/endpoint/nonprice/delta_log_volume/near",
+              "ratio": 1.0579527490441423,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": -0.0007436766634905803,
+                  "low": -0.0014306434313374442,
+                  "high": -0.000107025233977466,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": -0.0007436766634905803,
+                  "low": -0.0016493602961293813,
+                  "high": 4.9605128869686234e-05,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/nonprice/oi_per_volume_asinh/near",
+              "ratio": 1.0661953872320842,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": -0.0005044749139849513,
+                  "low": -0.001079034617802916,
+                  "high": -1.9497257946302518e-05,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": -0.0005044749139849513,
+                  "low": -0.0011308973871726358,
+                  "high": 6.164031154683637e-05,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            }
+          ],
+          "neutral_primary_difference": {
+            "month": {
+              "mean": -0.0012867243907212235,
+              "low": -0.0020226122296922873,
+              "high": -0.000795527732015887,
+              "parents": 439,
+              "groups": 13,
+              "valid_draws": 2000,
+              "supported": true
+            },
+            "contract_period_month": {
+              "mean": -0.0012867243907212235,
+              "low": -0.001690420645318541,
+              "high": -0.0009317943743032296,
+              "parents": 439,
+              "groups": 206,
+              "valid_draws": 2000,
+              "supported": true
+            }
+          }
+        },
+        {
+          "cohort_seed": "cross_research/s43",
+          "reference_mse": 0.00854003004646759,
+          "candidate_mse": 0.00740584582335657,
+          "mse_change_percent": -13.280798977752461,
+          "reference_rmse_bps": 9.241228298482616,
+          "candidate_rmse_bps": 8.60572241206778,
+          "gain": "pass",
+          "overall_passed": false,
+          "full_price_ratios": {
+            "near": 1.077901509468377,
+            "mid": 0.9124399600387667,
+            "far": 0.8427365277033202
+          },
+          "endpoint_price_ratios": {
+            "near": 1.0168556367162653,
+            "mid": 0.8942550976213359,
+            "far": 0.8519454401778883
+          },
+          "p95_ratio": 0.7940008757268308,
+          "p95_passed": true,
+          "protection_counts": {
+            "fail": 3,
+            "pass": 75
+          },
+          "f03_counts": {
+            "pass": 15
+          },
+          "nonprice_counts": {
+            "pass": 54
+          },
+          "definite_harm_protections": 0,
+          "unconfirmed_protections": 3,
+          "full_nonprice_ratios": {
+            "body/near": 0.9193776775140934,
+            "volume_vs_prior_ema32/near": 1.0302557065938016,
+            "delta_log_volume/near": 1.0187754141551641,
+            "oi_change_percent_asinh/near": 0.9259452005091688,
+            "oi_per_volume_asinh/near": 0.9146051624447133,
+            "turnover_asinh/near": 0.9917286983034734,
+            "body/mid": 0.9533726456235055,
+            "volume_vs_prior_ema32/mid": 0.8739372521819837,
+            "delta_log_volume/mid": 0.8512759011039073,
+            "oi_change_percent_asinh/mid": 0.9180423228873276,
+            "oi_per_volume_asinh/mid": 0.9339652294269691,
+            "turnover_asinh/mid": 0.8917720771547623,
+            "body/far": 0.9064497879187975,
+            "volume_vs_prior_ema32/far": 0.905139841156728,
+            "delta_log_volume/far": 0.9189109877023615,
+            "oi_change_percent_asinh/far": 0.9545709910237183,
+            "oi_per_volume_asinh/far": 0.9674655683386623,
+            "turnover_asinh/far": 0.9130309010840103
+          },
+          "f03_ratios": {
+            "shift1/shape_a_mse": 0.8519304219977883,
+            "shift1/shape_b_mse": 0.8656728129562975,
+            "shift1/common_anchored_a_mse": 0.854153128752816,
+            "shift1/common_anchored_b_mse": 0.8622868201880572,
+            "shift1/disagreement_mse": 0.970280361036338,
+            "shift16/shape_a_mse": 0.8788137021859547,
+            "shift16/shape_b_mse": 0.8633296567409285,
+            "shift16/common_anchored_a_mse": 0.8774454480939,
+            "shift16/common_anchored_b_mse": 0.860394546655372,
+            "shift16/disagreement_mse": 0.9255641178820093,
+            "shift64/shape_a_mse": 0.9260859873278554,
+            "shift64/shape_b_mse": 0.8495009278869098,
+            "shift64/common_anchored_a_mse": 0.9360793617732803,
+            "shift64/common_anchored_b_mse": 0.8519454401778883,
+            "shift64/disagreement_mse": 0.8903611804223796
+          },
+          "failed_protections": [
+            {
+              "key": "retain/full/price/near",
+              "ratio": 1.077901509468377,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": -2.040534319450282e-05,
+                  "low": -8.007506839599184e-05,
+                  "high": 1.8528104138564982e-05,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": -2.040534319450282e-05,
+                  "low": -5.590605114279737e-05,
+                  "high": 7.069976224209412e-06,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/interior/price/near",
+              "ratio": 1.0784775523952048,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": -1.9842679309420636e-05,
+                  "low": -7.932851727162358e-05,
+                  "high": 1.904984841327248e-05,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": -1.9842679309420636e-05,
+                  "low": -5.521553585306756e-05,
+                  "high": 7.77835745916057e-06,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            },
+            {
+              "key": "retain/endpoint/price/near",
+              "ratio": 1.0168556367162653,
+              "both_lower_bounds_exceed_10pct": false,
+              "intervals": {
+                "month": {
+                  "mean": -9.186365659993947e-05,
+                  "low": -0.00022892160356619763,
+                  "high": 2.1213321781400318e-05,
+                  "parents": 439,
+                  "groups": 13,
+                  "valid_draws": 2000,
+                  "supported": true
+                },
+                "contract_period_month": {
+                  "mean": -9.186365659993947e-05,
+                  "low": -0.00020758585724428607,
+                  "high": 6.1239982849286855e-06,
+                  "parents": 439,
+                  "groups": 206,
+                  "valid_draws": 2000,
+                  "supported": true
+                }
+              }
+            }
+          ],
+          "neutral_primary_difference": {
+            "month": {
+              "mean": -0.0011341842231110202,
+              "low": -0.001705575020572942,
+              "high": -0.0007311473477674521,
+              "parents": 439,
+              "groups": 13,
+              "valid_draws": 2000,
+              "supported": true
+            },
+            "contract_period_month": {
+              "mean": -0.0011341842231110202,
+              "low": -0.0014509745919188415,
+              "high": -0.000858760677416524,
+              "parents": 439,
+              "groups": 206,
+              "valid_draws": 2000,
+              "supported": true
+            }
+          }
+        }
+      ]
+    },
+    "gate_counts": {
+      "layer2_vs_control": {
+        "primary_gain_passed": 0,
+        "primary_gain_total": 4,
+        "protection_passed": 183,
+        "protection_total": 312,
+        "protection_failed": 129,
+        "both_cluster_intervals_exceed_10pct_harm": 102,
+        "protection_unconfirmed": 27,
+        "p95_passed": 0,
+        "p95_total": 4,
+        "F03_passed": 0,
+        "F03_total": 60,
+        "all_cohorts_and_seeds_passed": false
+      },
+      "control_vs_initial": {
+        "primary_gain_passed": 4,
+        "primary_gain_total": 4,
+        "protection_passed": 307,
+        "protection_total": 312,
+        "protection_failed": 5,
+        "both_cluster_intervals_exceed_10pct_harm": 0,
+        "protection_unconfirmed": 5,
+        "p95_passed": 4,
+        "p95_total": 4,
+        "F03_passed": 60,
+        "F03_total": 60,
+        "all_cohorts_and_seeds_passed": false
+      }
+    },
+    "validation_curves": {
+      "control_s42": {
+        "final_query": {
+          "initial": 0.03216132870810456,
+          "last": 0.029066667306079437,
+          "change_percent": -9.622305813644061
+        },
+        "auxiliary_query": {
+          "initial": 0.03216132870810456,
+          "last": 0.029066667306079437,
+          "change_percent": -9.622305813644061
+        },
+        "path": {
+          "initial": 0.00047332561115801084,
+          "last": 0.00041770167456899444,
+          "change_percent": -11.751727622118334
+        },
+        "change1": {
+          "initial": 0.027049970261783074,
+          "last": 0.023097686563814827,
+          "change_percent": -14.611046369807434
+        },
+        "body": {
+          "initial": 0.04651360362181901,
+          "last": 0.042834768137013625,
+          "change_percent": -7.909160328054399
+        },
+        "activity": {
+          "initial": 0.07303548016367614,
+          "last": 0.06665524169929173,
+          "change_percent": -8.735806829894166
+        }
+      },
+      "layer2_s42": {
+        "final_query": {
+          "initial": 0.03216132870810456,
+          "last": 0.02984607135632723,
+          "change_percent": -7.198885881832018
+        },
+        "auxiliary_query": {
+          "initial": 0.1904285888810404,
+          "last": 0.10091971953923518,
+          "change_percent": -47.003903073461764
+        },
+        "path": {
+          "initial": 0.00047332561115801084,
+          "last": 0.0005630630178775167,
+          "change_percent": 18.958916357802735
+        },
+        "change1": {
+          "initial": 0.027049970261783074,
+          "last": 0.024436091530318775,
+          "change_percent": -9.663148262892019
+        },
+        "body": {
+          "initial": 0.04651360362181901,
+          "last": 0.04333244267625104,
+          "change_percent": -6.839205518094326
+        },
+        "activity": {
+          "initial": 0.07303548016367614,
+          "last": 0.06800127858495783,
+          "change_percent": -6.892816433104043
+        }
+      },
+      "control_s43": {
+        "final_query": {
+          "initial": 0.032102253841761,
+          "last": 0.028942815398480315,
+          "change_percent": -9.841796338831044
+        },
+        "auxiliary_query": {
+          "initial": 0.032102253841761,
+          "last": 0.028942815398480315,
+          "change_percent": -9.841796338831044
+        },
+        "path": {
+          "initial": 0.00044240528879751497,
+          "last": 0.000396513913458744,
+          "change_percent": -10.373152514407447
+        },
+        "change1": {
+          "initial": 0.02109834707769513,
+          "last": 0.016883669771008063,
+          "change_percent": -19.976338862785916
+        },
+        "body": {
+          "initial": 0.04046975683442313,
+          "last": 0.03578569462391693,
+          "change_percent": -11.574228700385936
+        },
+        "activity": {
+          "initial": 0.07886215542420213,
+          "last": 0.07276302138834505,
+          "change_percent": -7.733917495723574
+        }
+      },
+      "layer2_s43": {
+        "final_query": {
+          "initial": 0.032102253841761,
+          "last": 0.029658827578550588,
+          "change_percent": -7.611385403824267
+        },
+        "auxiliary_query": {
+          "initial": 0.20256131737617528,
+          "last": 0.10952551767190424,
+          "change_percent": -45.929697194600514
+        },
+        "path": {
+          "initial": 0.00044240528879751497,
+          "last": 0.000578665419573301,
+          "change_percent": 30.79984218682139
+        },
+        "change1": {
+          "initial": 0.02109834707769513,
+          "last": 0.017666293972730895,
+          "change_percent": -16.266928837247885
+        },
+        "body": {
+          "initial": 0.04046975683442313,
+          "last": 0.03679574686123951,
+          "change_percent": -9.078408818257467
+        },
+        "activity": {
+          "initial": 0.07886215542420213,
+          "last": 0.0740484264335037,
+          "change_percent": -6.103978473331373
+        }
+      }
+    }
+  },
+  "conclusion": {
+    "control_vs_initial": "总体价格MSE降低13.2808%～19.2163%，主收益4/4、保护307/312、F03为60/60、P95为4/4；5项跨品种保护未确认，未证实超过10%伤害。保留control180双种子有限研究收益，不宣布均衡升级。",
+    "layer2_vs_control": "总体价格MSE增加25.5715%～43.7680%，4项差值区间都支持误差增加；主收益0/4、保护183/312、F03为0/60、P95为0/4。129失败保护中102项两类区间均超过10%伤害、27项未确认；收束此共享头/20%重分配/固定60轮配方。",
+    "learning": "第2层验证Q降低45.93%～47.00%，最终验证路径损失反而升18.96%～30.80%；辅助任务学会不代表最终状态改善。总Q下降会掩盖路径代价，不据此证明梯度冲突或最优架构。",
+    "original_flags_preserved": {
+      "limited_hypothesis_supported": false,
+      "budget_hypothesis_supported": false
+    },
+    "generic_reuse": "unknown_not_tested",
+    "promotion": false
+  },
+  "decision_impact": {
+    "reference_unchanged": {
+      "model": "Macro control",
+      "seeds": [
+        42,
+        43
+      ],
+      "selected_epochs": [
+        97,
+        94
+      ],
+      "width": 768,
+      "layers": 4,
+      "heads": 8,
+      "claim": "Research reference only, not globally optimal or fully accepted"
+    },
+    "retained_candidate": "layer_supervision768/control_s42 and control_s43 fixed additional last60 (cumulative180); limited research candidate only",
+    "closed_recipe": "layer_supervision768/layer2 shared-query alpha0.2 reallocation at fixed60",
+    "historical_results": "旧D/多尺度/mask/深度/重叠/纠错结论均不改判；本轮不做其跨预算排名",
+    "no_new_jobs": true
+  },
+  "next_action": {
+    "status": "design_pending_no_new_training",
+    "task_ids": [
+      "F05",
+      "F01",
+      "F11"
+    ],
+    "question": "在不要求浅层重复最终完整任务的前提下，编码阶段能否更有效地组织近远期价量内容？这是待设计假设，不是本报告已定位的根因。",
+    "deliverable": "下一轮先交付一张可反驳的编码阶段信息组织设计卡：与旧causal-pool/历史query/长短记忆去重，区分编码写入和末端query读取，比较固定总状态容量；未能提出独立可识别的改动则不启动训练。",
+    "source": "尚未锁定；本轮control180双种子仅为有限研究候选。未来若采用，需显式重新锁来源、对照和预算；不得静默替换Macro或旧来源。",
+    "constraints": [
+      "目标仍是因果可复用价量状态",
+      "每被监督端点完整128与全位置评价保持",
+      "价量和近中远内容分项保护",
+      "不重跑此layer2权重网格、不自动再续60轮、不直接扩层",
+      "保留F02/F03/F04/F06-F12条件分支；V13仍待合格独立数据"
+    ],
+    "reason": "原Q追加预算有有限收益，但没有均衡验收；layer2配方广泛退化。下一设计优先改变信息组织这一机制，不能据此声称训练因素已排除或架构是唯一瓶颈。",
+    "training_budget": 0,
+    "entrypoint": null,
+    "code_change": false
+  },
+  "review": {
+    "purpose": {
+      "status": "pass_for_scope",
+      "evidence": "F05两类比较分开：额外优化带来有限历史价格收益；layer2相对同期对照退化，配方收束；F11不以重建替代通用复用验收。",
+      "remaining": "通用复用、交易/预测与独立泛化未获新证据。"
+    },
+    "architecture": {
+      "status": "pass_for_scope",
+      "evidence": "4层/768/8头及共享query不变；每端点自己的完整128；公开输出仍仅最终层。绑定代码、46项来源重放及340项因果收据通过；initial固定8输出与原报告逐值相同。",
+      "remaining": "模型权重未下载，本地未重新前向；共享读头适配与最终损失权重变化并存，不能唯一归因编码器/梯度冲突或容量。"
+    },
+    "training": {
+      "status": "pass_for_scope",
+      "evidence": "240轮/9120次新增更新、四组固定last60、绝对epoch121..180采样和同种子曝光独立复算；原Adam恢复证据和固定LR/alpha算式一致。候选辅助损失下降但最终路径变差；候选裁剪频率低于对照。",
+      "remaining": "Adam/RNG实际张量留远端；20%是名义系数，非梯度占比。续训比较同时包含固定LR续段，不分离纯轮数作用；同更新非严格同算力。"
+    },
+    "validation": {
+      "status": "pass_for_scope",
+      "evidence": "12545项全128位置→父块/分布/双2000次聚类bootstrap/门槛复算通过；3118项原始价格及固定8预测复算通过。control有5项保护未确认，layer2有明确退化，均保留原阈值。",
+      "remaining": "完整128逐预测留远端，本地仅固定8逐预测；研究集已反复使用，非V13。相关保护项非独立能力且无家族多重检验校正；无新增冻结用途验证。"
+    },
+    "data": {
+      "status": "pass_for_scope",
+      "evidence": "135份可用包文件哈希通过；220份本地CSV匹配绑定哈希，1423父块整段255 close与时间身份及8674608个价格目标值核对；原train/val/research与单合约分区不变。",
+      "remaining": "本次未从原CSV重新生成全量成交/持仓标签；活动评价基于报告给定标签/mask。没有新独立数据，重叠曝光不是新增样本。"
+    },
+    "engineering": {
+      "status": "pass_for_scope",
+      "evidence": "正式gzip完整、路径安全；1次执行退出0，四组60轮与六模型固定锁完整，用时17824.764624秒。协议/绑定源码匹配；只做CPU报告审查，未改生产实现/旧来源。",
+      "remaining": "权重/优化器及完整预测按协议省略，身份与值核验范围分开；来源预检时延/显存不等于训练后候选生产性能。"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "reports/layer_supervision_review_c95e373e9b9d/provenance_review.py",
+      "sha256": "471f8bd864f8505e39e8ac5164c6d4aa65e74f034b2214be04d66f10855d653a"
+    },
+    {
+      "path": "reports/layer_supervision_review_c95e373e9b9d/provenance_review.json",
+      "sha256": "1915f798544c0ecdb688503f28bdb1822d603cd04587c234d0dd25d53c328745"
+    },
+    {
+      "path": "reports/layer_supervision_review_c95e373e9b9d/metric_review.py",
+      "sha256": "625108eae2675c75db9c1120539336c55cc0f9caec95b7c4a5e882dea304f2ce"
+    },
+    {
+      "path": "reports/layer_supervision_review_c95e373e9b9d/metric_review.json",
+      "sha256": "6b194f20f33206683526b5211d39638680c461c03c0afbce0f7c8b2fd6445b89"
+    },
+    {
+      "path": "reports/layer_supervision_review_c95e373e9b9d/prediction_review.py",
+      "sha256": "b6452948f21f3d8b1e5414d2fd509d5bffa3634521c04ba57cb4a5e2096b6255"
+    },
+    {
+      "path": "reports/layer_supervision_review_c95e373e9b9d/prediction_review.json",
+      "sha256": "59a572df745e386d064bd8f4c206656649c29a23135e2e49996327fd2c797bed"
+    },
+    {
+      "path": "reports/layer_supervision_review_c95e373e9b9d/plot_review.py",
+      "sha256": "3455aae6389927828885e29a15507c9152a61fe61d1181c2c08267e9824e8508"
+    },
+    {
+      "path": "reports/layer_supervision_review_c95e373e9b9d/result_summary.png",
+      "sha256": "cf3aeebece68dfcccd950c920a5de98ee6a836b319ce5b85518e0970b033ad36"
+    }
+  ]
+}
