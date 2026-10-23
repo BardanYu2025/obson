@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-24",
-  "current_iteration": "layer_supervision768_reviewed_recipe_closed",
-  "current_iteration_scope": "原Q续训相对initial120：总体价格MSE降低13.2808%～19.2163%，主收益4/4、保护307/312、F03为60/60、P95为4/4；5项跨品种保护未确认，未证实超过10%伤害。保留control180双种子有限研究收益，不宣布均衡升级。 layer2相对control180：总体价格MSE增加25.5715%～43.7680%，4项差值区间都支持误差增加；主收益0/4、保护183/312、F03为0/60、P95为0/4。129失败保护中102项两类区间均超过10%伤害、27项未确认；收束此共享头/20%重分配/固定60轮配方。 Macro不换；下一步F05信息组织设计，尚无新GPU预算。",
+  "current_iteration": "state_organization768_code_ready_pending_AutoDL",
+  "current_iteration_scope": "第23节F05跨深度内容组织：source control180双种子，plain/late_memory/staged_memory各追加60轮；原Q、完整128、公开768保持，两个必要比较同时通过才支持有限内容收益。代码就绪、CUDA未运行；第22节结论/Macro/历史纠错不改。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -518,11 +518,11 @@
         "docs/BABEL_ROADMAP.md#20-f01f03继续学习embedding先检验主目标的尺度分配2026-10-12",
         "docs/BABEL_LAYER_SUPERVISION768_REVIEW.json"
       ],
-      "next_action": "下一F05设计继续保持全位置/完整上下文职责；显式同时128保持独立未执行假设。",
+      "next_action": "只执行第23节state_organization768有界三组双种子，报告后逐项归档，不自动启动保留分支。",
       "implementation": "complete",
       "execution": "four_fixed120_workers_complete_reviewed",
       "conclusion": "本多尺度配方综合价格MSE升7.27%–24.78%，4项主收益0通过，均衡升级未成立。",
-      "current_role": "第22节同种子同曝光、每端点完整128与全128评价已核验；此次未测试显式每步同时128，不改第20节结论。",
+      "current_role": "保持uniform5/每端点own128/全128评价；显式同时128仍未测试。",
       "external_reference_20261018": {
         "project_ids": [
           "vjepa21"
@@ -531,11 +531,24 @@
         "evidence": "external_research_20261018"
       },
       "current_iteration": {
-        "card": "layer_supervision_plan",
-        "implementation": "complete",
-        "execution": "four60_complete_reviewed",
-        "conclusion": "总体价格MSE降低13.2808%～19.2163%，主收益4/4、保护307/312、F03为60/60、P95为4/4；5项跨品种保护未确认，未证实超过10%伤害。保留control180双种子有限研究收益，不宣布均衡升级。"
-      }
+        "card": "state_organization_plan",
+        "implementation": "complete_synthetic_checked",
+        "execution": "not_run",
+        "conclusion": "pending"
+      },
+      "iteration_archive": [
+        {
+          "current_iteration": {
+            "card": "layer_supervision_plan",
+            "implementation": "complete",
+            "execution": "four60_complete_reviewed",
+            "conclusion": "总体价格MSE降低13.2808%～19.2163%，主收益4/4、保护307/312、F03为60/60、P95为4/4；5项跨品种保护未确认，未证实超过10%伤害。保留control180双种子有限研究收益，不宣布均衡升级。"
+          },
+          "current_role": "第22节同种子同曝光、每端点完整128与全128评价已核验；此次未测试显式每步同时128，不改第20节结论。",
+          "next_action": "下一F05设计继续保持全位置/完整上下文职责；显式同时128保持独立未执行假设。"
+        }
+      ],
+      "historical_status_scope": "本对象status/implementation/execution/conclusion保留此前已完成的职责范围；第23节的当前执行状态仅见current_iteration及state_organization_plan，尚未运行。"
     },
     {
       "id": "F02",
@@ -629,7 +642,7 @@
         "V05",
         "V10"
       ],
-      "status": "第22节已复核：原Q续训有有限收益，layer2明确退化，本配方收束；信息组织方向仍开放。",
+      "status": "第22节配方已归档；第23节信息组织三组对照代码就绪待AutoDL。历史/当前结论分开。",
       "reentry_or_acceptance": "基线可靠后固定问题，分别控制深度/宽度/头数/训练预算；不拿短训深层与长训浅层作单因素结论",
       "evidence": [
         "docs/BABEL_GROWTH768_REVIEW.md",
@@ -638,10 +651,10 @@
         "docs/BABEL_ROADMAP.md#21-f05让已经发生的历史在编码器内部充分交流2026-10-17",
         "docs/BABEL_LAYER_SUPERVISION768_REVIEW.json"
       ],
-      "implementation": "complete_synthetic_and_remote_checked",
-      "execution": "four_fixed60_CUDA_workers_and_six_model_all128_evaluation_complete_reviewed",
-      "conclusion": "总体价格MSE增加25.5715%～43.7680%，4项差值区间都支持误差增加；主收益0/4、保护183/312、F03为0/60、P95为0/4。129失败保护中102项两类区间均超过10%伤害、27项未确认；收束此共享头/20%重分配/固定60轮配方。",
-      "next_action": "下一轮先交付一张可反驳的编码阶段信息组织设计卡：与旧causal-pool/历史query/长短记忆去重，区分编码写入和末端query读取，比较固定总状态容量；未能提出独立可识别的改动则不启动训练。",
+      "implementation": "complete_synthetic_checked",
+      "execution": "not_run",
+      "conclusion": "第23节跨深度信息组织待验证；第22节原Q有限收益和层监督退化结论见归档，未改变。",
+      "next_action": "只执行第23节state_organization768有界三组双种子，报告后逐项归档，不自动启动保留分支。",
       "external_reference_20261018": {
         "project_ids": [
           "vjepa21",
@@ -652,10 +665,10 @@
         "evidence": "external_research_20261018"
       },
       "current_iteration": {
-        "card": "layer_supervision_plan",
-        "implementation": "complete",
-        "execution": "four60_complete_reviewed",
-        "conclusion": "总体价格MSE增加25.5715%～43.7680%，4项差值区间都支持误差增加；主收益0/4、保护183/312、F03为0/60、P95为0/4。129失败保护中102项两类区间均超过10%伤害、27项未确认；收束此共享头/20%重分配/固定60轮配方。"
+        "card": "state_organization_plan",
+        "implementation": "complete_synthetic_checked",
+        "execution": "not_run",
+        "conclusion": "pending"
       },
       "previous_iteration_disposition": {
         "status": "第21节四组120轮内部注意力对照完成并复核；未均衡升级，固定配方收束，信息组织方向保留。",
@@ -663,7 +676,24 @@
         "execution": "four_fixed120_CUDA_workers_complete_reviewed",
         "conclusion": "完成真实训练/评价；全历史注意力综合价格MSE增加6.82%～14.44%，主收益0/4，保护未全过。本固定配方收束，不晋升。近段实体收益和中段代价同时保留。",
         "next_action": "第22节准备完成：恢复原control last120及Adam，原Q续训对照与第2层共享监督候选双种子各追加60轮。旧mask结果保留；新执行/结论待AutoDL。"
-      }
+      },
+      "iteration_archive": [
+        {
+          "current_iteration": {
+            "card": "layer_supervision_plan",
+            "implementation": "complete",
+            "execution": "four60_complete_reviewed",
+            "conclusion": "总体价格MSE增加25.5715%～43.7680%，4项差值区间都支持误差增加；主收益0/4、保护183/312、F03为0/60、P95为0/4。129失败保护中102项两类区间均超过10%伤害、27项未确认；收束此共享头/20%重分配/固定60轮配方。"
+          },
+          "next_action": "下一轮先交付一张可反驳的编码阶段信息组织设计卡：与旧causal-pool/历史query/长短记忆去重，区分编码写入和末端query读取，比较固定总状态容量；未能提出独立可识别的改动则不启动训练。",
+          "previous_unscoped_status": {
+            "implementation": "complete_synthetic_and_remote_checked",
+            "execution": "four_fixed60_CUDA_workers_and_six_model_all128_evaluation_complete_reviewed",
+            "conclusion": "总体价格MSE增加25.5715%～43.7680%，4项差值区间都支持误差增加；主收益0/4、保护183/312、F03为0/60、P95为0/4。129失败保护中102项两类区间均超过10%伤害、27项未确认；收束此共享头/20%重分配/固定60轮配方。"
+          }
+        }
+      ],
+      "current_role": "主要问题为h2->h4与h4->h4同容量内容汇聚，同时对比原结构；源码已就绪。"
     },
     {
       "id": "F06",
@@ -790,7 +820,7 @@
         "docs/BABEL_ROADMAP.md#19-f11n05下一用途",
         "docs/BABEL_LAYER_SUPERVISION768_REVIEW.json"
       ],
-      "next_action": "第22节内容/成本结算完成，无通用复用新证据。保留现有原型及旧用途边界；后续用途须另锁任务和强基线，不能由辅助层loss或重建均值宣布晋升。",
+      "next_action": "只执行第23节state_organization768有界三组双种子，报告后逐项归档，不自动启动保留分支。",
       "implementation": "fixed_closed_bar_adapter_and_bounded_replay_delivered",
       "execution": "complete_AutoDL_CUDA_and_report_reviewed",
       "conclusion": "连续接口数值资格通过；普通平均保真较高，压力/低波动失败保留，不等于可靠趋势或通用用途验收。",
@@ -802,11 +832,24 @@
         "evidence": "external_research_20261018"
       },
       "current_iteration": {
-        "card": "layer_supervision_plan",
-        "implementation": "complete",
-        "execution": "four60_complete_reviewed",
-        "conclusion": "内容和成本已结算；0新增用途拟合，generic_reuse仍unknown_not_tested。"
-      }
+        "card": "state_organization_plan",
+        "implementation": "complete_synthetic_checked",
+        "execution": "not_run",
+        "conclusion": "pending"
+      },
+      "iteration_archive": [
+        {
+          "current_iteration": {
+            "card": "layer_supervision_plan",
+            "implementation": "complete",
+            "execution": "four60_complete_reviewed",
+            "conclusion": "内容和成本已结算；0新增用途拟合，generic_reuse仍unknown_not_tested。"
+          },
+          "next_action": "第22节内容/成本结算完成，无通用复用新证据。保留现有原型及旧用途边界；后续用途须另锁任务和强基线，不能由辅助层loss或重建均值宣布晋升。"
+        }
+      ],
+      "current_role": "仅内容保留及参数/运行读取成本；无新读头拟合，通用复用未知。",
+      "historical_status_scope": "本对象status/implementation/execution/conclusion保留此前已完成的职责范围；第23节的当前执行状态仅见current_iteration及state_organization_plan，尚未运行。"
     },
     {
       "id": "F12",
@@ -837,26 +880,16 @@
     "F11"
   ],
   "next_after_active": {
-    "status": "design_pending_no_new_training",
+    "status": "await_this_run_report_no_automatic_next_training",
     "task_ids": [
       "F05",
       "F01",
       "F11"
     ],
-    "question": "在不要求浅层重复最终完整任务的前提下，编码阶段能否更有效地组织近远期价量内容？这是待设计假设，不是本报告已定位的根因。",
-    "deliverable": "下一轮先交付一张可反驳的编码阶段信息组织设计卡：与旧causal-pool/历史query/长短记忆去重，区分编码写入和末端query读取，比较固定总状态容量；未能提出独立可识别的改动则不启动训练。",
-    "source": "尚未锁定；本轮control180双种子仅为有限研究候选。未来若采用，需显式重新锁来源、对照和预算；不得静默替换Macro或旧来源。",
-    "constraints": [
-      "目标仍是因果可复用价量状态",
-      "每被监督端点完整128与全位置评价保持",
-      "价量和近中远内容分项保护",
-      "不重跑此layer2权重网格、不自动再续60轮、不直接扩层",
-      "保留F02/F03/F04/F06-F12条件分支；V13仍待合格独立数据"
-    ],
-    "reason": "原Q追加预算有有限收益，但没有均衡验收；layer2配方广泛退化。下一设计优先改变信息组织这一机制，不能据此声称训练因素已排除或架构是唯一瓶颈。",
-    "training_budget": 0,
+    "deliverable": "按SHA复核state_organization768报告，比较staged对late和plain，归档各分项及成本；有收益只作为有限候选，没过则收束此配方。",
+    "training_budget_after_this_card": 0,
     "entrypoint": null,
-    "code_change": false
+    "retained": "All future hypotheses preserved; no rerun of prior layer2 or automatic grids."
   },
   "active_training_budget": {
     "task_ids": [
@@ -864,12 +897,13 @@
       "F01",
       "F11"
     ],
-    "status": "no_active_training_budget",
-    "jobs_max": 0,
-    "worker_epochs_max": 0,
-    "optimizer_updates_max": 0,
+    "status": "new_bounded_release_ready_not_executed",
+    "jobs_max": 6,
+    "worker_epochs_max": 360,
+    "optimizer_updates_max": 13680,
     "readout_fits": 0,
-    "reason": "第22节四组固定60轮已完成并收束；剩余时间不转为新任务。下一设计卡未锁定，不自动训练。"
+    "session_seconds_max": 86400,
+    "reason": "User explicitly requests next information-organization design/code/push with unchanged goal. Old layer2 auxiliary-supervision recipe is closed; tested shallow-task supervision is replaced by using shallow content without a separate task. Source and360-worker-epoch budget are new and explicit, not residual time or automatic continuation."
   },
   "aliases": {
     "R0": [
@@ -919,7 +953,7 @@
   "blocked_followups": {
     "F_optimization": "第20～22节固定矩阵均已完成并收束；下一步F05编码阶段信息组织设计，F01约束上下文/覆盖，F11限制用途声明。无新GPU预算，不自动开启网格/扩层/跨周期/未来分支。"
   },
-  "active_phase": "F05_information_organization_design_pending",
+  "active_phase": "F05_state_organization768_ready_pending_CUDA",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -17503,6 +17537,662 @@
       "training_budget": 0,
       "entrypoint": null,
       "code_change": false
+    }
+  },
+  "state_organization_plan": {
+    "date": "2026-10-24",
+    "task_ids": [
+      "F05",
+      "F01",
+      "F11"
+    ],
+    "requirement_ids": [
+      "N01",
+      "N02",
+      "N03",
+      "N04",
+      "N05",
+      "N07",
+      "N08",
+      "N09"
+    ],
+    "status": "code_ready_pending_AutoDL_execution",
+    "implementation": "complete_synthetic_and_static_checked",
+    "execution": "not_run",
+    "conclusion": "pending_no_real_model_acceptance",
+    "human_entry": "docs/BABEL_ROADMAP.md#23-f05f01f11最终状态形成前结合不同深度的内容2026-10-24",
+    "question": "Can h2 then h4 content aggregation improve final768 over BOTH h4 then h4 matched memory and contemporaneously continued original structure, with unchanged Q/history/updates?",
+    "reason_for_change": "User explicitly requests next information-organization design/code/push with unchanged goal. Old layer2 auxiliary-supervision recipe is closed; tested shallow-task supervision is replaced by using shallow content without a separate task. Source and360-worker-epoch budget are new and explicit, not residual time or automatic continuation.",
+    "previous_design_request": {
+      "status": "design_pending_no_new_training",
+      "task_ids": [
+        "F05",
+        "F01",
+        "F11"
+      ],
+      "question": "在不要求浅层重复最终完整任务的前提下，编码阶段能否更有效地组织近远期价量内容？这是待设计假设，不是本报告已定位的根因。",
+      "deliverable": "下一轮先交付一张可反驳的编码阶段信息组织设计卡：与旧causal-pool/历史query/长短记忆去重，区分编码写入和末端query读取，比较固定总状态容量；未能提出独立可识别的改动则不启动训练。",
+      "source": "尚未锁定；本轮control180双种子仅为有限研究候选。未来若采用，需显式重新锁来源、对照和预算；不得静默替换Macro或旧来源。",
+      "constraints": [
+        "目标仍是因果可复用价量状态",
+        "每被监督端点完整128与全位置评价保持",
+        "价量和近中远内容分项保护",
+        "不重跑此layer2权重网格、不自动再续60轮、不直接扩层",
+        "保留F02/F03/F04/F06-F12条件分支；V13仍待合格独立数据"
+      ],
+      "reason": "原Q追加预算有有限收益，但没有均衡验收；layer2配方广泛退化。下一设计优先改变信息组织这一机制，不能据此声称训练因素已排除或架构是唯一瓶颈。",
+      "training_budget": 0,
+      "entrypoint": null,
+      "code_change": false
+    },
+    "source": "/root/autodl-tmp/obson/checkpoints/babel_layer_supervision768",
+    "source_role": "control180 both seeds are limited research source; Macro97/94 remains reference",
+    "output": "/root/autodl-tmp/obson/checkpoints/babel_state_organization768",
+    "report": "/root/autodl-tmp/download/babel_state_organization768_reports.tar.gz",
+    "entrypoint": "scripts/babel_state_organization768_autodl.sh",
+    "module": "obson.babel.state_organization_run",
+    "protocol": {
+      "task_ids": [
+        "F05",
+        "F01",
+        "F11"
+      ],
+      "jobs": [
+        {
+          "name": "plain_s42",
+          "arm": "plain",
+          "seed": 42
+        },
+        {
+          "name": "late_memory_s42",
+          "arm": "late_memory",
+          "seed": 42
+        },
+        {
+          "name": "staged_memory_s42",
+          "arm": "staged_memory",
+          "seed": 42
+        },
+        {
+          "name": "staged_memory_s43",
+          "arm": "staged_memory",
+          "seed": 43
+        },
+        {
+          "name": "late_memory_s43",
+          "arm": "late_memory",
+          "seed": 43
+        },
+        {
+          "name": "plain_s43",
+          "arm": "plain",
+          "seed": 43
+        }
+      ],
+      "epochs": 60,
+      "source_epochs": 180,
+      "source_run_epoch": 60,
+      "source_updates": 6840,
+      "batch": 128,
+      "micro": 8,
+      "workers": 1,
+      "session_cap_seconds": 86400,
+      "encoder": {
+        "width": 768,
+        "heads": 8,
+        "ff": 3072,
+        "layers": 4
+      },
+      "source": "reviewed layer_supervision control local last60, cumulative180; original Adam retained",
+      "source_pins": {
+        "manifest": "9a3a3b14f411e4f3a94546fe0a061c78e94914d7c8ef578d0219ed7591cb461c",
+        "completion": "40a0e1aaea8b9655f361bd6a499211b0f2f564c07bd63577ccedf6429d57c633",
+        "checkpoints": {
+          "42": "b779175058e000f0011d8ce898b8e6e33e3f3abec7ddcd6b740f18b2f96839d7",
+          "43": "e1210912a0c46971a7bf71baef5c7f3d10dcfb039480cd29911bde3e99ee63a0"
+        }
+      },
+      "counts": {
+        "train": 4789,
+        "val": 978,
+        "test": 984,
+        "cross_research": 439
+      },
+      "sampling": "uniform5 without replacement, absolute epochs181..240, own128 at every endpoint",
+      "labels": "unchanged raw float64 relative close; original body/activity masks and statistics",
+      "Q": ".4path+.2change1+.1body+.3activity; SmoothL1; equal available age bands",
+      "objectives": {
+        "plain": "original final-state Q only; one query pass; no auxiliary layer loss",
+        "late_memory": "original final-state Q only; one query pass; no auxiliary layer loss",
+        "staged_memory": "original final-state Q only; one query pass; no auxiliary layer loss"
+      },
+      "model_contract": {
+        "arm": null,
+        "attention_mode": "causal",
+        "public_state": "one768 endpoint vector only; private memory is not exported",
+        "input": "independent observed128 x28 per endpoint; causal EMA prehistory retained",
+        "organization": {
+          "plain": "original final state",
+          "late_memory": "h4 then h4",
+          "staged_memory": "h2 then h4"
+        },
+        "memory": "private4x192; two independently parameterized write blocks; no feedback into backbone; zero output residual initialization",
+        "shared": "unchanged inherited coordinates and HistoryQuery; memory candidates equal parameter inventory and initialization, plain smaller",
+        "decoder": "seven-field age1..127 from final768 only; no raw/hidden/private-memory bypass"
+      },
+      "optimizer": {
+        "name": "AdamW",
+        "restore": "all inherited moments/steps retained by names; new memory only starts at zero",
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "weight_decay": 0.01,
+        "inherited_lr": 1.5e-05,
+        "memory_lr": 0.0003,
+        "clip": 1.0,
+        "clip_scope": "global all parameters; report inherited/memory preclip norms; extra-path clipping is part of recipe"
+      },
+      "runtime": {
+        "mha_fastpath": false,
+        "matmul_tf32": false,
+        "cudnn_tf32": false,
+        "cudnn_benchmark": false,
+        "threads": 4
+      },
+      "precision": "FP32 parameters/forward; float64 price truth/loss; no AMP/TF32",
+      "selection": "fixed additional last60 only; source cumulative180 zero-update reference; no best or LR search",
+      "validation_positions": [
+        1,
+        16,
+        32,
+        48,
+        64,
+        80,
+        96,
+        112,
+        128
+      ],
+      "evaluation_positions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128
+      ],
+      "prediction_export_positions": [
+        1,
+        32,
+        64,
+        80,
+        96,
+        112,
+        127,
+        128
+      ],
+      "evaluation_models": [
+        "initial_s42",
+        "initial_s43",
+        "plain_s42",
+        "plain_s43",
+        "late_memory_s42",
+        "late_memory_s43",
+        "staged_memory_s42",
+        "staged_memory_s43"
+      ],
+      "comparisons": [
+        "staged_vs_late primary",
+        "staged_vs_plain required",
+        "late_vs_plain secondary"
+      ],
+      "acceptance": "staged must pass BOTH matched late and contemporaneous plain: both seeds/cohorts price paired95% upper(candidate-.95reference)<=0, inherited10% physical/overlap guards and P95<=1.10; no generic promotion",
+      "bootstrap": {
+        "draws": 2000,
+        "seed": 20261012,
+        "groups": [
+          "month",
+          "contract_period_month"
+        ],
+        "min_parents": 100,
+        "min_groups": 6
+      },
+      "F11": "zero readout fits; content retention and actual compute costs; generic reuse remains unknown",
+      "budget_interpretation": "six workers60=360 worker epochs/13680 new updates; matched exposure, late/staged equal parameters, plain smaller; no exact FLOP claim",
+      "attribution_limit": "first read h2 versus h4 and its gradient path; no backbone feedback or cross-bar online memory; encoder/query jointly adapt, so no unique encoder-information or generic-reuse attribution",
+      "stopping": "fixed60 per worker/24h cumulative; source/nonfinite/causality/resource failure stops and exports; uncertain updates never replay; no automatic extension/grid",
+      "scope": "existing research data only; no future prediction, no Macro promotion"
+    },
+    "deduplication": [
+      {
+        "prior": "causal_pool",
+        "evidence": [
+          "docs/BABEL_CAUSAL_POOL768_DESIGN.md",
+          "docs/BABEL_CAUSAL_POOL768_REVIEW.md"
+        ],
+        "already_tested": "Encoder-side4x192 QKV residual pooling over final hidden rows; full/segmented history.",
+        "new_variable": "First of two independently parameterized writes reads h2 versus h4; carried into secondh4. Slots/pooling/residual alone are not novel."
+      },
+      {
+        "prior": "HistoryQuery/history_query",
+        "already_tested": "4x192 slots derived only from already formed768; agequery decodes them.",
+        "difference": "Private memory reads hidden rows before public state; unchanged decoder only receives public768."
+      },
+      {
+        "prior": "dual_state/fusion",
+        "already_tested": "Combining separately encoded long512 and short512 states.",
+        "difference": "Same128 context and same4-layer backbone; no independent long/short state, crossbar memory or concatenated public state."
+      },
+      {
+        "prior": "layer_supervision/structure/multiscale/depth",
+        "already_tested": "Auxiliary-layer, structure/scale losses and layer-count changes.",
+        "difference": "Only finalQ;4layers/8heads unchanged. No auxiliary branch task, patch grid or repeated old loss search."
+      }
+    ],
+    "architecture": {
+      "backbone": {
+        "width": 768,
+        "heads": 8,
+        "ff": 3072,
+        "layers": 4
+      },
+      "input": [
+        128,
+        28
+      ],
+      "public_width": 768,
+      "original_total_parameters": 30187399,
+      "candidate_total_parameters": 32411143,
+      "new_parameters": 2223744,
+      "private_memory": {
+        "slots": 4,
+        "width": 192,
+        "heads": 4,
+        "write_blocks": 2,
+        "block_parameters_independent": true,
+        "reset_each_window": true,
+        "slot_FF_width": 768,
+        "output_projection": "flatten768->768; exact zero weight/bias initialization"
+      },
+      "first_write_sources": {
+        "late_memory": 4,
+        "staged_memory": 2
+      },
+      "second_write_source": 4,
+      "backbone_feedback": false,
+      "decoder_private_bypass": false,
+      "initial_internal_memory_gradient": "zero due zero projection; tested useful pathways with nonzero synthetic projection",
+      "capacity_claim": "Equal public768 all arms; equal parameters/private capacity only late versus staged; not equal total capacity to plain."
+    },
+    "exposure": {
+      "workers": 6,
+      "seeds": [
+        42,
+        43
+      ],
+      "epochs_each": 60,
+      "worker_epochs": 360,
+      "steps_each": 2280,
+      "updates_total": 13680,
+      "parents_per_worker": 287340,
+      "states_per_worker": 1436700,
+      "parents_total": 1724040,
+      "states_total": 8620200,
+      "readout_fits": 0
+    },
+    "resource_policy": {
+      "session_seconds_max": 86400,
+      "serial_workers": 1,
+      "micro_parents": 8,
+      "effective_batch_parents": 128,
+      "zero_update_preflight": "measure actual3 architectures forward/backward/validation9/eval128; source validation/parity before first update",
+      "gpu": "measured activation peak plus conservative Adam/parameter buffers and reserve must fit available memory",
+      "disk": "8 model full128 prediction banks+fixed8 exports+6 weights and atomic replacement+reserve; no source deletion or existing-file credit",
+      "resume": "only committed boundaries; uncertain update/extraction export-only; completed run export-only",
+      "no_automatic_extension": true
+    },
+    "evaluation": {
+      "models": 8,
+      "all_endpoint_positions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128
+      ],
+      "primary": "staged_vs_late",
+      "required": "staged_vs_plain",
+      "secondary": "late_vs_plain",
+      "must_pass_both_required_groups": true,
+      "source_initial": "descriptive/replay only, not contemporaneous training control",
+      "decoder": "original query jointly adapted; no new probe fits",
+      "reuse": "unknown_not_tested",
+      "not_covered": [
+        "current age0 all fields",
+        "full wick fidelity",
+        "universal semantic reuse",
+        "future prediction",
+        "V13 independent confirmation"
+      ]
+    },
+    "stopping": "Fixed60/24h or source/numeric/resource failure; no added weights/slots/layers/epochs after result. Positive outcome only limited retention candidate; negative/tradeoff closes this recipe. No automatic next worker.",
+    "retained_branches": [
+      "F01 simultaneous128",
+      "F02 longer/online memory",
+      "F03 common content",
+      "F04 cross-resolution common content",
+      "F05 patch/depth/head capacity alternatives",
+      "F06 realbar-refresh forecasting",
+      "F07 free rollout",
+      "F08",
+      "F09",
+      "F10",
+      "F12",
+      "V13 new-data confirmation"
+    ],
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "F05 tests cross-depth aggregation into one causal price/activity state; F01 full-context and F11 claim/cost boundaries retained; predeclared bounded falsifier.",
+        "remaining": "Generic reusable semantics, trading and prediction advantage remain unverified; no Macro promotion."
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "Synthetic original output/gradient parity at zero projection; nonzero-projection first-write carry and gradient routes; equal late/staged initialization/parameters; endpoint-only128 causality and no raw/private-memory decoder bypass.",
+        "remaining": "Public768 is not total working memory; backbone never reads slots. Real CUDA parity pending. Joint query adaptation prevents unique encoder information attribution."
+      },
+      "training": {
+        "status": "pass_for_scope",
+        "evidence": "Original Q and micro/tail gradient equivalence; exact inherited Adam6840/RNG migration, new memory state empty; fixed60/absolute181..240 sampling; committed recovery and uncertain-update refusal.",
+        "remaining": "Same updates not exact FLOPs; candidate/base parameter counts and LR groups differ; global clipping is part of recipe, not proof of pure capacity cause."
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "Eight-model lock precedes research extraction; synthetic full128 extraction, both required comparison gates, missing/tampered-worker rejection and failed replay evidence; source replay uses old local60 rules.",
+        "remaining": "Actual two-cohort results absent; current age0/all-wick fidelity and general reuse not accepted. Reused research cohorts are not V13."
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "Reviewed control source manifest/completion and checkpoint pins checked against archive; original4789/978/984/439 identity/statistics/full128/rawfloat64/mask adapters retained; consumed-control source isolated and read-only.",
+        "remaining": "Remote source/data eligibility must be rechecked before training; no new independent data; duplicate exposure not independent samples."
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "New isolated modules, source qualification and six-worker lifecycle/8-lock synthetic tests, exact report-required payload and failed/stopped producer exit tests; Ruff/shell/CLI checks; independent read-only reviews found no blocking issue.",
+        "remaining": "No local real neural execution; CUDA device/numerics and measured24h/disk/GPU budget remain AutoDL preflight; uncatchable termination may require manual export."
+      }
+    },
+    "verification": {
+      "local_real_weight_execution": false,
+      "synthetic_tests": {
+        "total_passed": 422,
+        "new_study_passed": 142,
+        "inherited_regression_passed": 280,
+        "command": ".venv/bin/python -m pytest -q tests/babel/test_state_organization*.py tests/babel/test_layer_supervision*.py tests/babel/test_observed_history*.py",
+        "seconds": 43.17,
+        "scope": "synthetic only; no real checkpoints or local neural training"
+      },
+      "static_checks": [
+        "Ruff check/format",
+        "shell bash-n",
+        "runner/export CLI help",
+        "git diff --check"
+      ],
+      "independent_review": "model/history, source/training, runner and evaluate/export integration reviewed without current blocking findings",
+      "remote_CUDA": "pending",
+      "source_pin_arithmetic": "Both manifest/completion hashes and both checkpoint hashes independently match reviewed layer_supervision report receipts; weights not locally executed.",
+      "final_receipt_name_check": {
+        "passed": 21,
+        "seconds": 10.76,
+        "scope": "runner tests after clarifying complete_inherited_adam_restored receipt name; all new memory state still starts empty"
+      },
+      "independent_document_review": "Source/budget/gates/novelty match implementation. Corrected same-seed comparison wording and archived old F05 execution flags; current ready/not_run/pending distinct."
     }
   }
 }
