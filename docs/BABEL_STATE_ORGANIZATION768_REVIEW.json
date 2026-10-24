@@ -1,0 +1,1096 @@
+{
+  "schema": "babel-state-organization768-review-v1",
+  "date": "2026-10-24",
+  "task_ids": [
+    "F05",
+    "F01",
+    "F11"
+  ],
+  "requirement_ids": [
+    "N01",
+    "N02",
+    "N03",
+    "N04",
+    "N05",
+    "N07",
+    "N08",
+    "N09"
+  ],
+  "archive": {
+    "path": "/Users/bardan/Downloads/babel_state_organization768_reports.tar.gz",
+    "sha256": "cde52c2df62b238157e605f84d8afe15ccef928c71e38ba1175b4c5d4bf7dca0",
+    "bytes": 722388216,
+    "duplicate": false
+  },
+  "run": {
+    "path": "/root/autodl-tmp/obson/checkpoints/babel_state_organization768",
+    "matches_release_commit": "8dda597e57c7dfa9e9146ef1d32d97d885830156",
+    "protocol": "state_organization_plan; ROADMAP Section23",
+    "command_exit_code": 0,
+    "producer_status": "complete_requires_review",
+    "reviewed_status": "completed_reviewed_recipe_closed"
+  },
+  "evidence": [
+    {
+      "path": "reports/state_organization_review_cde52c2df62b/provenance_review.py",
+      "sha256": "3ff559cdd291848e21b410ebd65fb563b04025cd8b70e261f44fd0caff9244e8"
+    },
+    {
+      "path": "reports/state_organization_review_cde52c2df62b/provenance_review.json",
+      "sha256": "1ca16ffe1cd674ef226bb7a5e6ebfc943103638f33acd240bc93bb4abd723d5a"
+    },
+    {
+      "path": "reports/state_organization_review_cde52c2df62b/metric_review.py",
+      "sha256": "ee39ac153393005349c3cb12c1a5933c9e94d3750aed20174b1043d0a8596389"
+    },
+    {
+      "path": "reports/state_organization_review_cde52c2df62b/metric_review.json",
+      "sha256": "21ea2e5c0920594dcdb6bcb1b8e2f2cf0604177dc3e2c646fe11d8045ace09d1"
+    },
+    {
+      "path": "reports/state_organization_review_cde52c2df62b/prediction_review.py",
+      "sha256": "95361b10b9b86fbf40f460c6b769ca7ee283f58afb29ef0445b229779c3feede"
+    },
+    {
+      "path": "reports/state_organization_review_cde52c2df62b/prediction_review.json",
+      "sha256": "d23c0ca871455cb8d9e0d292bc252dcffbce62644f251a26b0c900e3e93e7265"
+    },
+    {
+      "path": "reports/state_organization_review_cde52c2df62b/learning_review.py",
+      "sha256": "ad2be8139f4da62611dd1df4d7087c9d02119adb8635c1ca56a23945d1aba936"
+    },
+    {
+      "path": "reports/state_organization_review_cde52c2df62b/learning_review.json",
+      "sha256": "167eb51b05dbc6614f41fb4d4db6f8af42ba0c89137b3622b00b7cdaed4e461c"
+    }
+  ],
+  "verification": {
+    "provenance": {
+      "passed": true,
+      "scope": "CPU provenance and report arithmetic only; no weights loaded, no neural execution, no Adam/RNG byte-level replay",
+      "archive_sha256": "cde52c2df62b238157e605f84d8afe15ccef928c71e38ba1175b4c5d4bf7dca0",
+      "archive_bytes": 722388216,
+      "protocol_matches_code_and_roadmap": true,
+      "implementation_all_bound_groups_match_current": true,
+      "implementation_bound_hash_entries": 340,
+      "included_files_verified": 173,
+      "omitted_inventory": {
+        "lock_or_uncommitted_temporary": 3,
+        "weights_or_optimizer_state": 6,
+        "full128_prediction_shard": 1424,
+        "raw_or_feature_cache_or_full_predictions": 4
+      },
+      "root_completion_files": 1603,
+      "root_completion_available_verified": 169,
+      "root_completion_omitted_identity_matched": 1434,
+      "original_source_files_locally_verified": 17,
+      "original_source_files_unavailable": [
+        "control_s42/last.pt",
+        "control_s43/last.pt"
+      ],
+      "data_meta_keys_match_original": [
+        "coverage",
+        "coverage_meta",
+        "statistics",
+        "source_verification"
+      ],
+      "independent_train_val_overlap_pairs": 0,
+      "source_replay_checks": 66,
+      "causal_checks": 462,
+      "epochs": 360,
+      "new_updates": 13680,
+      "parent_exposures": 1724040,
+      "state_exposures": 8620200,
+      "training_seconds": 23408.599956288934,
+      "total_elapsed_seconds": 27492.67610384524,
+      "attempts": 1,
+      "evaluation_extractions": 16,
+      "evaluation_states": 1457152,
+      "issues": [],
+      "limits": [
+        "Actual Adam tensors, RNG states and weights omitted from download: restoration evidence is bound producer code plus receipts, not local tensor verification.",
+        "Full128 prediction shards omitted; this check verifies their identities, not values.",
+        "Two source-control reports are available but original two source weights are not locally byte-verified.",
+        "Preflight timings/memory concern source states and zero-update microbatch, not trained-candidate deployment benchmark.",
+        "Model quality/gates are outside this provenance audit; reused research data are not independent confirmation."
+      ]
+    },
+    "metrics": {
+      "checks": 17478,
+      "numeric_elements": 2221480,
+      "passed": true,
+      "failures": [],
+      "largest_absolute_differences": [
+        {
+          "name": "test/staged_memory_s42/parent/full/nonprice/body/far",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 984,
+          "max_abs": 1.4210854715202004e-14,
+          "atol": 5e-11,
+          "rtol": 5e-10
+        },
+        {
+          "name": "test/staged_memory_s42/parent/interior/nonprice/body/far",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 984,
+          "max_abs": 1.4210854715202004e-14,
+          "atol": 5e-11,
+          "rtol": 5e-10
+        },
+        {
+          "name": "test/initial_s43/parent/interior/nonprice/body/far",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 984,
+          "max_abs": 1.0658141036401503e-14,
+          "atol": 5e-11,
+          "rtol": 5e-10
+        },
+        {
+          "name": "test/staged_memory_s43/parent/full/nonprice/body/far",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 984,
+          "max_abs": 1.0658141036401503e-14,
+          "atol": 5e-11,
+          "rtol": 5e-10
+        },
+        {
+          "name": "test/staged_memory_s43/parent/interior/nonprice/body/far",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 984,
+          "max_abs": 1.0658141036401503e-14,
+          "atol": 5e-11,
+          "rtol": 5e-10
+        },
+        {
+          "name": "test/initial_s42/parent/full/nonprice/body/far",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 984,
+          "max_abs": 8.881784197001252e-15,
+          "atol": 5e-11,
+          "rtol": 5e-10
+        },
+        {
+          "name": "test/plain_s42/parent/full/nonprice/body/far",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 984,
+          "max_abs": 8.881784197001252e-15,
+          "atol": 5e-11,
+          "rtol": 5e-10
+        },
+        {
+          "name": "test/initial_s42/parent/interior/nonprice/body/far",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 984,
+          "max_abs": 7.105427357601002e-15,
+          "atol": 5e-11,
+          "rtol": 5e-10
+        }
+      ]
+    },
+    "predictions": {
+      "checks": 3538,
+      "numeric_elements": 37737960,
+      "passed": true,
+      "failures": [],
+      "largest_absolute_differences": [
+        {
+          "name": "test/initial_s42/raw_labels",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 999744,
+          "max_abs": 1.7053025658242404e-13,
+          "atol": 1e-11,
+          "rtol": 1e-10
+        },
+        {
+          "name": "test/initial_s42/fixed8/price/far",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 7872,
+          "max_abs": 1.7053025658242404e-13,
+          "atol": 5e-11,
+          "rtol": 5e-10
+        },
+        {
+          "name": "test/initial_s43/raw_labels",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 999744,
+          "max_abs": 1.7053025658242404e-13,
+          "atol": 1e-11,
+          "rtol": 1e-10
+        },
+        {
+          "name": "test/plain_s42/raw_labels",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 999744,
+          "max_abs": 1.7053025658242404e-13,
+          "atol": 1e-11,
+          "rtol": 1e-10
+        },
+        {
+          "name": "test/plain_s43/raw_labels",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 999744,
+          "max_abs": 1.7053025658242404e-13,
+          "atol": 1e-11,
+          "rtol": 1e-10
+        },
+        {
+          "name": "test/late_memory_s42/raw_labels",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 999744,
+          "max_abs": 1.7053025658242404e-13,
+          "atol": 1e-11,
+          "rtol": 1e-10
+        },
+        {
+          "name": "test/late_memory_s43/raw_labels",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 999744,
+          "max_abs": 1.7053025658242404e-13,
+          "atol": 1e-11,
+          "rtol": 1e-10
+        },
+        {
+          "name": "test/staged_memory_s42/raw_labels",
+          "passed": true,
+          "kind": "numeric",
+          "elements": 999744,
+          "max_abs": 1.7053025658242404e-13,
+          "atol": 1e-11,
+          "rtol": 1e-10
+        }
+      ]
+    },
+    "learning": {
+      "checks": 444,
+      "passed": true
+    },
+    "local_real_neural_execution": false
+  },
+  "results": {
+    "formal_group_counts": {
+      "staged_vs_late": {
+        "primary_passed": 0,
+        "overall_comparisons_passed": 0,
+        "formal_interval_gates": 316,
+        "status_counts": {
+          "fail": 83,
+          "pass": 233
+        },
+        "protection_gates": 312,
+        "protection_counts": {
+          "pass": 233,
+          "fail": 79
+        },
+        "p95_passed": 4,
+        "definite_harm_protections": 19,
+        "unconfirmed_protections": 60,
+        "f03_counts": {
+          "fail": 23,
+          "pass": 37
+        }
+      },
+      "staged_vs_plain": {
+        "primary_passed": 0,
+        "overall_comparisons_passed": 0,
+        "formal_interval_gates": 316,
+        "status_counts": {
+          "fail": 148,
+          "pass": 168
+        },
+        "protection_gates": 312,
+        "protection_counts": {
+          "fail": 144,
+          "pass": 168
+        },
+        "p95_passed": 4,
+        "definite_harm_protections": 90,
+        "unconfirmed_protections": 54,
+        "f03_counts": {
+          "pass": 15,
+          "fail": 45
+        }
+      },
+      "late_vs_plain": {
+        "primary_passed": 0,
+        "overall_comparisons_passed": 0,
+        "formal_interval_gates": 316,
+        "status_counts": {
+          "fail": 126,
+          "pass": 190
+        },
+        "protection_gates": 312,
+        "protection_counts": {
+          "fail": 122,
+          "pass": 190
+        },
+        "p95_passed": 4,
+        "definite_harm_protections": 78,
+        "unconfirmed_protections": 44,
+        "f03_counts": {
+          "pass": 28,
+          "fail": 32
+        }
+      }
+    },
+    "comparisons": {
+      "staged_vs_late": [
+        {
+          "cohort_seed": "test/s42",
+          "reference_mse": 0.02865079716442955,
+          "candidate_mse": 0.03045677279339472,
+          "mse_change_percent": 6.303404469343432,
+          "gain": "fail",
+          "overall_passed": false,
+          "full_price_ratios": {
+            "near": 1.0243988367109187,
+            "mid": 1.0328580793933657,
+            "far": 1.0759556765997713
+          },
+          "p95_ratio": 0.9277499864153463,
+          "protection_counts": {
+            "pass": 55,
+            "fail": 23
+          },
+          "f03_counts": {
+            "fail": 11,
+            "pass": 4
+          },
+          "definite_harm_protections": 3,
+          "unconfirmed_protections": 20
+        },
+        {
+          "cohort_seed": "test/s43",
+          "reference_mse": 0.025539972837933453,
+          "candidate_mse": 0.02635520551739269,
+          "mse_change_percent": 3.1919872610373545,
+          "gain": "fail",
+          "overall_passed": false,
+          "full_price_ratios": {
+            "near": 1.0715438567885016,
+            "mid": 1.0458574070156663,
+            "far": 1.0232254520659914
+          },
+          "p95_ratio": 0.9931336959605773,
+          "protection_counts": {
+            "fail": 16,
+            "pass": 62
+          },
+          "f03_counts": {
+            "pass": 14,
+            "fail": 1
+          },
+          "definite_harm_protections": 2,
+          "unconfirmed_protections": 14
+        },
+        {
+          "cohort_seed": "cross_research/s42",
+          "reference_mse": 0.007467767955099497,
+          "candidate_mse": 0.007956664979677341,
+          "mse_change_percent": 6.546762399653727,
+          "gain": "fail",
+          "overall_passed": false,
+          "full_price_ratios": {
+            "near": 1.0454269855267997,
+            "mid": 1.0502323589216989,
+            "far": 1.0714300987416625
+          },
+          "p95_ratio": 1.0507909046064654,
+          "protection_counts": {
+            "pass": 59,
+            "fail": 19
+          },
+          "f03_counts": {
+            "pass": 6,
+            "fail": 9
+          },
+          "definite_harm_protections": 5,
+          "unconfirmed_protections": 14
+        },
+        {
+          "cohort_seed": "cross_research/s43",
+          "reference_mse": 0.007360778616633385,
+          "candidate_mse": 0.007643613317274804,
+          "mse_change_percent": 3.842456285837592,
+          "gain": "fail",
+          "overall_passed": false,
+          "full_price_ratios": {
+            "near": 1.3080708752372259,
+            "mid": 1.120016231339434,
+            "far": 0.9881137928289672
+          },
+          "p95_ratio": 1.046379805702326,
+          "protection_counts": {
+            "fail": 21,
+            "pass": 57
+          },
+          "f03_counts": {
+            "pass": 13,
+            "fail": 2
+          },
+          "definite_harm_protections": 9,
+          "unconfirmed_protections": 12
+        }
+      ],
+      "staged_vs_plain": [
+        {
+          "cohort_seed": "test/s42",
+          "reference_mse": 0.02893971524042592,
+          "candidate_mse": 0.03045677279339472,
+          "mse_change_percent": 5.242130201922723,
+          "gain": "fail",
+          "overall_passed": false,
+          "full_price_ratios": {
+            "near": 1.1190614873551805,
+            "mid": 1.1392193979302772,
+            "far": 1.0241550888055908
+          },
+          "p95_ratio": 0.9230620260697984,
+          "protection_counts": {
+            "fail": 27,
+            "pass": 51
+          },
+          "f03_counts": {
+            "pass": 11,
+            "fail": 4
+          },
+          "definite_harm_protections": 22,
+          "unconfirmed_protections": 5
+        },
+        {
+          "cohort_seed": "test/s43",
+          "reference_mse": 0.02503772890192274,
+          "candidate_mse": 0.02635520551739269,
+          "mse_change_percent": 5.261965334918117,
+          "gain": "fail",
+          "overall_passed": false,
+          "full_price_ratios": {
+            "near": 1.1653676077670565,
+            "mid": 1.1317220691502214,
+            "far": 1.0170290670197424
+          },
+          "p95_ratio": 1.0594227386767177,
+          "protection_counts": {
+            "fail": 35,
+            "pass": 43
+          },
+          "f03_counts": {
+            "fail": 13,
+            "pass": 2
+          },
+          "definite_harm_protections": 12,
+          "unconfirmed_protections": 23
+        },
+        {
+          "cohort_seed": "cross_research/s42",
+          "reference_mse": 0.0070625544976666175,
+          "candidate_mse": 0.007956664979677341,
+          "mse_change_percent": 12.659873736990313,
+          "gain": "fail",
+          "overall_passed": false,
+          "full_price_ratios": {
+            "near": 1.3814921123981407,
+            "mid": 1.2355757975284443,
+            "far": 1.0847112883269394
+          },
+          "p95_ratio": 1.0300861633496639,
+          "protection_counts": {
+            "fail": 41,
+            "pass": 37
+          },
+          "f03_counts": {
+            "pass": 2,
+            "fail": 13
+          },
+          "definite_harm_protections": 25,
+          "unconfirmed_protections": 16
+        },
+        {
+          "cohort_seed": "cross_research/s43",
+          "reference_mse": 0.0062057763095918995,
+          "candidate_mse": 0.007643613317274804,
+          "mse_change_percent": 23.169333471793465,
+          "gain": "fail",
+          "overall_passed": false,
+          "full_price_ratios": {
+            "near": 1.7257463360646006,
+            "mid": 1.436140606631302,
+            "far": 1.1312864155405267
+          },
+          "p95_ratio": 1.0776024287089365,
+          "protection_counts": {
+            "fail": 41,
+            "pass": 37
+          },
+          "f03_counts": {
+            "fail": 15
+          },
+          "definite_harm_protections": 31,
+          "unconfirmed_protections": 10
+        }
+      ],
+      "late_vs_plain": [
+        {
+          "cohort_seed": "test/s42",
+          "reference_mse": 0.02893971524042592,
+          "candidate_mse": 0.02865079716442955,
+          "mse_change_percent": -0.9983445711061467,
+          "gain": "fail",
+          "overall_passed": false,
+          "full_price_ratios": {
+            "near": 1.09240800287142,
+            "mid": 1.102977670077753,
+            "far": 0.95185620660706
+          },
+          "p95_ratio": 0.9949469572468964,
+          "protection_counts": {
+            "fail": 24,
+            "pass": 54
+          },
+          "f03_counts": {
+            "pass": 11,
+            "fail": 4
+          },
+          "definite_harm_protections": 12,
+          "unconfirmed_protections": 12
+        },
+        {
+          "cohort_seed": "test/s43",
+          "reference_mse": 0.02503772890192274,
+          "candidate_mse": 0.025539972837933453,
+          "mse_change_percent": 2.005948454742401,
+          "gain": "fail",
+          "overall_passed": false,
+          "full_price_ratios": {
+            "near": 1.0875594128827837,
+            "mid": 1.082099779146345,
+            "far": 0.9939442622017093
+          },
+          "p95_ratio": 1.0667473503172444,
+          "protection_counts": {
+            "fail": 29,
+            "pass": 49
+          },
+          "f03_counts": {
+            "pass": 8,
+            "fail": 7
+          },
+          "definite_harm_protections": 14,
+          "unconfirmed_protections": 15
+        },
+        {
+          "cohort_seed": "cross_research/s42",
+          "reference_mse": 0.0070625544976666175,
+          "candidate_mse": 0.007467767955099497,
+          "mse_change_percent": 5.73749140720623,
+          "gain": "fail",
+          "overall_passed": false,
+          "full_price_ratios": {
+            "near": 1.3214620738931804,
+            "mid": 1.1764785069058836,
+            "far": 1.0123957592762
+          },
+          "p95_ratio": 0.9802960406622898,
+          "protection_counts": {
+            "fail": 27,
+            "pass": 51
+          },
+          "f03_counts": {
+            "pass": 9,
+            "fail": 6
+          },
+          "definite_harm_protections": 24,
+          "unconfirmed_protections": 3
+        },
+        {
+          "cohort_seed": "cross_research/s43",
+          "reference_mse": 0.0062057763095918995,
+          "candidate_mse": 0.007360778616633385,
+          "mse_change_percent": 18.611729611592143,
+          "gain": "fail",
+          "overall_passed": false,
+          "full_price_ratios": {
+            "near": 1.3193064448832919,
+            "mid": 1.282249816070802,
+            "far": 1.1448948731923443
+          },
+          "p95_ratio": 1.0298387094594723,
+          "protection_counts": {
+            "fail": 42,
+            "pass": 36
+          },
+          "f03_counts": {
+            "fail": 15
+          },
+          "definite_harm_protections": 28,
+          "unconfirmed_protections": 14
+        }
+      ]
+    },
+    "neutral_price_difference_intervals": {
+      "staged_vs_late": {
+        "test/s42": {
+          "month": {
+            "mean": 0.0018059756289651693,
+            "low": 0.000670114766029082,
+            "high": 0.0038751630540207124,
+            "parents": 984,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 0.0018059756289651693,
+            "low": 0.0009542663957261639,
+            "high": 0.002980426660247219,
+            "parents": 984,
+            "groups": 498,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "test/s43": {
+          "month": {
+            "mean": 0.0008152326794592405,
+            "low": 0.0003986013049645509,
+            "high": 0.0016218770496726302,
+            "parents": 984,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 0.0008152326794592405,
+            "low": 0.0005003305012574645,
+            "high": 0.0012566099380869693,
+            "parents": 984,
+            "groups": 498,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "cross_research/s42": {
+          "month": {
+            "mean": 0.0004888970245778451,
+            "low": 0.0004031065893244021,
+            "high": 0.0005867382720315988,
+            "parents": 439,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 0.0004888970245778451,
+            "low": 0.0004318671322237604,
+            "high": 0.0005483957430183382,
+            "parents": 439,
+            "groups": 206,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "cross_research/s43": {
+          "month": {
+            "mean": 0.0002828347006414191,
+            "low": 0.00020271770293425013,
+            "high": 0.0003793686902470323,
+            "parents": 439,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 0.0002828347006414191,
+            "low": 0.00021919672727870547,
+            "high": 0.00035191827357619116,
+            "parents": 439,
+            "groups": 206,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        }
+      },
+      "staged_vs_plain": {
+        "test/s42": {
+          "month": {
+            "mean": 0.0015170575529687995,
+            "low": 0.0007715370089139311,
+            "high": 0.002954510938096256,
+            "parents": 984,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 0.0015170575529687995,
+            "low": 0.0009870685129190328,
+            "high": 0.0022254230811382153,
+            "parents": 984,
+            "groups": 498,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "test/s43": {
+          "month": {
+            "mean": 0.0013174766154699555,
+            "low": 0.0009968870468676674,
+            "high": 0.001593355935057418,
+            "parents": 984,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 0.0013174766154699555,
+            "low": 0.0011294867589383213,
+            "high": 0.0014762746381170057,
+            "parents": 984,
+            "groups": 498,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "cross_research/s42": {
+          "month": {
+            "mean": 0.000894110482010724,
+            "low": 0.0008288782096789765,
+            "high": 0.0009588166672394148,
+            "parents": 439,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 0.000894110482010724,
+            "low": 0.0008153797688071232,
+            "high": 0.0009719920040436309,
+            "parents": 439,
+            "groups": 206,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "cross_research/s43": {
+          "month": {
+            "mean": 0.001437837007682906,
+            "low": 0.001368694623607656,
+            "high": 0.0014974930088612766,
+            "parents": 439,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 0.001437837007682906,
+            "low": 0.001373207918383181,
+            "high": 0.0015031709342592115,
+            "parents": 439,
+            "groups": 206,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        }
+      },
+      "late_vs_plain": {
+        "test/s42": {
+          "month": {
+            "mean": -0.00028891807599637,
+            "low": -0.0010512672300964265,
+            "high": 0.0003001400093799411,
+            "parents": 984,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": -0.00028891807599637,
+            "low": -0.0009369732764654673,
+            "high": 0.00016193024237915653,
+            "parents": 984,
+            "groups": 498,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "test/s43": {
+          "month": {
+            "mean": 0.0005022439360107149,
+            "low": -0.0003290570815395944,
+            "high": 0.001132490427216161,
+            "parents": 984,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 0.0005022439360107149,
+            "low": 2.2251580029969666e-05,
+            "high": 0.0008624188283375783,
+            "parents": 984,
+            "groups": 498,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "cross_research/s42": {
+          "month": {
+            "mean": 0.00040521345743287904,
+            "low": 0.0003180416128196417,
+            "high": 0.0004843634034686537,
+            "parents": 439,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 0.00040521345743287904,
+            "low": 0.00032519547179287004,
+            "high": 0.00047705412194722096,
+            "parents": 439,
+            "groups": 206,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        },
+        "cross_research/s43": {
+          "month": {
+            "mean": 0.0011550023070414867,
+            "low": 0.0010113698391663512,
+            "high": 0.0012780857679339423,
+            "parents": 439,
+            "groups": 13,
+            "valid_draws": 2000,
+            "supported": true
+          },
+          "contract_period_month": {
+            "mean": 0.0011550023070414867,
+            "low": 0.0010657730949707835,
+            "high": 0.0012477537882261485,
+            "parents": 439,
+            "groups": 206,
+            "valid_draws": 2000,
+            "supported": true
+          }
+        }
+      }
+    },
+    "source_prediction_replay": {
+      "test/initial_s42": {
+        "source_prediction_exact": true,
+        "max_abs_prediction_difference": 0.0,
+        "rms_prediction_difference": 0.0
+      },
+      "test/initial_s43": {
+        "source_prediction_exact": true,
+        "max_abs_prediction_difference": 0.0,
+        "rms_prediction_difference": 0.0
+      },
+      "cross_research/initial_s42": {
+        "source_prediction_exact": true,
+        "max_abs_prediction_difference": 0.0,
+        "rms_prediction_difference": 0.0
+      },
+      "cross_research/initial_s43": {
+        "source_prediction_exact": true,
+        "max_abs_prediction_difference": 0.0,
+        "rms_prediction_difference": 0.0
+      }
+    },
+    "validation_vs_plain": {
+      "late_memory_vs_plain": {
+        "42": {
+          "validation_change_pct": {
+            "primary": -7.579094346556003,
+            "path": 15.52069166071215,
+            "change1": -19.55849090717987,
+            "body": -10.755312511689086,
+            "activity": -4.561972129769176,
+            "close_mae_bps": 7.161502014766552
+          },
+          "train_first_ratio": 2.4464763316765454,
+          "train_last_ratio": 0.9277224856101953,
+          "training_time_ratio": 1.0679024303565408
+        },
+        "43": {
+          "validation_change_pct": {
+            "primary": -8.22690400126439,
+            "path": 24.52189644679428,
+            "change1": -6.253885803551018,
+            "body": -6.526842750973683,
+            "activity": -8.950315930508445,
+            "close_mae_bps": 13.928391258518392
+          },
+          "train_first_ratio": 2.1834142455848555,
+          "train_last_ratio": 0.9137282816898334,
+          "training_time_ratio": 1.085056610683483
+        }
+      },
+      "staged_memory_vs_plain": {
+        "42": {
+          "validation_change_pct": {
+            "primary": -3.6297072193901547,
+            "path": 26.780182580894607,
+            "change1": -14.631147966163716,
+            "body": -7.931756494078734,
+            "activity": -0.6442142036747645,
+            "close_mae_bps": 11.320014196277327
+          },
+          "train_first_ratio": 2.136664295119808,
+          "train_last_ratio": 1.0127502228230048,
+          "training_time_ratio": 1.046201133918443
+        },
+        "43": {
+          "validation_change_pct": {
+            "primary": -4.1573657059057805,
+            "path": 37.900755487620415,
+            "change1": -2.6637904694634895,
+            "body": -3.432086686176339,
+            "activity": -4.731438666718013,
+            "close_mae_bps": 19.020987041155113
+          },
+          "train_first_ratio": 2.2051238897633065,
+          "train_last_ratio": 0.9421135687016344,
+          "training_time_ratio": 1.0831467692713654
+        }
+      }
+    },
+    "f11_cost": {
+      "task_id": "F11",
+      "workers": {
+        "plain_s42": {
+          "updates": 2280,
+          "training_seconds": 3797.5525433570147,
+          "parent_exposures": 287340,
+          "state_exposures": 1436700
+        },
+        "late_memory_s42": {
+          "updates": 2280,
+          "training_seconds": 4055.4155904576182,
+          "parent_exposures": 287340,
+          "state_exposures": 1436700
+        },
+        "staged_memory_s42": {
+          "updates": 2280,
+          "training_seconds": 3973.003776974976,
+          "parent_exposures": 287340,
+          "state_exposures": 1436700
+        },
+        "staged_memory_s43": {
+          "updates": 2280,
+          "training_seconds": 3959.8739861622453,
+          "parent_exposures": 287340,
+          "state_exposures": 1436700
+        },
+        "late_memory_s43": {
+          "updates": 2280,
+          "training_seconds": 3966.856171347201,
+          "parent_exposures": 287340,
+          "state_exposures": 1436700
+        },
+        "plain_s43": {
+          "updates": 2280,
+          "training_seconds": 3655.8978879898787,
+          "parent_exposures": 287340,
+          "state_exposures": 1436700
+        }
+      },
+      "public_state_float32_bytes": 3072,
+      "private_memory_float32_bytes_per_endpoint": 3072,
+      "private_memory_scope": "memory candidates only; plus original token activations, not persistent cross-bar state",
+      "raw_128_close_float32_bytes": 512,
+      "prepared_128x28_float32_bytes": 14336,
+      "raw_comparison_scope": "close-only history is not all28 model features; no storage superiority asserted",
+      "readout_fits": 0,
+      "reuse_status": "not_tested_by_new_task",
+      "scope": "retention and actual compute costs; generic utility unknown, no promotion"
+    }
+  },
+  "conclusion": {
+    "primary": "本固定h2→h4写入配方明确退化：相对同容量h4→h4，综合价格MSE增加3.19%～6.55%；相对原结构同期续训增加5.24%～23.17%。两必要比较主收益均0/4、全部8个无收益阈值差值在两种聚类95%区间均高于0。",
+    "secondary": "h4→h4对原结构价格MSE变化−1.00%～+18.61%，主收益0/4；不晋升为替代候选。",
+    "retained_benefit": "staged相对plain远段五种成交/持仓活动MSE点估计全部降低1.46%～12.83%；近段五项全部增加8.06%～62.10%。有限远段收益保留，不改判整体保护失败。",
+    "learning": "staged的综合验证Q比plain低3.63%～4.16%，但验证路径损失高26.78%～37.90%；总loss降低不能代替价格/近中远分项验收。未证明唯一梯度冲突、容量不足或第2层无用。",
+    "recipe_disposition": "本次两写入memory固定配方收束，不自动改LR/槽数/层数/权重或追加轮数。",
+    "promotion": false,
+    "generic_reuse": "unknown_not_tested",
+    "reference": "Macro97/94 unchanged; control180 retained historical limited source; plain240 descriptive comparison only, no new promotion gate."
+  },
+  "review": {
+    "purpose": {
+      "status": "pass_for_scope",
+      "evidence": "按F05两个必要对照同时判定，均失败；保留远段活动收益，拒绝以低Q或只超过退化候选宣布成功。F11用途不从重建推导。",
+      "remaining": "因果可复用价量状态的通用价值未验收，未来预测未新增证据。"
+    },
+    "architecture": {
+      "status": "pass_for_scope",
+      "evidence": "340条绑定实现记录核对；4层768/8头和私有4×192两写入架构按锁定协议执行；66来源/初始化、462因果检查通过；initial180固定8输出与上轮control180逐值相同。",
+      "remaining": "权重未下载，未本地神经回放；没有reset_first消融，不能断言写入被如何使用；内部工作容量不等于公开768。"
+    },
+    "training": {
+      "status": "pass_for_scope",
+      "evidence": "六组360轮/13680次更新、同种子全位置抽样/曝光、固定181..240末轮及原Q独立复算；继承Adam6840与新组空状态收据一致；无best改选。",
+      "remaining": "Adam/RNG真实张量未下载；新模块LR和global clipping是配方因素；初轮loss升高后恢复不证明根因就是LR。同更新非同FLOPs。"
+    },
+    "validation": {
+      "status": "pass_for_scope",
+      "evidence": "17478项全128聚合/分布/双2000bootstrap/阈值复算，3538项固定8预测/raw真值/F03核对全部通过；明确伤害与保护未确认分别归档；全部P95点保护通过不覆盖其他失败。",
+      "remaining": "完整128逐预测留远端；age0全部字段/完整影线/通用复用不在此次验收；重复研究集不能当V13，312保护高度相关不等于312能力。"
+    },
+    "data": {
+      "status": "pass_for_scope",
+      "evidence": "4789/978/984/439原身份/统计保持；独立train/val输入标签跨度重叠0；220份CSV与1423研究父块核验；8模型目标/mask/raw完全一致。",
+      "remaining": "本次未独立重新生成全部成交/持仓标签；复用其原绑定数据资格及导出目标，原始独立新数据仍缺。"
+    },
+    "engineering": {
+      "status": "pass_for_scope",
+      "evidence": "退出0、单次27492.676秒；173个导出文件、169个可用completion成员哈希通过，其余明确省略并匹配指纹；8模型锁后16套提取完成，未发现本范围工程错误。",
+      "remaining": "权重/优化器和完整128预测省略，不能称本地恢复已验证；报告算术通过不等于科学假设通过。"
+    }
+  },
+  "decision_impact": {
+    "F05": "本跨深度/同容量两写入配方不支持，收束；旧layer2/causal_pool/深度/Macro及修复结论不改变。",
+    "F01": "完整128、uniform5和全128评价职责通过执行核查；没有补上所谓遗漏位置，显式同时128仍保留未测试。",
+    "F11": "有分项内容取舍与成本结果，0新读头拟合；未获通用用途或替代原始历史的优势。",
+    "reference_unchanged": true,
+    "new_training_budget": 0
+  },
+  "next_action": {
+    "status": "design_decision_pending_no_new_GPU_job",
+    "task_ids": [
+      "F01",
+      "F05",
+      "F11"
+    ],
+    "question": "能否将必要内容保真作为训练中的独立保护条件，避免总Q改善通过抵消价格/近端退化获得？",
+    "deliverable": "一张有限设计决策卡：优先固定plain架构，明确主优化目标、必要保护及仅训练数据确定的尺度/约束，与旧活动调权、删S、Haar/多尺度逐项去重并配同期原Q对照；提出不了实质区别就收束此建议。",
+    "evidence": "同一验证集late/staged均总Q下降而path上升；研究集近段/活动/共同内容保护失败。已有证据足够设计，不再追加诊断矩阵。",
+    "source": "not_locked; plain means architecture, not automatic promotion/continuation of plain240 weights",
+    "constraints": [
+      "目标保持因果可复用价量状态",
+      "完整历史/全位置及价量需求保持",
+      "不以标量loss大小推断梯度贡献或冲突",
+      "不重开历史纠错，不重跑旧网格，不自动加轮",
+      "本次为有限目标取舍决策，不无限期阻止架构研究",
+      "patch/输入分组、显式128、长记忆、跨分辨率/未来等仍保留但非自动任务"
+    ],
+    "reason": "两种新增模块均出现训练总分与必要内容保护排序分离；本报告没有定位bar粒度组织为唯一瓶颈。先明确目标/保护机制比直接换patch更可解释；不因此宣称Q实现错误或架构最优。",
+    "training_budget": 0,
+    "entrypoint": null,
+    "code_change": false
+  }
+}

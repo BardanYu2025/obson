@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-24",
-  "current_iteration": "state_organization768_code_ready_pending_AutoDL",
-  "current_iteration_scope": "第23节F05跨深度内容组织：source control180双种子，plain/late_memory/staged_memory各追加60轮；原Q、完整128、公开768保持，两个必要比较同时通过才支持有限内容收益。代码就绪、CUDA未运行；第22节结论/Macro/历史纠错不改。",
+  "current_iteration": "state_organization768_reviewed_recipe_closed",
+  "current_iteration_scope": "本固定h2→h4写入配方明确退化：相对同容量h4→h4，综合价格MSE增加3.19%～6.55%；相对原结构同期续训增加5.24%～23.17%。两必要比较主收益均0/4、全部8个无收益阈值差值在两种聚类95%区间均高于0。 staged相对plain远段五种成交/持仓活动MSE点估计全部降低1.46%～12.83%；近段五项全部增加8.06%～62.10%。有限远段收益保留，不改判整体保护失败。 本配方收束，Macro不换，无待跑GPU命令；下一项F01/F05训练目标保护设计决策。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -516,13 +516,14 @@
         "docs/BABEL_UNIFORM_CONTEXT768_REVIEW.md",
         "docs/BABEL_STATE_COVERAGE768_REVIEW.json",
         "docs/BABEL_ROADMAP.md#20-f01f03继续学习embedding先检验主目标的尺度分配2026-10-12",
-        "docs/BABEL_LAYER_SUPERVISION768_REVIEW.json"
+        "docs/BABEL_LAYER_SUPERVISION768_REVIEW.json",
+        "docs/BABEL_STATE_ORGANIZATION768_REVIEW.json"
       ],
-      "next_action": "只执行第23节state_organization768有界三组双种子，报告后逐项归档，不自动启动保留分支。",
+      "next_action": "一张有限设计决策卡：优先固定plain架构，明确主优化目标、必要保护及仅训练数据确定的尺度/约束，与旧活动调权、删S、Haar/多尺度逐项去重并配同期原Q对照；提出不了实质区别就收束此建议。",
       "implementation": "complete",
       "execution": "four_fixed120_workers_complete_reviewed",
       "conclusion": "本多尺度配方综合价格MSE升7.27%–24.78%，4项主收益0通过，均衡升级未成立。",
-      "current_role": "保持uniform5/每端点own128/全128评价；显式同时128仍未测试。",
+      "current_role": "第23节完整历史、全位置监督和评价已复核；下一设计检验必要内容保护与总Q排序分离，未改变显式同时128保留假设。",
       "external_reference_20261018": {
         "project_ids": [
           "vjepa21"
@@ -532,9 +533,9 @@
       },
       "current_iteration": {
         "card": "state_organization_plan",
-        "implementation": "complete_synthetic_checked",
-        "execution": "not_run",
-        "conclusion": "pending"
+        "implementation": "complete_synthetic_and_remote_checked",
+        "execution": "six60_eightmodel_evaluation_complete_reviewed",
+        "conclusion": "完整128、uniform5和全128评价职责通过执行核查；没有补上所谓遗漏位置，显式同时128仍保留未测试。"
       },
       "iteration_archive": [
         {
@@ -546,9 +547,19 @@
           },
           "current_role": "第22节同种子同曝光、每端点完整128与全128评价已核验；此次未测试显式每步同时128，不改第20节结论。",
           "next_action": "下一F05设计继续保持全位置/完整上下文职责；显式同时128保持独立未执行假设。"
+        },
+        {
+          "current_iteration": {
+            "card": "state_organization_plan",
+            "implementation": "complete_synthetic_checked",
+            "execution": "not_run",
+            "conclusion": "pending"
+          },
+          "current_role": "保持uniform5/每端点own128/全128评价；显式同时128仍未测试。",
+          "next_action": "只执行第23节state_organization768有界三组双种子，报告后逐项归档，不自动启动保留分支。"
         }
       ],
-      "historical_status_scope": "本对象status/implementation/execution/conclusion保留此前已完成的职责范围；第23节的当前执行状态仅见current_iteration及state_organization_plan，尚未运行。"
+      "historical_status_scope": "本对象status/implementation/execution/conclusion保留此前已完成的职责范围；第23节实际执行和结论见current_iteration及state_organization_plan，已完成复核收束。"
     },
     {
       "id": "F02",
@@ -642,19 +653,20 @@
         "V05",
         "V10"
       ],
-      "status": "第22节配方已归档；第23节信息组织三组对照代码就绪待AutoDL。历史/当前结论分开。",
+      "status": "第23节已完成复核：跨深度配方明确退化，有远段活动取舍但未均衡升级；收束，下一项目标保护设计决策。",
       "reentry_or_acceptance": "基线可靠后固定问题，分别控制深度/宽度/头数/训练预算；不拿短训深层与长训浅层作单因素结论",
       "evidence": [
         "docs/BABEL_GROWTH768_REVIEW.md",
         "docs/BABEL_DEPTH768_REVIEW.md",
         "docs/BABEL_CAUSAL_POOL768_REVIEW.md",
         "docs/BABEL_ROADMAP.md#21-f05让已经发生的历史在编码器内部充分交流2026-10-17",
-        "docs/BABEL_LAYER_SUPERVISION768_REVIEW.json"
+        "docs/BABEL_LAYER_SUPERVISION768_REVIEW.json",
+        "docs/BABEL_STATE_ORGANIZATION768_REVIEW.json"
       ],
-      "implementation": "complete_synthetic_checked",
-      "execution": "not_run",
-      "conclusion": "第23节跨深度信息组织待验证；第22节原Q有限收益和层监督退化结论见归档，未改变。",
-      "next_action": "只执行第23节state_organization768有界三组双种子，报告后逐项归档，不自动启动保留分支。",
+      "implementation": "complete_synthetic_and_remote_checked",
+      "execution": "six_fixed60_CUDA_workers_and_eight_model_all128_evaluation_complete_reviewed",
+      "conclusion": "本固定h2→h4写入配方明确退化：相对同容量h4→h4，综合价格MSE增加3.19%～6.55%；相对原结构同期续训增加5.24%～23.17%。两必要比较主收益均0/4、全部8个无收益阈值差值在两种聚类95%区间均高于0。",
+      "next_action": "一张有限设计决策卡：优先固定plain架构，明确主优化目标、必要保护及仅训练数据确定的尺度/约束，与旧活动调权、删S、Haar/多尺度逐项去重并配同期原Q对照；提出不了实质区别就收束此建议。",
       "external_reference_20261018": {
         "project_ids": [
           "vjepa21",
@@ -666,9 +678,9 @@
       },
       "current_iteration": {
         "card": "state_organization_plan",
-        "implementation": "complete_synthetic_checked",
-        "execution": "not_run",
-        "conclusion": "pending"
+        "implementation": "complete_synthetic_and_remote_checked",
+        "execution": "six60_eightmodel_evaluation_complete_reviewed",
+        "conclusion": "本跨深度/同容量两写入配方不支持，收束；旧layer2/causal_pool/深度/Macro及修复结论不改变。"
       },
       "previous_iteration_disposition": {
         "status": "第21节四组120轮内部注意力对照完成并复核；未均衡升级，固定配方收束，信息组织方向保留。",
@@ -691,9 +703,19 @@
             "execution": "four_fixed60_CUDA_workers_and_six_model_all128_evaluation_complete_reviewed",
             "conclusion": "总体价格MSE增加25.5715%～43.7680%，4项差值区间都支持误差增加；主收益0/4、保护183/312、F03为0/60、P95为0/4。129失败保护中102项两类区间均超过10%伤害、27项未确认；收束此共享头/20%重分配/固定60轮配方。"
           }
+        },
+        {
+          "current_iteration": {
+            "card": "state_organization_plan",
+            "implementation": "complete_synthetic_checked",
+            "execution": "not_run",
+            "conclusion": "pending"
+          },
+          "current_role": "主要问题为h2->h4与h4->h4同容量内容汇聚，同时对比原结构；源码已就绪。",
+          "next_action": "只执行第23节state_organization768有界三组双种子，报告后逐项归档，不自动启动保留分支。"
         }
       ],
-      "current_role": "主要问题为h2->h4与h4->h4同容量内容汇聚，同时对比原结构；源码已就绪。"
+      "current_role": "跨深度写入比同容量和plain都退化，固定配方收束；架构/patch仍保留，暂不自动增加。"
     },
     {
       "id": "F06",
@@ -818,9 +840,10 @@
         "docs/BABEL_ROADMAP.md#17-f11连续使用结果",
         "docs/BABEL_ROADMAP.md#18-f11用途与代价结算",
         "docs/BABEL_ROADMAP.md#19-f11n05下一用途",
-        "docs/BABEL_LAYER_SUPERVISION768_REVIEW.json"
+        "docs/BABEL_LAYER_SUPERVISION768_REVIEW.json",
+        "docs/BABEL_STATE_ORGANIZATION768_REVIEW.json"
       ],
-      "next_action": "只执行第23节state_organization768有界三组双种子，报告后逐项归档，不自动启动保留分支。",
+      "next_action": "一张有限设计决策卡：优先固定plain架构，明确主优化目标、必要保护及仅训练数据确定的尺度/约束，与旧活动调权、删S、Haar/多尺度逐项去重并配同期原Q对照；提出不了实质区别就收束此建议。",
       "implementation": "fixed_closed_bar_adapter_and_bounded_replay_delivered",
       "execution": "complete_AutoDL_CUDA_and_report_reviewed",
       "conclusion": "连续接口数值资格通过；普通平均保真较高，压力/低波动失败保留，不等于可靠趋势或通用用途验收。",
@@ -833,9 +856,9 @@
       },
       "current_iteration": {
         "card": "state_organization_plan",
-        "implementation": "complete_synthetic_checked",
-        "execution": "not_run",
-        "conclusion": "pending"
+        "implementation": "complete_synthetic_and_remote_checked",
+        "execution": "six60_eightmodel_evaluation_complete_reviewed",
+        "conclusion": "有分项内容取舍与成本结果，0新读头拟合；未获通用用途或替代原始历史的优势。"
       },
       "iteration_archive": [
         {
@@ -846,10 +869,20 @@
             "conclusion": "内容和成本已结算；0新增用途拟合，generic_reuse仍unknown_not_tested。"
           },
           "next_action": "第22节内容/成本结算完成，无通用复用新证据。保留现有原型及旧用途边界；后续用途须另锁任务和强基线，不能由辅助层loss或重建均值宣布晋升。"
+        },
+        {
+          "current_iteration": {
+            "card": "state_organization_plan",
+            "implementation": "complete_synthetic_checked",
+            "execution": "not_run",
+            "conclusion": "pending"
+          },
+          "current_role": "仅内容保留及参数/运行读取成本；无新读头拟合，通用复用未知。",
+          "next_action": "只执行第23节state_organization768有界三组双种子，报告后逐项归档，不自动启动保留分支。"
         }
       ],
-      "current_role": "仅内容保留及参数/运行读取成本；无新读头拟合，通用复用未知。",
-      "historical_status_scope": "本对象status/implementation/execution/conclusion保留此前已完成的职责范围；第23节的当前执行状态仅见current_iteration及state_organization_plan，尚未运行。"
+      "current_role": "本次仅内容与成本结算，无用途拟合或升级；通用复用仍未知。",
+      "historical_status_scope": "本对象status/implementation/execution/conclusion保留此前已完成的职责范围；第23节实际执行和结论见current_iteration及state_organization_plan，已完成复核收束。"
     },
     {
       "id": "F12",
@@ -875,35 +908,46 @@
     }
   ],
   "active_order": [
-    "F05",
     "F01",
+    "F05",
     "F11"
   ],
   "next_after_active": {
-    "status": "await_this_run_report_no_automatic_next_training",
+    "status": "design_decision_pending_no_new_GPU_job",
     "task_ids": [
-      "F05",
       "F01",
+      "F05",
       "F11"
     ],
-    "deliverable": "按SHA复核state_organization768报告，比较staged对late和plain，归档各分项及成本；有收益只作为有限候选，没过则收束此配方。",
-    "training_budget_after_this_card": 0,
+    "question": "能否将必要内容保真作为训练中的独立保护条件，避免总Q改善通过抵消价格/近端退化获得？",
+    "deliverable": "一张有限设计决策卡：优先固定plain架构，明确主优化目标、必要保护及仅训练数据确定的尺度/约束，与旧活动调权、删S、Haar/多尺度逐项去重并配同期原Q对照；提出不了实质区别就收束此建议。",
+    "evidence": "同一验证集late/staged均总Q下降而path上升；研究集近段/活动/共同内容保护失败。已有证据足够设计，不再追加诊断矩阵。",
+    "source": "not_locked; plain means architecture, not automatic promotion/continuation of plain240 weights",
+    "constraints": [
+      "目标保持因果可复用价量状态",
+      "完整历史/全位置及价量需求保持",
+      "不以标量loss大小推断梯度贡献或冲突",
+      "不重开历史纠错，不重跑旧网格，不自动加轮",
+      "本次为有限目标取舍决策，不无限期阻止架构研究",
+      "patch/输入分组、显式128、长记忆、跨分辨率/未来等仍保留但非自动任务"
+    ],
+    "reason": "两种新增模块均出现训练总分与必要内容保护排序分离；本报告没有定位bar粒度组织为唯一瓶颈。先明确目标/保护机制比直接换patch更可解释；不因此宣称Q实现错误或架构最优。",
+    "training_budget": 0,
     "entrypoint": null,
-    "retained": "All future hypotheses preserved; no rerun of prior layer2 or automatic grids."
+    "code_change": false
   },
   "active_training_budget": {
     "task_ids": [
-      "F05",
       "F01",
+      "F05",
       "F11"
     ],
-    "status": "new_bounded_release_ready_not_executed",
-    "jobs_max": 6,
-    "worker_epochs_max": 360,
-    "optimizer_updates_max": 13680,
+    "status": "no_active_training_budget",
+    "jobs_max": 0,
+    "worker_epochs_max": 0,
+    "optimizer_updates_max": 0,
     "readout_fits": 0,
-    "session_seconds_max": 86400,
-    "reason": "User explicitly requests next information-organization design/code/push with unchanged goal. Old layer2 auxiliary-supervision recipe is closed; tested shallow-task supervision is replaced by using shallow content without a separate task. Source and360-worker-epoch budget are new and explicit, not residual time or automatic continuation."
+    "reason": "第23节六组各60轮完整执行并收束；下一项仅训练目标保护设计决策，未锁定新机制/来源/预算。"
   },
   "aliases": {
     "R0": [
@@ -953,7 +997,7 @@
   "blocked_followups": {
     "F_optimization": "第20～22节固定矩阵均已完成并收束；下一步F05编码阶段信息组织设计，F01约束上下文/覆盖，F11限制用途声明。无新GPU预算，不自动开启网格/扩层/跨周期/未来分支。"
   },
-  "active_phase": "F05_state_organization768_ready_pending_CUDA",
+  "active_phase": "F01_F05_objective_protection_design_pending",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -1412,6 +1456,29 @@
       "actual_seconds": 17824.76462444663,
       "report_sha256": "c95e373e9b9d5a30bbf2a4666279b87d53b5b4b63f3a49fc21ba8d34476056f6",
       "review": "docs/BABEL_LAYER_SUPERVISION768_REVIEW.json"
+    },
+    {
+      "task_ids": [
+        "F05",
+        "F01",
+        "F11"
+      ],
+      "status": "completed_reviewed_no_remaining_jobs",
+      "jobs_max": 6,
+      "worker_epochs_max": 360,
+      "optimizer_updates_max": 13680,
+      "readout_fits": 0,
+      "session_seconds_max": 86400,
+      "reason": "User explicitly requests next information-organization design/code/push with unchanged goal. Old layer2 auxiliary-supervision recipe is closed; tested shallow-task supervision is replaced by using shallow content without a separate task. Source and360-worker-epoch budget are new and explicit, not residual time or automatic continuation.",
+      "card": "state_organization_plan",
+      "study": "state_organization768",
+      "actual_jobs": 6,
+      "actual_worker_epochs": 360,
+      "actual_optimizer_updates": 13680,
+      "actual_state_exposures": 8620200,
+      "actual_seconds": 27492.67610384524,
+      "report_sha256": "cde52c2df62b238157e605f84d8afe15ccef928c71e38ba1175b4c5d4bf7dca0",
+      "review": "docs/BABEL_STATE_ORGANIZATION768_REVIEW.json"
     }
   ],
   "next_repair_cards": {
@@ -17556,10 +17623,19 @@
       "N08",
       "N09"
     ],
-    "status": "code_ready_pending_AutoDL_execution",
-    "implementation": "complete_synthetic_and_static_checked",
-    "execution": "not_run",
-    "conclusion": "pending_no_real_model_acceptance",
+    "status": "completed_reviewed_recipe_closed",
+    "implementation": "complete_synthetic_and_remote_checked",
+    "execution": "six_fixed60_CUDA_workers_and_eight_model_all128_evaluation_complete_reviewed",
+    "conclusion": {
+      "primary": "本固定h2→h4写入配方明确退化：相对同容量h4→h4，综合价格MSE增加3.19%～6.55%；相对原结构同期续训增加5.24%～23.17%。两必要比较主收益均0/4、全部8个无收益阈值差值在两种聚类95%区间均高于0。",
+      "secondary": "h4→h4对原结构价格MSE变化−1.00%～+18.61%，主收益0/4；不晋升为替代候选。",
+      "retained_benefit": "staged相对plain远段五种成交/持仓活动MSE点估计全部降低1.46%～12.83%；近段五项全部增加8.06%～62.10%。有限远段收益保留，不改判整体保护失败。",
+      "learning": "staged的综合验证Q比plain低3.63%～4.16%，但验证路径损失高26.78%～37.90%；总loss降低不能代替价格/近中远分项验收。未证明唯一梯度冲突、容量不足或第2层无用。",
+      "recipe_disposition": "本次两写入memory固定配方收束，不自动改LR/槽数/层数/权重或追加轮数。",
+      "promotion": false,
+      "generic_reuse": "unknown_not_tested",
+      "reference": "Macro97/94 unchanged; control180 retained historical limited source; plain240 descriptive comparison only, no new promotion gate."
+    },
     "human_entry": "docs/BABEL_ROADMAP.md#23-f05f01f11最终状态形成前结合不同深度的内容2026-10-24",
     "question": "Can h2 then h4 content aggregation improve final768 over BOTH h4 then h4 matched memory and contemporaneously continued original structure, with unchanged Q/history/updates?",
     "reason_for_change": "User explicitly requests next information-organization design/code/push with unchanged goal. Old layer2 auxiliary-supervision recipe is closed; tested shallow-task supervision is replaced by using shallow content without a separate task. Source and360-worker-epoch budget are new and explicit, not residual time or automatic continuation.",
@@ -18139,6 +18215,134 @@
     "review": {
       "purpose": {
         "status": "pass_for_scope",
+        "evidence": "按F05两个必要对照同时判定，均失败；保留远段活动收益，拒绝以低Q或只超过退化候选宣布成功。F11用途不从重建推导。",
+        "remaining": "因果可复用价量状态的通用价值未验收，未来预测未新增证据。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "340条绑定实现记录核对；4层768/8头和私有4×192两写入架构按锁定协议执行；66来源/初始化、462因果检查通过；initial180固定8输出与上轮control180逐值相同。",
+        "remaining": "权重未下载，未本地神经回放；没有reset_first消融，不能断言写入被如何使用；内部工作容量不等于公开768。"
+      },
+      "training": {
+        "status": "pass_for_scope",
+        "evidence": "六组360轮/13680次更新、同种子全位置抽样/曝光、固定181..240末轮及原Q独立复算；继承Adam6840与新组空状态收据一致；无best改选。",
+        "remaining": "Adam/RNG真实张量未下载；新模块LR和global clipping是配方因素；初轮loss升高后恢复不证明根因就是LR。同更新非同FLOPs。"
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "17478项全128聚合/分布/双2000bootstrap/阈值复算，3538项固定8预测/raw真值/F03核对全部通过；明确伤害与保护未确认分别归档；全部P95点保护通过不覆盖其他失败。",
+        "remaining": "完整128逐预测留远端；age0全部字段/完整影线/通用复用不在此次验收；重复研究集不能当V13，312保护高度相关不等于312能力。"
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "4789/978/984/439原身份/统计保持；独立train/val输入标签跨度重叠0；220份CSV与1423研究父块核验；8模型目标/mask/raw完全一致。",
+        "remaining": "本次未独立重新生成全部成交/持仓标签；复用其原绑定数据资格及导出目标，原始独立新数据仍缺。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "退出0、单次27492.676秒；173个导出文件、169个可用completion成员哈希通过，其余明确省略并匹配指纹；8模型锁后16套提取完成，未发现本范围工程错误。",
+        "remaining": "权重/优化器和完整128预测省略，不能称本地恢复已验证；报告算术通过不等于科学假设通过。"
+      }
+    },
+    "verification": {
+      "local_real_weight_execution": false,
+      "synthetic_tests": {
+        "total_passed": 422,
+        "new_study_passed": 142,
+        "inherited_regression_passed": 280,
+        "command": ".venv/bin/python -m pytest -q tests/babel/test_state_organization*.py tests/babel/test_layer_supervision*.py tests/babel/test_observed_history*.py",
+        "seconds": 43.17,
+        "scope": "synthetic only; no real checkpoints or local neural training"
+      },
+      "static_checks": [
+        "Ruff check/format",
+        "shell bash-n",
+        "runner/export CLI help",
+        "git diff --check"
+      ],
+      "independent_review": "model/history, source/training, runner and evaluate/export integration reviewed without current blocking findings",
+      "remote_CUDA": "complete_source_numeric_and_resource_checks_reviewed",
+      "source_pin_arithmetic": "Both manifest/completion hashes and both checkpoint hashes independently match reviewed layer_supervision report receipts; weights not locally executed.",
+      "final_receipt_name_check": {
+        "passed": 21,
+        "seconds": 10.76,
+        "scope": "runner tests after clarifying complete_inherited_adam_restored receipt name; all new memory state still starts empty"
+      },
+      "independent_document_review": "Source/budget/gates/novelty match implementation. Corrected same-seed comparison wording and archived old F05 execution flags; current ready/not_run/pending distinct."
+    },
+    "report_review": {
+      "path": "docs/BABEL_STATE_ORGANIZATION768_REVIEW.json",
+      "archive_sha256": "cde52c2df62b238157e605f84d8afe15ccef928c71e38ba1175b4c5d4bf7dca0",
+      "reviewed": "2026-10-24",
+      "gate_counts": {
+        "staged_vs_late": {
+          "primary_passed": 0,
+          "overall_comparisons_passed": 0,
+          "formal_interval_gates": 316,
+          "status_counts": {
+            "fail": 83,
+            "pass": 233
+          },
+          "protection_gates": 312,
+          "protection_counts": {
+            "pass": 233,
+            "fail": 79
+          },
+          "p95_passed": 4,
+          "definite_harm_protections": 19,
+          "unconfirmed_protections": 60,
+          "f03_counts": {
+            "fail": 23,
+            "pass": 37
+          }
+        },
+        "staged_vs_plain": {
+          "primary_passed": 0,
+          "overall_comparisons_passed": 0,
+          "formal_interval_gates": 316,
+          "status_counts": {
+            "fail": 148,
+            "pass": 168
+          },
+          "protection_gates": 312,
+          "protection_counts": {
+            "fail": 144,
+            "pass": 168
+          },
+          "p95_passed": 4,
+          "definite_harm_protections": 90,
+          "unconfirmed_protections": 54,
+          "f03_counts": {
+            "pass": 15,
+            "fail": 45
+          }
+        },
+        "late_vs_plain": {
+          "primary_passed": 0,
+          "overall_comparisons_passed": 0,
+          "formal_interval_gates": 316,
+          "status_counts": {
+            "fail": 126,
+            "pass": 190
+          },
+          "protection_gates": 312,
+          "protection_counts": {
+            "fail": 122,
+            "pass": 190
+          },
+          "p95_passed": 4,
+          "definite_harm_protections": 78,
+          "unconfirmed_protections": 44,
+          "f03_counts": {
+            "pass": 28,
+            "fail": 32
+          }
+        }
+      }
+    },
+    "implementation_review": {
+      "purpose": {
+        "status": "pass_for_scope",
         "evidence": "F05 tests cross-depth aggregation into one causal price/activity state; F01 full-context and F11 claim/cost boundaries retained; predeclared bounded falsifier.",
         "remaining": "Generic reusable semantics, trading and prediction advantage remain unverified; no Macro promotion."
       },
@@ -18168,31 +18372,29 @@
         "remaining": "No local real neural execution; CUDA device/numerics and measured24h/disk/GPU budget remain AutoDL preflight; uncatchable termination may require manual export."
       }
     },
-    "verification": {
-      "local_real_weight_execution": false,
-      "synthetic_tests": {
-        "total_passed": 422,
-        "new_study_passed": 142,
-        "inherited_regression_passed": 280,
-        "command": ".venv/bin/python -m pytest -q tests/babel/test_state_organization*.py tests/babel/test_layer_supervision*.py tests/babel/test_observed_history*.py",
-        "seconds": 43.17,
-        "scope": "synthetic only; no real checkpoints or local neural training"
-      },
-      "static_checks": [
-        "Ruff check/format",
-        "shell bash-n",
-        "runner/export CLI help",
-        "git diff --check"
+    "next_action": {
+      "status": "design_decision_pending_no_new_GPU_job",
+      "task_ids": [
+        "F01",
+        "F05",
+        "F11"
       ],
-      "independent_review": "model/history, source/training, runner and evaluate/export integration reviewed without current blocking findings",
-      "remote_CUDA": "pending",
-      "source_pin_arithmetic": "Both manifest/completion hashes and both checkpoint hashes independently match reviewed layer_supervision report receipts; weights not locally executed.",
-      "final_receipt_name_check": {
-        "passed": 21,
-        "seconds": 10.76,
-        "scope": "runner tests after clarifying complete_inherited_adam_restored receipt name; all new memory state still starts empty"
-      },
-      "independent_document_review": "Source/budget/gates/novelty match implementation. Corrected same-seed comparison wording and archived old F05 execution flags; current ready/not_run/pending distinct."
+      "question": "能否将必要内容保真作为训练中的独立保护条件，避免总Q改善通过抵消价格/近端退化获得？",
+      "deliverable": "一张有限设计决策卡：优先固定plain架构，明确主优化目标、必要保护及仅训练数据确定的尺度/约束，与旧活动调权、删S、Haar/多尺度逐项去重并配同期原Q对照；提出不了实质区别就收束此建议。",
+      "evidence": "同一验证集late/staged均总Q下降而path上升；研究集近段/活动/共同内容保护失败。已有证据足够设计，不再追加诊断矩阵。",
+      "source": "not_locked; plain means architecture, not automatic promotion/continuation of plain240 weights",
+      "constraints": [
+        "目标保持因果可复用价量状态",
+        "完整历史/全位置及价量需求保持",
+        "不以标量loss大小推断梯度贡献或冲突",
+        "不重开历史纠错，不重跑旧网格，不自动加轮",
+        "本次为有限目标取舍决策，不无限期阻止架构研究",
+        "patch/输入分组、显式128、长记忆、跨分辨率/未来等仍保留但非自动任务"
+      ],
+      "reason": "两种新增模块均出现训练总分与必要内容保护排序分离；本报告没有定位bar粒度组织为唯一瓶颈。先明确目标/保护机制比直接换patch更可解释；不因此宣称Q实现错误或架构最优。",
+      "training_budget": 0,
+      "entrypoint": null,
+      "code_change": false
     }
   }
 }
