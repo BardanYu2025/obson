@@ -3882,5 +3882,61 @@
       "evidence": "139随包文件哈希核对、完成/锁/预算一致，退出0；总40675.34秒内完整完成；代码/协议与2185fdd匹配，本地0真实模型执行。",
       "remaining": "权重/Adam/完整预测按协议省略，引用哈希收据不能等同验证这些文件字节；最终评价逐模型进度日志不足已记录，不为此改写绑定代码或重跑。"
     }
+  },
+  "subsequent_code_data_audit_20261026": {
+    "roadmap": "docs/BABEL_ROADMAP.json:recent_method_audit_20261026",
+    "raw_body_activity_supplement": {
+      "regressions_passed": 232,
+      "independent_synthetic_passed": 71,
+      "raw_label_checks_passed": 1671,
+      "data_arithmetic_checks_passed": 11,
+      "raw_nonprice_values": 8674608,
+      "raw_nonprice_max_abs": 0,
+      "raw_masks_equal": true,
+      "scope_limits": [
+        "Uses pinned feature semantics and statistics, including source mask/suspect policy; not proof source feed is economically correct.",
+        "Fixed8 positions across1423 research parents only; full train/val caches not in package.",
+        "No new independent market data, no real neural execution."
+      ]
+    },
+    "objective_vs_evaluation_fixed8": {
+      "test/s42": {
+        "Q": 0.8019414376295451,
+        "path": 1.3507014860369566,
+        "change1": 0.5236450936443885,
+        "body": 0.7478192747833817,
+        "activity": 0.9175344364913199,
+        "physical_price_MSE": 1.3709824492733926,
+        "near_MSE": 1.7391349031089771
+      },
+      "test/s43": {
+        "Q": 0.7232627199268911,
+        "path": 1.3587295564268513,
+        "change1": 0.49368213350861795,
+        "body": 0.6864691830744222,
+        "activity": 0.7892754902082042,
+        "physical_price_MSE": 1.2567011011567222,
+        "near_MSE": 2.029935083923028
+      },
+      "cross_research/s42": {
+        "Q": 0.843828833310851,
+        "path": 1.021244484521461,
+        "change1": 0.5032181130033697,
+        "body": 0.7634221747822105,
+        "activity": 0.911604161841798,
+        "physical_price_MSE": 0.9294435158211605,
+        "near_MSE": 1.3112992254290545
+      },
+      "cross_research/s43": {
+        "Q": 0.7446396593274274,
+        "path": 0.982500152558381,
+        "change1": 0.4690318833692624,
+        "body": 0.6848065913880074,
+        "activity": 0.7840894759673102,
+        "physical_price_MSE": 0.8168046602479667,
+        "near_MSE": 1.3338207924493812
+      }
+    },
+    "limits": "后补审计不改变原全128正式门槛或科学处置；原review中未重生成raw活动的说明是初次报告审查范围，现仅固定8位置补齐；全train/val缓存和真实权重仍未新验证。"
   }
 }

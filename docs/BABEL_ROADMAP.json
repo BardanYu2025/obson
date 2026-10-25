@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-26",
-  "current_iteration": "input_patch768_report_reviewed_fixed_recipe_closed",
-  "current_iteration_scope": "第25节F05/F01/F11三组双种子各120轮与12套全128评价完整结束并复核。patch4提速且部分内容有收益，但对bar近期价格四组合确认损害，未形成均衡升级；收束固定4/120，不晋升。下一步仅审查混合输入粒度候选，新增预算0。",
+  "current_iteration": "recent_method_audit_20261026_complete",
+  "current_iteration_scope": "按用户要求先审第22–25节代码/数据/训练；本范围无需推翻/重跑的实施错误，补齐固定8原始活动真值核对。确认目标/验收取舍和新结构适配边界；保留原配方结论，混合粒度只保留待审候选，0新训练。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -521,7 +521,7 @@
         "docs/BABEL_CONTENT_GUARD768_REVIEW.json",
         "docs/BABEL_INPUT_PATCH768_REVIEW.json"
       ],
-      "next_action": "以后输入组织仍必须保留相同公开端点历史与评价职责；显式同时128保留但不自动排队。",
+      "next_action": "后续保持完整历史/全位置职责和共同目标边界，不把当前差分边界当新错码；显式全128保留。",
       "implementation": "complete",
       "execution": "four_fixed120_workers_complete_reviewed",
       "conclusion": "本多尺度配方综合价格MSE升7.27%–24.78%，4项主收益0通过，均衡升级未成立。",
@@ -592,7 +592,8 @@
           "next_action": "只执行第25节input_patch768有界三组×双种子，交自动生成的reports.tar.gz；在真实报告前不改判科学结果。"
         }
       ],
-      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；本轮以current_iteration和input_patch_plan为准。"
+      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；本轮以current_iteration和input_patch_plan为准。",
+      "method_audit": "recent_method_audit_20261026"
     },
     {
       "id": "F02",
@@ -701,7 +702,7 @@
       "implementation": "complete_synthetic_and_remote_checked",
       "execution": "six_fixed60_CUDA_workers_and_eight_model_all128_evaluation_complete_reviewed",
       "conclusion": "本固定h2→h4写入配方明确退化：相对同容量h4→h4，综合价格MSE增加3.19%～6.55%；相对原结构同期续训增加5.24%～23.17%。两必要比较主收益均0/4、全部8个无收益阈值差值在两种聚类95%区间均高于0。",
-      "next_action": "先设计一张有限、可反驳的输入粒度对照卡；审查通过后再实施和锁预算。本轮固定4根/120轮已收束，无待跑任务。",
+      "next_action": "先根据本次审计完善下一张实验卡的机制归因与诊断要求；混合粒度保留候选，当前不直接实施或启动。",
       "external_reference_20261018": {
         "project_ids": [
           "vjepa21",
@@ -782,7 +783,8 @@
         }
       ],
       "current_role": "patch4相对bar近端价格MSE四组合均增加31.84%～92.21%，双聚类区间确认超过10%；local4保留128token也四组合确认近端损害。patch4较local4综合均值均改善且更快。",
-      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；本轮以current_iteration和input_patch_plan为准。"
+      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；本轮以current_iteration和input_patch_plan为准。",
+      "method_audit": "recent_method_audit_20261026"
     },
     {
       "id": "F06",
@@ -912,7 +914,7 @@
         "docs/BABEL_CONTENT_GUARD768_REVIEW.json",
         "docs/BABEL_INPUT_PATCH768_REVIEW.json"
       ],
-      "next_action": "保留质量/成本分账；有限用途、独立确认与保留未来分支按原条件单列。",
+      "next_action": "内容保留、读取与用途分开；低Q不能代替均衡保真；V13仍单列，不新增GPU任务。",
       "implementation": "fixed_closed_bar_adapter_and_bounded_replay_delivered",
       "execution": "complete_AutoDL_CUDA_and_report_reviewed",
       "conclusion": "连续接口数值资格通过；普通平均保真较高，压力/低波动失败保留，不等于可靠趋势或通用用途验收。",
@@ -982,7 +984,8 @@
         }
       ],
       "current_role": "patch4训练耗时为bar的39.87%，中远端实体/活动均值有收益，近端内容有代价；必要比较未整体通过，0新增用途拟合。",
-      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；本轮以current_iteration和input_patch_plan为准。"
+      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；本轮以current_iteration和input_patch_plan为准。",
+      "method_audit": "recent_method_audit_20261026"
     },
     {
       "id": "F12",
@@ -1013,33 +1016,23 @@
     "F11"
   ],
   "next_after_active": {
-    "status": "design_candidate_only_no_ready_entrypoint",
+    "status": "audit_complete_candidate_retained_not_implementation_ready",
     "task_ids": [
       "F05",
       "F01",
       "F11"
     ],
-    "question": "在同一完整128输入窗中，近期保持原逐bar输入、较远历史使用片段，能否保留近期内容并保留本轮实测的成本收益？",
-    "action": "先设计一张有限、可反驳的输入粒度对照卡；审查通过后再实施和锁预算。本轮固定4根/120轮已收束，无待跑任务。",
-    "basis": "patch4训练时间约为bar的39.87%，中远端实体/活动有点估计收益，但对bar近端价格四组合均确认超过10%损害；local4同128token也损害近端，因此不能认定token少是唯一原因。",
-    "distinct_from_old": "旧short/long是独立状态融合，history_memory是历史embedding银行，pool/state-organization在隐藏层后；候选只改变同一128原特征窗进入主干前的时间粒度，仍公开一个768。",
-    "reject_renamed_repeat": "纯线性bar投影+四根线性上下文残差可合并为112→768投影，函数类基本等同local4；零初始化改变优化起点，不能冒称新的信息组织机制。",
-    "must_lock_before_implementation": [
-      "近期长度和远端分片/滚动相位",
-      "原bar位置坐标与全部128覆盖",
-      "投影参数/初始化、同期必要对照和总状态",
-      "同更新曝光与实测算力的不同账本",
-      "近中远/实体/活动/F03/尾部保护及停止条件"
+    "action": "先根据本次审计完善下一张实验卡的机制归因与诊断要求；混合粒度保留候选，当前不直接实施或启动。",
+    "reason": "用户要求先排查；审计确认总Q/物理内容排序分歧和新结构适配混杂，故不能仅凭近期差就直接推出混合粒度能解决。",
+    "before_new_code": [
+      "明确训练实际优化的量与必要内容保护，记录分项而非只看名义系数；不因活动数值大自动删活动或重开旧反馈网格",
+      "区分新信息机制与共享query适配/最终权重重分配/新分支学习率和clip影响；若无法分离就将结论严格限定为配方",
+      "保持同来源/完整128/同期对照/固定预算与停止；明确只测同曝光，不声称架构极限",
+      "新诊断先用train/val；如需梯度机制结论须有对应证据，不能把标量loss份额冒充梯度"
     ],
-    "not_decided": "尚未选近期长度、具体控制矩阵、训练预算或接受新方案；没有证明混合粒度有效，也没有定位唯一根因。",
     "new_gpu_budget": 0,
-    "new_readout_fits": 0,
-    "prohibitions": [
-      "不把剩余时间自动转成新训练",
-      "不同时叠加新loss/gate/非线性支路/长记忆",
-      "不自动扩长度/层数/权重网格",
-      "不替换Macro、不重开历史纠错"
-    ]
+    "ready_entrypoint": null,
+    "no_automatic_rerun": true
   },
   "active_training_budget": {
     "task_ids": [
@@ -1103,7 +1096,7 @@
   "blocked_followups": {
     "F_optimization": "第20～24节配方保持收束；仅第25节固定三组输入粒度已就绪。无自动loss/LR/层数/patch长度网格；V13仍缺新数据。"
   },
-  "active_phase": "F05_input_patch_report_archived_next_design_only_no_pending_run",
+  "active_phase": "recent_method_audit_complete_before_next_experiment_design",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -20782,6 +20775,280 @@
         "不自动扩长度/层数/权重网格",
         "不替换Macro、不重开历史纠错"
       ]
+    }
+  },
+  "recent_method_audit_20261026": {
+    "date": "2026-10-26",
+    "task_ids": [
+      "F01",
+      "F05",
+      "F11"
+    ],
+    "requirement_ids": [
+      "N01",
+      "N02",
+      "N03",
+      "N04",
+      "N05",
+      "N07",
+      "N08",
+      "N09"
+    ],
+    "status": "completed_for_declared_scope",
+    "request": "先排查最近几轮代码/数据/训练，再解释为何很多候选未胜原方案。",
+    "scope": "第22–25节及共享数据/目标/评价链；不是全部历史重新验收。",
+    "source_commit": "93ea857b399f23ef70d0f76c10944a620c0c5d4e",
+    "archive_reviews_reused_not_new_experiments": [
+      {
+        "path": "/Users/bardan/Downloads/babel_layer_supervision768_reports.tar.gz",
+        "sha256": "c95e373e9b9d5a30bbf2a4666279b87d53b5b4b63f3a49fc21ba8d34476056f6",
+        "existing_review": "docs/BABEL_LAYER_SUPERVISION768_REVIEW.json"
+      },
+      {
+        "path": "/Users/bardan/Downloads/babel_state_organization768_reports.tar.gz",
+        "sha256": "cde52c2df62b238157e605f84d8afe15ccef928c71e38ba1175b4c5d4bf7dca0",
+        "existing_review": "docs/BABEL_STATE_ORGANIZATION768_REVIEW.json"
+      },
+      {
+        "path": "/Users/bardan/Downloads/babel_content_guard768_reports.tar.gz",
+        "sha256": "1d853f8f503d5729eadc0bf42b1baff8a37e230bca188646eb0954a4efe08e11",
+        "existing_review": "docs/BABEL_CONTENT_GUARD768_REVIEW.json"
+      },
+      {
+        "path": "/Users/bardan/Downloads/babel_input_patch768_reports.tar.gz",
+        "sha256": "d43c29c04199e5718dee9f1f2eaa2a76b59faf44de80f958505313b8c9319b99",
+        "existing_review": "docs/BABEL_INPUT_PATCH768_REVIEW.json"
+      }
+    ],
+    "implementation_bugs_requiring_rerun_found": 0,
+    "production_edits": 0,
+    "real_weight_loads_or_neural_runs_local": 0,
+    "new_checks": {
+      "regressions_passed": 232,
+      "independent_synthetic_passed": 71,
+      "raw_label_checks_passed": 1671,
+      "data_arithmetic_checks_passed": 11,
+      "raw_nonprice_values": 8674608,
+      "raw_nonprice_max_abs": 0,
+      "raw_masks_equal": true,
+      "scope_limits": [
+        "Uses pinned feature semantics and statistics, including source mask/suspect policy; not proof source feed is economically correct.",
+        "Fixed8 positions across1423 research parents only; full train/val caches not in package.",
+        "No new independent market data, no real neural execution."
+      ]
+    },
+    "findings": [
+      {
+        "id": "recent_A",
+        "classification": "checked_no_blocking_implementation_bug_found",
+        "question": "是否候选没有训练、输入标签错位、数据分区泄漏、恢复或预算错配？",
+        "evidence": "232现有回归+71独立合成；原CSV实体/活动8674608值与mask逐值一致；全128索引、未来扰动和来源/排样核对。",
+        "impact": "在本次范围没有据此推翻/重跑22–25的依据；不是对全部代码/真实权重的无条件保证。"
+      },
+      {
+        "id": "recent_B",
+        "classification": "confirmed_objective_tradeoff",
+        "question": "为什么总loss变好，近端价格反而更差？",
+        "evidence": "原Q为age标准化SmoothL1+差分/实体/活动，接受使用物理MSE+逐项保护。固定8同一批预测patch/bar Q比0.80194/0.72326/0.84383/0.74464，近端MSE比1.73913/2.02994/1.31130/1.33382。末轮路径项约占Q的0.63%–0.79%，活动60%–76%，都是标量值份额。",
+        "impact": "候选确实优化了现有目标，不是没有学到；训练和验收排名不等价，本身非错码，但不能继续凭更低总loss解释表示已变好。活动仍是需求，不由此删活动或自动扫权重。",
+        "source": [
+          "src/obson/babel/history_query.py:130",
+          "src/obson/babel/multiscale_metrics.py:44"
+        ]
+      },
+      {
+        "id": "recent_C",
+        "classification": "confirmed_recipe_changes_and_limited_attribution",
+        "question": "改了机制后是否只测了机制本身？",
+        "evidence": "层2辅助采用0.8finalQ+0.2h2Q且共享query，实际辅助标量约占46%–52%；memory新参数LR是旧参数20倍且共用clip，首轮Q约0.078–0.090而plain约0.036；patch末token从当前28投影变为最近4根112投影，非函数保持起点。",
+        "impact": "对实际配方的比较成立；不能扩大为中层监督/记忆/片段整个机制无效，也不能断言这几个具体因素已证明是失败根因。",
+        "source": [
+          "src/obson/babel/layer_supervision_training.py:115",
+          "src/obson/babel/state_organization_training.py:32",
+          "src/obson/babel/input_patch.py:35"
+        ]
+      },
+      {
+        "id": "recent_D",
+        "classification": "confirmed_reference_and_coverage_limits",
+        "question": "是否所有新实验都不如原来的主模型，或者又漏训了位置？",
+        "evidence": "最近几轮比较的是各轮同期control，不是全部直接与Macro同预算对比；第22纯Q续训已有13.28%–19.22%总体价格收益但5项保护未确认。完整128与uniform5已实现，显式每步128未测试；当前实体/活动未直接回读，change1只覆盖历史内部126差分但age1有path监督。",
+        "impact": "保留有限收益和覆盖边界；原Macro是研究参照，不是已证明的全局最优；当前边界是旧协议明示内容，不当新错码重开历史修复。"
+      }
+    ],
+    "posthoc_fixed8_objective_diagnostic": {
+      "test/s42": {
+        "Q": 0.8019414376295451,
+        "path": 1.3507014860369566,
+        "change1": 0.5236450936443885,
+        "body": 0.7478192747833817,
+        "activity": 0.9175344364913199,
+        "physical_price_MSE": 1.3709824492733926,
+        "near_MSE": 1.7391349031089771
+      },
+      "test/s43": {
+        "Q": 0.7232627199268911,
+        "path": 1.3587295564268513,
+        "change1": 0.49368213350861795,
+        "body": 0.6864691830744222,
+        "activity": 0.7892754902082042,
+        "physical_price_MSE": 1.2567011011567222,
+        "near_MSE": 2.029935083923028
+      },
+      "cross_research/s42": {
+        "Q": 0.843828833310851,
+        "path": 1.021244484521461,
+        "change1": 0.5032181130033697,
+        "body": 0.7634221747822105,
+        "activity": 0.911604161841798,
+        "physical_price_MSE": 0.9294435158211605,
+        "near_MSE": 1.3112992254290545
+      },
+      "cross_research/s43": {
+        "Q": 0.7446396593274274,
+        "path": 0.982500152558381,
+        "change1": 0.4690318833692624,
+        "body": 0.6848065913880074,
+        "activity": 0.7840894759673102,
+        "physical_price_MSE": 0.8168046602479667,
+        "near_MSE": 1.3338207924493812
+      }
+    },
+    "synthetic_objective_counterexample": {
+      "evidence": {
+        "constant_4bps_error": {
+          "path": 0.00032408952255108525,
+          "change1": 6.179560262254535e-36,
+          "body": 0.0,
+          "activity": 0.0,
+          "Q": 0.0001296358090204341,
+          "physical_price_MSE": 0.0016,
+          "physical_price_bands": {
+            "1_16": 0.0016,
+            "17_64": 0.0016,
+            "65_127": 0.0016000000000000007
+          }
+        },
+        "alternating_1bps_error": {
+          "path": 2.025559515944283e-05,
+          "change1": 0.0009702840068257654,
+          "body": 0.0,
+          "activity": 0.0,
+          "Q": 0.00020215903942893021,
+          "physical_price_MSE": 0.0001,
+          "physical_price_bands": {
+            "1_16": 0.0001,
+            "17_64": 0.0001,
+            "65_127": 0.00010000000000000005
+          }
+        }
+      },
+      "interpretation": "保持其他字段正确，历史价格整体偏移4bps的Q低于交替±1bps，但物理MSE为其16倍。差分项对常数偏移不敏感、path仍有约束。这证明两个目标不等价，不证明真实模型错误来自这唯一模式，也不改变原接受。"
+    },
+    "evidence_files": {
+      "root": "/Users/bardan/private/obson/reports/recent_method_audit_20261026",
+      "files": {
+        "recent_training_audit.json": "cb68e67ab5dc717e7d7794a85ae2fb9edd13db62b7c745ceeede69195cb6e6be",
+        "recent_data_audit.json": "346b441c8e40e3b100db9fefb1e3f1facb18b153f02c923a5be94c11f697b2f8",
+        "recent_data_raw_audit.json": "0d6720d6d6c6cd291f602df0107dc38bfb35dc5f6428ce5d5c6c39483dd56f95",
+        "recent_data_raw_audit.py": "9fe61d4375879777e3d8cd82c76f388646592f4f44f8fe4d77d7117796fb00f3",
+        "recent_data_causal_checks.json": "d07a6eff1aa813aeb84c77d9964d450479dfa93c6a51476bb1ea7950a2768dd3",
+        "recent_data_causal_checks.py": "6d889140eef977629c60236a4dbf5570910bed5ff548209ee98276f0ec7aad49",
+        "recent_patch_audit.json": "70ac2ef3cc66bfc9584b345827f3522ec24bb7e7738076fc3500c9869a6503b5",
+        "recent_patch_synthetic.json": "a88236714904c37f669933413ffc3b7a24b34f75c4121a2a7c5695a20dc27a6c",
+        "audit_patch_mechanism.py": "ecc4be27059ea2a21e8826810232c069b4c6185c12a8cac505a0e1765aadc9db",
+        "recent_objective_audit.json": "b2bd6bbae0985309c5fead41545a85e0c5b731828d6e6627ee3b721982713afb",
+        "recent_objective_audit.py": "d14de8cb2f2bac67886195e93353163fd9b336f9c3578398b54150fa3a11bcff"
+      }
+    },
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "用户要求先查代码/数据/训练；范围固定第22–25节，不启动新优化，不把训练loss或单项改善当通用价量状态成功。",
+        "remaining": "当前表示的通用复用价值、独立泛化仍未验收；本轮不评价市场未来可预测性。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "候选前向/参数梯度/optimizer接入、bar原函数、完整128/片段顺序/原位置/因果mask合成检查；区分投影变化、共享query与输入token数。",
+        "remaining": "未加载真实权重做分支消融，不能确认新memory按预期使用h2；编码与query联合训练，不定位唯一容量瓶颈。"
+      },
+      "training": {
+        "status": "pass_for_scope",
+        "evidence": "232项训练/恢复/模型回归通过，71项新增合成检查；恢复来源、尾批micro、LR和固定last核查。独立计算中层辅助实际标量份额、memory首轮冲击、Q与物理评分分歧。",
+        "remaining": "标量loss份额不是参数梯度份额；没有反事实证明某LR、剪裁或任务冲突为唯一原因。同曝光不等于各架构充分调优。"
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "保留原报告阈值/排序；固定8预测独立重算Q与物理误差，四组合Q均改善但近端均退化；新诊断不替代原全128正式接受。",
+        "remaining": "只有固定8预测可重新评分；重复研究集不是V13；既有change1不含age0边和当前实体/活动未直接重建的范围不被此次消除。"
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "补查220原CSV与1423父窗固定8端点的8674608实体/活动值及mask，逐值一致；1671检查及11项EMA/全部128索引/未来扰动检查通过；分区跨度核对。",
+        "remaining": "本次未重生成全train/val缓存，没有认证上游行情经济真实性或新增独立数据；EMA例检4合约不是全输入逐bit审计。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "只读生产实现、CPU报告算术和合成测试；未改历史绑定源码/协议、未读真实权重。证据脚本/结果以SHA保存在reports，执行/科学接受分开。",
+        "remaining": "真实CUDA权重与Adam载荷仍留远端；本次通过不能盖章全部历史或所有运行环境无误。"
+      }
+    },
+    "decision_impact": {
+      "numeric_results_retained": true,
+      "formal_thresholds_unchanged": true,
+      "macro_reference_unchanged": true,
+      "historical_repairs_remain_closed": true,
+      "rerun_required_from_found_bug": false,
+      "new_training_budget": 0,
+      "interpretation": "配方结果有效；架构机制/容量的普遍结论不得扩大。多次未均衡晋升不能统一解释为架构容量不足或代码普遍错误。"
+    },
+    "previous_next_candidate": {
+      "status": "design_candidate_only_no_ready_entrypoint",
+      "task_ids": [
+        "F05",
+        "F01",
+        "F11"
+      ],
+      "question": "在同一完整128输入窗中，近期保持原逐bar输入、较远历史使用片段，能否保留近期内容并保留本轮实测的成本收益？",
+      "action": "先设计一张有限、可反驳的输入粒度对照卡；审查通过后再实施和锁预算。本轮固定4根/120轮已收束，无待跑任务。",
+      "basis": "patch4训练时间约为bar的39.87%，中远端实体/活动有点估计收益，但对bar近端价格四组合均确认超过10%损害；local4同128token也损害近端，因此不能认定token少是唯一原因。",
+      "distinct_from_old": "旧short/long是独立状态融合，history_memory是历史embedding银行，pool/state-organization在隐藏层后；候选只改变同一128原特征窗进入主干前的时间粒度，仍公开一个768。",
+      "reject_renamed_repeat": "纯线性bar投影+四根线性上下文残差可合并为112→768投影，函数类基本等同local4；零初始化改变优化起点，不能冒称新的信息组织机制。",
+      "must_lock_before_implementation": [
+        "近期长度和远端分片/滚动相位",
+        "原bar位置坐标与全部128覆盖",
+        "投影参数/初始化、同期必要对照和总状态",
+        "同更新曝光与实测算力的不同账本",
+        "近中远/实体/活动/F03/尾部保护及停止条件"
+      ],
+      "not_decided": "尚未选近期长度、具体控制矩阵、训练预算或接受新方案；没有证明混合粒度有效，也没有定位唯一根因。",
+      "new_gpu_budget": 0,
+      "new_readout_fits": 0,
+      "prohibitions": [
+        "不把剩余时间自动转成新训练",
+        "不同时叠加新loss/gate/非线性支路/长记忆",
+        "不自动扩长度/层数/权重网格",
+        "不替换Macro、不重开历史纠错"
+      ]
+    },
+    "next": {
+      "status": "audit_complete_candidate_retained_not_implementation_ready",
+      "task_ids": [
+        "F05",
+        "F01",
+        "F11"
+      ],
+      "action": "先根据本次审计完善下一张实验卡的机制归因与诊断要求；混合粒度保留候选，当前不直接实施或启动。",
+      "reason": "用户要求先排查；审计确认总Q/物理内容排序分歧和新结构适配混杂，故不能仅凭近期差就直接推出混合粒度能解决。",
+      "before_new_code": [
+        "明确训练实际优化的量与必要内容保护，记录分项而非只看名义系数；不因活动数值大自动删活动或重开旧反馈网格",
+        "区分新信息机制与共享query适配/最终权重重分配/新分支学习率和clip影响；若无法分离就将结论严格限定为配方",
+        "保持同来源/完整128/同期对照/固定预算与停止；明确只测同曝光，不声称架构极限",
+        "新诊断先用train/val；如需梯度机制结论须有对应证据，不能把标量loss份额冒充梯度"
+      ],
+      "new_gpu_budget": 0,
+      "ready_entrypoint": null,
+      "no_automatic_rerun": true
     }
   }
 }
