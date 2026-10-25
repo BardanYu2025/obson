@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-10-25",
-  "current_iteration": "content_guard768_completed_reviewed_recipe_closed",
-  "current_iteration_scope": "第24节F01/F05/F11六组60轮完整结束并复核：反馈对原Q主收益0/4，近端价格均恶化31.48%～72.82%；训练面板原Q21/21双种子，反馈12/21和9/21。配方收束、Macro不变。下一方向为F05输入片段化设计审查；无新代码/运行任务/预算。",
+  "current_iteration": "input_patch768_code_ready_waiting_AutoDL",
+  "current_iteration_scope": "第24节已收束；第25节F05/F01/F11输入片段化三组×双种子从头120轮代码就绪，265合成/回归通过，远程未执行、科学结论待验证。只跑新input_patch768；旧结果与Macro参照保持。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -520,11 +520,11 @@
         "docs/BABEL_STATE_ORGANIZATION768_REVIEW.json",
         "docs/BABEL_CONTENT_GUARD768_REVIEW.json"
       ],
-      "next_action": "下一张有限设计决策卡；先解决输入/位置定义、匹配起点、参数与算力账本、预算和验收，尚未准备代码入口。",
+      "next_action": "只执行第25节input_patch768有界三组×双种子，交自动生成的reports.tar.gz；在真实报告前不改判科学结果。",
       "implementation": "complete",
       "execution": "four_fixed120_workers_complete_reviewed",
       "conclusion": "本多尺度配方综合价格MSE升7.27%–24.78%，4项主收益0通过，均衡升级未成立。",
-      "current_role": "保留每端点完整128/全位置职责；片段化不能漏掉中间状态或引入未来；显式同时128仍独立保留。",
+      "current_role": "每端点own128、同uniform5训练/全128评价；32内部token不减少公开端点评价。",
       "external_reference_20261018": {
         "project_ids": [
           "vjepa21"
@@ -533,10 +533,10 @@
         "evidence": "external_research_20261018"
       },
       "current_iteration": {
-        "card": "content_guard_plan",
-        "implementation": "complete_synthetic_and_remote_checked",
-        "execution": "six60_eightmodel_all128_complete_reviewed",
-        "conclusion": "完整历史/采样/全128评价确认，反馈内容保护未成立；显式同时128未测试。"
+        "card": "input_patch_plan",
+        "implementation": "complete_synthetic_checked",
+        "execution": "not_run",
+        "conclusion": "pending"
       },
       "iteration_archive": [
         {
@@ -568,9 +568,19 @@
           },
           "current_role": "第23节完整历史、全位置监督和评价已复核；下一设计检验必要内容保护与总Q排序分离，未改变显式同时128保留假设。",
           "next_action": "一张有限设计决策卡：优先固定plain架构，明确主优化目标、必要保护及仅训练数据确定的尺度/约束，与旧活动调权、删S、Haar/多尺度逐项去重并配同期原Q对照；提出不了实质区别就收束此建议。"
+        },
+        {
+          "current_iteration": {
+            "card": "content_guard_plan",
+            "implementation": "complete_synthetic_and_remote_checked",
+            "execution": "six60_eightmodel_all128_complete_reviewed",
+            "conclusion": "完整历史/采样/全128评价确认，反馈内容保护未成立；显式同时128未测试。"
+          },
+          "current_role": "保留每端点完整128/全位置职责；片段化不能漏掉中间状态或引入未来；显式同时128仍独立保留。",
+          "next_action": "下一张有限设计决策卡；先解决输入/位置定义、匹配起点、参数与算力账本、预算和验收，尚未准备代码入口。"
         }
       ],
-      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史研究处置；本轮状态以current_iteration与content_guard_plan为准。"
+      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；本轮以current_iteration和input_patch_plan为准。"
     },
     {
       "id": "F02",
@@ -664,7 +674,7 @@
         "V05",
         "V10"
       ],
-      "status": "第24节反馈训练配方完整结束并收束；下一F05输入时间片段化设计建议，无新训练任务。",
+      "status": "第24节反馈配方已收束；第25节输入片段化固定对照代码就绪，待AutoDL。",
       "reentry_or_acceptance": "基线可靠后固定问题，分别控制深度/宽度/头数/训练预算；不拿短训深层与长训浅层作单因素结论",
       "evidence": [
         "docs/BABEL_GROWTH768_REVIEW.md",
@@ -678,7 +688,7 @@
       "implementation": "complete_synthetic_and_remote_checked",
       "execution": "six_fixed60_CUDA_workers_and_eight_model_all128_evaluation_complete_reviewed",
       "conclusion": "本固定h2→h4写入配方明确退化：相对同容量h4→h4，综合价格MSE增加3.19%～6.55%；相对原结构同期续训增加5.24%～23.17%。两必要比较主收益均0/4、全部8个无收益阈值差值在两种聚类95%区间均高于0。",
-      "next_action": "下一张有限设计决策卡；先解决输入/位置定义、匹配起点、参数与算力账本、预算和验收，尚未准备代码入口。",
+      "next_action": "只执行第25节input_patch768有界三组×双种子，交自动生成的reports.tar.gz；在真实报告前不改判科学结果。",
       "external_reference_20261018": {
         "project_ids": [
           "vjepa21",
@@ -689,10 +699,10 @@
         "evidence": "external_research_20261018"
       },
       "current_iteration": {
-        "card": "content_guard_plan",
-        "implementation": "complete_synthetic_and_remote_checked",
-        "execution": "six60_eightmodel_all128_complete_reviewed",
-        "conclusion": "反馈相对原Q无预定收益，近端均超过10%伤害；原Q固定训练面板21项均改善，不能据反馈失败认定架构容量不足。"
+        "card": "input_patch_plan",
+        "implementation": "complete_synthetic_checked",
+        "execution": "not_run",
+        "conclusion": "pending"
       },
       "previous_iteration_disposition": {
         "status": "第21节四组120轮内部注意力对照完成并复核；未均衡升级，固定配方收束，信息组织方向保留。",
@@ -735,10 +745,20 @@
           },
           "current_role": "跨深度写入比同容量和plain都退化，固定配方收束；架构/patch仍保留，暂不自动增加。",
           "next_action": "一张有限设计决策卡：优先固定plain架构，明确主优化目标、必要保护及仅训练数据确定的尺度/约束，与旧活动调权、删S、Haar/多尺度逐项去重并配同期原Q对照；提出不了实质区别就收束此建议。"
+        },
+        {
+          "current_iteration": {
+            "card": "content_guard_plan",
+            "implementation": "complete_synthetic_and_remote_checked",
+            "execution": "six60_eightmodel_all128_complete_reviewed",
+            "conclusion": "反馈相对原Q无预定收益，近端均超过10%伤害；原Q固定训练面板21项均改善，不能据反馈失败认定架构容量不足。"
+          },
+          "current_role": "优先审查输入时间粒度，不扩反馈损失网格；假设而非已定位根因，尚无启动预算。",
+          "next_action": "下一张有限设计决策卡；先解决输入/位置定义、匹配起点、参数与算力账本、预算和验收，尚未准备代码入口。"
         }
       ],
-      "current_role": "优先审查输入时间粒度，不扩反馈损失网格；假设而非已定位根因，尚无启动预算。",
-      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史研究处置；本轮状态以current_iteration与content_guard_plan为准。"
+      "current_role": "比较主干前输入组织：bar/local4/patch4，保持768/4/8与原query/Q。",
+      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；本轮以current_iteration和input_patch_plan为准。"
     },
     {
       "id": "F06",
@@ -867,7 +887,7 @@
         "docs/BABEL_STATE_ORGANIZATION768_REVIEW.json",
         "docs/BABEL_CONTENT_GUARD768_REVIEW.json"
       ],
-      "next_action": "下一张有限设计决策卡；先解决输入/位置定义、匹配起点、参数与算力账本、预算和验收，尚未准备代码入口。",
+      "next_action": "只执行第25节input_patch768有界三组×双种子，交自动生成的reports.tar.gz；在真实报告前不改判科学结果。",
       "implementation": "fixed_closed_bar_adapter_and_bounded_replay_delivered",
       "execution": "complete_AutoDL_CUDA_and_report_reviewed",
       "conclusion": "连续接口数值资格通过；普通平均保真较高，压力/低波动失败保留，不等于可靠趋势或通用用途验收。",
@@ -879,10 +899,10 @@
         "evidence": "external_research_20261018"
       },
       "current_iteration": {
-        "card": "content_guard_plan",
-        "implementation": "complete_synthetic_and_remote_checked",
-        "execution": "six60_eightmodel_all128_complete_reviewed",
-        "conclusion": "内容/成本已结算，无新用途拟合或通用复用接受，不晋升。"
+        "card": "input_patch_plan",
+        "implementation": "complete_synthetic_checked",
+        "execution": "not_run",
+        "conclusion": "pending"
       },
       "iteration_archive": [
         {
@@ -913,10 +933,20 @@
           },
           "current_role": "本次仅内容与成本结算，无用途拟合或升级；通用复用仍未知。",
           "next_action": "一张有限设计决策卡：优先固定plain架构，明确主优化目标、必要保护及仅训练数据确定的尺度/约束，与旧活动调权、删S、Haar/多尺度逐项去重并配同期原Q对照；提出不了实质区别就收束此建议。"
+        },
+        {
+          "current_iteration": {
+            "card": "content_guard_plan",
+            "implementation": "complete_synthetic_and_remote_checked",
+            "execution": "six60_eightmodel_all128_complete_reviewed",
+            "conclusion": "内容/成本已结算，无新用途拟合或通用复用接受，不晋升。"
+          },
+          "current_role": "内容保留/读取成本/复用价值分开；无新用途或V13接受，Macro参照不变。",
+          "next_action": "下一张有限设计决策卡；先解决输入/位置定义、匹配起点、参数与算力账本、预算和验收，尚未准备代码入口。"
         }
       ],
-      "current_role": "内容保留/读取成本/复用价值分开；无新用途或V13接受，Macro参照不变。",
-      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史研究处置；本轮状态以current_iteration与content_guard_plan为准。"
+      "current_role": "同物理内容保护与成本分开；不新增用途拟合，不宣布通用表示或替换Macro。",
+      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；本轮以current_iteration和input_patch_plan为准。"
     },
     {
       "id": "F12",
@@ -947,78 +977,13 @@
     "F11"
   ],
   "next_after_active": {
-    "status": "design_recommendation_only_no_launch_card",
+    "status": "await_input_patch_AutoDL_report",
     "task_ids": [
       "F05",
       "F01",
       "F11"
     ],
-    "question": "保持单768/原Q/原query与完整128，将连续少量bar按顺序拼成输入片段，是否比逐bar输入更好地保留组合形态与局部内容？",
-    "deliverable": "下一张有限设计决策卡；先解决输入/位置定义、匹配起点、参数与算力账本、预算和验收，尚未准备代码入口。",
-    "reason": "固定分项与反馈配方未胜原Q，且原Q在同架构能满足21项训练面板保护；停止自动损失网格，检验roadmap已保留且未执行的输入粒度假设。该结果没有证明patch是根因或保证收益。",
-    "priority": "input_time_patches_before_another_loss_grid_or_unmotivated_depth_scale",
-    "preserve": [
-      "closed-bar causal reusable price/activity state",
-      "each endpoint own full128",
-      "single public768",
-      "original Q and HistoryQuery",
-      "original contracts/splits/train-only statistics/EMA prehistory",
-      "all128 evaluation and near/mid/far/body/activity/F03/tails",
-      "Macro and historical repair closure",
-      "all retained future branches and V13 restrictions"
-    ],
-    "deduplication": {
-      "causal_pool": "旧方案在隐藏层后分范围汇聚并残差相加；候选改变进入主干前的输入粒度。",
-      "state_organization": "旧h2/h4私有记忆写入后投影加到末端；片段输入不是换名重复该汇聚通路。",
-      "history_query": "保留原query，不以增加读头作主要变量。",
-      "cnn256": "旧整体卷积主干对照不等于保持768 Transformer的输入粒度对照。",
-      "structured768_alternative": "单纯reshape/可逆混合不创造新机制；直接四槽写入并取消残差靠近旧pool/memory，同时改query又混入读出。暂不优先。"
-    },
-    "required_before_implementation": [
-      "固定单一片段长度；保留片段内所有特征与顺序；不使用均值bar替代。",
-      "每个公开bar状态独立只看截至自身的128；不得将patch内部早token当对应过去状态。",
-      "优先匹配从头随机起点与同曝光；若从源权重适配必须有明确匹配适配控制，不能直接接control180续60归因结构。",
-      "逐项列清输入投影、位置、mask、参数变化；保持原Q、query、公开768、主干层数头数，不同时引入跨周期或新损失。",
-      "锁定来源/初始化、数值预算、同更新与实际算力、选模和收益/保护/停止门槛后才给命令。",
-      "失败关闭单一粒度配方，不自动扩片段大小或深度网格。"
-    ],
-    "source": "not_locked_no_automatic_promotion_of_control240_or_other_candidate",
-    "training_budget": 0,
-    "entrypoint": null,
-    "code_change": false,
-    "retained_branches": "显式同时128、长记忆、跨周期、价量联合、未来外推仍保留；均非自动任务；V13仍缺新数据。",
-    "review": {
-      "purpose": {
-        "status": "pass_for_scope",
-        "evidence": "继续状态生成与内容保留主线；重建不等于用途成功。",
-        "remaining": "效用仍待单独证据。"
-      },
-      "architecture": {
-        "status": "open",
-        "evidence": "输入粒度与旧末端汇聚/记忆区别明确。",
-        "remaining": "精确片段长度/投影/位置/参数/初始化尚未锁定。"
-      },
-      "training": {
-        "status": "open",
-        "evidence": "拟固定原Q、query和同曝光，优先匹配从头。",
-        "remaining": "确切优化器/轮数/资源预算未定，不可启动。"
-      },
-      "validation": {
-        "status": "open",
-        "evidence": "保留全128、价量分项、F03和尾部；不回改本次门槛。",
-        "remaining": "下一卡完整事前收益/保护/停止规则待锁定。"
-      },
-      "data": {
-        "status": "pass_for_scope",
-        "evidence": "原单合约分区、全部输入和因果前史保持，不要求新标签。",
-        "remaining": "片段端点/边界工程验证待实施；V13仍无新数据。"
-      },
-      "engineering": {
-        "status": "open",
-        "evidence": "当前无新代码、入口或GPU任务。",
-        "remaining": "仅设计方向，后续需合成、CUDA预检及导出检查。"
-      }
-    }
+    "action": "仅执行第25节input_patch768固定三组×双种子；收到包按来源/完成/内容/成本逐条归档，结果出来前不安排patch网格或新优化分支。"
   },
   "active_training_budget": {
     "task_ids": [
@@ -1026,12 +991,14 @@
       "F01",
       "F11"
     ],
-    "status": "none_pending_design_card",
-    "jobs_max": 0,
-    "worker_epochs_max": 0,
-    "optimizer_updates_max": 0,
+    "status": "locked_code_ready_not_run",
+    "jobs_max": 6,
+    "worker_epochs_max": 720,
+    "optimizer_updates_max": 27360,
     "readout_fits": 0,
-    "reason": "第24节预算已完整执行并收束；下一输入粒度仅设计建议，未分配新训练预算或复用剩余时限。"
+    "session_cap_seconds": 86400,
+    "reason": "用户要求输入片段化公平对照；local4区分局部投影与stride。相同曝光从头120，非续训旧模型；新预算不承接第24节剩余时间。",
+    "card": "input_patch_plan"
   },
   "aliases": {
     "R0": [
@@ -1079,9 +1046,9 @@
     "F11"
   ],
   "blocked_followups": {
-    "F_optimization": "第20～24节配方均收束；不自动续训或扩loss/LR/层数/片段长度网格。下一F05输入粒度需先完成公平起点/位置/预算/验收设计，无待跑命令。"
+    "F_optimization": "第20～24节配方保持收束；仅第25节固定三组输入粒度已就绪。无自动loss/LR/层数/patch长度网格；V13仍缺新数据。"
   },
-  "active_phase": "F05_input_granularity_design_recommendation_no_launch_card",
+  "active_phase": "F05_input_patch768_ready_for_one_bounded_AutoDL_run",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -19319,7 +19286,7 @@
     }
   },
   "input_granularity_design_request": {
-    "status": "design_recommendation_only_no_launch_card",
+    "status": "resolved_into_input_patch_plan_20261025",
     "task_ids": [
       "F05",
       "F01",
@@ -19390,6 +19357,1190 @@
         "evidence": "当前无新代码、入口或GPU任务。",
         "remaining": "仅设计方向，后续需合成、CUDA预检及导出检查。"
       }
+    },
+    "resolved_by": "input_patch_plan",
+    "historical_scope": "先前设计建议记录保留；新的确切三组/初始化/预算/验收见第25节，不再作为当前无卡状态。"
+  },
+  "input_patch_plan": {
+    "date": "2026-10-25",
+    "task_ids": [
+      "F05",
+      "F01",
+      "F11"
+    ],
+    "requirement_ids": [
+      "N01",
+      "N02",
+      "N03",
+      "N04",
+      "N05",
+      "N07",
+      "N08",
+      "N09"
+    ],
+    "status": "code_ready_waiting_AutoDL",
+    "implementation": "complete_synthetic_checked",
+    "execution": "not_run",
+    "conclusion": "pending",
+    "promoted": false,
+    "human_entry": "docs/BABEL_ROADMAP.md#25-f05f01f11输入片段化先组合局部再学习片段关系2026-10-25",
+    "question": "同样每根已收盘bar的完整128历史、单768状态和原Q，把连续4根有序组合并减少主干token到32，能否比逐bar及逐bar滑动4根组合都更均衡保留价量内容？",
+    "reason": "第24节反馈未胜原Q，原Q同结构能满足固定训练面板21项均值保护；关闭该损失配方后检验不同的输入粒度机制，不宣称已定位架构根因。",
+    "authorization": "用户要求设计输入片段化、避免重复、公平对照、检查代码并推送；新增必要local4控制与固定预算在实施前声明。",
+    "difference_from_old": {
+      "causal_pool": "旧方案在隐藏层后汇聚，本轮进入主干前组合输入。",
+      "state_organization": "旧h2/h4写入记忆并回加末端，本轮不增加记忆分支。",
+      "history_query": "不改原query，不加读头。",
+      "cnn256": "不整体替换主干为CNN，保留768/4层/8头。",
+      "observed_history": "保持因果三角mask，改变token组织；不是重跑full-attention。",
+      "content_guard": "原Q固定，不加反馈、分项系数或训练面板约束。"
+    },
+    "source": {
+      "path": "/root/autodl-tmp/obson/checkpoints/babel_overlap_content768",
+      "role": "data_lineage_only_no_neural_weight_or_Adam_restore",
+      "completion_sha256": "835cce0452c27173f808b530871624b59041dceb71552074bf32e4c722e4139d",
+      "model_start": "scratch",
+      "ancestry_limit": "旧数据来源验证仍哈希祖先权重文件，不能删除这些依赖；初始化不反序列化旧神经权重。"
+    },
+    "data": {
+      "raw_root": "/root/autodl-tmp/data/contracts",
+      "counts": {
+        "train": 4789,
+        "val": 978,
+        "test": 984,
+        "cross_research": 439
+      },
+      "features": "unchanged float32 N255x28 parent blocks, each public endpoint independently selects own trailing128",
+      "truth": "unchanged float64 raw closes and original body/activity masks; train-only statistics unchanged",
+      "prices": "100log(close/endpoint_close), original frozen normalization; no future price anchor",
+      "partition": "same original contract/period/split identities, all input/target spans, causal EMA prehistory; no new raw data or continuous-contract splice",
+      "fit": "no new scales, PCA or Haar fitting"
+    },
+    "architecture": {
+      "width": 768,
+      "layers": 4,
+      "heads": 8,
+      "ff": 3072,
+      "dropout": 0,
+      "encoder": "preLN causal Transformer; same coordinate projection",
+      "query": "original HistoryQuery, four192 internal vectors from final768 only, two layers/four heads, original age1..127 outputs",
+      "state": "one endpoint768 only, no raw/target decoder bypass; no internal early-token full-context public API",
+      "position": "full128 original sinusoidal bar coordinates; patch endpoints3,7,...127, not0..31",
+      "grouping_phase": "window-relative; moving endpoint shifts patch phase, tested by unchanged F03 physical-overlap guards",
+      "arms": {
+        "bar": {
+          "patch_length": 1,
+          "stride": 1,
+          "tokens": 128,
+          "input_projection": [
+            28,
+            768
+          ],
+          "parameters_encoder_plus_query": 30187399
+        },
+        "local4": {
+          "patch_length": 4,
+          "stride": 1,
+          "tokens": 128,
+          "input_projection": [
+            112,
+            768
+          ],
+          "padding": "first three token histories left padded standardized-feature zero inside own window; no extra raw history, no attention padding mask",
+          "parameters_encoder_plus_query": 30251911
+        },
+        "patch4": {
+          "patch_length": 4,
+          "stride": 4,
+          "tokens": 32,
+          "input_projection": [
+            112,
+            768
+          ],
+          "packing": "all128rows once, oldest-first all28 features, no averaging",
+          "parameters_encoder_plus_query": 30251911
+        }
+      },
+      "parameter_difference": 64512,
+      "parameter_percent_increase": 0.21370506283101767,
+      "controlled_contrast": "local4 vs patch4 same parameters/initial tensors; bar vs alternatives includes different input projection, disclosed practical package comparison"
+    },
+    "initialization": {
+      "seeds": [
+        42,
+        43
+      ],
+      "shared": "original scratch encoder constructed first; backbone/coordinates/query bit-identical across arms per seed",
+      "input": "local4/patch4 separate deterministic seed+20261025 input projection stream; complete tensors identical",
+      "receipts": "before updates, perseed arms signatures/shared signatures/input contracts/counts; bound by checkpoints and final six-model lock",
+      "function_preserving": false,
+      "optimizer": "fresh empty Adam; no old model or Adam; resume only own committed checkpoint",
+      "state_scaler": "zero mean/unit scale, no refit"
+    },
+    "training": {
+      "objective": ".4path+.2change1+.1body+.3activity, original Q SmoothL1; same masks, age-band support and valid-field normalization",
+      "trainable": "all encoder/query parameters",
+      "epochs": 120,
+      "batch": 128,
+      "micro": 8,
+      "workers": 1,
+      "sampling": "uniform5 endpoints without replacement per parent per epoch, paired original epochs1..120 schedule per seed",
+      "optimizer": {
+        "name": "AdamW",
+        "peak_lr": 0.0003,
+        "warmup_epochs": 10,
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "weight_decay": 0.01,
+        "global_clip": 1,
+        "schedule": "unchanged original120 cosine including original floor",
+        "foreach": null,
+        "capturable": false,
+        "differentiable": false,
+        "fused": null
+      },
+      "precision": "FP32 parameters and forward, raw price/loss float64; fixed context runtime noAMP/TF32",
+      "fairness": "same updates/exposures/selection; different FLOPs/time measured, not equal compute",
+      "not_tested": "explicit all128 simultaneous training remains retained hypothesis"
+    },
+    "budget": {
+      "job_order": [
+        "bar_s42",
+        "local4_s42",
+        "patch4_s42",
+        "patch4_s43",
+        "local4_s43",
+        "bar_s43"
+      ],
+      "jobs_max": 6,
+      "epochs_each": 120,
+      "worker_epochs_max": 720,
+      "updates_each": 4560,
+      "optimizer_updates_max": 27360,
+      "parent_exposures": 3448080,
+      "supervised_state_exposures": 17240400,
+      "session_cap_seconds": 86400,
+      "research_states": 1092864,
+      "sample_prediction_states": 68304,
+      "evaluation_banks": 12,
+      "readout_fits": 0,
+      "preflight": "measure all3 actual Q backward + validation9 + evaluation128, disk and peakGPU; conservative slower-arm bound; no fixed speedup claim",
+      "source_budget": "new bounded release; no reuse of remainder from previous run",
+      "accounting": "Successful first source qualification charged before worker reservation; worker preparation/preflight/train/eval/save charged; final export outside cap."
+    },
+    "selection": {
+      "fixed": "last120 all6 only",
+      "validation": "epoch0 and every5, nine fixed positions, diagnostic only",
+      "lock": "all6 last120 and both initialization receipts before preparing/scoring research cohorts",
+      "no_search": [
+        "best epoch",
+        "LR",
+        "patch length",
+        "extra epochs",
+        "fresh downstream heads"
+      ]
+    },
+    "evaluation": {
+      "positions": "all1..128 each independently owns128; fixed8 predictions exported",
+      "comparison_groups": [
+        "patch4_vs_bar",
+        "patch4_vs_local4",
+        "local4_vs_bar"
+      ],
+      "required": [
+        "patch4_vs_bar",
+        "patch4_vs_local4"
+      ],
+      "secondary": "local4_vs_bar descriptive only, never promoted as patch success",
+      "gain": "bothseeds/bothcohorts dualpaired95%upper(candidate-.95reference)<=0 composite physical priceMSE",
+      "protections": "same78 physical near/mid/far/interior/endpoint/body/activity/F03 protections, dual95%upper(candidate-1.10reference)<=0; P95 ratio<=1.10",
+      "interval_gates": 948,
+      "p95_gates": 12,
+      "bootstrap": {
+        "draws_per_grouping": 2000,
+        "seed": 20261012,
+        "groupings": [
+          "month",
+          "contract_period_month"
+        ],
+        "min_parents": 100,
+        "min_groups": 6
+      },
+      "f11": "parameters/runtime/memory/disk/public state3072bytes; no new utility fits; cost savings cannot replace quality gate",
+      "limits": [
+        "Repeated research cohorts are not V13",
+        "No universal representation or forecasting acceptance",
+        "No age0/full-wick acceptance",
+        "Encoder and query both update, no encoder-only causal attribution",
+        "Macro97/94 unchanged; no automatic promotion",
+        "Only fixed4/120 recipe tested, failure does not eliminate all patch models"
+      ]
+    },
+    "stop": "fixed120 or cumulative24h; source/causality/nonfinite/resources/transactions fail stops and exports; uncertain uncommitted updates or extraction not replayed, no grid/automatic extension",
+    "entrypoint": "scripts/babel_input_patch768_autodl.sh",
+    "module": "obson.babel.input_patch_run",
+    "output": "/root/autodl-tmp/obson/checkpoints/babel_input_patch768",
+    "report": "/root/autodl-tmp/download/babel_input_patch768_reports.tar.gz",
+    "delivery": "all/evaluate/export fixed configuration; success/failure/stopped automatic report; completed all only verify/export; weights/Adam/full128 predictions retained remotely and hashed",
+    "retained_branches": "F02长记忆、F04跨周期、价量联合、F06～F09外推、显式同时128等保留但不自动运行；V13独立数据仍缺。",
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "F05主干前输入粒度、F01完整128职责、F11内容与成本的有限可反驳对照；旧损失配方收束，无预测标签或规则分类替代目标。",
+        "remaining": "通用价量表示、用途迁移和未来外推不由重建接受；V13仍缺独立数据。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "独立拼接/顺序/零补/全部128覆盖、原bar坐标、公开端点未来与窗外扰动、原bar前向与全部梯度回归通过；local4/patch4完整张量一致，三组共享主干/query签名；实际新建参数计数与卡一致。",
+        "remaining": "输入投影相对bar新增64512参数，比较边界已披露；真实CUDA数值/因果预检待执行，结果不能单归encoder信息量。"
+      },
+      "training": {
+        "status": "pass_for_scope",
+        "evidence": "原Q逐值和全部神经梯度回归、三组micro/尾批累积、采样/曝光/固定120调度、新Adam及完整轮恢复通过；模型/Adam dtype/flags/步数/RNG先检查再load，未提交更新拒绝重放。",
+        "remaining": "相同更新不等于相同FLOPs；120轮不是架构收敛极限；显式同时128仍未测试。"
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "双必要对照、12评价组合、948区间及12P95门槛测试通过；缺对照、组别/位置/初始化/签名替换均拒绝；全128评价、固定8导出、signed F03、原评分及研究前6模型锁检查通过。",
+        "remaining": "没有真实研究结果，不晋升；重复集合不替代V13；age0/完整影线和通用用途不在本轮接受范围。"
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "复用原只读数据适配/完整跨度/统计/raw float64价格/mask；来源隔离和缺目录回归通过；不加载祖先神经权重，来源身份仍绑定祖先文件。",
+        "remaining": "远端实际文件及缓存指纹待启动核验；源依赖不可删除；无新独立行情。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "265项集成合成/回归通过(146新增、119复用边界)，Ruff/格式/bash语法/两个CLI帮助/diff检查通过；read-only交叉审查修复observed_history直接依赖漏绑、三组初始化/6模型资源计数；首次来源校验计时、预算、锁、失败/停止/完整报告导出及shell出口通过。",
+        "remaining": "本地0真实权重读取和真实神经执行；GPU显存/时间、完整CUDA研究仍待AutoDL。最终导出在24h执行预算外，保证失败也可打包。"
+      }
+    },
+    "checks": {
+      "integration_command": ".venv/bin/python -m pytest -q tests/babel/test_input_patch*.py tests/babel/test_observed_history.py tests/babel/test_observed_history_training.py tests/babel/test_observed_history_export_v2.py tests/babel/test_multiscale_data.py tests/babel/test_multiscale_evaluate.py",
+      "passed": 265,
+      "new_tests": 146,
+      "inherited_regressions": 119,
+      "seconds": 30.22,
+      "ruff": "check and format --check pass (uvx ruff)",
+      "shell": "bash -n and9 real-bash/fake-python tests pass",
+      "cli": "input_patch_run --help and input_patch_export --help pass",
+      "diff_check": "pass",
+      "real_neural_execution_local": 0,
+      "real_checkpoint_reads_local": 0,
+      "synthetic_parameter_count_check": {
+        "bar": 30187399,
+        "local4": 30251911,
+        "patch4": 30251911
+      },
+      "resource_disk_lower_estimate_GiB": 8.775832261890173,
+      "independent_review": "model/training original-function parity; runner initialization/exposures/restore/source binding; evaluate/export semantic substitutions; roadmap/protocol fairness and scope reviewed; no remaining implementation blocker found in this scope"
+    },
+    "protocol": {
+      "task_ids": [
+        "F05",
+        "F01",
+        "F11"
+      ],
+      "jobs": [
+        {
+          "name": "bar_s42",
+          "arm": "bar",
+          "seed": 42
+        },
+        {
+          "name": "local4_s42",
+          "arm": "local4",
+          "seed": 42
+        },
+        {
+          "name": "patch4_s42",
+          "arm": "patch4",
+          "seed": 42
+        },
+        {
+          "name": "patch4_s43",
+          "arm": "patch4",
+          "seed": 43
+        },
+        {
+          "name": "local4_s43",
+          "arm": "local4",
+          "seed": 43
+        },
+        {
+          "name": "bar_s43",
+          "arm": "bar",
+          "seed": 43
+        }
+      ],
+      "epochs": 120,
+      "batch": 128,
+      "micro": 8,
+      "workers": 1,
+      "session_cap_seconds": 86400,
+      "session_accounting": "successful first read-only source qualification is charged before worker reservation; resumed worker wall time includes preparation, preflight, training and evaluation; final export is outside the execution cap",
+      "encoder": {
+        "width": 768,
+        "heads": 8,
+        "ff": 3072,
+        "layers": 4
+      },
+      "patch_length": 4,
+      "source": "reviewed overlap-content DATA lineage only; no source neural weights or Adam loaded",
+      "source_completion": "835cce0452c27173f808b530871624b59041dceb71552074bf32e4c722e4139d",
+      "counts": {
+        "train": 4789,
+        "val": 978,
+        "test": 984,
+        "cross_research": 439
+      },
+      "initialization": "scratch; same-seed trunk/coordinates/query exact across all arms; local4/patch4 all tensors exact; different bar input shape declared",
+      "sampling": "five uniform endpoints without replacement at epochs1..120; each independently sees full128",
+      "labels": "unchanged raw float64 relative close, body/activity masks and frozen train statistics",
+      "objectives": {
+        "bar": ".4path+.2change1+.1body+.3activity; original Q",
+        "local4": ".4path+.2change1+.1body+.3activity; original Q",
+        "patch4": ".4path+.2change1+.1body+.3activity; original Q"
+      },
+      "model_contract": {
+        "bar": {
+          "schema": "babel-input-patch-model-v1",
+          "arm": "bar",
+          "attention_mode": "causal",
+          "scope": "closed_endpoint_observed_trailing128",
+          "endpoint_only": true,
+          "input_length": 128,
+          "input_channels": 28,
+          "state_width": 768,
+          "encoder": {
+            "width": 768,
+            "heads": 8,
+            "ff": 3072,
+            "layers": 4
+          },
+          "patch_length": 1,
+          "token_stride": 1,
+          "token_count": 128,
+          "token_endpoints_zero_based": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119,
+            120,
+            121,
+            122,
+            123,
+            124,
+            125,
+            126,
+            127
+          ],
+          "position_coordinates": "original_zero_based_bar_endpoints",
+          "input_order": "oldest_bar_first_then_all28_features",
+          "padding": "none",
+          "internal_tokens_are_public_bar_states": false,
+          "early_tokens_have_complete_own128": false,
+          "state_scaler": "fixed_zero_mean_unit_scale_no_refit",
+          "raw_or_target_decoder_bypass": false,
+          "additional_parameters_vs_bar": 0,
+          "checkpoint_semantics": "arm_and_stride_must_be_bound_separately_from_identical_local4_patch4_tensor_keys"
+        },
+        "local4": {
+          "schema": "babel-input-patch-model-v1",
+          "arm": "local4",
+          "attention_mode": "causal",
+          "scope": "closed_endpoint_observed_trailing128",
+          "endpoint_only": true,
+          "input_length": 128,
+          "input_channels": 28,
+          "state_width": 768,
+          "encoder": {
+            "width": 768,
+            "heads": 8,
+            "ff": 3072,
+            "layers": 4
+          },
+          "patch_length": 4,
+          "token_stride": 1,
+          "token_count": 128,
+          "token_endpoints_zero_based": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119,
+            120,
+            121,
+            122,
+            123,
+            124,
+            125,
+            126,
+            127
+          ],
+          "position_coordinates": "original_zero_based_bar_endpoints",
+          "input_order": "oldest_bar_first_then_all28_features",
+          "padding": "three_standardized_zero_rows_inside_window_only",
+          "internal_tokens_are_public_bar_states": false,
+          "early_tokens_have_complete_own128": false,
+          "state_scaler": "fixed_zero_mean_unit_scale_no_refit",
+          "raw_or_target_decoder_bypass": false,
+          "additional_parameters_vs_bar": 64512,
+          "checkpoint_semantics": "arm_and_stride_must_be_bound_separately_from_identical_local4_patch4_tensor_keys"
+        },
+        "patch4": {
+          "schema": "babel-input-patch-model-v1",
+          "arm": "patch4",
+          "attention_mode": "causal",
+          "scope": "closed_endpoint_observed_trailing128",
+          "endpoint_only": true,
+          "input_length": 128,
+          "input_channels": 28,
+          "state_width": 768,
+          "encoder": {
+            "width": 768,
+            "heads": 8,
+            "ff": 3072,
+            "layers": 4
+          },
+          "patch_length": 4,
+          "token_stride": 4,
+          "token_count": 32,
+          "token_endpoints_zero_based": [
+            3,
+            7,
+            11,
+            15,
+            19,
+            23,
+            27,
+            31,
+            35,
+            39,
+            43,
+            47,
+            51,
+            55,
+            59,
+            63,
+            67,
+            71,
+            75,
+            79,
+            83,
+            87,
+            91,
+            95,
+            99,
+            103,
+            107,
+            111,
+            115,
+            119,
+            123,
+            127
+          ],
+          "position_coordinates": "original_zero_based_bar_endpoints",
+          "input_order": "oldest_bar_first_then_all28_features",
+          "padding": "none",
+          "internal_tokens_are_public_bar_states": false,
+          "early_tokens_have_complete_own128": false,
+          "state_scaler": "fixed_zero_mean_unit_scale_no_refit",
+          "raw_or_target_decoder_bypass": false,
+          "additional_parameters_vs_bar": 64512,
+          "checkpoint_semantics": "arm_and_stride_must_be_bound_separately_from_identical_local4_patch4_tensor_keys"
+        }
+      },
+      "optimizer": {
+        "name": "AdamW",
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "weight_decay": 0.01,
+        "peak_lr": 0.0003,
+        "warmup": 10,
+        "clip": 1.0,
+        "foreach": null,
+        "capturable": false,
+        "differentiable": false,
+        "fused": null,
+        "restore": "fresh zero moments; only own committed checkpoints resume"
+      },
+      "runtime": {
+        "mha_fastpath": false,
+        "matmul_tf32": false,
+        "cudnn_tf32": false,
+        "cudnn_benchmark": false,
+        "threads": 4
+      },
+      "precision": "FP32 parameters/forward; float64 truth/loss; no AMP/TF32",
+      "selection": "fixed last120 only; epoch0/every5 validation diagnostics; no best/LR/patch-size search",
+      "validation_positions": [
+        1,
+        16,
+        32,
+        48,
+        64,
+        80,
+        96,
+        112,
+        128
+      ],
+      "evaluation_positions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128
+      ],
+      "prediction_export_positions": [
+        1,
+        32,
+        64,
+        80,
+        96,
+        112,
+        127,
+        128
+      ],
+      "comparisons": [
+        "patch4_vs_bar primary",
+        "patch4_vs_local4 required",
+        "local4_vs_bar secondary"
+      ],
+      "acceptance": "patch4 must pass BOTH bar and local4 for both seeds/cohorts: paired95% upper(candidate-.95control)<=0 for composite price; inherited all10% physical/F03/P95 guards; no generic promotion",
+      "bootstrap": {
+        "draws": 2000,
+        "seed": 20261012,
+        "groups": [
+          "month",
+          "contract_period_month"
+        ],
+        "min_parents": 100,
+        "min_groups": 6
+      },
+      "budget": "six120 workers=720epochs/27360updates/17240400 supervised-state exposures; equal updates, not equal FLOPs/time",
+      "F11": "zero readout fits; public768=3072float32 bytes; actual parameters/time reported; generic reuse unknown",
+      "stopping": "fixed120/cumulative24h; numeric/source/causality/resource failure stops; uncertain updates never replay; no automatic extension/grid",
+      "source_dependency_limit": "legacy data provenance still hashes ancestral weight files; no old model/Adam is deserialized for initialization",
+      "scope": "reused research cohorts only; Macro unchanged; no forecasting or universal representation acceptance"
+    },
+    "implementation_fingerprint": {
+      "inherited": {
+        "inherited": {
+          "inherited": {
+            "inherited": {
+              "inherited": {
+                "inherited": {
+                  "interface": {
+                    "r1": {
+                      "modules": {
+                        "architecture.py": "6feaf96d4bbb657eb7cb79825a8a6777dfddbea0d56415373a17c22ed510fc7f",
+                        "state_combination.py": "a7f4c3a8faa43282e9d2b9a7aeb0d13382684d21d4d0b021444f279b5c7f5f7f",
+                        "state_holdout.py": "8bfe39c9689d3d5e8df0fbb27ebf1701429366d52ef6e3f7ff55b0bbc5a52055",
+                        "state_transfer.py": "48bca4aeb877d834da2540dfccda69dece5d9b13f3c7c1ce87216c2e5492e62a",
+                        "ae_extend.py": "901df775eabffdeb81f868f7cd1f47dbb6626637225670322e82fa3dde09b385",
+                        "ar_reconstruction.py": "1547f7885eb73a5574e6df1cf30376dcd0c1cfb498dab4c38aa10e2ecfce8661",
+                        "history_autoencoder.py": "d304386d9ed98da7281580d11351e14da4aaf6dae7a55cdd61d7ba35a4274969",
+                        "architecture_benchmark.py": "29377e5b55bb210a50be18a6696890dbd40c29850749454a9ed65a412aa33f62",
+                        "capacity.py": "eed6d39a4b2822b2e1be5d277f42f0068d624ff2fd74c065ce2cf8670ed8edd3",
+                        "capacity_benchmark.py": "f9359a56a4478e303f754e72f3a975412a51570e87628d7d7d6d26ddd556dd84",
+                        "pca_teacher.py": "3d7c6896c3616be7f90f895d279f67fa37013c9e80bfbd16b7e33d726f4af07c",
+                        "pca_teacher_benchmark.py": "cbc278bbcaf3e9e1bcd883a551bee2f36406177f8a7a43d74e0e75dee1938992",
+                        "pca_anneal_benchmark.py": "0657e9b7e150c68ea30c365e7d889f9f8d1067ebf94e341349e38c99abd72592",
+                        "window_sampling.py": "e87c78be6bc99a49ccd7034911041df63421e0f6df691156eb882267c8526bb6",
+                        "coverage_audit.py": "6a6422fc5bb59efbf7a53c78287c65fe6eab17d6d316281ac824100d6df5fd78",
+                        "data.py": "094bf46b6e52762765df71777bb1216a3d24634775e20fb3ad74609e143360e7",
+                        "ae_context.py": "4c1fa44b703ad5ded5cb929a926a16339948c1a55d560c16fff5ff7c3099cd47",
+                        "activity_ablation.py": "41f5ed4180598d4bcbe57b2bd0344534929413afa9765ad96939cc777c40be53",
+                        "ar_codec.py": "4df9216cbeca8768a073864684c9e3a302eb010796419f32fed5b402e4ebcffd",
+                        "representation.py": "35e87a731d7eec037ef387ba8c38da32afb24dad0c245c64174ee160fb9fa672",
+                        "sampling_benchmark.py": "332f41a6d24b10713e70205e7dd80b168d407635335ed15e89ef5e91fcf3993b",
+                        "prefix_readout.py": "5e2d8a72df4a9da6495626462153afcee0ea5543daf937667b0f13825b1cfcfc",
+                        "prefix_readout_benchmark.py": "dd0ae3ec8a9495ed80f0160eeaae0e7ef074fd9e98c2dc99204527be477ae1da",
+                        "shared_readout.py": "ff98ed0c8b34493ee0f1fd0bd28f9feb30d55033bd4660e38deac17d09b74618",
+                        "shared_readout_benchmark.py": "be8b208f8cd9ff95824042c9eeef115ac8974329d6df8e2c90063ea468ebfa7f",
+                        "bar_alignment.py": "9e967839cb1cc529c3bae755c5407dc7a0a63e7ae3833a70a19c78bc6ba5ad7f",
+                        "bar_alignment_benchmark.py": "447f94df322ebda9c21cca8e0d6dd70a23c0724bd3619f7c436294c68d0068cb",
+                        "endpoint_readout.py": "36dc6b283a13120052b2f6a0530c928a07f545d541f1cffb8bfeb9e89122678a",
+                        "endpoint_readout_audit.py": "f80966db6ed85633caab1ae4b0311b466cfa0f4101ec72c5464a478470775c9b",
+                        "path_feature.py": "5230a5d1a7cce540b34948c6c1425f210624c9170bc8dce76ba0cc849a6d2e7a",
+                        "path_feature_benchmark.py": "76cc55b6636fede109d81e99b0e1936cf3aa4eb7a5b5deffde21d59176beef6e",
+                        "streaming.py": "21ed4674f0573d9d39a9f0112cd34064ddf8d0f343963770ea7509ae7fc0038e",
+                        "window_state.py": "09136e11f75a8336d526a8501f367a7d0347148b0dca23c21ad88bfc1194573a",
+                        "window_state_cli.py": "a7ea47f215cf7e8178cbe04eec47264ede9342ae9a9cb729e36464dc1d78bbd0",
+                        "window_state_delivery.py": "4d30e5fe1de4e5a79bbb855ed513ba39be7c0bec64e0b91e35303d1e1b05adc0",
+                        "window_state_probe.py": "cc495daeebf9fbf348232fda98d2158919004f2d0223e5255a87c8272167d9cb",
+                        "window_state_probe_run.py": "b48f5324ca6c25fc813c51f4b95306f4344eb1ea07b8a90453a8a288bc4d1165",
+                        "utility_probe.py": "cfc989660702d8f55a278202518b95ddd190c3ba72b685b257c57156626fb45f",
+                        "utility_probe_run.py": "a9ba55a98ae0f7567a202b1799dbe074d1770ee4285efd38e567d2a66e43fe76",
+                        "overlap_diagnostic.py": "1bc3588ac1bb0c70a12ac5bb22432fb65a26da717f335372d69b3c841160dc52",
+                        "overlap_diagnostic_run.py": "5c38b7d219d38e5149934cb12af32b0676271eadca0197398695eaca93035f02",
+                        "overlap_consistency.py": "462f62f51191095644df86b5438687d58a6d0851f1ce1af0ea9dc51e64b83be3",
+                        "overlap_consistency_evaluate.py": "02f89921e9430d4494a546ebaaab881d5564753d85e1b93ecbbeda11c05c49f9",
+                        "overlap_consistency_run.py": "f0421650c77f1ac4caa109d993a55a18ceaf46c2dd7fae599be31c828f15e351",
+                        "consistency_readout.py": "a50a45f75432f2140d48d9c2d617ff33e6d77601b4e8d173a1bb438ac0e26a2f",
+                        "capacity_growth.py": "45367062c1c1db35e6b7ac489d830af5ab02d1f0160785adc0aa1d3ee67cb7dc",
+                        "capacity_growth_evaluate.py": "ce106eaf33bd22b29d487842e436351395b0bced88da9777da664242967678fb",
+                        "capacity_growth_run.py": "052ffbc35f47ed34b65504837752af04de70859851358e4eceb07a035bbadfa6",
+                        "local_readapt.py": "52961f22c869f12011b7aa3b2981cd1cae819d5f1bcf864adf7f33fc5f2e7d95",
+                        "local_readapt_run.py": "b49e136e2983ebef3d722328fad91f178f01deb8d230708d33e6d35ca9ee4994",
+                        "cross_period_consistency.py": "0ed4adae4b50bb50b77252263b325ac762e6812c04bbc95e4b9ea8c3a5da1365",
+                        "cross_period_data.py": "24c0af28157fa7398aa7a6f2272d9d145746c3c8c7b2e7dabb96fae259a801a0",
+                        "cross_period_audit.py": "0fb169d3096519ac3a7d0d4aad9861c7ebf5a8d4904bbadd77945882eefc7476",
+                        "cross_period_evaluate.py": "39267ca90c232f7ab9e8626d7e9440dab5c31fd5162bbdb0e87e57703438186b",
+                        "cross_period_run.py": "45b42700f0eca30b76c57e34f22958aaf11fe76aae44c964746ce9d520ecb2e4",
+                        "cross_period_recheck.py": "3e7a97b1b93c5feac612739994b5ce03358bde92d63b69e1010f7efb93d55bb4",
+                        "local_warmstart_run.py": "2c35601c38e3bd750b17775173ff62707da1d3a3979e6295af4ce286ff4d8c93",
+                        "research_state.py": "fa8a63775d805a6a4bc799de61269cb447b1bf6e879126ff86866e97ec5c9a5b",
+                        "research_state_cli.py": "dfbd6074612a854208fb07bca6825fcd02d2eb03ea3365ea4aae746d2a3a44c3",
+                        "research_state_view.py": "cd9d4ebf7c77cb56003317f65234b42548d6a091f4b7bfbd3be7e5e23a32c019",
+                        "research_state_delivery.py": "554d8878b2fd6b6cb319e694a23938b55a23e6b125b6c66d0ef7de28fe294ace",
+                        "research_state_view.html": "cbdf226d76bec1be33be0ffe73bf14baa373d10bfdb2e4a8ee6691db18cda61c",
+                        "history_query.py": "90a6bfad9f65954d6800b455ddf146f750cd32b2154617c59fbb16c825d14b12",
+                        "history_query_evaluate.py": "772cfa009059c85b6cce5fa4e6f18f54c0c174fdd9e18aac1ee5f1a59ed160fa",
+                        "history_query_run.py": "3d10d65443007bb7dc64be7e9f864e3aebee5990c1d5b3787fbd751a06e8eca3",
+                        "bar_semantics.py": "60d0cb1c7c5b9d85eefd4fbb8aa98824625c4f4253e39ccbbdaa7c48b1434bcd",
+                        "bar_semantics_evaluate.py": "24fa003c331f18b32837aa9a908e34f08ac6a85f76c5a5353388566108289575",
+                        "bar_semantics_run.py": "4b505605d6817f1ffd5e3fd3185184c141e2c675f4ffd4b0fa62b8563f6f15ea",
+                        "history_structure.py": "59ac9a00d1707d52f52442a324970c44088447461f35d53042dbab570f4635b8",
+                        "history_structure_evaluate.py": "b80b08d88273c24780949103331619b8ad36b7747cad47e9df73aa08b84dad1a",
+                        "history_structure_run.py": "8c401b7c8b765f7f29b77dfb8370430c70f71eedd52092ca8dc27d2ba6847268",
+                        "causal_pool.py": "d90cdcfd6d97dca019240f6a1b1ef45be29d642da0bf0fb955f416541b8ed06a",
+                        "causal_pool_evaluate.py": "7e962154bd7431898385df4d9f2b6efcc9a33b938d8bbbd3a56cce8adf039251",
+                        "causal_pool_run.py": "50a39a860ab156207a965a6fa2c461272e7ccb832e13ff1d9e8816d17d156cb1",
+                        "depth_scaling.py": "9c4a7a25216ec7808cb019be92e62db08f128d1ac99119211d6190d4f501f109",
+                        "depth_scaling_evaluate.py": "1fb2b7227931aa53a476710af7ff2ca7392aa7dd12793b3335011340c6311636",
+                        "depth_scaling_run.py": "a62a38630747a0aa0ba67d92b2eac8aac25b3cdb3e4c7a1efbb3fc6590904319",
+                        "activity_weight.py": "aff739139bad1179186f9df2cf375c04973546c3d6ec1dcd73645505ee55f867",
+                        "activity_weight_evaluate.py": "1522f92c0262a98f3b86bac892b05161b935035e1adde2eb46ba5c6dda997707",
+                        "activity_weight_run.py": "00f31a96894f453d965f851a6c15ef1ad324e62012dc999e8e2fe8fdeea8ea5e",
+                        "shared_history.py": "236638bc1e058856cc07d909d7171a976649bae50458fb86fd7749369ef49681",
+                        "shared_history_data.py": "b9bb5d7d79ba0ba7a254800f7259784cce30e169b5fe07701eb0f422ab2d3bc6",
+                        "shared_history_evaluate.py": "7ca9228e87e97bf36f03d24ccef68215f5eeef2d5a4e5975e6c6b33b59ada0c7",
+                        "shared_history_run.py": "3cd2462bfbabe5a48748323b500baf9484fc105eef759685dee395369bd8e042",
+                        "grounded_history.py": "896c14d338a31c24f292a8bcb0ee08e9c972dca7a8263890169761adc97208b6",
+                        "grounded_history_data.py": "e4bc87f410e7da3c5795ce4810b753bcc2ca9d7cfbc8dd08ed19370e7a34dcaa",
+                        "grounded_history_warmup.py": "cc32eff2d36e21c2dc591d45917e901383571d4df82c850597944fd3f09a42b8",
+                        "grounded_history_evaluate.py": "16833bde36e7bc54f5389fc582bc5668a5795cd6f4462ef40d570ff32d62b116",
+                        "grounded_history_run.py": "fa10f7422aaa1fa32916bbf7074b7dd9da95039678f3386f876bb7900713688c",
+                        "grounded_readout_audit.py": "96fc4e5dd153b9ebd9865bd4057d01cbcaa509f9de7940e8fc8442b94ee10c1d",
+                        "macro_history.py": "35426f6687395eb72278a1b9676c3b81c5f8facd4e4d07e40fec302fec69b027",
+                        "macro_history_data.py": "e6db6c21d1946e360f46eb966f48e9865692cb1b8e28aa722e0b7667c2af7cbd",
+                        "macro_history_evaluate.py": "c42365c8ffa9399c561e2311587ad2f2793fb00d88259a4a70ac42f2bf1fa092",
+                        "macro_history_run.py": "57d2460f384547c39c5aa64c2ef389e169f9300bbbb4d2f88e51684621882e37",
+                        "linear_history.py": "04de9caef82860a1c751722b40db988e987e187e7ea3330a29cca0235cf5872d",
+                        "linear_history_evaluate.py": "4943ed405f4dbc9b71c2b68f4f1615d55e409c349519bd6fc5f5ef260c14d0fd",
+                        "linear_history_run.py": "0d441b1d56f01b12fb32db4eb16933378513ab1adc07d60e61f27ca3a9c15402",
+                        "uniform_context.py": "229e587b61c02e8d3aaf48406aaf967a029d853e7ad1495dd95b54a796a5abaf",
+                        "uniform_context_data.py": "020d0027ee5a71e6918c8ca25ac2f0988b00edbbcfcc2e316a0b60bba35ab75f",
+                        "uniform_context_evaluate.py": "50460be35a827362372a5f3c365179be4020c7d8110c43ee427a0af193d25cfa",
+                        "state_rollout_data.py": "d62a381f19d137a1fa9a9f1c7f76fd47d4c730601e8ab52ad884b105a3244af0",
+                        "uniform_context_run.py": "38a5f5fede42df547d42b3823b1d2e51acde4f2d459811a2871a9c40342e5b51",
+                        "context_transfer.py": "9ab81bc8d407a58df346ab5e523eb42fdc66b0c192def243aebfb6312551dc6a",
+                        "context_transfer_data.py": "0035e1e6ab602bf8079ed6e7815a512e96775539fd4dfdf64f3f390a2eca655c",
+                        "context_transfer_evaluate.py": "88a7d88a75da571ece7a80902c3ec27793af2eda6998ba78ae32b5f1b4e48ee7",
+                        "context_transfer_run.py": "01c3fc2d4630421f8f922328201b0c0efb6efc1d7336d790c74723ebb5ccc260",
+                        "recovery_audit.py": "444443fce51339cbf3ed68864adb135b74fab072a72c60a8f23f6224c56e558a",
+                        "recovery_qualification.py": "fd3b3c890e544a67007cfd0bc0e6bba57fb2128d151de606dff813d571c07f6d",
+                        "recovery_objectives.py": "2352e6712217ea26c1d76dd548f68737264c32c54cde6e570ed65f1f7b8bd47e",
+                        "recovery_lr.py": "4a5ac937f1eab0691389f5c33880d01e057406c9a678761027621010111650fd"
+                      },
+                      "script": "14401e2f75d1a6e5e8ab1388d6e7a962ca052a90e7b34f54d571a2dffa8a4fd1",
+                      "protocol": "16302023ebad7d70dd5c375972bc0e1dc1b5fc303431043f0aabe17506738c41"
+                    },
+                    "module": "0b8d40c068137f762128af3cd6889a925033f186ab944c7f431dacb0f3397d6e",
+                    "script": "3f0f8357a1ffc0e79100e8d1e328d21ea2ab88e500e13a8fe7422e5ccabbe542",
+                    "protocol": "49784d0f17c65d48b3cc1ed07b5abaf530ceb8b3e9f5be20457b478e532b8453"
+                  },
+                  "modules": {
+                    "recovery_rs.py": "607f80acfb64d5a58cf73c4733641b3dd513b6e41e48a52646b49db2cc824ee3",
+                    "recovery_rs_evaluate.py": "87abda093b91cde5ed5f41dceb63ae6e2f68e62441afc323e85f3cde983e7f74"
+                  },
+                  "script": "bf242890576c424819ed1b678322d5978061df582db14f5ef7de58cb0b76973b",
+                  "protocol": "b5dd984b803c603d7895f503a455caf24e8337cb2737472ba9c724a5da6a117d"
+                },
+                "modules": {
+                  "recovery_context_run.py": "3c6c5a6e1d1d1913bff3d665f8e421ae648cbae6266b40573f3abeedb81ac823",
+                  "recovery_context.py": "0622649a88dc66ae571349a731fb665c139ea5a646335ff5525b1d15e1af6058",
+                  "recovery_context_evaluate.py": "665dd4554b27da53db09f70cfceaeb84a6ca38447b497585826851331f630d1a"
+                },
+                "script": "417425bbb5ce67e601dab9c32d558e2a632fb8a05dc7aabbdbd1dc8ba24b8c38",
+                "protocol": {
+                  "task": "V06; V03 training controls; V14 source provenance scope",
+                  "source": "Original Macro control s42/s43 best97/94; 768/4/8; no RS trained weights",
+                  "arms": {
+                    "A_prefix_common": {
+                      "native_input": true,
+                      "native_target": true
+                    },
+                    "B_full_common": {
+                      "native_input": false,
+                      "native_target": true
+                    },
+                    "C_full_extended": {
+                      "native_input": false,
+                      "native_target": false
+                    }
+                  },
+                  "epochs": 60,
+                  "seeds": [
+                    42,
+                    43
+                  ],
+                  "batch": 128,
+                  "micro": 8,
+                  "jobs": 6,
+                  "worker_epochs": 360,
+                  "updates": 13680,
+                  "session_seconds": 43200,
+                  "train_rows": 4789,
+                  "val_rows": 978,
+                  "input": "Bound255 causal rows; same contract/partition, original endpoint inventories and train-only frozen statistics; causal EMA feature prehistory remains, prefix is a feature-row context, not zero information about earlier raw history",
+                  "sampling": "Original Context deterministic order, four uniformly sampled distinct interior prefixes from original non-held-out set plus128, same seed/epoch stream across arms",
+                  "optimizer": "Fresh AdamW, betas .9/.999, eps1e-8; decay encoder .01/query .0001; no inherited optimizer; combined clip1; eval-mode autograd, FP32, no AMP",
+                  "rates": {
+                    "42": [
+                      3.066380815642346e-06,
+                      3.0663808156423456e-05
+                    ],
+                    "43": [
+                      3.2648704606900738e-06,
+                      3.2648704606900735e-05
+                    ]
+                  },
+                  "loss": "Original query(.4path+.2change1+.1body+.3activity)+remote structure1; identical reductions. No extra local gradient or head fitting",
+                  "comparison": "Equal60 epochs/updates, not equal compute. A/B identical labels/masks/effective weights; B/C identical inputs, target expansion includes weight changes",
+                  "selection": "Original24 validation guard<=1.10 and full-context price minimax; epoch0 allowed for best ONLY. Primary inference uses fixed last60, best secondary. All six locked before research",
+                  "evaluation": "Every model/source evaluated under A/B/C at32/64/96/128, support masks exported. A/B deployed common-task effect plus common fixed-interface contrasts; source policy gap and difference-in-differences separate. Both seeds and reused test/cross research; monthly and contract-month paired bootstrap",
+                  "decision": "No automatic promotion. Completed controlled evidence closes attribution only; B last60 must beat deployed A AND source under B by>=5% on common interior price in BOTH seeds/cohorts; both month and contract-month supported paired upper bounds<=0, and all24 source measures<=1.10 for retention. C-B contrasts are secondary and include support/weight expansion. No claim of global architecture superiority or independent final generalization",
+                  "stop": "No extra LR/weight/depth/grid/epoch extension. Nonfinite, identity/control/replay failure stop and export. Incomplete or unsupported intervals remain inconclusive",
+                  "data_gap": "V14 input/target statistics linked by exact SHA to reviewed Coverage raw-data refit; no refit in this run. State-vector/local scaler ancestry not independently refit; do not mark full data ancestry accepted"
+                }
+              },
+              "modules": {
+                "state_coverage.py": "9a5856547b9848d3d45c6e9fefdacdd1af56d205d170b87afe17e8715205f51c",
+                "state_coverage_data.py": "b0fd823b9cc4bd1dc3133c01fb6bc1dc92faee8d731852339c3c6df48fc86005",
+                "state_coverage_evaluate.py": "114990c38fde26e278fd6acd2be19d224a417c2cf28f800481b65b0bd3f72549",
+                "utility_probe.py": "cfc989660702d8f55a278202518b95ddd190c3ba72b685b257c57156626fb45f",
+                "window_state_probe.py": "cc495daeebf9fbf348232fda98d2158919004f2d0223e5255a87c8272167d9cb",
+                "utility_probe_run.py": "a9ba55a98ae0f7567a202b1799dbe074d1770ee4285efd38e567d2a66e43fe76",
+                "state_coverage_run.py": "eb403caadc692b4376709445cde36d58150354a3490da7bf6e9c3e2fe5698627"
+              },
+              "script": "8d6d15320b340e9e240f63b889a7d14be6f2052585b65a1174a86b99a428c020"
+            },
+            "modules": {
+              "state_readability.py": "4fb0c09722a1b5090d1c501999d7c23bff222013c6ff7ebc4287493032ae6a7e",
+              "state_readability_run.py": "9b060829dd2bdf9a651256b113a869554df59b19a0ac697621acf1f6b3630054"
+            },
+            "script": "8ab695c021d5fdae9958d200f7a32ba23db84a0eea36e51a4d14d4d0d4b1b092"
+          },
+          "modules": {
+            "history_state_api.py": "148ee36013ca1992511c2f370699fec704a1feb020a2db90e3f558ca36990d23",
+            "history_state_delivery.py": "6397d6b772bb5142058cf24215ddd3ea538cac945bea9de37e0e1e952c401c97"
+          },
+          "script": "a77a0d78686d71a2fcf9452ce30ddfceb561f11ef76526024f45543d6bcff962"
+        },
+        "modules": {
+          "history_price_truth.py": "87674d91b6a11de66308955b0f162e7e65dddbe68d3d0184a9289ffdb83438a7",
+          "overlap_content_audit.py": "b4edf52acd2d5e03ad840cbd7881eb5f0dac9f1dc37cdb7f287df0f66ff8f089",
+          "overlap_content_metrics.py": "ad74d83137a69fccc8272e4ccdaf245143db1332347459b747430f28e38f92c2",
+          "overlap_content_run.py": "0de8b03bb696f4ae3b242cf566f05ef8ca96e15fd132035cd8442fed3a814488"
+        },
+        "inventory": "007e788425787f60c115ff559796a36448908d0800e53c23986e7a04b5b2b0f1",
+        "script": "d72e59f7bbb0205e273112dbdc2c9b5899f53001bfbee965149ebb77b53a51a3"
+      },
+      "data": {
+        "content_retention_data.py": "13990739bd92854cd01a3f44d5d23100eb79a7a0b85bd55025373cd8ccf39906",
+        "multiscale_content.py": "343b101d09275593347dd286b1a54e50fdbda8cd224ff45f85d62885010f59fa",
+        "multiscale_training.py": "4150c0b540a724126329e7c9d0799b5d5f160eb4ab2f1d1ad08faedc56725928",
+        "multiscale_data.py": "df3d75d943945b9f85b0544767936d90ea7da72661a27d6aec4fbf89f57b2c9e"
+      },
+      "modules": {
+        "multiscale_data.py": "df3d75d943945b9f85b0544767936d90ea7da72661a27d6aec4fbf89f57b2c9e",
+        "observed_history_run.py": "b43d4f81b490295e4be16a8dd2f70d0d9e68ba0c80766ff58ed49646d1d9ea98",
+        "multiscale_content.py": "343b101d09275593347dd286b1a54e50fdbda8cd224ff45f85d62885010f59fa",
+        "input_patch_training.py": "c671d8940cb589b2a990a84e076ddb38292b2e02a09fa6ef8c07d541a4b38b0d",
+        "input_patch_evaluate.py": "09cba7fd9d4856d1c95939176579cfec7697ebea3092ee771075179854cd66a4",
+        "input_patch.py": "65a36bf7be081f4ec02fd76a9beb3cb8c2d039515ac288d919f6808c29f4a413",
+        "uniform_context.py": "229e587b61c02e8d3aaf48406aaf967a029d853e7ad1495dd95b54a796a5abaf",
+        "multiscale_evaluate.py": "c90351834fa05d7ad1866613565d3237d07a5b02eda6ca3c7cd8c3566b6976cc",
+        "multiscale_metrics.py": "9a8d8b25cfec8de848ef33f0652a336c5113ae4a8d2b3ad72c260933ee2b34e2",
+        "input_patch_export.py": "8637dd43977c3f64eec7f765989840b68c2d1aebc51b996cf2b80c4db3e81cb3",
+        "recovery_audit.py": "444443fce51339cbf3ed68864adb135b74fab072a72c60a8f23f6224c56e558a",
+        "history_query.py": "90a6bfad9f65954d6800b455ddf146f750cd32b2154617c59fbb16c825d14b12",
+        "history_price_truth.py": "87674d91b6a11de66308955b0f162e7e65dddbe68d3d0184a9289ffdb83438a7",
+        "multiscale_training.py": "4150c0b540a724126329e7c9d0799b5d5f160eb4ab2f1d1ad08faedc56725928",
+        "state_coverage.py": "9a5856547b9848d3d45c6e9fefdacdd1af56d205d170b87afe17e8715205f51c",
+        "overlap_content_audit.py": "b4edf52acd2d5e03ad840cbd7881eb5f0dac9f1dc37cdb7f287df0f66ff8f089",
+        "observed_history.py": "0d3a5ebbfbb6a186e08eb53aab07e05e71ef7ac1f9d9e2bf42aefb48534d0a06",
+        "observed_history_training.py": "2a7ff5b41c1d5a68aa267383c381c87a4119954da14467e4e7bd6829b6644b15",
+        "observed_history_export.py": "7729aa07c990d20ad0d3bbe97f2402e9ff6bed27cba149f8ebb8008e2a32d485",
+        "observed_history_export_v2.py": "83b9e6e4254d512e397f0aeb9c8aa6fb0c1383fb6f2c1ed032b52215481279bc",
+        "history_autoencoder.py": "d304386d9ed98da7281580d11351e14da4aaf6dae7a55cdd61d7ba35a4274969",
+        "ae_extend.py": "901df775eabffdeb81f868f7cd1f47dbb6626637225670322e82fa3dde09b385",
+        "input_patch_run.py": "8ae1324dd8b4e1805f0c056f07375b1d6c1b30cf1f5a9d57f57034c38c17db26"
+      },
+      "script": "37ecdd26f25d8e42008de466a2380f86b25dfdf4a4e4de07fdb417c652774774"
     }
   }
 }
