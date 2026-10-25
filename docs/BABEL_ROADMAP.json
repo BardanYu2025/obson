@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
-  "updated": "2026-10-25",
-  "current_iteration": "input_patch768_code_ready_waiting_AutoDL",
-  "current_iteration_scope": "第24节已收束；第25节F05/F01/F11输入片段化三组×双种子从头120轮代码就绪，265合成/回归通过，远程未执行、科学结论待验证。只跑新input_patch768；旧结果与Macro参照保持。",
+  "updated": "2026-10-26",
+  "current_iteration": "input_patch768_report_reviewed_fixed_recipe_closed",
+  "current_iteration_scope": "第25节F05/F01/F11三组双种子各120轮与12套全128评价完整结束并复核。patch4提速且部分内容有收益，但对bar近期价格四组合确认损害，未形成均衡升级；收束固定4/120，不晋升。下一步仅审查混合输入粒度候选，新增预算0。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -518,13 +518,14 @@
         "docs/BABEL_ROADMAP.md#20-f01f03继续学习embedding先检验主目标的尺度分配2026-10-12",
         "docs/BABEL_LAYER_SUPERVISION768_REVIEW.json",
         "docs/BABEL_STATE_ORGANIZATION768_REVIEW.json",
-        "docs/BABEL_CONTENT_GUARD768_REVIEW.json"
+        "docs/BABEL_CONTENT_GUARD768_REVIEW.json",
+        "docs/BABEL_INPUT_PATCH768_REVIEW.json"
       ],
-      "next_action": "只执行第25节input_patch768有界三组×双种子，交自动生成的reports.tar.gz；在真实报告前不改判科学结果。",
+      "next_action": "以后输入组织仍必须保留相同公开端点历史与评价职责；显式同时128保留但不自动排队。",
       "implementation": "complete",
       "execution": "four_fixed120_workers_complete_reviewed",
       "conclusion": "本多尺度配方综合价格MSE升7.27%–24.78%，4项主收益0通过，均衡升级未成立。",
-      "current_role": "每端点own128、同uniform5训练/全128评价；32内部token不减少公开端点评价。",
+      "current_role": "相同两种子排样/原Q/曝光、每个公开端点完整128、全128端点评价已核对；32内部token不减少公开监督端点。",
       "external_reference_20261018": {
         "project_ids": [
           "vjepa21"
@@ -534,9 +535,10 @@
       },
       "current_iteration": {
         "card": "input_patch_plan",
-        "implementation": "complete_synthetic_checked",
-        "execution": "not_run",
-        "conclusion": "pending"
+        "implementation": "complete_synthetic_and_remote_checked",
+        "execution": "six120_twelve_all128_banks_complete_reviewed",
+        "conclusion": "本次没有漏训中间bar，也没有改变每端点历史职责；均衡失败不能归因于只训练32公开位置。",
+        "review": "docs/BABEL_INPUT_PATCH768_REVIEW.json"
       },
       "iteration_archive": [
         {
@@ -578,6 +580,16 @@
           },
           "current_role": "保留每端点完整128/全位置职责；片段化不能漏掉中间状态或引入未来；显式同时128仍独立保留。",
           "next_action": "下一张有限设计决策卡；先解决输入/位置定义、匹配起点、参数与算力账本、预算和验收，尚未准备代码入口。"
+        },
+        {
+          "current_iteration": {
+            "card": "input_patch_plan",
+            "implementation": "complete_synthetic_checked",
+            "execution": "not_run",
+            "conclusion": "pending"
+          },
+          "current_role": "每端点own128、同uniform5训练/全128评价；32内部token不减少公开端点评价。",
+          "next_action": "只执行第25节input_patch768有界三组×双种子，交自动生成的reports.tar.gz；在真实报告前不改判科学结果。"
         }
       ],
       "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；本轮以current_iteration和input_patch_plan为准。"
@@ -674,7 +686,7 @@
         "V05",
         "V10"
       ],
-      "status": "第24节反馈配方已收束；第25节输入片段化固定对照代码就绪，待AutoDL。",
+      "status": "第25节输入片段化真实报告已复核，固定4/120配方收束；有成本/部分内容收益但无均衡升级。下一仅准备设计候选，无新训练预算。",
       "reentry_or_acceptance": "基线可靠后固定问题，分别控制深度/宽度/头数/训练预算；不拿短训深层与长训浅层作单因素结论",
       "evidence": [
         "docs/BABEL_GROWTH768_REVIEW.md",
@@ -683,12 +695,13 @@
         "docs/BABEL_ROADMAP.md#21-f05让已经发生的历史在编码器内部充分交流2026-10-17",
         "docs/BABEL_LAYER_SUPERVISION768_REVIEW.json",
         "docs/BABEL_STATE_ORGANIZATION768_REVIEW.json",
-        "docs/BABEL_CONTENT_GUARD768_REVIEW.json"
+        "docs/BABEL_CONTENT_GUARD768_REVIEW.json",
+        "docs/BABEL_INPUT_PATCH768_REVIEW.json"
       ],
       "implementation": "complete_synthetic_and_remote_checked",
       "execution": "six_fixed60_CUDA_workers_and_eight_model_all128_evaluation_complete_reviewed",
       "conclusion": "本固定h2→h4写入配方明确退化：相对同容量h4→h4，综合价格MSE增加3.19%～6.55%；相对原结构同期续训增加5.24%～23.17%。两必要比较主收益均0/4、全部8个无收益阈值差值在两种聚类95%区间均高于0。",
-      "next_action": "只执行第25节input_patch768有界三组×双种子，交自动生成的reports.tar.gz；在真实报告前不改判科学结果。",
+      "next_action": "先设计一张有限、可反驳的输入粒度对照卡；审查通过后再实施和锁预算。本轮固定4根/120轮已收束，无待跑任务。",
       "external_reference_20261018": {
         "project_ids": [
           "vjepa21",
@@ -700,9 +713,10 @@
       },
       "current_iteration": {
         "card": "input_patch_plan",
-        "implementation": "complete_synthetic_checked",
-        "execution": "not_run",
-        "conclusion": "pending"
+        "implementation": "complete_synthetic_and_remote_checked",
+        "execution": "six120_twelve_all128_banks_complete_reviewed",
+        "conclusion": "本固定输入配方没有均衡内容升级；不能将退化单归32token太少、112→768丢维度或容量不足。",
+        "review": "docs/BABEL_INPUT_PATCH768_REVIEW.json"
       },
       "previous_iteration_disposition": {
         "status": "第21节四组120轮内部注意力对照完成并复核；未均衡升级，固定配方收束，信息组织方向保留。",
@@ -755,9 +769,19 @@
           },
           "current_role": "优先审查输入时间粒度，不扩反馈损失网格；假设而非已定位根因，尚无启动预算。",
           "next_action": "下一张有限设计决策卡；先解决输入/位置定义、匹配起点、参数与算力账本、预算和验收，尚未准备代码入口。"
+        },
+        {
+          "current_iteration": {
+            "card": "input_patch_plan",
+            "implementation": "complete_synthetic_checked",
+            "execution": "not_run",
+            "conclusion": "pending"
+          },
+          "current_role": "比较主干前输入组织：bar/local4/patch4，保持768/4/8与原query/Q。",
+          "next_action": "只执行第25节input_patch768有界三组×双种子，交自动生成的reports.tar.gz；在真实报告前不改判科学结果。"
         }
       ],
-      "current_role": "比较主干前输入组织：bar/local4/patch4，保持768/4/8与原query/Q。",
+      "current_role": "patch4相对bar近端价格MSE四组合均增加31.84%～92.21%，双聚类区间确认超过10%；local4保留128token也四组合确认近端损害。patch4较local4综合均值均改善且更快。",
       "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；本轮以current_iteration和input_patch_plan为准。"
     },
     {
@@ -885,9 +909,10 @@
         "docs/BABEL_ROADMAP.md#19-f11n05下一用途",
         "docs/BABEL_LAYER_SUPERVISION768_REVIEW.json",
         "docs/BABEL_STATE_ORGANIZATION768_REVIEW.json",
-        "docs/BABEL_CONTENT_GUARD768_REVIEW.json"
+        "docs/BABEL_CONTENT_GUARD768_REVIEW.json",
+        "docs/BABEL_INPUT_PATCH768_REVIEW.json"
       ],
-      "next_action": "只执行第25节input_patch768有界三组×双种子，交自动生成的reports.tar.gz；在真实报告前不改判科学结果。",
+      "next_action": "保留质量/成本分账；有限用途、独立确认与保留未来分支按原条件单列。",
       "implementation": "fixed_closed_bar_adapter_and_bounded_replay_delivered",
       "execution": "complete_AutoDL_CUDA_and_report_reviewed",
       "conclusion": "连续接口数值资格通过；普通平均保真较高，压力/低波动失败保留，不等于可靠趋势或通用用途验收。",
@@ -900,9 +925,10 @@
       },
       "current_iteration": {
         "card": "input_patch_plan",
-        "implementation": "complete_synthetic_checked",
-        "execution": "not_run",
-        "conclusion": "pending"
+        "implementation": "complete_synthetic_and_remote_checked",
+        "execution": "six120_twelve_all128_banks_complete_reviewed",
+        "conclusion": "成本收益与局部内容收益成立于本次工作负载；不是均衡模型晋升、通用表示、交易或未来预测收益。",
+        "review": "docs/BABEL_INPUT_PATCH768_REVIEW.json"
       },
       "iteration_archive": [
         {
@@ -943,9 +969,19 @@
           },
           "current_role": "内容保留/读取成本/复用价值分开；无新用途或V13接受，Macro参照不变。",
           "next_action": "下一张有限设计决策卡；先解决输入/位置定义、匹配起点、参数与算力账本、预算和验收，尚未准备代码入口。"
+        },
+        {
+          "current_iteration": {
+            "card": "input_patch_plan",
+            "implementation": "complete_synthetic_checked",
+            "execution": "not_run",
+            "conclusion": "pending"
+          },
+          "current_role": "同物理内容保护与成本分开；不新增用途拟合，不宣布通用表示或替换Macro。",
+          "next_action": "只执行第25节input_patch768有界三组×双种子，交自动生成的reports.tar.gz；在真实报告前不改判科学结果。"
         }
       ],
-      "current_role": "同物理内容保护与成本分开；不新增用途拟合，不宣布通用表示或替换Macro。",
+      "current_role": "patch4训练耗时为bar的39.87%，中远端实体/活动均值有收益，近端内容有代价；必要比较未整体通过，0新增用途拟合。",
       "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；本轮以current_iteration和input_patch_plan为准。"
     },
     {
@@ -977,13 +1013,33 @@
     "F11"
   ],
   "next_after_active": {
-    "status": "await_input_patch_AutoDL_report",
+    "status": "design_candidate_only_no_ready_entrypoint",
     "task_ids": [
       "F05",
       "F01",
       "F11"
     ],
-    "action": "仅执行第25节input_patch768固定三组×双种子；收到包按来源/完成/内容/成本逐条归档，结果出来前不安排patch网格或新优化分支。"
+    "question": "在同一完整128输入窗中，近期保持原逐bar输入、较远历史使用片段，能否保留近期内容并保留本轮实测的成本收益？",
+    "action": "先设计一张有限、可反驳的输入粒度对照卡；审查通过后再实施和锁预算。本轮固定4根/120轮已收束，无待跑任务。",
+    "basis": "patch4训练时间约为bar的39.87%，中远端实体/活动有点估计收益，但对bar近端价格四组合均确认超过10%损害；local4同128token也损害近端，因此不能认定token少是唯一原因。",
+    "distinct_from_old": "旧short/long是独立状态融合，history_memory是历史embedding银行，pool/state-organization在隐藏层后；候选只改变同一128原特征窗进入主干前的时间粒度，仍公开一个768。",
+    "reject_renamed_repeat": "纯线性bar投影+四根线性上下文残差可合并为112→768投影，函数类基本等同local4；零初始化改变优化起点，不能冒称新的信息组织机制。",
+    "must_lock_before_implementation": [
+      "近期长度和远端分片/滚动相位",
+      "原bar位置坐标与全部128覆盖",
+      "投影参数/初始化、同期必要对照和总状态",
+      "同更新曝光与实测算力的不同账本",
+      "近中远/实体/活动/F03/尾部保护及停止条件"
+    ],
+    "not_decided": "尚未选近期长度、具体控制矩阵、训练预算或接受新方案；没有证明混合粒度有效，也没有定位唯一根因。",
+    "new_gpu_budget": 0,
+    "new_readout_fits": 0,
+    "prohibitions": [
+      "不把剩余时间自动转成新训练",
+      "不同时叠加新loss/gate/非线性支路/长记忆",
+      "不自动扩长度/层数/权重网格",
+      "不替换Macro、不重开历史纠错"
+    ]
   },
   "active_training_budget": {
     "task_ids": [
@@ -991,14 +1047,13 @@
       "F01",
       "F11"
     ],
-    "status": "locked_code_ready_not_run",
-    "jobs_max": 6,
-    "worker_epochs_max": 720,
-    "optimizer_updates_max": 27360,
+    "status": "none_after_completed_input_patch_recipe",
+    "jobs_max": 0,
+    "worker_epochs_max": 0,
+    "optimizer_updates_max": 0,
     "readout_fits": 0,
-    "session_cap_seconds": 86400,
-    "reason": "用户要求输入片段化公平对照；local4区分局部投影与stride。相同曝光从头120，非续训旧模型；新预算不承接第24节剩余时间。",
-    "card": "input_patch_plan"
+    "session_cap_seconds": 0,
+    "reason": "固定三组×双种子720轮预算已完成并归档；下一候选尚未形成完整卡/入口，不继承剩余时间。"
   },
   "aliases": {
     "R0": [
@@ -1048,7 +1103,7 @@
   "blocked_followups": {
     "F_optimization": "第20～24节配方保持收束；仅第25节固定三组输入粒度已就绪。无自动loss/LR/层数/patch长度网格；V13仍缺新数据。"
   },
-  "active_phase": "F05_input_patch768_ready_for_one_bounded_AutoDL_run",
+  "active_phase": "F05_input_patch_report_archived_next_design_only_no_pending_run",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -1556,6 +1611,29 @@
       "actual_seconds": 27864.65712659061,
       "report_sha256": "1d853f8f503d5729eadc0bf42b1baff8a37e230bca188646eb0954a4efe08e11",
       "review": "docs/BABEL_CONTENT_GUARD768_REVIEW.json"
+    },
+    {
+      "task_ids": [
+        "F05",
+        "F01",
+        "F11"
+      ],
+      "status": "completed_reviewed_no_remaining_jobs",
+      "jobs_max": 6,
+      "worker_epochs_max": 720,
+      "optimizer_updates_max": 27360,
+      "readout_fits": 0,
+      "session_cap_seconds": 86400,
+      "reason": "用户要求输入片段化公平对照；local4区分局部投影与stride。相同曝光从头120，非续训旧模型；新预算不承接第24节剩余时间。",
+      "card": "input_patch_plan",
+      "study": "input_patch768",
+      "actual_jobs": 6,
+      "actual_worker_epochs": 720,
+      "actual_optimizer_updates": 27360,
+      "actual_state_exposures": 17240400,
+      "actual_seconds": 40675.341854438186,
+      "report_sha256": "d43c29c04199e5718dee9f1f2eaa2a76b59faf44de80f958505313b8c9319b99",
+      "review": "docs/BABEL_INPUT_PATCH768_REVIEW.json"
     }
   ],
   "next_repair_cards": {
@@ -19378,10 +19456,10 @@
       "N08",
       "N09"
     ],
-    "status": "code_ready_waiting_AutoDL",
-    "implementation": "complete_synthetic_checked",
-    "execution": "not_run",
-    "conclusion": "pending",
+    "status": "completed_reviewed_fixed_recipe_closed",
+    "implementation": "complete_synthetic_and_remote_checked",
+    "execution": "six120_twelve_all128_banks_complete_reviewed",
+    "conclusion": "patch4有约60%训练时间节省、跨品种整体及中远端部分内容收益，但相对bar近端价格四组合确认超过10%伤害；两个必要比较未整体通过，不晋升，固定4/120配方收束。",
     "promoted": false,
     "human_entry": "docs/BABEL_ROADMAP.md#25-f05f01f11输入片段化先组合局部再学习片段关系2026-10-25",
     "question": "同样每根已收盘bar的完整128历史、单768状态和原Q，把连续4根有序组合并减少主干token到32，能否比逐bar及逐bar滑动4根组合都更均衡保留价量内容？",
@@ -19589,33 +19667,33 @@
     "review": {
       "purpose": {
         "status": "pass_for_scope",
-        "evidence": "F05主干前输入粒度、F01完整128职责、F11内容与成本的有限可反驳对照；旧损失配方收束，无预测标签或规则分类替代目标。",
-        "remaining": "通用价量表示、用途迁移和未来外推不由重建接受；V13仍缺独立数据。"
+        "evidence": "F05输入组织、F01完整历史/位置职责、F11内容/成本分别结算；真实内容收益、质量退化、执行完成分开。",
+        "remaining": "单状态通用复用优势与独立验收未证实；本轮不评价未来预测。"
       },
       "architecture": {
         "status": "pass_for_scope",
-        "evidence": "独立拼接/顺序/零补/全部128覆盖、原bar坐标、公开端点未来与窗外扰动、原bar前向与全部梯度回归通过；local4/patch4完整张量一致，三组共享主干/query签名；实际新建参数计数与卡一致。",
-        "remaining": "输入投影相对bar新增64512参数，比较边界已披露；真实CUDA数值/因果预检待执行，结果不能单归encoder信息量。"
+        "evidence": "源码绑定一致；三组768/4/8、原query、单末端状态及原位置坐标不变；12份初末因果收据通过；local4/patch4同参数/初始化收据核对。",
+        "remaining": "权重未随包下载，初始相等/因果是远端收据与源码证据而非本地真实权重重放；bar投影参数少0.214%；encoder/query共同训练，不作encoder-only归因。"
       },
       "training": {
         "status": "pass_for_scope",
-        "evidence": "原Q逐值和全部神经梯度回归、三组micro/尾批累积、采样/曝光/固定120调度、新Adam及完整轮恢复通过；模型/Adam dtype/flags/步数/RNG先检查再load，未提交更新拒绝重放。",
-        "remaining": "相同更新不等于相同FLOPs；120轮不是架构收敛极限；显式同时128仍未测试。"
+        "evidence": "独立重算240个seed-epoch排样，核对720worker-epoch、27360更新、相同曝光/原Q/LR与固定last120；无新用途拟合。",
+        "remaining": "同曝光不是同算力；固定120不是各架构极限；LR本地libm复算5个cosine轮存在1–5双精度ULP差异、远端同种子三组完全相等，未改配方或科学阈值。"
       },
       "validation": {
         "status": "pass_for_scope",
-        "evidence": "双必要对照、12评价组合、948区间及12P95门槛测试通过；缺对照、组别/位置/初始化/签名替换均拒绝；全128评价、固定8导出、signed F03、原评分及研究前6模型锁检查通过。",
-        "remaining": "没有真实研究结果，不晋升；重复集合不替代V13；age0/完整影线和通用用途不在本轮接受范围。"
+        "evidence": "全部12评分银行1092864状态重聚合，948区间门槛/12P95独立重算；68304固定8状态预测重算；确认伤害与未确认保护分开。",
+        "remaining": "其余120位置仅能从评分数组重聚合；age0/完整影线/通用复用仍未验收。研究集合重复使用，不是V13。"
       },
       "data": {
         "status": "pass_for_scope",
-        "evidence": "复用原只读数据适配/完整跨度/统计/raw float64价格/mask；来源隔离和缺目录回归通过；不加载祖先神经权重，来源身份仍绑定祖先文件。",
-        "remaining": "远端实际文件及缓存指纹待启动核验；源依赖不可删除；无新独立行情。"
+        "evidence": "原train4789/val978/test984/cross439身份及train-val完整255跨度分区核对；220CSV哈希、1423父块362865收盘价、8674608价格标签独立核对。",
+        "remaining": "活动真值核对到六模型同标签/mask及误差算术，未从原成交/持仓重生成全套活动特征；没有新独立行情。"
       },
       "engineering": {
         "status": "pass_for_scope",
-        "evidence": "265项集成合成/回归通过(146新增、119复用边界)，Ruff/格式/bash语法/两个CLI帮助/diff检查通过；read-only交叉审查修复observed_history直接依赖漏绑、三组初始化/6模型资源计数；首次来源校验计时、预算、锁、失败/停止/完整报告导出及shell出口通过。",
-        "remaining": "本地0真实权重读取和真实神经执行；GPU显存/时间、完整CUDA研究仍待AutoDL。最终导出在24h执行预算外，保证失败也可打包。"
+        "evidence": "139随包文件哈希核对、完成/锁/预算一致，退出0；总40675.34秒内完整完成；代码/协议与2185fdd匹配，本地0真实模型执行。",
+        "remaining": "权重/Adam/完整预测按协议省略，引用哈希收据不能等同验证这些文件字节；最终评价逐模型进度日志不足已记录，不为此改写绑定代码或重跑。"
       }
     },
     "checks": {
@@ -20541,6 +20619,169 @@
         "input_patch_run.py": "8ae1324dd8b4e1805f0c056f07375b1d6c1b30cf1f5a9d57f57034c38c17db26"
       },
       "script": "37ecdd26f25d8e42008de466a2380f86b25dfdf4a4e4de07fdb417c652774774"
+    },
+    "readiness_review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "F05主干前输入粒度、F01完整128职责、F11内容与成本的有限可反驳对照；旧损失配方收束，无预测标签或规则分类替代目标。",
+        "remaining": "通用价量表示、用途迁移和未来外推不由重建接受；V13仍缺独立数据。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "独立拼接/顺序/零补/全部128覆盖、原bar坐标、公开端点未来与窗外扰动、原bar前向与全部梯度回归通过；local4/patch4完整张量一致，三组共享主干/query签名；实际新建参数计数与卡一致。",
+        "remaining": "输入投影相对bar新增64512参数，比较边界已披露；真实CUDA数值/因果预检待执行，结果不能单归encoder信息量。"
+      },
+      "training": {
+        "status": "pass_for_scope",
+        "evidence": "原Q逐值和全部神经梯度回归、三组micro/尾批累积、采样/曝光/固定120调度、新Adam及完整轮恢复通过；模型/Adam dtype/flags/步数/RNG先检查再load，未提交更新拒绝重放。",
+        "remaining": "相同更新不等于相同FLOPs；120轮不是架构收敛极限；显式同时128仍未测试。"
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "双必要对照、12评价组合、948区间及12P95门槛测试通过；缺对照、组别/位置/初始化/签名替换均拒绝；全128评价、固定8导出、signed F03、原评分及研究前6模型锁检查通过。",
+        "remaining": "没有真实研究结果，不晋升；重复集合不替代V13；age0/完整影线和通用用途不在本轮接受范围。"
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "复用原只读数据适配/完整跨度/统计/raw float64价格/mask；来源隔离和缺目录回归通过；不加载祖先神经权重，来源身份仍绑定祖先文件。",
+        "remaining": "远端实际文件及缓存指纹待启动核验；源依赖不可删除；无新独立行情。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "265项集成合成/回归通过(146新增、119复用边界)，Ruff/格式/bash语法/两个CLI帮助/diff检查通过；read-only交叉审查修复observed_history直接依赖漏绑、三组初始化/6模型资源计数；首次来源校验计时、预算、锁、失败/停止/完整报告导出及shell出口通过。",
+        "remaining": "本地0真实权重读取和真实神经执行；GPU显存/时间、完整CUDA研究仍待AutoDL。最终导出在24h执行预算外，保证失败也可打包。"
+      }
+    },
+    "report_review": {
+      "date": "2026-10-26",
+      "archive_sha256": "d43c29c04199e5718dee9f1f2eaa2a76b59faf44de80f958505313b8c9319b99",
+      "evidence": "docs/BABEL_INPUT_PATCH768_REVIEW.json",
+      "group_counts": {
+        "patch4_vs_bar": {
+          "primary_passed": 2,
+          "overall_comparisons_passed": 0,
+          "formal_interval_gates": 316,
+          "status_counts": {
+            "fail": 103,
+            "pass": 213
+          },
+          "protection_gates": 312,
+          "protection_counts": {
+            "fail": 101,
+            "pass": 211
+          },
+          "p95_passed": 4,
+          "definite_harm_protections": 39,
+          "unconfirmed_protections": 62,
+          "f03_counts": {
+            "fail": 26,
+            "pass": 34
+          }
+        },
+        "patch4_vs_local4": {
+          "primary_passed": 1,
+          "overall_comparisons_passed": 1,
+          "formal_interval_gates": 316,
+          "status_counts": {
+            "fail": 19,
+            "pass": 297
+          },
+          "protection_gates": 312,
+          "protection_counts": {
+            "fail": 16,
+            "pass": 296
+          },
+          "p95_passed": 4,
+          "definite_harm_protections": 0,
+          "unconfirmed_protections": 16,
+          "f03_counts": {
+            "pass": 52,
+            "fail": 8
+          }
+        },
+        "local4_vs_bar": {
+          "primary_passed": 0,
+          "overall_comparisons_passed": 0,
+          "formal_interval_gates": 316,
+          "status_counts": {
+            "fail": 147,
+            "pass": 169
+          },
+          "protection_gates": 312,
+          "protection_counts": {
+            "fail": 143,
+            "pass": 169
+          },
+          "p95_passed": 2,
+          "definite_harm_protections": 62,
+          "unconfirmed_protections": 81,
+          "f03_counts": {
+            "fail": 39,
+            "pass": 21
+          }
+        }
+      },
+      "decision": {
+        "macro_reference_unchanged": true,
+        "historical_repairs_remain_closed": true,
+        "old_protocols_thresholds_unchanged": true,
+        "additional_training_jobs": 0,
+        "rerun_required": false,
+        "retain_measured_cost_and_partial_content_benefits": true,
+        "reject_balanced_upgrade": true
+      }
+    },
+    "completed_budget": {
+      "task_ids": [
+        "F05",
+        "F01",
+        "F11"
+      ],
+      "status": "completed_reviewed_no_remaining_jobs",
+      "jobs_max": 6,
+      "worker_epochs_max": 720,
+      "optimizer_updates_max": 27360,
+      "readout_fits": 0,
+      "session_cap_seconds": 86400,
+      "reason": "用户要求输入片段化公平对照；local4区分局部投影与stride。相同曝光从头120，非续训旧模型；新预算不承接第24节剩余时间。",
+      "card": "input_patch_plan",
+      "study": "input_patch768",
+      "actual_jobs": 6,
+      "actual_worker_epochs": 720,
+      "actual_optimizer_updates": 27360,
+      "actual_state_exposures": 17240400,
+      "actual_seconds": 40675.341854438186,
+      "report_sha256": "d43c29c04199e5718dee9f1f2eaa2a76b59faf44de80f958505313b8c9319b99",
+      "review": "docs/BABEL_INPUT_PATCH768_REVIEW.json"
+    },
+    "next": {
+      "status": "design_candidate_only_no_ready_entrypoint",
+      "task_ids": [
+        "F05",
+        "F01",
+        "F11"
+      ],
+      "question": "在同一完整128输入窗中，近期保持原逐bar输入、较远历史使用片段，能否保留近期内容并保留本轮实测的成本收益？",
+      "action": "先设计一张有限、可反驳的输入粒度对照卡；审查通过后再实施和锁预算。本轮固定4根/120轮已收束，无待跑任务。",
+      "basis": "patch4训练时间约为bar的39.87%，中远端实体/活动有点估计收益，但对bar近端价格四组合均确认超过10%损害；local4同128token也损害近端，因此不能认定token少是唯一原因。",
+      "distinct_from_old": "旧short/long是独立状态融合，history_memory是历史embedding银行，pool/state-organization在隐藏层后；候选只改变同一128原特征窗进入主干前的时间粒度，仍公开一个768。",
+      "reject_renamed_repeat": "纯线性bar投影+四根线性上下文残差可合并为112→768投影，函数类基本等同local4；零初始化改变优化起点，不能冒称新的信息组织机制。",
+      "must_lock_before_implementation": [
+        "近期长度和远端分片/滚动相位",
+        "原bar位置坐标与全部128覆盖",
+        "投影参数/初始化、同期必要对照和总状态",
+        "同更新曝光与实测算力的不同账本",
+        "近中远/实体/活动/F03/尾部保护及停止条件"
+      ],
+      "not_decided": "尚未选近期长度、具体控制矩阵、训练预算或接受新方案；没有证明混合粒度有效，也没有定位唯一根因。",
+      "new_gpu_budget": 0,
+      "new_readout_fits": 0,
+      "prohibitions": [
+        "不把剩余时间自动转成新训练",
+        "不同时叠加新loss/gate/非线性支路/长记忆",
+        "不自动扩长度/层数/权重网格",
+        "不替换Macro、不重开历史纠错"
+      ]
     }
   }
 }
