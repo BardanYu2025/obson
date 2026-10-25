@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
-  "updated": "2026-10-24",
-  "current_iteration": "content_guard768_code_ready_remote_not_run",
-  "current_iteration_scope": "第24节F01/F05/F11分项反馈保护：原Q/固定分项/逐项反馈，同plain结构与control180来源，六组固定60轮。代码/合成与静态检查完成；AutoDL尚未执行，效果待验证。第23节保持收束，Macro与历史纠错结案不变。",
+  "updated": "2026-10-25",
+  "current_iteration": "content_guard768_completed_reviewed_recipe_closed",
+  "current_iteration_scope": "第24节F01/F05/F11六组60轮完整结束并复核：反馈对原Q主收益0/4，近端价格均恶化31.48%～72.82%；训练面板原Q21/21双种子，反馈12/21和9/21。配方收束、Macro不变。下一方向为F05输入片段化设计审查；无新代码/运行任务/预算。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -517,13 +517,14 @@
         "docs/BABEL_STATE_COVERAGE768_REVIEW.json",
         "docs/BABEL_ROADMAP.md#20-f01f03继续学习embedding先检验主目标的尺度分配2026-10-12",
         "docs/BABEL_LAYER_SUPERVISION768_REVIEW.json",
-        "docs/BABEL_STATE_ORGANIZATION768_REVIEW.json"
+        "docs/BABEL_STATE_ORGANIZATION768_REVIEW.json",
+        "docs/BABEL_CONTENT_GUARD768_REVIEW.json"
       ],
-      "next_action": "只运行第24节babel_content_guard768三组双种子固定60；回包后按原门槛复核，失败也归档，不自动追加网格。",
+      "next_action": "下一张有限设计决策卡；先解决输入/位置定义、匹配起点、参数与算力账本、预算和验收，尚未准备代码入口。",
       "implementation": "complete",
       "execution": "four_fixed120_workers_complete_reviewed",
       "conclusion": "本多尺度配方综合价格MSE升7.27%–24.78%，4项主收益0通过，均衡升级未成立。",
-      "current_role": "保持uniform5、每端点完整128及全128评价；检验必要内容保护，显式同时128不自动启动。",
+      "current_role": "保留每端点完整128/全位置职责；片段化不能漏掉中间状态或引入未来；显式同时128仍独立保留。",
       "external_reference_20261018": {
         "project_ids": [
           "vjepa21"
@@ -533,9 +534,9 @@
       },
       "current_iteration": {
         "card": "content_guard_plan",
-        "implementation": "complete_synthetic_and_static_checked",
-        "execution": "not_run",
-        "conclusion": "pending"
+        "implementation": "complete_synthetic_and_remote_checked",
+        "execution": "six60_eightmodel_all128_complete_reviewed",
+        "conclusion": "完整历史/采样/全128评价确认，反馈内容保护未成立；显式同时128未测试。"
       },
       "iteration_archive": [
         {
@@ -663,7 +664,7 @@
         "V05",
         "V10"
       ],
-      "status": "第23节已完成复核：跨深度配方明确退化，有远段活动取舍但未均衡升级；收束，下一项目标保护设计决策。",
+      "status": "第24节反馈训练配方完整结束并收束；下一F05输入时间片段化设计建议，无新训练任务。",
       "reentry_or_acceptance": "基线可靠后固定问题，分别控制深度/宽度/头数/训练预算；不拿短训深层与长训浅层作单因素结论",
       "evidence": [
         "docs/BABEL_GROWTH768_REVIEW.md",
@@ -671,12 +672,13 @@
         "docs/BABEL_CAUSAL_POOL768_REVIEW.md",
         "docs/BABEL_ROADMAP.md#21-f05让已经发生的历史在编码器内部充分交流2026-10-17",
         "docs/BABEL_LAYER_SUPERVISION768_REVIEW.json",
-        "docs/BABEL_STATE_ORGANIZATION768_REVIEW.json"
+        "docs/BABEL_STATE_ORGANIZATION768_REVIEW.json",
+        "docs/BABEL_CONTENT_GUARD768_REVIEW.json"
       ],
       "implementation": "complete_synthetic_and_remote_checked",
       "execution": "six_fixed60_CUDA_workers_and_eight_model_all128_evaluation_complete_reviewed",
       "conclusion": "本固定h2→h4写入配方明确退化：相对同容量h4→h4，综合价格MSE增加3.19%～6.55%；相对原结构同期续训增加5.24%～23.17%。两必要比较主收益均0/4、全部8个无收益阈值差值在两种聚类95%区间均高于0。",
-      "next_action": "只运行第24节babel_content_guard768三组双种子固定60；回包后按原门槛复核，失败也归档，不自动追加网格。",
+      "next_action": "下一张有限设计决策卡；先解决输入/位置定义、匹配起点、参数与算力账本、预算和验收，尚未准备代码入口。",
       "external_reference_20261018": {
         "project_ids": [
           "vjepa21",
@@ -688,9 +690,9 @@
       },
       "current_iteration": {
         "card": "content_guard_plan",
-        "implementation": "complete_synthetic_and_static_checked",
-        "execution": "not_run",
-        "conclusion": "pending"
+        "implementation": "complete_synthetic_and_remote_checked",
+        "execution": "six60_eightmodel_all128_complete_reviewed",
+        "conclusion": "反馈相对原Q无预定收益，近端均超过10%伤害；原Q固定训练面板21项均改善，不能据反馈失败认定架构容量不足。"
       },
       "previous_iteration_disposition": {
         "status": "第21节四组120轮内部注意力对照完成并复核；未均衡升级，固定配方收束，信息组织方向保留。",
@@ -735,7 +737,7 @@
           "next_action": "一张有限设计决策卡：优先固定plain架构，明确主优化目标、必要保护及仅训练数据确定的尺度/约束，与旧活动调权、删S、Haar/多尺度逐项去重并配同期原Q对照；提出不了实质区别就收束此建议。"
         }
       ],
-      "current_role": "固定plain结构，排除新结构混杂；不把本目标配方当架构最优证明。",
+      "current_role": "优先审查输入时间粒度，不扩反馈损失网格；假设而非已定位根因，尚无启动预算。",
       "historical_status_scope": "此前status/implementation/execution/conclusion保留历史研究处置；本轮状态以current_iteration与content_guard_plan为准。"
     },
     {
@@ -862,9 +864,10 @@
         "docs/BABEL_ROADMAP.md#18-f11用途与代价结算",
         "docs/BABEL_ROADMAP.md#19-f11n05下一用途",
         "docs/BABEL_LAYER_SUPERVISION768_REVIEW.json",
-        "docs/BABEL_STATE_ORGANIZATION768_REVIEW.json"
+        "docs/BABEL_STATE_ORGANIZATION768_REVIEW.json",
+        "docs/BABEL_CONTENT_GUARD768_REVIEW.json"
       ],
-      "next_action": "只运行第24节babel_content_guard768三组双种子固定60；回包后按原门槛复核，失败也归档，不自动追加网格。",
+      "next_action": "下一张有限设计决策卡；先解决输入/位置定义、匹配起点、参数与算力账本、预算和验收，尚未准备代码入口。",
       "implementation": "fixed_closed_bar_adapter_and_bounded_replay_delivered",
       "execution": "complete_AutoDL_CUDA_and_report_reviewed",
       "conclusion": "连续接口数值资格通过；普通平均保真较高，压力/低波动失败保留，不等于可靠趋势或通用用途验收。",
@@ -877,9 +880,9 @@
       },
       "current_iteration": {
         "card": "content_guard_plan",
-        "implementation": "complete_synthetic_and_static_checked",
-        "execution": "not_run",
-        "conclusion": "pending"
+        "implementation": "complete_synthetic_and_remote_checked",
+        "execution": "six60_eightmodel_all128_complete_reviewed",
+        "conclusion": "内容/成本已结算，无新用途拟合或通用复用接受，不晋升。"
       },
       "iteration_archive": [
         {
@@ -912,7 +915,7 @@
           "next_action": "一张有限设计决策卡：优先固定plain架构，明确主优化目标、必要保护及仅训练数据确定的尺度/约束，与旧活动调权、删S、Haar/多尺度逐项去重并配同期原Q对照；提出不了实质区别就收束此建议。"
         }
       ],
-      "current_role": "分项内容、成本与有限证据；无新用途拟合、通用复用或模型晋升。",
+      "current_role": "内容保留/读取成本/复用价值分开；无新用途或V13接受，Macro参照不变。",
       "historical_status_scope": "此前status/implementation/execution/conclusion保留历史研究处置；本轮状态以current_iteration与content_guard_plan为准。"
     },
     {
@@ -939,37 +942,96 @@
     }
   ],
   "active_order": [
-    "F01",
     "F05",
+    "F01",
     "F11"
   ],
   "next_after_active": {
-    "status": "conditional_on_fixed_report_no_automatic_jobs",
+    "status": "design_recommendation_only_no_launch_card",
     "task_ids": [
-      "F01",
       "F05",
+      "F01",
       "F11"
     ],
-    "question": "按固定末轮结果判断分项反馈是否兼顾内容保真；不通过即收束配方，通过也只记有限候选。",
-    "retained_branches": "显式同时128、输入时间分组/patch、长记忆、跨分辨率及未来外推仍保留，均非自动任务；V13待合格新数据。",
-    "training_budget": 0
+    "question": "保持单768/原Q/原query与完整128，将连续少量bar按顺序拼成输入片段，是否比逐bar输入更好地保留组合形态与局部内容？",
+    "deliverable": "下一张有限设计决策卡；先解决输入/位置定义、匹配起点、参数与算力账本、预算和验收，尚未准备代码入口。",
+    "reason": "固定分项与反馈配方未胜原Q，且原Q在同架构能满足21项训练面板保护；停止自动损失网格，检验roadmap已保留且未执行的输入粒度假设。该结果没有证明patch是根因或保证收益。",
+    "priority": "input_time_patches_before_another_loss_grid_or_unmotivated_depth_scale",
+    "preserve": [
+      "closed-bar causal reusable price/activity state",
+      "each endpoint own full128",
+      "single public768",
+      "original Q and HistoryQuery",
+      "original contracts/splits/train-only statistics/EMA prehistory",
+      "all128 evaluation and near/mid/far/body/activity/F03/tails",
+      "Macro and historical repair closure",
+      "all retained future branches and V13 restrictions"
+    ],
+    "deduplication": {
+      "causal_pool": "旧方案在隐藏层后分范围汇聚并残差相加；候选改变进入主干前的输入粒度。",
+      "state_organization": "旧h2/h4私有记忆写入后投影加到末端；片段输入不是换名重复该汇聚通路。",
+      "history_query": "保留原query，不以增加读头作主要变量。",
+      "cnn256": "旧整体卷积主干对照不等于保持768 Transformer的输入粒度对照。",
+      "structured768_alternative": "单纯reshape/可逆混合不创造新机制；直接四槽写入并取消残差靠近旧pool/memory，同时改query又混入读出。暂不优先。"
+    },
+    "required_before_implementation": [
+      "固定单一片段长度；保留片段内所有特征与顺序；不使用均值bar替代。",
+      "每个公开bar状态独立只看截至自身的128；不得将patch内部早token当对应过去状态。",
+      "优先匹配从头随机起点与同曝光；若从源权重适配必须有明确匹配适配控制，不能直接接control180续60归因结构。",
+      "逐项列清输入投影、位置、mask、参数变化；保持原Q、query、公开768、主干层数头数，不同时引入跨周期或新损失。",
+      "锁定来源/初始化、数值预算、同更新与实际算力、选模和收益/保护/停止门槛后才给命令。",
+      "失败关闭单一粒度配方，不自动扩片段大小或深度网格。"
+    ],
+    "source": "not_locked_no_automatic_promotion_of_control240_or_other_candidate",
+    "training_budget": 0,
+    "entrypoint": null,
+    "code_change": false,
+    "retained_branches": "显式同时128、长记忆、跨周期、价量联合、未来外推仍保留；均非自动任务；V13仍缺新数据。",
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "继续状态生成与内容保留主线；重建不等于用途成功。",
+        "remaining": "效用仍待单独证据。"
+      },
+      "architecture": {
+        "status": "open",
+        "evidence": "输入粒度与旧末端汇聚/记忆区别明确。",
+        "remaining": "精确片段长度/投影/位置/参数/初始化尚未锁定。"
+      },
+      "training": {
+        "status": "open",
+        "evidence": "拟固定原Q、query和同曝光，优先匹配从头。",
+        "remaining": "确切优化器/轮数/资源预算未定，不可启动。"
+      },
+      "validation": {
+        "status": "open",
+        "evidence": "保留全128、价量分项、F03和尾部；不回改本次门槛。",
+        "remaining": "下一卡完整事前收益/保护/停止规则待锁定。"
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "原单合约分区、全部输入和因果前史保持，不要求新标签。",
+        "remaining": "片段端点/边界工程验证待实施；V13仍无新数据。"
+      },
+      "engineering": {
+        "status": "open",
+        "evidence": "当前无新代码、入口或GPU任务。",
+        "remaining": "仅设计方向，后续需合成、CUDA预检及导出检查。"
+      }
+    }
   },
   "active_training_budget": {
     "task_ids": [
-      "F01",
       "F05",
+      "F01",
       "F11"
     ],
-    "status": "bounded_ready_remote_not_started",
-    "jobs_max": 6,
-    "worker_epochs_max": 360,
-    "optimizer_updates_max": 13680,
+    "status": "none_pending_design_card",
+    "jobs_max": 0,
+    "worker_epochs_max": 0,
+    "optimizer_updates_max": 0,
     "readout_fits": 0,
-    "session_cap_seconds": 86400,
-    "reason": "用户授权第24节新机制准备；原Q/固定分项/反馈三组两个种子，固定追加60，不延长第23节。",
-    "source_calibration_states": 47890,
-    "final_calibration_states": 143670,
-    "research_states": 1457152
+    "reason": "第24节预算已完整执行并收束；下一输入粒度仅设计建议，未分配新训练预算或复用剩余时限。"
   },
   "aliases": {
     "R0": [
@@ -1017,9 +1079,9 @@
     "F11"
   ],
   "blocked_followups": {
-    "F_optimization": "第20～23节旧配方均已收束；只准备第24节原Q/固定分项/反馈有限矩阵，不自动启动系数网格、扩层、patch、跨周期或未来分支。"
+    "F_optimization": "第20～24节配方均收束；不自动续训或扩loss/LR/层数/片段长度网格。下一F05输入粒度需先完成公平起点/位置/预算/验收设计，无待跑命令。"
   },
-  "active_phase": "F01_F05_content_guard_ready_for_AutoDL",
+  "active_phase": "F05_input_granularity_design_recommendation_no_launch_card",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -1501,6 +1563,32 @@
       "actual_seconds": 27492.67610384524,
       "report_sha256": "cde52c2df62b238157e605f84d8afe15ccef928c71e38ba1175b4c5d4bf7dca0",
       "review": "docs/BABEL_STATE_ORGANIZATION768_REVIEW.json"
+    },
+    {
+      "task_ids": [
+        "F01",
+        "F05",
+        "F11"
+      ],
+      "status": "completed_reviewed_no_remaining_jobs",
+      "jobs_max": 6,
+      "worker_epochs_max": 360,
+      "optimizer_updates_max": 13680,
+      "readout_fits": 0,
+      "session_cap_seconds": 86400,
+      "reason": "用户授权第24节新机制准备；原Q/固定分项/反馈三组两个种子，固定追加60，不延长第23节。",
+      "source_calibration_states": 47890,
+      "final_calibration_states": 143670,
+      "research_states": 1457152,
+      "card": "content_guard_plan",
+      "study": "content_guard768",
+      "actual_jobs": 6,
+      "actual_worker_epochs": 360,
+      "actual_optimizer_updates": 13680,
+      "actual_state_exposures": 8620200,
+      "actual_seconds": 27864.65712659061,
+      "report_sha256": "1d853f8f503d5729eadc0bf42b1baff8a37e230bca188646eb0954a4efe08e11",
+      "review": "docs/BABEL_CONTENT_GUARD768_REVIEW.json"
     }
   ],
   "next_repair_cards": {
@@ -18448,10 +18536,10 @@
       "H2",
       "H3"
     ],
-    "status": "code_ready_checked_remote_not_run",
-    "implementation": "complete_synthetic_and_static_checked",
-    "execution": "not_run",
-    "conclusion": "pending_no_scientific_acceptance",
+    "status": "completed_reviewed_recipe_closed",
+    "implementation": "complete_synthetic_and_remote_checked",
+    "execution": "six60_eightmodel_all128_complete_reviewed",
+    "conclusion": "no_accepted_content_feedback_gain",
     "human_entry": "docs/BABEL_ROADMAP.md#24-f01f05f11让退化的内容单独反馈到训练2026-10-24",
     "previous_design_request": {
       "status": "design_decision_pending_no_new_GPU_job",
@@ -18505,15 +18593,78 @@
     "reference_unchanged": true,
     "local_real_neural_execution": false,
     "next_action": {
-      "status": "conditional_on_fixed_report_no_automatic_jobs",
+      "status": "design_recommendation_only_no_launch_card",
       "task_ids": [
-        "F01",
         "F05",
+        "F01",
         "F11"
       ],
-      "question": "按固定末轮结果判断分项反馈是否兼顾内容保真；不通过即收束配方，通过也只记有限候选。",
-      "retained_branches": "显式同时128、输入时间分组/patch、长记忆、跨分辨率及未来外推仍保留，均非自动任务；V13待合格新数据。",
-      "training_budget": 0
+      "question": "保持单768/原Q/原query与完整128，将连续少量bar按顺序拼成输入片段，是否比逐bar输入更好地保留组合形态与局部内容？",
+      "deliverable": "下一张有限设计决策卡；先解决输入/位置定义、匹配起点、参数与算力账本、预算和验收，尚未准备代码入口。",
+      "reason": "固定分项与反馈配方未胜原Q，且原Q在同架构能满足21项训练面板保护；停止自动损失网格，检验roadmap已保留且未执行的输入粒度假设。该结果没有证明patch是根因或保证收益。",
+      "priority": "input_time_patches_before_another_loss_grid_or_unmotivated_depth_scale",
+      "preserve": [
+        "closed-bar causal reusable price/activity state",
+        "each endpoint own full128",
+        "single public768",
+        "original Q and HistoryQuery",
+        "original contracts/splits/train-only statistics/EMA prehistory",
+        "all128 evaluation and near/mid/far/body/activity/F03/tails",
+        "Macro and historical repair closure",
+        "all retained future branches and V13 restrictions"
+      ],
+      "deduplication": {
+        "causal_pool": "旧方案在隐藏层后分范围汇聚并残差相加；候选改变进入主干前的输入粒度。",
+        "state_organization": "旧h2/h4私有记忆写入后投影加到末端；片段输入不是换名重复该汇聚通路。",
+        "history_query": "保留原query，不以增加读头作主要变量。",
+        "cnn256": "旧整体卷积主干对照不等于保持768 Transformer的输入粒度对照。",
+        "structured768_alternative": "单纯reshape/可逆混合不创造新机制；直接四槽写入并取消残差靠近旧pool/memory，同时改query又混入读出。暂不优先。"
+      },
+      "required_before_implementation": [
+        "固定单一片段长度；保留片段内所有特征与顺序；不使用均值bar替代。",
+        "每个公开bar状态独立只看截至自身的128；不得将patch内部早token当对应过去状态。",
+        "优先匹配从头随机起点与同曝光；若从源权重适配必须有明确匹配适配控制，不能直接接control180续60归因结构。",
+        "逐项列清输入投影、位置、mask、参数变化；保持原Q、query、公开768、主干层数头数，不同时引入跨周期或新损失。",
+        "锁定来源/初始化、数值预算、同更新与实际算力、选模和收益/保护/停止门槛后才给命令。",
+        "失败关闭单一粒度配方，不自动扩片段大小或深度网格。"
+      ],
+      "source": "not_locked_no_automatic_promotion_of_control240_or_other_candidate",
+      "training_budget": 0,
+      "entrypoint": null,
+      "code_change": false,
+      "retained_branches": "显式同时128、长记忆、跨周期、价量联合、未来外推仍保留；均非自动任务；V13仍缺新数据。",
+      "review": {
+        "purpose": {
+          "status": "pass_for_scope",
+          "evidence": "继续状态生成与内容保留主线；重建不等于用途成功。",
+          "remaining": "效用仍待单独证据。"
+        },
+        "architecture": {
+          "status": "open",
+          "evidence": "输入粒度与旧末端汇聚/记忆区别明确。",
+          "remaining": "精确片段长度/投影/位置/参数/初始化尚未锁定。"
+        },
+        "training": {
+          "status": "open",
+          "evidence": "拟固定原Q、query和同曝光，优先匹配从头。",
+          "remaining": "确切优化器/轮数/资源预算未定，不可启动。"
+        },
+        "validation": {
+          "status": "open",
+          "evidence": "保留全128、价量分项、F03和尾部；不回改本次门槛。",
+          "remaining": "下一卡完整事前收益/保护/停止规则待锁定。"
+        },
+        "data": {
+          "status": "pass_for_scope",
+          "evidence": "原单合约分区、全部输入和因果前史保持，不要求新标签。",
+          "remaining": "片段端点/边界工程验证待实施；V13仍无新数据。"
+        },
+        "engineering": {
+          "status": "open",
+          "evidence": "当前无新代码、入口或GPU任务。",
+          "remaining": "仅设计方向，后续需合成、CUDA预检及导出检查。"
+        }
+      }
     },
     "protocol": {
       "task_ids": [
@@ -19002,6 +19153,243 @@
       "calibration_read_scope": "Planned once each; no-update final panel retries separately recorded and charged to same24h budget, not new training exposure.",
       "research_states": 1457152,
       "readout_fits": 0
+    },
+    "review_document": "docs/BABEL_CONTENT_GUARD768_REVIEW.json",
+    "report_archive": {
+      "path": "/Users/bardan/Downloads/babel_content_guard768_reports.tar.gz",
+      "sha256": "1d853f8f503d5729eadc0bf42b1baff8a37e230bca188646eb0954a4efe08e11",
+      "bytes": 722829753,
+      "duplicate": false
+    },
+    "results_review": {
+      "group_counts": {
+        "feedback_vs_fixed": {
+          "primary_passed": 2,
+          "comparisons_passed": 0,
+          "interval_gates": 316,
+          "interval_status_counts": {
+            "fail": 138,
+            "pass": 178
+          },
+          "protection_gates": 312,
+          "protection_counts": {
+            "fail": 136,
+            "pass": 176
+          },
+          "p95_passed": 4,
+          "definite_harm_protections": 109,
+          "f03_counts": {
+            "pass": 52,
+            "fail": 8
+          }
+        },
+        "feedback_vs_control": {
+          "primary_passed": 0,
+          "comparisons_passed": 0,
+          "interval_gates": 316,
+          "interval_status_counts": {
+            "fail": 189,
+            "pass": 127
+          },
+          "protection_gates": 312,
+          "protection_counts": {
+            "fail": 185,
+            "pass": 127
+          },
+          "p95_passed": 2,
+          "definite_harm_protections": 81,
+          "f03_counts": {
+            "fail": 36,
+            "pass": 24
+          }
+        },
+        "fixed_vs_control": {
+          "primary_passed": 0,
+          "comparisons_passed": 0,
+          "interval_gates": 316,
+          "interval_status_counts": {
+            "fail": 115,
+            "pass": 201
+          },
+          "protection_gates": 312,
+          "protection_counts": {
+            "fail": 111,
+            "pass": 201
+          },
+          "p95_passed": 1,
+          "definite_harm_protections": 76,
+          "f03_counts": {
+            "fail": 47,
+            "pass": 13
+          }
+        },
+        "feedback_vs_initial": {
+          "primary_passed": 2,
+          "comparisons_passed": 0,
+          "interval_gates": 316,
+          "interval_status_counts": {
+            "fail": 35,
+            "pass": 281
+          },
+          "protection_gates": 316,
+          "protection_counts": {
+            "fail": 35,
+            "pass": 281
+          },
+          "p95_passed": 4,
+          "definite_harm_protections": 7,
+          "f03_counts": {
+            "pass": 52,
+            "fail": 8
+          }
+        }
+      },
+      "train_panel_passing_groups": {
+        "control_s42": 21,
+        "control_s43": 21,
+        "fixed_s42": 14,
+        "fixed_s43": 13,
+        "feedback_s42": 12,
+        "feedback_s43": 9
+      },
+      "near_price_vs_control_percent": [
+        31.48023391455279,
+        56.92083763616353,
+        70.35409224207929,
+        72.81838925149538
+      ]
+    },
+    "report_review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "F01/F05/F11预定三组双种子检验已完整执行；研究接受为false，未以重建均值或相对弱对照改判成功。",
+        "remaining": "通用价量状态复用优势、未来预测及V13均未由本轮确认。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "三组同768/4/8 plain及原HistoryQuery，0新增参数；因果与唯一公开状态凭据通过。原Q双种子21项固定训练均值均不劣source。",
+        "remaining": "未比较架构容量上限；编码器与query共同更新，不能隔离纯编码信息量。下一patch设计仍需起点/位置/成本控制。"
+      },
+      "training": {
+        "status": "pass_for_scope",
+        "evidence": "六组各60/2280，6840→9120恢复凭据、360轮采样与乘子递推独立核对，固定/反馈首轮完全一致；系数触顶及裁剪如实归档。",
+        "remaining": "反馈在固定训练面板也未达标；未独立重放权重/Adam/RNG，无梯度夹角证据，不宣称唯一优化原因。"
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "全部位置聚合、1264区间判据及16P95重算，91072固定位置预测评分核对；已确认伤害与保护未确认分开。",
+        "remaining": "全128原预测和训练校准预测未导出；本轮全部接受条件未过；重复研究集不替代V13。"
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "原来源/分区/统计与支持匹配；11566144价格真值与220份原CSV核对，完整历史和均匀位置职责不变。",
+        "remaining": "活动/实体以已导出的目标与mask评分，未重新从raw全链生成；无新独立行情。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "190实际报告文件及186可用completion成员哈希核对，1434省略成员身份匹配，单次退出0；累计27864.657秒。",
+        "remaining": "远端真实权重/优化器载荷仅有身份与执行凭据，本地0神经执行；工程通过不等于科学接受。"
+      }
+    },
+    "completed_budget": {
+      "task_ids": [
+        "F01",
+        "F05",
+        "F11"
+      ],
+      "status": "completed_reviewed_no_remaining_jobs",
+      "jobs_max": 6,
+      "worker_epochs_max": 360,
+      "optimizer_updates_max": 13680,
+      "readout_fits": 0,
+      "session_cap_seconds": 86400,
+      "reason": "用户授权第24节新机制准备；原Q/固定分项/反馈三组两个种子，固定追加60，不延长第23节。",
+      "source_calibration_states": 47890,
+      "final_calibration_states": 143670,
+      "research_states": 1457152,
+      "card": "content_guard_plan",
+      "study": "content_guard768",
+      "actual_jobs": 6,
+      "actual_worker_epochs": 360,
+      "actual_optimizer_updates": 13680,
+      "actual_state_exposures": 8620200,
+      "actual_seconds": 27864.65712659061,
+      "report_sha256": "1d853f8f503d5729eadc0bf42b1baff8a37e230bca188646eb0954a4efe08e11",
+      "review": "docs/BABEL_CONTENT_GUARD768_REVIEW.json"
+    }
+  },
+  "input_granularity_design_request": {
+    "status": "design_recommendation_only_no_launch_card",
+    "task_ids": [
+      "F05",
+      "F01",
+      "F11"
+    ],
+    "question": "保持单768/原Q/原query与完整128，将连续少量bar按顺序拼成输入片段，是否比逐bar输入更好地保留组合形态与局部内容？",
+    "deliverable": "下一张有限设计决策卡；先解决输入/位置定义、匹配起点、参数与算力账本、预算和验收，尚未准备代码入口。",
+    "reason": "固定分项与反馈配方未胜原Q，且原Q在同架构能满足21项训练面板保护；停止自动损失网格，检验roadmap已保留且未执行的输入粒度假设。该结果没有证明patch是根因或保证收益。",
+    "priority": "input_time_patches_before_another_loss_grid_or_unmotivated_depth_scale",
+    "preserve": [
+      "closed-bar causal reusable price/activity state",
+      "each endpoint own full128",
+      "single public768",
+      "original Q and HistoryQuery",
+      "original contracts/splits/train-only statistics/EMA prehistory",
+      "all128 evaluation and near/mid/far/body/activity/F03/tails",
+      "Macro and historical repair closure",
+      "all retained future branches and V13 restrictions"
+    ],
+    "deduplication": {
+      "causal_pool": "旧方案在隐藏层后分范围汇聚并残差相加；候选改变进入主干前的输入粒度。",
+      "state_organization": "旧h2/h4私有记忆写入后投影加到末端；片段输入不是换名重复该汇聚通路。",
+      "history_query": "保留原query，不以增加读头作主要变量。",
+      "cnn256": "旧整体卷积主干对照不等于保持768 Transformer的输入粒度对照。",
+      "structured768_alternative": "单纯reshape/可逆混合不创造新机制；直接四槽写入并取消残差靠近旧pool/memory，同时改query又混入读出。暂不优先。"
+    },
+    "required_before_implementation": [
+      "固定单一片段长度；保留片段内所有特征与顺序；不使用均值bar替代。",
+      "每个公开bar状态独立只看截至自身的128；不得将patch内部早token当对应过去状态。",
+      "优先匹配从头随机起点与同曝光；若从源权重适配必须有明确匹配适配控制，不能直接接control180续60归因结构。",
+      "逐项列清输入投影、位置、mask、参数变化；保持原Q、query、公开768、主干层数头数，不同时引入跨周期或新损失。",
+      "锁定来源/初始化、数值预算、同更新与实际算力、选模和收益/保护/停止门槛后才给命令。",
+      "失败关闭单一粒度配方，不自动扩片段大小或深度网格。"
+    ],
+    "source": "not_locked_no_automatic_promotion_of_control240_or_other_candidate",
+    "training_budget": 0,
+    "entrypoint": null,
+    "code_change": false,
+    "retained_branches": "显式同时128、长记忆、跨周期、价量联合、未来外推仍保留；均非自动任务；V13仍缺新数据。",
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "继续状态生成与内容保留主线；重建不等于用途成功。",
+        "remaining": "效用仍待单独证据。"
+      },
+      "architecture": {
+        "status": "open",
+        "evidence": "输入粒度与旧末端汇聚/记忆区别明确。",
+        "remaining": "精确片段长度/投影/位置/参数/初始化尚未锁定。"
+      },
+      "training": {
+        "status": "open",
+        "evidence": "拟固定原Q、query和同曝光，优先匹配从头。",
+        "remaining": "确切优化器/轮数/资源预算未定，不可启动。"
+      },
+      "validation": {
+        "status": "open",
+        "evidence": "保留全128、价量分项、F03和尾部；不回改本次门槛。",
+        "remaining": "下一卡完整事前收益/保护/停止规则待锁定。"
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "原单合约分区、全部输入和因果前史保持，不要求新标签。",
+        "remaining": "片段端点/边界工程验证待实施；V13仍无新数据。"
+      },
+      "engineering": {
+        "status": "open",
+        "evidence": "当前无新代码、入口或GPU任务。",
+        "remaining": "仅设计方向，后续需合成、CUDA预检及导出检查。"
+      }
     }
   }
 }
