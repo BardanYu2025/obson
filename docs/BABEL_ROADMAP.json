@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
-  "updated": "2026-10-26",
-  "current_iteration": "input_factorial768_ready_for_autodl",
-  "current_iteration_scope": "在最近32根保持逐bar输入、相同双投影架构下，较早96根的稀疏片段组织和投影初始化分别有何作用，二者是否相互依赖？ 保持目的与原Q；四臂2×2只分离结构及输入初始化，不作全部训练适配归因。",
+  "updated": "2026-11-15",
+  "current_iteration": "input_factorial_fresh768_ready_for_new_autodl",
+  "current_iteration_scope": "旧AutoDL清理且无完整备份；原input_factorial768未运行。保留四臂结构×初始化问题，使用同一新锁定窗口/训练尺度，增加同期从头bar双种子参照；只作本轮配对比较。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -16,7 +16,8 @@
     "width": 768,
     "layers": 4,
     "heads": 8,
-    "claim": "Research reference only, not globally optimal or fully accepted"
+    "claim": "Research reference only, not globally optimal or fully accepted",
+    "artifact_availability": "Historical conclusions retained; required modern weights/cache absent after remote deletion, no complete backup. Not restored or deployed by this release."
   },
   "requirements": [
     {
@@ -521,7 +522,7 @@
         "docs/BABEL_CONTENT_GUARD768_REVIEW.json",
         "docs/BABEL_INPUT_PATCH768_REVIEW.json"
       ],
-      "next_action": "只执行第26节input_factorial768，检查自动导出的完整或失败报告；既有实验不用重跑，本轮结果不自动触发扩网格或Macro晋升。",
+      "next_action": "只运行第27节babel_input_factorial_fresh768；旧input_factorial768不运行。自动导出reports与full backup；收报告后按结构/初始化/交互及同期bar分别归档。",
       "implementation": "complete",
       "execution": "four_fixed120_workers_complete_reviewed",
       "conclusion": "本多尺度配方综合价格MSE升7.27%–24.78%，4项主收益0通过，均衡升级未成立。",
@@ -534,7 +535,7 @@
         "evidence": "external_research_20261018"
       },
       "current_iteration": {
-        "card": "input_factorial_plan",
+        "card": "input_factorial_fresh_plan",
         "implementation": "complete_synthetic_checked",
         "execution": "not_run",
         "conclusion": "pending"
@@ -600,9 +601,19 @@
           },
           "current_role": "相同两种子排样/原Q/曝光、每个公开端点完整128、全128端点评价已核对；32内部token不减少公开监督端点。",
           "next_action": "后续保持完整历史/全位置职责和共同目标边界，不把当前差分边界当新错码；显式全128保留。"
+        },
+        {
+          "current_iteration": {
+            "card": "input_factorial_plan",
+            "implementation": "complete_synthetic_checked",
+            "execution": "not_run",
+            "conclusion": "pending"
+          },
+          "next_action": "只执行第26节input_factorial768，检查自动导出的完整或失败报告；既有实验不用重跑，本轮结果不自动触发扩网格或Macro晋升。",
+          "reason": "Remote artifact loss; unrun old factorial superseded, no historical scientific finding changed."
         }
       ],
-      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；本轮以current_iteration和input_factorial_plan为准。",
+      "historical_status_scope": "保留既往status/implementation/execution/conclusion历史处置；本轮以current_iteration和input_factorial_fresh_plan为准。",
       "method_audit": "recent_method_audit_20261026"
     },
     {
@@ -712,7 +723,7 @@
       "implementation": "complete_synthetic_and_remote_checked",
       "execution": "six_fixed60_CUDA_workers_and_eight_model_all128_evaluation_complete_reviewed",
       "conclusion": "本固定h2→h4写入配方明确退化：相对同容量h4→h4，综合价格MSE增加3.19%～6.55%；相对原结构同期续训增加5.24%～23.17%。两必要比较主收益均0/4、全部8个无收益阈值差值在两种聚类95%区间均高于0。",
-      "next_action": "只执行第26节input_factorial768，检查自动导出的完整或失败报告；既有实验不用重跑，本轮结果不自动触发扩网格或Macro晋升。",
+      "next_action": "只运行第27节babel_input_factorial_fresh768；旧input_factorial768不运行。自动导出reports与full backup；收报告后按结构/初始化/交互及同期bar分别归档。",
       "external_reference_20261018": {
         "project_ids": [
           "vjepa21",
@@ -723,7 +734,7 @@
         "evidence": "external_research_20261018"
       },
       "current_iteration": {
-        "card": "input_factorial_plan",
+        "card": "input_factorial_fresh_plan",
         "implementation": "complete_synthetic_checked",
         "execution": "not_run",
         "conclusion": "pending"
@@ -800,10 +811,20 @@
           },
           "current_role": "patch4相对bar近端价格MSE四组合均增加31.84%～92.21%，双聚类区间确认超过10%；local4保留128token也四组合确认近端损害。patch4较local4综合均值均改善且更快。",
           "next_action": "先根据本次审计完善下一张实验卡的机制归因与诊断要求；混合粒度保留候选，当前不直接实施或启动。"
+        },
+        {
+          "current_iteration": {
+            "card": "input_factorial_plan",
+            "implementation": "complete_synthetic_checked",
+            "execution": "not_run",
+            "conclusion": "pending"
+          },
+          "next_action": "只执行第26节input_factorial768，检查自动导出的完整或失败报告；既有实验不用重跑，本轮结果不自动触发扩网格或Macro晋升。",
+          "reason": "Remote artifact loss; unrun old factorial superseded, no historical scientific finding changed."
         }
       ],
       "current_role": "分离较早96的token组织与投影初始化；同recent32/参数/主干/Q预算。",
-      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；本轮以current_iteration和input_factorial_plan为准。",
+      "historical_status_scope": "保留既往status/implementation/execution/conclusion历史处置；本轮以current_iteration和input_factorial_fresh_plan为准。",
       "method_audit": "recent_method_audit_20261026"
     },
     {
@@ -934,7 +955,7 @@
         "docs/BABEL_CONTENT_GUARD768_REVIEW.json",
         "docs/BABEL_INPUT_PATCH768_REVIEW.json"
       ],
-      "next_action": "只执行第26节input_factorial768，检查自动导出的完整或失败报告；既有实验不用重跑，本轮结果不自动触发扩网格或Macro晋升。",
+      "next_action": "只运行第27节babel_input_factorial_fresh768；旧input_factorial768不运行。自动导出reports与full backup；收报告后按结构/初始化/交互及同期bar分别归档。",
       "implementation": "fixed_closed_bar_adapter_and_bounded_replay_delivered",
       "execution": "complete_AutoDL_CUDA_and_report_reviewed",
       "conclusion": "连续接口数值资格通过；普通平均保真较高，压力/低波动失败保留，不等于可靠趋势或通用用途验收。",
@@ -946,7 +967,7 @@
         "evidence": "external_research_20261018"
       },
       "current_iteration": {
-        "card": "input_factorial_plan",
+        "card": "input_factorial_fresh_plan",
         "implementation": "complete_synthetic_checked",
         "execution": "not_run",
         "conclusion": "pending"
@@ -1011,10 +1032,20 @@
           },
           "current_role": "patch4训练耗时为bar的39.87%，中远端实体/活动均值有收益，近端内容有代价；必要比较未整体通过，0新增用途拟合。",
           "next_action": "内容保留、读取与用途分开；低Q不能代替均衡保真；V13仍单列，不新增GPU任务。"
+        },
+        {
+          "current_iteration": {
+            "card": "input_factorial_plan",
+            "implementation": "complete_synthetic_checked",
+            "execution": "not_run",
+            "conclusion": "pending"
+          },
+          "next_action": "只执行第26节input_factorial768，检查自动导出的完整或失败报告；既有实验不用重跑，本轮结果不自动触发扩网格或Macro晋升。",
+          "reason": "Remote artifact loss; unrun old factorial superseded, no historical scientific finding changed."
         }
       ],
       "current_role": "均衡内容/实际成本分别结算，历史bar只读参考，不自动晋升Macro或宣布通用复用。",
-      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；本轮以current_iteration和input_factorial_plan为准。",
+      "historical_status_scope": "保留既往status/implementation/execution/conclusion历史处置；本轮以current_iteration和input_factorial_fresh_plan为准。",
       "method_audit": "recent_method_audit_20261026"
     },
     {
@@ -1052,29 +1083,28 @@
       "F01",
       "F11"
     ],
-    "action": "仅执行第26节input_factorial768四臂双种子有界实验；交自动reports包，按结构/初始化/交互与历史锚点分别归档；旧input_patch无需重跑。",
-    "reason": "第25节local4和patch4都损害近端，不能只归token数；追加审计未发现要求重跑的直接错码，但初始投影及实际训练目标影响未被分离。本轮从头作两因素对照。",
-    "ready_entrypoint": "scripts/babel_input_factorial768_autodl.sh",
+    "action": "只运行第27节babel_input_factorial_fresh768；旧input_factorial768不运行。自动导出reports与full backup；收报告后按结构/初始化/交互及同期bar分别归档。",
+    "ready_entrypoint": "scripts/babel_input_factorial_fresh_autodl.sh",
     "no_automatic_rerun": true,
     "no_automatic_followup_grid": true
   },
   "active_training_budget": {
-    "jobs_max": 8,
+    "jobs_max": 10,
     "epochs_each": 120,
-    "worker_epochs_max": 960,
+    "worker_epochs_max": 1200,
     "updates_each": 4560,
-    "optimizer_updates_max": 36480,
-    "parent_exposures": 4597440,
-    "supervised_state_exposures": 22987200,
-    "session_cap_seconds": 86400,
+    "optimizer_updates_max": 45600,
+    "parent_exposures": 5746800,
+    "supervised_state_exposures": 28734000,
+    "session_cap_seconds": 129600,
     "evaluation_models": 10,
     "evaluation_banks": 20,
     "research_states": 1821440,
-    "sample_prediction_states": 113840,
     "readout_fits": 0,
-    "preflight": "actual dense and hybrid Q backward,validation9,evaluation128; compute all8worker training +10model evaluation,diagnostic/checkpoint/tar disk, CUDA memory; fail closed if insufficient",
-    "accounting": "source/startup/preflight/train/eval/save cumulative including resume; export outside cap; no inherited remainder",
+    "workers_concurrent": 1,
+    "initial_free_disk_GiB": 44.38526914641261,
     "job_order": [
+      "reference_bar_s42",
       "dense_random_s42",
       "hybrid_random_s42",
       "dense_endpoint_s42",
@@ -1082,16 +1112,12 @@
       "hybrid_endpoint_s43",
       "dense_endpoint_s43",
       "hybrid_random_s43",
-      "dense_random_s43"
+      "dense_random_s43",
+      "reference_bar_s43"
     ],
-    "initial_disk_estimate_GiB": 19.708588425070047,
-    "disk_accounting": "Uncompressed full128 shards, position/parent/support/context/F03 score arrays, fixed8 prediction/target/mask/raw, eight Adam +atomic replace, base report+snapshot+new tar+backup, raw cache and2GiB safety. Resume credits only bound/hashed committed own checkpoints and completed banks, capped by category; never source/raw/foreign/uncommitted/archive credit.",
-    "task_ids": [
-      "F05",
-      "F01",
-      "F11"
-    ],
-    "status": "prepared_not_run_fixed_eight120"
+    "status": "ready_not_run",
+    "revision_reason": "Add2 same-budget scratch controls because original frozen weights lost; +25% worker epochs,24h→36h cap; retain full evidence/optimizer backup; no extension based on scores",
+    "accounting": "supervisor startup/source/init/preflight/train/evaluate cumulative; precomputed CPU package install and final exports outside cap; no hidden repeats of uncommitted updates"
   },
   "aliases": {
     "R0": [
@@ -1141,7 +1167,7 @@
   "blocked_followups": {
     "F_optimization": "第20～24节配方保持收束；仅第25节固定三组输入粒度已就绪。无自动loss/LR/层数/patch长度网格；V13仍缺新数据。"
   },
-  "active_phase": "input_factorial_implementation_ready_remote_not_run",
+  "active_phase": "portable_data_and_standalone_fresh_factorial_ready_remote_not_run",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -21116,7 +21142,7 @@
     ],
     "status": {
       "implementation": "complete_synthetic_checked",
-      "execution": "not_run",
+      "execution": "not_run_superseded_by_fresh_source_recovery",
       "conclusion": "pending"
     },
     "question": "在最近32根保持逐bar输入、相同双投影架构下，较早96根的稀疏片段组织和投影初始化分别有何作用，二者是否相互依赖？",
@@ -22269,6 +22295,272 @@
         ]
       },
       "independent_review": "model/training/source/runner and evaluation/export cross-reviewed; root checked cross-module binding, source report, full schema disk accounting and remaining-disk resume; implementation evidence only"
-    }
+    },
+    "superseded_by": "input_factorial_fresh_plan",
+    "supersession_reason": "User confirmed original experiment never ran, AutoDL expired/erased, no full backup; original2 frozen bar references and fixed cache not locally available. Original protocol and source remain unchanged."
+  },
+  "input_factorial_fresh_plan": {
+    "schema": "babel-input-factorial-fresh768-v1",
+    "date": "2026-11-15",
+    "task_ids": [
+      "F05",
+      "F01",
+      "F11"
+    ],
+    "requirement_ids": [
+      "N01",
+      "N02",
+      "N03",
+      "N04",
+      "N05",
+      "N07",
+      "N08",
+      "N09"
+    ],
+    "status": {
+      "implementation": "complete_synthetic_checked",
+      "execution": "not_run",
+      "conclusion": "pending"
+    },
+    "protocol": {
+      "schema": "babel-input-factorial-fresh768-v1",
+      "task_ids": [
+        "F05",
+        "F01",
+        "F11"
+      ],
+      "jobs": [
+        {
+          "name": "reference_bar_s42",
+          "arm": "reference_bar",
+          "seed": 42
+        },
+        {
+          "name": "dense_random_s42",
+          "arm": "dense_random",
+          "seed": 42
+        },
+        {
+          "name": "hybrid_random_s42",
+          "arm": "hybrid_random",
+          "seed": 42
+        },
+        {
+          "name": "dense_endpoint_s42",
+          "arm": "dense_endpoint",
+          "seed": 42
+        },
+        {
+          "name": "hybrid_endpoint_s42",
+          "arm": "hybrid_endpoint",
+          "seed": 42
+        },
+        {
+          "name": "hybrid_endpoint_s43",
+          "arm": "hybrid_endpoint",
+          "seed": 43
+        },
+        {
+          "name": "dense_endpoint_s43",
+          "arm": "dense_endpoint",
+          "seed": 43
+        },
+        {
+          "name": "hybrid_random_s43",
+          "arm": "hybrid_random",
+          "seed": 43
+        },
+        {
+          "name": "dense_random_s43",
+          "arm": "dense_random",
+          "seed": 43
+        },
+        {
+          "name": "reference_bar_s43",
+          "arm": "reference_bar",
+          "seed": 43
+        }
+      ],
+      "epochs": 120,
+      "batch": 128,
+      "micro": 8,
+      "workers": 1,
+      "worker_epochs": 1200,
+      "updates": 45600,
+      "parent_exposures": 5746800,
+      "supervised_states": 28734000,
+      "cap_seconds": 129600,
+      "selection": "fixed_last120_no_best_or_seed_selection",
+      "starting_point": "all10 scratch; originalQ, matched sampling/LR/Adam; no historical weight restored",
+      "bar_role": "concurrent freshly trained quality baseline; fewer86784 parameters than factorial arms; not an equal-parameter structure contrast",
+      "data": {
+        "schema": "babel-input-factorial-fresh-data-v1",
+        "counts": {
+          "train": 4789,
+          "val": 978,
+          "test": 984,
+          "cross_research": 439
+        },
+        "train_symbols": [
+          "MA",
+          "TA",
+          "ag",
+          "cu",
+          "hc",
+          "i",
+          "j",
+          "jm",
+          "m",
+          "p",
+          "rb",
+          "sr",
+          "y"
+        ],
+        "cross_symbols": [
+          "RM",
+          "au",
+          "c",
+          "cs",
+          "ru"
+        ],
+        "periods": [
+          15,
+          30,
+          60
+        ],
+        "bounds": {
+          "train_until": "2024-08-07",
+          "val_until": "2025-08-25",
+          "test_until": "2026-09-11"
+        },
+        "asof": "2026-09-12 03:00:00",
+        "input": "own128 from full255 inside same contract/session partition",
+        "sampling": "eligible main endpoints at fixed raw-row stride16; lowest SHA256(20261115|split|key|row), then key,row order",
+        "scalers": "new train-only unique physical rows; masked population mean/std with fixed1e-5 floor",
+        "legacy_equivalence": false,
+        "forecast_targets": false
+      },
+      "data_revision_reason": "User confirmed previous AutoDL erased and no complete backup; original fixed indexes/scalers and bar weights unavailable",
+      "reference_revision_reason": "Replaces2 missing frozen bar anchors with2 concurrent scratch120 controls, +240worker_epochs; no reconstruction of old history",
+      "scope": "New cohort/scales: only within-run paired conclusions, not historical numeric replay or Macro promotion",
+      "acceptance": {
+        "source_module": "obson.babel.multiscale_evaluate",
+        "source_sha256": "c90351834fa05d7ad1866613565d3237d07a5b02eda6ca3c7cd8c3566b6976cc",
+        "reuse": "Unchanged physical price, six nonprice fields, exact support, F03, dual2000 bootstrap and five-percent gain/ten-percent protection/P95 gates",
+        "bootstrap_seed": 20261012,
+        "haar_fit": false,
+        "scope": "Same observed physical history, not forecasting or universal representation acceptance"
+      },
+      "runtime": {
+        "mha_fastpath": false,
+        "matmul_tf32": false,
+        "cudnn_tf32": false,
+        "cudnn_benchmark": false,
+        "threads": 4
+      },
+      "diagnostics": "factorial gradient panels epoch0/10/120 unchanged; bar controls originalQ validation/causality, no additional fitted heads",
+      "research": "all10 last120 locked before any research model scoring; all128 endpoints; original1580 interval and20 P95 gates",
+      "backup": "automatic report and complete resume backup; raw data available in git snapshot; user must download backup before instance deletion"
+    },
+    "budget": {
+      "jobs_max": 10,
+      "epochs_each": 120,
+      "worker_epochs_max": 1200,
+      "updates_each": 4560,
+      "optimizer_updates_max": 45600,
+      "parent_exposures": 5746800,
+      "supervised_state_exposures": 28734000,
+      "session_cap_seconds": 129600,
+      "evaluation_models": 10,
+      "evaluation_banks": 20,
+      "research_states": 1821440,
+      "readout_fits": 0,
+      "workers_concurrent": 1,
+      "initial_free_disk_GiB": 44.38526914641261,
+      "job_order": [
+        "reference_bar_s42",
+        "dense_random_s42",
+        "hybrid_random_s42",
+        "dense_endpoint_s42",
+        "hybrid_endpoint_s42",
+        "hybrid_endpoint_s43",
+        "dense_endpoint_s43",
+        "hybrid_random_s43",
+        "dense_random_s43",
+        "reference_bar_s43"
+      ],
+      "status": "ready_not_run",
+      "revision_reason": "Add2 same-budget scratch controls because original frozen weights lost; +25% worker epochs,24h→36h cap; retain full evidence/optimizer backup; no extension based on scores",
+      "accounting": "supervisor startup/source/init/preflight/train/evaluate cumulative; precomputed CPU package install and final exports outside cap; no hidden repeats of uncommitted updates"
+    },
+    "source": {
+      "old_checkpoint_recovered": false,
+      "old_cache_recovered": false,
+      "raw_single_contract_files": 1251,
+      "snapshot_manifest_sha256": "adc34d786321f25cf3e501e265ba54b37cad8076c9e25b22a6b02d8ae9b672bd",
+      "dataset_manifest_sha256": "b5d401b5e9fc45116f8d8ce3a34125c7c23859db778a7124c0c76512ec0658c3",
+      "package_bytes": 137626855,
+      "parts": 5,
+      "selected_contracts": 908,
+      "train_unique_rows": 592646
+    },
+    "entrypoint": "scripts/babel_input_factorial_fresh_autodl.sh",
+    "module": "obson.babel.input_factorial_fresh_run",
+    "output": "/root/autodl-tmp/obson/checkpoints/babel_input_factorial_fresh768",
+    "report": "/root/autodl-tmp/download/babel_input_factorial_fresh768_reports.tar.gz",
+    "backup": "/root/autodl-tmp/download/babel_input_factorial_fresh768_backup.tar.gz",
+    "checks": {
+      "regression_command": "PYTHONPATH=src .venv/bin/python -m pytest -q tests/babel/test_input_factorial*.py tests/babel/test_input_patch*.py tests/babel/test_observed_history.py tests/babel/test_observed_history_training.py tests/babel/test_observed_history_export_v2.py tests/babel/test_multiscale_data.py tests/babel/test_multiscale_evaluate.py",
+      "new_tests": 25,
+      "real_neural_execution_local": 0,
+      "real_weight_loads_local": 0,
+      "data_build": "1251 original contract CSVs; 966 main +285 cross; 908 selected contracts; causal prefix equality on every selected contract; full255 partition checks; 592646 unique training rows for scales",
+      "portable_restore": "Full package installed into an empty local directory; all1262 file sizes/SHA256 checked; cached arrays finite/shapes/dtypes validated; second manifest construction works without old weights/cache",
+      "synthetic_lifecycle": "Real tiny CPU initialization and2epochs of each of5arms; committed checkpoints and completed reentry checked; both-seed shared parameter qualification",
+      "failure_cases": "missing/corrupt/reordered payload; unsafe tar, collision, links, missing member; failed preflight cannot bypass; unsettled budget cannot reset; concurrent launcher cannot overwrite live status; CUDA required; report vs full backup; atomic archive preservation; real shell success/failure/export",
+      "cuda_status": "not_run; timing/VRAM/backward/real-weight causality remain remote gates",
+      "passed": 457,
+      "seconds": 58.13,
+      "inherited_regressions": 432,
+      "ruff": "check/format pass",
+      "shell": "bash -n and real bash success/failure/auto-export tests pass",
+      "cli": "run --help pass",
+      "diff": "git diff --check pass",
+      "local_environment": "Python3.13.18, torch2.8.0 CPU tests, numpy2.3.3/pandas2.3.2; remote requires torch2.8.0 CUDA"
+    },
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "Same F05 input grouping versus initialization question, F01 own128/all-position coverage, F11 content/cost limits. Remote loss causes a reproducibility revision, not a new optimization branch.",
+        "remaining": "No scientific improvement, general reuse or V13 acceptance established."
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "Original four equal-parameter factorial arms and same shared query reused without edits; fresh original bar controls; both seeds common tensors matched; tiny5arm lifecycle and inherited causal tests.",
+        "remaining": "Fresh bar has86784 fewer parameters; only four-arm comparisons isolate factors. Real768 CUDA checks pending."
+      },
+      "training": {
+        "status": "pass_for_scope",
+        "evidence": "All10 scratch, no Adam inheritance; original Q=.4path+.2change1+.1body+.3activity, uniform5, batch128/micro8,120epochs and fixedlast; added240worker epochs recorded.36h cumulative timeout.",
+        "remaining": "Fixed budget does not establish optimum for each architecture. Actual CUDA timing/gradient checks pending; partial uncommitted epoch cannot silently rerun."
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "All10 checkpoints locked before20banks; exact original1580interval/20P95 rules, same physical target/full128 positions. Completion rechecks complete bank inventories/shards; new results use concurrent bar role explicitly.",
+        "remaining": "New cohort/scalers cannot numerically replay or compare directly against old results. Existing research data reused, not V13; age0/all wicks/general downstream reuse not accepted."
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "1251 raw single-contract files packaged; root aggregate CSVs excluded. New deterministic stride16+SHA cohort, full255 time partition and main-endpoint selection; train-only592646 unique physical rows,908contract prefix checks; package empty-directory restore hashes pass.",
+        "remaining": "Old selected rows/scalers were lost and are not recovered. No new market data; supplier economic truth not independently certified. EMA carries causal earlier history; windows may span trading sessions."
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "25 new synthetic/data/shell tests plus432 inherited regressions; immutable release hashes, code/source bindings, transaction/resume guards, parent/worker deadlines, exclusive export and complete backup.",
+        "remaining": "Local tests are CPU synthetic, not a real GPU execution. Requires PyTorch2.8.0 CUDA and measured preflight;44.4GiB initial free after data install. Backups must leave the instance before deletion; lost historical weights remain unavailable."
+      }
+    },
+    "decision_impact": "第25节及旧纠错结论不撤销；缺权重是复现资产丢失。新bar不是Macro替代或旧参照恢复，原第26节未运行。",
+    "next": "Execute only the new standalone study; review complete or failed report before any new grid."
   }
 }
