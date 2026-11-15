@@ -1,0 +1,47 @@
+{
+  "schema": "babel-macro-asset-recovery-evidence-v1",
+  "date": "2026-11-15",
+  "scope": "Recovered original row identities and scaler bytes, ancestral manifests and CPU reconstruction audit; NO weights or certified feature/PCA cache. This is not a completed training manifest.",
+  "source": {
+    "path": "reports/observed_history_review_cecb3cc29636/babel_observed_history768/manifest.json",
+    "sha256": "d8246106b4ea5b59aabf35603c90e98569417b1cf1ec84bb1156e46411f33f6c"
+  },
+  "files": {
+    "audit.json": {
+      "sha256": "33ba9bbd021802f4007ee41c35dc97d42278a8699288d7c3bd14d3505c7687c2",
+      "bytes": 3955
+    },
+    "audit.py": {
+      "sha256": "a17f5fe3673b689d864558d1c828dd3ac1d4a2093974980419e3ee8d1d0c85db",
+      "bytes": 3471
+    },
+    "cross_research_rows.json": {
+      "sha256": "ed26891b60da2426f7912ba1449ae1e102c204b7e9587757cdb1e7fd1d87cea8",
+      "bytes": 113127
+    },
+    "retained_source_manifest.json": {
+      "sha256": "d8246106b4ea5b59aabf35603c90e98569417b1cf1ec84bb1156e46411f33f6c",
+      "bytes": 4726449
+    },
+    "statistics.json": {
+      "sha256": "9b81f16b6377044ba1e389db45bee277265567bc903020bd1458a2f4f4f8943b",
+      "bytes": 1883
+    },
+    "test_rows.json": {
+      "sha256": "7beae3a83c87fd8a480fd8a96f68aef01262e44677571c1235667b445cbd35fb",
+      "bytes": 253068
+    },
+    "train_rows.json": {
+      "sha256": "1a5daf7bdddffb8aefe33dea50f61ba9cb25e6f0d3d0a2b30286de71b7fb6dc5",
+      "bytes": 1235725
+    },
+    "val_rows.json": {
+      "sha256": "f66f439b916abf0570f5e485eae29001bbb2fd403d96f774aa3a22511df15fea",
+      "bytes": 251547
+    }
+  },
+  "statistics_old_hash_match": true,
+  "all4_row_old_hash_match": true,
+  "full255_npz_old_file_hash_match": false,
+  "neural_execution": 0
+}

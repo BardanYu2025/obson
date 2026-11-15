@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-11-15",
-  "current_iteration": "input_factorial_fresh768_ready_for_new_autodl",
-  "current_iteration_scope": "旧AutoDL清理且无完整备份；原input_factorial768未运行。保留四臂结构×初始化问题，使用同一新锁定窗口/训练尺度，增加同期从头bar双种子参照；只作本轮配对比较。",
+  "current_iteration": "macro_asset_recovery_plan_ready_training_entrypoint_not_ready",
+  "current_iteration_scope": "先恢复被清理的Macro研究模型资产。原四臂结构×初始化假设保留且未执行，排在恢复交付之后。不是重开旧纠错或宣称重训已经重现原成绩。",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -17,7 +17,7 @@
     "layers": 4,
     "heads": 8,
     "claim": "Research reference only, not globally optimal or fully accepted",
-    "artifact_availability": "Historical conclusions retained; required modern weights/cache absent after remote deletion, no complete backup. Not restored or deployed by this release."
+    "artifact_availability": "Macro weights remain absent. Original4 row inventories and train scalers recovered with exact historical hashes; full cache equivalence and PCA assets not yet qualified."
   },
   "requirements": [
     {
@@ -522,7 +522,7 @@
         "docs/BABEL_CONTENT_GUARD768_REVIEW.json",
         "docs/BABEL_INPUT_PATCH768_REVIEW.json"
       ],
-      "next_action": "只运行第27节babel_input_factorial_fresh768；旧input_factorial768不运行。自动导出reports与full backup；收报告后按结构/初始化/交互及同期bar分别归档。",
+      "next_action": "恢复原输入/目标/PCA/采样与三视图数据并核对缓存差异；固定13阶段单链恢复协议和验收，然后准备新入口。恢复权重、评价及离机备份完成后再恢复F05四臂计划。",
       "implementation": "complete",
       "execution": "four_fixed120_workers_complete_reviewed",
       "conclusion": "本多尺度配方综合价格MSE升7.27%–24.78%，4项主收益0通过，均衡升级未成立。",
@@ -535,10 +535,10 @@
         "evidence": "external_research_20261018"
       },
       "current_iteration": {
-        "card": "input_factorial_fresh_plan",
-        "implementation": "complete_synthetic_checked",
-        "execution": "not_run",
-        "conclusion": "pending"
+        "card": "macro_asset_recovery_plan",
+        "implementation": "inventory_and_lineage_done_entrypoint_pending",
+        "execution": "cpu_asset_audit_only",
+        "conclusion": "weights_and_capabilities_not_restored"
       },
       "iteration_archive": [
         {
@@ -611,9 +611,19 @@
           },
           "next_action": "只执行第26节input_factorial768，检查自动导出的完整或失败报告；既有实验不用重跑，本轮结果不自动触发扩网格或Macro晋升。",
           "reason": "Remote artifact loss; unrun old factorial superseded, no historical scientific finding changed."
+        },
+        {
+          "current_iteration": {
+            "card": "input_factorial_fresh_plan",
+            "implementation": "complete_synthetic_checked",
+            "execution": "not_run",
+            "conclusion": "pending"
+          },
+          "next_action": "只运行第27节babel_input_factorial_fresh768；旧input_factorial768不运行。自动导出reports与full backup；收报告后按结构/初始化/交互及同期bar分别归档。",
+          "reason": "2026-11-15 user restoration-first priority; no job started."
         }
       ],
-      "historical_status_scope": "保留既往status/implementation/execution/conclusion历史处置；本轮以current_iteration和input_factorial_fresh_plan为准。",
+      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；当前以current_iteration和macro_asset_recovery_plan及延后factorial计划为准。",
       "method_audit": "recent_method_audit_20261026"
     },
     {
@@ -723,7 +733,7 @@
       "implementation": "complete_synthetic_and_remote_checked",
       "execution": "six_fixed60_CUDA_workers_and_eight_model_all128_evaluation_complete_reviewed",
       "conclusion": "本固定h2→h4写入配方明确退化：相对同容量h4→h4，综合价格MSE增加3.19%～6.55%；相对原结构同期续训增加5.24%～23.17%。两必要比较主收益均0/4、全部8个无收益阈值差值在两种聚类95%区间均高于0。",
-      "next_action": "只运行第27节babel_input_factorial_fresh768；旧input_factorial768不运行。自动导出reports与full backup；收报告后按结构/初始化/交互及同期bar分别归档。",
+      "next_action": "原2x2结构/初始化计划保留；Macro交付恢复后用同一合格数据、共同随机起点和同期bar重新绑定执行，不能默改成Macro微调。",
       "external_reference_20261018": {
         "project_ids": [
           "vjepa21",
@@ -735,9 +745,10 @@
       },
       "current_iteration": {
         "card": "input_factorial_fresh_plan",
-        "implementation": "complete_synthetic_checked",
+        "implementation": "retained_requires_data_rebinding",
         "execution": "not_run",
-        "conclusion": "pending"
+        "conclusion": "pending",
+        "queue": "after_model_restoration"
       },
       "previous_iteration_disposition": {
         "status": "第21节四组120轮内部注意力对照完成并复核；未均衡升级，固定配方收束，信息组织方向保留。",
@@ -821,10 +832,20 @@
           },
           "next_action": "只执行第26节input_factorial768，检查自动导出的完整或失败报告；既有实验不用重跑，本轮结果不自动触发扩网格或Macro晋升。",
           "reason": "Remote artifact loss; unrun old factorial superseded, no historical scientific finding changed."
+        },
+        {
+          "current_iteration": {
+            "card": "input_factorial_fresh_plan",
+            "implementation": "complete_synthetic_checked",
+            "execution": "not_run",
+            "conclusion": "pending"
+          },
+          "next_action": "只运行第27节babel_input_factorial_fresh768；旧input_factorial768不运行。自动导出reports与full backup；收报告后按结构/初始化/交互及同期bar分别归档。",
+          "reason": "2026-11-15 user restoration-first priority; no job started."
         }
       ],
       "current_role": "分离较早96的token组织与投影初始化；同recent32/参数/主干/Q预算。",
-      "historical_status_scope": "保留既往status/implementation/execution/conclusion历史处置；本轮以current_iteration和input_factorial_fresh_plan为准。",
+      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；当前以current_iteration和macro_asset_recovery_plan及延后factorial计划为准。",
       "method_audit": "recent_method_audit_20261026"
     },
     {
@@ -955,7 +976,7 @@
         "docs/BABEL_CONTENT_GUARD768_REVIEW.json",
         "docs/BABEL_INPUT_PATCH768_REVIEW.json"
       ],
-      "next_action": "只运行第27节babel_input_factorial_fresh768；旧input_factorial768不运行。自动导出reports与full backup；收报告后按结构/初始化/交互及同期bar分别归档。",
+      "next_action": "恢复原输入/目标/PCA/采样与三视图数据并核对缓存差异；固定13阶段单链恢复协议和验收，然后准备新入口。恢复权重、评价及离机备份完成后再恢复F05四臂计划。",
       "implementation": "fixed_closed_bar_adapter_and_bounded_replay_delivered",
       "execution": "complete_AutoDL_CUDA_and_report_reviewed",
       "conclusion": "连续接口数值资格通过；普通平均保真较高，压力/低波动失败保留，不等于可靠趋势或通用用途验收。",
@@ -967,10 +988,10 @@
         "evidence": "external_research_20261018"
       },
       "current_iteration": {
-        "card": "input_factorial_fresh_plan",
-        "implementation": "complete_synthetic_checked",
-        "execution": "not_run",
-        "conclusion": "pending"
+        "card": "macro_asset_recovery_plan",
+        "implementation": "inventory_and_lineage_done_entrypoint_pending",
+        "execution": "cpu_asset_audit_only",
+        "conclusion": "weights_and_capabilities_not_restored"
       },
       "iteration_archive": [
         {
@@ -1042,10 +1063,20 @@
           },
           "next_action": "只执行第26节input_factorial768，检查自动导出的完整或失败报告；既有实验不用重跑，本轮结果不自动触发扩网格或Macro晋升。",
           "reason": "Remote artifact loss; unrun old factorial superseded, no historical scientific finding changed."
+        },
+        {
+          "current_iteration": {
+            "card": "input_factorial_fresh_plan",
+            "implementation": "complete_synthetic_checked",
+            "execution": "not_run",
+            "conclusion": "pending"
+          },
+          "next_action": "只运行第27节babel_input_factorial_fresh768；旧input_factorial768不运行。自动导出reports与full backup；收报告后按结构/初始化/交互及同期bar分别归档。",
+          "reason": "2026-11-15 user restoration-first priority; no job started."
         }
       ],
       "current_role": "均衡内容/实际成本分别结算，历史bar只读参考，不自动晋升Macro或宣布通用复用。",
-      "historical_status_scope": "保留既往status/implementation/execution/conclusion历史处置；本轮以current_iteration和input_factorial_fresh_plan为准。",
+      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；当前以current_iteration和macro_asset_recovery_plan及延后factorial计划为准。",
       "method_audit": "recent_method_audit_20261026"
     },
     {
@@ -1072,52 +1103,30 @@
     }
   ],
   "active_order": [
-    "F05",
-    "F01",
-    "F11"
+    "F11",
+    "F01"
   ],
   "next_after_active": {
-    "status": "implementation_ready_remote_not_run",
+    "status": "prepare_recovery_components_no_training_command",
     "task_ids": [
-      "F05",
-      "F01",
-      "F11"
+      "F11",
+      "F01"
     ],
-    "action": "只运行第27节babel_input_factorial_fresh768；旧input_factorial768不运行。自动导出reports与full backup；收报告后按结构/初始化/交互及同期bar分别归档。",
-    "ready_entrypoint": "scripts/babel_input_factorial_fresh_autodl.sh",
+    "action": "恢复原输入/目标/PCA/采样与三视图数据并核对缓存差异；固定13阶段单链恢复协议和验收，然后准备新入口。恢复权重、评价及离机备份完成后再恢复F05四臂计划。",
+    "ready_entrypoint": null,
+    "deferred_entrypoint": "scripts/babel_input_factorial_fresh_autodl.sh",
     "no_automatic_rerun": true,
     "no_automatic_followup_grid": true
   },
   "active_training_budget": {
-    "jobs_max": 10,
-    "epochs_each": 120,
-    "worker_epochs_max": 1200,
-    "updates_each": 4560,
-    "optimizer_updates_max": 45600,
-    "parent_exposures": 5746800,
-    "supervised_state_exposures": 28734000,
-    "session_cap_seconds": 129600,
-    "evaluation_models": 10,
-    "evaluation_banks": 20,
-    "research_states": 1821440,
-    "readout_fits": 0,
-    "workers_concurrent": 1,
-    "initial_free_disk_GiB": 44.38526914641261,
-    "job_order": [
-      "reference_bar_s42",
-      "dense_random_s42",
-      "hybrid_random_s42",
-      "dense_endpoint_s42",
-      "hybrid_endpoint_s42",
-      "hybrid_endpoint_s43",
-      "dense_endpoint_s43",
-      "hybrid_random_s43",
-      "dense_random_s43",
-      "reference_bar_s43"
-    ],
-    "status": "ready_not_run",
-    "revision_reason": "Add2 same-budget scratch controls because original frozen weights lost; +25% worker epochs,24h→36h cap; retain full evidence/optimizer backup; no extension based on scores",
-    "accounting": "supervisor startup/source/init/preflight/train/evaluate cumulative; precomputed CPU package install and final exports outside cap; no hidden repeats of uncommitted updates"
+    "status": "not_launchable_data_and_protocol_gates_open",
+    "authorized_cuda_runs_now": 0,
+    "proposed_selected_recipe_stages_per_seed": 13,
+    "proposed_epochs_per_seed": 1531,
+    "proposed_worker_epochs_two_seeds": 3062,
+    "query_only_epochs_per_seed": 50,
+    "walltime_cap_seconds": null,
+    "reason": "Historical selected weight path budget accounting only; GPU timing/resource cap and exact stage manifests await data/PCA recovery. Fresh36h cap does not apply to this different workload."
   },
   "aliases": {
     "R0": [
@@ -1160,14 +1169,13 @@
   "progress_log": "docs/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "current_task_ids": [
-    "F05",
-    "F01",
-    "F11"
+    "F11",
+    "F01"
   ],
   "blocked_followups": {
     "F_optimization": "第20～24节配方保持收束；仅第25节固定三组输入粒度已就绪。无自动loss/LR/层数/patch长度网格；V13仍缺新数据。"
   },
-  "active_phase": "portable_data_and_standalone_fresh_factorial_ready_remote_not_run",
+  "active_phase": "F11_asset_recovery_before_F05_factorial",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -22297,7 +22305,8 @@
       "independent_review": "model/training/source/runner and evaluation/export cross-reviewed; root checked cross-module binding, source report, full schema disk accounting and remaining-disk resume; implementation evidence only"
     },
     "superseded_by": "input_factorial_fresh_plan",
-    "supersession_reason": "User confirmed original experiment never ran, AutoDL expired/erased, no full backup; original2 frozen bar references and fixed cache not locally available. Original protocol and source remain unchanged."
+    "supersession_reason": "User confirmed original experiment never ran, AutoDL expired/erased, no full backup; original2 frozen bar references and fixed cache not locally available. Original protocol and source remain unchanged.",
+    "current_disposition": "Original hypothesis retained; old dependencies/entrypoint not runnable after deletion. Implementation recovery/rebinding follows Macro delivery; no original trial ran."
   },
   "input_factorial_fresh_plan": {
     "schema": "babel-input-factorial-fresh768-v1",
@@ -22318,9 +22327,10 @@
       "N09"
     ],
     "status": {
-      "implementation": "complete_synthetic_checked",
-      "execution": "not_run",
-      "conclusion": "pending"
+      "implementation": "complete_synthetic_checked_but_not_current_execution",
+      "execution": "not_run_user_confirmed",
+      "conclusion": "pending",
+      "queue": "held_until_macro_restored_and_data_rebound"
     },
     "protocol": {
       "schema": "babel-input-factorial-fresh768-v1",
@@ -22561,6 +22571,482 @@
       }
     },
     "decision_impact": "第25节及旧纠错结论不撤销；缺权重是复现资产丢失。新bar不是Macro替代或旧参照恢复，原第26节未运行。",
-    "next": "Execute only the new standalone study; review complete or failed report before any new grid."
+    "next": "Preserve four arms and two same-budget scratchbar controls. Rebind recovered original cohort/scalers after data qualification. Macro restoration is project priority, NOT permission to turn scratch factorial into Macro warm-start.",
+    "source_inventory_correction": {
+      "date": "2026-11-15",
+      "prior_claim": "Original fixed identities/scalers unavailable, requiring new sampled cohort",
+      "corrected_fact": "Original4 row lists and normalization recovered from retained report JSON; exact old hashes verified. Actual cachedNPZ/weights absent; rebuiltNPZ hashes differ, so full numeric replay remains unqualified.",
+      "evidence": "artifacts/babel_macro_recovery_20261115/manifest.json",
+      "decision": "Do not launch fresh-new-cohort recipe; preserve2x2 question and rebind to recovered original data after qualification. Do not change historical source hashes."
+    }
+  },
+  "execution_priority_history": [
+    {
+      "date": "2026-11-15",
+      "current_iteration": "input_factorial_fresh768_ready_for_new_autodl",
+      "next_after_active": {
+        "status": "implementation_ready_remote_not_run",
+        "task_ids": [
+          "F05",
+          "F01",
+          "F11"
+        ],
+        "action": "只运行第27节babel_input_factorial_fresh768；旧input_factorial768不运行。自动导出reports与full backup；收报告后按结构/初始化/交互及同期bar分别归档。",
+        "ready_entrypoint": "scripts/babel_input_factorial_fresh_autodl.sh",
+        "no_automatic_rerun": true,
+        "no_automatic_followup_grid": true
+      },
+      "active_training_budget": {
+        "jobs_max": 10,
+        "epochs_each": 120,
+        "worker_epochs_max": 1200,
+        "updates_each": 4560,
+        "optimizer_updates_max": 45600,
+        "parent_exposures": 5746800,
+        "supervised_state_exposures": 28734000,
+        "session_cap_seconds": 129600,
+        "evaluation_models": 10,
+        "evaluation_banks": 20,
+        "research_states": 1821440,
+        "readout_fits": 0,
+        "workers_concurrent": 1,
+        "initial_free_disk_GiB": 44.38526914641261,
+        "job_order": [
+          "reference_bar_s42",
+          "dense_random_s42",
+          "hybrid_random_s42",
+          "dense_endpoint_s42",
+          "hybrid_endpoint_s42",
+          "hybrid_endpoint_s43",
+          "dense_endpoint_s43",
+          "hybrid_random_s43",
+          "dense_random_s43",
+          "reference_bar_s43"
+        ],
+        "status": "ready_not_run",
+        "revision_reason": "Add2 same-budget scratch controls because original frozen weights lost; +25% worker epochs,24h→36h cap; retain full evidence/optimizer backup; no extension based on scores",
+        "accounting": "supervisor startup/source/init/preflight/train/evaluate cumulative; precomputed CPU package install and final exports outside cap; no hidden repeats of uncommitted updates"
+      },
+      "reason": "User explicitly requests restore retained model first; fresh job not started; original data/scaler recovery newly evidenced."
+    }
+  ],
+  "macro_asset_recovery_plan": {
+    "schema": "babel-macro-recovery-plan-v1",
+    "date": "2026-11-15",
+    "task_ids": [
+      "F11",
+      "F01"
+    ],
+    "retained_experiment_task_ids": [
+      "F05",
+      "F01",
+      "F11"
+    ],
+    "status": {
+      "plan": "selected_weight_path_mapped",
+      "implementation": "recovered_json_evidence_ready_training_runner_not_ready",
+      "execution": "cpu_asset_audit_only_no_cuda",
+      "scientific_acceptance": "not_established"
+    },
+    "target": {
+      "run": "babel_macro_history768",
+      "arms": [
+        "control_s42",
+        "control_s43"
+      ],
+      "historical_selected_epochs": [
+        97,
+        94
+      ],
+      "historical_weights": {
+        "42": "eb1743b178d680caae8376fc61c016431555a9007d98b35113af34821a022b28",
+        "43": "70578bf63518c4815406b7e349b1e27608a5e8e1623e32343719ebbf3d167915"
+      },
+      "output": "768 causal state plus original history query/local diagnostic, train scalers, full reloadable bundle; separate recipe replication from performance recovery"
+    },
+    "source_correction": {
+      "date": "2026-11-15",
+      "prior_claim": "Original fixed identities/scalers unavailable, requiring new sampled cohort",
+      "corrected_fact": "Original4 row lists and normalization recovered from retained report JSON; exact old hashes verified. Actual cachedNPZ/weights absent; rebuiltNPZ hashes differ, so full numeric replay remains unqualified.",
+      "evidence": "artifacts/babel_macro_recovery_20261115/manifest.json",
+      "decision": "Do not launch fresh-new-cohort recipe; preserve2x2 question and rebind to recovered original data after qualification. Do not change historical source hashes."
+    },
+    "asset_audit": {
+      "statistics_exact_sha": "9b81f16b6377044ba1e389db45bee277265567bc903020bd1458a2f4f4f8943b",
+      "expected_statistics_sha": "9b81f16b6377044ba1e389db45bee277265567bc903020bd1458a2f4f4f8943b",
+      "row_agreement_reports": [
+        "reports/observed_history_review_cecb3cc29636/babel_observed_history768",
+        "reports/multiscale_review_8b4fdb27d5c1/babel_multiscale768_v2",
+        "reports/layer_supervision_review_c95e373e9b9d/babel_layer_supervision768"
+      ],
+      "partition_checks": {
+        "train/val": {
+          "train": 4789,
+          "val": 978,
+          "overlapping_intervals": 0
+        },
+        "train/test": {
+          "train": 4789,
+          "val": 984,
+          "overlapping_intervals": 0
+        },
+        "val/test": {
+          "train": 978,
+          "val": 984,
+          "overlapping_intervals": 0
+        }
+      },
+      "splits": {
+        "train": {
+          "rows": 4789,
+          "shape": [
+            4789,
+            255,
+            28
+          ],
+          "cache_sha256": "ee14e82e85e28e51d6f4a13ae689da620b59613ee073ba56a1c5ece871e5be67",
+          "expected_cache_sha256": "27a5bb7850bf820e774063aae13b414f68b4255e5777cb715afbf6c35e6800ba",
+          "cache_bytes_equal": false,
+          "row_sha256": "1a5daf7bdddffb8aefe33dea50f61ba9cb25e6f0d3d0a2b30286de71b7fb6dc5",
+          "expected_row_sha256": "1a5daf7bdddffb8aefe33dea50f61ba9cb25e6f0d3d0a2b30286de71b7fb6dc5",
+          "row_bytes_equal": true
+        },
+        "val": {
+          "rows": 978,
+          "shape": [
+            978,
+            255,
+            28
+          ],
+          "cache_sha256": "bc566e66576b16d826e2a1fe2d5f8e6375c009f0a2152558af4479125cd6d3cd",
+          "expected_cache_sha256": "7a160897a9d39ca1ce6156d1e6ed9ca832b2df3900ae84e3d6875e63d5589ab8",
+          "cache_bytes_equal": false,
+          "row_sha256": "f66f439b916abf0570f5e485eae29001bbb2fd403d96f774aa3a22511df15fea",
+          "expected_row_sha256": "f66f439b916abf0570f5e485eae29001bbb2fd403d96f774aa3a22511df15fea",
+          "row_bytes_equal": true
+        },
+        "test": {
+          "rows": 984,
+          "shape": [
+            984,
+            255,
+            28
+          ],
+          "cache_sha256": "f99f6b8d666606cc8e40861129462ace2f54508eefbfda596d0de590b4a48527",
+          "expected_cache_sha256": "a036da450e3c291d644cf8d6dc42f609590ec9542ac4460e4ae7bdca82af9190",
+          "cache_bytes_equal": false,
+          "row_sha256": "7beae3a83c87fd8a480fd8a96f68aef01262e44677571c1235667b445cbd35fb",
+          "expected_row_sha256": "7beae3a83c87fd8a480fd8a96f68aef01262e44677571c1235667b445cbd35fb",
+          "row_bytes_equal": true
+        },
+        "cross_research": {
+          "rows": 439,
+          "shape": [
+            439,
+            255,
+            28
+          ],
+          "cache_sha256": "0a70b8857cd9a604003fa445c02d48367ebeafabcc89e2c487b29f9ed8e6e5c9",
+          "expected_cache_sha256": "4c6dfcdf8def41ffe039ac3482969c0b7bd9b657230b321a6850285d1b88e0b3",
+          "cache_bytes_equal": false,
+          "row_sha256": "ed26891b60da2426f7912ba1449ae1e102c204b7e9587757cdb1e7fd1d87cea8",
+          "expected_row_sha256": "ed26891b60da2426f7912ba1449ae1e102c204b7e9587757cdb1e7fd1d87cea8",
+          "row_bytes_equal": true
+        }
+      },
+      "model_executions": 0,
+      "model_weights_recovered": false,
+      "input_sources": {
+        "reports/observed_history_review_cecb3cc29636/babel_observed_history768/manifest.json": "d8246106b4ea5b59aabf35603c90e98569417b1cf1ec84bb1156e46411f33f6c",
+        "reports/observed_history_review_cecb3cc29636/babel_observed_history768/train_rows.json": "1a5daf7bdddffb8aefe33dea50f61ba9cb25e6f0d3d0a2b30286de71b7fb6dc5",
+        "reports/observed_history_review_cecb3cc29636/babel_observed_history768/val_rows.json": "f66f439b916abf0570f5e485eae29001bbb2fd403d96f774aa3a22511df15fea",
+        "reports/observed_history_review_cecb3cc29636/babel_observed_history768/test_rows.json": "7beae3a83c87fd8a480fd8a96f68aef01262e44677571c1235667b445cbd35fb",
+        "reports/observed_history_review_cecb3cc29636/babel_observed_history768/cross_research_rows.json": "ed26891b60da2426f7912ba1449ae1e102c204b7e9587757cdb1e7fd1d87cea8"
+      },
+      "script_sha256": "a17f5fe3673b689d864558d1c828dd3ac1d4a2093974980419e3ee8d1d0c85db"
+    },
+    "artifact_manifest": "artifacts/babel_macro_recovery_20261115/manifest.json",
+    "lineage": [
+      {
+        "order": 1,
+        "stage": "bar_alignment",
+        "arm": "w768_joint",
+        "epochs_per_seed": 200,
+        "start": "scratch",
+        "evidence": "src/obson/babel/bar_alignment_benchmark.py:model_for",
+        "retained_semantics": "768/2/8, FF512; train-only PCA768 fixed decoder and original local supervision; no512 neural weights loaded",
+        "seeds": [
+          42,
+          43
+        ]
+      },
+      {
+        "order": 2,
+        "stage": "path",
+        "arm": "control",
+        "epochs_per_seed": 100,
+        "start": "previous last200 + Adam/RNG",
+        "evidence": "src/obson/babel/path_feature_benchmark.py:construct",
+        "retained_semantics": "Keep PathInput wrapper disabled; control training, no path candidate",
+        "seeds": [
+          42,
+          43
+        ]
+      },
+      {
+        "order": 3,
+        "stage": "consistency",
+        "arm": "consistent",
+        "epochs_per_seed": 100,
+        "start": "previous control last300 + Adam/RNG",
+        "evidence": "src/obson/babel/overlap_consistency_run.py:construct",
+        "retained_semantics": "Retain original paired history consistency; select best400 under original validation",
+        "seeds": [
+          42,
+          43
+        ]
+      },
+      {
+        "order": 4,
+        "stage": "growth",
+        "arm": "deep",
+        "epochs_per_seed": 100,
+        "start": "consistent best400; reset optimizers",
+        "evidence": "src/obson/babel/capacity_growth_run.py:construct",
+        "retained_semantics": "Identity growth to768/4/8 FF3072; preserve original shared-history objective",
+        "seeds": [
+          42,
+          43
+        ]
+      },
+      {
+        "order": 5,
+        "stage": "cross_period",
+        "arm": "control",
+        "epochs_per_seed": 100,
+        "start": "deep best500; reset optimizers",
+        "evidence": "src/obson/babel/cross_period_run.py:make_manifest",
+        "retained_semantics": "Three-view training; cross penalty0, same-period consistency retained; produces control600",
+        "seeds": [
+          42,
+          43
+        ]
+      },
+      {
+        "order": 6,
+        "stage": "history_query",
+        "arm": "warm",
+        "epochs_per_seed": 50,
+        "start": "control600 frozen encoder/local",
+        "evidence": "src/obson/babel/history_query_run.py:construct",
+        "retained_semantics": "Fit train-state scaler, warm original query only; final50; not six main query branches",
+        "seeds": [
+          42,
+          43
+        ]
+      },
+      {
+        "order": 7,
+        "stage": "bar_semantics",
+        "arm": "uniform",
+        "epochs_per_seed": 100,
+        "start": "control600 + warm query50; reset optimizers",
+        "evidence": "src/obson/babel/bar_semantics_run.py:construct",
+        "retained_semantics": "Uniform history-query encoder supervision; detached local diagnostic",
+        "seeds": [
+          42,
+          43
+        ]
+      },
+      {
+        "order": 8,
+        "stage": "history_structure",
+        "arm": "control",
+        "epochs_per_seed": 100,
+        "start": "uniform best; reset optimizers",
+        "evidence": "src/obson/babel/history_structure_run.py:construct",
+        "retained_semantics": "Original query continuation; structure/consistent candidates NOT loaded",
+        "seeds": [
+          42,
+          43
+        ]
+      },
+      {
+        "order": 9,
+        "stage": "causal_pool",
+        "arm": "plain",
+        "epochs_per_seed": 100,
+        "start": "history-structure control best; reset optimizers",
+        "evidence": "src/obson/babel/causal_pool_run.py:construct",
+        "retained_semantics": "No pooling module; this stage adds common remote-structure objective",
+        "seeds": [
+          42,
+          43
+        ]
+      },
+      {
+        "order": 10,
+        "stage": "depth",
+        "arm": "d4_lr3",
+        "epochs_per_seed": 281,
+        "start": "plain best; reset at fork, retain Adam between budget segments",
+        "evidence": "src/obson/babel/depth_scaling_run.py:construct",
+        "retained_semantics": "Historical selected encoder peak3e-5,100/191/281 LR segments; no8/12 orLR1 search",
+        "seeds": [
+          42,
+          43
+        ]
+      },
+      {
+        "order": 11,
+        "stage": "activity_weight",
+        "arm": "a030",
+        "epochs_per_seed": 100,
+        "start": "d4_lr3 selected best at281 budget; reset optimizers",
+        "evidence": "src/obson/babel/activity_weight_run.py:construct",
+        "retained_semantics": "Original historical activity coefficient0.3; do not rerun0/0.1 candidates",
+        "seeds": [
+          42,
+          43
+        ]
+      },
+      {
+        "order": 12,
+        "stage": "shared_history",
+        "arm": "control",
+        "epochs_per_seed": 100,
+        "start": "a030 best; reset optimizers",
+        "evidence": "src/obson/babel/shared_history_run.py:construct",
+        "retained_semantics": "Keep4800 triplet/paired-geometry sampler; auxiliary head detached from encoder, separate clipping",
+        "seeds": [
+          42,
+          43
+        ]
+      },
+      {
+        "order": 13,
+        "stage": "macro_history",
+        "arm": "control",
+        "epochs_per_seed": 100,
+        "start": "shared control best; reset optimizers",
+        "evidence": "src/obson/babel/macro_history_run.py:construct",
+        "retained_semantics": "Original reconstruction/structure/local recipe; frozen-reader diagnostic, auxiliary encoder weight0; final Macro reference",
+        "seeds": [
+          42,
+          43
+        ]
+      }
+    ],
+    "steps": [
+      {
+        "step": "F11.restore.1",
+        "name": "原资产与数据恢复",
+        "status": "partial_CPU_verified",
+        "done": "4清单/旧统计哈希匹配，原Macro身份及实际继承链固定",
+        "todo": "解释4NPZ差异；重建原128目标/PCA768/坐标及局部尺度、dense候选和同/跨周期三视图。原full255缓存不是整个Macro训练数据。",
+        "exit": "原数据/实现指纹和数值资格明确；如无法原样恢复，记缺口，不伪造旧缓存或默换新清单。"
+      },
+      {
+        "step": "F11.restore.2",
+        "name": "只重训实际继承链",
+        "status": "planned_not_implemented",
+        "stages": 13,
+        "seeds": [
+          42,
+          43
+        ],
+        "epochs_per_seed": 1531,
+        "query_only_epochs_per_seed": 50,
+        "todo": "新自包含stage runner按chain执行，原目标/LR/采样/选模职责分别绑定；只恢复历史选中配方，不重开候选矩阵。",
+        "exit": "26个stage/seed预算完整或有明确停止原因；每段source/checkpoint/best/last/Adam/RNG及备份可核查。"
+      },
+      {
+        "step": "F11.restore.3",
+        "name": "检查恢复到了什么程度",
+        "status": "planned_protocol_gate_open",
+        "todo": "先固定可比较的旧预测/真实目标与验收面板；双种子分别核对因果/滚动/形状，近中远价格、实体、活动、尾部与已知失败案例；保留原研究集限制。",
+        "exit": "分别报告可加载、配方重建、旧能力重现；未达到原效果就如实不认定恢复完成，不自动加轮补分。"
+      },
+      {
+        "step": "F11.restore.4",
+        "name": "完整交付并离机保存",
+        "status": "planned",
+        "todo": "统一encoder/query/scalers、checkpoint/optimizer/RNG/data/code清单、示例和报告；干净进程恢复及批量/逐条比对；每阶段导出download并保留离机备份。",
+        "exit": "双种子产物完整、恢复冒烟通过且本地/独立存储有完整备份。"
+      },
+      {
+        "step": "F05.resume_factorial",
+        "name": "恢复原实验队列",
+        "status": "retained_after_restore",
+        "todo": "原四臂密集/片段×随机/末根初始化不变；同期bar参照仍需同预算scratch；优先绑定本次找回的原窗口/尺度。不把Macro权重换入四组。",
+        "exit": "依恢复数据证据重绑定入口、预算、验收和导出后，再发布唯一新命令。"
+      }
+    ],
+    "skipped_neural_matrices": [
+      "128/512 early model searches (CPU data/PCA setup retained)",
+      "bar_alignment endpoint/512 arms",
+      "path candidate",
+      "paired consistency control",
+      "growth base/wide",
+      "cross-period cross arm",
+      "random/warm local head adaptation",
+      "history_query six main100 arms (keep only50 warm)",
+      "bar_semantics control/additive",
+      "history_structure structure/consistent",
+      "causal_pool full_pool/scale_pool",
+      "depth8/12 and unselectedlr1 grid",
+      "activity0/.1",
+      "shared within/cross",
+      "grounded random-head warmups that were not inherited",
+      "macro content/aligned",
+      "closed V01–V12/V14 correction comparisons",
+      "later rollout/coverage/optimization branches"
+    ],
+    "important_distinctions": [
+      "Inference-source verifier dependency is not necessarily a trained-weight dependency. New recovery manifests must remove comparison-only ancestry without forging old completion receipts.",
+      "Macro prefix-history training is not the later own128-per-position scratch recipe; do not silently replace training with full255 uniform5/Q-only.",
+      "Old97/94 and depth279/281 are provenance, not forced winners for new random/numeric trajectory. Apply retained validation rules and record new identities.",
+      "Historical chosen LR3e-5 is fixed as production-recipe reconstruction; this does not reproduce full two-LR depth study or change its scientific findings.",
+      "Recreated weights are new artifacts; exact tensor equality is not promised. PCA/normalization differences must be qualified before training."
+    ],
+    "stopping": {
+      "training_now": false,
+      "reason": "data/PCA and explicit recovery acceptance/resource protocol still open",
+      "automatic_extensions": false,
+      "scientific_gates": "Never select on reused research scores to make restored model resemble old best; no seed mixing, no target-derived input shortcuts",
+      "budget_note": "1531/seed is prospective selected-chain budget, not a GPU time quote or approval to launch current old scripts."
+    },
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "User prioritizes restoring a runnable retained Macro research reference before new factorial optimization; no new hypothesis and no reopening closed scientific repairs.",
+        "remaining": "Restored executable and restored historical performance are distinct milestones; no best-on-all-metrics claim."
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "Traced actual construct/load functions: root768 joint is scratch2layer, grows to4/8/FF3072; query warmed aftercontrol600. Historical auxiliary matrices are not neural parents.",
+        "remaining": "Restore runner must retain wrappers, PCA buffers, fixed scalers, detached heads and function-preserving growth; source adapters need implementation/testing."
+      },
+      "training": {
+        "status": "pass_for_scope",
+        "evidence": "13 retained recipe stages,1531epochs/seed including50query-only; original loss/sampling/LR/reset versus carried Adam identified. Only historical chosen LR/arms planned, not repeat broad comparisons.",
+        "remaining": "This is a selected-recipe reconstruction, not reproducing the old whole selection study. Concrete stage manifests/updates/resource walltime caps must be bound before CUDA; no present launch budget."
+      },
+      "validation": {
+        "status": "open",
+        "evidence": "OldMacro identities s42e97/s43e94 pinned by nested report; archived per-bar query/embedding replays and current-market view available for frozen checks. No seed cherry-picking or automatic Macro promotion.",
+        "remaining": "Pin same-target recovery acceptance panel/numeric tolerances before training; report data gaps, local/current/near-far/activity scope, repeated research status. Cannot certify performance without new CUDA outputs."
+      },
+      "data": {
+        "status": "open",
+        "evidence": "Found omitted report assets: four original row files match three reports and four historical SHA256s;1883byte statistics matches9b81f16...8943b exactly. Full255 raw CPU rebuild finite and partition-safe.",
+        "remaining": "All4 rebuiltNPZ file hashes differ; cannot assume serialization-only or numeric-equivalent without evidence. PCA basis, dense candidate bank, schedules and three-view geometry still need recovery qualification."
+      },
+      "engineering": {
+        "status": "open",
+        "evidence": "Preserved/published recovered JSON assets and reproducible CPUaudit; no real model weights loaded/forwarded. User confirmed fresh experiment not started; old protocol/code untouched.",
+        "remaining": "New stage runner/export/restore smoke tests not yet implemented. Existing ancestor matrix verifiers must be replaced by honest recovery contracts, never fabricated completion files. Need off-instance full backups."
+      }
+    }
   }
 }
