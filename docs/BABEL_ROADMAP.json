@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-11-15",
-  "current_iteration": "macro_asset_recovery_plan_ready_training_entrypoint_not_ready",
-  "current_iteration_scope": "先恢复被清理的Macro研究模型资产。原四臂结构×初始化假设保留且未执行，排在恢复交付之后。不是重开旧纠错或宣称重训已经重现原成绩。",
+  "current_iteration": "macro_asset_recovery_plan_and_preservation_component_ready_training_entrypoint_not_ready",
+  "current_iteration_scope": "Restore erased Macro first; prepare immutable complete snapshots and verified off-instance copies as required delivery. No CUDA training ready; original factorial retained.",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -22644,7 +22644,7 @@
     ],
     "status": {
       "plan": "selected_weight_path_mapped",
-      "implementation": "recovered_json_evidence_ready_training_runner_not_ready",
+      "implementation": "recovered_json_evidence_and_snapshot_tool_ready_training_runner_not_ready",
       "execution": "cpu_asset_audit_only_no_cuda",
       "scientific_acceptance": "not_established"
     },
@@ -22970,9 +22970,9 @@
       {
         "step": "F11.restore.4",
         "name": "完整交付并离机保存",
-        "status": "planned",
-        "todo": "统一encoder/query/scalers、checkpoint/optimizer/RNG/data/code清单、示例和报告；干净进程恢复及批量/逐条比对；每阶段导出download并保留离机备份。",
-        "exit": "双种子产物完整、恢复冒烟通过且本地/独立存储有完整备份。"
+        "status": "snapshot_component_ready_real_model_delivery_pending",
+        "todo": "接入恢复runner每阶段打包；冻结实际架构/源码/环境/原始数据/缓存及best/last/Adam/scheduler/RNG/采样进度；CUDA干净进程模型与续训核验；离机完整包校验并保留回执。",
+        "exit": "真实双种子完整版本、CUDA恢复/续训验证和至少一份已核验的完整离机副本；三项分开计数。工具测试或download路径不算交付完成。"
       },
       {
         "step": "F05.resume_factorial",
@@ -23044,9 +23044,143 @@
       },
       "engineering": {
         "status": "open",
-        "evidence": "Preserved/published recovered JSON assets and reproducible CPUaudit; no real model weights loaded/forwarded. User confirmed fresh experiment not started; old protocol/code untouched.",
-        "remaining": "New stage runner/export/restore smoke tests not yet implemented. Existing ancestor matrix verifiers must be replaced by honest recovery contracts, never fabricated completion files. Need off-instance full backups."
+        "evidence": "Recovered JSON evidence preserved; stdlib snapshot pack/verify/restore and29 synthetic tests plus25 existing regressions added. No real model weights loaded or executed.",
+        "remaining": "Single-chain recovery runner, honest source contracts, resource caps and export integration pending; real CUDA model/continuation validation and reviewed off-instance complete model copies remain required."
       }
+    },
+    "preservation": {
+      "schema": "babel-model-preservation-plan-v1",
+      "date": "2026-11-15",
+      "task_ids": [
+        "F11"
+      ],
+      "requirement_ids": [
+        "N04",
+        "N09"
+      ],
+      "reason": "User requires weights, architecture and training code frozen together after erased AutoDL exposed missing off-instance model backup.",
+      "implementation": {
+        "module": "src/obson/babel/model_release.py",
+        "tests": "tests/babel/test_model_release.py",
+        "status": "component_ready_not_integrated_into_macro_runner",
+        "entrypoints": [
+          "pack",
+          "verify",
+          "restore"
+        ],
+        "stdlib_only": true,
+        "no_model_deserialization": true
+      },
+      "contract": {
+        "schema": "babel-model-snapshot-v1",
+        "identity": [
+          "release_id",
+          "source_commit",
+          "run_status",
+          "limitations"
+        ],
+        "models": [
+          "id",
+          "seed",
+          "best",
+          "last",
+          "resume"
+        ],
+        "file_inventory_fields": [
+          "source",
+          "sha256",
+          "bytes",
+          "roles"
+        ],
+        "required_roles": [
+          "weights",
+          "resume_state",
+          "architecture",
+          "preprocessing",
+          "data",
+          "code",
+          "environment",
+          "recipe",
+          "evaluation",
+          "example"
+        ],
+        "run_status": [
+          "complete",
+          "failed",
+          "stopped"
+        ],
+        "cooperative_run_locks_required": true,
+        "physical_deliverables": [
+          "model.tar.gz",
+          "model.tar.gz.sha256",
+          "restore.py",
+          "release_receipt.json"
+        ],
+        "storage_policy": "Per-stage full snapshots to /root/autodl-tmp/download; final complete copy on local computer or independent storage must be verified and location reviewed. Reports alone and same-instance copies do not close delivery.",
+        "publication": "New directory only, explicit pinned file allowlist, deterministic archive, complete byte verification before receipt. Requires actual assets; no synthetic stand-in for missing Macro.",
+        "limits": "Asset-category and hash validation cannot prove checkpoint internals, Python dependency completeness, reproducible CUDA runtime, science, or independent storage location."
+      },
+      "acceptance": [
+        {
+          "gate": "files",
+          "required": "Every model and frozen dependency included; archive plus empty-directory restore verifies bytes",
+          "current": "synthetic_only_passed"
+        },
+        {
+          "gate": "runtime",
+          "required": "AutoDL CUDA clean-process restoration, fixed output parity, resume-state continuation",
+          "current": "not_run"
+        },
+        {
+          "gate": "off_instance",
+          "required": "Complete copy beyond disposable instance; actual local/storage verification receipt and reviewed location",
+          "current": "no_restored_Macro_weights_to_copy"
+        },
+        {
+          "gate": "scientific_recovery",
+          "required": "F11.restore.3 capability panel reported independently; no automatic acceptance from other gates",
+          "current": "protocol_pending"
+        }
+      ],
+      "tests": {
+        "new_storage_tests": 29,
+        "existing_regression_tests": 25,
+        "real_weights_loaded_locally": 0,
+        "real_market_neural_training_locally": 0
+      },
+      "review": {
+        "purpose": {
+          "status": "pass_for_scope",
+          "evidence": "Asset preservation for a reusable causal state, no new hypothesis, no training budget or F05 plan change.",
+          "remaining": "Lost Macro bytes remain absent; a new release cannot be fabricated."
+        },
+        "architecture": {
+          "status": "open",
+          "evidence": "Explicit architecture/preprocessing/weights roles and per-model best/last bindings; no model code changed.",
+          "remaining": "Real constructor, wrappers, PCA and complete dependency resolution must pass AutoDL CUDA restoration."
+        },
+        "training": {
+          "status": "open",
+          "evidence": "Requires resume-state assets per model; no loss/optimizer/budget changes and no real model execution.",
+          "remaining": "Archiver does not deserialize checkpoints. Adam/scheduler/RNG/sampler validity and actual continuation require runner/CUDA checks."
+        },
+        "validation": {
+          "status": "pass_for_scope",
+          "evidence": "29 synthetic storage tests passed; independent isolated process without project or site packages restored two declared seeds byte-for-byte. Tamper, missing asset, lock, immutable destinations, partial failure and safe paths checked. Receipts expressly do not certify model quality.",
+          "remaining": "Synthetic bytes are not model capability evidence. Bind real restoration samples and scientific recovery panel separately."
+        },
+        "data": {
+          "status": "open",
+          "evidence": "Explicit data/preprocessing categories, pinned hashes, no implicit globs or replacement of old data. Existing raw Git snapshot and recovered JSON assets unchanged.",
+          "remaining": "Original4 rebuiltNPZ hashes still differ; PCA/cache qualification not completed. Role presence cannot prove semantic completeness."
+        },
+        "engineering": {
+          "status": "pass_for_scope",
+          "evidence": "Standalone pack/verify/restore uses stdlib, refuses overwrite and active cooperative run locks, verifies entire tar before publishing and restored files on disk. 29 new +25 existing fresh-export/lifecycle regression tests passed; ruff and shell CLI help checked.",
+          "remaining": "Macro runner integration, real CUDA restored model/resume and actual off-instance complete model receipt all pending. Mac/Linux only; Python>=3.11. Tool host metadata alone does not prove independent storage."
+        }
+      },
+      "next": "F11.restore.1 data/PCA qualification then single-chain runner and stage export integration. F05 factorial remains held."
     }
   }
 }
