@@ -1,0 +1,5 @@
+# Use the AutoDL CUDA PyTorch2.8.0 environment. Do not install a CPU torch wheel.
+# Original source runtime numeric dependencies; archived file hashes remain the gate.
+numpy==2.3.2
+pandas==2.3.2
+scikit-learn==1.7.2
