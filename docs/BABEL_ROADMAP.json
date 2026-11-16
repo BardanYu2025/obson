@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-11-16",
-  "current_iteration": "macro_root_data_qualification_and_stage01_with_backup_ready",
-  "current_iteration_scope": "F11.restore.1/.2/.4: CPU original128/PCA evidence and conditional first ancestor only. Four input hashes locally unresolved; CUDA not run, final Macro not restored; factorial retained.",
+  "current_iteration": "final_size_scratch_baseline_route_review_design_pending",
+  "current_iteration_scope": "F11/F01/F05: prioritize a reproducible scratch state baseline, reuse it as matched bar reference for retained factorial where protocol agrees. Not finalMacro recovery, no new CUDA run.",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -522,7 +522,7 @@
         "docs/BABEL_CONTENT_GUARD768_REVIEW.json",
         "docs/BABEL_INPUT_PATCH768_REVIEW.json"
       ],
-      "next_action": "运行第28.2节唯一入口：原数据/PCA资格通过才恢复第1阶段双种子200轮并自动备份；输入哈希失败则零训练、交诊断。收到报告后关闭数据缺口或归档第1阶段，再准备第2阶段；其余12阶段和F05四臂继续保留。",
+      "next_action": "先核对数据并设计最终规模scratch基线，尽量复用为原四臂的同预算bar参照；明确初始化/损失/曝光/LR/评价/备份后发布新入口。13阶段保留历史复现，不默认执行。",
       "implementation": "complete",
       "execution": "four_fixed120_workers_complete_reviewed",
       "conclusion": "本多尺度配方综合价格MSE升7.27%–24.78%，4项主收益0通过，均衡升级未成立。",
@@ -535,10 +535,11 @@
         "evidence": "external_research_20261018"
       },
       "current_iteration": {
-        "card": "macro_asset_recovery_plan.stage01_release",
-        "implementation": "conditional_stage01_and_backups_ready",
-        "execution": "CPU_only_no_CUDA",
-        "conclusion": "original8label_mask_hashes_match_input4hashes_unresolved_finalMacro_not_restored"
+        "card": "macro_asset_recovery_plan.route_decision_20261116",
+        "implementation": "route_review_only_new_recipe_pending",
+        "execution": "no_CUDA_stage01_not_started",
+        "conclusion": "scratch_preferred_not_claimed_superior",
+        "queue": "data_and_scratch_protocol_then_matched_factorial"
       },
       "iteration_archive": [
         {
@@ -733,7 +734,7 @@
       "implementation": "complete_synthetic_and_remote_checked",
       "execution": "six_fixed60_CUDA_workers_and_eight_model_all128_evaluation_complete_reviewed",
       "conclusion": "本固定h2→h4写入配方明确退化：相对同容量h4→h4，综合价格MSE增加3.19%～6.55%；相对原结构同期续训增加5.24%～23.17%。两必要比较主收益均0/4、全部8个无收益阈值差值在两种聚类95%区间均高于0。",
-      "next_action": "原2x2结构/初始化计划保留；Macro交付恢复后用同一合格数据、共同随机起点和同期bar重新绑定执行，不能默改成Macro微调。",
+      "next_action": "先核对数据并设计最终规模scratch基线，尽量复用为原四臂的同预算bar参照；明确初始化/损失/曝光/LR/评价/备份后发布新入口。13阶段保留历史复现，不默认执行。",
       "external_reference_20261018": {
         "project_ids": [
           "vjepa21",
@@ -744,11 +745,11 @@
         "evidence": "external_research_20261018"
       },
       "current_iteration": {
-        "card": "input_factorial_fresh_plan",
-        "implementation": "retained_requires_data_rebinding",
-        "execution": "not_run",
-        "conclusion": "pending",
-        "queue": "after_model_restoration"
+        "card": "macro_asset_recovery_plan.route_decision_20261116",
+        "implementation": "route_review_only_new_recipe_pending",
+        "execution": "no_CUDA_stage01_not_started",
+        "conclusion": "scratch_preferred_not_claimed_superior",
+        "queue": "data_and_scratch_protocol_then_matched_factorial"
       },
       "previous_iteration_disposition": {
         "status": "第21节四组120轮内部注意力对照完成并复核；未均衡升级，固定配方收束，信息组织方向保留。",
@@ -976,7 +977,7 @@
         "docs/BABEL_CONTENT_GUARD768_REVIEW.json",
         "docs/BABEL_INPUT_PATCH768_REVIEW.json"
       ],
-      "next_action": "运行第28.2节唯一入口：原数据/PCA资格通过才恢复第1阶段双种子200轮并自动备份；输入哈希失败则零训练、交诊断。收到报告后关闭数据缺口或归档第1阶段，再准备第2阶段；其余12阶段和F05四臂继续保留。",
+      "next_action": "先核对数据并设计最终规模scratch基线，尽量复用为原四臂的同预算bar参照；明确初始化/损失/曝光/LR/评价/备份后发布新入口。13阶段保留历史复现，不默认执行。",
       "implementation": "fixed_closed_bar_adapter_and_bounded_replay_delivered",
       "execution": "complete_AutoDL_CUDA_and_report_reviewed",
       "conclusion": "连续接口数值资格通过；普通平均保真较高，压力/低波动失败保留，不等于可靠趋势或通用用途验收。",
@@ -988,10 +989,11 @@
         "evidence": "external_research_20261018"
       },
       "current_iteration": {
-        "card": "macro_asset_recovery_plan.stage01_release",
-        "implementation": "conditional_stage01_and_backups_ready",
-        "execution": "CPU_only_no_CUDA",
-        "conclusion": "original8label_mask_hashes_match_input4hashes_unresolved_finalMacro_not_restored"
+        "card": "macro_asset_recovery_plan.route_decision_20261116",
+        "implementation": "route_review_only_new_recipe_pending",
+        "execution": "no_CUDA_stage01_not_started",
+        "conclusion": "scratch_preferred_not_claimed_superior",
+        "queue": "data_and_scratch_protocol_then_matched_factorial"
       },
       "iteration_archive": [
         {
@@ -1104,45 +1106,31 @@
   ],
   "active_order": [
     "F11",
-    "F01"
+    "F01",
+    "F05"
   ],
   "next_after_active": {
-    "status": "conditional_stage01_entrypoint_ready",
+    "status": "scratch_baseline_design_pending_no_run_command",
     "task_ids": [
       "F11",
-      "F01"
+      "F01",
+      "F05"
     ],
-    "action": "运行第28.2节唯一入口：原数据/PCA资格通过才恢复第1阶段双种子200轮并自动备份；输入哈希失败则零训练、交诊断。收到报告后关闭数据缺口或归档第1阶段，再准备第2阶段；其余12阶段和F05四臂继续保留。",
-    "ready_entrypoint": "scripts/babel_macro_restore_autodl.sh",
-    "deferred_entrypoint": "scripts/babel_input_factorial_fresh_autodl.sh",
+    "action": "先核对数据并设计最终规模scratch基线，尽量复用为原四臂的同预算bar参照；明确初始化/损失/曝光/LR/评价/备份后发布新入口。13阶段保留历史复现，不默认执行。",
+    "ready_entrypoint": null,
+    "deferred_entrypoint": [
+      "scripts/babel_macro_restore_autodl.sh",
+      "scripts/babel_input_factorial_fresh_autodl.sh"
+    ],
     "no_automatic_rerun": true,
     "no_automatic_followup_grid": true
   },
   "active_training_budget": {
-    "status": "conditional_on_exact_original128_inputs_targets_masks",
-    "authorized_cuda_runs_now": 2,
-    "condition": "No actual GPU start until data receipt training_allowed=true; local evidence false. Only s01, no automatic later stages.",
-    "stage": "s01_bar_alignment",
-    "seeds": [
-      42,
-      43
-    ],
-    "epochs_per_seed": 200,
-    "worker_epochs": 400,
-    "updates_per_optimizer_per_seed": 7600,
-    "window_exposures_per_seed": 957800,
-    "local_targets_per_seed": 3831200,
-    "effective_batch": 128,
-    "micro": 16,
-    "evaluation_micro": 64,
-    "walltime_cap_seconds": 43200,
-    "minimum_free_bytes": 12884901888,
-    "discarded_diagnostic_updates_per_seed": {
-      "training_process": 1,
-      "independent_cuda_process": 1
-    },
-    "later_stages_per_seed": 12,
-    "full_selected_chain_epochs_per_seed_retained": 1531,
+    "status": "route_decision_only_no_launchable_card",
+    "authorized_cuda_runs_now": 0,
+    "new_worker_epochs": 0,
+    "old_stage01_budget": "retained_not_launched_not_current",
+    "old_factorial_budget": "retained120_last120_requires_explicit_rebinding_before_run",
     "automatic_extensions": false
   },
   "aliases": {
@@ -1187,12 +1175,13 @@
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "current_task_ids": [
     "F11",
-    "F01"
+    "F01",
+    "F05"
   ],
   "blocked_followups": {
     "F_optimization": "第20～24节配方保持收束；仅第25节固定三组输入粒度已就绪。无自动loss/LR/层数/patch长度网格；V13仍缺新数据。"
   },
-  "active_phase": "F11_asset_recovery_before_F05_factorial",
+  "active_phase": "F11_scratch_capability_rebuild_design_before_F05_release",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -22323,7 +22312,7 @@
     },
     "superseded_by": "input_factorial_fresh_plan",
     "supersession_reason": "User confirmed original experiment never ran, AutoDL expired/erased, no full backup; original2 frozen bar references and fixed cache not locally available. Original protocol and source remain unchanged.",
-    "current_disposition": "Original hypothesis retained; old dependencies/entrypoint not runnable after deletion. Implementation recovery/rebinding follows Macro delivery; no original trial ran."
+    "current_disposition": "retained_unrun_requires_original_data_and_scratch_reference_binding_no13stage_prerequisite"
   },
   "input_factorial_fresh_plan": {
     "schema": "babel-input-factorial-fresh768-v1",
@@ -22347,7 +22336,7 @@
       "implementation": "complete_synthetic_checked_but_not_current_execution",
       "execution": "not_run_user_confirmed",
       "conclusion": "pending",
-      "queue": "held_until_macro_restored_and_data_rebound"
+      "queue": "held_until_data_and_scratch_reference_protocol_rebound_not_fullMacro_restoration"
     },
     "protocol": {
       "schema": "babel-input-factorial-fresh768-v1",
@@ -22588,7 +22577,7 @@
       }
     },
     "decision_impact": "第25节及旧纠错结论不撤销；缺权重是复现资产丢失。新bar不是Macro替代或旧参照恢复，原第26节未运行。",
-    "next": "Preserve four arms and two same-budget scratchbar controls. Rebind recovered original cohort/scalers after data qualification. Macro restoration is project priority, NOT permission to turn scratch factorial into Macro warm-start.",
+    "next": "先核对数据并设计最终规模scratch基线，尽量复用为原四臂的同预算bar参照；明确初始化/损失/曝光/LR/评价/备份后发布新入口。13阶段保留历史复现，不默认执行。",
     "source_inventory_correction": {
       "date": "2026-11-15",
       "prior_claim": "Original fixed identities/scalers unavailable, requiring new sampled cohort",
@@ -22660,6 +22649,38 @@
         "walltime_cap_seconds": null,
         "reason": "Historical selected weight path budget accounting only; GPU timing/resource cap and exact stage manifests await data/PCA recovery. Fresh36h cap does not apply to this different workload."
       }
+    },
+    {
+      "date": "2026-11-16",
+      "previous_iteration": "macro_root_data_qualification_and_stage01_with_backup_ready",
+      "previous_budget": {
+        "status": "conditional_on_exact_original128_inputs_targets_masks",
+        "authorized_cuda_runs_now": 2,
+        "condition": "No actual GPU start until data receipt training_allowed=true; local evidence false. Only s01, no automatic later stages.",
+        "stage": "s01_bar_alignment",
+        "seeds": [
+          42,
+          43
+        ],
+        "epochs_per_seed": 200,
+        "worker_epochs": 400,
+        "updates_per_optimizer_per_seed": 7600,
+        "window_exposures_per_seed": 957800,
+        "local_targets_per_seed": 3831200,
+        "effective_batch": 128,
+        "micro": 16,
+        "evaluation_micro": 64,
+        "walltime_cap_seconds": 43200,
+        "minimum_free_bytes": 12884901888,
+        "discarded_diagnostic_updates_per_seed": {
+          "training_process": 1,
+          "independent_cuda_process": 1
+        },
+        "later_stages_per_seed": 12,
+        "full_selected_chain_epochs_per_seed_retained": 1531,
+        "automatic_extensions": false
+      },
+      "reason": "User asks whether final-model scratch recipe is preferable to replaying13 stages; confirms stage01 NOT started. Review favors compact capability rebuilding; historical trajectory remains optional."
     }
   ],
   "macro_asset_recovery_plan": {
@@ -22677,8 +22698,9 @@
     "status": {
       "plan": "selected_weight_path_mapped",
       "implementation": "first_stage_and_automatic_full_backup_ready_synthetic_checked_later12_not_implemented",
-      "execution": "CPU_data_and_PCA_arithmetic_complete_CUDA_not_run",
-      "scientific_acceptance": "not_established_final_Macro_missing"
+      "execution": "stage01_not_started_user_confirmed_20261116",
+      "scientific_acceptance": "not_established_final_Macro_missing",
+      "priority": "historical_trajectory_retained_not_default_execution"
     },
     "target": {
       "run": "babel_macro_history768",
@@ -22981,7 +23003,7 @@
       {
         "step": "F11.restore.2",
         "name": "只重训实际继承链",
-        "status": "stage01_implemented_remote_not_run_later12_pending",
+        "status": "historical_reproduction_option_not_default",
         "stages": 13,
         "seeds": [
           42,
@@ -22989,7 +23011,7 @@
         ],
         "epochs_per_seed": 1531,
         "query_only_epochs_per_seed": 50,
-        "todo": "Run only first ancestor after input gate; then wire remaining12 inherited stages without new matrices. No finalMacro claim from stage01.",
+        "todo": "保留原13阶段出处/预算；不再作为从头基线与F05的默认前置。需要历史复现时另作明确决定。",
         "exit": "26个stage/seed预算完整或有明确停止原因；每段source/checkpoint/best/last/Adam/RNG及备份可核查。"
       },
       {
@@ -23009,8 +23031,8 @@
       {
         "step": "F05.resume_factorial",
         "name": "恢复原实验队列",
-        "status": "retained_after_restore",
-        "todo": "原四臂密集/片段×随机/末根初始化不变；同期bar参照仍需同预算scratch；优先绑定本次找回的原窗口/尺度。不把Macro权重换入四组。",
+        "status": "retained_after_data_and_scratch_protocol_binding",
+        "todo": "原密集/片段×随机/末根初始化不变；优先与scratch能力复建共用同预算bar参照，重新绑定数据和备份，不要求先复走13阶段。",
         "exit": "依恢复数据证据重绑定入口、预算、验收和导出后，再发布唯一新命令。"
       }
     ],
@@ -23042,8 +23064,8 @@
       "Recreated weights are new artifacts; exact tensor equality is not promised. PCA/normalization differences must be qualified before training."
     ],
     "stopping": {
-      "training_now": "conditional_stage01_only",
-      "reason": "Original128 input hashes must reproduce; local4x hashes unresolved. Final12 stages unimplemented here.",
+      "training_now": false,
+      "reason": "User confirmed no stage01 launch; prefer scratch capability rebuilding design. Preserve historical gates, do not launch existing entrypoints.",
       "automatic_extensions": false,
       "walltime_seconds": 43200,
       "scientific_gates": "No research selection or auto-promotion; Macro scientific capability comparison remains F11.restore.3."
@@ -23574,7 +23596,93 @@
       },
       "report": "/root/autodl-tmp/download/babel_macro_restore_s01_reports.tar.gz",
       "full_backup_directory": "/root/autodl-tmp/download/babel_macro_restore_s01",
-      "scope_limit": "Only first selected ancestor. Successful data gate can train; failed gate exports without any neural execution. Later12 stages are retained, not launched."
+      "scope_limit": "Only first selected ancestor. Successful data gate can train; failed gate exports without any neural execution. Later12 stages are retained, not launched.",
+      "execution_disposition": "code_ready_but_hold_not_started_after_route_review"
+    },
+    "route_decision_20261116": {
+      "date": "2026-11-16",
+      "type": "route_decision_not_executable_experiment_card",
+      "task_ids": [
+        "F11",
+        "F01",
+        "F05"
+      ],
+      "requirement_ids": [
+        "N02",
+        "N03",
+        "N04",
+        "N09"
+      ],
+      "user_confirmed_stage01_started": false,
+      "decision": "Prefer final-size scratch capability baseline over default replay of13historical stages; trajectory retained as optional reproduction.",
+      "correction": "Actual checkpoint ancestry does not prove all stages/methods necessary to build useful representation.",
+      "scope": "New model identity; no claim of restoring oldMacro weights or guaranteed same capabilities; no new optimization matrix here.",
+      "existing_scratch_evidence": {
+        "review": "docs/BABEL_STATE_COVERAGE768_REVIEW.json",
+        "D_vs_A_price_improvement_percent": [
+          44.23039554327496,
+          61.896493234736916
+        ],
+        "scope": "same-study120epochs,notDvsMacro",
+        "full_acceptance_passed": false,
+        "later_scratch_bar_evidence": "docs/BABEL_ROADMAP.md#25"
+      },
+      "final_Macro_gradient_route": "macro_history.losses -> shared_history.losses: Q+S into encoder/query;local_head uses z.detach();control auxiliary encoder weight0;fixed PCA decoder not in final encoder loss path.",
+      "preferred_baseline": "Already-tested scratch4/768/8/FF3072 causal encoder, own128 per endpoint, uniform5, shared HistoryQuery, originalQ as factorial baseline; not assertion Q dominates Q+S.",
+      "preserved_optional": [
+        "13-stageMacro historical reproduction",
+        "PCA curriculum hypothesis",
+        "F01 simultaneous128",
+        "F02",
+        "F03",
+        "F04",
+        "F06",
+        "F07",
+        "F08",
+        "F09",
+        "F10",
+        "F12",
+        "V13"
+      ],
+      "budget": {
+        "new_cuda": 0,
+        "new_epochs": 0,
+        "pending": "Full launch card required; do not silently change historical120/last120factorial or compare long baseline vs shorter candidates as matched."
+      },
+      "execution": "No current launch command;stage01andoldfreshheld",
+      "next": "先核对数据并设计最终规模scratch基线，尽量复用为原四臂的同预算bar参照；明确初始化/损失/曝光/LR/评价/备份后发布新入口。13阶段保留历史复现，不默认执行。",
+      "review": {
+        "purpose": {
+          "status": "pass_for_scope",
+          "evidence": "Goal is reusable causal price/activity states and recoverable delivery; distinguish historical weight lineage from necessary production recipe.",
+          "remaining": "New baseline identity and capability acceptance separate from oldMacro/science/future prediction."
+        },
+        "architecture": {
+          "status": "pass_for_scope",
+          "evidence": "Read finalMacro construct/loss routes and existing uniform scratch implementation;4/768/8/FF3072 and shared query have actual evidence.",
+          "remaining": "Functional removal of disabled historical wrappers and initial scaler/parameter policy need implementation card."
+        },
+        "training": {
+          "status": "open",
+          "evidence": "Existing120epoch scratch evidence, Q/S and activity tradeoffs, four-layer/depth compute budgets distinguish inheritance from causal necessity; no automatic aggregation of auxiliary objectives.",
+          "remaining": "Unified update/exposure/LR/resource and checkpoint selection card not newly fixed;0launch budget."
+        },
+        "validation": {
+          "status": "open",
+          "evidence": "D beats A on reconstruction44-62percent but does not meet complete Macro/use protection; historicalMacro is capability anchor, not equal-budget control.",
+          "remaining": "New acceptance/stopping and saved-output comparability must be pinned before launch; repeated research notV13."
+        },
+        "data": {
+          "status": "open",
+          "evidence": "Previous1251raw/8labelmaskSHA/PCA CPU evidence retained; original128cross453 vsfull255cross439 distinguished.",
+          "remaining": "Four input hashes unresolved; independent feature/data qualification and new identity if exact oldbytes unavailable, never forged hashes or waived data audit."
+        },
+        "engineering": {
+          "status": "pass_for_scope",
+          "evidence": "Docs-only route update; user confirms macro_restore_s01 not started; code unchanged, original full backup components retained.",
+          "remaining": "No new runnable scratch card; integrate full backups into consolidated runner and perform CUDA/off-instance acceptance."
+        }
+      }
     }
   }
 }
