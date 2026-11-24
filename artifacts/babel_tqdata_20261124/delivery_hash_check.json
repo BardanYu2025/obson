@@ -1,0 +1,8 @@
+{
+  "manifest_path": "/Users/bardan/private/tqdata_2015/_incoming_p2_from_i/BOX_MONTH_FILE_SHA256.csv",
+  "manifest_sha256": "6ce671cc020aff2cd2f5db03a0e93cf65b65ec5ec1e43a3e5cc86b9828849e46",
+  "expected": 2382,
+  "matched": 2382,
+  "missing_or_mismatch": [],
+  "extra_paths": []
+}

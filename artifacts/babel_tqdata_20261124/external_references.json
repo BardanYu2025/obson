@@ -1,0 +1,96 @@
+{
+  "date": "2026-11-24",
+  "scope": "Primary author repositories/papers and official docs only; no third-party code executed; no weights loaded",
+  "references": [
+    {
+      "id": "timesfm3",
+      "repository": "google-research/timesfm",
+      "commit": "918df02c9d366b2145bc5876135fa2131d3ed2a6",
+      "urls": [
+        "https://research.google/blog/timesfm-3-a-zero-shot-foundation-model-for-multivariate-forecasting/",
+        "https://github.com/google-research/timesfm/blob/918df02c9d366b2145bc5876135fa2131d3ed2a6/src/timesfm3/torch/model.py"
+      ],
+      "observed": "Patched decoder-only model, causal temporal and cross-variate attention, direct multi-step quantiles; code uses running statistics, masks and RMS normalization.",
+      "transfer": "Separate time/variable roles and availability masks; forecast quantiles rather than precise future wicks.",
+      "limit": "330M published model trained on >1 trillion time points is not evidence of an appropriate Babel scale. Marginal quantiles are not a joint sampled path. No pretrained weights downloaded."
+    },
+    {
+      "id": "chronos2",
+      "repository": "amazon-science/chronos-forecasting",
+      "commit": "1224fafa91e1ecd6674f5204066b159e40b5e4a1",
+      "urls": [
+        "https://arxiv.org/abs/2510.15821",
+        "https://github.com/amazon-science/chronos-forecasting/blob/1224fafa91e1ecd6674f5204066b159e40b5e4a1/src/chronos/chronos2/model.py",
+        "https://github.com/amazon-science/chronos-forecasting/blob/1224fafa91e1ecd6674f5204066b159e40b5e4a1/src/chronos/chronos2/layers.py"
+      ],
+      "observed": "Group attention shares information across variables/related series; time mask expansion is not a per-bar causal contract; RoPE and T5-style RMS normalization in implementation.",
+      "transfer": "Price/activity/context mixing with explicit same-origin availability.",
+      "limit": "Forecasting at the observed endpoint does not qualify all interior representations as causal. Historical and future-known covariates must be distinguished. Forecasting benchmark wins do not certify trading or compressed state quality."
+    },
+    {
+      "id": "patchtst",
+      "repository": "yuqinie98/PatchTST",
+      "commit": "204c21efe0b39603ad6e2ca640ef5896646ab1a9",
+      "urls": [
+        "https://arxiv.org/abs/2211.14730",
+        "https://github.com/yuqinie98/PatchTST/blob/204c21efe0b39603ad6e2ca640ef5896646ab1a9/PatchTST_self_supervised/src/models/patchTST.py"
+      ],
+      "observed": "Ordered temporal patches; channel-independent encoder reshapes batch*variables; prediction head can flatten the whole sequence.",
+      "transfer": "Preserve ordering when grouping remote context; cost-aware comparison.",
+      "limit": "Our patch/local4 trials already exist and were not balanced wins. Do not repeat them under a new name. OHLCV are coupled; entire-sequence decoder is not a one-vector decoder."
+    },
+    {
+      "id": "ts2vec",
+      "repository": "zhihanyue/ts2vec",
+      "commit": "b0088e14a99706c05451316dc6db8d3da9351163",
+      "urls": [
+        "https://arxiv.org/abs/2106.10466",
+        "https://github.com/zhihanyue/ts2vec/blob/b0088e14a99706c05451316dc6db8d3da9351163/models/dilated_conv.py"
+      ],
+      "observed": "Timestamp representations with contextual and hierarchical consistency; default convolutions have symmetric padding.",
+      "transfer": "Timestamp-level reusable state and explicitly scoped shared-content comparisons.",
+      "limit": "Past work already examined overlap; no direct reuse of default interior states or forcing full vectors equal across resolutions."
+    },
+    {
+      "id": "tirex2",
+      "repository": "NX-AI/tirex-2",
+      "commit": "758d6255624b562dc27cbc9250d86dd33f3ae946",
+      "urls": [
+        "https://arxiv.org/abs/2607.01204v2",
+        "https://nx-ai.github.io/tirex-2/introduction/"
+      ],
+      "observed": "xLSTM multivariate recurrent design; official docs explicitly say public forecast API recomputes its context and does not expose state-carrying incremental forecasts.",
+      "transfer": "Retain recurrent memory as F02 candidate if measured streaming cost warrants it.",
+      "limit": "Paper and docs reviewed; no kernel-level audit or real-weight execution. Do not assume public embedding equals all recurrent memory."
+    },
+    {
+      "id": "planet",
+      "urls": [
+        "https://proceedings.mlr.press/v97/hafner19a.html"
+      ],
+      "observed": "Latent dynamics uses deterministic and stochastic components in an action-conditioned control setting.",
+      "transfer": "Differentiate observed state updates from uncertain imagined future transitions.",
+      "limit": "OHLCV/OI lack identified market actions, order book and exogenous interventions; not evidence we can reconstruct buying/selling agents or simulate causal market mechanics."
+    },
+    {
+      "id": "proper_scoring",
+      "urls": [
+        "https://arxiv.org/abs/2504.01781",
+        "https://doi.org/10.1198/016214506000001437"
+      ],
+      "observed": "Proper scoring rules evaluate conditional distributions, including log score and CRPS.",
+      "transfer": "Evaluate calibration and sharpness plus proper score, not a handpicked plausible trajectory or just direction accuracy.",
+      "limit": "Marginal calibration alone does not establish joint path dependence, rare-event quality or trading value."
+    },
+    {
+      "id": "tqsdk",
+      "urls": [
+        "https://doc.shinnytech.com/tqsdk/latest/reference/tqsdk.tools.download.html",
+        "https://doc.shinnytech.com/tqsdk/latest/reference/tqsdk.api.html"
+      ],
+      "observed": "DataDownloader period is seconds; date arguments refer to trading days, datetime without timezone defaults to Beijing; open/close OI refer to start/end holdings.",
+      "transfer": "Retain source clocks, true availability, session calendars, volume sums and OI endpoints.",
+      "limit": "Historical session changes, volume counting regimes and official main mapping release times remain to be qualified from appropriate source metadata."
+    }
+  ]
+}

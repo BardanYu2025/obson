@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-24",
+  "versions": {
+    "numpy": "2.3.3",
+    "pandas": "2.3.2",
+    "pyarrow": "26.0.1",
+    "pytest": "8.4.2"
+  },
+  "CPU_only": true,
+  "tests": "5 passed tests/babel/test_tqdata_audit.py",
+  "source_sha256": "43ed1387d9eb821bb94147fc9fdc98193fabd87ae699df4303c96c9eb45689f5",
+  "files": {
+    "artifacts/babel_tqdata_20261124/compare_old_minutes.py": "46aeeae3b3037d50c5c162299b743406f3b8dd9f4a2f1ba82ae572a9ea8aabeb",
+    "artifacts/babel_tqdata_20261124/delivery_hash_check.json": "ea24e27890a07c0ba4b103def3efe8a53ad8d3c6796d85d9809f032e21f56fdb",
+    "artifacts/babel_tqdata_20261124/external_references.json": "8007fba23ccc5d58e37344d82cc7f8b26f15d2b9c931ebf3b805fb7c8356ef4e",
+    "artifacts/babel_tqdata_20261124/inventory.json.gz": "f0a4a462fe5034a3efcc37a0ebcf045a5b7fb23b47c847923af4167ef58ab187",
+    "artifacts/babel_tqdata_20261124/old_overlap_spotcheck.json": "6be5335088d54485e99b2c56d91cb5d1a834cc185f124ee3d6b9e7a04ca7b13d",
+    "artifacts/babel_tqdata_20261124/quality_notes.json": "4afb59764ceb5400f71187245eb0386e7895cc74e51ce5c7def008a88f9faf5d",
+    "artifacts/babel_tqdata_20261124/summary.json": "2dd6eb90300208808c636fb627523207ecbecf216d61923469a6975269eb77e9"
+  },
+  "limits": "Frozen inventory of inspected subset, not all incoming delivery locked; no training or model inference."
+}

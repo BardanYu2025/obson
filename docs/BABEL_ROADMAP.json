@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
-  "updated": "2026-11-16",
-  "current_iteration": "final_size_scratch_baseline_route_review_design_pending",
-  "current_iteration_scope": "F11/F01/F05: prioritize a reproducible scratch state baseline, reuse it as matched bar reference for retained factorial where protocol agrees. Not finalMacro recovery, no new CUDA run.",
+  "updated": "2026-11-24",
+  "current_iteration": "minute_data_audited_state_and_probabilistic_future_design_pending_implementation",
+  "current_iteration_scope": "F01/F05/F11/V13 local minute audit and state+forecast design; retained F02/F04/F06-F10 hypotheses. No model training or scoring.",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -433,20 +433,21 @@
         "E3"
       ],
       "implementation": "已有时间确认入口，需按届时来源重锁",
-      "execution": "旧快照无新历史；未做最终独立验收",
+      "execution": "2026-11-24 CPU inventory finds799440 later single-contract minute rows across10 calendar weeks; zero model scoring and no qualified-window count.",
       "conclusion": "现有研究证据不等于最终独立泛化确认",
       "evidence": [
         "docs/BABEL_TIME_CONFIRMATION_REVIEW.md",
-        "docs/BABEL_RECONSTRUCTION_EXIT.md"
+        "docs/BABEL_RECONSTRUCTION_EXIT.md",
+        "artifacts/babel_tqdata_20261124/summary.json"
       ],
       "depends_on": [],
-      "next_action": "第10节有限历史状态验收卡已准备；本地盘点及用户确认当前无新行情，等待独立快照，评分入口尚未实现。不得复跑旧数据冒充独立验证。",
-      "human_status": "验收卡已准备；当前无新数据，未执行",
+      "next_action": "Qualify minute-derived closed single-contract windows, reserve new-time holdout before any pretraining/fitting; bind new model identity before new acceptance card. Original Macro/D four-model card remains historical, not executable.",
+      "human_status": "新分钟数据含旧边界之后行情，资格未完成；原四模型权重缺失，未执行验收",
       "original_problem": "反复用于设计的研究集不能再充当最终独立测试集。",
       "completed_work": "已纠正数据集身份和结论表述；没有完成最终独立验收。",
       "completion_rule": "冻结模型、用途和门槛后，完成真正独立数据的验收。此项不计作当前代码已修复。",
       "closed": false,
-      "remaining_work": "独立数据到位后冻结快照/用途/预算并实现验收入口，再执行与审报告；目前不启动评分。"
+      "remaining_work": "New snapshot and eligibility/independence/support; frozen delivered model; implement acceptance runner. No V13 acceptance claimed."
     },
     {
       "id": "V14",
@@ -522,7 +523,7 @@
         "docs/BABEL_CONTENT_GUARD768_REVIEW.json",
         "docs/BABEL_INPUT_PATCH768_REVIEW.json"
       ],
-      "next_action": "先核对数据并设计最终规模scratch基线，尽量复用为原四臂的同预算bar参照；明确初始化/损失/曝光/LR/评价/备份后发布新入口。13阶段保留历史复现，不默认执行。",
+      "next_action": "Lock source and physical-time splits, implement minute/session adapter, then shared scratch baseline/factorial and frozen probability-readout card with full backups. No old training command now.",
       "implementation": "complete",
       "execution": "four_fixed120_workers_complete_reviewed",
       "conclusion": "本多尺度配方综合价格MSE升7.27%–24.78%，4项主收益0通过，均衡升级未成立。",
@@ -535,11 +536,11 @@
         "evidence": "external_research_20261018"
       },
       "current_iteration": {
-        "card": "macro_asset_recovery_plan.route_decision_20261116",
-        "implementation": "route_review_only_new_recipe_pending",
-        "execution": "no_CUDA_stage01_not_started",
-        "conclusion": "scratch_preferred_not_claimed_superior",
-        "queue": "data_and_scratch_protocol_then_matched_factorial"
+        "card": "new_minute_state_design_20261124",
+        "implementation": "CPU_audit_complete_training_adapter_not_ready",
+        "execution": "CPU_only_no_CUDA",
+        "conclusion": "new_data_enables_research_not_proof_of_model_gain",
+        "queue": "adapter_then_shared_scratch_and_retained_factorial_frozen_forecast"
       },
       "iteration_archive": [
         {
@@ -622,6 +623,17 @@
           },
           "next_action": "只运行第27节babel_input_factorial_fresh768；旧input_factorial768不运行。自动导出reports与full backup；收报告后按结构/初始化/交互及同期bar分别归档。",
           "reason": "2026-11-15 user restoration-first priority; no job started."
+        },
+        {
+          "date": "2026-11-24",
+          "current_iteration": {
+            "card": "macro_asset_recovery_plan.route_decision_20261116",
+            "implementation": "route_review_only_new_recipe_pending",
+            "execution": "no_CUDA_stage01_not_started",
+            "conclusion": "scratch_preferred_not_claimed_superior",
+            "queue": "data_and_scratch_protocol_then_matched_factorial"
+          },
+          "reason": "New source minutes and renewed prediction goal justify broad redesign. Prior trials and four-arm question retained; no need to wait for perfect reconstruction or replay13 stages."
         }
       ],
       "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；当前以current_iteration和macro_asset_recovery_plan及延后factorial计划为准。",
@@ -650,6 +662,11 @@
         ],
         "status": "references_not_automatic_jobs",
         "evidence": "external_research_20261018"
+      },
+      "design_note_20261124": {
+        "card": "new_minute_state_design_20261124",
+        "status": "retained_no_new_CUDA_budget",
+        "note": "Original task/hypothesis preserved. Section29 defines proposed data/architecture/forecast interfaces; no scientific acceptance."
       }
     },
     {
@@ -708,6 +725,11 @@
         ],
         "status": "references_not_automatic_jobs",
         "evidence": "external_research_20261018"
+      },
+      "design_note_20261124": {
+        "card": "new_minute_state_design_20261124",
+        "status": "retained_no_new_CUDA_budget",
+        "note": "Original task/hypothesis preserved. Section29 defines proposed data/architecture/forecast interfaces; no scientific acceptance."
       }
     },
     {
@@ -734,7 +756,7 @@
       "implementation": "complete_synthetic_and_remote_checked",
       "execution": "six_fixed60_CUDA_workers_and_eight_model_all128_evaluation_complete_reviewed",
       "conclusion": "本固定h2→h4写入配方明确退化：相对同容量h4→h4，综合价格MSE增加3.19%～6.55%；相对原结构同期续训增加5.24%～23.17%。两必要比较主收益均0/4、全部8个无收益阈值差值在两种聚类95%区间均高于0。",
-      "next_action": "先核对数据并设计最终规模scratch基线，尽量复用为原四臂的同预算bar参照；明确初始化/损失/曝光/LR/评价/备份后发布新入口。13阶段保留历史复现，不默认执行。",
+      "next_action": "Lock source and physical-time splits, implement minute/session adapter, then shared scratch baseline/factorial and frozen probability-readout card with full backups. No old training command now.",
       "external_reference_20261018": {
         "project_ids": [
           "vjepa21",
@@ -745,11 +767,11 @@
         "evidence": "external_research_20261018"
       },
       "current_iteration": {
-        "card": "macro_asset_recovery_plan.route_decision_20261116",
-        "implementation": "route_review_only_new_recipe_pending",
-        "execution": "no_CUDA_stage01_not_started",
-        "conclusion": "scratch_preferred_not_claimed_superior",
-        "queue": "data_and_scratch_protocol_then_matched_factorial"
+        "card": "new_minute_state_design_20261124",
+        "implementation": "CPU_audit_complete_training_adapter_not_ready",
+        "execution": "CPU_only_no_CUDA",
+        "conclusion": "new_data_enables_research_not_proof_of_model_gain",
+        "queue": "adapter_then_shared_scratch_and_retained_factorial_frozen_forecast"
       },
       "previous_iteration_disposition": {
         "status": "第21节四组120轮内部注意力对照完成并复核；未均衡升级，固定配方收束，信息组织方向保留。",
@@ -843,6 +865,17 @@
           },
           "next_action": "只运行第27节babel_input_factorial_fresh768；旧input_factorial768不运行。自动导出reports与full backup；收报告后按结构/初始化/交互及同期bar分别归档。",
           "reason": "2026-11-15 user restoration-first priority; no job started."
+        },
+        {
+          "date": "2026-11-24",
+          "current_iteration": {
+            "card": "macro_asset_recovery_plan.route_decision_20261116",
+            "implementation": "route_review_only_new_recipe_pending",
+            "execution": "no_CUDA_stage01_not_started",
+            "conclusion": "scratch_preferred_not_claimed_superior",
+            "queue": "data_and_scratch_protocol_then_matched_factorial"
+          },
+          "reason": "New source minutes and renewed prediction goal justify broad redesign. Prior trials and four-arm question retained; no need to wait for perfect reconstruction or replay13 stages."
         }
       ],
       "current_role": "分离较早96的token组织与投影初始化；同recent32/参数/主干/Q预算。",
@@ -867,6 +900,11 @@
         ],
         "status": "references_not_automatic_jobs",
         "evidence": "external_research_20261018"
+      },
+      "design_note_20261124": {
+        "card": "new_minute_state_design_20261124",
+        "status": "retained_no_new_CUDA_budget",
+        "note": "Original task/hypothesis preserved. Section29 defines proposed data/architecture/forecast interfaces; no scientific acceptance."
       }
     },
     {
@@ -889,6 +927,11 @@
         ],
         "status": "references_not_automatic_jobs",
         "evidence": "external_research_20261018"
+      },
+      "design_note_20261124": {
+        "card": "new_minute_state_design_20261124",
+        "status": "retained_no_new_CUDA_budget",
+        "note": "Original task/hypothesis preserved. Section29 defines proposed data/architecture/forecast interfaces; no scientific acceptance."
       }
     },
     {
@@ -915,6 +958,11 @@
         ],
         "status": "references_not_automatic_jobs",
         "evidence": "external_research_20261018"
+      },
+      "design_note_20261124": {
+        "card": "new_minute_state_design_20261124",
+        "status": "retained_no_new_CUDA_budget",
+        "note": "Original task/hypothesis preserved. Section29 defines proposed data/architecture/forecast interfaces; no scientific acceptance."
       }
     },
     {
@@ -935,6 +983,11 @@
         ],
         "status": "references_not_automatic_jobs",
         "evidence": "external_research_20261018"
+      },
+      "design_note_20261124": {
+        "card": "new_minute_state_design_20261124",
+        "status": "retained_no_new_CUDA_budget",
+        "note": "Original task/hypothesis preserved. Section29 defines proposed data/architecture/forecast interfaces; no scientific acceptance."
       }
     },
     {
@@ -949,7 +1002,12 @@
       "evidence": [
         "docs/BABEL_ACTIVITY_ABLATION.md",
         "docs/BABEL_ACTIVITY_ALIGNMENT.md"
-      ]
+      ],
+      "design_note_20261124": {
+        "card": "new_minute_state_design_20261124",
+        "status": "retained_no_new_CUDA_budget",
+        "note": "Original task/hypothesis preserved. Section29 defines proposed data/architecture/forecast interfaces; no scientific acceptance."
+      }
     },
     {
       "id": "F11",
@@ -977,7 +1035,7 @@
         "docs/BABEL_CONTENT_GUARD768_REVIEW.json",
         "docs/BABEL_INPUT_PATCH768_REVIEW.json"
       ],
-      "next_action": "先核对数据并设计最终规模scratch基线，尽量复用为原四臂的同预算bar参照；明确初始化/损失/曝光/LR/评价/备份后发布新入口。13阶段保留历史复现，不默认执行。",
+      "next_action": "Lock source and physical-time splits, implement minute/session adapter, then shared scratch baseline/factorial and frozen probability-readout card with full backups. No old training command now.",
       "implementation": "fixed_closed_bar_adapter_and_bounded_replay_delivered",
       "execution": "complete_AutoDL_CUDA_and_report_reviewed",
       "conclusion": "连续接口数值资格通过；普通平均保真较高，压力/低波动失败保留，不等于可靠趋势或通用用途验收。",
@@ -989,11 +1047,11 @@
         "evidence": "external_research_20261018"
       },
       "current_iteration": {
-        "card": "macro_asset_recovery_plan.route_decision_20261116",
-        "implementation": "route_review_only_new_recipe_pending",
-        "execution": "no_CUDA_stage01_not_started",
-        "conclusion": "scratch_preferred_not_claimed_superior",
-        "queue": "data_and_scratch_protocol_then_matched_factorial"
+        "card": "new_minute_state_design_20261124",
+        "implementation": "CPU_audit_complete_training_adapter_not_ready",
+        "execution": "CPU_only_no_CUDA",
+        "conclusion": "new_data_enables_research_not_proof_of_model_gain",
+        "queue": "adapter_then_shared_scratch_and_retained_factorial_frozen_forecast"
       },
       "iteration_archive": [
         {
@@ -1075,6 +1133,17 @@
           },
           "next_action": "只运行第27节babel_input_factorial_fresh768；旧input_factorial768不运行。自动导出reports与full backup；收报告后按结构/初始化/交互及同期bar分别归档。",
           "reason": "2026-11-15 user restoration-first priority; no job started."
+        },
+        {
+          "date": "2026-11-24",
+          "current_iteration": {
+            "card": "macro_asset_recovery_plan.route_decision_20261116",
+            "implementation": "route_review_only_new_recipe_pending",
+            "execution": "no_CUDA_stage01_not_started",
+            "conclusion": "scratch_preferred_not_claimed_superior",
+            "queue": "data_and_scratch_protocol_then_matched_factorial"
+          },
+          "reason": "New source minutes and renewed prediction goal justify broad redesign. Prior trials and four-arm question retained; no need to wait for perfect reconstruction or replay13 stages."
         }
       ],
       "current_role": "均衡内容/实际成本分别结算，历史bar只读参考，不自动晋升Macro或宣布通用复用。",
@@ -1105,18 +1174,19 @@
     }
   ],
   "active_order": [
-    "F11",
     "F01",
+    "F11",
     "F05"
   ],
   "next_after_active": {
-    "status": "scratch_baseline_design_pending_no_run_command",
+    "status": "minute_data_adapter_and_execution_card_not_ready",
     "task_ids": [
-      "F11",
       "F01",
-      "F05"
+      "F11",
+      "F05",
+      "V13"
     ],
-    "action": "先核对数据并设计最终规模scratch基线，尽量复用为原四臂的同预算bar参照；明确初始化/损失/曝光/LR/评价/备份后发布新入口。13阶段保留历史复现，不默认执行。",
+    "action": "Lock source and physical-time splits, implement minute/session adapter, then shared scratch baseline/factorial and frozen probability-readout card with full backups. No old training command now.",
     "ready_entrypoint": null,
     "deferred_entrypoint": [
       "scripts/babel_macro_restore_autodl.sh",
@@ -1126,12 +1196,13 @@
     "no_automatic_followup_grid": true
   },
   "active_training_budget": {
-    "status": "route_decision_only_no_launchable_card",
     "authorized_cuda_runs_now": 0,
     "new_worker_epochs": 0,
-    "old_stage01_budget": "retained_not_launched_not_current",
-    "old_factorial_budget": "retained120_last120_requires_explicit_rebinding_before_run",
-    "automatic_extensions": false
+    "status": "design_only_requires_snapshot_and_resource_preflight",
+    "unit": "optimizer updates, endpoint exposure, independent groups, measured CUDA seconds",
+    "automatic_extensions": false,
+    "old_stage01_budget": "retained_not_started_not_current",
+    "old_factorial_budget": "retained120_last120_not_applicable_to_new_data_without_rebinding"
   },
   "aliases": {
     "R0": [
@@ -1174,14 +1245,15 @@
   "progress_log": "docs/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "current_task_ids": [
-    "F11",
     "F01",
-    "F05"
+    "F05",
+    "F11",
+    "V13"
   ],
   "blocked_followups": {
     "F_optimization": "第20～24节配方保持收束；仅第25节固定三组输入粒度已就绪。无自动loss/LR/层数/patch长度网格；V13仍缺新数据。"
   },
-  "active_phase": "F11_scratch_capability_rebuild_design_before_F05_release",
+  "active_phase": "minute_adapter_and_locked_scratch_baseline_before_matched_input_and_frozen_forecast",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -3246,7 +3318,7 @@
       "F11",
       "V13"
     ],
-    "status": "plan_locked_data_unavailable_runner_not_implemented",
+    "status": "new_minute_candidates_unqualified_original_weights_absent_card_rebinding_required",
     "implementation": "plan_only_no_new_runner",
     "execution": "not_run_no_fresh_data",
     "scientific_acceptance": "not_assessed",
@@ -3419,6 +3491,14 @@
       "new_data_scores_seen": false,
       "required_before_runner": "flat path->efficiency0/linearity0; scale invariance, near-zero finite guard, raw/cache price-coordinate consistency, same truth for all methods; all before future scoring",
       "implementation": "Raw-close component implemented and CPU validated on all2401 existing windows; future V13 runner not implemented/integrated. Full OHLC/activity and new-data qualification still belong to that runner."
+    },
+    "latest_data_revision_20261124": {
+      "evidence": "artifacts/babel_tqdata_20261124/summary.json",
+      "later_minute_rows": 799440,
+      "calendar_weeks": 10,
+      "status": "candidate_not_qualified",
+      "old_card_weights": "unavailable_not_runnable",
+      "next": "reserve physical-time tail, verify aggregation/full support and new model identity before scoring"
     }
   },
   "evaluation_target_issue": {
@@ -22336,7 +22416,7 @@
       "implementation": "complete_synthetic_checked_but_not_current_execution",
       "execution": "not_run_user_confirmed",
       "conclusion": "pending",
-      "queue": "held_until_data_and_scratch_reference_protocol_rebound_not_fullMacro_restoration"
+      "queue": "held_for_new_minute_adapter_and_equal_budget_rebinding_four_arm_hypothesis_retained"
     },
     "protocol": {
       "schema": "babel-input-factorial-fresh768-v1",
@@ -22681,6 +22761,14 @@
         "automatic_extensions": false
       },
       "reason": "User asks whether final-model scratch recipe is preferable to replaying13 stages; confirms stage01 NOT started. Review favors compact capability rebuilding; historical trajectory remains optional."
+    },
+    {
+      "date": "2026-11-24",
+      "previous_iteration": "final_size_scratch_baseline_route_review_design_pending",
+      "previous_phase": "F11_scratch_capability_rebuild_design_before_F05_release",
+      "reason": "New source minutes and renewed prediction goal justify broad redesign. Prior trials and four-arm question retained; no need to wait for perfect reconstruction or replay13 stages.",
+      "new_entry": "section29/new_minute_state_design_20261124",
+      "no_training_started": true
     }
   ],
   "macro_asset_recovery_plan": {
@@ -23682,6 +23770,551 @@
           "evidence": "Docs-only route update; user confirms macro_restore_s01 not started; code unchanged, original full backup components retained.",
           "remaining": "No new runnable scratch card; integrate full backups into consolidated runner and perform CUDA/off-instance acceptance."
         }
+      }
+    },
+    "latest_route_20261124": "section29/new_minute_state_design_20261124; original13-stage optional, stage01 not launched; data identity checks and full backup requirements retained"
+  },
+  "new_minute_state_design_20261124": {
+    "date": "2026-11-24",
+    "task_ids": [
+      "F01",
+      "F05",
+      "F11",
+      "V13"
+    ],
+    "retained_branch_ids": [
+      "F02",
+      "F03",
+      "F04",
+      "F06",
+      "F07",
+      "F08",
+      "F09",
+      "F10",
+      "F12"
+    ],
+    "status": {
+      "implementation": "CPU_inventory_component_complete_training_adapter_and_runner_not_ready",
+      "execution": "full_local_CPU_data_audit_and_primary_source_review_only",
+      "scientific_acceptance": "no_model_execution_no_new_model_claim"
+    },
+    "user_change": "Data still being synced. Old training has not begun. Reconsider data, model, training, evaluation around historical embedding plus current state and future bar prediction.",
+    "evidence_root": "artifacts/babel_tqdata_20261124",
+    "summary": {
+      "schema": "babel.tqdata.inventory.v1",
+      "root": "/Users/bardan/private/tqdata_2015",
+      "cutoff": "2026-09-12 03:00:00",
+      "execution": "CPU_data_only_no_model_no_training_no_performance_selection",
+      "source_code_sha256": "43ed1387d9eb821bb94147fc9fdc98193fabd87ae699df4303c96c9eb45689f5",
+      "groups": {
+        "main": {
+          "files": 44,
+          "products": [
+            "AP",
+            "CF",
+            "FG",
+            "IC",
+            "IF",
+            "IH",
+            "IM",
+            "MA",
+            "OI",
+            "RM",
+            "SA",
+            "SF",
+            "SM",
+            "SR",
+            "TA",
+            "a",
+            "ag",
+            "al",
+            "au",
+            "bu",
+            "c",
+            "cu",
+            "eb",
+            "eg",
+            "fu",
+            "hc",
+            "i",
+            "j",
+            "jd",
+            "jm",
+            "l",
+            "lh",
+            "m",
+            "ni",
+            "nr",
+            "p",
+            "pp",
+            "rb",
+            "ru",
+            "sc",
+            "sn",
+            "v",
+            "y",
+            "zn"
+          ],
+          "rows": 37602456,
+          "bytes": 1005329005,
+          "first": "2016-01-04 21:00:00",
+          "last": "2026-11-18 14:59:00",
+          "years": {
+            "2016": 3062091,
+            "2017": 3047385,
+            "2018": 3201855,
+            "2019": 3436290,
+            "2020": 3262965,
+            "2021": 3642540,
+            "2022": 3654690,
+            "2023": 3691800,
+            "2024": 3686370,
+            "2025": 3707190,
+            "2026": 3209280
+          },
+          "checks": {
+            "nat": 0,
+            "timestamp_clock_mismatch": 0,
+            "duplicate_timestamps": 0,
+            "backward_steps": 0,
+            "not_minute_aligned": 0,
+            "nonfinite_numeric_rows": 0,
+            "invalid_ohlc": 0,
+            "nonpositive_price_rows": 0,
+            "negative_volume_or_oi_rows": 3
+          },
+          "nominal_clock_bins_not_qualified": {
+            "15": 2506832,
+            "30": 1303364,
+            "60": 770015
+          },
+          "after_old_cutoff_rows": 630090,
+          "after_old_cutoff_calendar_weeks": [
+            "2026-W38",
+            "2026-W39",
+            "2026-W40",
+            "2026-W41",
+            "2026-W42",
+            "2026-W43",
+            "2026-W44",
+            "2026-W45",
+            "2026-W46",
+            "2026-W47"
+          ],
+          "zero_volume_rows": 342848,
+          "flat_zero_unchanged_oi_rows": 342846,
+          "max_contiguous_flat_zero_minutes": 330
+        },
+        "month": {
+          "files": 2382,
+          "products": [
+            "AP",
+            "CF",
+            "FG",
+            "IC",
+            "IF",
+            "IH",
+            "IM",
+            "MA",
+            "OI",
+            "RM",
+            "SA",
+            "SF",
+            "SM",
+            "SR",
+            "TA",
+            "a",
+            "ag",
+            "al",
+            "au",
+            "bu",
+            "c",
+            "cu",
+            "eb",
+            "eg",
+            "fu",
+            "hc",
+            "i",
+            "j",
+            "jd",
+            "jm",
+            "l",
+            "lh",
+            "m",
+            "ni",
+            "nr",
+            "p",
+            "pp",
+            "rb",
+            "ru",
+            "sc",
+            "sn",
+            "v",
+            "y",
+            "zn"
+          ],
+          "rows": 46224030,
+          "bytes": 1552055292,
+          "first": "2016-01-04 09:00:00",
+          "last": "2026-11-19 14:59:00",
+          "years": {
+            "2016": 3565010,
+            "2017": 3560560,
+            "2018": 3798825,
+            "2019": 4137840,
+            "2020": 3986820,
+            "2021": 4502385,
+            "2022": 4566300,
+            "2023": 4706055,
+            "2024": 4680615,
+            "2025": 4700850,
+            "2026": 4018770
+          },
+          "checks": {
+            "nat": 0,
+            "timestamp_clock_mismatch": 0,
+            "duplicate_timestamps": 0,
+            "backward_steps": 0,
+            "not_minute_aligned": 0,
+            "nonfinite_numeric_rows": 0,
+            "invalid_ohlc": 0,
+            "nonpositive_price_rows": 0,
+            "negative_volume_or_oi_rows": 0
+          },
+          "nominal_clock_bins_not_qualified": {
+            "15": 3081607,
+            "30": 1601214,
+            "60": 944208
+          },
+          "after_old_cutoff_rows": 799440,
+          "after_old_cutoff_calendar_weeks": [
+            "2026-W38",
+            "2026-W39",
+            "2026-W40",
+            "2026-W41",
+            "2026-W42",
+            "2026-W43",
+            "2026-W44",
+            "2026-W45",
+            "2026-W46",
+            "2026-W47"
+          ],
+          "zero_volume_rows": 715616,
+          "flat_zero_unchanged_oi_rows": 715590,
+          "max_contiguous_flat_zero_minutes": 330
+        },
+        "index": {
+          "files": 6,
+          "products": [
+            "al",
+            "cu",
+            "hc",
+            "ni",
+            "rb",
+            "zn"
+          ],
+          "rows": 6594180,
+          "bytes": 197615694,
+          "first": "2016-01-04 21:00:00",
+          "last": "2026-11-18 14:59:00",
+          "years": {
+            "2016": 632850,
+            "2017": 616440,
+            "2018": 611730,
+            "2019": 613260,
+            "2020": 539250,
+            "2021": 611250,
+            "2022": 608700,
+            "2023": 609900,
+            "2024": 608700,
+            "2025": 612450,
+            "2026": 529650
+          },
+          "checks": {
+            "nat": 0,
+            "timestamp_clock_mismatch": 0,
+            "duplicate_timestamps": 0,
+            "backward_steps": 0,
+            "not_minute_aligned": 0,
+            "nonfinite_numeric_rows": 0,
+            "invalid_ohlc": 0,
+            "nonpositive_price_rows": 0,
+            "negative_volume_or_oi_rows": 0
+          },
+          "nominal_clock_bins_not_qualified": {
+            "15": 439612,
+            "30": 227726,
+            "60": 129706
+          },
+          "after_old_cutoff_rows": 103500,
+          "after_old_cutoff_calendar_weeks": [
+            "2026-W38",
+            "2026-W39",
+            "2026-W40",
+            "2026-W41",
+            "2026-W42",
+            "2026-W43",
+            "2026-W44",
+            "2026-W45",
+            "2026-W46",
+            "2026-W47"
+          ],
+          "zero_volume_rows": 12518,
+          "flat_zero_unchanged_oi_rows": 12518,
+          "max_contiguous_flat_zero_minutes": 240
+        }
+      },
+      "missing_month_products_vs_main": [],
+      "read_failures": [],
+      "changed_or_removed_during_audit": [],
+      "added_during_audit": [],
+      "overlapping_same_contract_file_ranges": [],
+      "limits": [
+        "Inventory during delivery, not a locked complete training snapshot",
+        "Flat zero-trade bars flag a pattern, not proof of fabricated/missing trades",
+        "No session resampling, as-of mapping qualification or usable-window count",
+        "After-cutoff counts are raw minutes, not independent V13 windows",
+        "No claim that all numerical rows are semantically valid market observations"
+      ]
+    },
+    "external_references": {
+      "date": "2026-11-24",
+      "scope": "Primary author repositories/papers and official docs only; no third-party code executed; no weights loaded",
+      "references": [
+        {
+          "id": "timesfm3",
+          "repository": "google-research/timesfm",
+          "commit": "918df02c9d366b2145bc5876135fa2131d3ed2a6",
+          "urls": [
+            "https://research.google/blog/timesfm-3-a-zero-shot-foundation-model-for-multivariate-forecasting/",
+            "https://github.com/google-research/timesfm/blob/918df02c9d366b2145bc5876135fa2131d3ed2a6/src/timesfm3/torch/model.py"
+          ],
+          "observed": "Patched decoder-only model, causal temporal and cross-variate attention, direct multi-step quantiles; code uses running statistics, masks and RMS normalization.",
+          "transfer": "Separate time/variable roles and availability masks; forecast quantiles rather than precise future wicks.",
+          "limit": "330M published model trained on >1 trillion time points is not evidence of an appropriate Babel scale. Marginal quantiles are not a joint sampled path. No pretrained weights downloaded."
+        },
+        {
+          "id": "chronos2",
+          "repository": "amazon-science/chronos-forecasting",
+          "commit": "1224fafa91e1ecd6674f5204066b159e40b5e4a1",
+          "urls": [
+            "https://arxiv.org/abs/2510.15821",
+            "https://github.com/amazon-science/chronos-forecasting/blob/1224fafa91e1ecd6674f5204066b159e40b5e4a1/src/chronos/chronos2/model.py",
+            "https://github.com/amazon-science/chronos-forecasting/blob/1224fafa91e1ecd6674f5204066b159e40b5e4a1/src/chronos/chronos2/layers.py"
+          ],
+          "observed": "Group attention shares information across variables/related series; time mask expansion is not a per-bar causal contract; RoPE and T5-style RMS normalization in implementation.",
+          "transfer": "Price/activity/context mixing with explicit same-origin availability.",
+          "limit": "Forecasting at the observed endpoint does not qualify all interior representations as causal. Historical and future-known covariates must be distinguished. Forecasting benchmark wins do not certify trading or compressed state quality."
+        },
+        {
+          "id": "patchtst",
+          "repository": "yuqinie98/PatchTST",
+          "commit": "204c21efe0b39603ad6e2ca640ef5896646ab1a9",
+          "urls": [
+            "https://arxiv.org/abs/2211.14730",
+            "https://github.com/yuqinie98/PatchTST/blob/204c21efe0b39603ad6e2ca640ef5896646ab1a9/PatchTST_self_supervised/src/models/patchTST.py"
+          ],
+          "observed": "Ordered temporal patches; channel-independent encoder reshapes batch*variables; prediction head can flatten the whole sequence.",
+          "transfer": "Preserve ordering when grouping remote context; cost-aware comparison.",
+          "limit": "Our patch/local4 trials already exist and were not balanced wins. Do not repeat them under a new name. OHLCV are coupled; entire-sequence decoder is not a one-vector decoder."
+        },
+        {
+          "id": "ts2vec",
+          "repository": "zhihanyue/ts2vec",
+          "commit": "b0088e14a99706c05451316dc6db8d3da9351163",
+          "urls": [
+            "https://arxiv.org/abs/2106.10466",
+            "https://github.com/zhihanyue/ts2vec/blob/b0088e14a99706c05451316dc6db8d3da9351163/models/dilated_conv.py"
+          ],
+          "observed": "Timestamp representations with contextual and hierarchical consistency; default convolutions have symmetric padding.",
+          "transfer": "Timestamp-level reusable state and explicitly scoped shared-content comparisons.",
+          "limit": "Past work already examined overlap; no direct reuse of default interior states or forcing full vectors equal across resolutions."
+        },
+        {
+          "id": "tirex2",
+          "repository": "NX-AI/tirex-2",
+          "commit": "758d6255624b562dc27cbc9250d86dd33f3ae946",
+          "urls": [
+            "https://arxiv.org/abs/2607.01204v2",
+            "https://nx-ai.github.io/tirex-2/introduction/"
+          ],
+          "observed": "xLSTM multivariate recurrent design; official docs explicitly say public forecast API recomputes its context and does not expose state-carrying incremental forecasts.",
+          "transfer": "Retain recurrent memory as F02 candidate if measured streaming cost warrants it.",
+          "limit": "Paper and docs reviewed; no kernel-level audit or real-weight execution. Do not assume public embedding equals all recurrent memory."
+        },
+        {
+          "id": "planet",
+          "urls": [
+            "https://proceedings.mlr.press/v97/hafner19a.html"
+          ],
+          "observed": "Latent dynamics uses deterministic and stochastic components in an action-conditioned control setting.",
+          "transfer": "Differentiate observed state updates from uncertain imagined future transitions.",
+          "limit": "OHLCV/OI lack identified market actions, order book and exogenous interventions; not evidence we can reconstruct buying/selling agents or simulate causal market mechanics."
+        },
+        {
+          "id": "proper_scoring",
+          "urls": [
+            "https://arxiv.org/abs/2504.01781",
+            "https://doi.org/10.1198/016214506000001437"
+          ],
+          "observed": "Proper scoring rules evaluate conditional distributions, including log score and CRPS.",
+          "transfer": "Evaluate calibration and sharpness plus proper score, not a handpicked plausible trajectory or just direction accuracy.",
+          "limit": "Marginal calibration alone does not establish joint path dependence, rare-event quality or trading value."
+        },
+        {
+          "id": "tqsdk",
+          "urls": [
+            "https://doc.shinnytech.com/tqsdk/latest/reference/tqsdk.tools.download.html",
+            "https://doc.shinnytech.com/tqsdk/latest/reference/tqsdk.api.html"
+          ],
+          "observed": "DataDownloader period is seconds; date arguments refer to trading days, datetime without timezone defaults to Beijing; open/close OI refer to start/end holdings.",
+          "transfer": "Retain source clocks, true availability, session calendars, volume sums and OI endpoints.",
+          "limit": "Historical session changes, volume counting regimes and official main mapping release times remain to be qualified from appropriate source metadata."
+        }
+      ]
+    },
+    "mathematical_contract": {
+      "state": "z_t=E(all declared observations available by close t), approximate task-useful compression not proven sufficient/Markov",
+      "history": "D_hist(z_t,age,field,resolution); no extra raw-history or encoder-token bypass",
+      "future": "Conditional probability over future returns/paths, stochastic innovations; deterministic next latent need not equal unknowable actual z_next",
+      "scope": "Observable OHLCV/OI do not identify individual buy/sell/open/close mechanisms"
+    },
+    "data_design": {
+      "primary": "immutable single-contract minutes; preserve lifetime/product/exchange/series family; no continuous roll stitching",
+      "aggregation": "same-minute source, session-aware clock bins and completeness/availability; first open, max high, min low, last close, volume sum, first/last OI; never future partial-coarse high/low/close",
+      "normalization": "previous-close-relative log-price/shape and causal scale retained as input, log/relative volume and OI changes with masks; training-only fit; no future-window sigma",
+      "pitfalls": [
+        "CZCE short codes repeat across decades",
+        "official-main-window sampling is not full-lifetime/unbiased universe",
+        "metadata snapshot not historical fee/margin history",
+        "do not equate zero-volume flat records with certainly fabricated observations",
+        "no blanket pre2020 volume divisor",
+        "partial index coverage not complete universe"
+      ],
+      "holdout_proposal": "Reserve physical times strictly after old 2026-09-12 03:00 until full-context qualification, no pretraining/fitting/scoring. Provisional train2016-2024 / val2025H1 / development2025H2-oldcutoff; freeze final boundaries before model execution.",
+      "old_source": "Retain data/contracts and its old hashes. Spot-check is not all-cache equivalence. Old four x-array hash discrepancy unresolved."
+    },
+    "architecture_design": {
+      "baseline": "new scratch 768/4 layers/8 heads/FF3072 causal preLN + old shared state-only query, existing28 features and Q as controlled starting recipe",
+      "capacity_candidate": "768/8 layers same heads as conditional comparison, not automatically launched or declared superior",
+      "target_context": "recent fine bars plus already-closed5/15/60-minute context; illustrative cap128 rows each1/5/15/60 <=512 market tokens; exact lengths not executable card",
+      "cost_semantics": "public768 state is not runtime buffer/KV budget; timestamp masks, multilayer indirect context and EMA all included in dependency accounting",
+      "future_candidate": "frozen z initializes small shared AR decoder of Student-t returns; teacher forcing training vs free path sampling evaluation. Direct multi-horizon quantile decoder is matched necessary control; future volume/OI not supplied. Decoder u is not encoder z_next.",
+      "deferred": [
+        "RoPE/RMSNorm/gatedFFN not bundled into depth attribution",
+        "xLSTM/SSM only if streaming cost motivates",
+        "index as separate past-only optional context with validity masks",
+        "stochastic latent transition with frozen teacher is retained, not claimed implemented"
+      ]
+    },
+    "training_design": {
+      "baseline_loss": "Q=.4path+.2change1+.1body+.3activity, existing support/bands; not optimal-gradient allocation claim",
+      "supervision": "endpoints each get declared full context; uniform/stratified endpoint and history-age sampling with inclusion weights where needed; all-qualified-position evaluation; explicit simultaneous128 retained",
+      "coverage": "sample wider contract-month/year/product support rather than repeatedly expose4789 parents; epochs not comparable across datasets",
+      "future": "initially freeze encoder; train conditional probability by proper score, use origin-known scales, report free-run skill; joint encoder gradients require explicit F08 matched control",
+      "cross_resolution": "same physical interval and shared observables, not full-vector equality; aggregation loses fine order",
+      "budget": {
+        "authorized_cuda_runs_now": 0,
+        "new_worker_epochs": 0,
+        "status": "design_only_requires_snapshot_and_resource_preflight",
+        "unit": "optimizer updates, endpoint exposure, independent groups, measured CUDA seconds",
+        "automatic_extensions": false
+      }
+    },
+    "evaluation_design": {
+      "ledgers": [
+        "current/near/mid/far price-body-activity retention and tails",
+        "frozen reuse vs direct history statistics/raw/PCA/shallow heads",
+        "probabilistic future NLL/CRPS, calibration, sharpness and joint path checks",
+        "time-forward execution with realistic tradability and historical costs"
+      ],
+      "forecast_controls": [
+        "flat/zero-return",
+        "causal historical-volatility empirical distribution",
+        "simple time-series/raw-feature models",
+        "direct multi-horizon head matched to AR readout opportunity"
+      ],
+      "sampling": "physical time spans grouped across periods and data families; purge for disjoint blocks, label online walk-forward separately; paired contract-time/week/month uncertainty",
+      "acceptance": "Numerical primary/near-far/activity/tail margins and runtime limits not yet locked. No promotion by total loss or one seed; no forecast skill => bounded recipe closes without erasing historical-state utility.",
+      "independent_data": "new later minutes are candidates, not V13 accepted128 windows; old Macro/D files absent => old four-model card cannot run unchanged"
+    },
+    "queue": [
+      {
+        "task_ids": [
+          "F01",
+          "V13"
+        ],
+        "action": "finish minute/session adapter, raw-selection/context/data-quality qualification and versioned split/scaler/PCA assets",
+        "ready": false
+      },
+      {
+        "task_ids": [
+          "F11",
+          "F01"
+        ],
+        "action": "lock and implement reproducible scratch baseline and complete model snapshots",
+        "ready": false
+      },
+      {
+        "task_ids": [
+          "F05"
+        ],
+        "action": "retain/rebind original dense-hybrid x random-endpoint four arms with shared same-budget bar reference",
+        "ready": false,
+        "parallel_after_baseline": "frozen forecasting branch"
+      },
+      {
+        "task_ids": [
+          "F06",
+          "F07",
+          "F09"
+        ],
+        "action": "frozen embedding probabilistic AR vs direct multi-step forecasting, distinct live-refresh and no-new-data rollout",
+        "ready": false
+      },
+      {
+        "task_ids": [
+          "F02",
+          "F04",
+          "F05",
+          "F08",
+          "F10"
+        ],
+        "action": "conditional depth/multiresolution/memory/joint objectives/index-context experiments driven by named gap; not mandatory serial chain",
+        "ready": false
+      }
+    ],
+    "reason_order_changed": "New source minutes and renewed prediction goal justify broad redesign. Prior trials and four-arm question retained; no need to wait for perfect reconstruction or replay13 stages.",
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "User 2026-11-24 reasserts historical causal embedding, current price state and per-bar prediction. Retention, reuse, forecast and trading are separate acceptance claims.",
+        "remaining": "No generic representation, forecast or trading success claimed."
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "Old HistoryQuery and depth/input-factorial evidence reviewed; pinned author code for TS2Vec, PatchTST, Chronos2 and TimesFM3 inspected. Public z, runtime memory and future decoder u distinguished.",
+        "remaining": "New multiscale availability masks, effective context, probabilistic head and CUDA resources not implemented."
+      },
+      "training": {
+        "status": "open",
+        "evidence": "Q decomposition, all-position full-context requirement, actual gradients, horizon scaling, teacher-forced/free-running distinction recorded.",
+        "remaining": "New snapshot, optimizer updates/exposure/LR, numerical gates and resource limits must be locked before training. Zero CUDA runs."
+      },
+      "validation": {
+        "status": "open",
+        "evidence": "Four acceptance ledgers; raw/PCA/simple-model controls, blocked uncertainty, per-field tails, temporal holdout reservation proposed before any model scoring.",
+        "remaining": "V13 support not counted on qualified aggregate windows; original Macro/D weights absent. Current-state definitions are not trading ground truth."
+      },
+      "data": {
+        "status": "pass_for_scope",
+        "evidence": "2432 Parquet files fully read; 2382 month files match external delivered size/SHA manifest; 58303 shared old aggregate bars match in 45 deterministic cases; three negative-volume main rows and inactive flat runs recorded.",
+        "remaining": "Inventory not a ready training snapshot. Session rules, gap/inactivity masks, volume/OI conventions, selection as-of and complete warmup context pending. Index partially synced."
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "Five synthetic/temporary-Parquet tests; CPU-only read-only audit with input stat-change detection and per-file SHA. No real weights or third-party code executed.",
+        "remaining": "New training adapter/runner, GPU preflight, backup integration and off-instance receipt remain open; unrelated docs/BABEL.md preserved."
       }
     }
   }

@@ -1,0 +1,1239 @@
+{
+  "scope": "deterministic first filename per shared product whose new interval contains 2026-06-01; nominal wall-clock aggregation; no session completeness qualification; no feature rebuilding",
+  "cases": [
+    {
+      "product": "MA",
+      "contract": "CZCE.MA609",
+      "period": 15,
+      "old_path": "data/contracts/MA/CZCE.MA609_15m.csv",
+      "new_path": "month_contracts/bars/MA/CZCE_MA609_2026-04-09_2026-08-21.parquet",
+      "common_rows": 2123,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "MA",
+      "contract": "CZCE.MA609",
+      "period": 30,
+      "old_path": "data/contracts/MA/CZCE.MA609_30m.csv",
+      "new_path": "month_contracts/bars/MA/CZCE_MA609_2026-04-09_2026-08-21.parquet",
+      "common_rows": 1108,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "MA",
+      "contract": "CZCE.MA609",
+      "period": 60,
+      "old_path": "data/contracts/MA/CZCE.MA609_60m.csv",
+      "new_path": "month_contracts/bars/MA/CZCE_MA609_2026-04-09_2026-08-21.parquet",
+      "common_rows": 647,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "RM",
+      "contract": "CZCE.RM609",
+      "period": 15,
+      "old_path": "data/contracts/RM/CZCE.RM609_15m.csv",
+      "new_path": "month_contracts/bars/RM/CZCE_RM609_2026-04-07_2026-08-24.parquet",
+      "common_rows": 2184,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "RM",
+      "contract": "CZCE.RM609",
+      "period": 30,
+      "old_path": "data/contracts/RM/CZCE.RM609_30m.csv",
+      "new_path": "month_contracts/bars/RM/CZCE_RM609_2026-04-07_2026-08-24.parquet",
+      "common_rows": 1140,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "RM",
+      "contract": "CZCE.RM609",
+      "period": 60,
+      "old_path": "data/contracts/RM/CZCE.RM609_60m.csv",
+      "new_path": "month_contracts/bars/RM/CZCE_RM609_2026-04-07_2026-08-24.parquet",
+      "common_rows": 666,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "TA",
+      "contract": "CZCE.TA609",
+      "period": 15,
+      "old_path": "data/contracts/TA/CZCE.TA609_15m.csv",
+      "new_path": "month_contracts/bars/TA/CZCE_TA609_2026-04-09_2026-08-27.parquet",
+      "common_rows": 2215,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "TA",
+      "contract": "CZCE.TA609",
+      "period": 30,
+      "old_path": "data/contracts/TA/CZCE.TA609_30m.csv",
+      "new_path": "month_contracts/bars/TA/CZCE_TA609_2026-04-09_2026-08-27.parquet",
+      "common_rows": 1156,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "TA",
+      "contract": "CZCE.TA609",
+      "period": 60,
+      "old_path": "data/contracts/TA/CZCE.TA609_60m.csv",
+      "new_path": "month_contracts/bars/TA/CZCE_TA609_2026-04-09_2026-08-27.parquet",
+      "common_rows": 675,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "au",
+      "contract": "SHFE.au2606",
+      "period": 15,
+      "old_path": "data/contracts/au/SHFE.au2606_15m.csv",
+      "new_path": "month_contracts/bars/au/SHFE_au2606_2026-03-18_2026-06-02.parquet",
+      "common_rows": 1843,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "au",
+      "contract": "SHFE.au2606",
+      "period": 30,
+      "old_path": "data/contracts/au/SHFE.au2606_30m.csv",
+      "new_path": "month_contracts/bars/au/SHFE_au2606_2026-03-18_2026-06-02.parquet",
+      "common_rows": 947,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "au",
+      "contract": "SHFE.au2606",
+      "period": 60,
+      "old_path": "data/contracts/au/SHFE.au2606_60m.csv",
+      "new_path": "month_contracts/bars/au/SHFE_au2606_2026-03-18_2026-06-02.parquet",
+      "common_rows": 549,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "cu",
+      "contract": "SHFE.cu2607",
+      "period": 15,
+      "old_path": "data/contracts/cu/SHFE.cu2607_15m.csv",
+      "new_path": "month_contracts/bars/cu/SHFE_cu2607_2026-05-15_2026-07-01.parquet",
+      "common_rows": 1007,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "cu",
+      "contract": "SHFE.cu2607",
+      "period": 30,
+      "old_path": "data/contracts/cu/SHFE.cu2607_30m.csv",
+      "new_path": "month_contracts/bars/cu/SHFE_cu2607_2026-05-15_2026-07-01.parquet",
+      "common_rows": 520,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "cu",
+      "contract": "SHFE.cu2607",
+      "period": 60,
+      "old_path": "data/contracts/cu/SHFE.cu2607_60m.csv",
+      "new_path": "month_contracts/bars/cu/SHFE_cu2607_2026-05-15_2026-07-01.parquet",
+      "common_rows": 293,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "hc",
+      "contract": "SHFE.hc2610",
+      "period": 15,
+      "old_path": "data/contracts/hc/SHFE.hc2610_15m.csv",
+      "new_path": "month_contracts/bars/hc/SHFE_hc2610_2026-03-27_2026-09-09.parquet",
+      "common_rows": 2598,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "hc",
+      "contract": "SHFE.hc2610",
+      "period": 30,
+      "old_path": "data/contracts/hc/SHFE.hc2610_30m.csv",
+      "new_path": "month_contracts/bars/hc/SHFE_hc2610_2026-03-27_2026-09-09.parquet",
+      "common_rows": 1356,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "hc",
+      "contract": "SHFE.hc2610",
+      "period": 60,
+      "old_path": "data/contracts/hc/SHFE.hc2610_60m.csv",
+      "new_path": "month_contracts/bars/hc/SHFE_hc2610_2026-03-27_2026-09-09.parquet",
+      "common_rows": 792,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "i",
+      "contract": "DCE.i2609",
+      "period": 15,
+      "old_path": "data/contracts/i/DCE.i2609_15m.csv",
+      "new_path": "month_contracts/bars/i/DCE_i2609_2026-04-01_2026-08-19.parquet",
+      "common_rows": 2184,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "i",
+      "contract": "DCE.i2609",
+      "period": 30,
+      "old_path": "data/contracts/i/DCE.i2609_30m.csv",
+      "new_path": "month_contracts/bars/i/DCE_i2609_2026-04-01_2026-08-19.parquet",
+      "common_rows": 1140,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "i",
+      "contract": "DCE.i2609",
+      "period": 60,
+      "old_path": "data/contracts/i/DCE.i2609_60m.csv",
+      "new_path": "month_contracts/bars/i/DCE_i2609_2026-04-01_2026-08-19.parquet",
+      "common_rows": 666,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "j",
+      "contract": "DCE.j2609",
+      "period": 15,
+      "old_path": "data/contracts/j/DCE.j2609_15m.csv",
+      "new_path": "month_contracts/bars/j/DCE_j2609_2026-04-16_2026-08-27.parquet",
+      "common_rows": 2100,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "j",
+      "contract": "DCE.j2609",
+      "period": 30,
+      "old_path": "data/contracts/j/DCE.j2609_30m.csv",
+      "new_path": "month_contracts/bars/j/DCE_j2609_2026-04-16_2026-08-27.parquet",
+      "common_rows": 1096,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "j",
+      "contract": "DCE.j2609",
+      "period": 60,
+      "old_path": "data/contracts/j/DCE.j2609_60m.csv",
+      "new_path": "month_contracts/bars/j/DCE_j2609_2026-04-16_2026-08-27.parquet",
+      "common_rows": 640,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "jm",
+      "contract": "DCE.jm2609",
+      "period": 15,
+      "old_path": "data/contracts/jm/DCE.jm2609_15m.csv",
+      "new_path": "month_contracts/bars/jm/DCE_jm2609_2026-04-09_2026-08-26.parquet",
+      "common_rows": 2192,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "jm",
+      "contract": "DCE.jm2609",
+      "period": 30,
+      "old_path": "data/contracts/jm/DCE.jm2609_30m.csv",
+      "new_path": "month_contracts/bars/jm/DCE_jm2609_2026-04-09_2026-08-26.parquet",
+      "common_rows": 1144,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "jm",
+      "contract": "DCE.jm2609",
+      "period": 60,
+      "old_path": "data/contracts/jm/DCE.jm2609_60m.csv",
+      "new_path": "month_contracts/bars/jm/DCE_jm2609_2026-04-09_2026-08-26.parquet",
+      "common_rows": 668,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "m",
+      "contract": "DCE.m2609",
+      "period": 15,
+      "old_path": "data/contracts/m/DCE.m2609_15m.csv",
+      "new_path": "month_contracts/bars/m/DCE_m2609_2026-04-01_2026-08-18.parquet",
+      "common_rows": 2161,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "m",
+      "contract": "DCE.m2609",
+      "period": 30,
+      "old_path": "data/contracts/m/DCE.m2609_30m.csv",
+      "new_path": "month_contracts/bars/m/DCE_m2609_2026-04-01_2026-08-18.parquet",
+      "common_rows": 1128,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "m",
+      "contract": "DCE.m2609",
+      "period": 60,
+      "old_path": "data/contracts/m/DCE.m2609_60m.csv",
+      "new_path": "month_contracts/bars/m/DCE_m2609_2026-04-01_2026-08-18.parquet",
+      "common_rows": 659,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "p",
+      "contract": "DCE.p2609",
+      "period": 15,
+      "old_path": "data/contracts/p/DCE.p2609_15m.csv",
+      "new_path": "month_contracts/bars/p/DCE_p2609_2026-03-31_2026-08-19.parquet",
+      "common_rows": 2207,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "p",
+      "contract": "DCE.p2609",
+      "period": 30,
+      "old_path": "data/contracts/p/DCE.p2609_30m.csv",
+      "new_path": "month_contracts/bars/p/DCE_p2609_2026-03-31_2026-08-19.parquet",
+      "common_rows": 1152,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "p",
+      "contract": "DCE.p2609",
+      "period": 60,
+      "old_path": "data/contracts/p/DCE.p2609_60m.csv",
+      "new_path": "month_contracts/bars/p/DCE_p2609_2026-03-31_2026-08-19.parquet",
+      "common_rows": 673,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "rb",
+      "contract": "SHFE.rb2610",
+      "period": 15,
+      "old_path": "data/contracts/rb/SHFE.rb2610_15m.csv",
+      "new_path": "month_contracts/bars/rb/SHFE_rb2610_2026-03-31_2026-09-09.parquet",
+      "common_rows": 2552,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "rb",
+      "contract": "SHFE.rb2610",
+      "period": 30,
+      "old_path": "data/contracts/rb/SHFE.rb2610_30m.csv",
+      "new_path": "month_contracts/bars/rb/SHFE_rb2610_2026-03-31_2026-09-09.parquet",
+      "common_rows": 1332,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "rb",
+      "contract": "SHFE.rb2610",
+      "period": 60,
+      "old_path": "data/contracts/rb/SHFE.rb2610_60m.csv",
+      "new_path": "month_contracts/bars/rb/SHFE_rb2610_2026-03-31_2026-09-09.parquet",
+      "common_rows": 778,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "ru",
+      "contract": "SHFE.ru2609",
+      "period": 15,
+      "old_path": "data/contracts/ru/SHFE.ru2609_15m.csv",
+      "new_path": "month_contracts/bars/ru/SHFE_ru2609_2026-04-01_2026-08-20.parquet",
+      "common_rows": 2207,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "ru",
+      "contract": "SHFE.ru2609",
+      "period": 30,
+      "old_path": "data/contracts/ru/SHFE.ru2609_30m.csv",
+      "new_path": "month_contracts/bars/ru/SHFE_ru2609_2026-04-01_2026-08-20.parquet",
+      "common_rows": 1152,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "ru",
+      "contract": "SHFE.ru2609",
+      "period": 60,
+      "old_path": "data/contracts/ru/SHFE.ru2609_60m.csv",
+      "new_path": "month_contracts/bars/ru/SHFE_ru2609_2026-04-01_2026-08-20.parquet",
+      "common_rows": 673,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "sr",
+      "contract": "CZCE.SR609",
+      "period": 15,
+      "old_path": "data/contracts/sr/CZCE.SR609_15m.csv",
+      "new_path": "month_contracts/bars/SR/CZCE_SR609_2026-03-27_2026-08-20.parquet",
+      "common_rows": 2276,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "sr",
+      "contract": "CZCE.SR609",
+      "period": 30,
+      "old_path": "data/contracts/sr/CZCE.SR609_30m.csv",
+      "new_path": "month_contracts/bars/SR/CZCE_SR609_2026-03-27_2026-08-20.parquet",
+      "common_rows": 1188,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "sr",
+      "contract": "CZCE.SR609",
+      "period": 60,
+      "old_path": "data/contracts/sr/CZCE.SR609_60m.csv",
+      "new_path": "month_contracts/bars/SR/CZCE_SR609_2026-03-27_2026-08-20.parquet",
+      "common_rows": 694,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "y",
+      "contract": "DCE.y2609",
+      "period": 15,
+      "old_path": "data/contracts/y/DCE.y2609_15m.csv",
+      "new_path": "month_contracts/bars/y/DCE_y2609_2026-03-30_2026-08-11.parquet",
+      "common_rows": 2092,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "y",
+      "contract": "DCE.y2609",
+      "period": 30,
+      "old_path": "data/contracts/y/DCE.y2609_30m.csv",
+      "new_path": "month_contracts/bars/y/DCE_y2609_2026-03-30_2026-08-11.parquet",
+      "common_rows": 1092,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    },
+    {
+      "product": "y",
+      "contract": "DCE.y2609",
+      "period": 60,
+      "old_path": "data/contracts/y/DCE.y2609_60m.csv",
+      "new_path": "month_contracts/bars/y/DCE_y2609_2026-03-30_2026-08-11.parquet",
+      "common_rows": 638,
+      "rows_different": 0,
+      "different_by_field": {
+        "open": 0,
+        "high": 0,
+        "low": 0,
+        "close": 0,
+        "volume": 0,
+        "open_oi": 0,
+        "close_oi": 0
+      },
+      "max_abs_by_field": {
+        "open": 0.0,
+        "high": 0.0,
+        "low": 0.0,
+        "close": 0.0,
+        "volume": 0.0,
+        "open_oi": 0.0,
+        "close_oi": 0.0
+      }
+    }
+  ],
+  "common_rows": 58303,
+  "rows_different": 0,
+  "products": [
+    "MA",
+    "RM",
+    "TA",
+    "au",
+    "cu",
+    "hc",
+    "i",
+    "j",
+    "jm",
+    "m",
+    "p",
+    "rb",
+    "ru",
+    "sr",
+    "y"
+  ]
+}

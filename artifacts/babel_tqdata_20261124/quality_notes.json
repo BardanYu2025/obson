@@ -1,0 +1,114 @@
+{
+  "anomalies": [
+    {
+      "path": "main/jd.parquet",
+      "sha256": "f5f496c3af917177461f199cee50a728b35295f6d2ea73163ce4dfca5b81d86c",
+      "checks": {
+        "nat": 0,
+        "timestamp_clock_mismatch": 0,
+        "duplicate_timestamps": 0,
+        "backward_steps": 0,
+        "not_minute_aligned": 0,
+        "nonfinite_numeric_rows": 0,
+        "invalid_ohlc": 0,
+        "nonpositive_price_rows": 0,
+        "negative_volume_or_oi_rows": 1
+      }
+    },
+    {
+      "path": "main/p.parquet",
+      "sha256": "81e1f04aa4f4c01b8ac9ea3a7d48fc7c2b498f00721915a0edaede58958019a5",
+      "checks": {
+        "nat": 0,
+        "timestamp_clock_mismatch": 0,
+        "duplicate_timestamps": 0,
+        "backward_steps": 0,
+        "not_minute_aligned": 0,
+        "nonfinite_numeric_rows": 0,
+        "invalid_ohlc": 0,
+        "nonpositive_price_rows": 0,
+        "negative_volume_or_oi_rows": 1
+      }
+    },
+    {
+      "path": "main/zn.parquet",
+      "sha256": "8eb2184fdec969dae10284642c49bdb7a7f1c08e6a87591815a736a4387c23ff",
+      "checks": {
+        "nat": 0,
+        "timestamp_clock_mismatch": 0,
+        "duplicate_timestamps": 0,
+        "backward_steps": 0,
+        "not_minute_aligned": 0,
+        "nonfinite_numeric_rows": 0,
+        "invalid_ohlc": 0,
+        "nonpositive_price_rows": 0,
+        "negative_volume_or_oi_rows": 1
+      }
+    }
+  ],
+  "highest_zero_flat_file_ratios": [
+    {
+      "path": "month_contracts/bars/fu/SHFE_fu1805_2017-07-28_2018-05-18.parquet",
+      "rows": 40431,
+      "ratio": 0.9999505330068512
+    },
+    {
+      "path": "month_contracts/bars/fu/SHFE_fu1703_2016-05-25_2016-06-16.parquet",
+      "rows": 225,
+      "ratio": 0.9955555555555555
+    },
+    {
+      "path": "month_contracts/bars/SM/CZCE_SM601_2015-08-17_2016-01-08.parquet",
+      "rows": 217,
+      "ratio": 0.9953917050691244
+    },
+    {
+      "path": "month_contracts/bars/fu/SHFE_fu1706_2016-10-25_2016-12-20.parquet",
+      "rows": 2118,
+      "ratio": 0.9929178470254958
+    },
+    {
+      "path": "month_contracts/bars/fu/SHFE_fu1804_2017-05-23_2017-08-11.parquet",
+      "rows": 3619,
+      "ratio": 0.9906051395413098
+    },
+    {
+      "path": "month_contracts/bars/fu/SHFE_fu1705_2016-06-28_2016-11-08.parquet",
+      "rows": 3733,
+      "ratio": 0.990088400750067
+    },
+    {
+      "path": "month_contracts/bars/SF/CZCE_SF601_2015-08-05_2016-01-12.parquet",
+      "rows": 221,
+      "ratio": 0.9864253393665159
+    },
+    {
+      "path": "month_contracts/bars/fu/SHFE_fu1711_2016-12-06_2017-06-08.parquet",
+      "rows": 3375,
+      "ratio": 0.9860740740740741
+    },
+    {
+      "path": "month_contracts/bars/SF/CZCE_SF706_2016-07-04_2017-02-28.parquet",
+      "rows": 5295,
+      "ratio": 0.9852691218130312
+    },
+    {
+      "path": "month_contracts/bars/fu/SHFE_fu1702_2016-02-24_2016-06-08.parquet",
+      "rows": 4133,
+      "ratio": 0.9852407452213888
+    }
+  ],
+  "old_raw_inventory": {
+    "files": 1251,
+    "rows": 4360913,
+    "products": 18,
+    "periods": [
+      15,
+      30,
+      60
+    ],
+    "first": "2019-09-16 21:00:00",
+    "last": "2026-09-12 02:15:00"
+  },
+  "limits": "Old CSV inventory counted on 2026-11-22. Clock bins and comparison are not session or complete-context qualifications. No source edits."
+}
