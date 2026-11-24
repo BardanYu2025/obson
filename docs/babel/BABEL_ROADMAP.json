@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v1",
   "updated": "2026-11-25",
-  "current_iteration": "design_only_goals_decisions_and_plain_language_protocol",
-  "current_iteration_scope": "N07/N09 operating principles and reply rules; retain F01/F05/F11/V13 minute-data design and original four arms. Documentation only, no implementation or training.",
+  "current_iteration": "new_data_first_integrated_state_architecture_and_objective_design",
+  "current_iteration_scope": "Design only: new minute-data observation contract, multiresolution state encoder, interval decoder, historical/probabilistic objectives and A/B/C controls. Old four-arm study retained but not prerequisite.",
   "current_reference": {
     "model": "Macro control",
     "seeds": [
@@ -37,7 +37,7 @@
     {
       "id": "N03",
       "title": "bar状态与序列状态的关系明确",
-      "requirement": "声明每个状态的可见历史与预热；当前研究的滚动128末端状态可作该窗口seq表示，单次128前向的早期状态不能冒称同样有128历史。",
+      "requirement": "声明每个状态H_t的实际可见区间、分辨率、归一预热与运行记忆；z_t=E(H_t)可作该历史的序列表示。内部token或短前缀不得冒称同等完整历史。固定128滚动是旧实例，不再限制新架构。",
       "acceptance": "同物理端点/上下文评价；短前缀冷启动、完整滚动与长期记忆分开。",
       "status": "ongoing_contract_not_blanket_accepted"
     },
@@ -58,7 +58,7 @@
     {
       "id": "N06",
       "title": "保留未来逐bar外推方向",
-      "requirement": "真实新bar刷新后的一步预测与没有新行情的自由递推分开；预测z129目标为E(2..129)，不是E(2..128)。",
+      "requirement": "真实新bar刷新后预测与没有新行情的自由概率递推分开；若预测真实未来embedding，其目标应是E(H_(t+h))，不可把缺少未来新bar的历史状态当真值。旧固定128示例仍是E(2..129)而非E(2..128)；概率头内部u不自动等同真实encoder状态。",
       "acceptance": "状态相似度与新增价格增益分别评价；按步长给误差/基线skill/可用范围，不用未来重置或重新锚定。",
       "status": "ongoing_contract_not_blanket_accepted"
     },
@@ -523,7 +523,7 @@
         "docs/BABEL_CONTENT_GUARD768_REVIEW.json",
         "docs/BABEL_INPUT_PATCH768_REVIEW.json"
       ],
-      "next_action": "Lock source and physical-time splits, implement minute/session adapter, then shared scratch baseline/factorial and frozen probability-readout card with full backups. No old training command now.",
+      "next_action": "在第30节新数据A/B/C提案下封口原始快照/日历/口径资格、独立组清单、共同更新/资源预算与数值验收门槛。当前只做方案；不实施runner，不先复现旧4层/Q/四臂。",
       "implementation": "complete",
       "execution": "four_fixed120_workers_complete_reviewed",
       "conclusion": "本多尺度配方综合价格MSE升7.27%–24.78%，4项主收益0通过，均衡升级未成立。",
@@ -536,11 +536,11 @@
         "evidence": "external_research_20261018"
       },
       "current_iteration": {
-        "card": "new_minute_state_design_20261124",
-        "implementation": "CPU_audit_complete_training_adapter_not_ready",
-        "execution": "CPU_only_no_CUDA",
-        "conclusion": "new_data_enables_research_not_proof_of_model_gain",
-        "queue": "adapter_then_shared_scratch_and_retained_factorial_frozen_forecast"
+        "card": "new_data_first_model_design_20261125",
+        "implementation": "not_started_design_only",
+        "execution": "no_CUDA",
+        "conclusion": "new_proposal_no_effectiveness_claim",
+        "scope": "A/B/C编码与训练目标提案；F02是有限多尺度历史，F04是共同源视图，不自动加入额外对齐loss或递归记忆。"
       },
       "iteration_archive": [
         {
@@ -634,9 +634,23 @@
             "queue": "data_and_scratch_protocol_then_matched_factorial"
           },
           "reason": "New source minutes and renewed prediction goal justify broad redesign. Prior trials and four-arm question retained; no need to wait for perfect reconstruction or replay13 stages."
+        },
+        {
+          "date": "2026-11-25",
+          "reason": "new_data_first_route_correction",
+          "prior_current_fields": {
+            "current_iteration": {
+              "card": "new_minute_state_design_20261124",
+              "implementation": "CPU_audit_complete_training_adapter_not_ready",
+              "execution": "CPU_only_no_CUDA",
+              "conclusion": "new_data_enables_research_not_proof_of_model_gain",
+              "queue": "adapter_then_shared_scratch_and_retained_factorial_frozen_forecast"
+            },
+            "next_action": "Lock source and physical-time splits, implement minute/session adapter, then shared scratch baseline/factorial and frozen probability-readout card with full backups. No old training command now."
+          }
         }
       ],
-      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；当前以current_iteration和macro_asset_recovery_plan及延后factorial计划为准。",
+      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；当前以current_iteration、第30节和new_data_first_model_design_20261125为准；旧恢复链及四臂不在当前队列。",
       "method_audit": "recent_method_audit_20261026"
     },
     {
@@ -667,7 +681,15 @@
         "card": "new_minute_state_design_20261124",
         "status": "retained_no_new_CUDA_budget",
         "note": "Original task/hypothesis preserved. Section29 defines proposed data/architecture/forecast interfaces; no scientific acceptance."
-      }
+      },
+      "current_iteration": {
+        "card": "new_data_first_model_design_20261125",
+        "implementation": "not_started_design_only",
+        "execution": "no_CUDA",
+        "conclusion": "new_proposal_no_effectiveness_claim",
+        "scope": "A/B/C编码与训练目标提案；F02是有限多尺度历史，F04是共同源视图，不自动加入额外对齐loss或递归记忆。"
+      },
+      "next_action": "在第30节新数据A/B/C提案下封口原始快照/日历/口径资格、独立组清单、共同更新/资源预算与数值验收门槛。当前只做方案；不实施runner，不先复现旧4层/Q/四臂。"
     },
     {
       "id": "F03",
@@ -730,7 +752,15 @@
         "card": "new_minute_state_design_20261124",
         "status": "retained_no_new_CUDA_budget",
         "note": "Original task/hypothesis preserved. Section29 defines proposed data/architecture/forecast interfaces; no scientific acceptance."
-      }
+      },
+      "current_iteration": {
+        "card": "new_data_first_model_design_20261125",
+        "implementation": "not_started_design_only",
+        "execution": "no_CUDA",
+        "conclusion": "new_proposal_no_effectiveness_claim",
+        "scope": "A/B/C编码与训练目标提案；F02是有限多尺度历史，F04是共同源视图，不自动加入额外对齐loss或递归记忆。"
+      },
+      "next_action": "在第30节新数据A/B/C提案下封口原始快照/日历/口径资格、独立组清单、共同更新/资源预算与数值验收门槛。当前只做方案；不实施runner，不先复现旧4层/Q/四臂。"
     },
     {
       "id": "F05",
@@ -756,7 +786,7 @@
       "implementation": "complete_synthetic_and_remote_checked",
       "execution": "six_fixed60_CUDA_workers_and_eight_model_all128_evaluation_complete_reviewed",
       "conclusion": "本固定h2→h4写入配方明确退化：相对同容量h4→h4，综合价格MSE增加3.19%～6.55%；相对原结构同期续训增加5.24%～23.17%。两必要比较主收益均0/4、全部8个无收益阈值差值在两种聚类95%区间均高于0。",
-      "next_action": "Lock source and physical-time splits, implement minute/session adapter, then shared scratch baseline/factorial and frozen probability-readout card with full backups. No old training command now.",
+      "next_action": "在第30节新数据A/B/C提案下封口原始快照/日历/口径资格、独立组清单、共同更新/资源预算与数值验收门槛。当前只做方案；不实施runner，不先复现旧4层/Q/四臂。",
       "external_reference_20261018": {
         "project_ids": [
           "vjepa21",
@@ -767,11 +797,11 @@
         "evidence": "external_research_20261018"
       },
       "current_iteration": {
-        "card": "new_minute_state_design_20261124",
-        "implementation": "CPU_audit_complete_training_adapter_not_ready",
-        "execution": "CPU_only_no_CUDA",
-        "conclusion": "new_data_enables_research_not_proof_of_model_gain",
-        "queue": "adapter_then_shared_scratch_and_retained_factorial_frozen_forecast"
+        "card": "new_data_first_model_design_20261125",
+        "implementation": "not_started_design_only",
+        "execution": "no_CUDA",
+        "conclusion": "new_proposal_no_effectiveness_claim",
+        "scope": "A/B/C编码与训练目标提案；F02是有限多尺度历史，F04是共同源视图，不自动加入额外对齐loss或递归记忆。"
       },
       "previous_iteration_disposition": {
         "status": "第21节四组120轮内部注意力对照完成并复核；未均衡升级，固定配方收束，信息组织方向保留。",
@@ -876,10 +906,24 @@
             "queue": "data_and_scratch_protocol_then_matched_factorial"
           },
           "reason": "New source minutes and renewed prediction goal justify broad redesign. Prior trials and four-arm question retained; no need to wait for perfect reconstruction or replay13 stages."
+        },
+        {
+          "date": "2026-11-25",
+          "reason": "new_data_first_route_correction",
+          "prior_current_fields": {
+            "current_iteration": {
+              "card": "new_minute_state_design_20261124",
+              "implementation": "CPU_audit_complete_training_adapter_not_ready",
+              "execution": "CPU_only_no_CUDA",
+              "conclusion": "new_data_enables_research_not_proof_of_model_gain",
+              "queue": "adapter_then_shared_scratch_and_retained_factorial_frozen_forecast"
+            },
+            "next_action": "Lock source and physical-time splits, implement minute/session adapter, then shared scratch baseline/factorial and frozen probability-readout card with full backups. No old training command now."
+          }
         }
       ],
       "current_role": "分离较早96的token组织与投影初始化；同recent32/参数/主干/Q预算。",
-      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；当前以current_iteration和macro_asset_recovery_plan及延后factorial计划为准。",
+      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；当前以current_iteration、第30节和new_data_first_model_design_20261125为准；旧恢复链及四臂不在当前队列。",
       "method_audit": "recent_method_audit_20261026"
     },
     {
@@ -905,7 +949,15 @@
         "card": "new_minute_state_design_20261124",
         "status": "retained_no_new_CUDA_budget",
         "note": "Original task/hypothesis preserved. Section29 defines proposed data/architecture/forecast interfaces; no scientific acceptance."
-      }
+      },
+      "current_iteration": {
+        "card": "new_data_first_model_design_20261125",
+        "implementation": "not_started_design_only",
+        "execution": "no_CUDA",
+        "conclusion": "new_proposal_no_effectiveness_claim",
+        "scope": "A/B/C编码与训练目标提案；F02是有限多尺度历史，F04是共同源视图，不自动加入额外对齐loss或递归记忆。"
+      },
+      "next_action": "在第30节新数据A/B/C提案下封口原始快照/日历/口径资格、独立组清单、共同更新/资源预算与数值验收门槛。当前只做方案；不实施runner，不先复现旧4层/Q/四臂。"
     },
     {
       "id": "F07",
@@ -932,7 +984,15 @@
         "card": "new_minute_state_design_20261124",
         "status": "retained_no_new_CUDA_budget",
         "note": "Original task/hypothesis preserved. Section29 defines proposed data/architecture/forecast interfaces; no scientific acceptance."
-      }
+      },
+      "current_iteration": {
+        "card": "new_data_first_model_design_20261125",
+        "implementation": "not_started_design_only",
+        "execution": "no_CUDA",
+        "conclusion": "new_proposal_no_effectiveness_claim",
+        "scope": "A/B/C编码与训练目标提案；F02是有限多尺度历史，F04是共同源视图，不自动加入额外对齐loss或递归记忆。"
+      },
+      "next_action": "在第30节新数据A/B/C提案下封口原始快照/日历/口径资格、独立组清单、共同更新/资源预算与数值验收门槛。当前只做方案；不实施runner，不先复现旧4层/Q/四臂。"
     },
     {
       "id": "F08",
@@ -963,7 +1023,15 @@
         "card": "new_minute_state_design_20261124",
         "status": "retained_no_new_CUDA_budget",
         "note": "Original task/hypothesis preserved. Section29 defines proposed data/architecture/forecast interfaces; no scientific acceptance."
-      }
+      },
+      "current_iteration": {
+        "card": "new_data_first_model_design_20261125",
+        "implementation": "not_started_design_only",
+        "execution": "no_CUDA",
+        "conclusion": "new_proposal_no_effectiveness_claim",
+        "scope": "A/B/C编码与训练目标提案；F02是有限多尺度历史，F04是共同源视图，不自动加入额外对齐loss或递归记忆。"
+      },
+      "next_action": "在第30节新数据A/B/C提案下封口原始快照/日历/口径资格、独立组清单、共同更新/资源预算与数值验收门槛。当前只做方案；不实施runner，不先复现旧4层/Q/四臂。"
     },
     {
       "id": "F09",
@@ -988,7 +1056,15 @@
         "card": "new_minute_state_design_20261124",
         "status": "retained_no_new_CUDA_budget",
         "note": "Original task/hypothesis preserved. Section29 defines proposed data/architecture/forecast interfaces; no scientific acceptance."
-      }
+      },
+      "current_iteration": {
+        "card": "new_data_first_model_design_20261125",
+        "implementation": "not_started_design_only",
+        "execution": "no_CUDA",
+        "conclusion": "new_proposal_no_effectiveness_claim",
+        "scope": "A/B/C编码与训练目标提案；F02是有限多尺度历史，F04是共同源视图，不自动加入额外对齐loss或递归记忆。"
+      },
+      "next_action": "在第30节新数据A/B/C提案下封口原始快照/日历/口径资格、独立组清单、共同更新/资源预算与数值验收门槛。当前只做方案；不实施runner，不先复现旧4层/Q/四臂。"
     },
     {
       "id": "F10",
@@ -1007,7 +1083,15 @@
         "card": "new_minute_state_design_20261124",
         "status": "retained_no_new_CUDA_budget",
         "note": "Original task/hypothesis preserved. Section29 defines proposed data/architecture/forecast interfaces; no scientific acceptance."
-      }
+      },
+      "current_iteration": {
+        "card": "new_data_first_model_design_20261125",
+        "implementation": "not_started_design_only",
+        "execution": "no_CUDA",
+        "conclusion": "new_proposal_no_effectiveness_claim",
+        "scope": "A/B/C编码与训练目标提案；F02是有限多尺度历史，F04是共同源视图，不自动加入额外对齐loss或递归记忆。"
+      },
+      "next_action": "在第30节新数据A/B/C提案下封口原始快照/日历/口径资格、独立组清单、共同更新/资源预算与数值验收门槛。当前只做方案；不实施runner，不先复现旧4层/Q/四臂。"
     },
     {
       "id": "F11",
@@ -1035,7 +1119,7 @@
         "docs/BABEL_CONTENT_GUARD768_REVIEW.json",
         "docs/BABEL_INPUT_PATCH768_REVIEW.json"
       ],
-      "next_action": "Lock source and physical-time splits, implement minute/session adapter, then shared scratch baseline/factorial and frozen probability-readout card with full backups. No old training command now.",
+      "next_action": "在第30节新数据A/B/C提案下封口原始快照/日历/口径资格、独立组清单、共同更新/资源预算与数值验收门槛。当前只做方案；不实施runner，不先复现旧4层/Q/四臂。",
       "implementation": "fixed_closed_bar_adapter_and_bounded_replay_delivered",
       "execution": "complete_AutoDL_CUDA_and_report_reviewed",
       "conclusion": "连续接口数值资格通过；普通平均保真较高，压力/低波动失败保留，不等于可靠趋势或通用用途验收。",
@@ -1047,11 +1131,11 @@
         "evidence": "external_research_20261018"
       },
       "current_iteration": {
-        "card": "new_minute_state_design_20261124",
-        "implementation": "CPU_audit_complete_training_adapter_not_ready",
-        "execution": "CPU_only_no_CUDA",
-        "conclusion": "new_data_enables_research_not_proof_of_model_gain",
-        "queue": "adapter_then_shared_scratch_and_retained_factorial_frozen_forecast"
+        "card": "new_data_first_model_design_20261125",
+        "implementation": "not_started_design_only",
+        "execution": "no_CUDA",
+        "conclusion": "new_proposal_no_effectiveness_claim",
+        "scope": "A/B/C编码与训练目标提案；F02是有限多尺度历史，F04是共同源视图，不自动加入额外对齐loss或递归记忆。"
       },
       "iteration_archive": [
         {
@@ -1144,10 +1228,24 @@
             "queue": "data_and_scratch_protocol_then_matched_factorial"
           },
           "reason": "New source minutes and renewed prediction goal justify broad redesign. Prior trials and four-arm question retained; no need to wait for perfect reconstruction or replay13 stages."
+        },
+        {
+          "date": "2026-11-25",
+          "reason": "new_data_first_route_correction",
+          "prior_current_fields": {
+            "current_iteration": {
+              "card": "new_minute_state_design_20261124",
+              "implementation": "CPU_audit_complete_training_adapter_not_ready",
+              "execution": "CPU_only_no_CUDA",
+              "conclusion": "new_data_enables_research_not_proof_of_model_gain",
+              "queue": "adapter_then_shared_scratch_and_retained_factorial_frozen_forecast"
+            },
+            "next_action": "Lock source and physical-time splits, implement minute/session adapter, then shared scratch baseline/factorial and frozen probability-readout card with full backups. No old training command now."
+          }
         }
       ],
       "current_role": "均衡内容/实际成本分别结算，历史bar只读参考，不自动晋升Macro或宣布通用复用。",
-      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；当前以current_iteration和macro_asset_recovery_plan及延后factorial计划为准。",
+      "historical_status_scope": "此前status/implementation/execution/conclusion保留历史处置；当前以current_iteration、第30节和new_data_first_model_design_20261125为准；旧恢复链及四臂不在当前队列。",
       "method_audit": "recent_method_audit_20261026"
     },
     {
@@ -1175,18 +1273,21 @@
   ],
   "active_order": [
     "F01",
+    "F05",
+    "F08",
     "F11",
-    "F05"
+    "V13"
   ],
   "next_after_active": {
-    "status": "master_experiment_card_design_only_not_ready_to_run",
+    "status": "design_specified_four_execution_gates_open_no_code",
     "task_ids": [
       "F01",
-      "F11",
       "F05",
+      "F08",
+      "F11",
       "V13"
     ],
-    "action": "只准备新数据总实验卡：共同题目、分区/留出、可重复基线、原四臂与冻结概率头的有限矩阵、资源待定项、主收益/保护/结果分叉和完整备份。暂不实施分钟适配器或runner。",
+    "action": "在第30节新数据A/B/C提案下封口原始快照/日历/口径资格、独立组清单、共同更新/资源预算与数值验收门槛。当前只做方案；不实施runner，不先复现旧4层/Q/四臂。",
     "ready_entrypoint": null,
     "deferred_entrypoint": [
       "scripts/babel_macro_restore_autodl.sh",
@@ -1246,14 +1347,21 @@
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "current_task_ids": [
     "F01",
+    "F02",
+    "F04",
     "F05",
+    "F06",
+    "F07",
+    "F08",
+    "F09",
+    "F10",
     "F11",
     "V13"
   ],
   "blocked_followups": {
     "F_optimization": "第20～24节配方保持收束；仅第25节固定三组输入粒度已就绪。无自动loss/LR/层数/patch长度网格；V13仍缺新数据。"
   },
-  "active_phase": "design_only_master_experiment_card_before_any_implementation",
+  "active_phase": "new_data_design_specified_pending_snapshot_budget_and_acceptance_lock",
   "RS_entrypoint": {
     "task_ids": [
       "V04",
@@ -1290,7 +1398,7 @@
       "former_path": "docs/BABEL_RECOVERY_SCOPE_CORRECTION.md",
       "available_in_git_commit": "27f85db"
     },
-    "current_status_entry": "docs/babel/BABEL_ROADMAP.md section0; scientific design section29; docs/babel/BABEL_EXPERIMENT_WORKFLOW.md sections7-8",
+    "current_status_entry": "docs/babel/BABEL_ROADMAP.md section0; current scientific design section30; section29 audit facts and superseded draft retained; workflow sections7-8",
     "historical_current_sections": "Introductory October/November action suggestions are folded as historical records, not an executable queue.",
     "folder_entry": "docs/babel/README.md",
     "legacy_paths": "Compatibility symlinks; one canonical copy in docs/babel. Historical bound evidence retains original bytes and original references remain resolvable."
@@ -22396,7 +22504,13 @@
     },
     "superseded_by": "input_factorial_fresh_plan",
     "supersession_reason": "User confirmed original experiment never ran, AutoDL expired/erased, no full backup; original2 frozen bar references and fixed cache not locally available. Original protocol and source remain unchanged.",
-    "current_disposition": "retained_unrun_requires_original_data_and_scratch_reference_binding_no13stage_prerequisite"
+    "current_disposition": "retained_unrun_requires_original_data_and_scratch_reference_binding_no13stage_prerequisite",
+    "current_disposition_20261125": {
+      "queue": "retained_not_queued",
+      "reason": "旧结构/起步适配假设保留；用户要求基于新数据重新设计，非新方案前置。",
+      "replacement_entry": "section30",
+      "scientific_conclusion": "not_run_no_result_added"
+    }
   },
   "input_factorial_fresh_plan": {
     "schema": "babel-input-factorial-fresh768-v1",
@@ -22420,7 +22534,7 @@
       "implementation": "complete_synthetic_checked_but_not_current_execution",
       "execution": "not_run_user_confirmed",
       "conclusion": "pending",
-      "queue": "held_for_new_minute_adapter_and_equal_budget_rebinding_four_arm_hypothesis_retained"
+      "queue": "retained_not_queued_new_data_design_takes_priority"
     },
     "protocol": {
       "schema": "babel-input-factorial-fresh768-v1",
@@ -22668,6 +22782,12 @@
       "corrected_fact": "Original4 row lists and normalization recovered from retained report JSON; exact old hashes verified. Actual cachedNPZ/weights absent; rebuiltNPZ hashes differ, so full numeric replay remains unqualified.",
       "evidence": "artifacts/babel_macro_recovery_20261115/manifest.json",
       "decision": "Do not launch fresh-new-cohort recipe; preserve2x2 question and rebind to recovered original data after qualification. Do not change historical source hashes."
+    },
+    "current_disposition_20261125": {
+      "queue": "retained_not_queued",
+      "reason": "旧结构/起步适配假设保留；用户要求基于新数据重新设计，非新方案前置。",
+      "replacement_entry": "section30",
+      "scientific_conclusion": "not_run_no_result_added"
     }
   },
   "execution_priority_history": [
@@ -22809,6 +22929,45 @@
       },
       "reason": "User explicitly requests plan and records only; asks to replace reactive micro-experiment chains with goals, decision gates, scoped error repair, success delivery and understandable replies. No scientific finding or old branch canceled.",
       "new_entry": "section0/research_operating_principles_20261124",
+      "no_training_started": true
+    },
+    {
+      "date": "2026-11-25",
+      "previous_state": {
+        "current_iteration": "design_only_goals_decisions_and_plain_language_protocol",
+        "current_iteration_scope": "N07/N09 operating principles and reply rules; retain F01/F05/F11/V13 minute-data design and original four arms. Documentation only, no implementation or training.",
+        "current_task_ids": [
+          "F01",
+          "F05",
+          "F11",
+          "V13"
+        ],
+        "active_order": [
+          "F01",
+          "F11",
+          "F05"
+        ],
+        "active_phase": "design_only_master_experiment_card_before_any_implementation",
+        "next_after_active": {
+          "status": "master_experiment_card_design_only_not_ready_to_run",
+          "task_ids": [
+            "F01",
+            "F11",
+            "F05",
+            "V13"
+          ],
+          "action": "只准备新数据总实验卡：共同题目、分区/留出、可重复基线、原四臂与冻结概率头的有限矩阵、资源待定项、主收益/保护/结果分叉和完整备份。暂不实施分钟适配器或runner。",
+          "ready_entrypoint": null,
+          "deferred_entrypoint": [
+            "scripts/babel_macro_restore_autodl.sh",
+            "scripts/babel_input_factorial_fresh_autodl.sh"
+          ],
+          "no_automatic_rerun": true,
+          "no_automatic_followup_grid": true
+        }
+      },
+      "reason": "用户明确指出新数据重新思考被旧路线/旧四臂默认顺序挤压；撤销旧4层/28维/Q和四臂优先作为前提，以新任务的状态、结构和目标共同设计。历史证据保留。",
+      "new_entry": "section30/new_data_first_model_design_20261125",
       "no_training_started": true
     }
   ],
@@ -24357,6 +24516,12 @@
         "evidence": "Five synthetic/temporary-Parquet tests; CPU-only read-only audit with input stat-change detection and per-file SHA. No real weights or third-party code executed.",
         "remaining": "New training adapter/runner, GPU preflight, backup integration and off-instance receipt remain open; unrelated docs/BABEL.md preserved."
       }
+    },
+    "current_disposition_20261125": {
+      "audit_facts": "retained",
+      "default_features_architecture_loss_queue": "superseded_by_section30",
+      "reason": "此前默认旧28维/Q/4层及四臂优先，未充分执行新数据重新设计。",
+      "no_old_training_started": true
     }
   },
   "mathematical_design_review_20261124": {
@@ -24492,6 +24657,11 @@
         "evidence": "Documentation-only discussion; historical bound code, artifacts, current queue and four-arm hypotheses unchanged.",
         "remaining": "No new CUDA entrypoint or training approval implied."
       }
+    },
+    "current_disposition_20261125": {
+      "mathematical_limits": "retained",
+      "candidate_priorities_and_queue": "superseded_by_section30",
+      "new_design": "time_scale_organization_and_joint_probability_supervision_are_explicit_proposals_not_extra_appendix"
     }
   },
   "current_work_mode": {
@@ -24699,6 +24869,11 @@
         "evidence": "仅roadmap/工作流程/JSON/追加日志；旧主体与研究数据未改；记录完整模型离机交付要求和当前资产缺失。",
         "remaining": "本次没有代码实现或CUDA检查，不宣称保证未来不会出错。"
       }
+    },
+    "current_route_disposition_20261125": {
+      "principles": "retained",
+      "old_four_arm_priority": "superseded_not_prerequisite",
+      "reason": "保留旧假设不应锁死新数据的任务/架构；现行路线见第30节。"
     }
   },
   "documentation_consolidation_20261125": {
@@ -24761,6 +24936,370 @@
         "status": "pass_for_scope",
         "evidence": "文档当前入口和AGENTS更新；旧导出脚本读取原路径由符号链接兼容。",
         "remaining": "未重跑训练脚本，仅检查其文档读取/复制路径。"
+      }
+    }
+  },
+  "requirement_refinements_20261125": [
+    {
+      "id": "N03",
+      "previous": {
+        "id": "N03",
+        "title": "bar状态与序列状态的关系明确",
+        "requirement": "声明每个状态的可见历史与预热；当前研究的滚动128末端状态可作该窗口seq表示，单次128前向的早期状态不能冒称同样有128历史。",
+        "acceptance": "同物理端点/上下文评价；短前缀冷启动、完整滚动与长期记忆分开。",
+        "status": "ongoing_contract_not_blanket_accepted"
+      },
+      "reason": "新数据采用物理时间多尺度输入，128滚动只是旧实现示例。"
+    },
+    {
+      "id": "N06",
+      "previous": {
+        "id": "N06",
+        "title": "保留未来逐bar外推方向",
+        "requirement": "真实新bar刷新后的一步预测与没有新行情的自由递推分开；预测z129目标为E(2..129)，不是E(2..128)。",
+        "acceptance": "状态相似度与新增价格增益分别评价；按步长给误差/基线skill/可用范围，不用未来重置或重新锚定。",
+        "status": "ongoing_contract_not_blanket_accepted"
+      },
+      "reason": "保留未来状态目标的真实信息定义，推广到多尺度H_t，避免固定128公式锁死新设计。"
+    }
+  ],
+  "new_data_first_model_design_20261125": {
+    "date": "2026-11-25",
+    "status": "substantive_design_proposal_not_executable_protocol",
+    "roadmap_section": "30",
+    "task_ids": [
+      "F01",
+      "F02",
+      "F04",
+      "F05",
+      "F06",
+      "F07",
+      "F08",
+      "F09",
+      "F10",
+      "F11",
+      "V13"
+    ],
+    "requirement_ids": [
+      "N01",
+      "N02",
+      "N03",
+      "N04",
+      "N05",
+      "N06",
+      "N07",
+      "N08",
+      "N09"
+    ],
+    "user_correction": "用户要以新分钟数据重新思考，用旧经验约束错误而非沿旧计划继续；指出11月24日新架构/新数学内容过薄。",
+    "recommendation": "同源多分辨率因果状态编码＋共享物理区间历史解码＋概率未来；同期普通编码、分层编码和联合预测监督A/B/C比较。",
+    "not_inherited_as_requirements": [
+      "旧28维/EMA组合",
+      "原Q与0.3活动权重",
+      "旧4层8头",
+      "13阶段恢复",
+      "先跑旧dense/hybrid×random/endpoint四臂"
+    ],
+    "data": {
+      "source": "/Users/bardan/private/tqdata_2015/month_contracts/bars",
+      "audit": "docs/babel/data_audit_20261124",
+      "new_check": "counts_and_sizes_only_not_new_full_audit",
+      "files_now": {
+        "month": 2382,
+        "main": 44,
+        "index": 6
+      },
+      "main_and_index": "not_required_first_inputs",
+      "identity": "exchange/product/full_contract_lifetime/start/end/available_at/source_SHA",
+      "aggregation": "O first,H max,L min,C last,V sum,OI start/end; historical session qualification, no every-N-rows grouping",
+      "selection_limit": "official main windows plus roll margins, not all contracts/full lifetime; as-of selection bias remains open"
+    },
+    "features": {
+      "numeric_classes": 9,
+      "fields": [
+        "log O/Cprev",
+        "log C/O",
+        "log H/max(O,C)",
+        "log min(O,C)/L",
+        "log1p volume",
+        "log1p OI_start",
+        "log1p OI_end",
+        "asinh deltaOI/train_scale",
+        "log causal_volatility"
+      ],
+      "context": "actual interval/availability/trading and wall time/quality masks; not prediction targets",
+      "normalization": "per-token same-period prior64-valid-return RMS with train-fitted floor and cold fallback; full warmup support counted; train-only field/period scale",
+      "excluded_defaults": [
+        "EMA/RSI/MACD teachers",
+        "PCA teacher",
+        "order-flow identities",
+        "future-window normalization"
+      ]
+    },
+    "architecture": {
+      "views": [
+        {
+          "minutes": 1,
+          "bars": 256
+        },
+        {
+          "minutes": 5,
+          "bars": 128
+        },
+        {
+          "minutes": 15,
+          "bars": 64
+        },
+        {
+          "minutes": 60,
+          "bars": 64
+        }
+      ],
+      "market_tokens_max": 512,
+      "public_z_dim": 768,
+      "z_fp32_bytes": 3072,
+      "public_side_information": [
+        "C_t",
+        "sigma_t",
+        "contract/time/coverage_quality"
+      ],
+      "blocks": 6,
+      "heads": 12,
+      "head_dim": 64,
+      "ffn": 3072,
+      "norm": "Pre-LN",
+      "flat_control": "all6 standard availability-causal blocks",
+      "hierarchical": "first2 within-scale causal market-token attention; last4 cross-scale time/scale prior; current state token read-only to market tokens",
+      "prior": "equal total prior mass per available scale; normalized exp(-trading_age/T_head) within scale; T=32,128,512,2048,8192,infinity each2 heads; log-space computation; softmax tau1",
+      "parameter_fairness": "same parameter shapes and shared seed initialization; fixed masks/prior differ; no same-compute claim",
+      "limits": [
+        "finite declared history, no infinite-state claim",
+        "coarse history does not preserve unobserved minute order",
+        "state tokens and runtime KV/buffers are distinct",
+        "geometry does not certify reconstruction"
+      ],
+      "attention_positions_max_including_state": 513,
+      "state_token_mask": "All arms: state reads all available market tokens and itself; market tokens never read state. First2 within-scale mask in B/C applies only market-to-market. Per-market query mask/prior uses its own availability, not endpoint t.",
+      "cross_resolution": "Shared physical content has deterministic aggregation relations, not equality of full latent states. First matrix uses same-source views/shared encoder/physical targets, no extra cross-scale consistency loss; F04 supervision hypothesis retained separately."
+    },
+    "historical_decoder": {
+      "input": "z and physical interval query only; declared price reference for absolute display",
+      "proposal": "shared FiLM-conditioned residual MLP4x256",
+      "outputs": [
+        "relative close path",
+        "body",
+        "upper wick",
+        "lower wick",
+        "log1p V",
+        "log1p OI_start",
+        "log1p OI_end"
+      ],
+      "current_close": "known reference excluded from reconstruction success; current shape/activity supervised",
+      "constraints": "positive price and OHLC geometry; nonnegative log1p V/OI; signed deltaOI derived",
+      "no_bypass": [
+        "raw history",
+        "all encoder tokens",
+        "true neighbor price",
+        "runtime cache"
+      ]
+    },
+    "objectives": {
+      "historical": "0.6 price +0.2 shape +0.2 activity, proposal not optimality claim",
+      "price": "half relative path, half adjacent differences derived from predictions",
+      "scale_and_age": "fixed train field/period scales; view-average and valid agebands1-16/17-64/>64; age0 separate; missing not zero",
+      "future": "teacher-forced Student-t conditional NLL over60 trading-minute returns; sigma fixed at origin; free-rollout evaluated separately",
+      "future_decoder": "2-layer GRU256, initialized and conditioned each step on z; nu2+softplus, positive scale floor; no fabricated future volume/OI",
+      "joint_lambda": "encoder-only ramp first10% updates to0.1 then fixed, proposal",
+      "gradient_control": "A/B future head receives detached z; C sends lambda*future gradient to encoder; all future head parameters get unweighted future objective; separate optimizers/clipping avoid unintended encoder changes"
+    },
+    "matrix": [
+      {
+        "name": "A",
+        "encoder": "flat",
+        "encoder_objective": "history",
+        "future_head": "train on detached z"
+      },
+      {
+        "name": "B",
+        "encoder": "hierarchical",
+        "encoder_objective": "history",
+        "future_head": "train on detached z",
+        "comparison": "B-A organization recipe"
+      },
+      {
+        "name": "C",
+        "encoder": "hierarchical",
+        "encoder_objective": "history+probabilistic future",
+        "comparison": "C-B predictive supervision"
+      }
+    ],
+    "fairness": {
+      "seeds": [
+        42,
+        43
+      ],
+      "proposed_training_workers": 6,
+      "same": [
+        "source",
+        "initialization by seed",
+        "endpoints",
+        "query sampling",
+        "label masks",
+        "N optimizer updates",
+        "selection opportunity",
+        "readout refit budget"
+      ],
+      "not_equal_claimed": "actual GPU time/FLOPs",
+      "not_identified": "full architecture x objective interaction; no flat+joint arm",
+      "selection": "lastN primary; predeclared best secondary only",
+      "after_training": "freeze all encoders; fit equally initialized/budgeted current-state and AR/direct-quantile readouts; raw/simple baselines"
+    },
+    "optimizer_proposal": {
+      "name": "AdamW",
+      "peak_lr": 0.0002,
+      "betas": [
+        0.9,
+        0.95
+      ],
+      "weight_decay": 0.01,
+      "clip_norm": 1,
+      "schedule": "5% warmup then cosine",
+      "precision": "uniform BF16 only if device/numeric qualified; critical targets/metrics sufficient precision",
+      "status": "proposal_not_run_no_grid"
+    },
+    "split_proposal": {
+      "train": "2016-2023",
+      "val": "2024",
+      "development": "2025 through old boundary",
+      "final_time_after": "2026-09-12 03:00 Asia/Shanghai",
+      "heldout_products": [
+        "IF",
+        "SA",
+        "lh",
+        "sn",
+        "OI"
+      ],
+      "qualification": "all input/warmup/query/forecast support within assigned partition for strict score; online-known-past score separate; no train/stat/pretrain final holdout"
+    },
+    "evaluation": {
+      "ledgers": [
+        "retention",
+        "frozen_reuse",
+        "probability",
+        "runtime",
+        "later_trading"
+      ],
+      "required_baselines": [
+        "zero-change",
+        "downsample/interpolation",
+        "train-only PCA with declared capacity",
+        "direct-history statistics/models",
+        "zero-return/historical-volatility distribution",
+        "simple AR/volatility model",
+        "same-input direct forecast"
+      ],
+      "forecast_horizons": [
+        1,
+        5,
+        15,
+        60
+      ],
+      "diagnostics": [
+        "no-z and mismatched-z",
+        "teacher_forced versus free",
+        "real refresh versus free",
+        "current and recent16minute content",
+        "all views/agebands/fields and P95",
+        "low-volatility/gaps/pressure/inactivity"
+      ],
+      "uncertainty": "paired contract-time and week/month groups, not overlapping-minute iid bootstrap"
+    },
+    "acceptance_proposal": {
+      "not_locked": true,
+      "B_vs_A": "price content MSE gain>=5%; recent16/current body <=5% degradation; core activity and tail<=10%",
+      "C_vs_B": "fresh frozen-head CRPS gain>=3% and positive skill vs simple baseline, same retention floors",
+      "required": "grouped interval support and pre-score support/power qualification; thresholds not inherited as facts or fitted after result"
+    },
+    "mathematical_reserves": [
+      {
+        "name": "truncated path signature/logsignature",
+        "task_ids": [
+          "F04",
+          "F05",
+          "F10"
+        ],
+        "trigger": "coarse observations lose ordering that matters to declared task",
+        "contract": "same raw minute path, fixed common coordinate scales and causal piecewise-linear path;4 dimensions(time,logclose,cumulativeV,OI);level3 signature85 incl constant/logsignature30 Lie coordinates",
+        "limits": "lossy truncation, not inversion/encryption; Chen composition same fine path not equality after OHLC downsampling; no intrabar ordering/causal order-flow inference",
+        "queue": "not_first_matrix"
+      },
+      {
+        "name": "stochastic state filter/Neural CDE",
+        "task_ids": [
+          "F02",
+          "F07"
+        ],
+        "trigger": "finite-window recomputation cost or observed update-memory gap",
+        "limits": "causal interpolation, total state/caches, reset/drift/numeric cost; no assumed conservation or identified market mechanism",
+        "queue": "conditional"
+      },
+      {
+        "name": "gradient coordination or new optimizer",
+        "task_ids": [
+          "F01"
+        ],
+        "trigger": "actual update diagnostics identify a distinguishable optimization issue",
+        "queue": "conditional_not_jointly_added"
+      }
+    ],
+    "old_four_arm_disposition": "hypothesis retained, not queued or prerequisite; no new result claimed",
+    "execution_gates_open": [
+      "snapshot/calendar/convention/quality",
+      "independent eligible groups",
+      "N/batch/GPU-hours/disk budget",
+      "power and final numeric thresholds before model scoring"
+    ],
+    "authorized_cuda_runs_added": 0,
+    "training_code_modified": false,
+    "sources": [
+      "https://arxiv.org/abs/2108.12409",
+      "https://arxiv.org/abs/2107.14795",
+      "https://arxiv.org/html/1603.03788v1",
+      "https://arxiv.org/html/1905.08494v2",
+      "https://arxiv.org/abs/1511.05121",
+      "https://arxiv.org/abs/2005.08926",
+      "https://sites.stat.washington.edu/raftery/Research/PDF/Gneiting2007jasa.pdf"
+    ],
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "从新分钟数据定义状态与历史/当前/概率未来，原128/28维/Q/4层和四臂不再作为默认前提；旧经验逐条标明可迁移范围。",
+        "remaining": "无新模型效果、通用表示或交易收益声明。"
+      },
+      "architecture": {
+        "status": "open",
+        "evidence": "512token物理观察、6层768/12头普通和分层对照、公开z+元信息、共享区间读头、概率头u与真实z区分。",
+        "remaining": "参数/mask/缓存/资源尚未实现核对。"
+      },
+      "training": {
+        "status": "open",
+        "evidence": "新9类输入、历史0.6/0.2/0.2提案、停梯度和联合路线、优化器分组、同初始化/抽样/N明确。",
+        "remaining": "尺度与真实梯度、精度、更新N和预算未锁；不把提案称已通过。"
+      },
+      "validation": {
+        "status": "open",
+        "evidence": "时间和品种留出提案、相同冻结读头机会、简单基线、去掉/错配z、逐位置与尾部、结果分叉和数值门槛提案已明确。",
+        "remaining": "实际独立样本支持与数值门槛待封口；无新评分。"
+      },
+      "data": {
+        "status": "open",
+        "evidence": "沿11月24日完整审计；本轮仅复查月份2382/main44/index6文件数量和大小；同源聚合和可用时间明确。",
+        "remaining": "日历、样本选择as-of、量仓口径、缺段/平线资格与最终快照待锁；没有重做全行审计。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "仅roadmap/JSON/工作流程/README/追加日志；旧审计证据与训练源码未修改。",
+        "remaining": "用户仍要求只做方案；新runner、CUDA恢复和离机模型未发生。"
       }
     }
   }
