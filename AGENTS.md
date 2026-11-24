@@ -6,9 +6,12 @@ this research protocol.
 
 ## Read before acting
 
-- `docs/BABEL_ROADMAP.md` and `docs/BABEL_ROADMAP.json`: current requirements,
+- Start at `docs/babel/README.md` for the current research folder. Legacy paths
+  under `docs/` are compatibility symlinks, not duplicate sources of truth.
+
+- `docs/babel/BABEL_ROADMAP.md` and `docs/babel/BABEL_ROADMAP.json`: current requirements,
   fixed task IDs, status, dependencies and retained future hypotheses.
-- `docs/BABEL_EXPERIMENT_WORKFLOW.md`: coding, report review and completion rules.
+- `docs/babel/BABEL_EXPERIMENT_WORKFLOW.md`: coding, report review and completion rules.
 - The protocol and evidence linked by the active task. Historical log entries do
   not override the current roadmap or the user's newer instructions.
 
@@ -22,7 +25,7 @@ this research protocol.
    model architecture, loss/training, validation, data and engineering. Record
    evidence and remaining gaps, not a blanket claim of correctness.
 4. Update the roadmap and append a review event to
-   `docs/BABEL_PROGRESS_LOG.jsonl`. Keep code ready, remote execution complete,
+   `docs/babel/BABEL_PROGRESS_LOG.jsonl`. Keep code ready, remote execution complete,
    and scientific acceptance distinct. Do not mark real-model acceptance from
    synthetic tests or arithmetic checks.
 5. Preserve previous failures, task IDs, retained hypotheses and user changes.
@@ -52,7 +55,7 @@ recorded, without inventing scientific results or relaxing gates to pass.
 
 ## Documentation consolidation (user clarification, 2026-10-05)
 
-- Use `docs/BABEL_ROADMAP.md` as the single execution and conclusion-disposition entry;
+- Use `docs/babel/BABEL_ROADMAP.md` as the single execution and conclusion-disposition entry;
   its JSON is a synchronized mirror. Update existing evidence documents when needed.
 - Do not create another explanatory/clarification/plan document for status corrections.
   Preserve historical bound protocols and report evidence; do not rewrite their hashes.
