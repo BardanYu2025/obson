@@ -24317,5 +24317,140 @@
         "remaining": "New training adapter/runner, GPU preflight, backup integration and off-instance receipt remain open; unrelated docs/BABEL.md preserved."
       }
     }
+  },
+  "mathematical_design_review_20261124": {
+    "date": "2026-11-24",
+    "status": "conditional_design_only_not_new_training_card",
+    "task_ids": [
+      "F01",
+      "F05"
+    ],
+    "conditional_task_ids": [
+      "F02",
+      "F04",
+      "F06",
+      "F07",
+      "F08",
+      "F09"
+    ],
+    "requirements": [
+      "N01",
+      "N02",
+      "N03",
+      "N05",
+      "N06",
+      "N07",
+      "N09"
+    ],
+    "roadmap_section": "29.8",
+    "question": "Can attention, state representation, reconstruction, losses and optimization have stronger mathematical foundations and task-specific innovation?",
+    "claims": {
+      "mathematical_motivation": "specified_with_limits",
+      "babel_empirical_benefit": "unverified",
+      "literature_novelty": "not_claimed"
+    },
+    "state_contract": "z=E(observed eligible history). Retaining realized content and retaining predictive information are distinct; finite-dimensional Markov sufficiency is not assumed; 768 floats alone do not define an information-theoretic rate.",
+    "candidates": [
+      {
+        "ids": [
+          "F05",
+          "F02"
+        ],
+        "name": "physical_time_scale_attention_prior",
+        "priority": "first_conditional_structure_candidate",
+        "equation": "softmax(s/tau+log(pi)) = argmax_a a.s - tau KL(a||pi)",
+        "controls": "same physical history/tokens/parameters/exposure; plain and simple relative-bias controls",
+        "limits": "not posterior/causal attribution; include no-decay content path; strict availability masks; no first-invention claim"
+      },
+      {
+        "ids": [
+          "F04"
+        ],
+        "name": "same_source_aggregation_content_consistency",
+        "priority": "conditional",
+        "controls": "same views and true common interval targets, no additional consistency control",
+        "limits": "no full-latent equality; anchor both views to truth against collapse; previous cross-period/content failures retained"
+      },
+      {
+        "ids": [
+          "F02",
+          "F07",
+          "F08"
+        ],
+        "name": "observation_corrected_recurrent_state",
+        "priority": "conditional_later",
+        "controls": "pure window state with matched information and explicit runtime memory cost",
+        "limits": "real observations correct predicted state; free rollout is stochastic; no order-flow identification from OHLCV; not a runnable card"
+      },
+      {
+        "ids": [
+          "F01"
+        ],
+        "name": "actual_update_diagnostics_before_gradient_coordination",
+        "priority": "baseline_instrumentation_then_conditional",
+        "controls": "same objective and optimizer before GradNorm/PCGrad; optimizer ablation separate",
+        "limits": "raw gradient projection not sufficient for Adam-update noninterference; no generalization guarantee"
+      },
+      {
+        "ids": [
+          "F01"
+        ],
+        "name": "muon_optimizer_ablation",
+        "priority": "conditional_not_queued",
+        "controls": "AdamW baseline, matched tuning opportunity, updates and separately measured time",
+        "limits": "different treatment for matrix versus other parameters; cannot fix an inappropriate objective"
+      }
+    ],
+    "history_preserved": [
+      "Haar multiscale loss had far-history improvement with unacceptable near costs; orthogonal equal-weight squared-error coordinate changes add no information.",
+      "Content-guard 21-group feedback hit caps and all added-loss updates clipped; this does not establish gradient conflict as unique cause.",
+      "PCA, cross-period, overlap and short-state previous results are not reset or rebranded as new evidence.",
+      "Original dense/hybrid x random/endpoint four arms retained; old scripts remain held."
+    ],
+    "queue_change": "none",
+    "authorized_cuda_runs_added": 0,
+    "acceptance": "Any candidate needs a single-variable source-bound card with new snapshot, numeric benefit/protection gates, selection and finite budget before CUDA. No ad-hoc extension or candidate promotion.",
+    "sources": [
+      "https://arxiv.org/abs/1803.02155",
+      "https://arxiv.org/abs/2108.12409",
+      "https://arxiv.org/abs/1511.05121",
+      "https://proceedings.mlr.press/v97/hafner19a.html",
+      "https://sites.stat.washington.edu/raftery/Research/PDF/Gneiting2007jasa.pdf",
+      "https://arxiv.org/abs/1711.02257",
+      "https://arxiv.org/abs/2001.06782",
+      "https://kellerjordan.github.io/posts/muon/"
+    ],
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "Historical retention, present descriptions and future conditional-distribution skill distinguished; predictive sufficiency is a hypothesis, not a market Markov assumption.",
+        "remaining": "No predictive or trading benefit established."
+      },
+      "architecture": {
+        "status": "open",
+        "evidence": "KL-regularized attention derivation and many-to-one aggregation limitations stated; ordinary 4-layer768 baseline retained.",
+        "remaining": "New attention/state-update candidates have no bound implementation or resource measurements."
+      },
+      "training": {
+        "status": "open",
+        "evidence": "Prior Haar and feedback-weight failures checked; actual update dot products include Adam, clipping and weight decay. Proper probabilistic losses separated from historical fidelity.",
+        "remaining": "No actual gradients or new optimizer runs; LR, numerical gates and budget require a card."
+      },
+      "validation": {
+        "status": "open",
+        "evidence": "Same physical information, parameters, updates, tuning opportunity and raw-history baselines required; applied changes need independent ablations.",
+        "remaining": "New snapshot acceptance thresholds and uncertainty support not locked."
+      },
+      "data": {
+        "status": "open",
+        "evidence": "Uses existing 20261124 read-only minute audit and explicit aggregation/availability contract; no new data claims.",
+        "remaining": "Calendar, selection as-of, quality masks, snapshot and final holdout pending."
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "Documentation-only discussion; historical bound code, artifacts, current queue and four-arm hypotheses unchanged.",
+        "remaining": "No new CUDA entrypoint or training approval implied."
+      }
+    }
   }
 }
