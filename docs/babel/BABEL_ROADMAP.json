@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v2-current-only",
   "updated": "2026-11-25",
-  "current_iteration": "architecture_information_organization_review",
-  "current_iteration_scope": "F05/F11：解释简图隐藏的实际通路，区分合理参照与已证实优秀架构，记录状态组织的具体讨论方向；不改变首批矩阵或训练授权。",
+  "current_iteration": "input_fusion_and_decoder_adequacy_review",
+  "current_iteration_scope": "F05/F11：保留共享多尺度编码与FiLM主训练头；具体化冻结状态后的有界历史读头容量检查。主矩阵/损失/授权不变，读头预算待锁。",
   "current_work_mode": {
     "mode": "design_and_records_only",
     "requested_on": "2026-11-24",
@@ -419,7 +419,8 @@
     "previous_proposed_main_workers": 6,
     "change_reason": "按用户表示优先的澄清，保留结构×历史掩码四臂/两种子8worker提案；移除首批概率训练/预测头预算，不新增授权。",
     "forecast_head_training_in_current_stage": false,
-    "future_encoder_gradient_weight": 0
+    "future_encoder_gradient_weight": 0,
+    "frozen_readout_scope_note": "Includes proposed4x256/4x512 fresh historical heads on each frozen clean representation, plus already planned current-description probes; total updates/GPU budget must be locked; no new authorization."
   },
   "new_data_first_model_design_20261125": {
     "date": "2026-11-25",
@@ -734,7 +735,8 @@
         "trading profit",
         "external-factor availability"
       ],
-      "current_descriptions": "predeclared past-only direction/path efficiency/volatility/drawdown/volume-OI content, multiple horizons/fields; no unique true regime or entry-signal claim"
+      "current_descriptions": "predeclared past-only direction/path efficiency/volatility/drawdown/volume-OI content, multiple horizons/fields; no unique true regime or entry-signal claim",
+      "history_readout_capacity_ref": "input_fusion_decoder_review_20261125.bounded_frozen_history_readout"
     },
     "acceptance_proposal": {
       "not_locked": true,
@@ -875,7 +877,8 @@
         "N and hardware micro/precision (effectivebatch64 proposal)",
         "all frozen readout budgets",
         "GPU-hours/disk caps",
-        "uniform numeric preflight"
+        "uniform numeric preflight",
+        "bounded historical head capacity comparison within F11"
       ],
       "status": "open"
     },
@@ -971,10 +974,10 @@
   "progress_log": "docs/babel/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "revision_record": {
-    "reason": "用户认为连接图过于简单，需要审视架构理由而非仅补参数。",
-    "method_change": "无运行配方改动；补输入/编码信息损失界限和编码期多状态讨论，未入队。",
+    "reason": "用户询问是否应采用多周期联合编码以及解码器是否太简单。",
+    "method_change": "保留原主训练配方，F11公平读出具体增加两档同族历史读头能力检查提案；不改变主编码器矩阵。",
     "supersedes_unexecuted_design_commit": null,
-    "reviewed_commit": "2a54927",
+    "reviewed_commit": "c8581e5",
     "completed_experiments_reinterpreted": false,
     "new_neural_code": false,
     "new_infrastructure_code": false,
@@ -983,33 +986,33 @@
   "review": {
     "purpose": {
       "status": "pass_for_scope",
-      "evidence": "以历史内容和当前状态为目标，区分概览图简洁、架构合理性和已验证优越性。",
-      "remaining": "没有新模型成绩，不把结构复杂当进步。"
+      "evidence": "保留可复用历史状态目标，不由图简单或读头形式换路线。",
+      "remaining": "无新能力结论，未来仍条件后续。"
     },
     "architecture": {
       "status": "pass_for_scope",
-      "evidence": "说明市场token在层内仍保留；明确多尺度输入不等于层级表示，Value通路不等于信息必然进入z。补编码期多状态的合同及旧解码槽区别。",
-      "remaining": "768维/单汇总最优性未证明；多状态仅讨论，未完成公平候选设计或加入矩阵。"
+      "evidence": "多尺度合并作为首轮共享主干；核对逐query FiLM通路和211万参数估算，说明单key注意力局限。",
+      "remaining": "联合编码最优性、读头充分性未验证；不新增四路或多状态主干。"
     },
     "training": {
       "status": "pass_for_scope",
-      "evidence": "现有两任务、梯度和数值默认不变；没有因图简单叠加损失或延长训练。",
-      "remaining": "历史保真与填空的取舍须真实实验；不能预设短期均为噪声。"
+      "evidence": "四臂两种子、原主训练损失/维数不变；两档冻结历史读头只用clean z和同一L_clean。",
+      "remaining": "新增读头资格拟合须计入F11共同预算，实际步数/精度/数值尚未锁。"
     },
     "validation": {
       "status": "pass_for_scope",
-      "evidence": "分清输入聚合信息丢失、编码信息丢失与读头/优化缺口；同状态大小不冒称同参数/算力。",
-      "remaining": "新组织若入矩阵需先锁配对通路/成本/验收；当前不安排额外worker。"
+      "evidence": "原头及4x256/4x512新头分开报告；各表示同预算，最终留出不挑头，读差不能推出丢失。",
+      "remaining": "容量比较是有限配方，需锁排名变化处置和停止阈值；无实际拟合。"
     },
     "data": {
       "status": "open",
-      "evidence": "远段粗OHLC不唯一确定分钟顺序，首项样本资格及声明观察范围保持。",
-      "remaining": "无新数据扫描，历史日历/口径/支持资格仍开放。"
+      "evidence": "同源多周期观察/元信息和原分区不变；重复覆盖作为风险保留。",
+      "remaining": "数据资格未完成，无新原始扫描。"
     },
     "engineering": {
       "status": "pass_for_scope",
-      "evidence": "仅现行roadmap/JSON与追加进度，当前四臂和冻结实验保持，真实代码未动。",
-      "remaining": "没有新模型实现、CUDA运行或恢复；文档检查不证明科学效果。"
+      "evidence": "只更新roadmap/JSON和追加事件；参数量仅标量算术，未实例化神经网络。",
+      "remaining": "没有新代码、CUDA、恢复或科学验收。"
     }
   },
   "design_rationale": {
@@ -2115,7 +2118,8 @@
       ],
       "implemented_or_tested": false,
       "source": "https://arxiv.org/html/1706.03762v7#S3.SS5"
-    }
+    },
+    "readout_qualification_ref": "input_fusion_decoder_review_20261125.bounded_frozen_history_readout"
   },
   "architecture_simplicity_review_20261125": {
     "date": "2026-11-25",
@@ -2204,5 +2208,121 @@
     },
     "authorized_cuda_runs_added": 0,
     "training_code_modified": false
+  },
+  "input_fusion_decoder_review_20261125": {
+    "date": "2026-11-25",
+    "status": "design_judgment_no_neural_execution",
+    "task_ids": [
+      "F05",
+      "F11"
+    ],
+    "question": "是否应合并多周期输入，历史解码器是否过于简单？",
+    "recommendation": "Retain shared multiscale causal encoding and FiLM training decoder as first-stage starting point; add bounded frozen-history decoder-capacity qualification to existing F11 budget before conclusions.",
+    "input_rationale": [
+      "same-source interval observations with shared typed fields",
+      "early legal cross-scale interaction",
+      "no early separate single-state compression per period",
+      "concatenation preserves individual records, does not remove values"
+    ],
+    "input_limits": [
+      "overlap/duplicate attention mass",
+      "unequal tokens per view",
+      "scale distribution and learned organization unresolved",
+      "four separate networks not automatically superior or cost-matched"
+    ],
+    "decoder_arithmetic": {
+      "query_projection": 2304,
+      "one_block": 525824,
+      "four_blocks": 2103296,
+      "output": 1799,
+      "total": 2107399,
+      "assumption": "all Linear have bias; each of4FiLM blocks has affine LayerNorm and256x256 W1/W2,768x512 conditioning",
+      "scope": "scalar arithmetic only, no instantiated model or adequacy proof"
+    },
+    "decoder_reasoning": [
+      "D(z,q) is repeatedly conditioned on full z, not a single linear readout",
+      "same z,q output independent of other concurrently queried intervals",
+      "shared z/weights and difference loss couple content without query self-attention",
+      "coordinate-MLP frequency limitations are a plausible diagnostic, not observed Babel failure",
+      "single-key cross-attention has softmax1 and read-value term independent of query, although residual/full decoder still can depend on query",
+      "query self-attention would require explicit query-set consistency or canonical grid contract"
+    ],
+    "bounded_frozen_history_readout": {
+      "status": "proposed_qualification_budget_pending_not_queued_as_encoder_run",
+      "retain_original_trained_head_score": true,
+      "candidate_head_widths": [
+        256,
+        512
+      ],
+      "blocks": 4,
+      "family": "same FiLM",
+      "init": "both newly randomized; within a width identical initial head weights across representations per seed",
+      "encoder": "frozen clean z only",
+      "loss": "same L_clean and query measure for both widths/all representations",
+      "same": [
+        "training/validation inventory",
+        "scales/targets/queries",
+        "head initialization seed protocol",
+        "update and selection opportunity"
+      ],
+      "not_equal": [
+        "head parameters",
+        "FLOPs/GPU time"
+      ],
+      "final_holdout_used_for_head_selection": false,
+      "readout_budget_ref": "active_training_budget.frozen_readout_budget",
+      "interpretation_positive": "heldout gain on identical z identifies at least some readout/fitting limitation; not encoder improvement",
+      "interpretation_negative": "both fail does not prove absence of information",
+      "rank_changes": "report decoder dependence, obey predeclared bounded resolution/stop rule; no best-head cherry-picking"
+    },
+    "sources": [
+      {
+        "url": "https://arxiv.org/abs/1709.07871",
+        "scope": "FiLM conditional affine modulation, not Babel result"
+      },
+      {
+        "url": "https://arxiv.org/abs/2006.10739",
+        "scope": "low-dimensional coordinate-MLP frequency learning, not diagnosis of current unimplemented model"
+      },
+      {
+        "url": "https://arxiv.org/html/1706.03762v7",
+        "scope": "attention formula; singleton-key implication is algebraic deduction"
+      }
+    ],
+    "primary_matrix_changed": false,
+    "authorized_cuda_runs_added": 0,
+    "training_code_modified": false,
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "保留可复用历史状态目标，不由图简单或读头形式换路线。",
+        "remaining": "无新能力结论，未来仍条件后续。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "多尺度合并作为首轮共享主干；核对逐query FiLM通路和211万参数估算，说明单key注意力局限。",
+        "remaining": "联合编码最优性、读头充分性未验证；不新增四路或多状态主干。"
+      },
+      "training": {
+        "status": "pass_for_scope",
+        "evidence": "四臂两种子、原主训练损失/维数不变；两档冻结历史读头只用clean z和同一L_clean。",
+        "remaining": "新增读头资格拟合须计入F11共同预算，实际步数/精度/数值尚未锁。"
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "原头及4x256/4x512新头分开报告；各表示同预算，最终留出不挑头，读差不能推出丢失。",
+        "remaining": "容量比较是有限配方，需锁排名变化处置和停止阈值；无实际拟合。"
+      },
+      "data": {
+        "status": "open",
+        "evidence": "同源多周期观察/元信息和原分区不变；重复覆盖作为风险保留。",
+        "remaining": "数据资格未完成，无新原始扫描。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "只更新roadmap/JSON和追加事件；参数量仅标量算术，未实例化神经网络。",
+        "remaining": "没有新代码、CUDA、恢复或科学验收。"
+      }
+    }
   }
 }
