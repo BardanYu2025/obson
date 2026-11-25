@@ -2094,6 +2094,27 @@
         "evidence": "仅现行文档与JSON和追加日志；冻结实验不改，无新代码/训练入口。",
         "remaining": "尚无真实CUDA前反向、恢复与离机资产；计划不是实施验收。"
       }
+    },
+    "packing_order_contract": {
+      "array_index_is_time": false,
+      "ordinal_position_embedding": false,
+      "physical_order_sources": [
+        "bound end-age/duration/period features",
+        "availability-based causal mask",
+        "candidate interval relation bias"
+      ],
+      "preprocessing": "previous-close and rolling statistics computed on real contract timelines before any token packing permutation",
+      "canonical_storage": "sort by availability, period and stable identity for inspection; not a substitute for mask",
+      "permutation": "permute entire market records, metadata, Value sources and both axes of masks/relations, terminal-state identity fixed; market outputs equivariant and z invariant in deterministic exact arithmetic",
+      "not_invariance": "moving price/activity between fixed timestamps changes the history; no injectivity guarantee for lossy z",
+      "planned_checks": [
+        "whole-record permutation within numerical tolerance",
+        "future key exclusion independent of row order",
+        "equal-close cross-scale mutual visibility",
+        "separate temporal-content sensitivity diagnostic"
+      ],
+      "implemented_or_tested": false,
+      "source": "https://arxiv.org/html/1706.03762v7#S3.SS5"
     }
   },
   "architecture_simplicity_review_20261125": {
