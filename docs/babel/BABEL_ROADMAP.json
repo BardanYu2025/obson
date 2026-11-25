@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v2-current-only",
   "updated": "2026-11-25",
-  "current_iteration": "mathematical_audit_and_unexecuted_objective_correction",
-  "current_iteration_scope": "F01/F05/F08/F11：数学条件、目标/采样/梯度/概率评分复核；仅修订未执行方案，不增架构模块/训练组。",
+  "current_iteration": "representation_first_external_context_later",
+  "current_iteration_scope": "F01/F05/F11：历史内容与当前描述优先；F08及未来用途条件保留。首批2x2训练因子改为历史掩码，未来编码梯度为0。",
   "current_work_mode": {
     "mode": "design_and_records_only",
     "requested_on": "2026-11-24",
@@ -28,14 +28,14 @@
     {
       "id": "N01",
       "title": "每根已收盘bar的因果状态",
-      "requirement": "状态只能使用截至该bar收盘的已知行情。未来行情可作为预测训练标签，联合方案允许相应损失更新编码器；未来真实值不得倒灌编码输入或自由外推过程。",
+      "requirement": "状态只使用截至bar收盘的可得行情；首批不使用未来标签更新编码器。后续若单独立项预测，未来标签可用于监督但不得倒灌输入或自由生成。",
       "acceptance": "未来扰动/截断不改已有状态，训练后权重也要检查。",
       "status": "ongoing_contract_not_blanket_accepted"
     },
     {
       "id": "N02",
       "title": "行情信息压缩，而非拟合几条规则",
-      "requirement": "价格路径、局部形态和有用成交/持仓活动应易于读取；允许有损压缩，不要求100%还原所有影线。",
+      "requirement": "优先保留价格路径、局部形态和有用成交/持仓内容，支持当前描述与后续复用；允许有损，不要求100%影线还原，不按纯K线未来能力删信息。",
       "acceptance": "分开当前字段、近中远历史、活动、困难样本和冻结用途；图形像不像不作唯一验收。",
       "status": "ongoing_contract_not_blanket_accepted"
     },
@@ -56,15 +56,15 @@
     {
       "id": "N05",
       "title": "状态可复用，可支持分类/趋势/波动等用途",
-      "requirement": "冻结embedding后验证用途，配同信息原始输入、PCA、当前特征和简单指标基线；不把重训主模型拟合评价规则当语义学习。",
+      "requirement": "当前主验收之一：冻结embedding验证多种只依赖过去的行情描述/复用，匹配简单统计/PCA/原始输入与读头机会；不把某一规则拟合当全部目标。",
       "acceptance": "同权重、同读取机会及事前门槛；历史状态描述不等于未来收益或开仓建议。",
       "status": "ongoing_contract_not_blanket_accepted"
     },
     {
       "id": "N06",
       "title": "保留未来逐bar外推方向",
-      "requirement": "真实新bar刷新后预测与没有新行情的自由概率递推分开；若预测真实未来embedding，其目标应是E(H_(t+h))，不可把缺少未来新bar的历史状态当真值。旧固定128示例仍是E(2..129)而非E(2..128)；概率头内部u不自动等同真实encoder状态。",
-      "acceptance": "状态相似度与新增价格增益分别评价；按步长给误差/基线skill/可用范围，不用未来重置或重新锚定。",
+      "requirement": "方向保留而非首批前置：以后可由z、公开元信息及当时可得舆情/市场因子共同预测。真实新bar刷新与自由概率递推分开；真实未来embedding目标仍是E(H_(t+h))，内部u不得冒充。",
+      "acceptance": "未来用途单独验收并检查z、因子、融合和同信息原历史增益；当前历史/状态交付不依赖预测通过，未评价不得标失败。",
       "status": "ongoing_contract_not_blanket_accepted"
     },
     {
@@ -77,7 +77,7 @@
     {
       "id": "N08",
       "title": "高效、可恢复的AutoDL交付",
-      "requirement": "本地只做合成测试/CPU数据与报告核验；真实模型在AutoDL；features/babel准备推送；成功失败均导出到/root/autodl-tmp/download。",
+      "requirement": "本地只做合成测试/CPU数据与报告核验；真实模型在AutoDL；codex/babel-next准备推送；成功失败均导出到/root/autodl-tmp/download。",
       "acceptance": "可运行时一次给完整启动/恢复/导出命令；同批必要对照，资源预算明确，不删除来源来过预检。",
       "status": "ongoing_contract_not_blanket_accepted"
     },
@@ -94,10 +94,6 @@
     "F02",
     "F04",
     "F05",
-    "F06",
-    "F07",
-    "F08",
-    "F09",
     "F10",
     "F11",
     "V13"
@@ -107,7 +103,7 @@
       "id": "F01",
       "title": "从头全位置监督与相同完整历史职责",
       "current_status": "design_active",
-      "current_role": "完整历史端点/查询覆盖；干净保留、合法历史掩码和实际联合梯度",
+      "current_role": "完整历史端点/查询覆盖；干净保留与历史掩码编码梯度2x2，不含未来编码梯度",
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
@@ -147,7 +143,7 @@
       "id": "F05",
       "title": "宽度、层数、头数与信息组织",
       "current_status": "design_active",
-      "current_role": "2×2结构因子：关系与Value通路对普通因果主干；旧输入四臂仍不排队",
+      "current_role": "结构因子：普通主干与关系/Value，训练因子为额外历史掩码；旧输入四臂不排队",
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
@@ -156,8 +152,8 @@
     {
       "id": "F06",
       "title": "接收真实新bar后刷新状态，再做下一步预测",
-      "current_status": "design_active",
-      "current_role": "真实新bar刷新后的预测与评价",
+      "current_status": "retained_conditional_not_current_stage",
+      "current_role": "合格状态后，接收真实新bar和当时可得外部因子的刷新预测；当前不安排",
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
@@ -166,8 +162,8 @@
     {
       "id": "F07",
       "title": "无新行情的未来状态自由自回归",
-      "current_status": "design_active_with_conditional_extensions",
-      "current_role": "自由概率路径评价；预测真实未来z需新证据",
+      "current_status": "retained_conditional_not_current_stage",
+      "current_role": "无未来真值的自由路径/真实未来状态研究条件保留；不是当前表示门槛",
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
@@ -176,8 +172,8 @@
     {
       "id": "F08",
       "title": "预测目标联合更新编码器",
-      "current_status": "design_active",
-      "current_role": "C-A及D-B联合监督比较；未来与掩码作为整套目标，不单独归因",
+      "current_status": "retained_conditional_not_current_stage",
+      "current_role": "未来目标联合更新编码器条件保留；当前C-A/D-B仅检验掩码梯度，不回答本编号",
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
@@ -186,8 +182,8 @@
     {
       "id": "F09",
       "title": "趋势/残差分解与概率未来、短期噪声",
-      "current_status": "design_active_with_conditional_extensions",
-      "current_role": "概率不确定性；额外趋势残差分解不默认进入",
+      "current_status": "retained_conditional_not_current_stage",
+      "current_role": "概率不确定性及外部背景用途保留；不作为当前编码器训练或验收",
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
@@ -207,7 +203,7 @@
       "id": "F11",
       "title": "冻结用途、重建阶段退出与可用模型交付",
       "current_status": "design_active",
-      "current_role": "冻结复用、内容相似检索、退出和完整资产；原始z余弦无默认语义保证",
+      "current_role": "按历史保留与冻结当前描述/复用交付可恢复状态；预测成绩不是本阶段门槛",
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
@@ -387,11 +383,10 @@
       "F08"
     ]
   },
-  "active_phase": "design_only_state_semantics_mask_dependency_and_factorial_run_card",
+  "active_phase": "design_only_history_retention_current_description_and_mask_factorial_card",
   "active_order": [
     "F01",
     "F05",
-    "F08",
     "F11",
     "V13"
   ],
@@ -399,12 +394,14 @@
     "status": "design_revision_pending_exact_card_no_execution",
     "task_ids": [
       "F01",
+      "F02",
+      "F04",
       "F05",
-      "F08",
+      "F10",
       "F11",
       "V13"
     ],
-    "action": "在codex/babel-next锁新数据快照/资格、遮挡依赖、共同标量与截断对照的梯度、采样风险/概率评分坐标及资源卡；实施需明确授权并新建独立版本，不导入旧链。",
+    "action": "锁历史保留/当前描述的资格和验收题目，以及历史掩码依赖、抽样/权重与资源卡；未来融合/联合训练条件保留，不自动启动。",
     "ready_entrypoint": null,
     "old_commands_active": false,
     "automatic_reruns": false
@@ -420,7 +417,9 @@
     "status": "revised_proposal_not_locked_zero_authorized",
     "automatic_extensions": false,
     "previous_proposed_main_workers": 6,
-    "change_reason": "未执行三臂替换为结构×训练2×2，两种子；不是新增授权。"
+    "change_reason": "按用户表示优先的澄清，保留结构×历史掩码四臂/两种子8worker提案；移除首批概率训练/预测头预算，不新增授权。",
+    "forecast_head_training_in_current_stage": false,
+    "future_encoder_gradient_weight": 0
   },
   "new_data_first_model_design_20261125": {
     "date": "2026-11-25",
@@ -430,10 +429,6 @@
       "F02",
       "F04",
       "F05",
-      "F06",
-      "F07",
-      "F08",
-      "F09",
       "F10",
       "F11",
       "V13"
@@ -449,8 +444,8 @@
       "N08",
       "N09"
     ],
-    "user_correction": "用户要以新分钟数据重新思考，用旧经验约束错误而非沿旧计划继续；指出11月24日新架构/新数学内容过薄。",
-    "recommendation": "同源分钟多视图→共同联合bar映射→普通/关系与Value因果主干→单状态→历史/掩码/概率用途；结构×训练2×2，设计未执行。",
+    "user_correction": "用户要以新分钟数据重新思考，用旧经验约束错误而非沿旧计划继续；指出11月24日新架构/新数学内容过薄。；2026-11-25进一步明确历史保留与当前描述优先，未来结合外部背景为后续用途。",
+    "recommendation": "同源分钟多视图→普通/关系Value因果编码→单z→共享历史头及冻结当前描述；结构×历史掩码2x2。未来融合和概率头条件后续，当前未执行。",
     "not_inherited_as_requirements": [
       "旧28维/EMA组合",
       "原Q与0.3活动权重",
@@ -471,7 +466,8 @@
         "main": 44,
         "index": 6
       },
-      "inventory_status": "20261124_full_audit; later counts/sizes check only; current synchronization completion not asserted"
+      "inventory_status": "20261124_full_audit; later counts/sizes check only; current synchronization completion not asserted",
+      "endpoint_eligibility": "observed input/warmup/query support only in first stage; future label availability not used to screen current samples"
     },
     "features": {
       "numeric_classes": 9,
@@ -580,45 +576,53 @@
       "historical": "0.6 price +0.2 shape +0.2 activity, proposal not optimality claim",
       "price": "half relative path, half adjacent differences derived from predictions",
       "scale_and_age": "fixed train field/period scales; view-average and valid agebands1-16/17-64/>64; age0 separate; missing not zero",
-      "future": "teacher-forced joint Student-t NLL of60 trading-minute log returns standardized by fixed origin sigma; real-prefix likelihood is exact chain scoring; marginal/free-generation evaluation separate",
-      "future_decoder": "2-layer GRU256 conditioned on z; nu>2 conditional step variance=s^2*nu/(nu-2), not variance=s^2; scale floor fixed before runs; continuous-return approximation, no true future volume/OI",
-      "joint_lambda": "lambda_M and lambda_P fixed before scores using common target scaling, initial gradients and resource qualification; not locked; positive from start, common LR warmup only",
-      "gradient_control": "C/D differentiate a common scalar L_history+lambda_M*L_mask+lambda_P*L_future for encoder and heads. A/B detach auxiliary encoder paths only; all heads use the same weighted objectives across arms; shared history head gets clean plus weighted mask. Same separate encoder/head clipping and recorded actual updates. Supersedes unweighted-head draft at1fdca9c; no executed run affected.",
+      "joint_lambda": "lambda_M fixed before scores using common scales/gradient and resource qualification, not locked; lambda_P=0 and no future branch in first stage",
+      "gradient_control": "C/D differentiate L_history+lambda_M*L_mask for encoder/shared history head; A/B detach only masked encoder path. All heads have identical weighted clean/masked opportunities, separate common clipping. No probability head or future-label indirect path.",
       "age0_mix": "supervised and separately evaluated; final mixing weight against historical agebands open_run_card_detail",
       "masked": "same historical query decoder on E(masked H_t); raw-minute dependency closure covers aggregates, previous-close ratios, rolling scales and public side info; only past targets excluding public current price anchor",
-      "mixed": "clean and masked forward with shared encoder weights; fixed paired task/endpoint/query/mask schedule; combine encoder gradients before update; no whole-state equality loss",
-      "interpretation": "history-type describes direct encoder gradients; auxiliary heads including shared historical decoder are trained comparably in all arms; implicit shared-head adaptation is common, not omitted",
-      "joint_scalar": "C/D L_joint=L_history+lambda_M*L_mask+lambda_P*L_future, same task coefficient for all parameter blocks before optimizer/clipping; A/B explicit semi-gradient encoder control",
+      "mixed": "paired clean and masked forwards with shared weights; fixed endpoints/queries/masks and combined encoder update; no whole-z equality; no future targets",
+      "interpretation": "history-type labels direct encoder gradients; all shared historical heads receive matched mask adaptation; current objective contains no forecast",
+      "joint_scalar": "C/D L_current=L_history+lambda_M*L_mask; A/B encoder has clean gradient only with shared weighted head adaptation; future weight0",
       "query_risk": "E_(t~rho) sum_q w_tq*loss_tq; sample q~p with w/p or sample q~w with plain mean; fixed eligible support and normalization before sampling; same measure across arms",
-      "difference_risk": "predict both real adjacent same-period legal intervals; no arbitrary sampled-pair adjacency or true-neighbor decoding; quadratic analogy aI+bD^T D only within stated assumptions, not global SmoothL1 identity"
+      "difference_risk": "predict both real adjacent same-period legal intervals; no arbitrary sampled-pair adjacency or true-neighbor decoding; quadratic analogy aI+bD^T D only within stated assumptions, not global SmoothL1 identity",
+      "future_status": "not_in_current_stage; no future head instantiated or fitted; future gradients absent; conditional F08 retained",
+      "lambda_P": 0
     },
     "matrix": [
       {
         "name": "A",
         "encoder": "ordinary_causal",
         "encoder_objective": "history",
-        "auxiliary_head_encoder_gradient": false
+        "auxiliary_head_encoder_gradient": false,
+        "future_encoder_gradient": false,
+        "probability_head_in_current_stage": false
       },
       {
         "name": "B",
         "encoder": "relation_value_causal",
         "encoder_objective": "history",
         "auxiliary_head_encoder_gradient": false,
-        "comparison": "B-A complete organization recipe"
+        "comparison": "B-A complete organization recipe",
+        "future_encoder_gradient": false,
+        "probability_head_in_current_stage": false
       },
       {
         "name": "C",
         "encoder": "ordinary_causal",
-        "encoder_objective": "history+masked_content+probabilistic_future",
+        "encoder_objective": "history+masked_past_content",
         "auxiliary_head_encoder_gradient": true,
-        "comparison": "C-A joint supervision recipe"
+        "comparison": "C-A extra historical-mask encoder-gradient effect",
+        "future_encoder_gradient": false,
+        "probability_head_in_current_stage": false
       },
       {
         "name": "D",
         "encoder": "relation_value_causal",
-        "encoder_objective": "history+masked_content+probabilistic_future",
+        "encoder_objective": "history+masked_past_content",
         "auxiliary_head_encoder_gradient": true,
-        "comparison": "D-C structure; D-B supervision; interaction(D-B)-(C-A)"
+        "comparison": "D-C whole-structure effect; D-B historical-mask gradient effect; interaction(D-B)-(C-A)",
+        "future_encoder_gradient": false,
+        "probability_head_in_current_stage": false
       }
     ],
     "fairness": {
@@ -638,13 +642,14 @@
         "readout refit budget",
         "clean/masked endpoint and target eligibility",
         "mask realizations",
-        "auxiliary head training opportunities"
+        "shared historical-head clean/masked training opportunities"
       ],
       "not_equal_claimed": "actual GPU time/FLOPs",
-      "not_identified": "individual relation versus Value contribution; individual mask versus future contribution; full recipe interaction estimable only with uncertainty support",
+      "not_identified": "individual relation versus Value contribution; future supervision or factor-fusion value not tested; mask-gradient effect defined with shared-head adaptation matched",
       "selection": "lastN primary; predeclared best secondary only",
-      "after_training": "freeze all encoders; fit equally initialized/budgeted current-state and AR/direct-quantile readouts; raw/simple baselines",
-      "parameter_match_scope": "common backbone dimensions/tensors initialized identically by seed; effective extra bias/mixing parameters and real FLOPs/cache disclosed; no exact-param claim"
+      "after_training": "freeze all encoders; equally initialized/budgeted current descriptive linear/small-MLP readouts with raw/simple baselines; no probability-head fitting in first stage",
+      "parameter_match_scope": "common backbone dimensions/tensors initialized identically by seed; effective extra bias/mixing parameters and real FLOPs/cache disclosed; no exact-param claim",
+      "task_scope": "2x2 structure by extra historical-mask encoder supervision; labels and eligibility use observed history only"
     },
     "optimizer_proposal": {
       "name": "AdamW",
@@ -672,59 +677,52 @@
         "sn",
         "OI"
       ],
-      "qualification": "all input/warmup/query/forecast support within assigned partition for strict score; online-known-past score separate; no train/stat/pretrain final holdout"
+      "qualification": "current: all input/warmup/historical-query support within assigned partition; no future60 requirement. Later forecast uses separately locked label-support inventory; no train/stat/pretrain final holdout."
     },
     "evaluation": {
       "ledgers": [
         "retention",
-        "frozen_reuse",
-        "probability",
-        "runtime",
-        "later_trading"
+        "frozen_current_description_and_reuse",
+        "runtime_and_recovery"
       ],
       "required_baselines": [
-        "zero-change",
-        "downsample/interpolation",
+        "zero-change history",
+        "same-information downsample/interpolation",
         "train-only PCA with declared capacity",
-        "direct-history statistics/models",
-        "zero-return/historical-volatility distribution",
-        "simple AR/volatility model",
-        "same-input direct forecast"
-      ],
-      "forecast_horizons": [
-        1,
-        5,
-        15,
-        60
+        "direct-history descriptive statistics",
+        "same-information raw-history readouts"
       ],
       "diagnostics": [
-        "no-z and mismatched-z",
-        "teacher_forced versus free",
-        "real refresh versus free",
         "current and recent16minute content",
         "all views/agebands/fields and P95",
-        "low-volatility/gaps/pressure/inactivity"
+        "low-volatility/gaps/pressure/inactivity",
+        "same-capacity fresh frozen-state readouts",
+        "no-z/mismatched-z for historical/current readouts",
+        "causal/current-input perturbation checks"
       ],
       "uncertainty": "paired contract-time and week/month groups, not overlapping-minute iid bootstrap; two seeds are minimum stability checks, do not estimate full initialization variance reliably; time groups cannot replace training replicates",
-      "forecast_score_contract": {
-        "targets": "single-step and cumulative log returns at fixed horizons, path vector in fixed training coordinates; price quantiles/coverage for display",
-        "joint_nll": "sum of real-prefix conditional negative log densities equals realized-path joint NLL, not leakage at generation; generated prefixes do not give that exact joint score",
-        "marginal_nll": "requires integration of intermediate outcomes; one conditional Student-t is not a multistep marginal",
-        "jacobian": "u=r/sigma_t; NLL_r=NLL_u+log(sigma_t) per step, H log(sigma_t) per path; CRPS_r=sigma_t*CRPS_u",
-        "crps": "univariate marginal return scoring, finite first moment; not a joint temporal-dependence score",
-        "energy_score": "E||X-y||-.5 E||X-Xprime|| on independent complete return paths; fixed Euclidean coordinates/scales and finite first moment; common MC budget/errors not yet locked",
-        "price_tail_limit": "nondegenerate untruncated Student-t log return has infinite E[exp(R)]; no theoretical mean-price claims or price-CRPS requiring finite first moment; no silent sample clipping",
-        "comparability": "same frozen probability-head opportunities across arms; added path scoring is evaluation only, no new workers"
-      }
+      "not_current_gates": [
+        "forecast CRPS/NLL/ES",
+        "next-bar direction accuracy",
+        "trading profit",
+        "external-factor availability"
+      ],
+      "current_descriptions": "predeclared past-only direction/path efficiency/volatility/drawdown/volume-OI content, multiple horizons/fields; no unique true regime or entry-signal claim"
     },
     "acceptance_proposal": {
       "not_locked": true,
-      "structure_effect": "B-A and D-C price content MSE>=5% proposal, group intervals required",
-      "joint_effect": "C-A and D-B fresh frozen-head CRPS>=3% and better than simple probability baseline, proposal",
+      "primary": [
+        "important historical content retention",
+        "frozen current-state description/reuse under matched readout opportunity"
+      ],
+      "structure_effect": "B-A and D-C on primary representation outcomes; old price-content MSE5% remains proposal only",
+      "mask_effect": "C-A and D-B on same primary outcomes; not forecast improvement; exact fresh-readout metric/threshold pending",
       "promotion_guard": "Every promoted candidate protects A and applicable matched control: recent16/currentbody<=5% degradation, core activity/tail<=10%; aggregate cannot compensate",
-      "history_or_similarity_only": "Separate uses require predeclared acceptance; no forecast success inferred; otherwise exploratory only",
-      "required": "All thresholds/aggregations/comparison order and dependence-aware uncertainty locked before scores; no posthoc pair choice",
-      "superiority_scope": "task/data/cost-qualified paired gains plus common-A and matched-control content protections; theory explains conditional properties, not global superiority; thresholds and comparison order remain open"
+      "baseline_delivery": "A may qualify by predeclared absolute/content/current-use standards; does not need to beat itself. More complex variants must establish additional gain.",
+      "future_forecast_gate": false,
+      "future_CRPS3pct": "retained proposal only for a later prediction-use version, not current selection/promotion",
+      "required": "lock absolute content utility, current reuse metrics, comparison order, uncertainty, costs and stopping rules before any scores; no posthoc threshold relaxation",
+      "superiority_scope": "historical/current representation only; retention does not guarantee arbitrary external-factor synergy; predictions not evaluated are not failed"
     },
     "mathematical_reserves": [
       {
@@ -763,7 +761,7 @@
       "final data/calendar/selection/field qualification",
       "mask dependency closure and deterministic missing features",
       "relation/value shape, state-self convention and actual parameter/compute accounting",
-      "lambda_M/P and age0/query/task schedule",
+      "lambda_M; lambda_P fixed0 and age0/query/task schedule",
       "N/batch/readout budget/GPU-hours/disk",
       "group support, comparison order, metric aggregation and acceptance"
     ],
@@ -781,33 +779,33 @@
     "review": {
       "purpose": {
         "status": "pass_for_scope",
-        "evidence": "以有损内容和用途风险定义状态，区分理想信息损失、有限头误差和真实可交付能力。",
-        "remaining": "没有新能力成绩或理论最优证明。"
+        "evidence": "按用户明确优先级，历史保留与当前描述/复用是当前主线，纯K线预测不是成功条件。",
+        "remaining": "近似重建不保证所有未来外部组合都可用；无新模型成绩。"
       },
       "architecture": {
         "status": "pass_for_scope",
-        "evidence": "核对因果归纳条件、softmax计数效应、Value凸混合局部界、OHLC几何和内容距离条件。",
-        "remaining": "实际数据依赖、mask、关系/自连接和数值资格仍待实现；结构优势未验证。"
+        "evidence": "保留z=E(H)和公开元信息；外部F在后续独立用途融合，相同完整输入应有相同确定性状态。",
+        "remaining": "未观察市场隐变量不能凭空编码；外部融合尚未实现。"
       },
       "training": {
         "status": "pass_for_scope",
-        "evidence": "修订未执行分块任务权重，联合组采用共同λ标量；明确w/p抽样风险及路径/差分频率意义。",
-        "remaining": "λ、w、ρ、age0、N/batch仍待锁；没有真实模型梯度验证。"
+        "evidence": "首批四臂仅历史保留/额外历史掩码梯度；lambda_P=0且不实例化概率头，头部掩码机会配对。",
+        "remaining": "lambda_M、w/rho/age0、N/batch及真实梯度检查未锁。"
       },
       "validation": {
         "status": "pass_for_scope",
-        "evidence": "区分联合NLL与自由边际，补尺度Jacobian、收益CRPS及路径ES；承认两种子与计算成本限制。",
-        "remaining": "路径样本数、相关组区间、多比较/选择顺序及数值接受线未锁。"
+        "evidence": "内容保留和冻结当前描述为主验收；未来NLL/CRPS/ES规则仅条件保留，不选模、不晋升、不阻塞交付。",
+        "remaining": "内容绝对可用质量、复用指标、数值门槛与比较次序待锁。"
       },
       "data": {
         "status": "open",
-        "evidence": "因果性证明明确依赖输入、统计、预热、样本选择与侧信息的可用性；本轮没有新原始扫描。",
-        "remaining": "最终快照、历史日历、量仓口径、缺失与选择资格仍开放。"
+        "evidence": "首批只按历史/预热/查询资格筛选，不以未来60步完整性筛样本；后续因子需发布时间/到达/版本。",
+        "remaining": "分钟快照/日历/口径仍未全部合格；没有外部因子数据资格。"
       },
       "engineering": {
         "status": "pass_for_scope",
-        "evidence": "只更新现行roadmap和追加进度；局部代数和反例经numpy/标量算术核对，冻结实验未改。",
-        "remaining": "代数核对不是真实前反向、CUDA、恢复或科学验收；没有新入口。"
+        "evidence": "同步现行roadmap/项目规则/入口并追加日志；5388a7a保留旧未执行三任务草案，冻结实验未改。",
+        "remaining": "仅方案修订，无模型、GPU执行、恢复或新科学验收。"
       }
     },
     "roadmap_sections": [
@@ -865,8 +863,9 @@
         "joint coefficients, primary metric aggregation/comparison and thresholds",
         "explicit endpoint/query target measure and unbiased estimator",
         "joint scalar weights and detached-control derivative checks",
-        "log-return density Jacobian, conditional/joint/marginal scoring and common path MC budget",
-        "causal dependency, duplicate-token and output-geometry invariants with defined scope"
+        "causal dependency, duplicate-token and output-geometry invariants with defined scope",
+        "no future encoder or probability-head path in first matrix",
+        "past-only endpoint eligibility and frozen-current-use primary gates"
       ],
       "status": "open"
     }
@@ -950,9 +949,9 @@
   "progress_log": "docs/babel/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "revision_record": {
-    "reason": "用户明确要求复审数学严谨性与优越性。",
-    "method_change": "替代尚未执行的编码器λ、头未加权方案：联合组对同一加权标量求导，所有臂头用同λ，对照辅助编码路径显式截断；明确对数收益Student-t、Jacobian和联合/边际/路径评分。",
-    "supersedes_unexecuted_design_commit": "1fdca9c",
+    "reason": "用户明确：保存重要历史和表征当前行情更重要，未来可结合舆情/市场因子预测。",
+    "method_change": "首批从history+mask+future改为history+mask，未来梯度0且无概率头；预测晋升条件移至后续用途，样本资格不再要求未来标签。",
+    "supersedes_unexecuted_design_commit": "5388a7a",
     "completed_experiments_reinterpreted": false,
     "new_neural_code": false,
     "new_infrastructure_code": false,
@@ -961,33 +960,33 @@
   "review": {
     "purpose": {
       "status": "pass_for_scope",
-      "evidence": "以有损内容和用途风险定义状态，区分理想信息损失、有限头误差和真实可交付能力。",
-      "remaining": "没有新能力成绩或理论最优证明。"
+      "evidence": "按用户明确优先级，历史保留与当前描述/复用是当前主线，纯K线预测不是成功条件。",
+      "remaining": "近似重建不保证所有未来外部组合都可用；无新模型成绩。"
     },
     "architecture": {
       "status": "pass_for_scope",
-      "evidence": "核对因果归纳条件、softmax计数效应、Value凸混合局部界、OHLC几何和内容距离条件。",
-      "remaining": "实际数据依赖、mask、关系/自连接和数值资格仍待实现；结构优势未验证。"
+      "evidence": "保留z=E(H)和公开元信息；外部F在后续独立用途融合，相同完整输入应有相同确定性状态。",
+      "remaining": "未观察市场隐变量不能凭空编码；外部融合尚未实现。"
     },
     "training": {
       "status": "pass_for_scope",
-      "evidence": "修订未执行分块任务权重，联合组采用共同λ标量；明确w/p抽样风险及路径/差分频率意义。",
-      "remaining": "λ、w、ρ、age0、N/batch仍待锁；没有真实模型梯度验证。"
+      "evidence": "首批四臂仅历史保留/额外历史掩码梯度；lambda_P=0且不实例化概率头，头部掩码机会配对。",
+      "remaining": "lambda_M、w/rho/age0、N/batch及真实梯度检查未锁。"
     },
     "validation": {
       "status": "pass_for_scope",
-      "evidence": "区分联合NLL与自由边际，补尺度Jacobian、收益CRPS及路径ES；承认两种子与计算成本限制。",
-      "remaining": "路径样本数、相关组区间、多比较/选择顺序及数值接受线未锁。"
+      "evidence": "内容保留和冻结当前描述为主验收；未来NLL/CRPS/ES规则仅条件保留，不选模、不晋升、不阻塞交付。",
+      "remaining": "内容绝对可用质量、复用指标、数值门槛与比较次序待锁。"
     },
     "data": {
       "status": "open",
-      "evidence": "因果性证明明确依赖输入、统计、预热、样本选择与侧信息的可用性；本轮没有新原始扫描。",
-      "remaining": "最终快照、历史日历、量仓口径、缺失与选择资格仍开放。"
+      "evidence": "首批只按历史/预热/查询资格筛选，不以未来60步完整性筛样本；后续因子需发布时间/到达/版本。",
+      "remaining": "分钟快照/日历/口径仍未全部合格；没有外部因子数据资格。"
     },
     "engineering": {
       "status": "pass_for_scope",
-      "evidence": "只更新现行roadmap和追加进度；局部代数和反例经numpy/标量算术核对，冻结实验未改。",
-      "remaining": "代数核对不是真实前反向、CUDA、恢复或科学验收；没有新入口。"
+      "evidence": "同步现行roadmap/项目规则/入口并追加日志；5388a7a保留旧未执行三任务草案，冻结实验未改。",
+      "remaining": "仅方案修订，无模型、GPU执行、恢复或新科学验收。"
     }
   },
   "design_rationale": {
@@ -1002,14 +1001,14 @@
       "new_reasoning": "已知区间几何作为关系输入；原固定分层/指数先验撤下默认，浅层Value连接借鉴原研究但Babel未验证。"
     },
     "training": {
-      "why": "干净保留、缺失推断、概率未来共享编码器联合学习；对照隔离辅助编码梯度。",
+      "why": "先比较干净历史保留与额外历史掩码编码梯度，未来损失不进入首批；避免按单独预测价值丢掉可能与外部因子协同的信息。",
       "old_lesson": "完整上下文与所有合格位置、真实梯度诊断、同起点同预算。",
-      "new_reasoning": "多视图分钟依赖闭包支持合法遮挡；2×2区分组织与整个混合目标的作用，先不新增对比/防塌缩目标。"
+      "new_reasoning": "多视图依赖闭包支持合法历史遮挡；2x2区分结构和历史掩码作用；外部融合/未来联合条件保留。"
     },
     "evaluation": {
-      "why": "分别结算内容、复用、概率和代价，避免单一重建分数代表全部目标。",
+      "why": "当前交付以内容、冻结当前描述/复用、成本与恢复为准；未来评分独立后续，不否决合格行情状态。",
       "old_lesson": "共同题目、新读头公平机会、尾部保护、独立留出与工程/科学状态区分。",
-      "new_reasoning": "物理回读、内容定义的检索、冻结新用途和概率评分分开；检索排除重叠捷径，所有候选对A保护。"
+      "new_reasoning": "先验证同一状态跨多种过去描述可读；未来按z/因子/融合/同信息原历史配对检验，不保证任意用途充分。"
     }
   },
   "stage_sequence": [
@@ -1031,10 +1030,9 @@
       "ids": [
         "F01",
         "F05",
-        "F08",
         "F11"
       ],
-      "status": "relation_value_and_mixed_task_design_exact_dependency_gradient_budget_pending"
+      "status": "history_mask_and_current_use_card_data_weights_budgets_pending"
     },
     {
       "order": 3,
@@ -1042,10 +1040,6 @@
       "ids": [
         "F01",
         "F05",
-        "F06",
-        "F07",
-        "F08",
-        "F09",
         "F10",
         "F11"
       ],
@@ -1053,10 +1047,9 @@
     },
     {
       "order": 4,
-      "name": "one_matched_batch_and_decision",
+      "name": "matched_history_mask_batch_and_representation_decision",
       "ids": [
         "F05",
-        "F08",
         "F11"
       ],
       "status": "not_started"
@@ -1214,7 +1207,8 @@
       }
     },
     "prior_unexecuted_design_evidence": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/BABEL_ROADMAP.json",
-    "latest_math_qualification": "mathematical_audit_20261125; unexecuted per-head weighting is superseded there"
+    "latest_math_qualification": "mathematical_audit_20261125; unexecuted per-head weighting is superseded there",
+    "scope_after_representation_priority": "Prior derivations remain reference, but any probability/joint-future execution or gating prescription is superseded by representation_priority_20261125; no prior run affected."
   },
   "branch_policy": {
     "active": "codex/babel-next",
@@ -1314,13 +1308,13 @@
       "unit": "一个已收盘端点t及它自己的完整H_t，不以窗口早期短前缀替代",
       "coarse_availability": "只用截至t已经闭合的粗格；粗格未闭合期间的新分钟仍可由1分钟视图提供",
       "arrival_assumption": "没有真实到达日志时，闭合可用是离线理想假设；实盘延迟和历史修订未验证",
-      "tasks": "干净历史保留、已发生内容遮挡、未来监督答案分开；共享编码器的现行梯度矩阵不变",
+      "tasks": "current: clean history retention and masked already-observed content; forecast labels and factor fusion only in later use versions",
       "mask_closure": "粗格、前收、滚动统计、指标和公开辅助信息中的被遮答案都必须清理；精确算法尚未锁定"
     },
     "sampling_and_splits": {
       "training": "按品种/合约/时间组抽端点，配额待卡锁定；不按未来涨幅或形态好看筛选",
       "fairness": "所有臂相同端点、查询、输入支持和训练专属尺度",
-      "partition": "沿用既定时间及跨品种提案；在拟合统计前分区，计入全部输入/预热/历史及未来标签支持",
+      "partition": "retain calendar/product splits; current support=input/warmup/history queries only; later prediction includes its own future label purge",
       "shuffle": "训练分区内部打乱合法；重叠样本随机分到训练/验证非法",
       "evaluation": "固定端点与近中远/尺度/字段清单，按时间/合约组报告；不将重叠分钟视作独立样本"
     },
@@ -1646,6 +1640,133 @@
         "status": "pass_for_scope",
         "evidence": "只更新现行roadmap和追加进度；局部代数和反例经numpy/标量算术核对，冻结实验未改。",
         "remaining": "代数核对不是真实前反向、CUDA、恢复或科学验收；没有新入口。"
+      }
+    },
+    "authorized_cuda_runs_added": 0,
+    "training_code_modified": false,
+    "scope_after_representation_priority": "Prior derivations remain reference, but any probability/joint-future execution or gating prescription is superseded by representation_priority_20261125; no prior run affected."
+  },
+  "representation_priority_20261125": {
+    "status": "design_revised_not_implemented_or_trained",
+    "task_ids": [
+      "F01",
+      "F05",
+      "F11"
+    ],
+    "conditional_task_ids": [
+      "F06",
+      "F07",
+      "F08",
+      "F09"
+    ],
+    "user_intent": "相同K线历史不唯一决定下一根；保存重要历史和表征当前行情更重要；未来可结合舆情/市场因子。",
+    "clarifications": [
+      "相同OHLC不必等同所有量仓/长历史/元信息相同；确定性E收到相同完整输入应输出同z。",
+      "不同结果可能包含遗漏背景、新信息及随机性，不据此断言纯不可约噪声或毫无概率可预测性。",
+      "近似重建不能保证任意未来外部因子用途充分。"
+    ],
+    "mainline": {
+      "encoder": "z=E(H), retain declared market history and current state content",
+      "primary_acceptance": [
+        "past content retention",
+        "frozen current description and reuse",
+        "causality/cost/recovery"
+      ],
+      "not_required": "Kline-only future prediction gain"
+    },
+    "current_training": {
+      "matrix": "ordinary/relation-value x history/extra-history-mask-gradient",
+      "main_workers_proposal": 8,
+      "seeds": [
+        42,
+        43
+      ],
+      "lambda_P": 0,
+      "forecast_head_instantiated": false,
+      "future_label_endpoint_filter": false
+    },
+    "superseded": {
+      "commit": "5388a7a",
+      "former_C_D_objective": "history+masked_content+probabilistic_future",
+      "former_CRPS_promotion": "moved to later use only",
+      "unexecuted": true,
+      "historical_results_changed": false
+    },
+    "future_interface": {
+      "prediction": "p(Y|z,M,F_asof)",
+      "initial_policy": "freeze delivered encoder; fuse as-of factors in a separate use experiment; later joint tuning requires explicit hypothesis/version",
+      "factors": "sentiment/news, broader-market factors and other qualified context; no collection/training authorized now",
+      "timing": "actual publication/arrival/revision identity, not hindsight event timestamps; missing factor not numeric zero",
+      "controls": [
+        "z only",
+        "F only",
+        "z+F",
+        "same-information raw H+F"
+      ],
+      "limits": "external factors may add no usable gain; any forecast still probabilistic"
+    },
+    "mathematics": {
+      "conditional_gap": "E KL(p(Y|H,M,F)||p(Y|Z,M,F))=I(Y;H|Z,M,F) under deterministic Z and well-defined expectations",
+      "counterexample": "independent fair H,F; Y=H xor F. I(Y;H)=0, I(Y;H|F)=1bit. Constant Z loses no H-only forecast value but loses the one-bit combined value.",
+      "interpretation": "supports retaining broad history before selecting solely for H-only predictions; not evidence markets obey XOR or measured Babel synergy",
+      "source": "https://arxiv.org/abs/1004.2515",
+      "IB_target_specific_reference": "https://arxiv.org/abs/physics/0004057"
+    },
+    "retained_forecast_design": {
+      "status": "conditional_not_queued",
+      "decoder": "2-layer GRU256 conditioned on z; nu>2 conditional step variance=s^2*nu/(nu-2), not variance=s^2; scale floor fixed before runs; continuous-return approximation, no true future volume/OI",
+      "objective": "teacher-forced joint Student-t NLL of60 trading-minute log returns standardized by fixed origin sigma; real-prefix likelihood is exact chain scoring; marginal/free-generation evaluation separate",
+      "evaluation": {
+        "forecast_horizons": [
+          1,
+          5,
+          15,
+          60
+        ],
+        "forecast_score_contract": {
+          "targets": "single-step and cumulative log returns at fixed horizons, path vector in fixed training coordinates; price quantiles/coverage for display",
+          "joint_nll": "sum of real-prefix conditional negative log densities equals realized-path joint NLL, not leakage at generation; generated prefixes do not give that exact joint score",
+          "marginal_nll": "requires integration of intermediate outcomes; one conditional Student-t is not a multistep marginal",
+          "jacobian": "u=r/sigma_t; NLL_r=NLL_u+log(sigma_t) per step, H log(sigma_t) per path; CRPS_r=sigma_t*CRPS_u",
+          "crps": "univariate marginal return scoring, finite first moment; not a joint temporal-dependence score",
+          "energy_score": "E||X-y||-.5 E||X-Xprime|| on independent complete return paths; fixed Euclidean coordinates/scales and finite first moment; common MC budget/errors not yet locked",
+          "price_tail_limit": "nondegenerate untruncated Student-t log return has infinite E[exp(R)]; no theoretical mean-price claims or price-CRPS requiring finite first moment; no silent sample clipping",
+          "comparability": "same frozen probability-head opportunities across arms; added path scoring is evaluation only, no new workers"
+        }
+      },
+      "acceptance_proposal": "old CRPS3pct remains an unlocked later-use proposal only"
+    },
+    "next": "lock historical content/current description task definition and acceptance, history-mask dependency/weights, data qualification and resources; no automatic forecasting detour",
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "按用户明确优先级，历史保留与当前描述/复用是当前主线，纯K线预测不是成功条件。",
+        "remaining": "近似重建不保证所有未来外部组合都可用；无新模型成绩。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "保留z=E(H)和公开元信息；外部F在后续独立用途融合，相同完整输入应有相同确定性状态。",
+        "remaining": "未观察市场隐变量不能凭空编码；外部融合尚未实现。"
+      },
+      "training": {
+        "status": "pass_for_scope",
+        "evidence": "首批四臂仅历史保留/额外历史掩码梯度；lambda_P=0且不实例化概率头，头部掩码机会配对。",
+        "remaining": "lambda_M、w/rho/age0、N/batch及真实梯度检查未锁。"
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "内容保留和冻结当前描述为主验收；未来NLL/CRPS/ES规则仅条件保留，不选模、不晋升、不阻塞交付。",
+        "remaining": "内容绝对可用质量、复用指标、数值门槛与比较次序待锁。"
+      },
+      "data": {
+        "status": "open",
+        "evidence": "首批只按历史/预热/查询资格筛选，不以未来60步完整性筛样本；后续因子需发布时间/到达/版本。",
+        "remaining": "分钟快照/日历/口径仍未全部合格；没有外部因子数据资格。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "同步现行roadmap/项目规则/入口并追加日志；5388a7a保留旧未执行三任务草案，冻结实验未改。",
+        "remaining": "仅方案修订，无模型、GPU执行、恢复或新科学验收。"
       }
     },
     "authorized_cuda_runs_added": 0,
