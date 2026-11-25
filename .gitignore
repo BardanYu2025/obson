@@ -18,3 +18,12 @@ experiments/*/.venv/
 *.tar.gz
 *.log
 nohup.out
+
+# Preserved local assets from the original checkout, never new experiment inputs
+/artifacts/
+/data.zip
+/live/
+/logs/
+/reports/
+/skills/
+/obson_e6_patch_20260914/

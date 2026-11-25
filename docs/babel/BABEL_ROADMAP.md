@@ -2,7 +2,7 @@
 
 更新：2026-11-25。**这是唯一的当前方案正文，从目标到实施顺序可连续阅读，不需要先读旧实验。** 当前处于方案设计阶段：数据基础审计已做，新模型尚未实现或训练，以下架构和数值均为提案，没有新的模型成绩。
 
-当前工作分支是`codex/babel-next`。新目录只携带当前方案、必要经验、分钟数据审计和独立实验基础设施。旧路线、源码和结果保留于[固定历史提交](https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/BABEL_ROADMAP.md)，不在新分支形成执行队列。迁移身份见[BRANCH_BASELINE.json](BRANCH_BASELINE.json)。
+固定工作目录为`/Users/bardan/Documents/Codex/来自旧电脑-20261031/obson`，与用户PyCharm一致；当前分支为`codex/babel-next`。本分支跟踪文件只携带当前方案、必要经验、分钟数据审计和独立实验基础设施。旧路线、源码和结果保留于[固定历史提交](https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/BABEL_ROADMAP.md)，不在新分支形成执行队列。迁移身份见[BRANCH_BASELINE.json](BRANCH_BASELINE.json)。
 
 **每轮实验一个独立版本目录。** 模型、训练/评价脚本、配置、依赖、测试和说明必须在同一目录；发布或首次运行后冻结，后续改动与修bug新建版本。禁止跨实验导入可变研究代码。详情见[实验目录原则](../../experiments/README.md)。本轮只完成工程隔离，下面的数据、架构与2×2实验提案没有因此变更，也未启动训练。
 

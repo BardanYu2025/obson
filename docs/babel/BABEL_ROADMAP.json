@@ -937,33 +937,33 @@
   "review": {
     "purpose": {
       "status": "pass_for_scope",
-      "evidence": "New-minute goal unchanged; clean branch excludes old execution chains while pinned history retains decisions.",
-      "remaining": "No new model capability or trading evidence."
+      "evidence": "Workspace unified with user PyCharm; research objective unchanged.",
+      "remaining": "No new model capability claimed."
     },
     "architecture": {
-      "status": "pass_for_scope",
-      "evidence": "Current relation/value backbone and 2x2 proposal unchanged; no legacy models copied.",
-      "remaining": "Exact architecture, resource and CUDA implementation gates remain open."
+      "status": "not_applicable",
+      "evidence": "No model or experimental source changed.",
+      "remaining": "Existing design gates unchanged."
     },
     "training": {
-      "status": "pass_for_scope",
-      "evidence": "No new model/training code or GPU work; immutable per-experiment source/config rule added.",
-      "remaining": "Mask, task gradients and budget remain unimplemented/unlocked."
+      "status": "not_applicable",
+      "evidence": "No neural execution or training configuration changes.",
+      "remaining": "Authorized CUDA budget remains zero."
     },
     "validation": {
       "status": "pass_for_scope",
-      "evidence": "Guard and tests cover accidental cross-experiment imports, symlinks, mutation, re-sealing and deleted releases; clean restore still required.",
-      "remaining": "Static guard does not prove arbitrary dynamic dependency isolation or scientific acceptance."
+      "evidence": "Branch, immutable experiment seal and local asset hashes checked after checkout.",
+      "remaining": "Workspace checks are not model validation."
     },
     "data": {
       "status": "pass_for_scope",
-      "evidence": "Only independent CPU audit migrated; core SHA and eight original artifacts unchanged, no full data reread.",
-      "remaining": "Final snapshot and full training qualification remain open."
+      "evidence": "39 formerly tracked local assets backed up and restored with SHA256; external minute root untouched.",
+      "remaining": "No new data qualification performed."
     },
     "engineering": {
       "status": "pass_for_scope",
-      "evidence": "New linked worktree and branch, isolated experiment template, release hashes, CI and tests; source workspace/user edits preserved.",
-      "remaining": "No new-model assets or AutoDL recovery; remote branch-protection enforcement not configured."
+      "evidence": "Primary checkout now holds codex/babel-next; old worktree detached and unlinked from chat; explicit canonical workdir recorded. Original docs edit saved as full file, patch and Git stash.",
+      "remaining": "App attachment API accepts linked worktrees only; primary binding not claimed. All operations explicitly use canonical primary path."
     }
   },
   "design_rationale": {
@@ -1203,5 +1203,18 @@
     "data": "external immutable manifests; no raw-data duplication or training weights in Git",
     "training_authorized": 0,
     "audit_exception": "20261124_minute_audit_v1 is a self-contained CPU audit migration; no historical model/weight dependency."
+  },
+  "workspace_policy": {
+    "canonical_root": "/Users/bardan/Documents/Codex/来自旧电脑-20261031/obson",
+    "branch": "codex/babel-next",
+    "reason": "User keeps PyCharm at original path and requests all subsequent work there.",
+    "use_explicit_workdir": true,
+    "automatic_worktree_creation": false,
+    "unused_worktree": "/Users/bardan/.codex/worktrees/babel-next/obson",
+    "unused_worktree_state": "detached at ad870dd; no longer a chat attachment; not active research workspace",
+    "local_backup": "/Users/bardan/Documents/Codex/来自旧电脑-20261031/obson-local-backup-20261125-135044",
+    "preserved_stash": "0c4171ffed46c058761185fc1aa7585b77c20fdd",
+    "tracked_asset_restoration_count": 39,
+    "external_minute_data_untouched": true
   }
 }
