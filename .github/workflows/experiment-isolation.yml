@@ -1,0 +1,28 @@
+name: Experiment isolation
+on:
+  push:
+    branches: [codex/babel-next]
+  pull_request:
+    branches: [codex/babel-next]
+permissions:
+  contents: read
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      # Pinned actions/checkout v6; only read permissions and no persisted token.
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Check releases and previous published files
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          if [ -n "$BASE_SHA" ] && [ "$BASE_SHA" != "0000000000000000000000000000000000000000" ]; then
+            python3 tools/experiment_guard.py --base "$BASE_SHA"
+          else
+            python3 tools/experiment_guard.py
+          fi
+      - name: Test isolation guard
+        run: python3 -m unittest discover -s tests -v

@@ -1,0 +1,6 @@
+# CPU-only environment used for experiments/20261124_minute_audit_v1/reports/20261124.
+# This is not the AutoDL neural-training environment.
+numpy==2.3.3
+pandas==2.3.2
+pyarrow==26.0.1
+pytest==8.4.2

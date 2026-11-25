@@ -1,0 +1,45 @@
+{
+  "schema": "babel.clean-branch.v1",
+  "date": "2026-11-25",
+  "active_branch": "codex/babel-next",
+  "source_branch": "features/babel",
+  "source_commit": "e060ca98f660579f0784c9f72a2ead6f31f13502",
+  "pinned_history_url": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/",
+  "original_workspace": "/Users/bardan/Documents/Codex/来自旧电脑-20261031/obson",
+  "removed_from_new_tree_files": 830,
+  "removed_tracked_bytes": 252188482,
+  "old_workspace_and_data_modified": false,
+  "carried": [
+    "current roadmap and workflow",
+    "fixed requirements/task dispositions and concise lessons",
+    "minute audit code and synthetic tests",
+    "eight byte-identical November24 audit artifacts"
+  ],
+  "audit_source_sha256": "43ed1387d9eb821bb94147fc9fdc98193fabd87ae699df4303c96c9eb45689f5",
+  "audit_artifacts": {
+    "summary.json": "2dd6eb90300208808c636fb627523207ecbecf216d61923469a6975269eb77e9",
+    "audit_receipt.json": "bd66ef166fc37ec251caa3c8c04ab6d57ccefb66d007833fae2793807700dad4",
+    "old_overlap_spotcheck.json": "6be5335088d54485e99b2c56d91cb5d1a834cc185f124ee3d6b9e7a04ca7b13d",
+    "inventory.json.gz": "f0a4a462fe5034a3efcc37a0ebcf045a5b7fb23b47c847923af4167ef58ab187",
+    "quality_notes.json": "4afb59764ceb5400f71187245eb0386e7895cc74e51ce5c7def008a88f9faf5d",
+    "delivery_hash_check.json": "ea24e27890a07c0ba4b103def3efe8a53ad8d3c6796d85d9809f032e21f56fdb",
+    "compare_old_minutes.py": "46aeeae3b3037d50c5c162299b743406f3b8dd9f4a2f1ba82ae572a9ea8aabeb",
+    "external_references.json": "8007fba23ccc5d58e37344d82cc7f8b26f15d2b9c931ebf3b805fb7c8356ef4e"
+  },
+  "historical_log": {
+    "source_branch": "features/babel",
+    "source_commit": "e060ca98f660579f0784c9f72a2ead6f31f13502",
+    "source_tree": "4d763ebff0947f518a87727beaebb996c5f954b5",
+    "url": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/",
+    "execution_allowed": false,
+    "historical_log_sha256": "399d61455a641135be8e1755508bada69aa8960f8bdcc19d66e0ae5b130df94c",
+    "historical_log_rows": 75,
+    "historical_log_url": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/BABEL_PROGRESS_LOG.jsonl",
+    "disposition": "旧失败/修复/未完成假设保留于固定Git版本；不是新分支前置任务。原始数据和旧工作目录未修改。"
+  },
+  "limits": [
+    "Git commit ancestry is retained; clean worktree is not history rewriting or repository object shrinkage",
+    "Audit code unchanged; only local test import adapted and wrapper newly supplied; no new full raw audit claimed",
+    "Old checkpoint recovery and input-factorial plans remain historical, not pending mandatory jobs"
+  ]
+}

@@ -1,71 +1,35 @@
-# Babel research work
+# Babel 新数据研究
 
-These rules apply to Babel research, its code, reports and experiment plans. They
-record the user's explicit workflow requirements. Other project work is outside
-this research protocol.
+当前分支：`codex/babel-next`。用户于2026-11-25明确要求隔离旧研究并实行每实验独立目录。本文件替代原分支的默认分支约定。
 
-## Read before acting
+## 先读当前入口
 
-- Start at `docs/babel/README.md` for the current research folder. Legacy paths
-  under `docs/` are compatibility symlinks, not duplicate sources of truth.
+- `docs/babel/BABEL_ROADMAP.md`及JSON：当前目标、数据、架构、训练与评价、固定N/F编号和当前待办。
+- `docs/babel/BABEL_EXPERIMENT_WORKFLOW.md`：实验、报告、资产与沟通规则。
+- `experiments/README.md`：目录与版本约定。
+- 旧代码/记录只在`features/babel`及`docs/babel/BRANCH_BASELINE.json`固定的提交。不得恢复旧队列或把旧checkpoint链作为新实验前置。
 
-- `docs/babel/BABEL_ROADMAP.md` and `docs/babel/BABEL_ROADMAP.json`: current requirements,
-  fixed task IDs, status, dependencies and retained future hypotheses.
-- `docs/babel/BABEL_EXPERIMENT_WORKFLOW.md`: coding, report review and completion rules.
-- The protocol and evidence linked by the active task. The current roadmap is a
-  standalone design; `docs/babel/archive/` contains evidence-only historical
-  snapshots. Do not treat archived `current`/`next` fields or commands as active.
-  Historical records do not override the current roadmap or newer user instructions.
+## 不变的目标与当前授权
 
-## Every code or experiment-plan change
+学习只看已发生行情的可复用bar/历史状态，分别验证历史内容、当前描述与概率未来。不要把某个读头、相似距离或规则拟合当全部目标。
+当前只授权方案和文档；本次额外授权分支整理及实验隔离基础设施。未授权实现新模型或启动训练。普通“继续”不扩大此范围。
+真实神经训练/真实权重执行只在AutoDL CUDA，本地允许合成测试、文档及数据算术。
 
-1. Tell the user the task ID(s), concrete question and intended deliverable before
-   editing. Necessary controls may address more than one ID in the same experiment.
-2. State source model, data/context, intended variable, matched controls, budget,
-   selection rules, acceptance and stopping criteria before launching training.
-3. After implementation or planning, record a review covering final purpose,
-   model architecture, loss/training, validation, data and engineering. Record
-   evidence and remaining gaps, not a blanket claim of correctness.
-4. Update the roadmap and append a review event to
-   `docs/babel/BABEL_PROGRESS_LOG.jsonl`. Keep code ready, remote execution complete,
-   and scientific acceptance distinct. Do not mark real-model acceptance from
-   synthetic tests or arithmetic checks.
-5. Preserve previous failures, task IDs, retained hypotheses and user changes.
-   Changing order, budget, thresholds or source needs an explicit recorded reason;
-   do not silently promote candidates or turn optional branches into active jobs.
+## 每个实验是独立版本目录（强制）
 
-## Every user-provided report archive
+1. 所有实验放在`experiments/<YYYYMMDD>_<question>_vN/`。一个有界问题及其匹配对照同目录，不为每个seed复制实验。
+2. 模型、数据处理、训练、评价、启动/导出脚本、配置、依赖和训练说明必须放在该目录。不得把新实验改到上一实验的脚本里。
+3. 不导入另一个实验或旧`obson`模块，不从可变共享研究代码取模型/损失/特征/评价逻辑。复用时复制经审查的最小代码并登记来源与SHA。外部库固定版本；只读大数据/权重按清单与哈希引用。
+4. 同一实验未发布草稿可在自己的目录完善。首次发布运行版本或首次执行前生成`release.json`并冻结，运行必须对应已推送提交。冻结后即使修bug、改配置/评测也新建v2目录，登记前身与影响；不得原地重封哈希。
+5. 各臂、seed、resume属于冻结配置内的run；不得改变配置后仍用旧run身份。报告按run ID追加，旧报告不覆写；结论修正在roadmap和新review记录注明取代关系。
+6. 发布前运行`python3 tools/experiment_guard.py --base HEAD`及对应实验测试。运行前校验release；静态检查不是动态依赖或科学有效性证明，仍需独立目录干净恢复预检。
+7. 新版本不得覆盖旧模型资产；每阶段完整包、恢复与离机SHA回执仍必需。Git与轻量报告不是权重备份。
 
-Follow the workflow: identify the archive by SHA256, source/run and protocol;
-review completion, evidence and limits; map results to task IDs; update conclusions,
-decision impact and next actions in the roadmap and append the review event.
-Duplicate uploads are not new experiments. Failed/incomplete reports must also be
-recorded, without inventing scientific results or relaxing gates to pass.
+## 每次计划/代码/报告
 
-## Execution conventions
-
-- Real neural training and real-weight execution belong on AutoDL CUDA; local
-  synthetic tests and CPU report/data arithmetic are allowed.
-- Work on `features/babel` unless the user changes this. Authorized preparation
-  includes committing/pushing completed work; preserve unrelated user changes.
-- Provide complete run/export commands only when entrypoints are ready. Export
-  success, failed and stopped reports to `/root/autodl-tmp/download`.
-- Prefer matched controls in one bounded release. Respect existing source hashes;
-  new modules are preferable to silently changing historical bound code.
-- Do not require repeated user approval for already authorized work. Do not spawn
-  agents unless the user or other applicable instructions explicitly request it.
-
-## Documentation consolidation (user clarification, 2026-10-05)
-
-- Use `docs/babel/BABEL_ROADMAP.md` as the single execution and conclusion-disposition entry;
-  its JSON is a synchronized mirror. Update existing evidence documents when needed.
-- Do not create another explanatory/clarification/plan document for status corrections.
-  Preserve historical bound protocols and report evidence; do not rewrite their hashes.
-- The original correction priority was completed within its documented scope:
-  V01-V12/V14 are closed; V13 independent acceptance remains open. Preserve those
-  dispositions in the archive. New valid negative results do not reopen all repairs.
-  Any newly found error still requires scoped correction and conclusion disposition;
-  model improvement is not the closure criterion for an unsupported historical claim.
-- Current user authorization is design and documentation only. Follow the current
-  roadmap for the new minute-data design; do not execute archived restoration or
-  experiment commands. Implementation requires the user to explicitly request it.
+- 先说明任务ID、具体问题、交付；开训前固定来源、上下文、变量、控制、预算、选择、接受/停止规则。
+- 完成后复查目的、架构、损失训练、验证、数据、工程；记录证据与缺口，区分代码/运行/科学验收。
+- 更新唯一roadmap及JSON，并追加本分支进度流。报告核对SHA、去重、完成状态和结论影响；不放宽门槛凑通过。
+- 保留旧失败和任务身份作为固定Git证据，不自动排队。原V01–V12/V14已按记录关闭，V13独立接受仍开放。
+- 可以提交和推送已授权完成的工作，保护不相关用户修改；不擅自派子代理。
+- 说明前因、做了什么、证据/结果、影响与下一步，让用户只看回复就能理解。无训练结果时不报模型进步。

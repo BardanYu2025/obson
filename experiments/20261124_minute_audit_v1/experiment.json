@@ -1,0 +1,29 @@
+{
+  "schema": "babel.experiment.v1",
+  "id": "20261124_minute_audit_v1",
+  "kind": "data_audit",
+  "status": "released",
+  "task_ids": [
+    "F01",
+    "F04",
+    "F10",
+    "V13"
+  ],
+  "predecessor": {
+    "commit": "e060ca98f660579f0784c9f72a2ead6f31f13502",
+    "source_path": "src/obson/babel/tqdata_audit.py",
+    "sha256": "43ed1387d9eb821bb94147fc9fdc98193fabd87ae699df4303c96c9eb45689f5"
+  },
+  "entrypoints": {
+    "audit": "scripts/audit.sh"
+  },
+  "source_files": [
+    "src/tqdata_audit.py"
+  ],
+  "data_manifests": [
+    "reports/20261124/inventory.json.gz"
+  ],
+  "ready_for_execution": true,
+  "scientific_status": "historical_inventory_only_not_training_qualified",
+  "migration": "core bytes unchanged; test import adapted; wrapper added; full raw audit not rerun"
+}

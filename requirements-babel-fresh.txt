@@ -1,5 +1,0 @@
-# AutoDL: use its supplied CUDA-enabled torch2.8.x; do not replace it with a CPU wheel.
-# Fixed CPU numeric dependencies used to build the portable data snapshot.
-numpy==2.3.3
-pandas==2.3.2
-scikit-learn==1.7.2

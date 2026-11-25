@@ -1,0 +1,12 @@
+{
+  "schema": "babel.experiment.v1",
+  "id": "_template",
+  "kind": "neural",
+  "status": "template",
+  "task_ids": [],
+  "predecessor": null,
+  "entrypoints": {},
+  "source_files": [],
+  "data_manifests": [],
+  "ready_for_execution": false
+}

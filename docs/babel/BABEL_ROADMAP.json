@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v2-current-only",
   "updated": "2026-11-25",
-  "current_iteration": "new_minute_state_semantics_attention_mixed_learning_design",
-  "current_iteration_scope": "Design only: explicit representation geometry, relation/value causal backbone and crossed architecture x joint-objective proposal; no code or CUDA authorization.",
+  "current_iteration": "clean_branch_and_immutable_experiment_layout",
+  "current_iteration_scope": "F05/F11 engineering isolation only; current model/data/2x2 scientific proposal unchanged; no neural code or training.",
   "current_work_mode": {
     "mode": "design_and_records_only",
     "requested_on": "2026-11-24",
@@ -111,7 +111,7 @@
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/0"
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/0"
     },
     {
       "id": "F02",
@@ -121,7 +121,7 @@
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/1"
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/1"
     },
     {
       "id": "F03",
@@ -131,7 +131,7 @@
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/2"
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/2"
     },
     {
       "id": "F04",
@@ -141,7 +141,7 @@
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/3"
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/3"
     },
     {
       "id": "F05",
@@ -151,7 +151,7 @@
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/4"
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/4"
     },
     {
       "id": "F06",
@@ -161,7 +161,7 @@
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/5"
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/5"
     },
     {
       "id": "F07",
@@ -171,7 +171,7 @@
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/6"
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/6"
     },
     {
       "id": "F08",
@@ -181,7 +181,7 @@
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/7"
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/7"
     },
     {
       "id": "F09",
@@ -191,7 +191,7 @@
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/8"
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/8"
     },
     {
       "id": "F10",
@@ -201,7 +201,7 @@
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/9"
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/9"
     },
     {
       "id": "F11",
@@ -211,7 +211,7 @@
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/10"
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/10"
     },
     {
       "id": "F12",
@@ -221,7 +221,7 @@
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/11"
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/future_branches/11"
     }
   ],
   "repair_tasks": [
@@ -231,7 +231,7 @@
       "closed": true,
       "status": "closed_with_recorded_scope",
       "conclusion": "140个原验证值一致；只关闭复放问题",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/0",
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/0",
       "next_action": "none_no_reopening"
     },
     {
@@ -240,7 +240,7 @@
       "closed": true,
       "status": "closed_with_recorded_scope",
       "conclusion": "直接数值准入缺口关闭；旧精确比例弃用，不证明损失均衡",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/1",
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/1",
       "next_action": "none_no_reopening"
     },
     {
@@ -249,7 +249,7 @@
       "closed": true,
       "status": "closed_with_recorded_scope",
       "conclusion": "降LR减轻该适配损伤但不充分；其他配置被记录并在V06跨组匹配，不能把适配失败归因为完整历史无效。",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/2",
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/2",
       "next_action": "none_no_reopening"
     },
     {
@@ -258,7 +258,7 @@
       "closed": true,
       "status": "closed_with_recorded_scope",
       "conclusion": "S训练覆盖17+且主Q仍有近端；原结构配方收益/取舍保留，架构/容量或不对称为唯一根因的判断撤回。RS删S未修复，停止该配方。",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/3",
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/3",
       "next_action": "none_no_reopening"
     },
     {
@@ -267,7 +267,7 @@
       "closed": true,
       "status": "closed_with_recorded_scope",
       "conclusion": "后续主干local是detach诊断而非编码器保护；Bar Semantics control/additive例外，Grounded联合未执行，Uniform/Context不训练local。RS固定头0.25回传未修复；原有限对照保留。",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/4",
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/4",
       "next_action": "none_no_reopening"
     },
     {
@@ -276,7 +276,7 @@
       "closed": true,
       "status": "closed_with_recorded_scope",
       "conclusion": "B较同输入源改善5.03%～17.88%，但共同题目B/A误差+3.06%～79.30%，跨研究s43区间跨0；原能力保护未过。C扩展目标有远端/近端取舍。旧配方结果保留，输入长度单因归因撤回，Macro不变。",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/5",
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/5",
       "next_action": "none_no_reopening"
     },
     {
@@ -285,7 +285,7 @@
       "closed": true,
       "status": "closed_with_recorded_scope",
       "conclusion": "原Macro与R1低LR第五轮的模块交叉证明固定读取兼容性会变化；未识别信息丢失。撤回由固定头读差直接推出信息减少的判断，也不声称信息必定完整。",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/6",
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/6",
       "next_action": "none_no_reopening"
     },
     {
@@ -294,7 +294,7 @@
       "closed": true,
       "status": "closed_with_recorded_scope",
       "conclusion": "小幅收益不达原门槛；dense_all有取舍；不是从头完整历史结论",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/7",
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/7",
       "next_action": "none_no_reopening"
     },
     {
@@ -303,7 +303,7 @@
       "closed": true,
       "status": "closed_with_recorded_scope",
       "conclusion": "不能仅以一致性距离证明所问区间语义；尚无合格新候选",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/8",
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/8",
       "next_action": "none_no_reopening"
     },
     {
@@ -312,7 +312,7 @@
       "closed": true,
       "status": "closed_with_recorded_scope",
       "conclusion": "同曝光加深收益与浅层追加预算分开；非四层全局最优",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/9",
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/9",
       "next_action": "none_no_reopening"
     },
     {
@@ -321,7 +321,7 @@
       "closed": true,
       "status": "closed_with_recorded_scope",
       "conclusion": "只以同轮plain/full/scale归因于pool配方",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/10",
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/10",
       "next_action": "none_no_reopening"
     },
     {
@@ -330,7 +330,7 @@
       "closed": true,
       "status": "closed_with_recorded_scope",
       "conclusion": "价格/活动取舍成立，不说明输入无用或状态信息完全消失",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/11",
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/11",
       "next_action": "none_no_reopening"
     },
     {
@@ -339,7 +339,7 @@
       "closed": false,
       "status": "open_independent_acceptance_new_identity_required",
       "conclusion": "现有研究证据不等于最终独立泛化确认",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/12",
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/12",
       "next_action": "qualify_new_data_then_frozen_candidate_independent_acceptance"
     },
     {
@@ -348,7 +348,7 @@
       "closed": true,
       "status": "closed_with_recorded_scope",
       "conclusion": "指定state/local尺度复算和本worker提交断点恢复通过；不扩大为全部历史链正确，诊断模型不晋升。",
-      "history_pointer": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/13",
+      "history_pointer": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json#/snapshot/repair_tasks/13",
       "next_action": "none_no_reopening"
     }
   ],
@@ -404,7 +404,7 @@
       "F11",
       "V13"
     ],
-    "action": "固定区间关系/Value通路、物理内容距离和原始分钟遮挡依赖；锁2×2的系数/调度/独立样本与资源卡。当前0运行，无旧命令或自动恢复。",
+    "action": "在codex/babel-next继续当前新数据方案；锁输入/遮挡/梯度与资源卡。进入实施时新建独立实验版本目录，不导入旧实验链。",
     "ready_entrypoint": null,
     "old_commands_active": false,
     "automatic_reruns": false
@@ -902,72 +902,68 @@
     }
   },
   "historical_archive": {
-    "markdown": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.md",
-    "json": "docs/babel/archive/BABEL_ROADMAP_BEFORE_REWRITE_20261125.json",
-    "source_commit": "ac029de8de0ff31001bc88bffd48d29ec6d2f5d1",
-    "source_json_sha256": "3618f637763c0e24f9cd46f3e9598ca6d2e8fcee4cf3ffe0f21d162d26c4ba2c",
-    "scope": "complete previous roadmap snapshot, all hypotheses, failures, task identities and bound-evidence pointers",
+    "source_branch": "features/babel",
+    "source_commit": "e060ca98f660579f0784c9f72a2ead6f31f13502",
+    "source_tree": "4d763ebff0947f518a87727beaebb996c5f954b5",
+    "url": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/",
     "execution_allowed": false,
-    "source_original_bytes_available_from_git": true,
-    "old_four_arm": "retained_not_queued",
-    "old_thirteen_stage_restore": "optional_historical_reproduction_not_prerequisite"
+    "historical_log_sha256": "399d61455a641135be8e1755508bada69aa8960f8bdcc19d66e0ae5b130df94c",
+    "historical_log_rows": 75,
+    "historical_log_url": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/BABEL_PROGRESS_LOG.jsonl",
+    "disposition": "旧失败/修复/未完成假设保留于固定Git版本；不是新分支前置任务。原始数据和旧工作目录未修改。"
   },
   "document_policy": {
     "execution_entry": "docs/babel/BABEL_ROADMAP.md",
     "machine_mirror": "docs/babel/BABEL_ROADMAP.json",
     "folder_entry": "docs/babel/README.md",
     "current_body": "only current proposal, reasons, retained lessons and task status; no chronological execution cards",
-    "history": "archive evidence only; do not copy archived current/next fields into current queue",
+    "history": "pinned Git evidence only; no legacy checkout/import dependency",
     "new_duplicate_explanation_documents": false,
-    "legacy_paths": "docs/BABEL_ROADMAP.* compatibility symlinks still refer to current canonical files",
-    "bound_evidence": "unchanged"
+    "legacy_paths": "not shipped on clean branch",
+    "bound_evidence": "unchanged",
+    "current_branch": "codex/babel-next"
   },
   "workflow": "docs/babel/BABEL_EXPERIMENT_WORKFLOW.md",
   "progress_log": "docs/babel/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "revision_record": {
-    "reason": "用户要求更深的架构/数学/语义与混合任务思考；仅增加论文名称不能解决表征目标。",
-    "method_change": "未执行的固定分层指数草案改为关系+Value结构，三臂6worker提案改为2×2双种子8worker提案；授权仍0。",
-    "plan_clarifications": [
-      "重建对可逆重参数化不敏感，原始z余弦无默认物理语义",
-      "相似度先以共享物理读出验证，不自动加一致性损失",
-      "联合掩码必须清除跨周期/派生字段旁路",
-      "整套结构/目标比较不拆成单组件效果"
-    ],
+    "reason": "User explicitly requested a new clean branch and independent immutable experiment directories.",
+    "method_change": "Repository/asset organization only; scientific architecture/data/training/evaluation proposal unchanged.",
     "completed_experiments_reinterpreted": false,
-    "new_code": false,
+    "new_neural_code": false,
+    "new_infrastructure_code": true,
     "new_training": false
   },
   "review": {
     "purpose": {
       "status": "pass_for_scope",
-      "evidence": "保持因果单状态、价量历史保留与当前/未来用途；区分可读内容、检索几何与概率信息，未把规则或完形填空替代最终目标。",
-      "remaining": "没有新模型能力或交易价值证据。"
+      "evidence": "New-minute goal unchanged; clean branch excludes old execution chains while pinned history retains decisions.",
+      "remaining": "No new model capability or trading evidence."
     },
     "architecture": {
-      "status": "open",
-      "evidence": "阅读RealFormer、Value Residual、Gated Attention、Differential Transformer及mHC原始研究，核对旧末端融合；提出关系+Value通路，模块职责与证伪范围明确。",
-      "remaining": "关系函数、有效参数/资源、混合初始化与数值mask尚未实现资格确认；整体配方不能归因每个零件。"
+      "status": "pass_for_scope",
+      "evidence": "Current relation/value backbone and 2x2 proposal unchanged; no legacy models copied.",
+      "remaining": "Exact architecture, resource and CUDA implementation gates remain open."
     },
     "training": {
-      "status": "open",
-      "evidence": "同编码器干净与遮挡前向联合训练；分清头与编码梯度、Adam实际更新；掩码不强迫全z相等。",
-      "remaining": "字段依赖闭包、遮挡比例与跨度、lambda、age0权重、N/batch/头预算及真实梯度核验。"
+      "status": "pass_for_scope",
+      "evidence": "No new model/training code or GPU work; immutable per-experiment source/config rule added.",
+      "remaining": "Mask, task gradients and budget remain unimplemented/unlocked."
     },
     "validation": {
-      "status": "open",
-      "evidence": "2×2补足结构与混合训练交互；相似度用真实物理内容外部验证，不由重建/有效秩推断语义；晋升均保护共同A。",
-      "remaining": "独立组支持、共同预算和主比较/多比较、指标汇总与数值门槛尚未锁定。"
+      "status": "pass_for_scope",
+      "evidence": "Guard and tests cover accidental cross-experiment imports, symlinks, mutation, re-sealing and deleted releases; clean restore still required.",
+      "remaining": "Static guard does not prove arbitrary dynamic dependency isolation or scientific acceptance."
     },
     "data": {
-      "status": "open",
-      "evidence": "未重新扫描或改变原行情；沿原分钟审计识别多视图、前收与滚动统计的掩码泄漏通路。",
-      "remaining": "日历/口径/选择时点/静止缺失及最终快照资格仍开放。"
+      "status": "pass_for_scope",
+      "evidence": "Only independent CPU audit migrated; core SHA and eight original artifacts unchanged, no full data reread.",
+      "remaining": "Final snapshot and full training qualification remain open."
     },
     "engineering": {
       "status": "pass_for_scope",
-      "evidence": "仅更新现有roadmap/JSON/README/工作流程及追加日志；源码、历史快照、绑定协议和审计文件不改。",
-      "remaining": "方案不是实现或CUDA验收；新模型与备份均未生成。"
+      "evidence": "New linked worktree and branch, isolated experiment template, release hashes, CI and tests; source workspace/user edits preserved.",
+      "remaining": "No new-model assets or AutoDL recovery; remote branch-protection enforcement not configured."
     }
   },
   "design_rationale": {
@@ -1051,174 +1047,6 @@
       "status": "not_started"
     }
   ],
-  "architecture_reasoning_20261125": {
-    "date": "2026-11-25",
-    "status": "prior_design_reasoning_preserved_updated_by_state_semantics_reasoning_20261125",
-    "task_ids": [
-      "F02",
-      "F04",
-      "F05",
-      "F08"
-    ],
-    "roadmap_sections": [
-      "3.6",
-      "3.7",
-      "3.8"
-    ],
-    "question": "视觉中的结构先验能否迁移到行情，decoder-only是否满足可独立复用状态的目标？",
-    "recommendation": "连续bar/合法区间token、关系感知因果Transformer、显式单状态瓶颈，同时历史回读与概率未来；不以纯下一根预测替代状态目标。",
-    "geometry": {
-      "observed_axes": [
-        "trading and wall time",
-        "interval extent/overlap/containment",
-        "scale relationship",
-        "typed OHLC versus volume/OI measurements"
-      ],
-      "not_assumed": [
-        "known Euclidean geometry of latent768",
-        "time reversal symmetry",
-        "price sign symmetry",
-        "energy conservation",
-        "intra-bar high-low ordering"
-      ],
-      "price_scale": "common positive multiplicative price change preserves log ratios, but tick/volatility/contract metadata matter"
-    },
-    "relation_bias": {
-      "form": "q_i*k_j/sqrt(d)+b_h(phi_ij)+causal_mask",
-      "priority": "time/interval/scale relationships",
-      "fixed_exponential": "existing proposal only, not locked physics",
-      "price_relation": "conditional candidate, not first batch; same raw price and scaling information must reach controls",
-      "learnable_bias": "candidate not selected; matched params/compute must be requalified"
-    },
-    "decoder_only_distinctions": [
-      "causal self-attention is not next-event loss by definition",
-      "decoder-only does not require autoregressive inference or discrete vocabulary",
-      "per-layer KV/recomputed history is additional runtime memory; final h is not automatically sufficient z"
-    ],
-    "bottleneck": {
-      "history_access": "downstream heads only z and declared metadata; query contains location not answer",
-      "free_forecast": "conditional on fixed z and previously generated returns, no true future or original history KV",
-      "direct_forecast_baseline": "full history allowed only as separately accounted baseline, not hidden access for z candidate"
-    },
-    "old_experiments": {
-      "early_AR": "causal Transformer + next-bar distribution is already in code/docs; code existence does not prove accepted performance",
-      "historical_AR512": "frozen state -> already observed64 history; different question from future forecasting",
-      "scale_pool": "old range16/32/64/128 pooling not identical to same-source multiresolution interval organization; prior no-balanced-gain result retained"
-    },
-    "matrix_disposition": "A/B/C questions and proposed6 main workers retained; B concrete relation/type mapping must freeze before code, not run old then add new. No extra worker or decoder search authorized.",
-    "priority_change_reason": "user explicitly asks to reconsider Transformer/decoder-only structure; resolve token relationships and public information boundary before locking resource/run card",
-    "sources": [
-      {
-        "url": "https://arxiv.org/abs/2010.11929",
-        "name": "ViT",
-        "used_for": "image patch tokens, not a claim of biological eye simulation"
-      },
-      {
-        "url": "https://arxiv.org/abs/2103.14030",
-        "name": "Swin",
-        "used_for": "local windows and hierarchical spatial organization"
-      },
-      {
-        "url": "https://arxiv.org/abs/2211.14730",
-        "name": "PatchTST",
-        "used_for": "time patches and channel-independent design as alternatives, not direct OHLC prescription"
-      },
-      {
-        "url": "https://arxiv.org/abs/2310.06625",
-        "name": "iTransformer",
-        "used_for": "variate-token attention as an alternative factorization"
-      },
-      {
-        "url": "https://arxiv.org/html/2310.10688v3",
-        "name": "TimesFM original",
-        "used_for": "patched causal self-attention and forecasting; decoder-style rather than discrete vocabulary requirement"
-      },
-      {
-        "url": "https://arxiv.org/html/2310.08278v3",
-        "name": "Lag-Llama",
-        "used_for": "causal decoder-only temporal model with Student-t probability output"
-      },
-      {
-        "url": "https://research.google/blog/timesfm-3-a-zero-shot-foundation-model-for-multivariate-forecasting/",
-        "name": "TimesFM-3 official",
-        "publication_date": "2026-08-31",
-        "used_for": "alternating temporal/variate attention; decoder-only backbone with nonautoregressive horizon output"
-      },
-      {
-        "url": "https://huggingface.co/docs/transformers/en/cache_explanation",
-        "name": "Hugging Face KV cache docs",
-        "used_for": "per-layer past K/V remain available during autoregressive inference; final vector is not whole runtime state"
-      },
-      {
-        "url": "https://arxiv.org/abs/2202.07765",
-        "name": "Perceiver AR",
-        "used_for": "read as background: causal input-to-latent compression, not single-vector market evidence"
-      }
-    ],
-    "local_evidence": [
-      {
-        "path": "docs/BABEL_AR.md",
-        "sha256": "81971a64b637ec39cc04733163fdf35a1c64d792089f9b941c913da4b0d632a9"
-      },
-      {
-        "path": "src/obson/babel/ar_model.py",
-        "sha256": "858c9f5af1a96415748668a17da963564db74fdb8bdd1534e6f4758b425816fd"
-      },
-      {
-        "path": "src/obson/babel/autoregressive.py",
-        "sha256": "f52f91c7148ebdc455235e788e5583d60cf678d9ce7544ed81bbe4125035bd33"
-      },
-      {
-        "path": "docs/BABEL_AR_RECONSTRUCTION.md",
-        "sha256": "439971a2b922c800f69902506450204113d4e562e185653f48ea85e31b1dcb60"
-      },
-      {
-        "path": "docs/BABEL_STATE_ROLLOUT768_PLAN.md",
-        "sha256": "138430ea584d78999c13c6bcb0b36fd1fa8daaa35269d98e6097f0056b71f57e"
-      },
-      {
-        "path": "docs/BABEL_CAUSAL_POOL768_DESIGN.md",
-        "sha256": "ae43d62a388e00dc390b8dc58a5bec35a0765fb2f8eefa3d93f4690fa21d5777"
-      },
-      {
-        "path": "docs/BABEL_CAUSAL_POOL768_REVIEW.md",
-        "sha256": "3602a81e12de62d392e1748d21c3efcd79d9f98713d58d8739b280b92d1491c4"
-      }
-    ],
-    "review": {
-      "purpose": {
-        "status": "pass_for_scope",
-        "evidence": "以单状态可复用历史/当前/未来目标审视decoder-only，不用直接预测或图像外观替代embedding目标。",
-        "remaining": "没有新模型效果或交易收益结论。"
-      },
-      "architecture": {
-        "status": "open",
-        "evidence": "区分因果主干、下一事件目标、自由生成和公开状态瓶颈；明确区间可用时间mask及缓存信息。建议连续区间token、关系感知因果主干、显式单状态。",
-        "remaining": "B固定/可学习关系方案与类型映射尚未冻结；若增参需重新锁对照；未实现验证。"
-      },
-      "training": {
-        "status": "open",
-        "evidence": "历史/概率监督和A/B/C科学问题保留；纯下一步预测不作为历史保留替代；旧AR代码只作设计范围核对。",
-        "remaining": "无新梯度或训练证据；N/batch/读头预算与数值资格未锁。"
-      },
-      "validation": {
-        "status": "open",
-        "evidence": "同信息全历史预测器与仅z头分账，公开向量和KV总成本区分，冻结新用途与自由运行分开。",
-        "remaining": "不由论文结果推断本任务收益；候选参数公平性和独立样本支持待锁。"
-      },
-      "data": {
-        "status": "open",
-        "evidence": "没有读取或改变新行情；沿原已知分钟/周期资料，讨论确定聚合与信息损失。",
-        "remaining": "合法日历、选择时点、量仓口径等既有资格缺口不变。"
-      },
-      "engineering": {
-        "status": "pass_for_scope",
-        "evidence": "只更改roadmap/JSON/README和追加日志；只读已有AR/汇聚源文件与报告，未执行模型、安装依赖或改绑定文件。",
-        "remaining": "方案审查不等于实现、CUDA或科学通过。"
-      }
-    },
-    "current_disposition": "几何/单状态/decoder-only边界仍有效；原三臂与固定先验待选框架已被本轮未执行修订替换，不是并行当前卡。"
-  },
   "state_semantics_reasoning_20261125": {
     "date": "2026-11-25",
     "status": "design_only_not_implemented_not_scientifically_accepted",
@@ -1270,17 +1098,17 @@
     ],
     "local_evidence": [
       {
-        "path": "docs/BABEL_RESIDUAL_FUSION.md",
+        "path": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/BABEL_RESIDUAL_FUSION.md",
         "sha256": "004cfdce9f970cc32963eb3ebe45b89ee638ab21ebeebddd1269c3f1bb37325b",
         "mode": "read_only"
       },
       {
-        "path": "docs/BABEL_SHARED_HISTORY_DESIGN_AUDIT.md",
+        "path": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/BABEL_SHARED_HISTORY_DESIGN_AUDIT.md",
         "sha256": "cc79f45e36ea605ecaf8f4c09275e1052b1d4603c70d5f6f80368144e7a903ec",
         "mode": "read_only"
       },
       {
-        "path": "docs/BABEL_CAUSAL_POOL768_REVIEW.md",
+        "path": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/BABEL_CAUSAL_POOL768_REVIEW.md",
         "sha256": "3602a81e12de62d392e1748d21c3efcd79d9f98713d58d8739b280b92d1491c4",
         "mode": "read_only"
       }
@@ -1327,100 +1155,6 @@
         "superiority before controlled results"
       ]
     },
-    "superseded_unexecuted_proposal": {
-      "status": "superseded_unexecuted_design_only",
-      "execution_allowed": false,
-      "source_commit": "1e9701955b0755fa8940eb257dff00992494d1cc",
-      "reason": "用户要求深入架构职责、相似性与一起混合训练；原固定分层先验未经证实，三臂无法估计结构×训练交互。",
-      "architecture": {
-        "views": [
-          {
-            "minutes": 1,
-            "bars": 256
-          },
-          {
-            "minutes": 5,
-            "bars": 128
-          },
-          {
-            "minutes": 15,
-            "bars": 64
-          },
-          {
-            "minutes": 60,
-            "bars": 64
-          }
-        ],
-        "market_tokens_max": 512,
-        "public_z_dim": 768,
-        "z_fp32_bytes": 3072,
-        "public_side_information": [
-          "C_t",
-          "sigma_t",
-          "contract/time/coverage_quality"
-        ],
-        "blocks": 6,
-        "heads": 12,
-        "head_dim": 64,
-        "ffn": 3072,
-        "norm": "Pre-LN",
-        "flat_control": "all6 standard availability-causal blocks",
-        "hierarchical": "first2 within-scale causal market-token attention; last4 cross-scale time/scale prior; current state token read-only to market tokens",
-        "prior": "equal total prior mass per available scale; normalized exp(-trading_age/T_head) within scale; T=32,128,512,2048,8192,infinity each2 heads; log-space computation; softmax tau1",
-        "parameter_fairness": "same parameter shapes and shared seed initialization; fixed masks/prior differ; no same-compute claim",
-        "limits": [
-          "finite declared history, no infinite-state claim",
-          "coarse history does not preserve unobserved minute order",
-          "state tokens and runtime KV/buffers are distinct",
-          "geometry does not certify reconstruction"
-        ],
-        "attention_positions_max_including_state": 513,
-        "state_token_mask": "All arms: state reads all available market tokens and itself; market tokens never read state. First2 within-scale mask in B/C applies only market-to-market. Per-market query mask/prior uses its own availability, not endpoint t.",
-        "cross_resolution": "Shared physical content has deterministic aggregation relations, not equality of full latent states. First matrix uses same-source views/shared encoder/physical targets, no extra cross-scale consistency loss; F04 supervision hypothesis retained separately.",
-        "state_self_logit_reference": "open_run_card_detail_before_implementation; formula applies to eligible market keys, state self key relative reference must be fixed",
-        "proposal_status": "6/768/12 and fixed-prior hierarchy are resource/design proposals; relation-bias/type mapping selection pending section3.8"
-      },
-      "matrix": [
-        {
-          "name": "A",
-          "encoder": "flat",
-          "encoder_objective": "history",
-          "future_head": "train on detached z"
-        },
-        {
-          "name": "B",
-          "encoder": "hierarchical",
-          "encoder_objective": "history",
-          "future_head": "train on detached z",
-          "comparison": "B-A organization recipe"
-        },
-        {
-          "name": "C",
-          "encoder": "hierarchical",
-          "encoder_objective": "history+probabilistic future",
-          "comparison": "C-B predictive supervision"
-        }
-      ],
-      "objectives": {
-        "historical": "0.6 price +0.2 shape +0.2 activity, proposal not optimality claim",
-        "price": "half relative path, half adjacent differences derived from predictions",
-        "scale_and_age": "fixed train field/period scales; view-average and valid agebands1-16/17-64/>64; age0 separate; missing not zero",
-        "future": "teacher-forced Student-t conditional NLL over60 trading-minute returns; sigma fixed at origin; free-rollout evaluated separately",
-        "future_decoder": "2-layer GRU256, initialized and conditioned each step on z; nu2+softplus, positive scale floor; no fabricated future volume/OI",
-        "joint_lambda": "encoder-only ramp first10% updates to0.1 then fixed, proposal",
-        "gradient_control": "A/B future head receives detached z; C sends lambda*future gradient to encoder; all future head parameters get unweighted future objective; separate optimizers/clipping avoid unintended encoder changes",
-        "age0_mix": "supervised and separately evaluated; final mixing weight against historical agebands open_run_card_detail"
-      },
-      "acceptance_proposal": {
-        "not_locked": true,
-        "B_vs_A": "price content MSE gain>=5%; recent16/current body <=5% degradation; core activity and tail<=10%",
-        "C_vs_B": "fresh frozen-head CRPS gain>=3% and positive skill vs simple baseline, same retention floors",
-        "required": "grouped interval support and pre-score support/power qualification; thresholds not inherited as facts or fitted after result",
-        "C_vs_A_promotion_guard": "C must also meet same history retention floors versus ordinary A before replacement; beating a weaker B is insufficient",
-        "metric_aggregation": "cross-field/product aggregation, primary readout and multiple-comparison order must be locked before candidate scores"
-      },
-      "proposed_main_workers": 6
-    },
     "reason_for_matrix_revision": "ABC lacked ordinary+joint control; mixed masked/future regimen now needs complete organization×objective interaction. No old executed run or bound protocol changed.",
     "authorized_cuda_runs_added": 0,
     "review": {
@@ -1454,6 +1188,20 @@
         "evidence": "仅更新现有roadmap/JSON/README/工作流程及追加日志；源码、历史快照、绑定协议和审计文件不改。",
         "remaining": "方案不是实现或CUDA验收；新模型与备份均未生成。"
       }
-    }
+    },
+    "prior_unexecuted_design_evidence": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/BABEL_ROADMAP.json"
+  },
+  "branch_policy": {
+    "active": "codex/babel-next",
+    "source": "e060ca98f660579f0784c9f72a2ead6f31f13502",
+    "legacy_branch": "features/babel",
+    "purpose": "Clean new-minute research workspace; only current plan, concise lessons, minute audit and isolated experiment infrastructure.",
+    "experiment_root": "experiments/<date>_<question>_vN",
+    "immutable_after": "release or first execution; fixes/config/objectives/evaluation changes create a new directory/revision",
+    "code_reuse": "copy with provenance and review into experiment; no import of another experiment or old repo module",
+    "runs": "run/seed directories under one frozen experiment; reports append-only",
+    "data": "external immutable manifests; no raw-data duplication or training weights in Git",
+    "training_authorized": 0,
+    "audit_exception": "20261124_minute_audit_v1 is a self-contained CPU audit migration; no historical model/weight dependency."
   }
 }

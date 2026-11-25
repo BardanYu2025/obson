@@ -1,5 +1,0 @@
-# CPU-only environment used for artifacts/babel_tqdata_20261124.
-# This is not the AutoDL neural-training environment.
-numpy==2.3.3
-pandas==2.3.2
-pyarrow==26.0.1

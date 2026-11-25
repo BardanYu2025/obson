@@ -1,21 +1,20 @@
-# 数据与模型（留在本地/AutoDL）
-data/
-models/
-checkpoints/
-# 环境与缓存
+# External raw data, models and machine environments
+/data/
+/models/
+/checkpoints/
 .venv/
 __pycache__/
 *.pyc
+.pytest_cache/
+.ruff_cache/
 .DS_Store
-# 运行产物
-*.log
-*.bak_*.csv
-nohup.out
-.babel-storage-cleanup.lock
-# 本地工具与其他
-skills/
-github_export/
 .idea/
-reports/
+# Experiment runtime data must be exported with explicit manifests
+experiments/*/runs/
+experiments/*/.venv/
+*.pt
+*.pth
+*.safetensors
 *.tar.gz
-obson_e6_patch_20260914/
+*.log
+nohup.out
