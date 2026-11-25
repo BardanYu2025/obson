@@ -387,7 +387,7 @@
       "F08"
     ]
   },
-  "active_phase": "design_only_snapshot_and_run_card_lock_pending",
+  "active_phase": "design_only_architecture_information_flow_review_before_run_card_lock",
   "active_order": [
     "F01",
     "F05",
@@ -396,7 +396,7 @@
     "V13"
   ],
   "next_after_active": {
-    "status": "design_proposal_pending_data_and_run_card_lock",
+    "status": "architecture_details_pending_selection_no_execution",
     "task_ids": [
       "F01",
       "F05",
@@ -404,7 +404,7 @@
       "F11",
       "V13"
     ],
-    "action": "按当前正文第8节确定数据资格、独立组、共同资源预算与精确运行卡；用户明确要求实施前不写训练代码。",
+    "action": "按3.8优先固定token合法区间、B的关系偏置/类型映射与公开状态信息边界，重核必要对照；数据资格继续，随后锁资源和运行卡。不自动增加worker或写训练代码。",
     "ready_entrypoint": null,
     "old_commands_active": false,
     "automatic_reruns": false
@@ -422,7 +422,7 @@
   },
   "new_data_first_model_design_20261125": {
     "date": "2026-11-25",
-    "status": "complete_design_narrative_execution_details_open_no_code",
+    "status": "design_narrative_with_architecture_details_under_review_no_code",
     "task_ids": [
       "F01",
       "F02",
@@ -537,7 +537,8 @@
       "attention_positions_max_including_state": 513,
       "state_token_mask": "All arms: state reads all available market tokens and itself; market tokens never read state. First2 within-scale mask in B/C applies only market-to-market. Per-market query mask/prior uses its own availability, not endpoint t.",
       "cross_resolution": "Shared physical content has deterministic aggregation relations, not equality of full latent states. First matrix uses same-source views/shared encoder/physical targets, no extra cross-scale consistency loss; F04 supervision hypothesis retained separately.",
-      "state_self_logit_reference": "open_run_card_detail_before_implementation; formula applies to eligible market keys, state self key relative reference must be fixed"
+      "state_self_logit_reference": "open_run_card_detail_before_implementation; formula applies to eligible market keys, state self key relative reference must be fixed",
+      "proposal_status": "6/768/12 and fixed-prior hierarchy are resource/design proposals; relation-bias/type mapping selection pending section3.8"
     },
     "historical_decoder": {
       "input": "z and physical interval query only; declared price reference for absolute display",
@@ -611,7 +612,8 @@
       "not_equal_claimed": "actual GPU time/FLOPs",
       "not_identified": "full architecture x objective interaction; no flat+joint arm",
       "selection": "lastN primary; predeclared best secondary only",
-      "after_training": "freeze all encoders; fit equally initialized/budgeted current-state and AR/direct-quantile readouts; raw/simple baselines"
+      "after_training": "freeze all encoders; fit equally initialized/budgeted current-state and AR/direct-quantile readouts; raw/simple baselines",
+      "parameter_match_scope": "same parameter shapes only for original fixed-prior A/B/C draft; if learnable relation/type mapping selected, requalify controls and disclose effective parameters/compute"
     },
     "optimizer_proposal": {
       "name": "AdamW",
@@ -734,33 +736,33 @@
     "review": {
       "purpose": {
         "status": "pass_for_scope",
-        "evidence": "当前正文按目标/数据/架构/训练/评价完整展开，每部分标明理由、旧经验与新数据选择；历史队列移出当前MD及JSON。",
-        "remaining": "无新模型效果、通用表示或交易收益声明。"
+        "evidence": "以单状态可复用历史/当前/未来目标审视decoder-only，不用直接预测或图像外观替代embedding目标。",
+        "remaining": "没有新模型效果或交易收益结论。"
       },
       "architecture": {
         "status": "open",
-        "evidence": "512token物理观察、6层768/12头普通和分层对照、公开z+元信息、共享区间读头、概率头u与真实z区分。",
-        "remaining": "查询编码、自连接logit基准待运行卡固定；参数/mask/资源尚未实现核对。"
+        "evidence": "区分因果主干、下一事件目标、自由生成和公开状态瓶颈；明确区间可用时间mask及缓存信息。建议连续区间token、关系感知因果主干、显式单状态。",
+        "remaining": "B固定/可学习关系方案与类型映射尚未冻结；若增参需重新锁对照；未实现验证。"
       },
       "training": {
         "status": "open",
-        "evidence": "新9类输入、历史0.6/0.2/0.2提案、停梯度和联合路线、优化器分组、同初始化/抽样/N明确。",
-        "remaining": "age0合并、采样概率、N/batch/读头预算与实际梯度/精度资格待锁；0训练。"
+        "evidence": "历史/概率监督和A/B/C科学问题保留；纯下一步预测不作为历史保留替代；旧AR代码只作设计范围核对。",
+        "remaining": "无新梯度或训练证据；N/batch/读头预算与数值资格未锁。"
       },
       "validation": {
         "status": "open",
-        "evidence": "时间和品种留出提案、相同冻结读头机会、简单基线、去掉/错配z、逐位置与尾部、结果分叉和数值门槛提案已明确。 C晋升同时对A保护历史，避免只战胜较差B。",
-        "remaining": "独立组支持、主指标跨字段/品种汇总、多比较顺序与最终数值门槛待锁；0新评分。"
+        "evidence": "同信息全历史预测器与仅z头分账，公开向量和KV总成本区分，冻结新用途与自由运行分开。",
+        "remaining": "不由论文结果推断本任务收益；候选参数公平性和独立样本支持待锁。"
       },
       "data": {
         "status": "open",
-        "evidence": "引用11月24日审计及前次11月25日数量复查；本轮未重新读取行情，数据审计原字节不改。",
-        "remaining": "日历、样本选择as-of、量仓口径、缺段/平线资格与最终快照待锁；没有重做全行审计。"
+        "evidence": "没有读取或改变新行情；沿原已知分钟/周期资料，讨论确定聚合与信息损失。",
+        "remaining": "合法日历、选择时点、量仓口径等既有资格缺口不变。"
       },
       "engineering": {
         "status": "pass_for_scope",
-        "evidence": "当前MD/JSON重新组织；完整旧快照归档并保留Git身份，协议/源码/原始审计不变；只做文档检查。",
-        "remaining": "用户仍要求只做方案；新runner、CUDA恢复和离机模型未发生。"
+        "evidence": "只更改roadmap/JSON/README和追加日志；只读已有AR/汇聚源文件与报告，未执行模型、安装依赖或改绑定文件。",
+        "remaining": "方案审查不等于实现、CUDA或科学通过。"
       }
     },
     "roadmap_sections": {
@@ -810,6 +812,7 @@
     {
       "gate": "exact_run_card",
       "items": [
+        "freeze token interval encoding, fixed versus learned relation bias/type mapping and control capacity before implementation",
         "query numerical encoding",
         "state self-logit reference",
         "age0 mixing and query probabilities",
@@ -911,33 +914,33 @@
   "review": {
     "purpose": {
       "status": "pass_for_scope",
-      "evidence": "当前正文按目标/数据/架构/训练/评价完整展开，每部分标明理由、旧经验与新数据选择；历史队列移出当前MD及JSON。",
-      "remaining": "无新模型效果、通用表示或交易收益声明。"
+      "evidence": "以单状态可复用历史/当前/未来目标审视decoder-only，不用直接预测或图像外观替代embedding目标。",
+      "remaining": "没有新模型效果或交易收益结论。"
     },
     "architecture": {
       "status": "open",
-      "evidence": "512token物理观察、6层768/12头普通和分层对照、公开z+元信息、共享区间读头、概率头u与真实z区分。",
-      "remaining": "查询编码、自连接logit基准待运行卡固定；参数/mask/资源尚未实现核对。"
+      "evidence": "区分因果主干、下一事件目标、自由生成和公开状态瓶颈；明确区间可用时间mask及缓存信息。建议连续区间token、关系感知因果主干、显式单状态。",
+      "remaining": "B固定/可学习关系方案与类型映射尚未冻结；若增参需重新锁对照；未实现验证。"
     },
     "training": {
       "status": "open",
-      "evidence": "新9类输入、历史0.6/0.2/0.2提案、停梯度和联合路线、优化器分组、同初始化/抽样/N明确。",
-      "remaining": "age0合并、采样概率、N/batch/读头预算与实际梯度/精度资格待锁；0训练。"
+      "evidence": "历史/概率监督和A/B/C科学问题保留；纯下一步预测不作为历史保留替代；旧AR代码只作设计范围核对。",
+      "remaining": "无新梯度或训练证据；N/batch/读头预算与数值资格未锁。"
     },
     "validation": {
       "status": "open",
-      "evidence": "时间和品种留出提案、相同冻结读头机会、简单基线、去掉/错配z、逐位置与尾部、结果分叉和数值门槛提案已明确。 C晋升同时对A保护历史，避免只战胜较差B。",
-      "remaining": "独立组支持、主指标跨字段/品种汇总、多比较顺序与最终数值门槛待锁；0新评分。"
+      "evidence": "同信息全历史预测器与仅z头分账，公开向量和KV总成本区分，冻结新用途与自由运行分开。",
+      "remaining": "不由论文结果推断本任务收益；候选参数公平性和独立样本支持待锁。"
     },
     "data": {
       "status": "open",
-      "evidence": "引用11月24日审计及前次11月25日数量复查；本轮未重新读取行情，数据审计原字节不改。",
-      "remaining": "日历、样本选择as-of、量仓口径、缺段/平线资格与最终快照待锁；没有重做全行审计。"
+      "evidence": "没有读取或改变新行情；沿原已知分钟/周期资料，讨论确定聚合与信息损失。",
+      "remaining": "合法日历、选择时点、量仓口径等既有资格缺口不变。"
     },
     "engineering": {
       "status": "pass_for_scope",
-      "evidence": "当前MD/JSON重新组织；完整旧快照归档并保留Git身份，协议/源码/原始审计不变；只做文档检查。",
-      "remaining": "用户仍要求只做方案；新runner、CUDA恢复和离机模型未发生。"
+      "evidence": "只更改roadmap/JSON/README和追加日志；只读已有AR/汇聚源文件与报告，未执行模型、安装依赖或改绑定文件。",
+      "remaining": "方案审查不等于实现、CUDA或科学通过。"
     }
   },
   "design_rationale": {
@@ -949,7 +952,7 @@
     "architecture": {
       "why": "先同尺度组织再跨尺度交流，公开单状态；统一物理查询区分状态内容与所问位置。",
       "old_lesson": "内部位置不冒充完整bar状态、避免旁路、固定头差不等于信息丢失。",
-      "new_reasoning": "同源多视图、时间尺度先验、共享区间读头和概率未来构成一套可比较设计。"
+      "new_reasoning": "同源多视图与区间关系；因果Transformer整理历史，显式z瓶颈供独立任务使用；固定指数先验是候选而非市场规律，decoder-only名称不证明状态充分。"
     },
     "training": {
       "why": "历史目标保护已发生内容，概率目标检验对未来有用信息；用停梯度对照分辨联合监督作用。",
@@ -977,14 +980,14 @@
     },
     {
       "order": 2,
-      "name": "bounded_run_card",
+      "name": "architecture_information_flow_and_bounded_run_card",
       "ids": [
         "F01",
         "F05",
         "F08",
         "F11"
       ],
-      "status": "proposal_only_exact_details_and_budget_open"
+      "status": "architecture_detail_choice_and_matching_pending_then_budget"
     },
     {
       "order": 3,
@@ -1020,5 +1023,172 @@
       ],
       "status": "not_started"
     }
-  ]
+  ],
+  "architecture_reasoning_20261125": {
+    "date": "2026-11-25",
+    "status": "design_review_no_new_workers",
+    "task_ids": [
+      "F02",
+      "F04",
+      "F05",
+      "F08"
+    ],
+    "roadmap_sections": [
+      "3.6",
+      "3.7",
+      "3.8"
+    ],
+    "question": "视觉中的结构先验能否迁移到行情，decoder-only是否满足可独立复用状态的目标？",
+    "recommendation": "连续bar/合法区间token、关系感知因果Transformer、显式单状态瓶颈，同时历史回读与概率未来；不以纯下一根预测替代状态目标。",
+    "geometry": {
+      "observed_axes": [
+        "trading and wall time",
+        "interval extent/overlap/containment",
+        "scale relationship",
+        "typed OHLC versus volume/OI measurements"
+      ],
+      "not_assumed": [
+        "known Euclidean geometry of latent768",
+        "time reversal symmetry",
+        "price sign symmetry",
+        "energy conservation",
+        "intra-bar high-low ordering"
+      ],
+      "price_scale": "common positive multiplicative price change preserves log ratios, but tick/volatility/contract metadata matter"
+    },
+    "relation_bias": {
+      "form": "q_i*k_j/sqrt(d)+b_h(phi_ij)+causal_mask",
+      "priority": "time/interval/scale relationships",
+      "fixed_exponential": "existing proposal only, not locked physics",
+      "price_relation": "conditional candidate, not first batch; same raw price and scaling information must reach controls",
+      "learnable_bias": "candidate not selected; matched params/compute must be requalified"
+    },
+    "decoder_only_distinctions": [
+      "causal self-attention is not next-event loss by definition",
+      "decoder-only does not require autoregressive inference or discrete vocabulary",
+      "per-layer KV/recomputed history is additional runtime memory; final h is not automatically sufficient z"
+    ],
+    "bottleneck": {
+      "history_access": "downstream heads only z and declared metadata; query contains location not answer",
+      "free_forecast": "conditional on fixed z and previously generated returns, no true future or original history KV",
+      "direct_forecast_baseline": "full history allowed only as separately accounted baseline, not hidden access for z candidate"
+    },
+    "old_experiments": {
+      "early_AR": "causal Transformer + next-bar distribution is already in code/docs; code existence does not prove accepted performance",
+      "historical_AR512": "frozen state -> already observed64 history; different question from future forecasting",
+      "scale_pool": "old range16/32/64/128 pooling not identical to same-source multiresolution interval organization; prior no-balanced-gain result retained"
+    },
+    "matrix_disposition": "A/B/C questions and proposed6 main workers retained; B concrete relation/type mapping must freeze before code, not run old then add new. No extra worker or decoder search authorized.",
+    "priority_change_reason": "user explicitly asks to reconsider Transformer/decoder-only structure; resolve token relationships and public information boundary before locking resource/run card",
+    "sources": [
+      {
+        "url": "https://arxiv.org/abs/2010.11929",
+        "name": "ViT",
+        "used_for": "image patch tokens, not a claim of biological eye simulation"
+      },
+      {
+        "url": "https://arxiv.org/abs/2103.14030",
+        "name": "Swin",
+        "used_for": "local windows and hierarchical spatial organization"
+      },
+      {
+        "url": "https://arxiv.org/abs/2211.14730",
+        "name": "PatchTST",
+        "used_for": "time patches and channel-independent design as alternatives, not direct OHLC prescription"
+      },
+      {
+        "url": "https://arxiv.org/abs/2310.06625",
+        "name": "iTransformer",
+        "used_for": "variate-token attention as an alternative factorization"
+      },
+      {
+        "url": "https://arxiv.org/html/2310.10688v3",
+        "name": "TimesFM original",
+        "used_for": "patched causal self-attention and forecasting; decoder-style rather than discrete vocabulary requirement"
+      },
+      {
+        "url": "https://arxiv.org/html/2310.08278v3",
+        "name": "Lag-Llama",
+        "used_for": "causal decoder-only temporal model with Student-t probability output"
+      },
+      {
+        "url": "https://research.google/blog/timesfm-3-a-zero-shot-foundation-model-for-multivariate-forecasting/",
+        "name": "TimesFM-3 official",
+        "publication_date": "2026-08-31",
+        "used_for": "alternating temporal/variate attention; decoder-only backbone with nonautoregressive horizon output"
+      },
+      {
+        "url": "https://huggingface.co/docs/transformers/en/cache_explanation",
+        "name": "Hugging Face KV cache docs",
+        "used_for": "per-layer past K/V remain available during autoregressive inference; final vector is not whole runtime state"
+      },
+      {
+        "url": "https://arxiv.org/abs/2202.07765",
+        "name": "Perceiver AR",
+        "used_for": "read as background: causal input-to-latent compression, not single-vector market evidence"
+      }
+    ],
+    "local_evidence": [
+      {
+        "path": "docs/BABEL_AR.md",
+        "sha256": "81971a64b637ec39cc04733163fdf35a1c64d792089f9b941c913da4b0d632a9"
+      },
+      {
+        "path": "src/obson/babel/ar_model.py",
+        "sha256": "858c9f5af1a96415748668a17da963564db74fdb8bdd1534e6f4758b425816fd"
+      },
+      {
+        "path": "src/obson/babel/autoregressive.py",
+        "sha256": "f52f91c7148ebdc455235e788e5583d60cf678d9ce7544ed81bbe4125035bd33"
+      },
+      {
+        "path": "docs/BABEL_AR_RECONSTRUCTION.md",
+        "sha256": "439971a2b922c800f69902506450204113d4e562e185653f48ea85e31b1dcb60"
+      },
+      {
+        "path": "docs/BABEL_STATE_ROLLOUT768_PLAN.md",
+        "sha256": "138430ea584d78999c13c6bcb0b36fd1fa8daaa35269d98e6097f0056b71f57e"
+      },
+      {
+        "path": "docs/BABEL_CAUSAL_POOL768_DESIGN.md",
+        "sha256": "ae43d62a388e00dc390b8dc58a5bec35a0765fb2f8eefa3d93f4690fa21d5777"
+      },
+      {
+        "path": "docs/BABEL_CAUSAL_POOL768_REVIEW.md",
+        "sha256": "3602a81e12de62d392e1748d21c3efcd79d9f98713d58d8739b280b92d1491c4"
+      }
+    ],
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "以单状态可复用历史/当前/未来目标审视decoder-only，不用直接预测或图像外观替代embedding目标。",
+        "remaining": "没有新模型效果或交易收益结论。"
+      },
+      "architecture": {
+        "status": "open",
+        "evidence": "区分因果主干、下一事件目标、自由生成和公开状态瓶颈；明确区间可用时间mask及缓存信息。建议连续区间token、关系感知因果主干、显式单状态。",
+        "remaining": "B固定/可学习关系方案与类型映射尚未冻结；若增参需重新锁对照；未实现验证。"
+      },
+      "training": {
+        "status": "open",
+        "evidence": "历史/概率监督和A/B/C科学问题保留；纯下一步预测不作为历史保留替代；旧AR代码只作设计范围核对。",
+        "remaining": "无新梯度或训练证据；N/batch/读头预算与数值资格未锁。"
+      },
+      "validation": {
+        "status": "open",
+        "evidence": "同信息全历史预测器与仅z头分账，公开向量和KV总成本区分，冻结新用途与自由运行分开。",
+        "remaining": "不由论文结果推断本任务收益；候选参数公平性和独立样本支持待锁。"
+      },
+      "data": {
+        "status": "open",
+        "evidence": "没有读取或改变新行情；沿原已知分钟/周期资料，讨论确定聚合与信息损失。",
+        "remaining": "合法日历、选择时点、量仓口径等既有资格缺口不变。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "只更改roadmap/JSON/README和追加日志；只读已有AR/汇聚源文件与报告，未执行模型、安装依赖或改绑定文件。",
+        "remaining": "方案审查不等于实现、CUDA或科学通过。"
+      }
+    }
+  }
 }
