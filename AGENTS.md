@@ -12,8 +12,10 @@ this research protocol.
 - `docs/babel/BABEL_ROADMAP.md` and `docs/babel/BABEL_ROADMAP.json`: current requirements,
   fixed task IDs, status, dependencies and retained future hypotheses.
 - `docs/babel/BABEL_EXPERIMENT_WORKFLOW.md`: coding, report review and completion rules.
-- The protocol and evidence linked by the active task. Historical log entries do
-  not override the current roadmap or the user's newer instructions.
+- The protocol and evidence linked by the active task. The current roadmap is a
+  standalone design; `docs/babel/archive/` contains evidence-only historical
+  snapshots. Do not treat archived `current`/`next` fields or commands as active.
+  Historical records do not override the current roadmap or newer user instructions.
 
 ## Every code or experiment-plan change
 
@@ -59,6 +61,11 @@ recorded, without inventing scientific results or relaxing gates to pass.
   its JSON is a synchronized mirror. Update existing evidence documents when needed.
 - Do not create another explanatory/clarification/plan document for status corrections.
   Preserve historical bound protocols and report evidence; do not rewrite their hashes.
-- Current priority is correcting original errors, verifying affected conclusions, then
-  archiving reliable conclusions. Model improvement is not the closure criterion for
-  correcting an unsupported historical claim. No new optimization branch before that work.
+- The original correction priority was completed within its documented scope:
+  V01-V12/V14 are closed; V13 independent acceptance remains open. Preserve those
+  dispositions in the archive. New valid negative results do not reopen all repairs.
+  Any newly found error still requires scoped correction and conclusion disposition;
+  model improvement is not the closure criterion for an unsupported historical claim.
+- Current user authorization is design and documentation only. Follow the current
+  roadmap for the new minute-data design; do not execute archived restoration or
+  experiment commands. Implementation requires the user to explicitly request it.
