@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v2-current-only",
   "updated": "2026-11-25",
-  "current_iteration": "representation_first_external_context_later",
-  "current_iteration_scope": "F01/F05/F11：历史内容与当前描述优先；F08及未来用途条件保留。首批2x2训练因子改为历史掩码，未来编码梯度为0。",
+  "current_iteration": "first_stage_architecture_multitask_design_card",
+  "current_iteration_scope": "F01/F05/F11：补齐输入/主干/共享头、历史保留与掩码联合更新、默认权重和首项样本资格交付；仅方案，无训练。",
   "current_work_mode": {
     "mode": "design_and_records_only",
     "requested_on": "2026-11-24",
@@ -383,7 +383,7 @@
       "F08"
     ]
   },
-  "active_phase": "design_only_history_retention_current_description_and_mask_factorial_card",
+  "active_phase": "design_only_concrete_first_stage_card_data_resource_acceptance_gates_open",
   "active_order": [
     "F01",
     "F05",
@@ -391,7 +391,7 @@
     "V13"
   ],
   "next_after_active": {
-    "status": "design_revision_pending_exact_card_no_execution",
+    "status": "sample_qualification_then_resource_acceptance_card_no_execution",
     "task_ids": [
       "F01",
       "F02",
@@ -401,7 +401,7 @@
       "F11",
       "V13"
     ],
-    "action": "锁历史保留/当前描述的资格和验收题目，以及历史掩码依赖、抽样/权重与资源卡；未来融合/联合训练条件保留，不自动启动。",
+    "action": "第一项为F02/F04/F10样本资格：固定源/端点/统计与mask协议/样本页；当前先补其方案证据。明确授权实施后产出资格包，再以独立版本实现四臂；不恢复旧模型链。",
     "ready_entrypoint": null,
     "old_commands_active": false,
     "automatic_reruns": false
@@ -410,11 +410,11 @@
     "authorized_cuda_runs_now": 0,
     "proposed_main_workers": 8,
     "optimizer_updates_N": null,
-    "effective_batch": null,
+    "effective_batch": 64,
     "frozen_readout_budget": null,
     "gpu_hours_cap": null,
     "disk_cap": null,
-    "status": "revised_proposal_not_locked_zero_authorized",
+    "status": "default_batch64_not_released_N_resources_readouts_open_zero_authorized",
     "automatic_extensions": false,
     "previous_proposed_main_workers": 6,
     "change_reason": "按用户表示优先的澄清，保留结构×历史掩码四臂/两种子8worker提案；移除首批概率训练/预测头预算，不新增授权。",
@@ -423,7 +423,7 @@
   },
   "new_data_first_model_design_20261125": {
     "date": "2026-11-25",
-    "status": "revised_design_only_not_run_card",
+    "status": "explicit_first_stage_defaults_not_qualified_or_released",
     "task_ids": [
       "F01",
       "F02",
@@ -534,20 +534,30 @@
       "attention_positions_max_including_state": 513,
       "state_token_mask": "All arms: market reads only by own availability and never terminal state; state reads all available market+self. All6 layers may cross scale.",
       "cross_resolution": "Shared physical content has deterministic aggregation relations, not equality of full latent states. First matrix uses same-source views/shared encoder/physical targets, no extra cross-scale consistency loss; F04 supervision hypothesis retained separately.",
-      "state_self_logit_reference": "ordinary content self logit plus explicit state-type relation convention; exact bias treatment pending",
+      "state_self_logit_reference": "ordinary content self score; any state key relation bias0",
       "proposal_status": "relation_value_candidate_under_design; no fixed first2/last4 partition or head time constants; 6/768/12 resource proposal unchanged",
       "structured_candidate": "all6 availability-causal blocks with bounded interval-relation bias; layers2-6 market-token V mixes current V with layer1 V",
       "relation_features": [
-        "causal trading-time gap",
-        "interval lengths/ratio",
-        "overlap/containment",
-        "availability/quality"
+        "log1p trading_end_gap",
+        "log1p wall_end_gap",
+        "log1p query_trading_duration",
+        "log1p key_trading_duration",
+        "log((1+query_duration)/(1+key_duration))",
+        "trading_interval_IoU",
+        "contains_query_key",
+        "contains_key_query",
+        "query_coverage",
+        "key_coverage",
+        "query_is_state",
+        "key_is_state"
       ],
-      "relation_map": "bounded c*tanh(small MLP(phi)); exact parameterization and c not locked",
+      "relation_map": "per-layer MLP12->32->12, b=2*tanh, final projection zero-init; proposal not released",
       "value_residual": "Vtilde_l,j=(1-alpha_l,h)*V_l,j+alpha_l,h*V_1,j; sigmoid layer/head coefficients; initial0.5 proposal; market tokens only; state self uses current V",
       "value_source": "layer1 input projection before any cross-token mixing, from mask-sanitized joint bar inputs",
       "attention_base_measure": "uniform over valid tokens including declared state self; relation bias is score, not proof of Bayesian inference or duplicate-invariance; repeated equal-score key mass changes by log multiplicity; no new coverage-weight arm",
-      "value_bound_scope": "convex mixture norm bound for fixed Value vectors only; not end-to-end stability, invertibility or retention guarantee; inspired variant not exact equivalence to every ResFormer recipe"
+      "value_bound_scope": "convex mixture norm bound for fixed Value vectors only; not end-to-end stability, invertibility or retention guarantee; inspired variant not exact equivalence to every ResFormer recipe",
+      "input_mapping": "first_stage_design_card_20261125.input",
+      "numeric_defaults": "first_stage_design_card_20261125.backbone"
     },
     "historical_decoder": {
       "input": "z and physical interval query only; declared price reference for absolute display",
@@ -569,16 +579,26 @@
         "true neighbor price",
         "runtime cache"
       ],
-      "query_encoding": "physical end-age/duration/resolution; exact numerical encoding open_run_card_detail",
-      "geometry_equations": "a=log(Cq/Ct),b=log(Cq/Oq),u,d>=0; Cq=Ct*exp(a),Oq=Cq*exp(-b),Hq=max(Oq,Cq)*exp(u),Lq=min(Oq,Cq)*exp(-d); tick and intrabar ordering not guaranteed"
+      "query_encoding": [
+        "log1p end_age_trading",
+        "log1p end_age_wall",
+        "log1p duration_trading",
+        "log1p duration_wall",
+        "period_onehot_1",
+        "period_onehot_5",
+        "period_onehot_15",
+        "period_onehot_60"
+      ],
+      "geometry_equations": "a=log(Cq/Ct),b=log(Cq/Oq),u,d>=0; Cq=Ct*exp(a),Oq=Cq*exp(-b),Hq=max(Oq,Cq)*exp(u),Lq=min(Oq,Cq)*exp(-d); tick and intrabar ordering not guaranteed",
+      "detailed_default": "first_stage_design_card_20261125.decoder"
     },
     "objectives": {
-      "historical": "0.6 price +0.2 shape +0.2 activity, proposal not optimality claim",
+      "historical": "Lclean=.9Lpast+.1Lcurrent; Lpast=.6price+.2shape+.2activity; Lcurrent=.5shape+.5activity",
       "price": "half relative path, half adjacent differences derived from predictions",
-      "scale_and_age": "fixed train field/period scales; view-average and valid agebands1-16/17-64/>64; age0 separate; missing not zero",
-      "joint_lambda": "lambda_M fixed before scores using common scales/gradient and resource qualification, not locked; lambda_P=0 and no future branch in first stage",
+      "scale_and_age": "fixed train scales; valid views equal; trading-minute ages1-16/17-64/>64 weights.40/.35/.25 renormalized when absent",
+      "joint_lambda": "lambda_M=.25 explicit draft default; qualification before freeze; lambda_P=0",
       "gradient_control": "C/D differentiate L_history+lambda_M*L_mask for encoder/shared history head; A/B detach only masked encoder path. All heads have identical weighted clean/masked opportunities, separate common clipping. No probability head or future-label indirect path.",
-      "age0_mix": "supervised and separately evaluated; final mixing weight against historical agebands open_run_card_detail",
+      "age0_mix": "current intervals ending exactly at t; .1clean weight; no known-close score",
       "masked": "same historical query decoder on E(masked H_t); raw-minute dependency closure covers aggregates, previous-close ratios, rolling scales and public side info; only past targets excluding public current price anchor",
       "mixed": "paired clean and masked forwards with shared weights; fixed endpoints/queries/masks and combined encoder update; no whole-z equality; no future targets",
       "interpretation": "history-type labels direct encoder gradients; all shared historical heads receive matched mask adaptation; current objective contains no forecast",
@@ -586,7 +606,11 @@
       "query_risk": "E_(t~rho) sum_q w_tq*loss_tq; sample q~p with w/p or sample q~w with plain mean; fixed eligible support and normalization before sampling; same measure across arms",
       "difference_risk": "predict both real adjacent same-period legal intervals; no arbitrary sampled-pair adjacency or true-neighbor decoding; quadratic analogy aI+bD^T D only within stated assumptions, not global SmoothL1 identity",
       "future_status": "not_in_current_stage; no future head instantiated or fitted; future gradients absent; conditional F08 retained",
-      "lambda_P": 0
+      "lambda_P": 0,
+      "default_weights": "first_stage_design_card_20261125.loss",
+      "default_sampling": "first_stage_design_card_20261125.sampling",
+      "default_mask": "first_stage_design_card_20261125.mask",
+      "lambda_M": 0.25
     },
     "matrix": [
       {
@@ -660,10 +684,13 @@
       ],
       "weight_decay": 0.01,
       "clip_norm": 1,
-      "schedule": "5% warmup then cosine",
+      "schedule": "5% linear warmup then cosine to10%peak; one scheduler step per optimizer update",
       "precision": "uniform BF16 only if device/numeric qualified; critical targets/metrics sufficient precision",
       "status": "proposal_not_run_no_grid",
-      "limits": "AdamW decoupled parameter shrinkage not global optimum guarantee; record g_task dot actual_delta_theta alongside gradient cosines, with first-order/remainder limits"
+      "limits": "AdamW decoupled parameter shrinkage not global optimum guarantee; record g_task dot actual_delta_theta alongside gradient cosines, with first-order/remainder limits",
+      "effective_batch": 64,
+      "decay_groups": "matrices and learned embeddings decay; biases, norm and alpha scalars no decay",
+      "gradient_accumulation": "same effective endpoints and weighting, one optimizer update after accumulation; clip encoder and head separately"
     },
     "split_proposal": {
       "train": "2016-2023",
@@ -758,12 +785,11 @@
     ],
     "old_four_arm_disposition": "hypothesis retained, not queued or prerequisite; no new result claimed",
     "execution_gates_open": [
-      "final data/calendar/selection/field qualification",
-      "mask dependency closure and deterministic missing features",
-      "relation/value shape, state-self convention and actual parameter/compute accounting",
-      "lambda_M; lambda_P fixed0 and age0/query/task schedule",
-      "N/batch/readout budget/GPU-hours/disk",
-      "group support, comparison order, metric aggregation and acceptance"
+      "data snapshot/calendar/units/asof scope and support qualification",
+      "mask minimum visibility and implementation counterfactuals",
+      "real numerical/gradient/CUDA/restore preflight",
+      "N/micro/precision/GPU/disk/frozen-readout budgets",
+      "absolute content utility and frozen-current-use labels/metrics/comparison/acceptance"
     ],
     "authorized_cuda_runs_added": 0,
     "training_code_modified": false,
@@ -779,36 +805,37 @@
     "review": {
       "purpose": {
         "status": "pass_for_scope",
-        "evidence": "按用户明确优先级，历史保留与当前描述/复用是当前主线，纯K线预测不是成功条件。",
-        "remaining": "近似重建不保证所有未来外部组合都可用；无新模型成绩。"
+        "evidence": "历史保留和当前描述主线不变，未来条件后续；首卡让用户能看到第一步。",
+        "remaining": "无新模型成绩或通用充分性证明。"
       },
       "architecture": {
         "status": "pass_for_scope",
-        "evidence": "保留z=E(H)和公开元信息；外部F在后续独立用途融合，相同完整输入应有相同确定性状态。",
-        "remaining": "未观察市场隐变量不能凭空编码；外部融合尚未实现。"
+        "evidence": "输入28+时间8、6x768x12主干、关系12->32->12、状态自连接与FiLM4x256明确。",
+        "remaining": "未实现形状/数值/真实依赖与成本验证。"
       },
       "training": {
         "status": "pass_for_scope",
-        "evidence": "首批四臂仅历史保留/额外历史掩码梯度；lambda_P=0且不实例化概率头，头部掩码机会配对。",
-        "remaining": "lambda_M、w/rho/age0、N/batch及真实梯度检查未锁。"
+        "evidence": "两次共享前向、一次更新；lambda_M=.25、clean=.9past+.1current、端点/查询权重、detach和优化器分组明示。",
+        "remaining": "默认数值非已验证最优；实际梯度/资源/N/冻结读头预算未锁。"
       },
       "validation": {
         "status": "pass_for_scope",
-        "evidence": "内容保留和冻结当前描述为主验收；未来NLL/CRPS/ES规则仅条件保留，不选模、不晋升、不阻塞交付。",
-        "remaining": "内容绝对可用质量、复用指标、数值门槛与比较次序待锁。"
+        "evidence": "训练抽查询、固定评价完整位置；头部机会相同，未来不入选模，近端/字段/尾部保护保留。",
+        "remaining": "绝对质量、冻结用途目标/预算、数值验收/比较次序仍开放。"
       },
       "data": {
         "status": "open",
-        "evidence": "首批只按历史/预热/查询资格筛选，不以未来60步完整性筛样本；后续因子需发布时间/到达/版本。",
-        "remaining": "分钟快照/日历/口径仍未全部合格；没有外部因子数据资格。"
+        "evidence": "资格包四类实物和mask隐藏值不变性写明，闭包含原分钟聚合/前收/尺度/质量/侧信息。",
+        "remaining": "原始快照/日历/单位、合法段对范围、闭包后最低可见覆盖未完整资格。"
       },
       "engineering": {
         "status": "pass_for_scope",
-        "evidence": "同步现行roadmap/项目规则/入口并追加日志；5388a7a保留旧未执行三任务草案，冻结实验未改。",
-        "remaining": "仅方案修订，无模型、GPU执行、恢复或新科学验收。"
+        "evidence": "仅现行文档与JSON和追加日志；冻结实验不改，无新代码/训练入口。",
+        "remaining": "尚无真实CUDA前反向、恢复与离机资产；计划不是实施验收。"
       }
     },
     "roadmap_sections": [
+      "0",
       "1",
       "2",
       "3.1-3.10",
@@ -845,7 +872,7 @@
     {
       "gate": "budget",
       "items": [
-        "N/effective batch",
+        "N and hardware micro/precision (effectivebatch64 proposal)",
         "all frozen readout budgets",
         "GPU-hours/disk caps",
         "uniform numeric preflight"
@@ -855,19 +882,14 @@
     {
       "gate": "exact_run_card",
       "items": [
-        "raw-minute mask dependency closure including public scale/reference",
-        "interval relation and value residual exact parameter/initialization",
-        "common input mapping and extra effective parameter/FLOP accounting",
-        "query and state-self conventions",
-        "age0, query/task/mask probabilities and encoder/head gradient rules",
-        "joint coefficients, primary metric aggregation/comparison and thresholds",
-        "explicit endpoint/query target measure and unbiased estimator",
-        "joint scalar weights and detached-control derivative checks",
-        "causal dependency, duplicate-token and output-geometry invariants with defined scope",
-        "no future encoder or probability-head path in first matrix",
-        "past-only endpoint eligibility and frozen-current-use primary gates"
+        "verify declared raw-minute dependency closure and minimum visible coverage",
+        "validate tensor/gradient/state-self/numeric defaults in independent version",
+        "lock primary metrics/comparison/thresholds and current-use readout protocol",
+        "actual parameter/compute and restore checks before training",
+        "no future branch and no legacy model dependency"
       ],
-      "status": "open"
+      "status": "defaults_defined_qualification_and_acceptance_open",
+      "design_defaults_ref": "first_stage_design_card_20261125"
     }
   ],
   "operating_principles": {
@@ -949,9 +971,9 @@
   "progress_log": "docs/babel/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "revision_record": {
-    "reason": "用户明确：保存重要历史和表征当前行情更重要，未来可结合舆情/市场因子预测。",
-    "method_change": "首批从history+mask+future改为history+mask，未来梯度0且无概率头；预测晋升条件移至后续用途，样本资格不再要求未来标签。",
-    "supersedes_unexecuted_design_commit": "5388a7a",
+    "reason": "用户指出架构和训练细节不够、多任务不清、无法判断第一步。",
+    "method_change": "将既有两任务四臂方案细化为明确模块、梯度、抽样及数值默认；补首项样本资格包。不是新实验支线。",
+    "supersedes_unexecuted_design_commit": "3a90757",
     "completed_experiments_reinterpreted": false,
     "new_neural_code": false,
     "new_infrastructure_code": false,
@@ -960,33 +982,33 @@
   "review": {
     "purpose": {
       "status": "pass_for_scope",
-      "evidence": "按用户明确优先级，历史保留与当前描述/复用是当前主线，纯K线预测不是成功条件。",
-      "remaining": "近似重建不保证所有未来外部组合都可用；无新模型成绩。"
+      "evidence": "历史保留和当前描述主线不变，未来条件后续；首卡让用户能看到第一步。",
+      "remaining": "无新模型成绩或通用充分性证明。"
     },
     "architecture": {
       "status": "pass_for_scope",
-      "evidence": "保留z=E(H)和公开元信息；外部F在后续独立用途融合，相同完整输入应有相同确定性状态。",
-      "remaining": "未观察市场隐变量不能凭空编码；外部融合尚未实现。"
+      "evidence": "输入28+时间8、6x768x12主干、关系12->32->12、状态自连接与FiLM4x256明确。",
+      "remaining": "未实现形状/数值/真实依赖与成本验证。"
     },
     "training": {
       "status": "pass_for_scope",
-      "evidence": "首批四臂仅历史保留/额外历史掩码梯度；lambda_P=0且不实例化概率头，头部掩码机会配对。",
-      "remaining": "lambda_M、w/rho/age0、N/batch及真实梯度检查未锁。"
+      "evidence": "两次共享前向、一次更新；lambda_M=.25、clean=.9past+.1current、端点/查询权重、detach和优化器分组明示。",
+      "remaining": "默认数值非已验证最优；实际梯度/资源/N/冻结读头预算未锁。"
     },
     "validation": {
       "status": "pass_for_scope",
-      "evidence": "内容保留和冻结当前描述为主验收；未来NLL/CRPS/ES规则仅条件保留，不选模、不晋升、不阻塞交付。",
-      "remaining": "内容绝对可用质量、复用指标、数值门槛与比较次序待锁。"
+      "evidence": "训练抽查询、固定评价完整位置；头部机会相同，未来不入选模，近端/字段/尾部保护保留。",
+      "remaining": "绝对质量、冻结用途目标/预算、数值验收/比较次序仍开放。"
     },
     "data": {
       "status": "open",
-      "evidence": "首批只按历史/预热/查询资格筛选，不以未来60步完整性筛样本；后续因子需发布时间/到达/版本。",
-      "remaining": "分钟快照/日历/口径仍未全部合格；没有外部因子数据资格。"
+      "evidence": "资格包四类实物和mask隐藏值不变性写明，闭包含原分钟聚合/前收/尺度/质量/侧信息。",
+      "remaining": "原始快照/日历/单位、合法段对范围、闭包后最低可见覆盖未完整资格。"
     },
     "engineering": {
       "status": "pass_for_scope",
-      "evidence": "同步现行roadmap/项目规则/入口并追加日志；5388a7a保留旧未执行三任务草案，冻结实验未改。",
-      "remaining": "仅方案修订，无模型、GPU执行、恢复或新科学验收。"
+      "evidence": "仅现行文档与JSON和追加日志；冻结实验不改，无新代码/训练入口。",
+      "remaining": "尚无真实CUDA前反向、恢复与离机资产；计划不是实施验收。"
     }
   },
   "design_rationale": {
@@ -1032,7 +1054,7 @@
         "F05",
         "F11"
       ],
-      "status": "history_mask_and_current_use_card_data_weights_budgets_pending"
+      "status": "tensor_loss_sampling_step_defaults_defined_data_resources_acceptance_open"
     },
     {
       "order": 3,
@@ -1208,7 +1230,8 @@
     },
     "prior_unexecuted_design_evidence": "https://github.com/BardanYu2025/obson/blob/e060ca98f660579f0784c9f72a2ead6f31f13502/docs/babel/BABEL_ROADMAP.json",
     "latest_math_qualification": "mathematical_audit_20261125; unexecuted per-head weighting is superseded there",
-    "scope_after_representation_priority": "Prior derivations remain reference, but any probability/joint-future execution or gating prescription is superseded by representation_priority_20261125; no prior run affected."
+    "scope_after_representation_priority": "Prior derivations remain reference, but any probability/joint-future execution or gating prescription is superseded by representation_priority_20261125; no prior run affected.",
+    "record_scope": "earlier dated design/review snapshot; current numerical defaults and remaining gates are in first_stage_design_card_20261125; append-only progress retains original wording"
   },
   "branch_policy": {
     "active": "codex/babel-next",
@@ -1381,7 +1404,8 @@
         "evidence": "只修改roadmap MD/JSON与追加进度；修正迁移后的失效审计目录引用；冻结实验不变。",
         "remaining": "尚无新处理管线、缓存、模型代码或训练入口。"
       }
-    }
+    },
+    "record_scope": "earlier dated design/review snapshot; current numerical defaults and remaining gates are in first_stage_design_card_20261125; append-only progress retains original wording"
   },
   "mathematical_audit_20261125": {
     "status": "design_audited_under_conditions_not_implemented_or_superiority_proven",
@@ -1644,7 +1668,9 @@
     },
     "authorized_cuda_runs_added": 0,
     "training_code_modified": false,
-    "scope_after_representation_priority": "Prior derivations remain reference, but any probability/joint-future execution or gating prescription is superseded by representation_priority_20261125; no prior run affected."
+    "scope_after_representation_priority": "Prior derivations remain reference, but any probability/joint-future execution or gating prescription is superseded by representation_priority_20261125; no prior run affected.",
+    "latest_design_resolution": "first_stage_design_card_20261125 supplies architecture/lambda/w/rho/age0/batch defaults; resource/data/acceptance gates remain open; prior event records unchanged",
+    "record_scope": "earlier dated design/review snapshot; current numerical defaults and remaining gates are in first_stage_design_card_20261125; append-only progress retains original wording"
   },
   "representation_priority_20261125": {
     "status": "design_revised_not_implemented_or_trained",
@@ -1770,6 +1796,303 @@
       }
     },
     "authorized_cuda_runs_added": 0,
-    "training_code_modified": false
+    "training_code_modified": false,
+    "latest_design_resolution": "first_stage_design_card_20261125 supplies architecture/lambda/w/rho/age0/batch defaults; resource/data/acceptance gates remain open; prior event records unchanged",
+    "record_scope": "earlier dated design/review snapshot; current numerical defaults and remaining gates are in first_stage_design_card_20261125; append-only progress retains original wording"
+  },
+  "first_stage_design_card_20261125": {
+    "date": "2026-11-25",
+    "status": "explicit_defaults_design_only_not_released_not_run",
+    "task_ids": [
+      "F01",
+      "F05",
+      "F11"
+    ],
+    "question": "如何把当前历史状态方案变成可理解的模块连接、多任务更新及第一项交付？",
+    "roadmap_section": "0",
+    "sources": [
+      {
+        "name": "FiLM",
+        "url": "https://arxiv.org/abs/1709.07871",
+        "scope": "conditioning mechanism only; Babel configuration unvalidated"
+      },
+      {
+        "name": "BERT",
+        "url": "https://arxiv.org/abs/1810.04805",
+        "scope": "historical masking inspiration; no bidirectional future access"
+      }
+    ],
+    "input": {
+      "numeric_feature_count": 9,
+      "visible_flags": 9,
+      "artificial_dependency_flags": 9,
+      "scale_fallback_flags": 1,
+      "joint_projection": [
+        28,
+        768
+      ],
+      "context_mlp": [
+        8,
+        64,
+        768
+      ],
+      "context": [
+        "log1p end_age_trading_minutes",
+        "log1p end_age_wall_minutes",
+        "log1p duration_trading_minutes",
+        "log1p duration_wall_minutes",
+        "coverage_fraction",
+        "valid_warmup_fraction",
+        "sin_session_clock",
+        "cos_session_clock"
+      ],
+      "period_embedding": [
+        4,
+        768
+      ],
+      "unknown": "zero with nonvisible flag; artificial dependence includes fallback-recomputed fields",
+      "contract_lookup_embedding": false
+    },
+    "backbone": {
+      "blocks": 6,
+      "dim": 768,
+      "heads": 12,
+      "ffn": 3072,
+      "activation": "GELU",
+      "dropout": 0,
+      "layernorm_epsilon": 1e-05,
+      "final_state_layernorm": true,
+      "market_tokens": 512,
+      "terminal_state_tokens": 1,
+      "internal_tokens_are_full_rolling_states": false,
+      "terminal_state_key_relation_bias": 0
+    },
+    "relation": {
+      "feature_count": 12,
+      "mlp": [
+        12,
+        32,
+        12
+      ],
+      "bound": 2,
+      "final_projection_zero_init": true,
+      "features": [
+        "log1p trading_end_gap",
+        "log1p wall_end_gap",
+        "log1p query_trading_duration",
+        "log1p key_trading_duration",
+        "log((1+query_duration)/(1+key_duration))",
+        "trading_interval_IoU",
+        "contains_query_key",
+        "contains_key_query",
+        "query_coverage",
+        "key_coverage",
+        "query_is_state",
+        "key_is_state"
+      ],
+      "state_interval": "no physical interval: duration/overlap/containment0, separate type indicators",
+      "state_key_bias": 0,
+      "alpha_init": 0.5,
+      "alpha_layers": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "market_values_only": true,
+      "actual_extra_parameters_flops_pending": true
+    },
+    "decoder": {
+      "query_count": 8,
+      "query_fields": [
+        "log1p end_age_trading",
+        "log1p end_age_wall",
+        "log1p duration_trading",
+        "log1p duration_wall",
+        "period_onehot_1",
+        "period_onehot_5",
+        "period_onehot_15",
+        "period_onehot_60"
+      ],
+      "query_projection": [
+        8,
+        256
+      ],
+      "blocks": 4,
+      "width": 256,
+      "conditioning_projection": [
+        768,
+        512
+      ],
+      "block": "h + W2 GELU(W1((1+gamma(z))*LN(h)+beta(z)))",
+      "outputs": 7,
+      "all_conditioning_paths_zero_init": false,
+      "raw_or_token_bypass": false
+    },
+    "tasks": {
+      "T1": "clean observed-history retention",
+      "T2": "masked observed-minute reconstruction",
+      "current_description": "frozen encoder evaluation, not pretraining task3",
+      "future": "no branch, no targets, no gradients",
+      "same_E_and_D": true,
+      "whole_z_equality_loss": false
+    },
+    "loss": {
+      "lambda_mask": 0.25,
+      "lambda_future": 0,
+      "clean_past": 0.9,
+      "clean_current": 0.1,
+      "past_and_mask_groups": {
+        "price": 0.6,
+        "shape": 0.2,
+        "activity": 0.2
+      },
+      "current_groups": {
+        "shape": 0.5,
+        "activity": 0.5
+      },
+      "price_path_adjacent": [
+        0.5,
+        0.5
+      ],
+      "shape_fields": [
+        "body",
+        "upper_wick",
+        "lower_wick"
+      ],
+      "activity_fields": [
+        "log1pV",
+        "log1pOIstart",
+        "log1pOIend",
+        "derived_asinh_deltaOI"
+      ],
+      "smooth_l1_beta": 1,
+      "field_scales": "training only fixed per-field/per-period",
+      "invalid_terms": "eligibility and normalization before sampling",
+      "known_current_close_scored": false
+    },
+    "sampling": {
+      "rho": "uniform eligible product -> uniform contract -> uniform nonempty year-month -> uniform endpoint",
+      "view_weights": "uniform valid past views",
+      "age_unit": "trading_minutes",
+      "age_bands": [
+        [
+          1,
+          16
+        ],
+        [
+          17,
+          64
+        ],
+        [
+          65,
+          null
+        ]
+      ],
+      "age_weights": [
+        0.4,
+        0.35,
+        0.25
+      ],
+      "empty_age_groups": "renormalize within view",
+      "past_queries": 64,
+      "query_estimator": "sample by fixed w then plain mean, no extra w",
+      "current_queries": "all legal intervals ending exactly at t, max4",
+      "adjacent": "additional actual legal same-period neighbor predictions, never truth; validity fixed before sampling",
+      "evaluation": "all declared legal intervals at fixed endpoints, separately current/age/view/field"
+    },
+    "mask": {
+      "raw_span_count": 2,
+      "raw_span_minutes": 8,
+      "raw_targets": 16,
+      "candidate_support": "latest256 1minute observations excluding current; contiguous within qualified continuous session segment",
+      "pair_distribution": "uniform legal unordered disjoint span pairs",
+      "eligibility": "same inventory all arms, exclude if no legal pair and disclose scope",
+      "target_period": 1,
+      "target_weight": "uniform16 targets with .6/.2/.2 groups",
+      "closure": [
+        "OHLC aggregation field sources",
+        "summed volume",
+        "OI boundary sources",
+        "previous close ratios",
+        "rolling scales",
+        "derived quality flags",
+        "public side information",
+        "Value inputs"
+      ],
+      "scale": "train-fixed fallback on hidden-return dependency; recompute visible coordinates, flag replacement",
+      "counterfactual": "changing only hidden raw values cannot change masked encoder inputs/readable sideinfo, labels may change",
+      "effective_mask_fraction": "measure after closure, not16/256 over all fields",
+      "minimum_visible_coverage": "pending qualification before training"
+    },
+    "one_update": [
+      "sample effectivebatch64 endpoints with full own context",
+      "build paired clean/masked with fixed stats and queries",
+      "shared E/D forwards",
+      "C/D use scalar clean+.25mask; A/B detach masked z only",
+      "accumulate then separate E/D norm1 clipping",
+      "one AdamW step and one scheduler step; log task gradients and actual update"
+    ],
+    "first_action": {
+      "ids": [
+        "F02",
+        "F04",
+        "F10"
+      ],
+      "purpose": "qualification for F01/F05, no model comparison",
+      "outputs": [
+        "source hashes/calendar/units/exclusion ledger",
+        "split endpoint inventories and complete support",
+        "training statistics/fallback/query-mask protocol and coverage",
+        "fixed inspectable normal/boundary/missing/inactive/cold sample examples"
+      ],
+      "not_repeated": "existing20261124 basic file census",
+      "limits": "not yet authorized implementation; unresolved scopes quarantine; no future-label eligibility",
+      "next": "independent frozen qualification and four-arm training versions; no mutable cross-experiment imports or legacy checkpoint chain"
+    },
+    "remaining_gates": [
+      "data snapshot/calendar/units/asof scope and support qualification",
+      "mask minimum visibility and implementation counterfactuals",
+      "real numerical/gradient/CUDA/restore preflight",
+      "N/micro/precision/GPU/disk/frozen-readout budgets",
+      "absolute content utility and frozen-current-use labels/metrics/comparison/acceptance"
+    ],
+    "defaults_are_optimal": false,
+    "implementation_authorized": false,
+    "authorized_cuda_runs_added": 0,
+    "training_code_modified": false,
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "历史保留和当前描述主线不变，未来条件后续；首卡让用户能看到第一步。",
+        "remaining": "无新模型成绩或通用充分性证明。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "输入28+时间8、6x768x12主干、关系12->32->12、状态自连接与FiLM4x256明确。",
+        "remaining": "未实现形状/数值/真实依赖与成本验证。"
+      },
+      "training": {
+        "status": "pass_for_scope",
+        "evidence": "两次共享前向、一次更新；lambda_M=.25、clean=.9past+.1current、端点/查询权重、detach和优化器分组明示。",
+        "remaining": "默认数值非已验证最优；实际梯度/资源/N/冻结读头预算未锁。"
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "训练抽查询、固定评价完整位置；头部机会相同，未来不入选模，近端/字段/尾部保护保留。",
+        "remaining": "绝对质量、冻结用途目标/预算、数值验收/比较次序仍开放。"
+      },
+      "data": {
+        "status": "open",
+        "evidence": "资格包四类实物和mask隐藏值不变性写明，闭包含原分钟聚合/前收/尺度/质量/侧信息。",
+        "remaining": "原始快照/日历/单位、合法段对范围、闭包后最低可见覆盖未完整资格。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "仅现行文档与JSON和追加日志；冻结实验不改，无新代码/训练入口。",
+        "remaining": "尚无真实CUDA前反向、恢复与离机资产；计划不是实施验收。"
+      }
+    }
   }
 }
