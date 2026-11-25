@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v2-current-only",
   "updated": "2026-11-25",
-  "current_iteration": "clean_branch_and_immutable_experiment_layout",
-  "current_iteration_scope": "F05/F11 engineering isolation only; current model/data/2x2 scientific proposal unchanged; no neural code or training.",
+  "current_iteration": "data_organization_and_indicator_policy",
+  "current_iteration_scope": "F01/F02/F04/F10方案澄清：分钟快照到端点样本、因果标准化及指标职责；F12不新增排队，结构/损失/2x2矩阵不变。",
   "current_work_mode": {
     "mode": "design_and_records_only",
     "requested_on": "2026-11-24",
@@ -460,17 +460,18 @@
     ],
     "data": {
       "source": "/Users/bardan/private/tqdata_2015/month_contracts/bars",
-      "audit": "docs/babel/data_audit_20261124",
-      "new_check": "counts_and_sizes_only_not_new_full_audit",
-      "files_now": {
+      "audit": "experiments/20261124_minute_audit_v1/reports/20261124",
+      "new_check": "source_documentation_and_one_parquet_schema_only_no_new_full_audit",
+      "main_and_index": "not_required_first_inputs",
+      "identity": "exchange/product/full_contract_lifetime/start/end/available_at/source_SHA",
+      "aggregation": "O first,H max,L min,C last,V sum,OI start/end; historical session qualification, no every-N-rows grouping",
+      "selection_limit": "official main windows plus roll margins, not all contracts/full lifetime; as-of selection bias remains open",
+      "files_at_20261124_audit": {
         "month": 2382,
         "main": 44,
         "index": 6
       },
-      "main_and_index": "not_required_first_inputs",
-      "identity": "exchange/product/full_contract_lifetime/start/end/available_at/source_SHA",
-      "aggregation": "O first,H max,L min,C last,V sum,OI start/end; historical session qualification, no every-N-rows grouping",
-      "selection_limit": "official main windows plus roll margins, not all contracts/full lifetime; as-of selection bias remains open"
+      "inventory_status": "20261124_full_audit; later counts/sizes check only; current synchronization completion not asserted"
     },
     "features": {
       "numeric_classes": 9,
@@ -927,43 +928,43 @@
   "progress_log": "docs/babel/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "revision_record": {
-    "reason": "User explicitly requested a new clean branch and independent immutable experiment directories.",
-    "method_change": "Repository/asset organization only; scientific architecture/data/training/evaluation proposal unchanged.",
+    "reason": "用户询问数据如何组织，训练是否依赖技术指标；按既有要求记录讨论。",
+    "method_change": "明确已有数据合同和指标非必需角色；修正审计迁移目录引用与计数时点标签，不改变科学对照或冻结实验。",
     "completed_experiments_reinterpreted": false,
     "new_neural_code": false,
-    "new_infrastructure_code": true,
+    "new_infrastructure_code": false,
     "new_training": false
   },
   "review": {
     "purpose": {
       "status": "pass_for_scope",
-      "evidence": "Workspace unified with user PyCharm; research objective unchanged.",
-      "remaining": "No new model capability claimed."
+      "evidence": "以原始历史内容建立可复用因果状态；技术指标不替代总体目标。",
+      "remaining": "设计澄清不是新能力成绩。"
     },
     "architecture": {
-      "status": "not_applicable",
-      "evidence": "No model or experimental source changed.",
-      "remaining": "Existing design gates unchanged."
+      "status": "pass_for_scope",
+      "evidence": "每个已闭合端点取得自身多尺度历史；未来仅为标签，现有骨干与公共状态不变。",
+      "remaining": "掩码派生依赖、实际到达延迟仍需固定与验证。"
     },
     "training": {
-      "status": "not_applicable",
-      "evidence": "No neural execution or training configuration changes.",
-      "remaining": "Authorized CUDA budget remains zero."
+      "status": "pass_for_scope",
+      "evidence": "配对端点/查询/分区，未加入指标损失或训练支线；授权CUDA仍0。",
+      "remaining": "分组配额、实际权重、掩码及联合梯度预算未锁。"
     },
     "validation": {
       "status": "pass_for_scope",
-      "evidence": "Branch, immutable experiment seal and local asset hashes checked after checkout.",
-      "remaining": "Workspace checks are not model validation."
+      "evidence": "全输入/预热/目标支持分区，训练专属统计与固定评价分组，直接统计保留为对照。",
+      "remaining": "独立数据资格和数值接受线尚未验收。"
     },
     "data": {
-      "status": "pass_for_scope",
-      "evidence": "39 formerly tracked local assets backed up and restored with SHA256; external minute root untouched.",
-      "remaining": "No new data qualification performed."
+      "status": "open",
+      "evidence": "复核冻结审计、交付说明和一个月合约Parquet列结构；没有重扫全量。",
+      "remaining": "快照、历史日历、单双边量仓口径、静止/缺失及选择可用性仍开放。"
     },
     "engineering": {
       "status": "pass_for_scope",
-      "evidence": "Primary checkout now holds codex/babel-next; old worktree detached and unlinked from chat; explicit canonical workdir recorded. Original docs edit saved as full file, patch and Git stash.",
-      "remaining": "App attachment API accepts linked worktrees only; primary binding not claimed. All operations explicitly use canonical primary path."
+      "evidence": "只修改roadmap MD/JSON与追加进度；修正迁移后的失效审计目录引用；冻结实验不变。",
+      "remaining": "尚无新处理管线、缓存、模型代码或训练入口。"
     }
   },
   "design_rationale": {
@@ -1216,5 +1217,152 @@
     "preserved_stash": "0c4171ffed46c058761185fc1aa7585b77c20fdd",
     "tracked_asset_restoration_count": 39,
     "external_minute_data_untouched": true
+  },
+  "data_organization_20261125": {
+    "status": "design_only_not_implemented_not_training_qualified",
+    "task_ids": [
+      "F01",
+      "F02",
+      "F04",
+      "F10"
+    ],
+    "indicator_branch": "F12_retained_not_queued",
+    "requirement_ids": [
+      "N01",
+      "N02",
+      "N03",
+      "N04",
+      "N05",
+      "N06",
+      "N07",
+      "N08",
+      "N09"
+    ],
+    "evidence": [
+      {
+        "path": "/Users/bardan/private/tqdata_2015/训练数据使用说明.md",
+        "sha256": "28751380b6090df4f6d19a1782b09766020f19f29a1a694a86775715c1a42000"
+      },
+      {
+        "path": "experiments/20261124_minute_audit_v1/reports/20261124/summary.json",
+        "sha256": "2dd6eb90300208808c636fb627523207ecbecf216d61923469a6975269eb77e9"
+      },
+      {
+        "path": "experiments/20261124_minute_audit_v1/reports/20261124/quality_notes.json",
+        "sha256": "4afb59764ceb5400f71187245eb0386e7895cc74e51ce5c7def008a88f9faf5d"
+      }
+    ],
+    "official_field_reference": "https://doc.shinnytech.com/tqsdk/latest/usage/mddatas.html",
+    "schema_spotcheck": {
+      "path": "/Users/bardan/private/tqdata_2015/month_contracts/bars/sc/INE_sc2202_2021-12-06_2022-01-18.parquet",
+      "columns": [
+        "datetime",
+        "datetime_nano",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "open_oi",
+        "close_oi"
+      ],
+      "scope": "one_file_schema_only_not_row_quality_or_full_inventory"
+    },
+    "layers": [
+      {
+        "name": "immutable_raw_snapshot",
+        "contents": "文件/说明/合约清单/SHA；训练不跟随同步目录自动变化"
+      },
+      {
+        "name": "qualified_single_contract_minutes",
+        "contents": "完整生命周期键、OHLCV/OI、区间起末/可用时间、交易日历与质量；冲突隔离不静默覆盖"
+      },
+      {
+        "name": "same_source_multiscale_views",
+        "contents": "1/5/15/60分钟，原分钟依赖、覆盖与闭合身份；不将时段尾部短格伪装完整格"
+      },
+      {
+        "name": "endpoint_sample_index",
+        "contents": "合约+t+快照/协议身份，各尺度切片、预热、分区、历史查询与未来标签依赖；避免复制所有重叠窗口"
+      }
+    ],
+    "sample": {
+      "unit": "一个已收盘端点t及它自己的完整H_t，不以窗口早期短前缀替代",
+      "coarse_availability": "只用截至t已经闭合的粗格；粗格未闭合期间的新分钟仍可由1分钟视图提供",
+      "arrival_assumption": "没有真实到达日志时，闭合可用是离线理想假设；实盘延迟和历史修订未验证",
+      "tasks": "干净历史保留、已发生内容遮挡、未来监督答案分开；共享编码器的现行梯度矩阵不变",
+      "mask_closure": "粗格、前收、滚动统计、指标和公开辅助信息中的被遮答案都必须清理；精确算法尚未锁定"
+    },
+    "sampling_and_splits": {
+      "training": "按品种/合约/时间组抽端点，配额待卡锁定；不按未来涨幅或形态好看筛选",
+      "fairness": "所有臂相同端点、查询、输入支持和训练专属尺度",
+      "partition": "沿用既定时间及跨品种提案；在拟合统计前分区，计入全部输入/预热/历史及未来标签支持",
+      "shuffle": "训练分区内部打乱合法；重叠样本随机分到训练/验证非法",
+      "evaluation": "固定端点与近中远/尺度/字段清单，按时间/合约组报告；不将重叠分钟视作独立样本"
+    },
+    "indicator_policy": {
+      "core": "原始价格/成交/持仓的相对表达与因果尺度、时间/质量上下文",
+      "engineered_statistics": "历史波动、log量仓和相对坐标属于人工处理，保留原波动尺度；不宣称零人工特征",
+      "not_required_first_inputs_or_primary_labels": [
+        "EMA",
+        "MACD",
+        "RSI",
+        "PCA_teacher"
+      ],
+      "why": "同一H的确定函数不新增外部信息，但可能帮助有限模型优化；不预判指标无用",
+      "extra_context": "更长预热或其他市场确实扩展输入；必须对照配平信息与支持，不能全部归因指标公式",
+      "roles": "直接统计比较方法可以保留；辅助输入/教师只在可定位缺口后条件立项，不增加本批worker",
+      "no_source_smoothing": "不先以均线替代真实起伏、删除影线；保留程度由分项误差与用途检验"
+    },
+    "open_data_gates": [
+      "冻结仍可能同步的最终快照",
+      "历史交易时段、粗格边界/尾段和完整性",
+      "单/双边量仓历史口径；交付说明的可能性未确认，不能统一除以2",
+      "静止行情、休市、缺失与冲突",
+      "主力窗口选择当时可用性",
+      "掩码完整依赖与不可见辅助量处理"
+    ],
+    "engineering": "本实验拥有处理代码/配置/尺度与样本清单；外部大数据只读按SHA引用，禁止调用可变外部加载脚本",
+    "authorized_cuda_runs_added": 0,
+    "training_code_modified": false,
+    "roadmap_sections": [
+      "2.1-2.7",
+      "4.5",
+      "5.1",
+      "8",
+      "9"
+    ],
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "以原始历史内容建立可复用因果状态；技术指标不替代总体目标。",
+        "remaining": "设计澄清不是新能力成绩。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "每个已闭合端点取得自身多尺度历史；未来仅为标签，现有骨干与公共状态不变。",
+        "remaining": "掩码派生依赖、实际到达延迟仍需固定与验证。"
+      },
+      "training": {
+        "status": "pass_for_scope",
+        "evidence": "配对端点/查询/分区，未加入指标损失或训练支线；授权CUDA仍0。",
+        "remaining": "分组配额、实际权重、掩码及联合梯度预算未锁。"
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "全输入/预热/目标支持分区，训练专属统计与固定评价分组，直接统计保留为对照。",
+        "remaining": "独立数据资格和数值接受线尚未验收。"
+      },
+      "data": {
+        "status": "open",
+        "evidence": "复核冻结审计、交付说明和一个月合约Parquet列结构；没有重扫全量。",
+        "remaining": "快照、历史日历、单双边量仓口径、静止/缺失及选择可用性仍开放。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "只修改roadmap MD/JSON与追加进度；修正迁移后的失效审计目录引用；冻结实验不变。",
+        "remaining": "尚无新处理管线、缓存、模型代码或训练入口。"
+      }
+    }
   }
 }
