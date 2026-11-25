@@ -1,8 +1,8 @@
 {
   "schema": "babel-roadmap-v2-current-only",
   "updated": "2026-11-25",
-  "current_iteration": "first_stage_architecture_multitask_design_card",
-  "current_iteration_scope": "F01/F05/F11：补齐输入/主干/共享头、历史保留与掩码联合更新、默认权重和首项样本资格交付；仅方案，无训练。",
+  "current_iteration": "architecture_information_organization_review",
+  "current_iteration_scope": "F05/F11：解释简图隐藏的实际通路，区分合理参照与已证实优秀架构，记录状态组织的具体讨论方向；不改变首批矩阵或训练授权。",
   "current_work_mode": {
     "mode": "design_and_records_only",
     "requested_on": "2026-11-24",
@@ -971,9 +971,10 @@
   "progress_log": "docs/babel/BABEL_PROGRESS_LOG.jsonl",
   "priority_policy": "New user instructions > current roadmap and locked active protocol > historical chronological suggestions. Changes recorded, original evidence never overwritten.",
   "revision_record": {
-    "reason": "用户指出架构和训练细节不够、多任务不清、无法判断第一步。",
-    "method_change": "将既有两任务四臂方案细化为明确模块、梯度、抽样及数值默认；补首项样本资格包。不是新实验支线。",
-    "supersedes_unexecuted_design_commit": "3a90757",
+    "reason": "用户认为连接图过于简单，需要审视架构理由而非仅补参数。",
+    "method_change": "无运行配方改动；补输入/编码信息损失界限和编码期多状态讨论，未入队。",
+    "supersedes_unexecuted_design_commit": null,
+    "reviewed_commit": "2a54927",
     "completed_experiments_reinterpreted": false,
     "new_neural_code": false,
     "new_infrastructure_code": false,
@@ -982,33 +983,33 @@
   "review": {
     "purpose": {
       "status": "pass_for_scope",
-      "evidence": "历史保留和当前描述主线不变，未来条件后续；首卡让用户能看到第一步。",
-      "remaining": "无新模型成绩或通用充分性证明。"
+      "evidence": "以历史内容和当前状态为目标，区分概览图简洁、架构合理性和已验证优越性。",
+      "remaining": "没有新模型成绩，不把结构复杂当进步。"
     },
     "architecture": {
       "status": "pass_for_scope",
-      "evidence": "输入28+时间8、6x768x12主干、关系12->32->12、状态自连接与FiLM4x256明确。",
-      "remaining": "未实现形状/数值/真实依赖与成本验证。"
+      "evidence": "说明市场token在层内仍保留；明确多尺度输入不等于层级表示，Value通路不等于信息必然进入z。补编码期多状态的合同及旧解码槽区别。",
+      "remaining": "768维/单汇总最优性未证明；多状态仅讨论，未完成公平候选设计或加入矩阵。"
     },
     "training": {
       "status": "pass_for_scope",
-      "evidence": "两次共享前向、一次更新；lambda_M=.25、clean=.9past+.1current、端点/查询权重、detach和优化器分组明示。",
-      "remaining": "默认数值非已验证最优；实际梯度/资源/N/冻结读头预算未锁。"
+      "evidence": "现有两任务、梯度和数值默认不变；没有因图简单叠加损失或延长训练。",
+      "remaining": "历史保真与填空的取舍须真实实验；不能预设短期均为噪声。"
     },
     "validation": {
       "status": "pass_for_scope",
-      "evidence": "训练抽查询、固定评价完整位置；头部机会相同，未来不入选模，近端/字段/尾部保护保留。",
-      "remaining": "绝对质量、冻结用途目标/预算、数值验收/比较次序仍开放。"
+      "evidence": "分清输入聚合信息丢失、编码信息丢失与读头/优化缺口；同状态大小不冒称同参数/算力。",
+      "remaining": "新组织若入矩阵需先锁配对通路/成本/验收；当前不安排额外worker。"
     },
     "data": {
       "status": "open",
-      "evidence": "资格包四类实物和mask隐藏值不变性写明，闭包含原分钟聚合/前收/尺度/质量/侧信息。",
-      "remaining": "原始快照/日历/单位、合法段对范围、闭包后最低可见覆盖未完整资格。"
+      "evidence": "远段粗OHLC不唯一确定分钟顺序，首项样本资格及声明观察范围保持。",
+      "remaining": "无新数据扫描，历史日历/口径/支持资格仍开放。"
     },
     "engineering": {
       "status": "pass_for_scope",
-      "evidence": "仅现行文档与JSON和追加日志；冻结实验不改，无新代码/训练入口。",
-      "remaining": "尚无真实CUDA前反向、恢复与离机资产；计划不是实施验收。"
+      "evidence": "仅现行roadmap/JSON与追加进度，当前四臂和冻结实验保持，真实代码未动。",
+      "remaining": "没有新模型实现、CUDA运行或恢复；文档检查不证明科学效果。"
     }
   },
   "design_rationale": {
@@ -2094,5 +2095,93 @@
         "remaining": "尚无真实CUDA前反向、恢复与离机资产；计划不是实施验收。"
       }
     }
+  },
+  "architecture_simplicity_review_20261125": {
+    "date": "2026-11-25",
+    "status": "design_review_only_no_candidate_queued",
+    "task_ids": [
+      "F05",
+      "F11"
+    ],
+    "trigger": "用户指出整体连接图很简单，要求架构理由更充分。",
+    "findings": [
+      "Simple diagram does not imply weak model; existing size and module names do not prove adequacy.",
+      "Up to512 market states of width768 remain inside encoder blocks; single public endpoint is not early global collapse.",
+      "Same-source multiscale observations are not a learned hierarchy; relation bias does not guarantee overlap accounting.",
+      "Value-residual access does not guarantee content reaches public z.",
+      "Single768 state is a storage/organization starting assumption, not a proven sufficient or optimal state.",
+      "Input aggregation loses distinctions that decoder depth cannot uniquely recover from absent information."
+    ],
+    "discussion_candidate": {
+      "name": "encoder_side_multiple_content_states",
+      "status": "not_queued_not_default",
+      "contract": "S_t=R(T_t) in R^(Kxd_s); z=vec(S_t); K*d_s=768; unchanged D(z,q)",
+      "example_only": [
+        8,
+        96
+      ],
+      "essential_difference": "multiple states read legal hidden history during compression, not reshape/project a completed z inside decoder",
+      "not_novel_claim": true,
+      "limits": [
+        "flattening is bijective rearrangement, not more information",
+        "existing12head attention already supplies multiple reads",
+        "equal state scalars/precision is not equal parameters or compute",
+        "state semantics not assigned as trend/noise or order-flow identities",
+        "no extra state/KV bypass to historical head"
+      ],
+      "comparison_requirements": [
+        "same input, backbone, history head, losses, endpoint exposure and selection opportunity",
+        "declare additional effective parameters/cache/FLOPs",
+        "declare full causal read/write paths",
+        "explicit replacement or bounded new matrix decision before release"
+      ]
+    },
+    "sources": [
+      {
+        "url": "https://arxiv.org/abs/2104.11227",
+        "name": "Multiscale Vision Transformers",
+        "scope": "feature hierarchy example in vision, not financial validation"
+      },
+      {
+        "url": "https://arxiv.org/abs/2107.14795",
+        "name": "Perceiver IO",
+        "scope": "latent representation and querying reference, not Babel invention or evidence of superiority"
+      }
+    ],
+    "decision": "Existing unexecuted2x2 retained; discuss information organization underF05, no added workers/losses or automatic next experiment. First sample-qualification deliverable unchanged.",
+    "review": {
+      "purpose": {
+        "status": "pass_for_scope",
+        "evidence": "以历史内容和当前状态为目标，区分概览图简洁、架构合理性和已验证优越性。",
+        "remaining": "没有新模型成绩，不把结构复杂当进步。"
+      },
+      "architecture": {
+        "status": "pass_for_scope",
+        "evidence": "说明市场token在层内仍保留；明确多尺度输入不等于层级表示，Value通路不等于信息必然进入z。补编码期多状态的合同及旧解码槽区别。",
+        "remaining": "768维/单汇总最优性未证明；多状态仅讨论，未完成公平候选设计或加入矩阵。"
+      },
+      "training": {
+        "status": "pass_for_scope",
+        "evidence": "现有两任务、梯度和数值默认不变；没有因图简单叠加损失或延长训练。",
+        "remaining": "历史保真与填空的取舍须真实实验；不能预设短期均为噪声。"
+      },
+      "validation": {
+        "status": "pass_for_scope",
+        "evidence": "分清输入聚合信息丢失、编码信息丢失与读头/优化缺口；同状态大小不冒称同参数/算力。",
+        "remaining": "新组织若入矩阵需先锁配对通路/成本/验收；当前不安排额外worker。"
+      },
+      "data": {
+        "status": "open",
+        "evidence": "远段粗OHLC不唯一确定分钟顺序，首项样本资格及声明观察范围保持。",
+        "remaining": "无新数据扫描，历史日历/口径/支持资格仍开放。"
+      },
+      "engineering": {
+        "status": "pass_for_scope",
+        "evidence": "仅现行roadmap/JSON与追加进度，当前四臂和冻结实验保持，真实代码未动。",
+        "remaining": "没有新模型实现、CUDA运行或恢复；文档检查不证明科学效果。"
+      }
+    },
+    "authorized_cuda_runs_added": 0,
+    "training_code_modified": false
   }
 }
