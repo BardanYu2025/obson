@@ -1,6 +1,6 @@
 {
   "schema": "babel-roadmap-v2-current-only",
-  "updated": "2026-11-26",
+  "updated": "2026-11-27",
   "current_iteration": "fixed_budget_observable_and_learned_state",
   "current_iteration_scope": "数据、架构、训练、评测、数学统一修订；明示事实与学习到的额外复用分开验收。设计与 CPU 算术。",
   "current_work_mode": {
@@ -835,7 +835,12 @@
         "order-flow identities",
         "future-window normalization"
       ],
-      "warmup_audit_resolution": "64 contiguous qualified pre-current close returns require65 boundary closes; no skip across unknown gaps; calendar-qualified session breaks explicit"
+      "warmup_audit_resolution": "64 contiguous qualified pre-current close returns require65 boundary closes; no skip across unknown gaps; calendar-qualified session breaks explicit",
+      "conditional_indicator_diagnostic": {
+        "status": "conditional F12 diagnostic only",
+        "example": "Compute close-to-EMA deviation from the same closed bars. A proposed frozen-state probe can check readability. If a specific deficit motivates an input trial, match raw history, initialization/warmup support, training budget and held-out uses across arms with and without that indicator.",
+        "active_indicator_branch": false
+      }
     },
     "input": {
       "numeric_feature_count": 9,
@@ -1155,7 +1160,8 @@
       "conditional": "Trigger only on development data when both paired seeds meet the predeclared relative R gain and the overall U or any family exceeds its protected degradation. Then four frozen states each fit one fresh direct D256 with common protocol, at most four; report separately. No final holdout trigger.",
       "coherence": "same physical parent-child complete partitions on clean observed history; no latent equality or extra unobserved minute targets",
       "R_perp": "mean ||(I-UU.T)(a_hat-a)||^2/(14*s_price_period^2) on common valid blocks only; average blocks within valid view, views within endpoint, then renormalize rho over endpoints with support. Coverage and invalids separately, all in R.",
-      "conditional_seed_scope": "Check R per paired seed; for U use the release seed 42 paired comparison at the prespecified guard thresholds."
+      "conditional_seed_scope": "Check R per paired seed; for U use the release seed 42 paired comparison at the prespecified guard thresholds.",
+      "observed_resolution_and_price_precision": "Recover only observed closed intervals at the declared resolution, using common C_t only to restore absolute prices. Report error by lookback, field and period in bps/ticks, plus tail error. Technical shape landmarks at finer resolution require the corresponding ordered inputs; empirical tick-level accuracy has not been measured."
     },
     "current_description": {
       "horizons_trade_minutes": [
@@ -1355,7 +1361,30 @@
           }
         ]
       },
-      "implementation_conventions_added": "Common paper defaults for previously unspecified hidden activations in the time and relation MLPs and for neutral terminal features. No new experimental arm."
+      "implementation_conventions_added": "Common paper defaults for previously unspecified hidden activations in the time and relation MLPs and for neutral terminal features. No new experimental arm.",
+      "frozen_technical_shape_description": {
+        "roadmap_anchor": "technical-patterns",
+        "status": "conditional downstream research hypothesis, not queued or run",
+        "task_ids": [
+          "F11"
+        ],
+        "scope": "From one frozen endpoint state, describe geometry visible by t, locate its evidence, and test reuse across instruments and dates.",
+        "current_regime_description": "Use the existing six observed descriptors at 16/64/256 trading minutes. Optional multi-label descriptions by horizon, with train-defined direction, volatility and activity thresholds; rare, ambiguous or unsupported examples included.",
+        "time_contract": "Record bar/level and both landmark time and first-known time. Replay truncated prefixes with an explicit candidate/confirmed/invalidated status and no retrospective rewrite. Insufficient support gets a separate status.",
+        "patterns": {
+          "head_and_shoulders": "Declare prior uptrend, pivot price field and confirmation, shoulder tolerance and spacing, two-trough neckline, and whether volume is required. One version confirms on a close below the neckline. Return the five extrema, neckline and first confirmation.",
+          "chan": "Fix the inclusion merge, tie handling, stroke and segment definitions, base and recursive levels. Locate top/bottom fractals, stroke endpoints, then segment and centre boundaries. Respect the right-hand processed candle and the first date the adopted rule can confirm each structure."
+        },
+        "validation": "Compare the same timestamped rule on the raw and reconstructed bars with a direct stage/landmark readout trained only on frozen z. Same-information raw/linear-representation controls where fitting a new head. Report event precision/recall, landmark time & price error, relative confirmation lag and abstention/coverage on held-out periods and instruments; include invalidated lookalikes. Display raw charts only for reference and inspection.",
+        "individual": "A named practitioner's judgement requires contemporaneous positive, negative and declined examples, observed context, decision timing and independent validation. For a shared interpretation also measure blind labeler agreement. Rule or judgement fidelity does not estimate profitability.",
+        "sources": [
+          "https://www.nber.org/system/files/working_papers/w7613/w7613.pdf",
+          "https://chartschool.stockcharts.com/table-of-contents/chart-analysis/chart-patterns/head-and-shoulders-top",
+          "https://blog.sina.com.cn/s/blog_486e105c01000bf2.html",
+          "https://blog.sina.com.cn/s/blog_486e105c010007p1.html"
+        ],
+        "new_fits_in_active_budget": 0
+      }
     },
     "implementation_authorized": false,
     "executed": false,
@@ -1667,6 +1696,99 @@
           "canonical_singleton_vs_ordered_duplicates_max_abs": 0
         },
         "scope": "Standalone deterministic array and scalar arithmetic; no network, training, weights, or new market-data scan."
+      },
+      "technical_shape_coarse_resolution_example": {
+        "scope": "synthetic integer-minute arithmetic; one 15-minute parent only; close-based extrema, common prior rise, no model, no pattern labels from real data",
+        "minute_closes_A": [
+          101,
+          103,
+          104,
+          103,
+          101,
+          103,
+          105,
+          107,
+          104,
+          101,
+          103,
+          104,
+          103,
+          100,
+          99
+        ],
+        "minute_closes_B": [
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107,
+          106,
+          105,
+          104,
+          103,
+          102,
+          101,
+          100,
+          99
+        ],
+        "shared_15m_OHLC_V_OIstart_OIend": [
+          100,
+          107,
+          99,
+          99,
+          15,
+          20,
+          20
+        ],
+        "A_pivots_event_value_kind_first_known": [
+          [
+            3,
+            104,
+            "peak",
+            4
+          ],
+          [
+            5,
+            101,
+            "trough",
+            6
+          ],
+          [
+            8,
+            107,
+            "peak",
+            9
+          ],
+          [
+            10,
+            101,
+            "trough",
+            11
+          ],
+          [
+            12,
+            104,
+            "peak",
+            13
+          ]
+        ],
+        "B_pivots_event_value_kind_first_known": [
+          [
+            7,
+            107,
+            "peak",
+            8
+          ]
+        ],
+        "A_first_close_below_neckline_after_right_confirmation": 14,
+        "fixed_peak_min_gap_ticks_by_error_bound": {
+          "1": 1,
+          "2": -1
+        },
+        "construction": "Same prior rise to 100, then one continuous 15-minute parent. The first minute opens at 100 and each later minute at the previous close. H/L are the max/min of O and C, each minute has V=1 and starts/ends with OI=20. Pivots use local strictly higher/lower minute closes with one observed right neighbor. The illustrative neckline criterion is a close strictly below the line through the two troughs.",
+        "figure": "docs/babel/figures/babel_shape_resolution.png"
       }
     },
     "training_tasks": {
