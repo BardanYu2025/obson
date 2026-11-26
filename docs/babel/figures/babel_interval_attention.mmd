@@ -1,0 +1,31 @@
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"PingFang SC, Hiragino Sans GB, Arial, sans-serif","fontSize":"17px","lineColor":"#53657b","textColor":"#14293a","edgeLabelBackground":"#ffffff"},"flowchart":{"htmlLabels":false,"useMaxWidth":false,"curve":"linear","nodeSpacing":28,"rankSpacing":23,"wrappingWidth":380,"diagramPadding":12,"padding":9}}}%%
+flowchart TB
+    source("当前隐藏值 X · [B,T,768]")
+    qkv("逐位置归一化后投影 Q、K、V<br/>每项 [B,12,T,64]")
+    geom("区间关系 φ · 12 项<br/>每层 MLP 产生 12 个有界偏置")
+    allowed("可用时刻与位置角色<br/>给出允许读取的键")
+    first("首层市场 Value<br/>保留对应 K 线的位置")
+    weights("注意力权重 A · [B,12,T,T]<br/>QKᵀ/8 加关系偏置，仅对合法键归一")
+    values("当前层与首层 Value 逐头混合<br/>第 2～6 层作用于市场键")
+    read("A × Value → 合并 12 头 → 输出投影")
+    skip("加回 X 得到 Y · [B,T,768]")
+    ff("加回前馈结果 Y + FFN(LN(Y))<br/>768 → 3072 → 768")
+    source --> qkv
+    qkv --> weights
+    geom --> weights
+    allowed --> weights
+    qkv --> values
+    first --> values
+    weights --> read
+    values --> read
+    read --> skip
+    source --> skip
+    skip --> ff
+    classDef observed fill:#eef3f7,stroke:#788a9c,color:#142b3e,stroke-width:1.5px;
+    classDef learned fill:#e8f5f1,stroke:#347c71,color:#143f39,stroke-width:1.7px;
+    classDef fixed fill:#fff3de,stroke:#a57531,color:#63400e,stroke-width:1.7px;
+    classDef publicState fill:#1d4052,stroke:#1d4052,color:#ffffff,stroke-width:2px;
+    classDef downstream fill:#f3eef9,stroke:#80649e,color:#47345e,stroke-width:1.5px;
+    class source,allowed observed;
+    class qkv,weights,read,skip,ff learned;
+    class geom,first,values fixed;

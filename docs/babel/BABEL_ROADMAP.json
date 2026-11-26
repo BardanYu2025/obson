@@ -554,7 +554,24 @@
       "roadmap_anchor": "model-architecture",
       "image": "docs/babel/figures/babel_state_architecture.png",
       "editable_source": "docs/babel/figures/babel_state_architecture.mmd",
-      "scope": "Current P2 and P3 alternatives, history readout and subsequent frozen uses. Arrows show forward flow; each arm has its own E and D weights."
+      "scope": "Current P2 and P3 alternatives, history readout and subsequent frozen uses. Arrows show forward flow; each arm has its own E and D weights.",
+      "details": [
+        {
+          "roadmap_anchor": "interval-attention",
+          "image": "docs/babel/figures/babel_interval_attention.png",
+          "editable_source": "docs/babel/figures/babel_interval_attention.mmd"
+        },
+        {
+          "roadmap_anchor": "film-history-decoder",
+          "image": "docs/babel/figures/babel_film_decoder.png",
+          "editable_source": "docs/babel/figures/babel_film_decoder.mmd"
+        }
+      ]
+    },
+    "architecture_decisions": {
+      "roadmap_anchor": "architecture-decisions",
+      "review_anchor": "architecture-checks",
+      "rule": "When a mechanism is changed or condensed, keep its purpose, current disposition, and immutable design/decision source in the existing roadmap."
     }
   },
   "workflow": "docs/babel/BABEL_EXPERIMENT_WORKFLOW.md",
@@ -577,8 +594,8 @@
     },
     "architecture": {
       "status": "pass_for_scope",
-      "evidence": "P2/P3 主干与查询相同；160+608=768，有效位在内，无额外逐块历史侧信息；模拟投影与反例有回执。 第 0.1 节架构图标明两组独立参数、状态内摘要校正和冻结后用途。",
-      "remaining": "序列化精度、查询局部性、滚动边界和成本尚待实施。"
+      "evidence": "已核对 P2/P3 逐层区间注意力和首层 Value、端点打包、十维查询四块 FiLM、物理读出及容量。总图和两张内部图、有限读出算术及原设计取舍有据可查。",
+      "remaining": "共同小 MLP 的 GELU 与虚拟状态填值是设计默认。实际初始化梯度、非负数值链接、FP32 误差、开销及模型表现仍待验证。"
     },
     "training": {
       "status": "pass_for_scope",
@@ -850,7 +867,8 @@
       ],
       "unknown": "zero with nonvisible flag; artificial dependence includes fallback-recomputed fields",
       "contract_lookup_embedding": false,
-      "artificial_flags_current": "zero in both current clean arms"
+      "artificial_flags_current": "zero in both current clean arms",
+      "embedding_sum": "Linear(28,768)(numeric and flags) + Linear(64,768)(GELU(Linear(8,64)(time/coverage))) + period embedding; no row-index positional embedding. Append one learned terminal state."
     },
     "backbone": {
       "blocks": 6,
@@ -864,7 +882,9 @@
       "market_tokens": 512,
       "terminal_state_tokens": 1,
       "internal_tokens_are_full_rolling_states": false,
-      "terminal_state_key_relation_bias": 0
+      "terminal_state_key_relation_bias": 0,
+      "block_order": "For X [B,T,768], Q,K,V project from tokenwise LN(X) then split to [B,12,T,64]. Y=X+Wout(concat(A @ mixed V)); Xnext=Y+Linear(3072,768)(GELU(Linear(768,3072)(LN(Y)))). Six blocks, final LN on terminal h, then P2 or P3 packing.",
+      "attention_permission": "Market query may read valid available market keys with availability<=own, including co-closed scales; never terminal. Terminal reads all available market keys and itself. Padding keys excluded; skip or zero padding queries to avoid all-masked softmax. Each endpoint recomputes its own state."
     },
     "relation": {
       "feature_count": 12,
@@ -905,7 +925,13 @@
       "applies_to": [
         "P2",
         "P3"
-      ]
+      ],
+      "score_contract": "A = row softmax(Q K.T / 8 + 2*tanh(MLP_layer(phi)) + availability mask). One head coordinate per output, zero both final weight and bias; state key bias 0 does not remove legal terminal self-content.",
+      "value_contract": "Layer 1 uses its own V1 from normalized per-token input, before cross-bar mixing. Layers 2-6 use Vtilde_market=(1-sigmoid(a_lh))*V_l + sigmoid(a_lh)*V1, a_lh initially zero, differentiable path to the first Value projection; a terminal key uses current V. Common mask and per-view cleaned source in masked training.",
+      "state_pair_fill": "Terminal query ends at t; terminal own duration/coverage zero, pairwise duration ratio/IoU/contains zero if either is terminal; real counterpart duration and coverage retained. Keys of terminal type always get zero relation bias.",
+      "hidden_activation": "GELU for the two-layer relation MLP; architecture-document proposal for both arms, not a released implementation.",
+      "score_effect_and_initial_gradient": "On a common legal row, fixing Q and K multiplies a pair's odds by exp(b_j-b_k), within [exp(-4),exp(4)]. At initialization b=0, gradient can update the final affine projection; gradient into the preceding relation hidden layer is zero on that first backward pass.",
+      "parameter_reporting_scope": "Analytic parameter counts assume biased affine projections. Actual parameter accounting, FLOPs, memory and latency await implementation."
     },
     "decoder": {
       "query_count": 10,
@@ -936,7 +962,15 @@
       "all_conditioning_paths_zero_init": false,
       "raw_or_token_bypass": false,
       "anchor_boundary": "a=0 for query ending t, not scored; no true neighbor or per-query true sigma",
-      "query_phase": "calendar ordinal within the past block, chronological j=0..15; current phase=(0,0). Lookup uses same prelocked calendar both arms."
+      "query_phase": "calendar ordinal within the past block, chronological j=0..15; current phase=(0,0). Lookup uses same prelocked calendar both arms.",
+      "block_execution": {
+        "query_input": "[B,K,10] -> biased Linear(10,256) -> u0 [B,K,256]",
+        "condition": "Independent per-block Linear(768,512)(z_cond) -> gamma, beta [B,1,256], broadcast across K; z_cond=h for P2 or train-scaled FiLM copy for P3. Nonzero random conditioning weights.",
+        "inside": "Affine LN along final 256 on each query, modulate by (1+gamma) and beta, biased 256->256 Linear, GELU, biased 256->256 Linear, add original u. Distinct weights in four blocks; share across all queries/resolutions within an arm.",
+        "out": "Biased Linear(256,7) after block 4; relative close, body, upper/lower wick, log1p of V/startOI/endOI. Current close coordinate a=0; differences are computed from predictions. Absolute prices use C_t strictly for restoration.",
+        "query_contract": "Direct P2/invalid/current per-query; P3 valid past gathers a canonical chronological group of 16, projects using raw facts from z, then selects requested slots. Singleton/permuted/duplicate queries have the same answer up to numerical tolerance.",
+        "open": "Zero-capable/nonnegative direct-output transform, exp range, precision and physical thresholds are finalized in the release card."
+      }
     },
     "matrix": [
       {
@@ -1247,7 +1281,81 @@
     "directions": {
       "priority1": "single bounded P2/P3 memory-allocation comparison (F01/F02/F04/F05/F10/F11)",
       "priority2": "diagnose uncovered details, ordered history and actual coarse/fine truth, no automatic second architecture",
-      "conditional": "old masked learning, recursive memory, signature, future or external factors remain unqueued"
+      "conditional": "old masked learning, recursive memory, signature, future or external factors remain unqueued",
+      "architecture_design_history": {
+        "roadmap_anchor": "architecture-decisions",
+        "common_active": [
+          "physical availability and paired record order",
+          "headwise interval bias, shallow Value and ordinary hidden residual as three distinct mechanisms",
+          "physical query, repeated FiLM conditioning and slot phase"
+        ],
+        "P3_active": "fixed-size observable projection plus learned coordinates; canonical local physical reconciliation",
+        "replaced": "per-layer same-resolution / fixed exponential prior; 8-coordinate history address; previous wider history-head grid",
+        "conditional": [
+          "encoder-side multiple content states at equal public size (e.g. 8x96), distinct from reshaping z",
+          "price-relative interval features",
+          "RealFormer score carry, output gating, differential attention, mHC and output-level long/short fusion",
+          "soft cross-resolution loss or canonical compositional readout",
+          "task-relevant distance from fixed physical outputs and a later retrieval projection",
+          "possible two-layer GRU of width 256 for conditional Student-t log-return paths with z conditioning at each step; a separate frozen-state future use"
+        ],
+        "immutable_records": [
+          {
+            "commit": "724ab66dd1726fdf76dfc4dca7cd7769d5a7bc14",
+            "scope": "packing, availability, conditioning and joint-training design"
+          },
+          {
+            "commit": "1c442f0b63504cb706528e9ad495baa5b1d7e12d",
+            "scope": "multiple content states before compression"
+          },
+          {
+            "commit": "eb0eeb1f88f78db0ef9e37b5222080e18e7ff80c",
+            "scope": "8-coordinate FiLM accounting and capacity diagnosis"
+          },
+          {
+            "commit": "76b6ad2f758346caa5d2437f3b269106badf6713",
+            "scope": "residual alternatives, physical aggregation, projection memory, state geometry and future decoder"
+          },
+          {
+            "commit": "c204de744dbcec79fdbd1e980e7800b5aacb050e",
+            "scope": "P2/P3, 10-coordinate address and 160+608 memory"
+          },
+          {
+            "commit": "0350a9adb3648d2f6baac6c752f268148f34c743",
+            "scope": "overview diagram, clean first comparison, conditional masked tasks and frozen uses"
+          },
+          {
+            "commit": "e060ca98f660579f0784c9f72a2ead6f31f13502",
+            "scope": "old executed decoder/pooling/two-write memory experiments and their reviews; baseline evidence, not current model runs"
+          }
+        ],
+        "old_executed_experiments": [
+          {
+            "method": "Four-key history decoder: one learned full-state projection makes 4x192 slots, Fourier relative age queries, 2 cross-attention layers of 4 heads; no query self-attention.",
+            "reported": "Mid-prefix history readout improved under joint supervision, with endpoint recent-history and overlap-consistency costs. No matched comparison with current FiLM.",
+            "archive": [
+              "docs/BABEL_HISTORY_QUERY768.md",
+              "docs/BABEL_HISTORY_QUERY768_REVIEW.md"
+            ]
+          },
+          {
+            "method": "Four nested direct pooling spans 16/32/64/128 against equally parameterized full-range pooling.",
+            "reported": "The nested windows did not show a consistent incremental gain in that experiment.",
+            "archive": [
+              "docs/BABEL_CAUSAL_POOL768_REVIEW.md"
+            ]
+          },
+          {
+            "method": "Four internal memory slots with two writes, h2 then h4 versus h4 then h4. Distinct from both decoder-side slots and the current shallow-Value path.",
+            "reported": "Higher price MSE than h4->h4; compared with same-budget plain, far activity improved and near activity worsened. Fixed old recipe closed.",
+            "archive": [
+              "src/obson/babel/state_organization.py",
+              "docs/BABEL_STATE_ORGANIZATION768_REVIEW.json"
+            ]
+          }
+        ]
+      },
+      "implementation_conventions_added": "Common paper defaults for previously unspecified hidden activations in the time and relation MLPs and for neutral terminal features. No new experimental arm."
     },
     "implementation_authorized": false,
     "executed": false,
@@ -1506,6 +1614,59 @@
           ],
           "interpretation": "Only deterministic statistics and order labels verified, no actual neural state constructed or decoded."
         }
+      },
+      "architecture_arithmetic": {
+        "parameter_assumptions": "All counted linear layers carry bias, four FiLM blocks each have affine LN, deterministic adjustments add no learned parameters.",
+        "decoder": {
+          "query10": 2816,
+          "single_film_block": 525824,
+          "four_blocks": 2103296,
+          "output": 1799,
+          "current": 2107911,
+          "earlier_query8": 2107399
+        },
+        "relation": {
+          "per_layer_two_biased_linears": 812,
+          "gates": 60,
+          "total_relation_and_gate": 4932,
+          "dense_score_elements_per_full_endpoint_layer": 3158028
+        },
+        "time_and_packing": {
+          "test_slots": [
+            "1m ending 10:04",
+            "1m ending 10:05",
+            "5m ending 10:05",
+            "padding",
+            "terminal 10:05"
+          ],
+          "legal_key_counts": [
+            1,
+            3,
+            3,
+            0,
+            4
+          ],
+          "permutations": 24,
+          "max_reordered_row_error_fp64": 2.220446049250313e-16,
+          "future_value_isolated_earlier_row": true,
+          "state_first_value_and_padding_ignored": true,
+          "same_close_minute_and_five_minute_iou": 0.2,
+          "duplicated_equal_score_mass_before_after": [
+            0.5,
+            0.75
+          ]
+        },
+        "query": {
+          "film_broadcast_check_max_abs": 0,
+          "period16_adjacent_chord": 0.3901806440322565,
+          "canonical_group_requested_slots": [
+            13,
+            2,
+            13
+          ],
+          "canonical_singleton_vs_ordered_duplicates_max_abs": 0
+        },
+        "scope": "Standalone deterministic array and scalar arithmetic; no network, training, weights, or new market-data scan."
       }
     },
     "training_tasks": {

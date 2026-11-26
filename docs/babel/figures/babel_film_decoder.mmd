@@ -1,0 +1,32 @@
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"PingFang SC, Hiragino Sans GB, Arial, sans-serif","fontSize":"17px","lineColor":"#53657b","textColor":"#14293a","edgeLabelBackground":"#ffffff"},"flowchart":{"htmlLabels":false,"useMaxWidth":false,"curve":"linear","nodeSpacing":28,"rankSpacing":23,"wrappingWidth":380,"diagramPadding":12,"padding":9}}}%%
+flowchart TB
+    query("区间查询 q · [B,K,10]<br/>线性投影得到 u₀ · [B,K,256]")
+    u("本块输入 u · [B,K,256]")
+    z("本端点状态 z · [B,768]")
+    norm("逐查询 LayerNorm")
+    cond("本块的状态投影 · 768 → 512<br/>拆成 γ、β，各 256 维")
+    mod("按查询广播<br/>(1 + γ) × LN(u) + β")
+    mlp("线性 256 → 256 · GELU<br/>线性 256 → 256")
+    plus("加回本块输入 u<br/>四个块依次执行，各有自己的参数")
+    out("第四块输出 → 线性 256 → 7<br/>七项暂定值 · [B,K,7]")
+    physical("恢复相对价格、形态和量仓<br/>P3 有效块先按已存事实校正")
+    query --> u
+    u --> norm
+    z --> cond
+    norm --> mod
+    cond --> mod
+    mod --> mlp
+    mlp --> plus
+    u --> plus
+    plus --> out
+    out --> physical
+    z -->|仅 P3 的块摘要| physical
+    classDef observed fill:#eef3f7,stroke:#788a9c,color:#142b3e,stroke-width:1.5px;
+    classDef learned fill:#e8f5f1,stroke:#347c71,color:#143f39,stroke-width:1.7px;
+    classDef fixed fill:#fff3de,stroke:#a57531,color:#63400e,stroke-width:1.7px;
+    classDef publicState fill:#1d4052,stroke:#1d4052,color:#ffffff,stroke-width:2px;
+    classDef downstream fill:#f3eef9,stroke:#80649e,color:#47345e,stroke-width:1.5px;
+    class query,u observed;
+    class z publicState;
+    class norm,cond,mod,mlp,plus,out learned;
+    class physical fixed;
