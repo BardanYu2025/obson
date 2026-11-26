@@ -1,6 +1,6 @@
 # Babel 当前研究资料
 
-当前分支：`codex/babel-next`。先读[路线图](BABEL_ROADMAP.md)：第0节当前两配方方案，第2～5节数据/架构/数学/训练评价，第5.6节应用，第10节逐行覆盖审计；[JSON](BABEL_ROADMAP.json)的`current_plan`是唯一当前机器方案。旧未执行网格仅保留Git引用，不是任务队列。
+当前分支：`codex/babel-next`。先读[路线图](BABEL_ROADMAP.md)：第 0 节为等容量两组比较，第 2.8、3、4、5 节给出样本依据、数学与架构、训练及验收。第 10 节是历史审计。[JSON](BABEL_ROADMAP.json)的`current_plan`是唯一当前机器方案。旧未执行网格仅保留Git引用，不是任务队列。
 
 - [工作流程](BABEL_EXPERIMENT_WORKFLOW.md)：实验决策、报告、备份与人类可读汇报。
 - [实验目录原则](../../experiments/README.md)：模型/训练/评测/配置/说明同目录，发布后冻结，改变进入新版本。
