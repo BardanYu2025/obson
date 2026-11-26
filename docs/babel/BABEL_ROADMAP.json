@@ -1183,7 +1183,8 @@
       "observed_resolution_and_price_precision": "Recover only observed closed intervals at the declared resolution, using common C_t only to restore absolute prices. Report error by lookback, field and period in bps/ticks, plus tail error. Technical shape landmarks at finer resolution require the corresponding ordered inputs; empirical tick-level accuracy has not been measured.",
       "price_anchor_support": {
         "audit": "Before scoring, certify known price-ratio paths to C_t using only shared visible gap/body ratios and proven same-source price boundaries across periods. A missing fine bar can be bridged by a qualified coarse view. A missing certificate flags unproven connectivity, not necessarily non-identifiability. The raw source supplies answers and checks only.",
-        "report": "Use identical predeclared masks for both arms. Keep all eligible truth-labelled targets in R. Stratify relative-close coverage and physical errors by certified versus unproven link to C_t. In the latter, scores can include imputation. Internal block contrasts, local geometry and adjacent changes have their own support."
+        "report": "Use identical predeclared masks for both arms. Keep all eligible truth-labelled targets in R. Stratify relative-close coverage and physical errors by certified versus unproven link to C_t. In the latter, scores can include imputation. Internal block contrasts, local geometry and adjacent changes have their own support.",
+        "gap_classification": "A scheduled break in the historical calendar preserves the link when the same-contract previous close and next open are known in comparable units: log(O_next/C_prev) records even a large reopening jump. If scheduled bars are missing, first check known same-source cross-resolution connections. An added ratio between observed endpoints is a separately labelled span, not a one-minute move or a continuous-volatility warmup observation. Leave missing interiors unknown and separate contracts or unresolved quote regimes."
       },
       "matched_pca_interpretation": "History scores compare each state with its own deployed decoder. Claims about reusable learned coordinates also require the matched frozen order-readout protocol, as specified in acceptance.",
       "absolute_limit_source": "Set absolute tolerances from the declared use and non-final qualification examples before candidate scores. The final holdouts only confirm the locked rules."
@@ -1409,6 +1410,26 @@
           "https://blog.sina.com.cn/s/blog_486e105c010007p1.html"
         ],
         "new_fits_in_active_budget": 0
+      },
+      "historical_segment_price_anchor": {
+        "status": "conditional representation design; no new active arm or training",
+        "task_ids": [
+          "F02",
+          "F04",
+          "F05",
+          "F10",
+          "F11"
+        ],
+        "roadmap_anchor": "historical-price-anchors",
+        "hypothesis": "One reachable positive quote per formerly disconnected component makes its absolute level identifiable at a fixed endpoint. A hard anchor can protect the reference bar; actual off-anchor shape and price precision depend on learned local differences.",
+        "information": "For exact visible log-price differences with k connected components including the current close, there are k-1 unresolved real additive offsets. At endpoint t use an observed close of the same contract at the declared resolution and comparable quote units. Both experimental arms receive the same new values and addresses at t. Do not attach C_t to earlier market tokens or pull finer, hidden or later observations.",
+        "observable_bridge_option": "A verified log(first observed reopening O / last observed C) with gap kind and span can connect both observed sides without supplying the missing trajectory. A bridge during missing trading bars stays outside contiguous one-minute change labels and warmup.",
+        "anchor": "In a supported contiguous within-view run ending at s, store a_s=log(C_s/C_t) and a resolvable in-state range. Decode from the same z with the normal, block-adjusted preliminary p on both i and s: C_hat_i=C_t*exp(a_s+p_i-p_s). Use the decoded body and wicks for O,H,L. The uniform shift leaves internal differences and the two zero-mean P3 price facts of complete blocks inside that run unchanged.",
+        "packing": "One bounded layout: concatenate public, chronological scheduled slot IDs per view; current caps total 512. A record is [first_slot,last_slot,anchor], with the last slot specifying s and invalid addresses -1 for empty. Three FP32 words = 12 bytes per contiguous within-view range. Arbitrary noncontiguous or multiview components can require multiple records. M hard records reduce learned capacity by 3M inside 768 words (P2-style 768-3M, P3-style 160 fixed plus 608-3M learned). Freeze feasible M on non-final qualification data. If over cap, prefer latest end, then finer view, then fixed slot order; other runs use their normal readout. No external range table, truth lookup or free anchor side channel.",
+        "absolute_interface": "Relative anchors recover prices with the ordinary public C_t and declared address/quote metadata. For price-self-contained z, budget C_t inside z as well or encode absolute anchors for required components; use a documented price unit/scale. Accurate C_t and exactly representable integer tick differences on a verified common grid allow a tick-exact anchor; test serialization and decoding. FP32 log does not promise bit-exact quotes.",
+        "qualification": "Tabulate scheduled breaks, missing minute interiors with and without a proven price link, anchored-range count and weighted coverage per view/product/time. Choose M before final data or candidate scores based on target use and coverage.",
+        "evaluation": "Only if needed: hold the base architecture fixed, give the same observed anchors/addresses and price information to learn-only, explicit and analytic controls at matched total state size. Score anchor bars, other observed OHLC errors in ticks and P95, coverage/overflow, and two-query/block decode cost separately. Future masked variants recompute anchors from visible inputs. For residual-memory claims full-summary collision pairs must also match anchor values, addresses and empty slots.",
+        "additional_active_fits": 0
       }
     },
     "implementation_authorized": false,
@@ -1906,6 +1927,34 @@
           "corrected_expected_mean": 4,
           "check": "Exact enumeration for one to three independent draws on three finite populations; linearity gives the 64-draw expectation."
         }
+      },
+      "historical_anchor_example_20261127": {
+        "scope": "CPU example with positive synthetic quotes only",
+        "scheduled_previous_close": 100,
+        "reopen": 105,
+        "current_close": 110,
+        "earlier_OHLC": [
+          99,
+          101,
+          97,
+          98
+        ],
+        "old_run_anchor": 100,
+        "local_close_ratio": "98/100",
+        "reference_ratio": "100/110",
+        "restored_OHLC_if_local_ratios_exact": [
+          99,
+          101,
+          97,
+          98
+        ],
+        "fp32_log_anchor_abs_quote_error_with_current_110": 1.5749932913422526e-07,
+        "exact_common_tick_example": {
+          "tick": "1/5",
+          "stored_offset_ticks": -50,
+          "restored_anchor": 100
+        },
+        "checks": "Both reopening and a missing-interval endpoint ratio can have the same numeric value but different support. Fraction arithmetic confirms that recentering preserves within-run differences and both zero-sum price contrasts on a complete 16-bar block, and a fixed three-word record costs 12 bytes."
       }
     },
     "training_tasks": {
