@@ -1,6 +1,6 @@
 # Babel 当前研究资料
 
-当前分支：`codex/babel-next`。先读[路线图](BABEL_ROADMAP.md)第0节的首轮设计卡：模块连接、两个混合任务、一次更新与第一步样本资格；后文给出目标、数据、依据及评价；[JSON](BABEL_ROADMAP.json)是同一方案的结构化镜像。
+当前分支：`codex/babel-next`。先读[路线图](BABEL_ROADMAP.md)第0节的完整方案：多周期编码、两个混合任务、四组训练、冻结解码器对照、评价/退出及第一步样本资格；后文给出目标、数据、依据及评价；[JSON](BABEL_ROADMAP.json)是同一方案的结构化镜像。
 
 - [工作流程](BABEL_EXPERIMENT_WORKFLOW.md)：实验决策、报告、备份与人类可读汇报。
 - [实验目录原则](../../experiments/README.md)：模型/训练/评测/配置/说明同目录，发布后冻结，改变进入新版本。
