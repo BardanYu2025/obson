@@ -549,7 +549,13 @@
     "legacy_paths": "not shipped on clean branch",
     "bound_evidence": "unchanged",
     "current_branch": "codex/babel-next",
-    "current_integrated_plan": "current_plan"
+    "current_integrated_plan": "current_plan",
+    "architecture_figure": {
+      "roadmap_anchor": "model-architecture",
+      "image": "docs/babel/figures/babel_state_architecture.png",
+      "editable_source": "docs/babel/figures/babel_state_architecture.mmd",
+      "scope": "Current P2 and P3 alternatives, history readout and subsequent frozen uses. Arrows show forward flow; each arm has its own E and D weights."
+    }
   },
   "workflow": "docs/babel/BABEL_EXPERIMENT_WORKFLOW.md",
   "progress_log": "docs/babel/BABEL_PROGRESS_LOG.jsonl",
@@ -571,12 +577,12 @@
     },
     "architecture": {
       "status": "pass_for_scope",
-      "evidence": "P2/P3 主干与查询相同；160+608=768，有效位在内，无额外逐块历史侧信息；模拟投影与反例有回执。",
+      "evidence": "P2/P3 主干与查询相同；160+608=768，有效位在内，无额外逐块历史侧信息；模拟投影与反例有回执。 第 0.1 节架构图标明两组独立参数、状态内摘要校正和冻结后用途。",
       "remaining": "序列化精度、查询局部性、滚动边界和成本尚待实施。"
     },
     "training": {
       "status": "pass_for_scope",
-      "evidence": "同 clean 端点/标签/更新，不把块内额外前向算成监督；记录零空间/活动集梯度。未来权重为零。",
+      "evidence": "同 clean 端点/标签/更新，不把块内额外前向算成监督；记录零空间/活动集梯度。未来权重为零。 第 0.2、4.1、4.3 节标出首批各项监督、条件双任务的两次前向与一次更新。",
       "remaining": "N/N_U/条件 N_H、真实数值后端和资源上限未锁。"
     },
     "validation": {
@@ -1021,7 +1027,32 @@
     "mask": {
       "active": false,
       "history": "76b6ad2f758346caa5d2437f3b269106badf6713; clean+0.25mask candidate archived, not queued",
-      "future_reentry": "Any new masked experiment must remove all target dependencies from features, summary, masks and decoder-side information."
+      "future_reentry": "Any new masked experiment must remove all target dependencies from features, summary, masks and decoder-side information.",
+      "conditional_design": {
+        "status": "documented_conditional_not_in_first_batch",
+        "active_in_first_batch": false,
+        "adds_runs_to_current_budget": 0,
+        "question": "On one fixed state architecture, does adding masked historical completion improve clean-history retention and the frozen uses?",
+        "precondition": "A residual/local-readback deficit on development data and sufficient visible context after masking; independent version, own frozen protocol and budget.",
+        "reference": "Same fixed state architecture, mask-eligible endpoints, common initialization and clean supervision; clean loss only.",
+        "combined": "Two views at one endpoint: full H and separately masked H. Reuse the same E and D in both forwards. Joint loss = L_clean + weight * L_mask, one combined backward and optimizer step.",
+        "mask_weight_if_activated": 0.25,
+        "gradient_targets": [
+          "encoder E",
+          "history decoder D"
+        ],
+        "forecast_encoder_gradient": false,
+        "source_mask": {
+          "view_minutes": 1,
+          "lookback_slots": 256,
+          "segments": 2,
+          "segment_minutes": 8,
+          "sampling": "Uniform legal unordered nonoverlapping pairs of continuous segments within qualified trading sessions, strictly before t; keep the current anchor visible."
+        },
+        "targets": "16 hidden past 1-minute intervals, equal across prequalified targets. Price/shape/activity weights as current_plan.loss.past_groups, valid terms fixed before sampling; truth enters loss only.",
+        "dependency_closure": "Apply mask to raw-minute dependencies before deriving views. Propagate to affected OHLCV/OI aggregates, preceding-close links, rolling scales, flags and readable metadata. Fixed train fallback where required. Recompute P3 facts from masked visible input only: invalid block = four zeros and flag 0, direct readout. Counterfactual hidden-value changes under fixed visible history/mask/eligibility preserve masked input, flags, summaries and decoder metadata.",
+        "decision": "Assess improvement in complete-input history fidelity with near-shape, activity and frozen-description protections; report frozen-order performance, masked error and actual extra compute separately. Sign comparison criteria before any independent run."
+      }
     },
     "optimizer": {
       "name": "AdamW",
@@ -1475,6 +1506,57 @@
           ],
           "interpretation": "Only deterministic statistics and order labels verified, no actual neural state constructed or decoded."
         }
+      }
+    },
+    "training_tasks": {
+      "roadmap_anchors": {
+        "overview": "training-tasks",
+        "active_update": "joint-update",
+        "conditional_two_task_design": "masked-multitask"
+      },
+      "active_pretraining": {
+        "arms": [
+          "P2",
+          "P3"
+        ],
+        "input_views_per_endpoint": [
+          "complete observed history"
+        ],
+        "input_tasks": [
+          "complete_history_readback"
+        ],
+        "targets": [
+          "past price path, adjacent change, shape and activity",
+          "current shape and activity for legal bars ending exactly at t"
+        ],
+        "loss_definition": "current_plan.loss",
+        "trainable_modules": [
+          "encoder E",
+          "history decoder D"
+        ],
+        "one_update": "Pool legal queries, weight past and current then backpropagate once per effective batch. Clip E and D separately and make one optimizer update; P3 physical readout uses within-state facts, without trainable summary parameters."
+      },
+      "frozen_current_description": {
+        "reads": "z only",
+        "trainable_modules": [
+          "current description MLP"
+        ],
+        "encoder_gradient": false,
+        "definition": "current_plan.current_description"
+      },
+      "frozen_order": {
+        "reads": "z only",
+        "trainable_modules": [
+          "order ridge readout fitted in closed form"
+        ],
+        "encoder_gradient": false,
+        "definition": "current_plan.order_probe"
+      },
+      "masked_history": "current_plan.mask.conditional_design",
+      "future_prediction": {
+        "active_in_first_batch": false,
+        "encoder_gradient": false,
+        "status": "conditional downstream use, initially frozen"
       }
     }
   },

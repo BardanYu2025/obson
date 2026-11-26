@@ -1,0 +1,36 @@
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"PingFang SC, Hiragino Sans GB, Arial, sans-serif","fontSize":"18px","lineColor":"#53657b","textColor":"#14293a","edgeLabelBackground":"#ffffff"},"flowchart":{"htmlLabels":false,"useMaxWidth":false,"curve":"linear","nodeSpacing":27,"rankSpacing":24,"wrappingWidth":380,"diagramPadding":12,"padding":9}}}%%
+flowchart TB
+    input("截至 t 的单合约已收盘行情<br/>1 / 5 / 15 / 60 分钟 · 最多 512 根")
+    encode("六层区间注意力编码器 E · 12 头<br/>最多 513 个位置 × 768 维<br/>区间偏置＋首层 Value 通路<br/>取端点状态 h · [B, 768]")
+    facts("价格轮廓、成交总量、持仓差<br/>32 块 ×（4 个数值＋1 个有效位）")
+    p2("P2　自由学习<br/>取 h 的全部 768 维")
+    p3("P3　分配记忆<br/>160 维摘要＋h 的前 608 维")
+    state("所选方案的状态 z · [B, 768]")
+    query("指定区间 q · 10 → 256 维<br/>时间、周期、槽位")
+    decode("历史解码器 D<br/>四个 FiLM 块 · 宽 256")
+    out("逐区间七项输出 · [B, K, 7]<br/>P2 直接读出，P3 校正有效块")
+    uses("冻结编码器后分别拟合<br/>当前行情描述、历史极值先后")
+
+    input --> encode
+    input --> facts
+    encode --> p2
+    encode --> p3
+    facts --> p3
+    p2 --> state
+    p3 --> state
+    state --> decode
+    query --> decode
+    decode --> out
+    state -->|P3 有效块摘要| out
+    state -.-> uses
+
+    classDef observed fill:#eef3f7,stroke:#788a9c,color:#142b3e,stroke-width:1.5px;
+    classDef learned fill:#e8f5f1,stroke:#347c71,color:#143f39,stroke-width:1.7px;
+    classDef fixed fill:#fff3de,stroke:#a57531,color:#63400e,stroke-width:1.7px;
+    classDef publicState fill:#1d4052,stroke:#1d4052,color:#ffffff,stroke-width:2px;
+    classDef downstream fill:#f3eef9,stroke:#80649e,color:#47345e,stroke-width:1.5px;
+    class input,query observed;
+    class encode,p2,decode,out learned;
+    class facts,p3 fixed;
+    class state publicState;
+    class uses downstream;
