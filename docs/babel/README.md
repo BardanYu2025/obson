@@ -1,6 +1,8 @@
 # Babel 当前研究资料
 
-当前分支：`codex/babel-next`。先读[路线图](BABEL_ROADMAP.md)：[模型总图](BABEL_ROADMAP.md#model-architecture)、[区间注意力](BABEL_ROADMAP.md#interval-attention)、[历史解码器](BABEL_ROADMAP.md#film-history-decoder)、[历版设计取舍](BABEL_ROADMAP.md#architecture-decisions)、[训练任务总表](BABEL_ROADMAP.md#training-tasks)和[完整回读＋遮挡填空](BABEL_ROADMAP.md#masked-multitask)可直接跳转。第 2.8、3、4、5 节给出样本依据、数学与架构、训练及验收。第 10 节是历史审计。[JSON](BABEL_ROADMAP.json)的`current_plan`是唯一当前机器方案。旧未执行网格仅保留Git引用，不是任务队列。
+从[当前结论与下一步](BABEL_ROADMAP.md#current-review)开始。11 月 24 日的单合约盘点只覆盖已审计批次，新增数据仍在下载。下一份交付是[数据与样本资格包](BABEL_ROADMAP.md#sample-qualification)。
+
+[模型总图](BABEL_ROADMAP.md#model-architecture)、[区间注意力](BABEL_ROADMAP.md#interval-attention)、[历史解码器](BABEL_ROADMAP.md#film-history-decoder)、[历版设计取舍](BABEL_ROADMAP.md#architecture-decisions)、[训练任务总表](BABEL_ROADMAP.md#training-tasks)、[完整回读＋遮挡填空](BABEL_ROADMAP.md#masked-multitask)、[价格重建范围](BABEL_ROADMAP.md#reconstruction-evidence)和[当前行情与技术形态](BABEL_ROADMAP.md#technical-patterns)均可直接跳转。路线图第 0～9 节和 [JSON](BABEL_ROADMAP.json) 的 `current_plan` 记录 `codex/babel-next` 的现行方案，第 10 节保留带日期的历史审计。
 
 - [工作流程](BABEL_EXPERIMENT_WORKFLOW.md)：实验决策、报告、备份与人类可读汇报。
 - [实验目录原则](../../experiments/README.md)：模型/训练/评测/配置/说明同目录，发布后冻结，改变进入新版本。

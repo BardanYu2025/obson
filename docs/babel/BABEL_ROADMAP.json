@@ -212,7 +212,7 @@
       "id": "F12",
       "title": "指标上下文、PCA教师、渐进监督和影线保真",
       "current_status": "retained_not_queued",
-      "current_role": "指标/PCA/渐进监督/影线配方保留",
+      "current_role": "指标输入、PCA 教师、渐进监督与影线配方条件保留。本轮训练集拟合的 PCA 仅作表示对照。",
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
@@ -399,7 +399,7 @@
       "F04",
       "F10"
     ],
-    "action": "F02/F04/F10 资格包：当时可知样本、共同槽位和16根块、摘要同信息复算、顺序/独立支持；再锁 P2/P3 的误差和资源。",
+    "action": "交付批次稳定后先按清单对账。F02/F04/F10 资格包核对当时可选范围、价位到当前锚点的关系、共同槽位/块、字段支持与留出，再锁可用误差和资源。",
     "ready_entrypoint": null,
     "old_commands_active": false,
     "automatic_reruns": false
@@ -428,9 +428,9 @@
     {
       "gate": "data",
       "items": [
-        "snapshot/calendar/versioned units and as-of scope",
+        "reconciled stable delivery, duplicate/revision provenance, calendar, versioned units and as-of scope",
         "complete history/warmup support; no future labels",
-        "calendar slots, visible-only block arithmetic/diversity, invalid groups and eligibility",
+        "calendar slots, per-endpoint block ceiling, valid facts from shared inputs, price-to-anchor connectivity, per-field loss support and coverage",
         "parent/child identities, 37-minute natural label support and eligibility for legal full-summary collision pairs"
       ],
       "status": "open"
@@ -476,7 +476,7 @@
     }
   ],
   "operating_principles": {
-    "goal": "每根已收盘bar产生可复用的因果价量状态，保留声明历史内容，支持当前描述和概率未来；128/768/Transformer/重建loss均为实现选择。",
+    "goal": "每根已收盘 bar 产生可复用的因果价量状态。首批验证历史保留和当前描述。概率未来及外部因子融合按后续用途另立项。",
     "goal_boundaries": [
       "不要求无损重建",
       "规则一致/重建/概率预测/交易价值分开",
@@ -572,7 +572,8 @@
       "roadmap_anchor": "architecture-decisions",
       "review_anchor": "architecture-checks",
       "rule": "When a mechanism is changed or condensed, keep its purpose, current disposition, and immutable design/decision source in the existing roadmap."
-    }
+    },
+    "current_review_anchor": "current-review"
   },
   "workflow": "docs/babel/BABEL_EXPERIMENT_WORKFLOW.md",
   "progress_log": "docs/babel/BABEL_PROGRESS_LOG.jsonl",
@@ -594,27 +595,27 @@
     },
     "architecture": {
       "status": "pass_for_scope",
-      "evidence": "已核对 P2/P3 逐层区间注意力和首层 Value、端点打包、十维查询四块 FiLM、物理读出及容量。总图和两张内部图、有限读出算术及原设计取舍有据可查。",
+      "evidence": "P2/P3 使用同结构但各自训练的 E、D。已核对注意力和 FiLM 接口、160+608 打包、严格历史块的日历上限及价格投影的适用范围。",
       "remaining": "共同小 MLP 的 GELU 与虚拟状态填值是设计默认。实际初始化梯度、非负数值链接、FP32 误差、开销及模型表现仍待验证。"
     },
     "training": {
       "status": "pass_for_scope",
-      "evidence": "同 clean 端点/标签/更新，不把块内额外前向算成监督；记录零空间/活动集梯度。未来权重为零。 第 0.2、4.1、4.3 节标出首批各项监督、条件双任务的两次前向与一次更新。",
+      "evidence": "双方共用端点、标签与查询。在完整支持上固定字段分母；缺标签抽样的期望经精确枚举对上稠密目标。条件遮挡和未来损失在首批权重为零。",
       "remaining": "N/N_U/条件 N_H、真实数值后端和资源上限未锁。"
     },
     "validation": {
       "status": "pass_for_scope",
-      "evidence": "R 与 U 的保护、正交剩余、相同摘要的 PCA 对照、自然顺序任务和所有摘要字节相同的反事实配对分别检验；联合配对时间块区间。",
+      "evidence": "相对价位按到当前收盘的可证路径分层并保留全体主分。断开价比的反例、投影对差分的反例已复算。等摘要顺序、共同读头、分组区间另行裁定。",
       "remaining": "绝对可用误差、合格独立组、功效、最终留出仍开放。"
     },
     "data": {
       "status": "open",
-      "evidence": "重新核验三个训练期 SHA、1476 个完整分钟块的两项价格系数及块内打乱涨跌次序的解析对照。",
-      "remaining": "未完成多周期块、全快照/历史日历、单位、as-of 与留出资格。"
+      "evidence": "11 月 24 日已审计批次的逐文件汇总与交付回执相符。11 月 26 日三个 2022 年合约的算术保留原证据。",
+      "remaining": "在下批次范围、修订、历史日历/单位、主力窗口当时可选性、各周期与独立留出支持仍待资格包。"
     },
     "engineering": {
       "status": "pass_for_scope",
-      "evidence": "文档与机器合同同步，局部 CPU 数据算术和 FP64 合成核对。",
+      "evidence": "封存的审计源码及原报告可追溯至固定 Git 版本。此次仅改方案和记录，用 CPU 算术核对协议。",
       "remaining": "无新实现、真实 CUDA 运行、权重或离机恢复。"
     }
   },
@@ -799,20 +800,35 @@
     "data": {
       "source": "/Users/bardan/private/tqdata_2015/month_contracts/bars",
       "audit": "experiments/20261124_minute_audit_v1/reports/20261124",
-      "new_check": "Three named training-era SHA rechecks and 1-minute arithmetic only (bounded_checks); other families counts/sizes from prior audit.",
+      "new_check": "2026-11-26: prior three named 2022 source SHA and 1m arithmetic. 2026-11-27: re-aggregated the sealed 2026-11-24 per-file inventory and checked its delivery receipt; no new raw corpus census.",
       "main_and_index": "not_required_first_inputs",
-      "identity": "exchange/product/full_contract_lifetime/start/end/available_at/source_SHA",
+      "identity": "Bar observation key: exchange, product, unambiguous full delivery-year/month contract identity, period and interval start/end in a fixed time zone.",
       "aggregation": "O first,H max,L min,C last,V sum,OI start/end; historical session qualification, no every-N-rows grouping",
-      "selection_limit": "official main windows plus roll margins, not all contracts/full lifetime; as-of selection bias remains open",
+      "selection_limit": "The audited month windows use official main days and roll margins. Replay eligibility from what was known at t; future roll dates and realized file endings cannot select earlier samples for an as-of claim. Without this evidence restrict claims to the retrospectively selected windows.",
       "files_at_20261124_audit": {
         "month": 2382,
         "main": 44,
         "index": 6
       },
-      "inventory_status": "Prior inventory and metadata check; no current full snapshot rehash.",
+      "inventory_status": "November 24 counts are for the audited delivery only. The user reports on 2026-11-27 that the larger download is incomplete. Full extent and completion fraction unknown.",
       "endpoint_eligibility": "No missing-future or mask-pair filter. Same observed clean eligibility both arms. Invalid blocks only disable explicit facts; do not drop remaining valid queries.",
       "qualification_note": "Month windows only. Three training-era files verified. Historical calendar, units, as-of, all periods and V13 open.",
-      "input_clock": "Both input windows use the most recent scheduled slots including any ending at t, capped separately by view. Missing slots remain masked in place; no backfill."
+      "input_clock": "Both input windows use the most recent scheduled slots including any ending at t, capped separately by view. Missing slots remain masked in place; no backfill.",
+      "source_revision": "Keep source path/SHA, vintage, availability and units as provenance. Coalesce equal known physical fields, units and quality semantics on the observation key with all sources retained. Quarantine unresolved differences on the same observation. Sample ID separately binds the frozen data snapshot, processing protocol, contract and endpoint.",
+      "audited_month_batch": {
+        "as_of": "2026-11-24",
+        "products": 44,
+        "files": 2382,
+        "rows": 46224030,
+        "bytes": 1552055292,
+        "first_minute_start_shanghai": "2016-01-04 09:00:00",
+        "last_minute_start_shanghai": "2026-11-19 14:59:00",
+        "zero_volume_rows": 715616,
+        "flat_zero_unchanged_oi_rows": 715590,
+        "delivery_receipt": "experiments/20261124_minute_audit_v1/reports/20261124/delivery_hash_check.json",
+        "receipt_scope": "All 2382 match that month-contract manifest only. Main had 3 rows flagged by ANY of volume, open_oi or close_oi < 0. Index had 6 products in this inventory."
+      },
+      "delivery_reconciliation": "Once the declared batch is stable, compare expected paths, sizes and SHA with the delivery and prior snapshot. Distinguish new, missing, confirmed source-empty, duplicate, changed or still-writing. Sign only the bounded stable scope."
     },
     "features": {
       "numeric_classes": 9,
@@ -1024,7 +1040,7 @@
       ],
       "smooth_l1_beta": 1,
       "field_scales": "training only fixed per-field/per-period",
-      "invalid_terms": "eligibility and normalization before sampling",
+      "invalid_terms": "Normalize supported terms at each endpoint using the full label support before sampling. Remove zero-mass leaves and renormalize nominal weights over remaining siblings within the field, content-group and past/current hierarchy. No supported leaf: coverage only. Never redefine support by the sampled hits or P3 block validity.",
       "known_current_close_scored": false,
       "P3_gradients": "Price I-UU.T on complete blocks, physical-simplex and OI-boundary derivatives piecewise; losses only on preselected weighted queries and true adjacency. Invalid/current direct.",
       "past_groups": {
@@ -1058,10 +1074,12 @@
       ],
       "empty_age_groups": "renormalize within view",
       "past_queries": 64,
-      "query_estimator": "sample by fixed w then plain mean, no extra w",
-      "current_queries": "all legal intervals ending exactly at t, max4",
-      "adjacent": "additional actual legal same-period neighbor predictions, never truth; validity fixed before sampling",
-      "evaluation": "all declared legal intervals at fixed endpoints, separately current/age/view/field"
+      "query_estimator": "64 independent draws with replacement from w per endpoint, identical for paired arms. For each positive-mass term f average m_if*loss_if/Z_f over these draws, with Z_f=sum_i w_i*m_if fixed from the full query list. Zero contribution for invalid draws, no second factor w and no random denominator. Repeated draws retain multiplicity even if forwards are deduplicated.",
+      "current_queries": "Enumerate all legal intervals ending at t (up to 4); equal weight within each supported field. Apply the same fixed sibling normalization to active fields/groups.",
+      "adjacent": "Assign a strictly-past change to its later query, append the immediately preceding calendar slot of the same period within the observed input. Require both valid closes and a proven consecutive link. Use predicted differences. No jumping over missing slots.",
+      "evaluation": "all declared legal intervals at fixed endpoints, separately current/age/view/field",
+      "within_age_group": "Uniform across eligible scheduled positions with at least one valid historical supervision term. Build w from the nonempty views/age groups, independently of the arm.",
+      "field_exposure": "Report term coverage, realized exposure and the per-endpoint probability (1-Z_f)^64 of missing the term in all draws."
     },
     "mask": {
       "active": false,
@@ -1122,7 +1140,8 @@
         "sn",
         "OI"
       ],
-      "qualification": "current: all input/warmup/historical-query support within assigned partition; no future60 requirement. Later forecast uses separately locked label-support inventory; no train/stat/pretrain final holdout."
+      "qualification": "current: all input/warmup/historical-query support within assigned partition; no future60 requirement. Later forecast uses separately locked label-support inventory; no train/stat/pretrain final holdout.",
+      "reporting": "Report disjoint cells for previously seen instruments on final dates, held-out instruments on pre-final development dates, and their intersection (held-out instruments on final dates). Freeze cells in advance, never select on the held-out instruments, and avoid counting the intersection twice as evidence."
     },
     "budget": {
       "encoder_runs": 4,
@@ -1144,7 +1163,7 @@
     "fairness": {
       "matched": [
         "raw observations, total state FP32 words, query metadata and use-head side information",
-        "relation-first-value backbone and shared parameter initialization",
+        "identical backbone and FiLM architectures, initialization paired by seed for corresponding tensors; independent E and D weights per arm and seed",
         "clean endpoints/queries/loss, paired seeds, N updates/effective batch",
         "standardization, selection opportunity and frozen-use labels"
       ],
@@ -1156,12 +1175,18 @@
     },
     "history_evaluation": {
       "primary": "deployed direct P2 vs deployed adjusted P3: whole-system fidelity",
-      "R": "final decoder, weighted half standardized relative-close MSE and half adjacent-return MSE; full eligible queries",
+      "R": "Final decoder, one half standardized relative-close MSE and one half adjacent-return MSE on all common eligible queries. For each term use its own complete support and renormalize endpoint weights rho over endpoints supporting that term. Report both coverages; if either is globally empty, R is unavailable.",
       "conditional": "Trigger only on development data when both paired seeds meet the predeclared relative R gain and the overall U or any family exceeds its protected degradation. Then four frozen states each fit one fresh direct D256 with common protocol, at most four; report separately. No final holdout trigger.",
       "coherence": "same physical parent-child complete partitions on clean observed history; no latent equality or extra unobserved minute targets",
       "R_perp": "mean ||(I-UU.T)(a_hat-a)||^2/(14*s_price_period^2) on common valid blocks only; average blocks within valid view, views within endpoint, then renormalize rho over endpoints with support. Coverage and invalids separately, all in R.",
       "conditional_seed_scope": "Check R per paired seed; for U use the release seed 42 paired comparison at the prespecified guard thresholds.",
-      "observed_resolution_and_price_precision": "Recover only observed closed intervals at the declared resolution, using common C_t only to restore absolute prices. Report error by lookback, field and period in bps/ticks, plus tail error. Technical shape landmarks at finer resolution require the corresponding ordered inputs; empirical tick-level accuracy has not been measured."
+      "observed_resolution_and_price_precision": "Recover only observed closed intervals at the declared resolution, using common C_t only to restore absolute prices. Report error by lookback, field and period in bps/ticks, plus tail error. Technical shape landmarks at finer resolution require the corresponding ordered inputs; empirical tick-level accuracy has not been measured.",
+      "price_anchor_support": {
+        "audit": "Before scoring, certify known price-ratio paths to C_t using only shared visible gap/body ratios and proven same-source price boundaries across periods. A missing fine bar can be bridged by a qualified coarse view. A missing certificate flags unproven connectivity, not necessarily non-identifiability. The raw source supplies answers and checks only.",
+        "report": "Use identical predeclared masks for both arms. Keep all eligible truth-labelled targets in R. Stratify relative-close coverage and physical errors by certified versus unproven link to C_t. In the latter, scores can include imputation. Internal block contrasts, local geometry and adjacent changes have their own support."
+      },
+      "matched_pca_interpretation": "History scores compare each state with its own deployed decoder. Claims about reusable learned coordinates also require the matched frozen order-readout protocol, as specified in acceptance.",
+      "absolute_limit_source": "Set absolute tolerances from the declared use and non-final qualification examples before candidate scores. The final holdouts only confirm the locked rules."
     },
     "current_description": {
       "horizons_trade_minutes": [
@@ -1255,11 +1280,11 @@
       "outputs": [
         {
           "name": "snapshot_manifest and conventions",
-          "criteria": "calendar, units, as-of source and common scope hashed; uncertain ranges isolated"
+          "criteria": "expected delivery vs stable files, revisions and duplicate keys reconciled; hash calendar, units, as-of universe and common scope; isolate unresolved ranges; qualify volume and OI conventions independently by product/contract/effective date"
         },
         {
           "name": "endpoint and block inventory",
-          "criteria": "per split/product/view coverage, complete input/warmup, invalid reasons; fresh 37-minute label subset, all endpoints retained as specified"
+          "criteria": "per split/product/view and field: actual input/warmup, anchor-connectivity, calendar block ceiling and valid blocks, missing reasons, 37-minute subset and independent support; retain eligible individual targets"
         },
         {
           "name": "statistics and source oracle",
@@ -1271,7 +1296,7 @@
         }
       ],
       "order": [
-        "freeze source/scope",
+        "reconcile the declared stable delivery batch and freeze signed source/scope",
         "split, purge actual dependencies and calculate coverage",
         "train-only scales, anchors, lookup and raw oracle",
         "sign sample qualification, absolute tolerances, budget and review"
@@ -1375,7 +1400,7 @@
           "head_and_shoulders": "Declare prior uptrend, pivot price field and confirmation, shoulder tolerance and spacing, two-trough neckline, and whether volume is required. One version confirms on a close below the neckline. Return the five extrema, neckline and first confirmation.",
           "chan": "Fix the inclusion merge, tie handling, stroke and segment definitions, base and recursive levels. Locate top/bottom fractals, stroke endpoints, then segment and centre boundaries. Respect the right-hand processed candle and the first date the adopted rule can confirm each structure."
         },
-        "validation": "Compare the same timestamped rule on the raw and reconstructed bars with a direct stage/landmark readout trained only on frozen z. Same-information raw/linear-representation controls where fitting a new head. Report event precision/recall, landmark time & price error, relative confirmation lag and abstention/coverage on held-out periods and instruments; include invalidated lookalikes. Display raw charts only for reference and inspection.",
+        "validation": "Compare the same timestamped rule on the raw and reconstructed bars with a direct stage/landmark readout trained only on frozen z. Same-information raw/linear-representation controls where fitting a new head. Report event precision/recall, landmark time & price error, relative confirmation lag and abstention/coverage on held-out periods and instruments; include invalidated lookalikes. Display raw charts only for reference and inspection. If both the history-decoded rule and the direct state probe fail, record both readout failures; unreadability by these probes alone does not locate information loss.",
         "individual": "A named practitioner's judgement requires contemporaneous positive, negative and declined examples, observed context, decision timing and independent validation. For a shared interpretation also measure blind labeler agreement. Rule or judgement fidelity does not estimate profitability.",
         "sources": [
           "https://www.nber.org/system/files/working_papers/w7613/w7613.pdf",
@@ -1496,13 +1521,14 @@
         "valid flag as one FP32"
       ],
       "calculation": "Recover relative log close path by setting first close locally to zero and accumulating 15 observed gap + body log returns. Both columns have zero sum. Recover physical V/OI from only shared inputs and train constants. Raw-source oracle is qualification only.",
-      "price_adjust": "For fixed valid block U, preliminary p, stored c, return p + U(c-U.T p). Squared improvement for the same p under exact c equals squared coefficient error; no implied SmoothL1/R/U improvement across learned models.",
+      "price_adjust": "On a valid block use p+U(c-U.T p). With exact c and the same p the unweighted level-SSE gain is the squared coefficient error; with stored c=U.T a+eps, residual SSE in exact remaining arithmetic is ||(I-UU.T)(p-a)||²+||eps||². Adjacency, R, SmoothL1 and downstream results require separate measurement.",
       "volume_adjust": "Invert stored S. If S=0 return zeros; otherwise Euclidean projection of preliminary physical volumes to nonnegative sum S: max(v-tau,0). Partial zeros allowed.",
       "oi_adjust": "Delta inverse from z. Let p0,p1 be preliminary physical first open OI, last close OI. x=max(0,-Delta,(p0+p1-Delta)/2); endpoints x,x+Delta; other OI unchanged.",
       "read_contract": "Always expand the same calendar block for a valid constrained query, discard unrequested outputs from loss; compute current boundaries separately and return raw head on invalid blocks. Aggregate OHLC only on exact nested physical supports for diagnosis, no hard equality across all resolutions.",
-      "float_contract": "Serialize raw c1,c2,log1p(S),asinh(Delta/s),valid flag as FP32. Set all five to zero on an invalid block. The FiLM conditioning copy scales four valid values by train-only period means and population SD floored at 1e-6, then forces invalids to zero and keeps mask. A view with no valid train block is excluded from fact calibration/eligibility for both arms and reported. Deterministic projection always uses the raw state, without global LN. Lock numerical tolerances in physical units before scores.",
+      "float_contract": "Serialize raw c1,c2,log1p(S),asinh(Delta/s),valid flag as FP32. Set all five to zero on an invalid block. The FiLM conditioning copy scales four valid values by train-only period means and population SD floored at 1e-6, then forces invalids to zero and keeps mask. Where a period has no valid training block, switch off explicit block facts and calibration, retain eligible direct bar targets for both arms, and report this coverage. Deterministic projection always uses the raw state, without global LN. Lock numerical tolerances in physical units before scores.",
       "OI_scale": "Per period max(1 physical contract unit, median nonzero absolute Delta among valid training blocks); all-zero eligible group falls back to 1. Only comparable qualified volumes/OI in contracts.",
-      "duration_weighting": "Equal ordinal slot weights including calendar-accepted short final session bars, not equal minute-duration weights."
+      "duration_weighting": "Equal ordinal slot weights including calendar-accepted short final session bars, not equal minute-duration weights.",
+      "calendar_complete_block_ceiling": "32 allocated blocks. For input caps C_s, I_s=1 when a scheduled bar of that view closes at t. Strictly-past full-block ceiling is sum floor((C_s-I_s)/16) = 32-sum I_s. At minute endpoints the full-history calendar ceiling ranges from 28 to 31; actual valid counts can be lower, including zero. Report ceiling, realized valid count and reasons separately."
     },
     "linear_controls": {
       "historical": [
@@ -1789,6 +1815,97 @@
         },
         "construction": "Same prior rise to 100, then one continuous 15-minute parent. The first minute opens at 100 and each later minute at the previous close. H/L are the max/min of O and C, each minute has V=1 and starts/ends with OI=20. Pivots use local strictly higher/lower minute closes with one observed right neighbor. The illustrative neckline criterion is a close strictly below the line through the two troughs.",
         "figure": "docs/babel/figures/babel_shape_resolution.png"
+      },
+      "contract_review_20261127": {
+        "scope": "Local arithmetic and archived reports. No new raw download scan, neural run or qualified live-history count.",
+        "calendar": {
+          "caps": [
+            256,
+            128,
+            64,
+            64
+          ],
+          "block_size": 16,
+          "continuous_t4800_max_by_view": [
+            15,
+            7,
+            3,
+            3
+          ],
+          "continuous_t4802_max_by_view": [
+            15,
+            8,
+            4,
+            4
+          ],
+          "calendar_only": "Enumerated 60 consecutive synthetic minute closes. Not a historical coverage statistic."
+        },
+        "price_anchor": {
+          "old_A_OHLC": [
+            [
+              100,
+              102,
+              100,
+              102
+            ],
+            [
+              102,
+              104,
+              101,
+              103
+            ]
+          ],
+          "old_B": "Double every old OHLC value",
+          "later_OHLC_both": [
+            [
+              100,
+              100,
+              100,
+              100
+            ],
+            [
+              100,
+              101,
+              100,
+              100
+            ]
+          ],
+          "boundary": "No observed link or crossing coarse statistic/warmup; identical masks and activity. Within-component gap/body/wick ratios identical.",
+          "old_last_close_over_same_current": [
+            "103/100",
+            "206/100"
+          ],
+          "log_target_difference": "log(2)"
+        },
+        "projection": {
+          "target_relative_log_closes": "all zero",
+          "preliminary_error": "0 through 15 in any common small unit",
+          "level_SSE_before_after": [
+            1240,
+            984
+          ],
+          "adjacent_SSE_before_after": [
+            15,
+            63
+          ],
+          "units": "squared common error units; exact arithmetic for the existing U"
+        },
+        "query_sampling": {
+          "w": [
+            0.5,
+            0.5
+          ],
+          "valid": [
+            1,
+            0
+          ],
+          "only_valid_loss": 4,
+          "valid_support_mass": 0.5,
+          "dense_valid_target": 4,
+          "naive_expected_zero_filled_mean": 2,
+          "corrected_expected_mean": 4,
+          "check": "Exact enumeration for one to three independent draws on three finite populations; linearity gives the 64-draw expectation."
+        }
       }
     },
     "training_tasks": {
