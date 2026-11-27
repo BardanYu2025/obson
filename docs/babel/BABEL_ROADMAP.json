@@ -2,7 +2,7 @@
   "schema": "babel-roadmap-v2-current-only",
   "updated": "2026-11-27",
   "current_iteration": "fixed_budget_observable_and_learned_state",
-  "current_iteration_scope": "同容量 P2/P3 的同一步三任务混训方案。完整月份交付已执行本地 CPU 原价与验证样本资格核对。",
+  "current_iteration_scope": "同容量 P2/P3 每步混训三项任务。已核对月份原价与标签，并从封存索引划出各用途及其品种范围。",
   "current_work_mode": {
     "mode": "design_and_records_only",
     "requested_on": "2026-11-24",
@@ -400,7 +400,7 @@
       "F08"
     ]
   },
-  "active_phase": "completed_month_source_qualification_reported_model_gates_open",
+  "active_phase": "month_use_scope_reviewed_historical_clocks_units_and_model_gates_open",
   "active_order": [
     "F01",
     "F02",
@@ -411,7 +411,7 @@
     "V13"
   ],
   "next_after_active": {
-    "status": "months_source_qualification_delivered_calendar_units_independence_open",
+    "status": "preliminary_use_scope_delivered_source_verification_then_scope_freeze",
     "task_ids": [
       "F02",
       "F04",
@@ -419,12 +419,12 @@
       "F11",
       "V13"
     ],
-    "action": "对拟交付的跨夜交易时段和未接边界作逐日期核查，分开核对成交量与持仓量口径、强顺序配对的历史跳价和涨跌停、留出市场时间支持及当时可选范围。再定报价容差和资源。",
+    "action": "优先按生效日核对预留品种及拟交付时期的交易时段和量、仓各自单位，再核当时可选的合约、三种任务共同样本和独立时间支持。核定可承诺的用途后锁误差和预算。指数另批。",
     "ready_entrypoint": null,
     "old_commands_active": false,
     "automatic_reruns": false,
     "qualification_report": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/qualification.md",
-    "deliverable_zh": "按品种、时期、用途列明可正式检验、仅作诊断和待补证据的范围。",
+    "deliverable_zh": "核定按品种、时期和用途共用的正式样本范围。",
     "roadmap_anchor": "next-deliverable"
   },
   "active_training_budget": {
@@ -546,19 +546,30 @@
     },
     "reply_principles": {
       "order": [
-        "前因和本轮具体问题",
-        "实际动作与方案/代码/运行/验收状态",
-        "普通话结果和关键证据",
-        "原结论影响与能力边界",
-        "下一步及用户是否需要操作"
+        "先直接回答与判断，再交代本轮问题",
+        "实际动作与方案/数据核对/训练/独立验收/备份状态",
+        "同条件的关键证据、重要反例及代价",
+        "哪项决策得到保留、收窄或修正",
+        "下一项具体工作，以及需要用户执行的动作"
       ],
       "default_key_numbers_at_most": 3,
       "exceptions": "用户要求详细数学、代码或完整对照时展开，不隐藏关键反证",
-      "terms": "首次解释编号、活动、近端、读头等；代号不能充当含义",
+      "terms": "先写研究问题或实际含义，编号紧随中文名。对普通问题直接回答。",
       "metrics": "比较对象/单位/范围/不确定性齐全；误差改善不是还原率、规则一致不是交易准确率",
       "progress": "按可交付能力和已完成决定，不凭实验数报整体百分比或保证成功时间",
       "scope": "普通答疑不自动改队列；新想法先登记，明确立项才启动",
-      "commands": "当前无操作；以后只给唯一正确完整命令和导出路径，不让用户挑历史脚本"
+      "commands": "当前无操作；以后只给唯一正确完整命令和导出路径，不让用户挑历史脚本",
+      "source": "docs/babel/BABEL_EXPERIMENT_WORKFLOW.md#reply-principles",
+      "evidence_links": "正文突出改变决定的证据。完整六方面审查、记录、表格、运行身份和哈希放在段尾链接。用户要求深入时展开。"
+    },
+    "analysis_principles": {
+      "source": "docs/babel/BABEL_EXPERIMENT_WORKFLOW.md#analysis-principles",
+      "decision": "看候选成绩前固定问题、适用范围、主要收益、不可补偿底线、预算、退出及各结果的下一步。开发集选模，最终留出确认一次。",
+      "comparison": "各任务的端点、可见输入与锚点、目标、尺度、读头及选择机会匹配，曝光与实际成本分别报告。",
+      "attribution": "原行情可复算的真值、规则或简单基线、固定解码校正、整套模型和未教用途分别取证。部件归因要有能区分该部件的比较。",
+      "denominators": "逐品种、时期、任务说明合法覆盖、缺类及读出失败。报自然与均衡总体、原单位及相对同条件基线的差，保留尾部和反证。",
+      "independence": "按共同市场时间块配对并报告块数、区间和两种子方向。独立支持不足的用途保持未决。",
+      "outcomes": "沿用 decision_outcomes 和 repair_scope，先区分实现错误、可用负结果、取舍、证据不足及可确认候选。"
     }
   },
   "historical_archive": {
@@ -667,8 +678,16 @@
           "work": "已下载月份合约的原价可回读范围、分类与顺序标签资格已按端点核对并复算。",
           "kind": "completed_months_source_qualification",
           "evidence": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/qualification.md"
+        },
+        {
+          "date": "2026-11-27",
+          "work": "核对严格完整描述的品种和分期覆盖、后期构造配对的市场周，整理每项用途当前的可验证范围。",
+          "kind": "completed_months_use_scope_review",
+          "evidence": "docs/babel/BABEL_ROADMAP.md#next-deliverable"
         }
-      ]
+      ],
+      "experiment_analysis": "docs/babel/BABEL_EXPERIMENT_WORKFLOW.md#analysis-principles",
+      "user_replies": "docs/babel/BABEL_EXPERIMENT_WORKFLOW.md#reply-principles"
     }
   },
   "workflow": "docs/babel/BABEL_EXPERIMENT_WORKFLOW.md",
@@ -700,38 +719,52 @@
       "summary": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/summary.json",
       "neural_code": false,
       "model_trained": false
+    },
+    "route_and_principles_20261127": {
+      "base_commit": "024b2c828437b9f59c5b27999ef5c97b1c4573e9",
+      "scope": "Use-specific source coverage and analysis/reporting protocol before index delivery.",
+      "evidence_key": "current_plan.data.scope_review_20261127",
+      "design_changes": [
+        "Joint task populations and scope",
+        "Physical-source cutoff wording",
+        "Attribution of output correction without refitting",
+        "Three-class macro recall and missing-class handling",
+        "Controlled-pair market-week support",
+        "Attention cost/preflight and equal-information check"
+      ],
+      "new_experiment_or_model_fit": false
     }
   },
   "review": {
     "purpose": {
-      "status": "qualified_source_scope",
-      "evidence": "完整月份的原价、当下方向与极值先后分别给出每个端点的资格，均只取截至当时的合约行情。",
-      "remaining": "共享状态能保留的细节和分类/顺序表现仍需模型实测。"
+      "status": "pass_for_scope",
+      "evidence": "历史价格、当前描述和未教顺序分别列出真实来源真值与可支持的用途。",
+      "remaining": "模型的使用精度和跨域泛化待独立实测。"
     },
     "architecture": {
       "status": "pass_for_scope",
-      "evidence": "前版 E/D/A 与 P2/P3 设计保留。本批核对四个周期的实体、影线与价格链。在真实来源构造路径上逐对复算 160 个打包摘要与粗周期父栏。",
-      "remaining": "本次只测数据变换和构造样本。实际网络压缩、初始化梯度、FP32 网络误差和成本待测。"
+      "evidence": "固定 P3 的校正前后可在完全相同目标上拆分历史误差。写明两套视图按共同输入精度生成摘要，并给出关系层稠密中间量的解析成本。",
+      "remaining": "真实输出、梯度、峰值显存与刷新时延待实现实测。"
     },
     "training": {
-      "status": "not_run",
-      "evidence": "本地 CPU 审计按任务分别核对数据资格，未启动神经训练。两段可遮分钟的来源候选 46,180,037 个。",
-      "remaining": "三任务共同运行卡、遮挡后的输入闭包、训练独占统计及资源预算开放。"
+      "status": "open",
+      "evidence": "三种任务同一步的输入、权重和两组匹配协议已核对。完整描述来源单位下严格且清除跨区的样本只在三个品种。",
+      "remaining": "物理单位、共同样本、实际曝光、损失梯度和训练预算尚未锁定或实测。"
     },
     "validation": {
-      "status": "source_labels_qualified_independent_model_validation_open",
-      "evidence": "严格且不跨分区的方向/自然顺序端点 30,907,644/37,045,869。第二套计算核对 46,224,030 个端点的两项原价标签、无资格标记和跨期清除。另从 1,188 个端点复算 679,654 次历史报价。构造路径上两项摘要条件均相等的顺序对为 196 对。",
-      "remaining": "后期覆盖 10 个市场周，44 个品种中 13 个同时出现两种稀有方向。196 对中后期 3 对，历史交易约束、模型实际性能和 V13 待核。"
+      "status": "open",
+      "evidence": "原价、方向和自然顺序均有来源依据，三类均衡召回口径已明确。固定抽样的 196 对中，后期 3 对涉及两个市场周。",
+      "remaining": "绝对使用线、当日构造合法性、实际各类召回和超出已教描述的独立证据待验，V13 开放。"
     },
     "data": {
-      "status": "partial_completed_month_snapshot_qualified",
-      "evidence": "44 个品种 2,382 份原始月份文件与原清单逐一匹配。原价按周期、日间与跨段条件给出逐端点覆盖，367 处未接边界有位置证据。",
-      "remaining": "逐日期跨段交易日历、历史量仓口径、选样当时可得性、未证跨周期路径及真实静止证据仍开放。指数另批。"
+      "status": "open",
+      "evidence": "月份合约严格全 18 项在清除跨区后有 646,168 个来源单位端点，五个预留品种为零。跨段候选与价格专用标签另列。",
+      "remaining": "逐生效日核交易时段、成交与持仓各自的口径、静止行情与合约当时可选范围。指数另批。"
     },
     "engineering": {
-      "status": "released_cpu_audit_verified",
-      "evidence": "独立 CPU 实验版本先冻结推送再执行。2,382 份端点索引、7 份原报告已复核哈希。从发布提交单独导出的实验通过 11 项测试并成功读取固定来源清单。",
-      "remaining": "模型实现、真实权重和 CUDA 运行另待授权。"
+      "status": "pass_for_scope",
+      "evidence": "复核全部 2,382 份封存端点索引和原回执的七份报告，重算严格 257 收盘与标签跨区标记，按原输入跨区标记筛选。",
+      "remaining": "模型代码、CUDA 与离机权重恢复另待实施。"
     }
   },
   "design_rationale": {
@@ -768,11 +801,11 @@
         "F11",
         "V13"
       ],
-      "status": "source_and_natural_labels_qualified_for_completed_month_windows_remaining_gates_open",
+      "status": "per_use_coverage_quantified_source_conventions_and_signed_scope_open",
       "evidence": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/qualification.md",
       "title_zh": "划定两套模型共用的样本范围",
-      "progress_zh": "当前，月份资料已核对，适用范围待定",
-      "deliverable_zh": "按品种、时期、用途列明可正式检验、仅作诊断和待补证据的范围。"
+      "progress_zh": "已完成各用途的范围初表，历史时段与量仓单位待核",
+      "deliverable_zh": "核定按品种、时期和用途共用的正式样本范围。"
     },
     {
       "order": 2,
@@ -1090,6 +1123,88 @@
           "natural_labels_full_review_sha256": "5ad286c7c4baaafcfebd32400ab9ef817571625a9eaf107dd8ba542cb07dccb8"
         },
         "neural_training": false
+      },
+      "scope_review_20261127": {
+        "anchor": "next-deliverable",
+        "source": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/receipt.json",
+        "source_index": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/source_index.json.gz",
+        "aggregate": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/by_product_split.csv.gz",
+        "pairs": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/strong_order_candidates.jsonl",
+        "evidence_kind": "Sealed monthly endpoint and source-unit arithmetic on the existing release. Counts cover selected source windows, not signed physical conventions, independent observations or trained model outcomes.",
+        "strict_full18": {
+          "definition": "Continuous wall minutes or witnessed intraday recesses. Require 257 closes and 256 valid source quantity observations. Count all18_strict & label18_in_split & input_split_safe after partition purge.",
+          "before_purge": 654900,
+          "after_purge": 646168,
+          "era_order": [
+            "train_time",
+            "validation_time",
+            "development_time",
+            "later_time"
+          ],
+          "by_product_after_purge": {
+            "ag": [
+              152144,
+              19758,
+              37740,
+              3552
+            ],
+            "au": [
+              154586,
+              20424,
+              36926,
+              2738
+            ],
+            "sc": [
+              143412,
+              26048,
+              45362,
+              3478
+            ]
+          },
+          "held_products": [
+            "IF",
+            "SA",
+            "lh",
+            "sn",
+            "OI"
+          ],
+          "held_products_any_era": 0
+        },
+        "extended_full18": {
+          "after_purge": 44723281,
+          "products": 44,
+          "held_products_later": 46396,
+          "scope": "Candidate numerical support. Require historical as-of-date session confirmation and separate volume and OI unit evidence before use."
+        },
+        "strict_price_only_after_purge": {
+          "direction_endpoints": 30907644,
+          "direction_products": 44,
+          "held_products_later_direction": 32963,
+          "order_endpoints": 37045869,
+          "order_products": 44,
+          "held_products_later_order": 39547,
+          "direction_counts": {
+            "down": 52991,
+            "low_direction": 30795682,
+            "up": 58971
+          },
+          "later_products_with_both_rare_directions": 13
+        },
+        "order_support": {
+          "constructed_numeric_pairs": 196,
+          "later_pair_counts_by_iso_market_week": {
+            "2026-W45": 1,
+            "2026-W46": 2
+          },
+          "later_natural_market_weeks": 10,
+          "claim": "Later controlled pairs are diagnostic at this support. Day-specific tick/price bounds, independently supported blocks and simultaneous bounds remain open for a claim beyond the 18 taught targets."
+        },
+        "verification": {
+          "method": "Checked the receipt reports and the SHA of every indexed endpoint file. Rebuilt the 257-close strict and label-span flags from boundary and partition runs, checked equality with stored flags, then intersected with input_split_safe. Every source row has valid source-unit quantity fields in the by-contract table. Compared strict totals per product and split against the unpurged report and dates of every later numeric pair against the pair list.",
+          "files": 2382,
+          "index_set_digest": "876844975705c1b8ba41cd555944ae28bd097dcf99c57fac13ce5f6f48d9771e",
+          "digest_recipe": "SHA-256 of UTF-8 lines id:actual_index_sha256 followed by LF in ascending numeric source id, unpadded."
+        }
       }
     },
     "features": {
@@ -1232,7 +1347,14 @@
       "state_pair_fill": "Terminal query ends at t; terminal own duration/coverage zero, pairwise duration ratio/IoU/contains zero if either is terminal; real counterpart duration and coverage retained. Keys of terminal type always get zero relation bias.",
       "hidden_activation": "GELU for the two-layer relation MLP; architecture-document proposal for both arms, not a released implementation.",
       "score_effect_and_initial_gradient": "On a common legal row, fixing Q and K multiplies a pair's odds by exp(b_j-b_k), within [exp(-4),exp(4)]. At initialization b=0, gradient can update the final affine projection; gradient into the preceding relation hidden layer is zero on that first backward pass.",
-      "parameter_reporting_scope": "Analytic parameter counts assume biased affine projections. Actual parameter accounting, FLOPs, memory and latency await implementation."
+      "parameter_reporting_scope": "Analytic parameter counts assume biased affine projections. Actual parameter accounting, FLOPs, memory and latency await implementation.",
+      "dense_hidden_cost": {
+        "T": 513,
+        "width": 32,
+        "fp32_bytes_per_element": 4,
+        "bytes_per_physical_endpoint_per_layer": 33685632,
+        "scope": "One materialized dense pairwise relation hidden activation only, not measured total memory. If query-row tiling is used, retain every legal key and first-layer Value for each row. Verify outputs/gradients against dense on a small input and measure backward retention or recompute at preflight."
+      }
     },
     "decoder": {
       "query_count": 10,
@@ -1426,7 +1548,7 @@
     "split_proposal": {
       "train": "2016-2023",
       "val": "2024",
-      "development": "2025 through old boundary",
+      "development": "2025 through 2026-09-12 03:00 Asia/Shanghai inclusive by source minute start",
       "final_time_after": "2026-09-12 03:00 Asia/Shanghai",
       "heldout_products": [
         "IF",
@@ -1436,7 +1558,9 @@
         "OI"
       ],
       "qualification": "current: all input/warmup/historical-query support within assigned partition; no future60 requirement. Later forecast uses separately locked label-support inventory; no train/stat/pretrain final holdout.",
-      "reporting": "Report disjoint cells for previously seen instruments on final dates, held-out instruments on pre-final development dates, and their intersection (held-out instruments on final dates). Freeze cells in advance, never select on the held-out instruments, and avoid counting the intersection twice as evidence."
+      "reporting": "Report disjoint cells for previously seen instruments on final dates, held-out instruments on pre-final development dates, and their intersection (held-out instruments on final dates). Freeze cells in advance, never select on the held-out instruments, and avoid counting the intersection twice as evidence.",
+      "cutoff_applied": "The sealed monthly index uses minute_start_local > cutoff for later_time and held_product_later_time. An equal minute start belongs to the development era. Purge whole input, warmup and label spans separately.",
+      "independence_status": "Per-cell ground-truth counts and coverage were inspected. Historical exposure and the number of usable market-time blocks for each claim remain to be checked. Candidate outcomes have not been observed."
     },
     "budget": {
       "encoder_runs": 4,
@@ -1481,7 +1605,7 @@
       "conditional": "Trigger only on development data when both paired seeds meet the predeclared relative R gain and delivery seed 42 exceeds the protected degradation on overall U or any descriptor family. Then four frozen states each fit one fresh direct D256 with common protocol, at most four; report separately. No final holdout trigger.",
       "coherence": "same physical parent-child complete partitions on clean observed history; no latent equality or extra unobserved minute targets",
       "R_perp": "mean ||(I-UU.T)(a_hat-a)||^2/(14*s_price_period^2) on common valid blocks only; average blocks within valid view, views within endpoint, then renormalize rho over endpoints with support. Coverage and invalids separately, all in R.",
-      "conditional_seed_scope": "Check R per paired seed; for U use the release seed 42 paired comparison at the prespecified guard thresholds.",
+      "conditional_seed_scope": "For this development-only diagnostic, seed 42 and seed 43 must each improve R over their paired P2 by at least 5%, and seed 42 must exceed the degradation guard on overall U (>5%) or a family (>10%). The normal upgrade rule uses seed 43 for direction only. A near-zero baseline uses the separately predeclared absolute rule.",
       "observed_resolution_and_price_precision": "Recover only observed closed intervals at the declared resolution, using common C_t only to restore absolute prices. Report error by lookback, field and period in bps/ticks, plus tail error. Technical shape landmarks at finer resolution require the corresponding ordered inputs; empirical tick-level accuracy has not been measured.",
       "price_anchor_support": {
         "audit": "Before scoring, certify known price-ratio paths to C_t using only shared visible gap/body ratios and proven same-source price boundaries across periods. A missing fine bar can be bridged by a qualified coarse view. A missing certificate flags unproven connectivity, not necessarily non-identifiability. The raw source supplies answers and checks only.",
@@ -1506,6 +1630,17 @@
           "certified link to C_t versus unproven link"
         ],
         "interpretation": "Lock promised fields, physical tolerances, required coverage and anchoring convention before scores. Accuracy on all truth-labelled targets still enters the existing R protocol. An unconnected earlier segment may be estimated; guaranteed price recall requires an observable connection or a tested in-scope anchor. A missing minute itself has no observed truth."
+      },
+      "readout_correction_accounting": {
+        "anchor": "price-gain-attribution",
+        "readouts": [
+          "P2 final",
+          "P3 provisional before output correction",
+          "same P3 final"
+        ],
+        "identity": "R(P2 final) - R(P3 final) = (R(P2 final) - R(P3 provisional)) + (R(P3 provisional) - R(P3 final)). Also compute each of the relative-close and adjacent-return MSE terms with the same respective support, weights and training scales. Derive adjacent returns from each set of predicted closes.",
+        "interpretation": "The last difference isolates application of the fixed correction to one trained P3. The first compares learned systems, including conditioning on the explicit facts and training with the correction. It does not identify encoder-only or multitask gains. Keep the current close as anchor, all common targets and the R_perp and order tests.",
+        "additional_fits": 0
       }
     },
     "current_description": {
@@ -1581,7 +1716,12 @@
           "s <= -0.5: downward-dominant",
           "interior including flat: low directional efficiency"
         ],
-        "evaluation": "Freeze thresholds before candidate scores. Report class counts, coverage, confusion and per-class recall against the raw rule, show near-boundary samples. Raw-rule truth, A-prime and D comparisons use common support and disclose each route’s eligibility. Distinguish this known-descriptor use from the held-out order label and the conditional technical-shape hypotheses."
+        "evaluation": "Freeze thresholds before candidate scores. Report class counts, coverage, confusion and per-class recall against the raw rule, show near-boundary samples. Raw-rule truth, A-prime and D comparisons use common support and disclose each route’s eligibility. Distinguish this known-descriptor use from the held-out order label and the conditional technical-shape hypotheses.",
+        "class_balance_reporting": {
+          "metric": "Per-class recall and the arithmetic mean of the three recalls, with class counts and confusion. The always-low-direction rule has macro recall 1/3 if all classes occur.",
+          "missing_class": "For a product/period missing any true class, give its count, mark that recall and three-class macro unavailable. Distinguish pooled natural endpoints from product-balanced scores.",
+          "baseline_population": "99.64% correct for always-low-direction on all strict purged natural month endpoints pooled without sampling weights. Aggregate label distribution consulted before any model fit. Reporting diagnostic only, original direction and promotion thresholds unchanged."
+        }
       },
       "raw_label_convention": "Use qualified physical one-minute closes including the pre-window boundary. Let l_i=log(C_i), r_i=l_i-l_(i-1), net=l_last-l_start, abs-path=sum(abs(r_i)). Use finite, consistent FP64 physical label calculations for the pair check, fixed train-only target transforms for the heads and no future input. The synthetic example uses accurate summation and raw physical components."
     },
@@ -1631,7 +1771,7 @@
         "F10"
       ],
       "name": "data_sample_qualification_contract_then_package",
-      "current_deliverable": "Full stable month snapshot and per-endpoint qualification for structural prices, current direction and natural historical order delivered. Extended calendar, cross-period reach beyond certified paths, unit legality, split support and actual model inputs still to sign.",
+      "current_deliverable": "Shared per-use preliminary scope completed on sealed month indexes. Next sign historical session and unit evidence, point-in-time selection, independent support, common per-task cohorts and only then physical tolerances/resources.",
       "outputs": [
         {
           "name": "snapshot_manifest and conventions",
@@ -1653,6 +1793,7 @@
       "order": [
         "completed for this monthly vintage: compare every source file to the manifest, checkpoint and previously sealed snapshot",
         "completed bounded subset: strict and source-screened price paths, labels, input/label purge, held-out sample/market-week support and fixed controlled-pair screening",
+        "completed: checked strict full-18 support after label and whole-input purge by product and partition, compared with extended numerical coverage and counted distinct later market weeks of controlled pairs",
         "open: per-date calendars, actual historical tick and price limits, volume/OI conventions, eligible as-of universe, exhaustive cross-view bridges, train-only scales and actual mask closure",
         "sign delivery scope, instrument-level physical tolerances, time support and the common resource card before scores"
       ],
@@ -1664,7 +1805,7 @@
       "not_new_basic_census": true,
       "neural_result": false,
       "evidence": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/qualification.md",
-      "current_exit": "partial -> shared bounded price/label cohort delivered. Conditional cohorts are marked separately; no model implementation or training."
+      "current_exit": "Partial. Price/label availability and complete-description coverage are quantified. The broad held-product full-18 scope is unsupported under strict continuity. Extended, source-unit counts remain conditional."
     },
     "directions": {
       "priority1": "single bounded P2/P3 memory-allocation comparison (F01/F02/F04/F05/F10/F11)",
@@ -1919,7 +2060,8 @@
       "float_contract": "Serialize raw c1,c2,log1p(S),asinh(Delta/s),valid flag as FP32. Set all five to zero on an invalid block. The FiLM conditioning copy scales four valid values by train-only period means and population SD floored at 1e-6, then forces invalids to zero and keeps mask. Where a period has no valid training block, switch off explicit block facts and calibration, retain eligible direct bar targets for both arms, and report this coverage. Deterministic projection always uses the raw state, without global LN. Lock numerical tolerances in physical units before scores.",
       "OI_scale": "Per period max(1 physical contract unit, median nonzero absolute Delta among valid training blocks); all-zero eligible group falls back to 1. Only comparable qualified volumes/OI in contracts.",
       "duration_weighting": "Equal ordinal slot weights including calendar-accepted short final session bars, not equal minute-duration weights.",
-      "calendar_complete_block_ceiling": "32 allocated blocks. For input caps C_s, I_s=1 when a scheduled bar of that view closes at t. Strictly-past full-block ceiling is sum floor((C_s-I_s)/16) = 32-sum I_s. At minute endpoints the full-history calendar ceiling ranges from 28 to 31; actual valid counts can be lower, including zero. Report ceiling, realized valid count and reasons separately."
+      "calendar_complete_block_ceiling": "32 allocated blocks. For input caps C_s, I_s=1 when a scheduled bar of that view closes at t. Strictly-past full-block ceiling is sum floor((C_s-I_s)/16) = 32-sum I_s. At minute endpoints the full-history calendar ceiling ranges from 28 to 31; actual valid counts can be lower, including zero. Report ceiling, realized valid count and reasons separately.",
+      "common_input_check": "On both clean and masked complete views, identical common visible inputs at the declared precision, availability, allowed anchor, train-only scales and calendar imply identical 160 serialized coordinates. Raw higher precision is available for source truth checks, not as extra representational input."
     },
     "linear_controls": {
       "historical": [
@@ -1961,7 +2103,8 @@
         "anchor": "order-beyond-descriptors",
         "subset": "From the already prescribed same-160-FP32 pairs at the same endpoint, before looking at model outputs retain those with all 18 raw historical descriptors defined and equal at the declared FP64 label precision. Same admissible calendar/metadata, transforms and raw support. No new pair search and no changes to the original pair or natural BA samples.",
         "readout": "Use the same existing frozen order probe and paired rank score, tie 0.5. Any scorer using only the identical 160 facts and 18 reference values gives 0.5 on every pair.",
-        "report": "Report eligible pair count/fraction, market-time block support and both seeds. For a separate claim beyond the 18 taught labels, predeclare it in the relevant paired simultaneous-bound family and require both seed directions and supported lower bound >0.5. If support is inadequate, leave this stronger claim open. No new fit or change to original system/upgrade gates."
+        "report": "Report eligible pair count/fraction, market-time block support and both seeds. For a separate claim beyond the 18 taught labels, predeclare it in the relevant paired simultaneous-bound family and require both seed directions and supported lower bound >0.5. If support is inadequate, leave this stronger claim open. No new fit or change to original system/upgrade gates.",
+        "month_scope": "Selected source pairs span only two later ISO market weeks. Their stronger beyond-taught-descriptor claim is diagnostic on this vintage. Natural order and the full-18 matched comparison retain separate claims."
       }
     },
     "bounded_checks": {
@@ -2467,7 +2610,8 @@
           ]
         },
         "one_update": "Compute all three means on the same parameters, weight and accumulate, then clip each module once and take one optimizer/scheduler step. P3 visible facts have no trainable parameters.",
-        "deployment": "Use the full available history to emit z."
+        "deployment": "Use the full available history to emit z.",
+        "eligible_populations": "Per task, both arms use the same frozen product/period endpoint list and report candidate counts and actual exposures. Description training and full U require all 18 labels on the signed population. Evaluate price-only labels separately outside that population. Preserve the three quotas in every update."
       },
       "frozen_current_description": {
         "reads": "frozen z only for state probes; an equivalent raw-input reference is also fitted",
