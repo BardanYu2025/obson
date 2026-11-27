@@ -1,8 +1,12 @@
 # Babel 当前研究资料
 
-从[当前结论与下一步](BABEL_ROADMAP.md#current-review)开始。11 月 24 日的单合约盘点只覆盖已审计批次，新增数据仍在下载。下一份交付是[数据与样本资格包](BABEL_ROADMAP.md#sample-qualification)。
+第一次读，从路线图首页的[四个模型方案与两次比较](BABEL_ROADMAP.md#model-recipes)开始。P0、P1 是上一版，P2、P3 是当前要比较的两套方案。
 
-[模型总图](BABEL_ROADMAP.md#model-architecture)、[区间注意力](BABEL_ROADMAP.md#interval-attention)、[历史解码器](BABEL_ROADMAP.md#film-history-decoder)、[历版设计取舍](BABEL_ROADMAP.md#architecture-decisions)、[训练任务总表](BABEL_ROADMAP.md#training-tasks)、[完整回读＋遮挡填空](BABEL_ROADMAP.md#masked-multitask)、[价格重建范围](BABEL_ROADMAP.md#reconstruction-evidence)和[当前行情与技术形态](BABEL_ROADMAP.md#technical-patterns)均可直接跳转。路线图第 0～9 节和 [JSON](BABEL_ROADMAP.json) 的 `current_plan` 记录 `codex/babel-next` 的现行方案，第 10 节保留带日期的历史审计。
+- 想顺着一个样本读，可以依次看[输入哪些 K 线](BABEL_ROADMAP.md#input-views)、[模型总图](BABEL_ROADMAP.md#model-architecture)、[怎样训练](BABEL_ROADMAP.md#training-tasks)和[怎样验收](BABEL_ROADMAP.md#delivery-criteria)。
+- 想了解当前进度，看[已有证据和下一步](BABEL_ROADMAP.md#current-review)。当前下载完成后，下一份交付是[数据与样本资格包](BABEL_ROADMAP.md#sample-qualification)。
+- 想查具体用途，看[价格能重建到哪里](BABEL_ROADMAP.md#reconstruction-evidence)、[缺失行情的价格锚点](BABEL_ROADMAP.md#historical-price-anchors)或[行情分类与技术形态](BABEL_ROADMAP.md#technical-patterns)。
+
+路线图第 0～9 节和 [JSON](BABEL_ROADMAP.json) 的 `current_plan` 记录 `codex/babel-next` 的现行方案。第 10 节保留带日期的历史审计。
 
 - [工作流程](BABEL_EXPERIMENT_WORKFLOW.md)：实验决策、报告、备份与人类可读汇报。
 - [实验目录原则](../../experiments/README.md)：模型/训练/评测/配置/说明同目录，发布后冻结，改变进入新版本。

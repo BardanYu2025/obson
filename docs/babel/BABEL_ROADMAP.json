@@ -573,7 +573,39 @@
       "review_anchor": "architecture-checks",
       "rule": "When a mechanism is changed or condensed, keep its purpose, current disposition, and immutable design/decision source in the existing roadmap."
     },
-    "current_review_anchor": "current-review"
+    "current_review_anchor": "current-review",
+    "reader_guide": {
+      "roadmap_anchor": "model-recipes",
+      "predecessor": {
+        "commit": "76b6ad2f758346caa5d2437f3b269106badf6713",
+        "markdown_source": "https://github.com/BardanYu2025/obson/blob/76b6ad2f758346caa5d2437f3b269106badf6713/docs/babel/BABEL_ROADMAP.md#L34-L43",
+        "status": "superseded_before_training",
+        "roles": [
+          "reference",
+          "candidate"
+        ],
+        "recipes": [
+          {
+            "id": "P0",
+            "structure": "plain causal transformer",
+            "E_and_D_loss": "L_clean"
+          },
+          {
+            "id": "P1",
+            "structure": "interval_relation_and_first_layer_Value",
+            "E_and_D_loss": "L_clean+0.25L_mask"
+          }
+        ]
+      },
+      "current_matrix": "current_plan.matrix",
+      "relationship": "P2 and P3 independently use the interval relations and first-layer Value path proposed in P1, with full-history readback only. Masked history remains conditional. The active question compares memory allocation plus the corresponding history readout.",
+      "first_read_anchors": [
+        "input-views",
+        "model-architecture",
+        "training-tasks",
+        "delivery-criteria"
+      ]
+    }
   },
   "workflow": "docs/babel/BABEL_EXPERIMENT_WORKFLOW.md",
   "progress_log": "docs/babel/BABEL_PROGRESS_LOG.jsonl",
