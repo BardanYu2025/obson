@@ -2,7 +2,7 @@
   "schema": "babel-roadmap-v2-current-only",
   "updated": "2026-11-27",
   "current_iteration": "fixed_budget_observable_and_learned_state",
-  "current_iteration_scope": "数据、架构、训练、评测、数学统一修订；明示事实与学习到的额外复用分开验收。设计与 CPU 算术。",
+  "current_iteration_scope": "同容量的 P2/P3 用同一批次混训完整历史回读、遮挡填空与当前描述，区分已学用途与未给标签的顺序题。设计与 CPU 算术。",
   "current_work_mode": {
     "mode": "design_and_records_only",
     "requested_on": "2026-11-24",
@@ -20,7 +20,7 @@
     "implementation_transition": "用户明确要求开始实施后进入；无需重复请求已经授权的方案确认"
   },
   "current_reference": {
-    "model": "P2 matched interval-relation + first-Value encoder, 768 learned features, clean-only, direct physical query",
+    "model": "P2 shared interval-relation and first-Value backbone, 768 learned coordinates, joint clean+mask+description pretraining, direct historical readout",
     "weights": "not_created",
     "historical_reference": "Macro reports remain; original weights absent; see archive; no claim of globally best model"
   },
@@ -100,9 +100,9 @@
   "future_branches": [
     {
       "id": "F01",
-      "title": "从头全位置监督与相同完整历史职责",
+      "title": "从头混合训练与完整历史覆盖",
       "current_status": "design_active",
-      "current_role": "两组相同完整历史目标与采样；块校正只增加内部计算，清晰区分实际梯度。",
+      "current_role": "两组从第一次更新起就用相同的回读、填空、行情描述样本和损失。P3 的额外校正只增加内部查询。",
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
@@ -202,7 +202,7 @@
       "id": "F11",
       "title": "冻结用途、重建阶段退出与可用模型交付",
       "current_status": "design_active",
-      "current_role": "历史、当前描述、独立路径顺序和离机恢复分层验收。",
+      "current_role": "在新行情检验历史和已学描述，用未教的顺序另检复用，按既有条件独立确认与离机恢复。",
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
@@ -399,7 +399,7 @@
       "F04",
       "F10"
     ],
-    "action": "交付批次稳定后先按清单对账。F02/F04/F10 资格包核对当时可选范围、价位到当前锚点的关系、共同槽位/块、字段支持与留出，再锁可用误差和资源。",
+    "action": "交付批次稳定后核对当时可选范围、价格锚点、三种任务分别合格的样本、遮挡泄题检查、共同区间及独立留出，再锁可用误差和资源。",
     "ready_entrypoint": null,
     "old_commands_active": false,
     "automatic_reruns": false
@@ -422,7 +422,13 @@
     "previous_plan_ref": "76b6ad2f758346caa5d2437f3b269106badf6713; 4+6, max8 optional; old unexecuted",
     "closed_form_order_fits": 6,
     "train_only_pca": 2,
-    "linear_history_decoder_families": 2
+    "linear_history_decoder_families": 2,
+    "proposed_task_examples_per_update": {
+      "complete_history_readback": 32,
+      "masked_history_completion": 16,
+      "current_description": 16
+    },
+    "bundled_joint_description_heads": 4
   },
   "execution_gates": [
     {
@@ -431,7 +437,8 @@
         "reconciled stable delivery, duplicate/revision provenance, calendar, versioned units and as-of scope",
         "complete history/warmup support; no future labels",
         "calendar slots, per-endpoint block ceiling, valid facts from shared inputs, price-to-anchor connectivity, per-field loss support and coverage",
-        "parent/child identities, 37-minute natural label support and eligibility for legal full-summary collision pairs"
+        "parent/child identities, 37-minute natural label support and eligibility for legal full-summary collision pairs",
+        "separate frozen pools for clean, masked and complete 18-descriptor tasks; hide source minutes before all aggregates, first Value, metadata and summaries; hidden-value counterfactual"
       ],
       "status": "open"
     },
@@ -448,9 +455,10 @@
     {
       "gate": "budget",
       "items": [
-        "4 main + 7 current neural fits, 6 closed-form order fits, 2 PCA and 2 history ridge families",
+        "4 joint E/D/A fits (paired 2×2) plus 7 fresh frozen-description fits, 6 closed-form order fits, 2 PCA and 2 history ridge families",
         "optional at most4 common direct history fits on development trigger only",
-        "N/N_U/N_H, microbatch/precision, compute, disk, latency and restore"
+        "N/N_U/N_H, microbatch/precision, compute, disk, latency and restore",
+        "qualify the proposed 32/16/16 task examples and 1/0.25/0.10 task-mean weights before scores; record qualified exposure and per-task cost"
       ],
       "status": "open"
     },
@@ -554,7 +562,7 @@
       "roadmap_anchor": "model-architecture",
       "image": "docs/babel/figures/babel_state_architecture.png",
       "editable_source": "docs/babel/figures/babel_state_architecture.mmd",
-      "scope": "Current P2 and P3 alternatives, history readout and subsequent frozen uses. Arrows show forward flow; each arm has its own E and D weights.",
+      "scope": "Per arm/seed one E and one shared D with four serial FiLM blocks for readback and completion. A maps the clean state to 18 descriptions during the same optimizer step. Dashed edge shows fresh post-freeze probes.",
       "details": [
         {
           "roadmap_anchor": "interval-attention",
@@ -598,7 +606,7 @@
         ]
       },
       "current_matrix": "current_plan.matrix",
-      "relationship": "P2 and P3 independently use the interval relations and first-layer Value path proposed in P1, with full-history readback only. Masked history remains conditional. The active question compares memory allocation plus the corresponding history readout.",
+      "relationship": "Both current arms inherit P1 interval and first-Value paths and use the same three tasks each update. The comparison concerns memory allocation plus readout. P0/P1 and the superseded full-history-only P2/P3 protocol each have immutable source records.",
       "first_read_anchors": [
         "input-views",
         "model-architecture",
@@ -613,11 +621,18 @@
   "revision_record": {
     "reason": "用户要求以现有路线为基础，系统优化 K 线表征。固定容量的学习价值须独立于已写入统计检验。",
     "supersedes_unexecuted_design_commit": "76b6ad2f758346caa5d2437f3b269106badf6713",
-    "superseded_scope": "P0/P1 unexecuted whole recipes, clean+mask confound, 4+6 and optional width grid. New P2/P3 share relation/Value, phase and clean-only supervision.",
+    "superseded_scope": "Unexecuted P0/P1 recipes with confounded architecture and mask usage, 4+6 and optional width grid. P2 and P3 share the backbone and sampling protocol.",
     "completed_experiments_reinterpreted": false,
     "new_neural_code": false,
     "new_infrastructure_code": false,
-    "new_training": false
+    "new_training": false,
+    "joint_pretraining_revision": {
+      "date": "2026-11-27",
+      "previous_P2_P3_commit": "8a15f57c6e1780e97b3cb17d236593d416aad87a",
+      "previous_scope": "Both arms used clean readback only; masked history was conditional and description was post-freeze only. Superseded before any training.",
+      "current_scope": "Same P2/P3 model comparison; both use simultaneous three-task updates. Cite model ID and source revision to identify a protocol.",
+      "new_training": false
+    }
   },
   "review": {
     "purpose": {
@@ -627,23 +642,23 @@
     },
     "architecture": {
       "status": "pass_for_scope",
-      "evidence": "P2/P3 使用同结构但各自训练的 E、D。已核对注意力和 FiLM 接口、160+608 打包、严格历史块的日历上限及价格投影的适用范围。",
+      "evidence": "每个架构及种子各有一组 E/D/A。D 的四个 FiLM 块串联，共用最后七项输出。A 直接读完整状态的 18 项描述。区间注意力、160+608 打包与价格投影保留。",
       "remaining": "共同小 MLP 的 GELU 与虚拟状态填值是设计默认。实际初始化梯度、非负数值链接、FP32 误差、开销及模型表现仍待验证。"
     },
     "training": {
       "status": "pass_for_scope",
-      "evidence": "双方共用端点、标签与查询。在完整支持上固定字段分母；缺标签抽样的期望经精确枚举对上稠密目标。条件遮挡和未来损失在首批权重为零。",
-      "remaining": "N/N_U/条件 N_H、真实数值后端和资源上限未锁。"
+      "evidence": "每步三份任务均值合并，E、D、A 各按实际路径受训。微批按任务分母归一，完整回读的缺标签期望保持稠密目标。未来损失为零。",
+      "remaining": "32/16/16 与 1/0.25/0.10 为拟定配方，三个任务真实支持、E/D/A 的梯度、N/N_U/条件 N_H 与资源待锁。"
     },
     "validation": {
       "status": "pass_for_scope",
-      "evidence": "相对价位按到当前收盘的可证路径分层并保留全体主分。断开价比的反例、投影对差分的反例已复算。等摘要顺序、共同读头、分组区间另行裁定。",
+      "evidence": "相对价位按到当前收盘的可证路径分层并保留全体主分。断开价比的反例、投影对差分的反例已复算。等摘要顺序、共同读头、分组区间另行裁定。 U 是已学描述在新样本上的测量，37 分钟顺序标签预训练留出。顺序翻转而收盘 RMSE 很小的算例解释了差别。",
       "remaining": "绝对可用误差、合格独立组、功效、最终留出仍开放。"
     },
     "data": {
       "status": "open",
       "evidence": "11 月 24 日已审计批次的逐文件汇总与交付回执相符。11 月 26 日三个 2022 年合约的算术保留原证据。",
-      "remaining": "在下批次范围、修订、历史日历/单位、主力窗口当时可选性、各周期与独立留出支持仍待资格包。"
+      "remaining": "在下批次范围、修订、历史日历/单位、主力窗口当时可选性、各周期与独立留出支持仍待资格包。 三类任务的条件覆盖和遮挡闭包需在合格样例上核对。"
     },
     "engineering": {
       "status": "pass_for_scope",
@@ -663,12 +678,12 @@
       "new_reasoning": "共享区间主干及物理相位；P3 的正交/单纯形/边界投影可核实，缓存和有效位计入成本。"
     },
     "training": {
-      "why": "双方只做完整历史回读，阻断旧对照结构与遮挡混杂。",
+      "why": "把还原、上下文填空和直接概括行情的梯度给同一个状态，两套架构在每一步拥有相同的任务和读出机会。",
       "old_lesson": "完整上下文与所有合格位置、真实梯度诊断、同起点同预算。",
       "new_reasoning": "同标签和更新机会。P3 的兄弟查询只在校正中使用，展开梯度、吞吐与费用如实计入。"
     },
     "evaluation": {
-      "why": "有约束的系统增益与冻结后的额外用途分别判断。",
+      "why": "对照由历史重建后计算的答案、直接描述和新用途；U 检验已学描述的泛化，顺序题独立验收。",
       "old_lesson": "共同题目、新读头公平机会、尾部保护、独立留出与工程/科学状态区分。",
       "new_reasoning": "同摘要 PCA、正交剩余价格和冻结顺序任务防止把写入数字重读一遍称为学习突破。"
     }
@@ -709,7 +724,7 @@
     },
     {
       "order": 4,
-      "name": "fixed_capacity_comparison_then_frozen_uses",
+      "name": "matched_three_task_pretraining_then_fresh_frozen_readouts",
       "ids": [
         "F05",
         "F11"
@@ -843,7 +858,7 @@
         "index": 6
       },
       "inventory_status": "November 24 counts are for the audited delivery only. The user reports on 2026-11-27 that the larger download is incomplete. Full extent and completion fraction unknown.",
-      "endpoint_eligibility": "No missing-future or mask-pair filter. Same observed clean eligibility both arms. Invalid blocks only disable explicit facts; do not drop remaining valid queries.",
+      "endpoint_eligibility": "Common raw source law conditioned on each task’s prespecified support; clean eligibility requires a supported legal query, masked eligibility a legal nonoverlapping pair, and description all 18 labels and required boundaries. Identical within-task pools across arms, no future filter. Invalid blocks disable only explicit facts.",
       "qualification_note": "Month windows only. Three training-era files verified. Historical calendar, units, as-of, all periods and V13 open.",
       "input_clock": "Both input windows use the most recent scheduled slots including any ending at t, capped separately by view. Missing slots remain masked in place; no backfill.",
       "source_revision": "Keep source path/SHA, vintage, availability and units as provenance. Coalesce equal known physical fields, units and quality semantics on the observation key with all sources retained. Quarantine unresolved differences on the same observation. Sample ID separately binds the frozen data snapshot, processing protocol, contract and endpoint.",
@@ -920,7 +935,7 @@
       ],
       "unknown": "zero with nonvisible flag; artificial dependence includes fallback-recomputed fields",
       "contract_lookup_embedding": false,
-      "artificial_flags_current": "zero in both current clean arms",
+      "artificial_flags_current": "zero on full inputs; masked inputs mark every affected field from raw-minute support before computing aggregates, scales, first Value and P3 summaries",
       "embedding_sum": "Linear(28,768)(numeric and flags) + Linear(64,768)(GELU(Linear(8,64)(time/coverage))) + period embedding; no row-index positional embedding. Append one learned terminal state."
     },
     "backbone": {
@@ -1023,31 +1038,36 @@
         "out": "Biased Linear(256,7) after block 4; relative close, body, upper/lower wick, log1p of V/startOI/endOI. Current close coordinate a=0; differences are computed from predictions. Absolute prices use C_t strictly for restoration.",
         "query_contract": "Direct P2/invalid/current per-query; P3 valid past gathers a canonical chronological group of 16, projects using raw facts from z, then selects requested slots. Singleton/permuted/duplicate queries have the same answer up to numerical tolerance.",
         "open": "Zero-capable/nonnegative direct-output transform, exp range, precision and physical thresholds are finalized in the release card."
-      }
+      },
+      "tasks": "One independently trained D per arm and seed, shared by clean and masked historical queries. Four FiLM blocks in series followed by ONE seven-field output. A is a separate direct current-description head."
     },
     "matrix": [
       {
         "id": "P2",
         "structure": "common relation/first Value backbone, h768 and direct FiLM",
-        "E_and_D_loss": "L_clean",
+        "E_and_D_loss": "E receives L_clean + 0.25 L_mask + 0.10 L_desc; D receives L_clean + 0.25 L_mask.",
         "seeds": [
           42,
           43
-        ]
+        ],
+        "description_head_loss": "A receives 0.10 L_desc from clean z only.",
+        "supervision_protocol": "current_plan.training_tasks.active_pretraining"
       },
       {
         "id": "P3",
         "structure": "common backbone, fixed160+learned608, same FiLM then block adjustment",
-        "E_and_D_loss": "L_clean on physically adjusted predictions; no gradient to observed facts",
+        "E_and_D_loss": "E receives L_clean + 0.25 L_mask + 0.10 L_desc; D receives L_clean + 0.25 L_mask.",
         "seeds": [
           42,
           43
-        ]
+        ],
+        "description_head_loss": "A receives 0.10 L_desc from clean z only.",
+        "supervision_protocol": "current_plan.training_tasks.active_pretraining"
       }
     ],
-    "comparison_scope": "One comparison: full memory allocation + consistent readout. Shared backbone, coordinate phase and clean-only objective; no component, multiscale or superiority claim without experiments.",
+    "comparison_scope": "Whole memory allocation and corresponding readout under identical three-task training, paired initializations and task draws. With no clean-only arm this comparison cannot isolate the benefit of multitask training.",
     "loss": {
-      "lambda_mask": 0,
+      "lambda_mask": 0.25,
       "lambda_future": 0,
       "clean_past": 0.9,
       "clean_current": 0.1,
@@ -1079,7 +1099,13 @@
         "price": 0.6,
         "shape": 0.2,
         "activity": 0.2
-      }
+      },
+      "lambda_clean": 1.0,
+      "lambda_current_description": 0.1,
+      "joint": "L_clean + 0.25 L_mask + 0.10 L_desc",
+      "task_reduction": "mean separately across 32 clean, 16 masked, 16 description samples then weight task means; nested clean groups sum to one inside L_clean",
+      "coefficient_status": "proposal to lock before observing candidate scores",
+      "description": "18 equally weighted training-scaled SmoothL1 beta1 values per clean description example"
     },
     "sampling": {
       "rho": "uniform eligible product -> uniform contract -> uniform nonempty year-month -> uniform endpoint",
@@ -1111,26 +1137,25 @@
       "adjacent": "Assign a strictly-past change to its later query, append the immediately preceding calendar slot of the same period within the observed input. Require both valid closes and a proven consecutive link. Use predicted differences. No jumping over missing slots.",
       "evaluation": "all declared legal intervals at fixed endpoints, separately current/age/view/field",
       "within_age_group": "Uniform across eligible scheduled positions with at least one valid historical supervision term. Build w from the nonempty views/age groups, independently of the arm.",
-      "field_exposure": "Report term coverage, realized exposure and the per-endpoint probability (1-Z_f)^64 of missing the term in all draws."
+      "field_exposure": "Report term coverage, realized exposure and the per-endpoint probability (1-Z_f)^64 of missing the term in all draws.",
+      "task_distribution": "For support S_k and group-balanced base endpoint law rho, use rho(t)*1[t in S_k] / sum_s rho(s)*1[s in S_k]. Freeze each support, report its product/time coverage and exposure; legal endpoints may appear across pools. The 64-query law applies only to clean history.",
+      "task_examples_per_update": {
+        "complete_history_readback": 32,
+        "masked_history_completion": 16,
+        "current_description": 16
+      }
     },
     "mask": {
-      "active": false,
-      "history": "76b6ad2f758346caa5d2437f3b269106badf6713; clean+0.25mask candidate archived, not queued",
-      "future_reentry": "Any new masked experiment must remove all target dependencies from features, summary, masks and decoder-side information.",
-      "conditional_design": {
-        "status": "documented_conditional_not_in_first_batch",
-        "active_in_first_batch": false,
-        "adds_runs_to_current_budget": 0,
-        "question": "On one fixed state architecture, does adding masked historical completion improve clean-history retention and the frozen uses?",
-        "precondition": "A residual/local-readback deficit on development data and sufficient visible context after masking; independent version, own frozen protocol and budget.",
-        "reference": "Same fixed state architecture, mask-eligible endpoints, common initialization and clean supervision; clean loss only.",
-        "combined": "Two views at one endpoint: full H and separately masked H. Reuse the same E and D in both forwards. Joint loss = L_clean + weight * L_mask, one combined backward and optimizer step.",
-        "mask_weight_if_activated": 0.25,
+      "active": true,
+      "history": "P1 used joint historical objectives in the 76b6ad2 design; both arms now use masked history in every update, superseding the unexecuted clean-only P2/P3 protocol at 8a15f57c6e1780e97b3cb17d236593d416aad87a.",
+      "active_design": {
+        "active_in_first_batch": true,
+        "weight": 0.25,
+        "task_examples_per_update": 16,
         "gradient_targets": [
           "encoder E",
-          "history decoder D"
+          "shared history decoder D"
         ],
-        "forecast_encoder_gradient": false,
         "source_mask": {
           "view_minutes": 1,
           "lookback_slots": 256,
@@ -1138,9 +1163,9 @@
           "segment_minutes": 8,
           "sampling": "Uniform legal unordered nonoverlapping pairs of continuous segments within qualified trading sessions, strictly before t; keep the current anchor visible."
         },
-        "targets": "16 hidden past 1-minute intervals, equal across prequalified targets. Price/shape/activity weights as current_plan.loss.past_groups, valid terms fixed before sampling; truth enters loss only.",
-        "dependency_closure": "Apply mask to raw-minute dependencies before deriving views. Propagate to affected OHLCV/OI aggregates, preceding-close links, rolling scales, flags and readable metadata. Fixed train fallback where required. Recompute P3 facts from masked visible input only: invalid block = four zeros and flag 0, direct readout. Counterfactual hidden-value changes under fixed visible history/mask/eligibility preserve masked input, flags, summaries and decoder metadata.",
-        "decision": "Assess improvement in complete-input history fidelity with near-shape, activity and frozen-description protections; report frozen-order performance, masked error and actual extra compute separately. Sign comparison criteria before any independent run."
+        "targets": "16 hidden past 1-minute intervals, equal across prequalified targets. Price/shape/activity weights as current_plan.loss.past_groups, valid terms fixed before sampling; truth enters loss only. Attribute an adjacent change to its hidden later query; append a qualified preceding query only for that difference. Average supported hidden positions within each field then renormalize supported siblings. Predeclare support using availability and calendar, independent of hidden market values.",
+        "dependency_closure": "Apply mask to raw-minute dependencies before deriving views. Propagate to affected OHLCV/OI aggregates, preceding-close links, rolling scales, flags and readable metadata. Fixed train fallback where required. Recompute P3 facts from masked visible input only: invalid block = four zeros and flag 0, direct readout. Counterfactual hidden-value changes under fixed visible history/mask/eligibility preserve masked input, flags, summaries and decoder metadata. All market Values originate in this view, including first-layer Value. An observed later interval up to t may be used after removing hidden dependencies; target-side prior close is never provided as an input.",
+        "evaluation": "On held-out eligible endpoints use paired, fixed masks; report per-field and per-session error, coverage and cost separately from R/U. Multiple true missing paths can give the same masked view."
       }
     },
     "optimizer": {
@@ -1158,7 +1183,7 @@
       "limits": "AdamW decoupled parameter shrinkage not global optimum guarantee; record g_task dot actual_delta_theta alongside gradient cosines, with first-order/remainder limits",
       "effective_batch": 64,
       "decay_groups": "matrices and learned embeddings decay; biases, norm and alpha scalars no decay",
-      "gradient_accumulation": "same effective endpoints and weighting, one optimizer update after accumulation; clip encoder and head separately"
+      "gradient_accumulation": "Accumulate on unchanged E/D/A parameters, weighing each clean example by 1/32, each masked by .25/16, each description by .10/16. Clip each of E,D,A at norm 1 after complete gradient accumulation, then one AdamW and one scheduler step. A uses the main schedule."
     },
     "split_proposal": {
       "train": "2016-2023",
@@ -1190,25 +1215,32 @@
       "default_history_refit": false,
       "closed_form_order_fits": 6,
       "pca_fits": 2,
-      "linear_history_decoder_families": 2
+      "linear_history_decoder_families": 2,
+      "task_examples_per_update": {
+        "complete_history_readback": 32,
+        "masked_history_completion": 16,
+        "current_description": 16
+      },
+      "joint_description_heads_included_in_encoder_runs": 4,
+      "meaning_of_current_head_fits": "Seven fresh post-freeze fits; separate from the four A modules already inside the four main training runs."
     },
     "fairness": {
       "matched": [
         "raw observations, total state FP32 words, query metadata and use-head side information",
-        "identical backbone and FiLM architectures, initialization paired by seed for corresponding tensors; independent E and D weights per arm and seed",
-        "clean endpoints/queries/loss, paired seeds, N updates/effective batch",
+        "identical backbone, FiLM and description-head structures; paired initialization for homologous parameters; independent E/D/A parameters for each arm and seed",
+        "same task pools, endpoints, clean queries, mask positions, targets, weights, task counts, paired seeds and N optimizer updates",
         "standardization, selection opportunity and frozen-use labels"
       ],
       "not_matched": [
         "P3 deterministic facts vs learned coordinates",
         "mandatory within-block expansion/projection cost, actual gradient paths"
       ],
-      "claim": "paired whole allocation/readout comparison, not matched FLOPs"
+      "claim": "allocation plus matched readout comparison under the same multitask supervision; actual FLOPs and per-task gradients may differ"
     },
     "history_evaluation": {
       "primary": "deployed direct P2 vs deployed adjusted P3: whole-system fidelity",
       "R": "Final decoder, one half standardized relative-close MSE and one half adjacent-return MSE on all common eligible queries. For each term use its own complete support and renormalize endpoint weights rho over endpoints supporting that term. Report both coverages; if either is globally empty, R is unavailable.",
-      "conditional": "Trigger only on development data when both paired seeds meet the predeclared relative R gain and the overall U or any family exceeds its protected degradation. Then four frozen states each fit one fresh direct D256 with common protocol, at most four; report separately. No final holdout trigger.",
+      "conditional": "Trigger only on development data when both paired seeds meet the predeclared relative R gain and delivery seed 42 exceeds the protected degradation on overall U or any descriptor family. Then four frozen states each fit one fresh direct D256 with common protocol, at most four; report separately. No final holdout trigger.",
       "coherence": "same physical parent-child complete partitions on clean observed history; no latent equality or extra unobserved minute targets",
       "R_perp": "mean ||(I-UU.T)(a_hat-a)||^2/(14*s_price_period^2) on common valid blocks only; average blocks within valid view, views within endpoint, then renormalize rho over endpoints with support. Coverage and invalids separately, all in R.",
       "conditional_seed_scope": "Check R per paired seed; for U use the release seed 42 paired comparison at the prespecified guard thresholds.",
@@ -1219,7 +1251,13 @@
         "gap_classification": "A scheduled break in the historical calendar preserves the link when the same-contract previous close and next open are known in comparable units: log(O_next/C_prev) records even a large reopening jump. If scheduled bars are missing, first check known same-source cross-resolution connections. An added ratio between observed endpoints is a separately labelled span, not a one-minute move or a continuous-volatility warmup observation. Leave missing interiors unknown and separate contracts or unresolved quote regimes."
       },
       "matched_pca_interpretation": "History scores compare each state with its own deployed decoder. Claims about reusable learned coordinates also require the matched frozen order-readout protocol, as specified in acceptance.",
-      "absolute_limit_source": "Set absolute tolerances from the declared use and non-final qualification examples before candidate scores. The final holdouts only confirm the locked rules."
+      "absolute_limit_source": "Set absolute tolerances from the declared use and non-final qualification examples before candidate scores. The final holdouts only confirm the locked rules.",
+      "reconstruction_composition": {
+        "anchor": "reconstruction-implies",
+        "condition": "For the actually represented ordered history H and allowed side information M, D(z,M)=H implies f(D(z,M),M)=f(H,M) for every determined f on that support. Absolute price, arrival order and initial state must be available when f needs them.",
+        "approximation": "If max absolute log-close error <= epsilon over the same window including its start, max log drawdown error <= 2*epsilon. Extremum ordering need not be stable.",
+        "comparison": "Compare raw-rule truth, same-rule after complete-input reconstruction and direct A/fresh A-prime on common supported endpoints. No extra fitted head for rule evaluation. Report missing boundaries/coverage without leaking missing true values or changing primary R/U support."
+      }
     },
     "current_description": {
       "horizons_trade_minutes": [
@@ -1242,7 +1280,7 @@
         "qualified full calendar support, no unexpected-gap concatenation"
       ],
       "eligibility": "same complete-label subset for all representations, discrepancy from history inventory disclosed",
-      "encoder": "frozen z only",
+      "encoder": "Pretraining: E receives direct description gradient through A on clean z. Evaluation: fit fresh A-prime with E frozen.",
       "primary_head": [
         768,
         128,
@@ -1261,7 +1299,25 @@
       ],
       "fit_count": 7,
       "representations": "four neural states, PCA768, same160+PCA608, raw same-information input; width128, 18 outputs",
-      "primary": "U applies only to the defined 18 observed descriptors"
+      "primary": "U evaluates ease and held-out-sample generalization of 18 targets used during representation pretraining. The 37-minute order label is held out of pretraining. Primary U uses fresh probes; bundled A performance is reported separately.",
+      "pretraining_head": {
+        "shape": [
+          768,
+          128,
+          18
+        ],
+        "activation": "GELU",
+        "reads": "Only clean z. P2 uses h; P3 applies the same fixed training-derived fact scaling as the FiLM conditioning copy. No raw bars or per-target anchors.",
+        "seed": "paired with main arm at 42 or 43",
+        "optimizer": "current_plan.optimizer",
+        "weight": 0.1
+      },
+      "fresh_probe": {
+        "seed": 314,
+        "fit_count": 7,
+        "reads": "frozen z; independent fresh parameters, common width and budget across representations",
+        "optimizer": "current_plan.head_optimizer_defaults"
+      }
     },
     "head_optimizer_defaults": {
       "name": "AdamW",
@@ -1317,7 +1373,7 @@
         },
         {
           "name": "endpoint and block inventory",
-          "criteria": "per split/product/view and field: actual input/warmup, anchor-connectivity, calendar block ceiling and valid blocks, missing reasons, 37-minute subset and independent support; retain eligible individual targets"
+          "criteria": "per split/product/view and field: actual input/warmup, anchor-connectivity, calendar block ceiling and valid blocks, missing reasons, 37-minute subset and independent support; retain eligible individual targets; three task-specific support pools, legal mask pairs, closure counterfactual, required descriptor boundary and exposure"
         },
         {
           "name": "statistics and source oracle",
@@ -1345,7 +1401,7 @@
     "directions": {
       "priority1": "single bounded P2/P3 memory-allocation comparison (F01/F02/F04/F05/F10/F11)",
       "priority2": "diagnose uncovered details, ordered history and actual coarse/fine truth, no automatic second architecture",
-      "conditional": "old masked learning, recursive memory, signature, future or external factors remain unqueued",
+      "conditional": "recursive memory, signature, extra indicator/shape uses, future or external factors remain conditional",
       "architecture_design_history": {
         "roadmap_anchor": "architecture-decisions",
         "common_active": [
@@ -1391,6 +1447,10 @@
           {
             "commit": "e060ca98f660579f0784c9f72a2ead6f31f13502",
             "scope": "old executed decoder/pooling/two-write memory experiments and their reviews; baseline evidence, not current model runs"
+          },
+          {
+            "commit": "8a15f57c6e1780e97b3cb17d236593d416aad87a",
+            "scope": "unexecuted P2/P3 with clean-only history, conditional completion and post-freeze-only description"
           }
         ],
         "old_executed_experiments": [
@@ -1460,7 +1520,7 @@
         "packing": "One bounded layout: concatenate public, chronological scheduled slot IDs per view; current caps total 512. A record is [first_slot,last_slot,anchor], with the last slot specifying s and invalid addresses -1 for empty. Three FP32 words = 12 bytes per contiguous within-view range. Arbitrary noncontiguous or multiview components can require multiple records. M hard records reduce learned capacity by 3M inside 768 words (P2-style 768-3M, P3-style 160 fixed plus 608-3M learned). Freeze feasible M on non-final qualification data. If over cap, prefer latest end, then finer view, then fixed slot order; other runs use their normal readout. No external range table, truth lookup or free anchor side channel.",
         "absolute_interface": "Relative anchors recover prices with the ordinary public C_t and declared address/quote metadata. For price-self-contained z, budget C_t inside z as well or encode absolute anchors for required components; use a documented price unit/scale. Accurate C_t and exactly representable integer tick differences on a verified common grid allow a tick-exact anchor; test serialization and decoding. FP32 log does not promise bit-exact quotes.",
         "qualification": "Tabulate scheduled breaks, missing minute interiors with and without a proven price link, anchored-range count and weighted coverage per view/product/time. Choose M before final data or candidate scores based on target use and coverage.",
-        "evaluation": "Only if needed: hold the base architecture fixed, give the same observed anchors/addresses and price information to learn-only, explicit and analytic controls at matched total state size. Score anchor bars, other observed OHLC errors in ticks and P95, coverage/overflow, and two-query/block decode cost separately. Future masked variants recompute anchors from visible inputs. For residual-memory claims full-summary collision pairs must also match anchor values, addresses and empty slots.",
+        "evaluation": "Only if needed: hold the base architecture fixed, give the same observed anchors/addresses and price information to learn-only, explicit and analytic controls at matched total state size. Score anchor bars, other observed OHLC errors in ticks and P95, coverage/overflow, and two-query/block decode cost separately. If this conditional anchor variant is tested with the active mask task, recompute all anchors and addresses from visible inputs. For residual-memory claims full-summary collision pairs must also match anchor values, addresses and empty slots.",
         "additional_active_fits": 0
       }
     },
@@ -1503,6 +1563,16 @@
         "venue": "September 2026 preprint",
         "url": "https://arxiv.org/abs/2609.34507",
         "scope": "Geometry-sensitive continuous candlestick representation and diffusion forecasting; not evidence about a reusable historical state."
+      },
+      {
+        "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+        "url": "https://aclanthology.org/N19-1423.pdf",
+        "scope": "Appendix A.2 combines the averaged masked-LM and next-sentence losses in pretraining; analogy for joint objectives, not evidence for market weights."
+      },
+      {
+        "title": "A Generalist Agent",
+        "url": "https://arxiv.org/pdf/2205.06175",
+        "scope": "Section 2.3 mixes subsequences from different data sources in a training batch under shared parameters. No policy or action labels in Babel."
       }
     ],
     "block_memory": {
@@ -1527,7 +1597,7 @@
       ],
       "block_count": 32,
       "slot_order": "Enumerate exchange-calendar slots strictly ending before t from most recent; reserve maxima per view, do not extend the original observed caps (which include current); group consecutively. Chronological j=0..15 within group. Never compact missing slots.",
-      "eligibility": "Same contract, same qualified units, all 16 observed within shared input, reversible price/volume/OI features, 15 known consecutive same-period boundary-close links. Qualified calendar breaks and prescribed short session-tail intervals explicit. Current intervals always direct.",
+      "eligibility": "Same contract, same qualified units, all 16 observed within shared input, reversible price/volume/OI features, 15 known consecutive same-period boundary-close links. Qualified calendar breaks and prescribed short session-tail intervals explicit. Current intervals always direct. For masked examples all requirements apply to the visible view after raw-minute dependency removal. Never reuse a complete-input fact or its eligibility.",
       "invalid": "Four zero coordinates plus mask 0; all independently eligible observed targets remain in R and clean loss; report qualified fraction under fixed query measure per view, product, time and endpoint.",
       "columns_divisor": 4,
       "u1": [
@@ -1617,7 +1687,8 @@
       "rule": "Positive end-minus-start close predicts low first (-1), negative predicts high first (+1); zero uses train-majority and ties +1.",
       "score": "BA=mean class recall plus stratification by net return and realized vol, flat rates and class counts; task held out of encoder training, ridge uses training labels. Baselines paired on same support.",
       "matched_pairs": "Preselect qualified endpoints independent of model scores; at most the first eligible adjacent interior pair per endpoint in a common constant-basis quarter and coarse interval. Construct integer-tick opposite-extremum-order paths on same context and schedule; accept only fully legal pairs with flipped 37-close label, identical full serialized 160 prefix and identical all coarse OHLCV/OI. Recompute full feature/warmup inputs; report supported endpoints and rejection reasons. Existing frozen probe, high-first scored higher=1, tie=.5, reverse=0. Any deterministic function of equal summaries ties. Report paired simultaneous-market-block interval and compare to .5 independent of the natural BA test. No extra fitting.",
-      "pair_construction": "Earliest eligible adjacent pair in the most recent 37 one-minute closes, both in the same uniform basis quarter and with successor in same 5/15/60 parents. All three consecutive trading minutes observed active. Use max(other 35 closes)+one valid tick and min(other 35)-one valid tick, in opposite orders; recompute opens from prior closes and H/L from O/C for affected three minutes, other data and V/OI fixed. Enforce known tick/market limits and qualified support; skip unknowns. Reject on unequal 160 serialized coordinates, unequal parent observations or same order labels. At most one pair/endpoint."
+      "pair_construction": "Earliest eligible adjacent pair in the most recent 37 one-minute closes, both in the same uniform basis quarter and with successor in same 5/15/60 parents. All three consecutive trading minutes observed active. Use max(other 35 closes)+one valid tick and min(other 35)-one valid tick, in opposite orders; recompute opens from prior closes and H/L from O/C for affected three minutes, other data and V/OI fixed. Enforce known tick/market limits and qualified support; skip unknowns. Reject on unequal 160 serialized coordinates, unequal parent observations or same order labels. At most one pair/endpoint.",
+      "interpretation": "The 37-minute extreme-order label is withheld from E and checkpoint selection; correlated price and description signals are present. Probe fitted only after freezing."
     },
     "bounded_checks": {
       "scope": "Arithmetic only; train-era convenience sample, no model weights, no full data qualification or independent holdout use.",
@@ -1987,53 +2058,116 @@
           "restored_anchor": 100
         },
         "checks": "Both reopening and a missing-interval endpoint ratio can have the same numeric value but different support. Fraction arithmetic confirms that recentering preserves within-run differences and both zero-sum price contrasts on a complete 16-bar block, and a fixed three-word record costs 12 bytes."
+      },
+      "joint_tasks_20261127": {
+        "scope": "CPU arithmetic on synthetic numbers, no training",
+        "steps": "For 32/16/16 deterministic task examples and weights 1, 1/4, 1/10, summing per-example gradients divided by their respective task counts recovers the weighted sum of the three mean gradients for E,D,A under uneven microbatches. Clipping is after accumulation.",
+        "swapped_extremes_37": {
+          "shared_closes": 35,
+          "common_close": 100,
+          "swapped_adjacent_closes": [
+            101,
+            99
+          ],
+          "squared_error_sum": 8,
+          "rmse": "sqrt(8/37)",
+          "label_flips": true
+        },
+        "gradient_check": {
+          "parameter_groups": 3,
+          "uneven_microbatch_sizes": [
+            1,
+            11,
+            3,
+            21,
+            11,
+            17
+          ],
+          "method": "rational arithmetic; three analytic derivatives matched exact symmetric differences of a scalar quadratic joint objective"
+        },
+        "drawdown_check": {
+          "log_paths": "four log closes on {-1,0,1} with independently chosen perturbations from the same set",
+          "pairs_tested": 6561,
+          "worst_absolute_error": 2,
+          "theorem": "at most 2 times maximum absolute log-close error"
+        }
       }
     },
     "training_tasks": {
       "roadmap_anchors": {
         "overview": "training-tasks",
         "active_update": "joint-update",
-        "conditional_two_task_design": "masked-multitask"
+        "active_mask_and_tasks": "masked-multitask",
+        "reconstruction_scope": "reconstruction-implies"
       },
       "active_pretraining": {
         "arms": [
           "P2",
           "P3"
         ],
-        "input_views_per_endpoint": [
-          "complete observed history"
-        ],
         "input_tasks": [
-          "complete_history_readback"
+          "complete_history_readback",
+          "masked_history_completion",
+          "current_description"
         ],
-        "targets": [
-          "past price path, adjacent change, shape and activity",
-          "current shape and activity for legal bars ending exactly at t"
-        ],
+        "effective_batch_unit": "64 task examples per optimizer update, from the first through the last; endpoints may repeat across task pools",
+        "task_examples_per_update": {
+          "complete_history_readback": 32,
+          "masked_history_completion": 16,
+          "current_description": 16
+        },
+        "task_mean_coefficients": {
+          "complete_history_readback": 1.0,
+          "masked_history_completion": 0.25,
+          "current_description": 0.1
+        },
+        "views": {
+          "complete_history_readback": "full H_t",
+          "masked_history_completion": "masked H_t, features and summaries rebuilt",
+          "current_description": "full H_t"
+        },
         "loss_definition": "current_plan.loss",
         "trainable_modules": [
           "encoder E",
-          "history decoder D"
+          "history decoder D",
+          "current description head A"
         ],
-        "one_update": "Pool legal queries, weight past and current then backpropagate once per effective batch. Clip E and D separately and make one optimizer update; P3 physical readout uses within-state facts, without trainable summary parameters."
+        "gradient_targets": {
+          "complete_history_readback": [
+            "E",
+            "D"
+          ],
+          "masked_history_completion": [
+            "E",
+            "D"
+          ],
+          "current_description": [
+            "E",
+            "A"
+          ]
+        },
+        "one_update": "Compute all three means on the same parameters, weight and accumulate, then clip each module once and take one optimizer/scheduler step. P3 visible facts have no trainable parameters.",
+        "deployment": "Use the full available history to emit z."
       },
       "frozen_current_description": {
-        "reads": "z only",
+        "reads": "frozen z only for state probes; an equivalent raw-input reference is also fitted",
         "trainable_modules": [
-          "current description MLP"
+          "fresh description MLP A-prime"
         ],
         "encoder_gradient": false,
-        "definition": "current_plan.current_description"
+        "definition": "current_plan.current_description",
+        "interpretation": "known tasks on held-out market samples"
       },
       "frozen_order": {
-        "reads": "z only",
+        "reads": "frozen z only for state probes",
         "trainable_modules": [
-          "order ridge readout fitted in closed form"
+          "fresh closed-form ridge readout"
         ],
         "encoder_gradient": false,
-        "definition": "current_plan.order_probe"
+        "definition": "current_plan.order_probe",
+        "interpretation": "task label unseen during pretraining"
       },
-      "masked_history": "current_plan.mask.conditional_design",
+      "masked_history": "current_plan.mask.active_design",
       "future_prediction": {
         "active_in_first_batch": false,
         "encoder_gradient": false,
