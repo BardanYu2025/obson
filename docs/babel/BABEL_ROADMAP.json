@@ -419,7 +419,7 @@
       "F11",
       "V13"
     ],
-    "action": "优先按生效日核对预留品种及拟交付时期的交易时段和量、仓各自单位，再核当时可选的合约、三种任务共同样本和独立时间支持。核定可承诺的用途后锁误差和预算。指数另批。",
+    "action": "把两套模型共用的样本范围、用途误差和成本写入同一份首批实验说明。先核实拟交付范围的交易时段、量仓单位、合约在当时是否可选及三类任务的支持，再锁物理误差、独立市场时间和预算。未覆盖的品种、指数和额外顺序结论各自保留证据缺口。",
     "ready_entrypoint": null,
     "old_commands_active": false,
     "automatic_reruns": false,
@@ -687,7 +687,8 @@
         }
       ],
       "experiment_analysis": "docs/babel/BABEL_EXPERIMENT_WORKFLOW.md#analysis-principles",
-      "user_replies": "docs/babel/BABEL_EXPERIMENT_WORKFLOW.md#reply-principles"
+      "user_replies": "docs/babel/BABEL_EXPERIMENT_WORKFLOW.md#reply-principles",
+      "first_batch_decision_anchor": "first-batch-decision"
     }
   },
   "workflow": "docs/babel/BABEL_EXPERIMENT_WORKFLOW.md",
@@ -2637,6 +2638,14 @@
         "encoder_gradient": false,
         "status": "conditional downstream use, initially frozen"
       }
+    },
+    "first_batch_decision": {
+      "anchor": "first-batch-decision",
+      "question": "在同一状态容量、相同可见行情和同一步三任务训练下，哪套状态能够达到历史与当前描述的使用要求，给已知摘要留空间是否值得？",
+      "study_unit": "两种状态、匹配对照与配对种子作为一批研究，共用获准后冻结的一个实验版本，各次运行独立记录。",
+      "ready_for_common_run_card": "按任务核实共同样本、源单位、价格锚与可见范围。完整回读、遮挡填空和全项描述均须有足够支持。在候选成绩出现前固定交付范围、绝对误差、保护项、独立时间支持和资源。无法支持核心问题时列明缺口并暂停。",
+      "claim_specific_evidence": "窄范围内仍可回答的问题与未达到原定覆盖的用途分别报告。指数资料和相同摘要及描述下顺序相反的配对只影响对应结论。核心历史或完整描述缺证据时不能签发相应用途。",
+      "result_actions": "按 current_plan.acceptance 处理可交付、替换、局部取舍、明确失败和证据不足。开发集符合 current_plan.history_evaluation.conditional 时至多一批同读头定位，结论单列。重开依据与成果备份执行 operating_principles.decision_unit 和实验独立目录规则。"
     }
   },
   "route_audit_20261126": {
