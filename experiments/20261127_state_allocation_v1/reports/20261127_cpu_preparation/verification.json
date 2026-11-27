@@ -1,0 +1,214 @@
+{
+  "stage": "Whole uploaded-month snapshot through the released prepare command; CPU arithmetic, no neural weights.",
+  "code_commit": "d4ad07f39eb6737fd31b430b145e4b730959b22f",
+  "release_sha256": "9b16baf40c2ccd628c5dbcd71ea3fc8225dd62057ce2680a48463749472848eb",
+  "snapshot_sha256": "e7061af7eebd15934a6f3d2f7b842040a7a8d8dfba8f147c2cef9e06359d64de",
+  "from_git_command": "bash scripts/autodl.sh prepare --data-root <tqdata_2015> --cache <new cache>",
+  "source_files": 2382,
+  "products": 44,
+  "raw_minute_rows": 46224030,
+  "hash_verified_files_in_prepared_shards": 16674,
+  "shard_file_bytes": 4534303832,
+  "cache_fingerprints": {
+    "catalogue.json": "5f04cc148cc75d2b761f6a39d3d92b17e4c6da869f242b7e515d8a53284e7f90",
+    "scales.json": "66c3da07d9992ff37504794cd5fa4972f06239076f3da0cc0632ab477326fc8f",
+    "coverage.json": "67585de6778263c0fabf5d7b690820bcb0aab1e8f27a83aa8dfea9bef0a6b8c9"
+  },
+  "sample_columns": [
+    "clean",
+    "mask",
+    "complete_18_in_source_units",
+    "nonflat_order37"
+  ],
+  "splits": [
+    "train",
+    "validation",
+    "development",
+    "later",
+    "held_train_era",
+    "held_validation_era",
+    "held_development_era",
+    "held_later"
+  ],
+  "by_split": [
+    [
+      29707920,
+      29683783,
+      450142,
+      24229264
+    ],
+    [
+      3927528,
+      3923848,
+      66230,
+      3203552
+    ],
+    [
+      6832578,
+      6826754,
+      120028,
+      5565971
+    ],
+    [
+      459779,
+      459267,
+      9768,
+      372355
+    ],
+    [
+      3115875,
+      3112595,
+      0,
+      2575847
+    ],
+    [
+      479884,
+      479308,
+      0,
+      395990
+    ],
+    [
+      806615,
+      805847,
+      0,
+      663343
+    ],
+    [
+      48244,
+      48196,
+      0,
+      39547
+    ]
+  ],
+  "all_splits": [
+    45378423,
+    45339598,
+    646168,
+    37045869
+  ],
+  "products_with_complete_18": [
+    "ag",
+    "au",
+    "sc"
+  ],
+  "old_audit_comparison": {
+    "old_index_manifest_sha256": "cfb804704dcff8b8ef41a17ba9168dd173d1e97d5ee1e210320063a36e2e1b4f",
+    "source_index_hashes_checked": 2382,
+    "source_split_cells": 19056,
+    "mismatch_cells": 0,
+    "matched_columns": [
+      "complete_18_in_source_units",
+      "nonflat_order37"
+    ],
+    "oracle": "old all18_strict & label18_in_split & input_split_safe; old order37 in {1,2} & strict37 & label37_in_split & input_split_safe"
+  },
+  "sample_check": {
+    "seed": [
+      701,
+      "split",
+      "task"
+    ],
+    "rows": [
+      {
+        "split": 0,
+        "task": 0,
+        "source": 2057,
+        "row": 5862,
+        "market_tokens": 512,
+        "valid_blocks": 22
+      },
+      {
+        "split": 0,
+        "task": 1,
+        "source": 2208,
+        "row": 3052,
+        "market_tokens": 509,
+        "valid_blocks": 13
+      },
+      {
+        "split": 0,
+        "task": 2,
+        "source": 833,
+        "row": 58686,
+        "market_tokens": 512,
+        "valid_blocks": 22
+      },
+      {
+        "split": 0,
+        "task": 3,
+        "source": 1011,
+        "row": 11361,
+        "market_tokens": 512,
+        "valid_blocks": 23
+      },
+      {
+        "split": 1,
+        "task": 0,
+        "source": 2243,
+        "row": 13131,
+        "market_tokens": 512,
+        "valid_blocks": 19
+      },
+      {
+        "split": 1,
+        "task": 1,
+        "source": 1620,
+        "row": 30375,
+        "market_tokens": 512,
+        "valid_blocks": 14
+      },
+      {
+        "split": 1,
+        "task": 2,
+        "source": 2068,
+        "row": 14146,
+        "market_tokens": 512,
+        "valid_blocks": 22
+      },
+      {
+        "split": 1,
+        "task": 3,
+        "source": 843,
+        "row": 23454,
+        "market_tokens": 512,
+        "valid_blocks": 21
+      },
+      {
+        "split": 2,
+        "task": 0,
+        "source": 1502,
+        "row": 13964,
+        "market_tokens": 512,
+        "valid_blocks": 19
+      },
+      {
+        "split": 2,
+        "task": 1,
+        "source": 1843,
+        "row": 12606,
+        "market_tokens": 512,
+        "valid_blocks": 16
+      },
+      {
+        "split": 2,
+        "task": 2,
+        "source": 2075,
+        "row": 16375,
+        "market_tokens": 512,
+        "valid_blocks": 22
+      },
+      {
+        "split": 2,
+        "task": 3,
+        "source": 1353,
+        "row": 17265,
+        "market_tokens": 512,
+        "valid_blocks": 19
+      }
+    ],
+    "visible_price_queries": 2430,
+    "max_abs_visible_minus_source_log_close": 6.802404507733062e-10,
+    "neural_forward_calls": 0
+  },
+  "pending": "Dated formal unit/calendar/contract scope, CUDA preflight, physical limits, budgets and actual P2/P3 fits."
+}

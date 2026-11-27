@@ -766,7 +766,7 @@
     },
     "data": {
       "status": "open",
-      "evidence": "月份合约严格全 18 项在清除跨区后有 646,168 个来源单位端点，五个预留品种为零。跨段候选与价格专用标签另列。",
+      "evidence": "首版 prepare 从完整来源快照生成共同输入和训练尺度。2,382 份源文件的完整描述及自然顺序资格在 19,056 个文件与分区组合上，与先前封存索引逐格一致。",
       "remaining": "逐生效日核交易时段、成交与持仓各自的口径、静止行情与合约当时可选范围。指数另批。"
     },
     "engineering": {
@@ -2708,7 +2708,15 @@
         "target GPU preflight and measured resource budget",
         "matched-pair attribution and simultaneous interval/conditional refit if triggered",
         "V13 independent confirmation and off-machine weights"
-      ]
+      ],
+      "cpu_preparation_receipt": {
+        "report": "experiments/20261127_state_allocation_v1/reports/20261127_cpu_preparation/verification.json",
+        "release_commit": "d4ad07f39eb6737fd31b430b145e4b730959b22f",
+        "prepared_from_all_month_files": 2382,
+        "full18_train_source_units": 450142,
+        "confirmed_source_split_cells": 19056,
+        "real_neural_executions": 0
+      }
     }
   },
   "route_audit_20261126": {
