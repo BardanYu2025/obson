@@ -1,0 +1,17 @@
+{
+  "schema": "babel.experiment.release.v1",
+  "id": "20261127_history_qualification_v1",
+  "files": {
+    "README.md": "7fca3ac3dede683bc439acab9f317dd8d9c4e05413957587446990f2a2a693c7",
+    "configs/protocol.json": "eeafe01ce50d00144b669aff5a472a26fa45aae492a3e7615c687b17ec4aaacd",
+    "experiment.json": "2b8cdd88cd7f749044a1d0d4ae147e6d254f78072052220d86cd74d9c8e3ff0f",
+    "requirements.lock": "e8ec0d01ee658c70de85b7b3f473045587b2291824003f3f135ac907db983c7d",
+    "scripts/audit.sh": "9d83f6ab41f5c06f2b63851a3c0bbd3bade38b4e41cfe843a296f766f3986fd8",
+    "src/lookup.py": "22fb3c90049c50e885ef9e63e5fd0d2a7806fe89b079ddd7ed8003f411a74bba",
+    "src/order_pairs.py": "66aac2c8bc6792344b4a1e1ac55a81e1099fcbb6b808747d07157a961fdd6a18",
+    "src/qualification.py": "192016d8798171f08671796fdfe229f075822cd65c65117e4421bdab1b7bd1c9",
+    "src/run_audit.py": "6139cde0b1b44428d62ff6e12e8b1179268f1a1528c1e91ebe32906f11888dcb",
+    "tests/test_qualification.py": "a477177eecacc476a67872e0b9abe7140d9187bb855d484876c1fa1b0fa575fd"
+  },
+  "reports_at_release": {}
+}

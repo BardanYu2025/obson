@@ -1,0 +1,9 @@
+{
+  "schema": "babel.experiment.v1", "id": "20261127_history_qualification_v1", "kind": "data_audit",
+  "status": "released", "task_ids": ["F01","F02","F04","F05","F10","F11","V13"],
+  "predecessor": {"commit": "c62f8d05036ca6fcb94bbdb04ce0d197565b2fdc","scope": "qualification question and design, standalone new CPU implementation; no code copied from prior experiments"},
+  "entrypoints": {"audit":"scripts/audit.sh","lookup":"src/lookup.py"},
+  "source_files":["src/qualification.py","src/order_pairs.py","src/run_audit.py","src/lookup.py"],
+  "data_manifests":["configs/protocol.json"], "ready_for_execution":true,
+  "scientific_status":"completed source batch qualification only; no neural weights or training"
+}
