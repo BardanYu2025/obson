@@ -1,9 +1,11 @@
 # Babel 当前研究资料
 
-第一次读，先看[你要的能力、首批怎么验](BABEL_ROADMAP.md#requirement-fit)，再看[四个模型方案与两次比较](BABEL_ROADMAP.md#model-recipes)。P0、P1 是上一版，P2、P3 是当前要比较的两套方案。
+第一次读，先看已经做到哪一步，再看每个研究问题的含义和下一步的交付物。[已完成的工作](BABEL_ROADMAP.md#current-review) · [研究编号速查](BABEL_ROADMAP.md#research-questions) · [实际工作顺序](BABEL_ROADMAP.md#work-sequence)
+
+P0、P1 是上一版的模型方案，P2、P3 是当前要比较的两套方案。[四个模型方案](BABEL_ROADMAP.md#model-recipes) · [首批要交付的能力](BABEL_ROADMAP.md#requirement-fit)
 
 - 想顺着一个样本读，可以依次看[输入哪些 K 线](BABEL_ROADMAP.md#input-views)、[模型总图](BABEL_ROADMAP.md#model-architecture)、[每次更新怎样混合三种任务](BABEL_ROADMAP.md#training-tasks)和[怎样验收](BABEL_ROADMAP.md#delivery-criteria)。
-- 想了解已经下载的行情能做什么，看[月份合约资格报告](../../experiments/20261127_history_qualification_v1/reports/completed_months_20261127/qualification.md)和[各品种可用数量](../../experiments/20261127_history_qualification_v1/reports/completed_months_20261127/by_product.md)。价格链、分类和顺序的样本已核对。[现有证据和下一步](BABEL_ROADMAP.md#current-review)
+- 想了解已经下载的行情能做什么，看[月份合约资格报告](../../experiments/20261127_history_qualification_v1/reports/completed_months_20261127/qualification.md)和[各品种可用数量](../../experiments/20261127_history_qualification_v1/reports/completed_months_20261127/by_product.md)。价格链、分类和顺序的样本已核对。[下一份样本范围表](BABEL_ROADMAP.md#next-deliverable)
 - 想查具体用途，看[价格能重建到哪里](BABEL_ROADMAP.md#reconstruction-evidence)、[重建后哪些问题可以直接计算](BABEL_ROADMAP.md#reconstruction-implies)、[缺失行情的价格锚点](BABEL_ROADMAP.md#historical-price-anchors)或[行情分类与技术形态](BABEL_ROADMAP.md#technical-patterns)。
 
 路线图第 0～9 节和 [JSON](BABEL_ROADMAP.json) 的 `current_plan` 记录 `codex/babel-next` 的现行方案。第 10 节保留带日期的历史审计。

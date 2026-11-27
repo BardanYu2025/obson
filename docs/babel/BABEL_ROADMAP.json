@@ -106,6 +106,7 @@
   "future_branches": [
     {
       "id": "F01",
+      "reader_question": "每一步怎样混训三项任务",
       "title": "从头混合训练与完整历史覆盖",
       "current_status": "design_active",
       "current_role": "两组从第一次更新起就用相同的回读、填空、行情描述样本和损失。P3 的额外校正只增加内部查询。",
@@ -116,6 +117,7 @@
     },
     {
       "id": "F02",
+      "reader_question": "一个状态看多远、看多细",
       "title": "可变历史、长短状态与在线记忆",
       "current_status": "design_active_with_conditional_extensions",
       "current_role": "有名义时间地址的多尺度窗口、近远记忆分配；递归条件保留。",
@@ -126,6 +128,7 @@
     },
     {
       "id": "F03",
+      "reader_question": "新来一根 K 线后怎样保留共同历史",
       "title": "重叠窗口共同历史与逐bar状态增量",
       "current_status": "retained_not_queued",
       "current_role": "旧共同内容配方已收束；重叠历史/状态增量假设保留",
@@ -136,9 +139,10 @@
     },
     {
       "id": "F04",
+      "reader_question": "同段行情在不同周期能否对齐",
       "title": "15/30/60跨分辨率共同内容",
       "current_status": "design_active_with_conditional_extensions",
-      "current_role": "共同分钟支持、嵌套真值验证；已观察的同周期块有确定性内容约束。",
+      "current_role": "首批用同源 1、5、15、60 分钟视图核对共同区间的聚合真值，已观察的同周期块有确定性内容约束。原题名中的 30 分钟线也可由同一来源聚合。",
       "implementation": "not_started_for_new_design",
       "execution": "not_started_for_new_design",
       "conclusion": "new_design_unverified; historical_results_preserved_in_archive",
@@ -146,6 +150,7 @@
     },
     {
       "id": "F05",
+      "reader_question": "模型怎样分配有限的记忆容量",
       "title": "宽度、层数、头数与信息组织",
       "current_status": "design_active",
       "current_role": "P2 自由学习与 P3 160 个摘要/有效位加 608 学习坐标，单一有界对照。",
@@ -156,6 +161,7 @@
     },
     {
       "id": "F06",
+      "reader_question": "真实新 K 线到来后怎样更新预测",
       "title": "接收真实新bar后刷新状态，再做下一步预测",
       "current_status": "retained_conditional_not_current_stage",
       "current_role": "合格状态后，接收真实新bar和当时可得外部因子的刷新预测；当前不安排",
@@ -166,6 +172,7 @@
     },
     {
       "id": "F07",
+      "reader_question": "没有新行情时怎样逐步推演未来",
       "title": "无新行情的未来状态自由自回归",
       "current_status": "retained_conditional_not_current_stage",
       "current_role": "无未来真值的自由路径/真实未来状态研究条件保留；不是当前表示门槛",
@@ -176,6 +183,7 @@
     },
     {
       "id": "F08",
+      "reader_question": "预测误差要不要参与训练编码器",
       "title": "预测目标联合更新编码器",
       "current_status": "retained_conditional_not_current_stage",
       "current_role": "未来目标联合更新编码器条件保留；当前两配方均无未来，不回答本编号",
@@ -186,6 +194,7 @@
     },
     {
       "id": "F09",
+      "reader_question": "怎样区分趋势与噪声、估计未来分布",
       "title": "趋势/残差分解与概率未来、短期噪声",
       "current_status": "retained_conditional_not_current_stage",
       "current_role": "概率不确定性及外部背景用途保留；不作为当前编码器训练或验收",
@@ -196,6 +205,7 @@
     },
     {
       "id": "F10",
+      "reader_question": "价格、成交量和持仓量保留多少",
       "title": "价量/持仓联合状态与更细交易行为",
       "current_status": "design_active",
       "current_role": "非负成交总量和持仓起末约束；影线、量仓原单位与困难组各自评分。",
@@ -206,6 +216,7 @@
     },
     {
       "id": "F11",
+      "reader_question": "冻结后的状态能做什么、何时交付",
       "title": "冻结用途、重建阶段退出与可用模型交付",
       "current_status": "design_active",
       "current_role": "在新行情检验历史和已学描述，用未教的顺序另检复用，按既有条件独立确认与离机恢复。",
@@ -216,6 +227,7 @@
     },
     {
       "id": "F12",
+      "reader_question": "技术指标与辅助监督能否改善表征",
       "title": "指标上下文、PCA教师、渐进监督和影线保真",
       "current_status": "retained_not_queued",
       "current_role": "指标输入、PCA 教师、渐进监督与影线配方条件保留。本轮训练集拟合的 PCA 仅作表示对照。",
@@ -411,7 +423,9 @@
     "ready_entrypoint": null,
     "old_commands_active": false,
     "automatic_reruns": false,
-    "qualification_report": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/qualification.md"
+    "qualification_report": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/qualification.md",
+    "deliverable_zh": "按品种、时期、用途列明可正式检验、仅作诊断和待补证据的范围。",
+    "roadmap_anchor": "next-deliverable"
   },
   "active_training_budget": {
     "authorized_cuda_runs_now": 0,
@@ -594,7 +608,7 @@
     },
     "current_review_anchor": "current-review",
     "reader_guide": {
-      "roadmap_anchor": "model-recipes",
+      "roadmap_anchor": "current-review",
       "predecessor": {
         "commit": "76b6ad2f758346caa5d2437f3b269106badf6713",
         "markdown_source": "https://github.com/BardanYu2025/obson/blob/76b6ad2f758346caa5d2437f3b269106badf6713/docs/babel/BABEL_ROADMAP.md#L34-L43",
@@ -619,12 +633,42 @@
       "current_matrix": "current_plan.matrix",
       "relationship": "Both current arms inherit P1 interval and first-Value paths and use the same three tasks each update. The comparison concerns memory allocation plus readout. P0/P1 and the superseded full-history-only P2/P3 protocol each have immutable source records.",
       "first_read_anchors": [
+        "current-review",
+        "research-questions",
+        "work-sequence",
         "input-views",
         "model-architecture",
         "training-tasks",
         "delivery-criteria"
       ],
-      "requirements_anchor": "requirement-fit"
+      "requirements_anchor": "requirement-fit",
+      "model_recipes_anchor": "model-recipes",
+      "research_questions_anchor": "research-questions",
+      "work_sequence_anchor": "work-sequence",
+      "next_deliverable_anchor": "next-deliverable",
+      "order_source": "stage_sequence",
+      "active_order_meaning": "既有字段 active_order 列出参与本轮的议题。实际工作先后见 stage_sequence，一个阶段可同时涉及多个议题。",
+      "completed_milestones": [
+        {
+          "date": "2026-11-24",
+          "work": "逐文件盘点真实月份合约，固定来源、时间与哈希。",
+          "kind": "data_inventory_completed",
+          "evidence": "experiments/20261124_minute_audit_v1/reports/20261124/summary.json"
+        },
+        {
+          "date_from": "2026-11-25",
+          "date_through": "2026-11-27",
+          "work": "隔离旧研究，写定首批两套状态的模型设计、同一步三任务及冻结后评测方案。",
+          "kind": "design_documented",
+          "evidence": "docs/babel/BABEL_ROADMAP.md#model-architecture"
+        },
+        {
+          "date": "2026-11-27",
+          "work": "已下载月份合约的原价可回读范围、分类与顺序标签资格已按端点核对并复算。",
+          "kind": "completed_months_source_qualification",
+          "evidence": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/qualification.md"
+        }
+      ]
     }
   },
   "workflow": "docs/babel/BABEL_EXPERIMENT_WORKFLOW.md",
@@ -721,10 +765,14 @@
         "F02",
         "F04",
         "F10",
+        "F11",
         "V13"
       ],
       "status": "source_and_natural_labels_qualified_for_completed_month_windows_remaining_gates_open",
-      "evidence": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/qualification.md"
+      "evidence": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/qualification.md",
+      "title_zh": "划定两套模型共用的样本范围",
+      "progress_zh": "当前，月份资料已核对，适用范围待定",
+      "deliverable_zh": "按品种、时期、用途列明可正式检验、仅作诊断和待补证据的范围。"
     },
     {
       "order": 2,
@@ -734,7 +782,10 @@
         "F05",
         "F11"
       ],
-      "status": "matched4_main_7_current_6_closed_form_order_absolute_limits_and_resources_open"
+      "status": "matched4_main_7_current_6_closed_form_order_absolute_limits_and_resources_open",
+      "title_zh": "锁定验收误差和运行预算",
+      "progress_zh": "数据范围明确后",
+      "deliverable_zh": "两套模型共用一份验收表和运行说明，在看模型分数前定稿。"
     },
     {
       "order": 3,
@@ -745,16 +796,24 @@
         "F10",
         "F11"
       ],
-      "status": "not_started_requires_explicit_implementation_request"
+      "status": "not_started_requires_explicit_implementation_request",
+      "title_zh": "实现模型并检查能否可靠运行",
+      "progress_zh": "待明确实施授权",
+      "deliverable_zh": "可从固定版本恢复的独立实验，以及 AutoDL CUDA 运行前检查记录。"
     },
     {
       "order": 4,
       "name": "matched_three_task_pretraining_then_fresh_frozen_readouts",
       "ids": [
+        "F01",
         "F05",
+        "F10",
         "F11"
       ],
-      "status": "not_started"
+      "status": "not_started",
+      "title_zh": "同批混训，再冻结比较",
+      "progress_zh": "待运行前检查通过",
+      "deliverable_zh": "用同一批样本报告各项成绩与成本。现有样本能否支持“学到额外顺序信息”的结论，单独判断。"
     },
     {
       "order": 5,
@@ -763,7 +822,10 @@
         "F11",
         "V13"
       ],
-      "status": "not_started"
+      "status": "not_started",
+      "title_zh": "独立确认并交付",
+      "progress_zh": "待有候选及足够独立样本",
+      "deliverable_zh": "交付通过验收的用途、覆盖和失效范围，附可恢复资产及离机哈希回执。"
     }
   ],
   "branch_policy": {
