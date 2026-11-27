@@ -1,0 +1,37 @@
+{
+  "frozen_source_commit": "95026dcd7d10e8924e03cc30d83a065f3d5152c8",
+  "all_endpoint_assets_sha_verified": 2382,
+  "previous_inventory_sha256": "f0a4a462fe5034a3efcc37a0ebcf045a5b7fb23b47c847923af4167ef58ab187",
+  "month_files_unchanged_from_previous_inventory": 2382,
+  "expanded_256_minute_shortfalls_disjoint": {
+    "within_first_255_rows_of_source_window": 607308,
+    "last_cut_has_intervening_main_minutes": 15103,
+    "last_cut_has_insufficient_evidence": 30292
+  },
+  "products_in_fixed_source_check": 44,
+  "fixed_files_in_natural_check": 132,
+  "natural_endpoint_checks": 1188,
+  "original_quote_bar_queries": 679654,
+  "max_abs_quote_error_native_in_checked_queries": 7.566995918750763e-10,
+  "max_relative_quote_error_in_checked_queries": 4.0435810954336754e-15,
+  "counterfactual_recomputed_from_actual_patched_parents": {
+    "matched_160_only": 3211,
+    "matched_160_and_18": 196,
+    "unequal_packed_facts": 1
+  },
+  "strong_screen_by_split": {
+    "train_time": 88,
+    "validation_time": 29,
+    "development_time": 63,
+    "later_time": 2,
+    "held_product_validation_era": 3,
+    "held_product_train_era": 6,
+    "held_product_development_era": 4,
+    "held_product_later_time": 1
+  },
+  "hypothetical_price_range_diagnostic": {
+    "all_three_hypothetical_ranges_inside_observed_ranges": 0
+  },
+  "selection": "First/middle/last file in manifest order per product; 9 equally spaced endpoint rows per file. Every preliminary same-160 candidate and the single rejected packed-precision case independently checked.",
+  "meaning": "Structural source checks and retrospective sample eligibility only. No model, exchange band or independent test performance certified."
+}

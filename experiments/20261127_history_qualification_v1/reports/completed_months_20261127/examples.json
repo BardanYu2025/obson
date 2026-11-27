@@ -1,0 +1,338 @@
+[
+  {
+    "source_id": 0,
+    "contract": "CZCE.AP202001",
+    "close_time": "2019-09-10 10:05",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 1,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 83,
+    "contract": "CZCE.FG201701",
+    "close_time": "2016-08-05 22:05",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 1,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 144,
+    "contract": "CFFEX.IC202004",
+    "close_time": "2020-03-12 10:35",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 1,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 344,
+    "contract": "CFFEX.IH201703",
+    "close_time": "2017-02-09 10:35",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 2,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 404,
+    "contract": "CFFEX.IH202203",
+    "close_time": "2022-02-10 10:35",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 2,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 516,
+    "contract": "CZCE.MA201801",
+    "close_time": "2017-07-28 22:05",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 2,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 663,
+    "contract": "CZCE.SF201905",
+    "close_time": "2018-12-17 10:05",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 2,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 745,
+    "contract": "CZCE.TA202009",
+    "close_time": "2020-03-24 10:05",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 1,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 827,
+    "contract": "SHFE.ag201912",
+    "close_time": "2019-04-25 22:05",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 2,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 904,
+    "contract": "SHFE.al201911",
+    "close_time": "2019-09-02 11:15",
+    "row": 359,
+    "class_code": 2,
+    "order_code": 2,
+    "reachable_bars_strict": [
+      120,
+      24,
+      8,
+      2
+    ]
+  },
+  {
+    "source_id": 999,
+    "contract": "SHFE.au202002",
+    "close_time": "2019-11-11 22:05",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 1,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 1098,
+    "contract": "DCE.c202005",
+    "close_time": "2019-11-25 10:05",
+    "row": 184,
+    "class_code": 2,
+    "order_code": 1,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 1173,
+    "contract": "SHFE.cu201910",
+    "close_time": "2019-07-30 22:05",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 2,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 1268,
+    "contract": "DCE.eb202107",
+    "close_time": "2021-05-19 22:05",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 1,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 1381,
+    "contract": "SHFE.fu202209",
+    "close_time": "2022-03-24 22:05",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 1,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 1473,
+    "contract": "DCE.j201701",
+    "close_time": "2016-08-08 22:05",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 1,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 1568,
+    "contract": "DCE.jm201805",
+    "close_time": "2017-11-22 22:05",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 1,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 1672,
+    "contract": "DCE.m202109",
+    "close_time": "2021-03-24 22:05",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 2,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 1740,
+    "contract": "SHFE.ni202304",
+    "close_time": "2023-02-17 22:05",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 2,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 1863,
+    "contract": "DCE.p201605",
+    "close_time": "2016-01-04 10:05",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 1,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 1939,
+    "contract": "SHFE.rb201910",
+    "close_time": "2019-03-25 22:05",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 1,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 2015,
+    "contract": "INE.sc202008",
+    "close_time": "2020-06-08 22:05",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 2,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 2201,
+    "contract": "DCE.v202201",
+    "close_time": "2021-08-12 22:05",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 1,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  },
+  {
+    "source_id": 2277,
+    "contract": "SHFE.zn201805",
+    "close_time": "2018-02-27 22:05",
+    "row": 64,
+    "class_code": 2,
+    "order_code": 2,
+    "reachable_bars_strict": [
+      65,
+      13,
+      4,
+      1
+    ]
+  }
+]

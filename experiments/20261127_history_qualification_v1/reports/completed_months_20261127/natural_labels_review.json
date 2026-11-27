@@ -1,0 +1,15 @@
+{
+  "source_commit": "95026dcd7d10e8924e03cc30d83a065f3d5152c8",
+  "source_files_and_sha_verified": 2382,
+  "labels_and_ineligibility_codes_verified_at_all_endpoints": 46224030,
+  "full_input_and_label_temporal_purge_verified_at_all_endpoints": 46224030,
+  "strict_counts_recomputed": {
+    "class_strict_purged_down": 52991,
+    "class_strict_purged_low_direction": 30795682,
+    "class_strict_purged_up": 58971,
+    "order_strict_purged_high_first": 18594937,
+    "order_strict_purged_low_first": 18450932,
+    "rows": 46224030
+  },
+  "scope": "Independent natural-label arithmetic and date-support checks conditional on frozen source boundary and bar decisions. No extra calendar evidence or model performance inferred."
+}

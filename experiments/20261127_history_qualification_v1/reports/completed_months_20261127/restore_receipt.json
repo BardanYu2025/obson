@@ -1,0 +1,15 @@
+{
+  "source_commit": "95026dcd7d10e8924e03cc30d83a065f3d5152c8",
+  "release_sha256": "c9a99dd7529b7b0b73d41a2fae4b3df115f474c944c28d271be101dc357db6a3",
+  "method": "Fresh single-experiment git archive exported under the ignored local run directory, hash check of every sealed file, isolated Python import path and pinned installed packages, fixed project-root working directory. No duplicate data scan or model execution.",
+  "sealed_files_verified": 10,
+  "restored_source_tests_passed": 11,
+  "restored_input_preflight": {
+    "products": 44,
+    "checkpoint": {
+      "delivered": 2382,
+      "empty": 6,
+      "empty_pre_2016": 144
+    }
+  }
+}

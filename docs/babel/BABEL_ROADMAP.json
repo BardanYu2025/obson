@@ -2,7 +2,7 @@
   "schema": "babel-roadmap-v2-current-only",
   "updated": "2026-11-27",
   "current_iteration": "fixed_budget_observable_and_learned_state",
-  "current_iteration_scope": "同容量的 P2/P3 用同一批次混训完整历史回读、遮挡填空与当前描述，区分已学用途与未给标签的顺序题。设计与 CPU 算术。",
+  "current_iteration_scope": "同容量 P2/P3 的同一步三任务混训方案。完整月份交付已执行本地 CPU 原价与验证样本资格核对。",
   "current_work_mode": {
     "mode": "design_and_records_only",
     "requested_on": "2026-11-24",
@@ -17,7 +17,13 @@
       "模型训练或真实权重执行"
     ],
     "ordinary_continue": "继续方案工作，不自动恢复旧实现授权",
-    "implementation_transition": "用户明确要求开始实施后进入；无需重复请求已经授权的方案确认"
+    "implementation_transition": "用户明确要求开始实施后进入；无需重复请求已经授权的方案确认",
+    "completed_scoped_request_20261127": {
+      "request": "用户只要求核对已下载完整的部分，指数尚在下载。",
+      "scope": "已完成月份合约的本地 CPU 原价、分类和顺序样本资格核对。",
+      "model_training": false,
+      "report": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/qualification.md"
+    }
   },
   "current_reference": {
     "model": "P2 shared interval-relation and first-Value backbone, 768 learned coordinates, joint clean+mask+description pretraining, direct historical readout",
@@ -382,7 +388,7 @@
       "F08"
     ]
   },
-  "active_phase": "design_only_qualification_next",
+  "active_phase": "completed_month_source_qualification_reported_model_gates_open",
   "active_order": [
     "F01",
     "F02",
@@ -393,16 +399,19 @@
     "V13"
   ],
   "next_after_active": {
-    "status": "qualification_contract_defined_package_not_created",
+    "status": "months_source_qualification_delivered_calendar_units_independence_open",
     "task_ids": [
       "F02",
       "F04",
-      "F10"
+      "F10",
+      "F11",
+      "V13"
     ],
-    "action": "交付批次稳定后核对当时可选范围、价格锚点、三种任务分别合格的样本、遮挡泄题检查、共同区间及独立留出，再锁可用误差和资源。",
+    "action": "对拟交付的跨夜交易时段和未接边界作逐日期核查，分开核对成交量与持仓量口径、强顺序配对的历史跳价和涨跌停、留出市场时间支持及当时可选范围。再定报价容差和资源。",
     "ready_entrypoint": null,
     "old_commands_active": false,
-    "automatic_reruns": false
+    "automatic_reruns": false,
+    "qualification_report": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/qualification.md"
   },
   "active_training_budget": {
     "authorized_cuda_runs_now": 0,
@@ -440,7 +449,8 @@
         "parent/child identities, 37-minute natural label support and eligibility for legal full-summary collision pairs",
         "separate frozen pools for clean, masked and complete 18-descriptor tasks; hide source minutes before all aggregates, first Value, metadata and summaries; hidden-value counterfactual"
       ],
-      "status": "open"
+      "status": "partial_for_completed_month_delivery",
+      "evidence": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/qualification.md"
     },
     {
       "gate": "independent_support",
@@ -450,7 +460,8 @@
         "held-out dates/products and market-time blocks; V13 open",
         "minimum support, class counts and detectable uncertainty before scores"
       ],
-      "status": "open"
+      "status": "open",
+      "coverage_evidence": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/market_weeks.csv.gz"
     },
     {
       "gate": "budget",
@@ -639,38 +650,44 @@
       "question": "Do the actual inputs, mixed update and delivery tests answer the stated historical reconstruction and current-market description needs?",
       "status": "design_and_bounded_arithmetic",
       "changes": "Correct earlier single-task prose and plain-Transformer comparison wording, specify raw quote and delivered descriptor readout checks, test what the held-out order label adds beyond trained descriptors. No change to the two-arm matrix, primary training objective or existing upgrade thresholds."
+    },
+    "source_qualification_20261127": {
+      "source_commit": "95026dcd7d10e8924e03cc30d83a065f3d5152c8",
+      "summary": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/summary.json",
+      "neural_code": false,
+      "model_trained": false
     }
   },
   "review": {
     "purpose": {
-      "status": "pass_for_scope",
-      "evidence": "首页把已发生的价量、当前行情描述、额外可读顺序和后续技术形态/未来用途逐项对应到验收。",
-      "remaining": "新状态和任何用途效果待实测。"
+      "status": "qualified_source_scope",
+      "evidence": "完整月份的原价、当下方向与极值先后分别给出每个端点的资格，均只取截至当时的合约行情。",
+      "remaining": "共享状态能保留的细节和分类/顺序表现仍需模型实测。"
     },
     "architecture": {
       "status": "pass_for_scope",
-      "evidence": "每个架构及种子各有一组 E/D/A。D 的四个 FiLM 块串联，共用最后七项输出。A 直接读完整状态的 18 项描述。区间注意力、160+608 打包与价格投影保留。 指定交付给使用者的当前描述参数为主分 U 实际测的 A′，训练头 A 单独记分。",
-      "remaining": "共同小 MLP 的 GELU 与虚拟状态填值是设计默认。实际初始化梯度、非负数值链接、FP32 误差、开销及模型表现仍待验证。"
+      "evidence": "前版 E/D/A 与 P2/P3 设计保留。本批核对四个周期的实体、影线与价格链。在真实来源构造路径上逐对复算 160 个打包摘要与粗周期父栏。",
+      "remaining": "本次只测数据变换和构造样本。实际网络压缩、初始化梯度、FP32 网络误差和成本待测。"
     },
     "training": {
-      "status": "pass_for_scope",
-      "evidence": "每步三份任务均值合并，E、D、A 各按实际路径受训。微批按任务分母归一，完整回读的缺标签期望保持稠密目标。未来损失为零。 第 1 节与经验表已对齐现行两种记忆分配和同一步三任务。",
-      "remaining": "32/16/16 与 1/0.25/0.10 为拟定配方，三个任务真实支持、E/D/A 的梯度、N/N_U/条件 N_H 与资源待锁。"
+      "status": "not_run",
+      "evidence": "本地 CPU 审计按任务分别核对数据资格，未启动神经训练。两段可遮分钟的来源候选 46,180,037 个。",
+      "remaining": "三任务共同运行卡、遮挡后的输入闭包、训练独占统计及资源预算开放。"
     },
     "validation": {
-      "status": "pass_for_scope",
-      "evidence": "原始 OHLC 逐字段物理误差、按定义分类和相同 160 摘要及 18 描述却顺序相反的反例已核算。拟用原有顺序读头检查该子集。",
-      "remaining": "价格四字段和描述的绝对用线、真实留出分类误差、匹配对支持及 V13 均待实测。"
+      "status": "source_labels_qualified_independent_model_validation_open",
+      "evidence": "严格且不跨分区的方向/自然顺序端点 30,907,644/37,045,869。第二套计算核对 46,224,030 个端点的两项原价标签、无资格标记和跨期清除。另从 1,188 个端点复算 679,654 次历史报价。构造路径上两项摘要条件均相等的顺序对为 196 对。",
+      "remaining": "后期覆盖 10 个市场周，44 个品种中 13 个同时出现两种稀有方向。196 对中后期 3 对，历史交易约束、模型实际性能和 V13 待核。"
     },
     "data": {
-      "status": "open",
-      "evidence": "封存的 2,382 份月份文件有相同时间、OHLC、成交及起末持仓字段。分开记录新批次提供与因果计算的指标，区别可出状态、可验价格描述与全 18 项可验的端点。",
-      "remaining": "在下批次范围、修订、历史日历/单位、主力窗口当时可选性、各周期与独立留出支持仍待资格包。 三类任务的条件覆盖和遮挡闭包需在合格样例上核对。"
+      "status": "partial_completed_month_snapshot_qualified",
+      "evidence": "44 个品种 2,382 份原始月份文件与原清单逐一匹配。原价按周期、日间与跨段条件给出逐端点覆盖，367 处未接边界有位置证据。",
+      "remaining": "逐日期跨段交易日历、历史量仓口径、选样当时可得性、未证跨周期路径及真实静止证据仍开放。指数另批。"
     },
     "engineering": {
-      "status": "pass_for_scope",
-      "evidence": "工作只涉及文档、封存字段清单与合成算术。训练矩阵和独立实验目录未改。",
-      "remaining": "无新实现、真实 CUDA 运行、权重或离机恢复。"
+      "status": "released_cpu_audit_verified",
+      "evidence": "独立 CPU 实验版本先冻结推送再执行。2,382 份端点索引、7 份原报告已复核哈希。从发布提交单独导出的实验通过 11 项测试并成功读取固定来源清单。",
+      "remaining": "模型实现、真实权重和 CUDA 运行另待授权。"
     }
   },
   "design_rationale": {
@@ -706,7 +723,8 @@
         "F10",
         "V13"
       ],
-      "status": "contract_and_limited_train_arithmetic_only_package_open"
+      "status": "source_and_natural_labels_qualified_for_completed_month_windows_remaining_gates_open",
+      "evidence": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/qualification.md"
     },
     {
       "order": 2,
@@ -759,7 +777,8 @@
     "runs": "run/seed directories under one frozen experiment; reports append-only",
     "data": "external immutable manifests; no raw-data duplication or training weights in Git",
     "training_authorized": 0,
-    "audit_exception": "20261124_minute_audit_v1 is a self-contained CPU audit migration; no historical model/weight dependency."
+    "audit_exception": "20261124_minute_audit_v1 is a self-contained CPU audit migration; no historical model/weight dependency.",
+    "audit_exception_20261127": "Released standalone, bounded CPU data qualification. Index download excluded. No neural implementation or run."
   },
   "workspace_policy": {
     "canonical_root": "/Users/bardan/Documents/Codex/来自旧电脑-20261031/obson",
@@ -854,8 +873,8 @@
     "data": {
       "source": "/Users/bardan/private/tqdata_2015/month_contracts/bars",
       "audit": "experiments/20261124_minute_audit_v1/reports/20261124",
-      "new_check": "2026-11-26: prior three named 2022 source SHA and 1m arithmetic. 2026-11-27: re-aggregated the sealed 2026-11-24 per-file inventory and checked its delivery receipt; no new raw corpus census.",
-      "main_and_index": "not_required_first_inputs",
+      "new_check": "2026-11-27: fresh bytes of every delivered month window and all 44 main timestamp witnesses verified against frozen manifests; previous month rows/size/SHA/first/last matched for all 2382 files.",
+      "main_and_index": "Only true maturity-month quotes for prices, labels and OHLC. Main timestamps corroborate breaks, product mapping witnesses trading dates and identity. Index price files excluded.",
       "identity": "Bar observation key: exchange, product, unambiguous full delivery-year/month contract identity, period and interval start/end in a fixed time zone.",
       "aggregation": "O first,H max,L min,C last,V sum,OI start/end; historical session qualification, no every-N-rows grouping",
       "selection_limit": "The audited month windows use official main days and roll margins. Replay eligibility from what was known at t; future roll dates and realized file endings cannot select earlier samples for an as-of claim. Without this evidence restrict claims to the retrospectively selected windows.",
@@ -864,9 +883,9 @@
         "main": 44,
         "index": 6
       },
-      "inventory_status": "November 24 counts are for the audited delivery only. The user reports on 2026-11-27 that the larger download is incomplete. Full extent and completion fraction unknown.",
+      "inventory_status": "User reports only index data is outstanding. The frozen monthly delivery is complete against its registry and checkpoint, and all nonempty source-file bytes verified. No statement about the final index inventory.",
       "endpoint_eligibility": "Common raw source law conditioned on each task’s prespecified support; clean eligibility requires a supported legal query, masked eligibility a legal nonoverlapping pair, and description all 18 labels and required boundaries. Identical within-task pools across arms, no future filter. Invalid blocks disable only explicit facts.",
-      "qualification_note": "Month windows only. Three training-era files verified. Historical calendar, units, as-of, all periods and V13 open.",
+      "qualification_note": "Source-side physical price and natural-label eligibility on the selected complete month batch is delivered. Extended session calendars, cross-period exhaustiveness, historical units and daily restrictions, retrospective universe and independent validation remain open.",
       "input_clock": "Both input windows use the most recent scheduled slots including any ending at t, capped separately by view. Missing slots remain masked in place; no backfill.",
       "source_revision": "Keep source path/SHA, vintage, availability and units as provenance. Coalesce equal known physical fields, units and quality semantics on the observation key with all sources retained. Quarantine unresolved differences on the same observation. Sample ID separately binds the frozen data snapshot, processing protocol, contract and endpoint.",
       "audited_month_batch": {
@@ -882,7 +901,134 @@
         "delivery_receipt": "experiments/20261124_minute_audit_v1/reports/20261124/delivery_hash_check.json",
         "receipt_scope": "All 2382 match that month-contract manifest only. Main had 3 rows flagged by ANY of volume, open_oi or close_oi < 0. Index had 6 products in this inventory."
       },
-      "delivery_reconciliation": "Once the declared batch is stable, compare expected paths, sizes and SHA with the delivery and prior snapshot. Distinguish new, missing, confirmed source-empty, duplicate, changed or still-writing. Sign only the bounded stable scope."
+      "delivery_reconciliation": "Once the declared batch is stable, compare expected paths, sizes and SHA with the delivery and prior snapshot. Distinguish new, missing, confirmed source-empty, duplicate, changed or still-writing. Sign only the bounded stable scope.",
+      "source_qualification_20261127": {
+        "tasks": [
+          "F02",
+          "F04",
+          "F10",
+          "F11"
+        ],
+        "run_id": "completed_months_20261127",
+        "source_commit": "95026dcd7d10e8924e03cc30d83a065f3d5152c8",
+        "release_sha256": "c9a99dd7529b7b0b73d41a2fae4b3df115f474c944c28d271be101dc357db6a3",
+        "report": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/qualification.md",
+        "by_product_readable": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/by_product.md",
+        "source_index": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/source_index.json.gz",
+        "boundary_table": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/unproven_boundaries.csv.gz",
+        "strong_pair_ids": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/strong_order_candidates.jsonl",
+        "lookup": "experiments/20261127_history_qualification_v1/src/lookup.py",
+        "local_endpoint_assets": "experiments/20261127_history_qualification_v1/runs/completed_months_20261127",
+        "summary": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/summary.json",
+        "summary_sha256": "14b95bdb09c224308086c1f8d447172ee7f2f25af41c37e67c962df21044afe2",
+        "independent_arithmetic_review": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/independent_review.json",
+        "review_sha256": "122b268dec5f95f0037a3dd23d379f9d34931f70bea6e218a1b11c2adb8d74bd",
+        "restored_release": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/restore_receipt.json",
+        "scope": {
+          "products": 44,
+          "delivered_month_files": 2382,
+          "unique_maturities": 2379,
+          "source_valid_minute_bars": 46224030,
+          "consistent_with_prior_file_inventory": 2382,
+          "registry_outcomes": {
+            "delivered": 2382,
+            "empty": 6,
+            "empty_pre_2016": 144
+          },
+          "index_read": false,
+          "main_quotes_used": false
+        },
+        "prices": {
+          "input": "As-of endpoint close and visible physical gap/body/wick ratios. Certified bar paths prove structural source-side recoverability; network retention unmeasured. Unproven paths do not establish mathematical impossibility.",
+          "columns": [
+            "1m/256",
+            "5m/128",
+            "15m/64",
+            "60m/64"
+          ],
+          "strict_full_cap": [
+            663750,
+            0,
+            0,
+            0
+          ],
+          "source_witnessed_full_cap": [
+            45571327,
+            44637431,
+            43862643,
+            29211320
+          ],
+          "strict_256_products": [
+            "ag",
+            "au",
+            "sc"
+          ],
+          "boundary_with_intervening_product_minutes": 67,
+          "boundary_insufficient_evidence": 300,
+          "unique_contracts_with_unjoined_boundary": 137,
+          "shortfalls_expanded_256_disjoint": {
+            "within_first_255_rows_of_source_window": 607308,
+            "last_cut_has_intervening_main_minutes": 15103,
+            "last_cut_has_insufficient_evidence": 30292
+          }
+        },
+        "labels": {
+          "unit": "overlapping eligible endpoints, after label/full-input/warmup temporal purge",
+          "strict_direction": 30907644,
+          "strict_direction_down_middle_up": [
+            52991,
+            30795682,
+            58971
+          ],
+          "strict_order": 37045869,
+          "strict_order_high_first_low_first": [
+            18594937,
+            18450932
+          ],
+          "screened_direction": 45202880,
+          "screened_order": 45073801,
+          "all_18_source_units_screened_purged": 44723281,
+          "mask_pair_source_endpoints_before_purge": 46180037
+        },
+        "later_time": {
+          "cutoff_semantics": "minute starts strictly after 2026-09-12T03:00 Asia/Shanghai",
+          "nonheld_direction_order": [
+            307496,
+            372355
+          ],
+          "held_intersection_direction_order": [
+            32963,
+            39547
+          ],
+          "union_weeks": 10,
+          "direction_labels_down_middle_up": [
+            1205,
+            338407,
+            847
+          ],
+          "products_present": 44,
+          "products_with_both_directional_extremes": 13,
+          "v13_signed": false
+        },
+        "counterfactual": {
+          "fixed_sample_endpoints": 12157,
+          "same_160": 3407,
+          "same_160_and_18": 196,
+          "same_160_and_18_later_time": 3,
+          "generated_from_real_endpoints": true,
+          "historical_exchange_legality_certified_count": null
+        },
+        "review_checks": {
+          "source_files_with_endpoint_indexes_SHA_verified": 2382,
+          "checked_natural_endpoints": 1188,
+          "original_bar_queries_checked": 679654,
+          "max_relative_physical_quote_error_checked": 4.0435810954336754e-15,
+          "natural_labels_and_temporal_purge_verified_at_all_endpoints": 46224030,
+          "natural_labels_full_review": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/natural_labels_review.json",
+          "natural_labels_full_review_sha256": "5ad286c7c4baaafcfebd32400ab9ef817571625a9eaf107dd8ba542cb07dccb8"
+        },
+        "neural_training": false
+      }
     },
     "features": {
       "numeric_classes": 9,
@@ -1423,7 +1569,7 @@
         "F10"
       ],
       "name": "data_sample_qualification_contract_then_package",
-      "current_deliverable": "qualification contract and bounded arithmetic only; first full signed package not built",
+      "current_deliverable": "Full stable month snapshot and per-endpoint qualification for structural prices, current direction and natural historical order delivered. Extended calendar, cross-period reach beyond certified paths, unit legality, split support and actual model inputs still to sign.",
       "outputs": [
         {
           "name": "snapshot_manifest and conventions",
@@ -1443,10 +1589,10 @@
         }
       ],
       "order": [
-        "reconcile the declared stable delivery batch and freeze signed source/scope",
-        "split, purge actual dependencies and calculate coverage",
-        "train-only scales, anchors, lookup and raw oracle",
-        "sign sample qualification, absolute tolerances, budget and review"
+        "completed for this monthly vintage: compare every source file to the manifest, checkpoint and previously sealed snapshot",
+        "completed bounded subset: strict and source-screened price paths, labels, input/label purge, held-out sample/market-week support and fixed controlled-pair screening",
+        "open: per-date calendars, actual historical tick and price limits, volume/OI conventions, eligible as-of universe, exhaustive cross-view bridges, train-only scales and actual mask closure",
+        "sign delivery scope, instrument-level physical tolerances, time support and the common resource card before scores"
       ],
       "exits": [
         "qualified -> common run card",
@@ -1454,7 +1600,9 @@
         "core provenance unclear -> stop dependent implementation and identify missing evidence"
       ],
       "not_new_basic_census": true,
-      "neural_result": false
+      "neural_result": false,
+      "evidence": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/qualification.md",
+      "current_exit": "partial -> shared bounded price/label cohort delivered. Conditional cohorts are marked separately; no model implementation or training."
     },
     "directions": {
       "priority1": "single bounded P2/P3 memory-allocation comparison (F01/F02/F04/F05/F10/F11)",
