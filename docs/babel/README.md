@@ -1,6 +1,6 @@
 # Babel 当前研究资料
 
-第一次读，从路线图首页的[四个模型方案与两次比较](BABEL_ROADMAP.md#model-recipes)开始。P0、P1 是上一版，P2、P3 是当前要比较的两套方案。
+第一次读，先看[你要的能力、首批怎么验](BABEL_ROADMAP.md#requirement-fit)，再看[四个模型方案与两次比较](BABEL_ROADMAP.md#model-recipes)。P0、P1 是上一版，P2、P3 是当前要比较的两套方案。
 
 - 想顺着一个样本读，可以依次看[输入哪些 K 线](BABEL_ROADMAP.md#input-views)、[模型总图](BABEL_ROADMAP.md#model-architecture)、[每次更新怎样混合三种任务](BABEL_ROADMAP.md#training-tasks)和[怎样验收](BABEL_ROADMAP.md#delivery-criteria)。
 - 想了解当前进度，看[已有证据和下一步](BABEL_ROADMAP.md#current-review)。当前下载完成后，下一份交付是[数据与样本资格包](BABEL_ROADMAP.md#sample-qualification)。

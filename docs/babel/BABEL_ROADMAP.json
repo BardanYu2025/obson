@@ -465,7 +465,7 @@
     {
       "gate": "acceptance",
       "items": [
-        "absolute historical and descriptive tolerances",
+        "per-field raw O/H/L/C physical tolerances and coverage for promised scope, and physical tolerances for the exact packaged descriptive readout; set before scores",
         "R/U, near/wicks/activity/tails and residual noninferiority",
         "separate learned benefit over matched analytic controls; familywise paired bounds",
         "stop decisions and near-zero handling predeclared"
@@ -612,7 +612,8 @@
         "model-architecture",
         "training-tasks",
         "delivery-criteria"
-      ]
+      ],
+      "requirements_anchor": "requirement-fit"
     }
   },
   "workflow": "docs/babel/BABEL_EXPERIMENT_WORKFLOW.md",
@@ -632,37 +633,43 @@
       "previous_scope": "Both arms used clean readback only; masked history was conditional and description was post-freeze only. Superseded before any training.",
       "current_scope": "Same P2/P3 model comparison; both use simultaneous three-task updates. Cite model ID and source revision to identify a protocol.",
       "new_training": false
+    },
+    "requirements_review_20261127": {
+      "parent_commit": "015f3768e33da49f734021f6736e33fdceda5093",
+      "question": "Do the actual inputs, mixed update and delivery tests answer the stated historical reconstruction and current-market description needs?",
+      "status": "design_and_bounded_arithmetic",
+      "changes": "Correct earlier single-task prose and plain-Transformer comparison wording, specify raw quote and delivered descriptor readout checks, test what the held-out order label adds beyond trained descriptors. No change to the two-arm matrix, primary training objective or existing upgrade thresholds."
     }
   },
   "review": {
     "purpose": {
       "status": "pass_for_scope",
-      "evidence": "固定容量下验证历史回读、当前描述及未预训练的顺序；固定事实单独记账。",
+      "evidence": "首页把已发生的价量、当前行情描述、额外可读顺序和后续技术形态/未来用途逐项对应到验收。",
       "remaining": "新状态和任何用途效果待实测。"
     },
     "architecture": {
       "status": "pass_for_scope",
-      "evidence": "每个架构及种子各有一组 E/D/A。D 的四个 FiLM 块串联，共用最后七项输出。A 直接读完整状态的 18 项描述。区间注意力、160+608 打包与价格投影保留。",
+      "evidence": "每个架构及种子各有一组 E/D/A。D 的四个 FiLM 块串联，共用最后七项输出。A 直接读完整状态的 18 项描述。区间注意力、160+608 打包与价格投影保留。 指定交付给使用者的当前描述参数为主分 U 实际测的 A′，训练头 A 单独记分。",
       "remaining": "共同小 MLP 的 GELU 与虚拟状态填值是设计默认。实际初始化梯度、非负数值链接、FP32 误差、开销及模型表现仍待验证。"
     },
     "training": {
       "status": "pass_for_scope",
-      "evidence": "每步三份任务均值合并，E、D、A 各按实际路径受训。微批按任务分母归一，完整回读的缺标签期望保持稠密目标。未来损失为零。",
+      "evidence": "每步三份任务均值合并，E、D、A 各按实际路径受训。微批按任务分母归一，完整回读的缺标签期望保持稠密目标。未来损失为零。 第 1 节与经验表已对齐现行两种记忆分配和同一步三任务。",
       "remaining": "32/16/16 与 1/0.25/0.10 为拟定配方，三个任务真实支持、E/D/A 的梯度、N/N_U/条件 N_H 与资源待锁。"
     },
     "validation": {
       "status": "pass_for_scope",
-      "evidence": "相对价位按到当前收盘的可证路径分层并保留全体主分。断开价比的反例、投影对差分的反例已复算。等摘要顺序、共同读头、分组区间另行裁定。 U 是已学描述在新样本上的测量，37 分钟顺序标签预训练留出。顺序翻转而收盘 RMSE 很小的算例解释了差别。",
-      "remaining": "绝对可用误差、合格独立组、功效、最终留出仍开放。"
+      "evidence": "原始 OHLC 逐字段物理误差、按定义分类和相同 160 摘要及 18 描述却顺序相反的反例已核算。拟用原有顺序读头检查该子集。",
+      "remaining": "价格四字段和描述的绝对用线、真实留出分类误差、匹配对支持及 V13 均待实测。"
     },
     "data": {
       "status": "open",
-      "evidence": "11 月 24 日已审计批次的逐文件汇总与交付回执相符。11 月 26 日三个 2022 年合约的算术保留原证据。",
+      "evidence": "封存的 2,382 份月份文件有相同时间、OHLC、成交及起末持仓字段。分开记录新批次提供与因果计算的指标，区别可出状态、可验价格描述与全 18 项可验的端点。",
       "remaining": "在下批次范围、修订、历史日历/单位、主力窗口当时可选性、各周期与独立留出支持仍待资格包。 三类任务的条件覆盖和遮挡闭包需在合格样例上核对。"
     },
     "engineering": {
       "status": "pass_for_scope",
-      "evidence": "封存的审计源码及原报告可追溯至固定 Git 版本。此次仅改方案和记录，用 CPU 算术核对协议。",
+      "evidence": "工作只涉及文档、封存字段清单与合成算术。训练矩阵和独立实验目录未改。",
       "remaining": "无新实现、真实 CUDA 运行、权重或离机恢复。"
     }
   },
@@ -903,6 +910,24 @@
         "status": "conditional F12 diagnostic only",
         "example": "Compute close-to-EMA deviation from the same closed bars. A proposed frozen-state probe can check readability. If a specific deficit motivates an input trial, match raw history, initialization/warmup support, training budget and held-out uses across arms with and without that indicator.",
         "active_indicator_branch": false
+      },
+      "audited_source_columns": {
+        "scope": "2026-11-24 sealed month-contract inventory only",
+        "month_files_with_same_schema": 2382,
+        "names": [
+          "datetime",
+          "datetime_nano",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume",
+          "open_oi",
+          "close_oi"
+        ],
+        "source": "experiments/20261124_minute_audit_v1/reports/20261124/inventory.json.gz",
+        "source_sha256": "f0a4a462fe5034a3efcc37a0ebcf045a5b7fb23b47c847923af4167ef58ab187",
+        "later_deliveries": "Inventory supplied and derived indicator fields, source/inputs, warmup, availability and role. The current encoder uses the nine declared numerical fields plus context and flags. Extra EMA/RSI/MACD inputs remain conditional F12."
       }
     },
     "input": {
@@ -1165,7 +1190,12 @@
         },
         "targets": "16 hidden past 1-minute intervals, equal across prequalified targets. Price/shape/activity weights as current_plan.loss.past_groups, valid terms fixed before sampling; truth enters loss only. Attribute an adjacent change to its hidden later query; append a qualified preceding query only for that difference. Average supported hidden positions within each field then renormalize supported siblings. Predeclare support using availability and calendar, independent of hidden market values.",
         "dependency_closure": "Apply mask to raw-minute dependencies before deriving views. Propagate to affected OHLCV/OI aggregates, preceding-close links, rolling scales, flags and readable metadata. Fixed train fallback where required. Recompute P3 facts from masked visible input only: invalid block = four zeros and flag 0, direct readout. Counterfactual hidden-value changes under fixed visible history/mask/eligibility preserve masked input, flags, summaries and decoder metadata. All market Values originate in this view, including first-layer Value. An observed later interval up to t may be used after removing hidden dependencies; target-side prior close is never provided as an input.",
-        "evaluation": "On held-out eligible endpoints use paired, fixed masks; report per-field and per-session error, coverage and cost separately from R/U. Multiple true missing paths can give the same masked view."
+        "evaluation": "On held-out eligible endpoints use paired, fixed masks; report per-field and per-session error, coverage and cost separately from R/U. Multiple true missing paths can give the same masked view.",
+        "price_reference": {
+          "fit_count": 0,
+          "inputs": "Only minute closes in the masked view recoverable in the declared common price coordinate. Same held-out endpoint, mask and target as both arms.",
+          "estimate": "Interpolate log close by trading-minute distance between the nearest certified observed closes bracketing the hidden span. With a single available side use its nearest certified close. With no support report unavailable. Compare on common support and disclose coverage separately from clean R."
+        }
       }
     },
     "optimizer": {
@@ -1257,6 +1287,17 @@
         "condition": "For the actually represented ordered history H and allowed side information M, D(z,M)=H implies f(D(z,M),M)=f(H,M) for every determined f on that support. Absolute price, arrival order and initial state must be available when f needs them.",
         "approximation": "If max absolute log-close error <= epsilon over the same window including its start, max log drawdown error <= 2*epsilon. Extremum ordering need not be stable.",
         "comparison": "Compare raw-rule truth, same-rule after complete-input reconstruction and direct A/fresh A-prime on common supported endpoints. No extra fitted head for rule evaluation. Report missing boundaries/coverage without leaking missing true values or changing primary R/U support."
+      },
+      "raw_quotes": {
+        "anchor": "ohlc-delivery",
+        "readout": "Deploy the declared decoder D and allowed C_t on complete inputs. Compare O,H,L,C separately to the original same-contract, same-interval quotes. For intervals ending at t the supplied close is recorded as given and excluded from fidelity scoring, while O,H,L remain scored when supported.",
+        "metrics": "For positive verified tick size at the original quote and effective date, use the unrounded absolute prediction error in ticks: weighted mean, weighted P95 and fraction <=1 tick. Use common endpoint/view/age weights within each supported cell; report count and coverage. Unknown tick but known comparable quote units: native-unit errors within contract only.",
+        "strata": [
+          "observed bar resolution",
+          "trading-minute lookback",
+          "certified link to C_t versus unproven link"
+        ],
+        "interpretation": "Lock promised fields, physical tolerances, required coverage and anchoring convention before scores. Accuracy on all truth-labelled targets still enters the existing R protocol. An unconnected earlier segment may be estimated; guaranteed price recall requires an observable connection or a tested in-scope anchor. A missing minute itself has no observed truth."
       }
     },
     "current_description": {
@@ -1317,7 +1358,24 @@
         "fit_count": 7,
         "reads": "frozen z; independent fresh parameters, common width and budget across representations",
         "optimizer": "current_plan.head_optimizer_defaults"
-      }
+      },
+      "delivery_head": "For the selected deployment seed, package the fresh post-freeze A-prime whose predictions define U, its input transform and target inverse transforms with E/D. Measure bundled training head A separately on the same holdout using its own transforms. Identify the delivered head before final evaluation.",
+      "direction_classification": {
+        "anchor": "direction-classification",
+        "purpose": "Descriptive classification from already trained continuous quantities. No new representation task, trainable head, fit or upgrade threshold.",
+        "horizon_trading_minutes": 64,
+        "support": "64 qualified consecutive minute close returns plus their starting close, using the same scheduled-session and gap rules. Report all price-qualified endpoints split by membership of the full 18-target U population. Original U and L_desc keep their complete-label populations.",
+        "raw_rule": "s=sum(r)/sum(abs(r)); flat window gives zero. Positive s is upward. Use physical, unrounded returns and the true starting close only to establish the source label.",
+        "observation_readout": "Undo training target transforms. From the delivered A-prime use sign(predicted net log move) times clip(predicted absolute path efficiency,0,1), with sign(0)=0. From D compute the raw rule on its own reconstructed quotes and boundary. Do not supply a missing true start to D.",
+        "proposed_symmetric_threshold": 0.5,
+        "classes": [
+          "s >= 0.5: upward-dominant",
+          "s <= -0.5: downward-dominant",
+          "interior including flat: low directional efficiency"
+        ],
+        "evaluation": "Freeze thresholds before candidate scores. Report class counts, coverage, confusion and per-class recall against the raw rule, show near-boundary samples. Raw-rule truth, A-prime and D comparisons use common support and disclose each route’s eligibility. Distinguish this known-descriptor use from the held-out order label and the conditional technical-shape hypotheses."
+      },
+      "raw_label_convention": "Use qualified physical one-minute closes including the pre-window boundary. Let l_i=log(C_i), r_i=l_i-l_(i-1), net=l_last-l_start, abs-path=sum(abs(r_i)). Use finite, consistent FP64 physical label calculations for the pair check, fixed train-only target transforms for the heads and no future input. The synthetic example uses accurate summation and raw physical components."
     },
     "head_optimizer_defaults": {
       "name": "AdamW",
@@ -1369,11 +1427,11 @@
       "outputs": [
         {
           "name": "snapshot_manifest and conventions",
-          "criteria": "expected delivery vs stable files, revisions and duplicate keys reconciled; hash calendar, units, as-of universe and common scope; isolate unresolved ranges; qualify volume and OI conventions independently by product/contract/effective date"
+          "criteria": "expected delivery vs stable files, revisions and duplicate keys reconciled; hash calendar, units, as-of universe and common scope; isolate unresolved ranges; qualify volume and OI conventions independently by product/contract/effective date; inventory actual columns and supplied versus derived indicators, warmup and as-of time in each stable delivery"
         },
         {
           "name": "endpoint and block inventory",
-          "criteria": "per split/product/view and field: actual input/warmup, anchor-connectivity, calendar block ceiling and valid blocks, missing reasons, 37-minute subset and independent support; retain eligible individual targets; three task-specific support pools, legal mask pairs, closure counterfactual, required descriptor boundary and exposure"
+          "criteria": "per split/product/view and field: actual input/warmup, anchor-connectivity, calendar block ceiling and valid blocks, missing reasons, 37-minute subset and independent support; retain eligible individual targets; three task-specific support pools, legal mask pairs, closure counterfactual, required descriptor boundary and exposure; denominator of eligible one-minute state endpoints, per-descriptor and all-18 coverage, eligible 64-minute price-only classification and overlap with U"
         },
         {
           "name": "statistics and source oracle",
@@ -1487,7 +1545,7 @@
           "F11"
         ],
         "scope": "From one frozen endpoint state, describe geometry visible by t, locate its evidence, and test reuse across instruments and dates.",
-        "current_regime_description": "Use the existing six observed descriptors at 16/64/256 trading minutes. Optional multi-label descriptions by horizon, with train-defined direction, volatility and activity thresholds; rare, ambiguous or unsupported examples included.",
+        "current_regime_description": "Use the observed 16/64/256-minute descriptors. The first concrete 64-minute directional readout and evaluation are in current_plan.current_description.direction_classification. Further volatility/activity thresholds and named chart-pattern tasks remain versioned conditional uses.",
         "time_contract": "Record bar/level and both landmark time and first-known time. Replay truncated prefixes with an explicit candidate/confirmed/invalidated status and no retrospective rewrite. Insufficient support gets a separate status.",
         "patterns": {
           "head_and_shoulders": "Declare prior uptrend, pivot price field and confirmation, shoulder tolerance and spacing, two-trough neckline, and whether volume is required. One version confirms on a close below the neckline. Return the five extrema, neckline and first confirmation.",
@@ -1526,7 +1584,7 @@
     },
     "implementation_authorized": false,
     "executed": false,
-    "deployment_selection": "seed42 default deployment, seed43 stability check, fixed before holdout; ensemble would count extra state/compute and requires protocol change",
+    "deployment_selection": "seed42 default deployment, seed43 stability check, fixed before holdout; ensemble would count extra state/compute and requires protocol change; deliver the specific frozen A-prime readout assessed by U for the selected representation, including its fitted transforms",
     "study_sources": [
       {
         "title": "Dimensionality Reduction for Fast Similarity Search in Large Time Series Databases",
@@ -1688,7 +1746,13 @@
       "score": "BA=mean class recall plus stratification by net return and realized vol, flat rates and class counts; task held out of encoder training, ridge uses training labels. Baselines paired on same support.",
       "matched_pairs": "Preselect qualified endpoints independent of model scores; at most the first eligible adjacent interior pair per endpoint in a common constant-basis quarter and coarse interval. Construct integer-tick opposite-extremum-order paths on same context and schedule; accept only fully legal pairs with flipped 37-close label, identical full serialized 160 prefix and identical all coarse OHLCV/OI. Recompute full feature/warmup inputs; report supported endpoints and rejection reasons. Existing frozen probe, high-first scored higher=1, tie=.5, reverse=0. Any deterministic function of equal summaries ties. Report paired simultaneous-market-block interval and compare to .5 independent of the natural BA test. No extra fitting.",
       "pair_construction": "Earliest eligible adjacent pair in the most recent 37 one-minute closes, both in the same uniform basis quarter and with successor in same 5/15/60 parents. All three consecutive trading minutes observed active. Use max(other 35 closes)+one valid tick and min(other 35)-one valid tick, in opposite orders; recompute opens from prior closes and H/L from O/C for affected three minutes, other data and V/OI fixed. Enforce known tick/market limits and qualified support; skip unknowns. Reject on unequal 160 serialized coordinates, unequal parent observations or same order labels. At most one pair/endpoint.",
-      "interpretation": "The 37-minute extreme-order label is withheld from E and checkpoint selection; correlated price and description signals are present. Probe fitted only after freezing."
+      "interpretation": "The 37-minute extreme-order label is withheld from E and checkpoint selection; correlated price and description signals are present. Probe fitted only after freezing.",
+      "matched_descriptors": {
+        "anchor": "order-beyond-descriptors",
+        "subset": "From the already prescribed same-160-FP32 pairs at the same endpoint, before looking at model outputs retain those with all 18 raw historical descriptors defined and equal at the declared FP64 label precision. Same admissible calendar/metadata, transforms and raw support. No new pair search and no changes to the original pair or natural BA samples.",
+        "readout": "Use the same existing frozen order probe and paired rank score, tie 0.5. Any scorer using only the identical 160 facts and 18 reference values gives 0.5 on every pair.",
+        "report": "Report eligible pair count/fraction, market-time block support and both seeds. For a separate claim beyond the 18 taught labels, predeclare it in the relevant paired simultaneous-bound family and require both seed directions and supported lower bound >0.5. If support is inadequate, leave this stronger claim open. No new fit or change to original system/upgrade gates."
+      }
     },
     "bounded_checks": {
       "scope": "Arithmetic only; train-era convenience sample, no model weights, no full data qualification or independent holdout use.",
@@ -2090,6 +2154,52 @@
           "pairs_tested": 6561,
           "worst_absolute_error": 2,
           "theorem": "at most 2 times maximum absolute log-close error"
+        }
+      },
+      "requirements_fit_20261127": {
+        "status": "synthetic CPU arithmetic, no model or data-download use",
+        "ohlc_counterexample": {
+          "tick_size": 1,
+          "true_OHLC": [
+            100,
+            110,
+            90,
+            100
+          ],
+          "readback_OHLC": [
+            103,
+            105,
+            95,
+            100
+          ],
+          "absolute_tick_errors_OHLC": [
+            3,
+            5,
+            5,
+            0
+          ],
+          "close_paths": "identical whole histories of closes and adjacent changes"
+        },
+        "direction_threshold": "Exhausted all 65 positive/negative counts with 64 equal-magnitude nonzero returns; threshold inclusion agrees with 3:1 total up/down travel. All-flat -> middle.",
+        "order_collision": {
+          "synthetic_clock": "8400 successive 1-minute bars from a 100 boundary, no gaps; 5/15/60 grids end on multiples of their periods; t=8400. Abstract calendar for arithmetic only.",
+          "closes": "100 throughout except t-50=102, t-49=98 and t-34,t-33 equal [101,99] or [99,101].",
+          "bar_fields": "Each O=previous close, H/L=max/min(O,C), unit V, start/end OI=100. All declared raw units are shared.",
+          "physical_descriptors": "Per horizon use consecutive differences of FP64 log closes, end minus start for net, accurate sums for absolute or squared returns, max past peak minus subsequent close including boundary, log1p total volume and zero transformed OI change. All 18 FP64 values agree.",
+          "summary": "Use existing 32 scheduled strictly-past 16-slot blocks, ordered by period then age, caps include t. Sum the price contrasts on cumulative within-block visible log gap plus body from a local zero, with log1p volume and transformed OI change. 28 valid blocks; 160 packed FP32 values agree.",
+          "checksums_encoding": "concatenated big-endian IEEE FP32 for facts, FP64 for physical descriptions in listed horizon/field order",
+          "packed_160_FP32_SHA256": "cb70dfce1c445d9d494289f57ef8f8d3b6bee0ee67829ea04b746aac81e27b6d",
+          "physical_18_FP64_SHA256": "750b92bf86bdeb64351ad5d963d57081ce2924b581c4404f195bc0ecce1a51aa",
+          "same_raw_OHLCV_OI_periods": [
+            5,
+            15,
+            60
+          ],
+          "opposite_order_labels": [
+            1,
+            -1
+          ],
+          "limitations": "Does not estimate frequency in actual contracts, prove exact descriptor equality on natural pairs or measure a model."
         }
       }
     },
