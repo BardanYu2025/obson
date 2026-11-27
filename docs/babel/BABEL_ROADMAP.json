@@ -689,6 +689,14 @@
       "experiment_analysis": "docs/babel/BABEL_EXPERIMENT_WORKFLOW.md#analysis-principles",
       "user_replies": "docs/babel/BABEL_EXPERIMENT_WORKFLOW.md#reply-principles",
       "first_batch_decision_anchor": "first-batch-decision"
+    },
+    "architecture_reference": {
+      "path": "docs/babel/BABEL_MODEL_ARCHITECTURE.md",
+      "purpose": "User-requested standalone tensor walkthrough and implementation checks for the P2/P3 comparison. The roadmap and current_plan remain the research protocol.",
+      "architecture_anchor": "tensor-walk",
+      "code_checks_anchor": "implementation-checks",
+      "arithmetic_anchor": "arithmetic-fixtures",
+      "arithmetic_command": ".venv/bin/python -m doctest -v docs/babel/BABEL_MODEL_ARCHITECTURE.md"
     }
   },
   "workflow": "docs/babel/BABEL_EXPERIMENT_WORKFLOW.md",
@@ -1724,7 +1732,18 @@
           "baseline_population": "99.64% correct for always-low-direction on all strict purged natural month endpoints pooled without sampling weights. Aggregate label distribution consulted before any model fit. Reporting diagnostic only, original direction and promotion thresholds unchanged."
         }
       },
-      "raw_label_convention": "Use qualified physical one-minute closes including the pre-window boundary. Let l_i=log(C_i), r_i=l_i-l_(i-1), net=l_last-l_start, abs-path=sum(abs(r_i)). Use finite, consistent FP64 physical label calculations for the pair check, fixed train-only target transforms for the heads and no future input. The synthetic example uses accurate summation and raw physical components."
+      "raw_label_convention": "Use qualified physical one-minute closes including the pre-window boundary. Let l_i=log(C_i), r_i=l_i-l_(i-1), net=l_last-l_start, abs-path=sum(abs(r_i)). Use finite, consistent FP64 physical label calculations for the pair check, fixed train-only target transforms for the heads and no future input. The synthetic example uses accurate summation and raw physical components.",
+      "output_layout": {
+        "order": "horizon-major, then the existing targets list within each horizon",
+        "index": "6 * horizon_index + target_index (zero-based)",
+        "example": "64-minute maximum log drawdown is coordinate 9",
+        "applies_to": [
+          "target assembly and its transforms",
+          "training head A",
+          "frozen probe A-prime",
+          "delivery inverse transforms"
+        ]
+      }
     },
     "head_optimizer_defaults": {
       "name": "AdamW",
@@ -2263,7 +2282,20 @@
           ],
           "canonical_singleton_vs_ordered_duplicates_max_abs": 0
         },
-        "scope": "Standalone deterministic array and scalar arithmetic; no network, training, weights, or new market-data scan."
+        "scope": "Standalone deterministic array and scalar arithmetic; no network, training, weights, or new market-data scan.",
+        "full_model_reference": {
+          "assumptions": "Biased affine layers, affine LayerNorm, one learned terminal token, four period embeddings. P3 facts and fixed projections carry no learned parameters. A-prime is fit later. Arithmetic for one arm and seed, not measured from implemented parameters.",
+          "input_stem_and_terminal": 76608,
+          "one_ordinary_encoder_block": 7087872,
+          "six_ordinary_encoder_blocks": 42527232,
+          "six_relation_mlps_and_gates": 4932,
+          "final_encoder_ln": 1536,
+          "encoder_E": 42610308,
+          "history_D": 2107911,
+          "description_A": 100754,
+          "E_D_A": 44818973,
+          "worked_examples": "docs/babel/BABEL_MODEL_ARCHITECTURE.md#arithmetic-fixtures"
+        }
       },
       "technical_shape_coarse_resolution_example": {
         "scope": "synthetic integer-minute arithmetic; one 15-minute parent only; close-based extrema, common prior rise, no model, no pattern labels from real data",

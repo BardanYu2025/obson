@@ -4,6 +4,7 @@
 
 P0、P1 是上一版的模型方案，P2、P3 是当前要比较的两套方案。[四个模型方案](BABEL_ROADMAP.md#model-recipes) · [首批要交付的能力](BABEL_ROADMAP.md#requirement-fit)
 
+- 想理解首批模型或审查实现，直接读[P2 与 P3 模型架构和代码核验](BABEL_MODEL_ARCHITECTURE.md)。从一次收盘走到报价和当前描述，附张量尺寸、梯度和可执行的算例。
 - 想顺着一个样本读，可以依次看[输入哪些 K 线](BABEL_ROADMAP.md#input-views)、[模型总图](BABEL_ROADMAP.md#model-architecture)、[每次更新怎样混合三种任务](BABEL_ROADMAP.md#training-tasks)和[怎样验收](BABEL_ROADMAP.md#delivery-criteria)。
 - 想了解已经下载的行情能做什么，看[月份合约资格报告](../../experiments/20261127_history_qualification_v1/reports/completed_months_20261127/qualification.md)和[各品种可用数量](../../experiments/20261127_history_qualification_v1/reports/completed_months_20261127/by_product.md)。价格、方向分类、自然顺序和完整行情描述各有自己的覆盖范围。[各用途的范围初表与下一步](BABEL_ROADMAP.md#next-deliverable)
 - 想查具体用途，看[价格能重建到哪里](BABEL_ROADMAP.md#reconstruction-evidence)、[重建后哪些问题可以直接计算](BABEL_ROADMAP.md#reconstruction-implies)、[缺失行情的价格锚点](BABEL_ROADMAP.md#historical-price-anchors)或[行情分类与技术形态](BABEL_ROADMAP.md#technical-patterns)。
