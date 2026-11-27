@@ -4,7 +4,7 @@
 
 当前分支：`codex/babel-next`。当前优先把过去行情编码成可复用状态，验证历史保留和当前行情描述。未来预测作为后续用途，可与当时可得的舆情/市场信息融合；纯K线预测不是当前编码器成功的必要条件。
 
-从[当前路线图](docs/babel/BABEL_ROADMAP.md)第 0 节开始。完整月份合约已做数据资格核对，可查每个品种有多少行情能还原原价、多少收盘时刻可验证分类与顺序。新模型处于设计阶段。[本批资格报告](experiments/20261127_history_qualification_v1/reports/completed_months_20261127/qualification.md) · [44 个品种覆盖](experiments/20261127_history_qualification_v1/reports/completed_months_20261127/by_product.md)
+从[当前路线图](docs/babel/BABEL_ROADMAP.md)第 0 节开始。完整月份合约已做数据资格核对，可查每个品种有多少行情能还原原价、多少收盘时刻可验证分类与顺序。首批模型已有独立代码与合成验证，用户将在 AutoDL 运行。[首批实验与上传、预检命令](experiments/20261127_state_allocation_v1/README.md) [本批资格报告](experiments/20261127_history_qualification_v1/reports/completed_months_20261127/qualification.md) · [44 个品种覆盖](experiments/20261127_history_qualification_v1/reports/completed_months_20261127/by_product.md)
 
 ```text
 docs/babel/           当前方案、流程、任务状态与本分支日志
@@ -12,6 +12,7 @@ experiments/          每个实验独立、自包含、发布后冻结
   _template/         新实验目录模板（不能运行）
   20261124_minute_audit_v1/  唯一迁入的CPU分钟数据审计及原证据
   20261127_history_qualification_v1/  已下载月份合约的原价、分类与顺序资格
+  20261127_state_allocation_v1/  P2/P3 混训、冻结读出、恢复与导出
 tools/               目录/版本治理工具；不承载模型、训练或科学指标
 .github/workflows/   实验隔离检查
 ```

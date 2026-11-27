@@ -2,22 +2,20 @@
   "schema": "babel-roadmap-v2-current-only",
   "updated": "2026-11-27",
   "current_iteration": "fixed_budget_observable_and_learned_state",
-  "current_iteration_scope": "同容量 P2/P3 每步混训三项任务。已核对月份原价与标签，并从封存索引划出各用途及其品种范围。",
+  "current_iteration_scope": "首批 P2/P3 同容量三任务代码已发布。本地验证合成训练与恢复，真实 CUDA 由用户执行。",
   "current_work_mode": {
-    "mode": "design_and_records_only",
-    "requested_on": "2026-11-24",
+    "mode": "first_batch_code_and_user_operated_autodl",
+    "requested_on": "2026-11-27",
     "allowed": [
-      "方案与历史证据复盘",
-      "roadmap/工作流程/JSON镜像/进度记录",
-      "完成文档的提交与推送"
+      "方案、数据算术、独立实验代码、合成测试、提交与推送",
+      "首批训练、评测、恢复及导出程序供用户在 AutoDL 使用"
     ],
     "not_authorized_now": [
-      "训练/数据处理/评价代码修改",
-      "新runner实现",
-      "模型训练或真实权重执行"
+      "助手代为启动真实模型训练或消耗用户 GPU 预算",
+      "自动扩展预测分支"
     ],
     "ordinary_continue": "继续方案工作，不自动恢复旧实现授权",
-    "implementation_transition": "用户明确要求开始实施后进入；无需重复请求已经授权的方案确认",
+    "implementation_transition": "本次已明确授权首批代码，用户负责上传数据及启动真实 CUDA。",
     "completed_scoped_request_20261127": {
       "request": "用户只要求核对已下载完整的部分，指数尚在下载。",
       "scope": "已完成月份合约的本地 CPU 原价、分类和顺序样本资格核对。",
@@ -400,7 +398,7 @@
       "F08"
     ]
   },
-  "active_phase": "month_use_scope_reviewed_historical_clocks_units_and_model_gates_open",
+  "active_phase": "first_joint_training_code_released_user_cuda_preflight_and_physical_scope_pending",
   "active_order": [
     "F01",
     "F02",
@@ -411,7 +409,7 @@
     "V13"
   ],
   "next_after_active": {
-    "status": "preliminary_use_scope_delivered_source_verification_then_scope_freeze",
+    "status": "user_upload_then_cuda_preflight_and_study_scope_freeze",
     "task_ids": [
       "F02",
       "F04",
@@ -419,8 +417,8 @@
       "F11",
       "V13"
     ],
-    "action": "把两套模型共用的样本范围、用途误差和成本写入同一份首批实验说明。先核实拟交付范围的交易时段、量仓单位、合约在当时是否可选及三类任务的支持，再锁物理误差、独立市场时间和预算。未覆盖的品种、指数和额外顺序结论各自保留证据缺口。",
-    "ready_entrypoint": null,
+    "action": "用户上传月份文件、主连时钟和交易日期后从 Git 在 AutoDL 执行 preflight。正式矩阵前核实范围、锁共同的物理误差和资源卡，再运行四个匹配训练。",
+    "ready_entrypoint": "experiments/20261127_state_allocation_v1/scripts/autodl.sh",
     "old_commands_active": false,
     "automatic_reruns": false,
     "qualification_report": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/qualification.md",
@@ -451,7 +449,8 @@
       "masked_history_completion": 16,
       "current_description": 16
     },
-    "bundled_joint_description_heads": 4
+    "bundled_joint_description_heads": 4,
+    "operator": "User operates AutoDL. No formal GPU hours or autonomous attempts have been authorized to this assistant. Code defaults are prospective."
   },
   "execution_gates": [
     {
@@ -752,8 +751,8 @@
     },
     "architecture": {
       "status": "pass_for_scope",
-      "evidence": "固定 P3 的校正前后可在完全相同目标上拆分历史误差。写明两套视图按共同输入精度生成摘要，并给出关系层稠密中间量的解析成本。",
-      "remaining": "真实输出、梯度、峰值显存与刷新时延待实现实测。"
+      "evidence": "正式宽度已用 meta 设备计数，缩小宽度的真实模块经过遮挡、投影与梯度测试。",
+      "remaining": "在目标 CUDA 上验证正式宽度、真实行情、时延与显存。"
     },
     "training": {
       "status": "open",
@@ -772,8 +771,8 @@
     },
     "engineering": {
       "status": "pass_for_scope",
-      "evidence": "复核全部 2,382 份封存端点索引和原回执的七份报告，重算严格 257 收盘与标签跨区标记，按原输入跨区标记筛选。",
-      "remaining": "模型代码、CUDA 与离机权重恢复另待实施。"
+      "evidence": "独立实验有 Git 获取、数据哈希、CUDA 预检、恢复和成功或失败包导出。合成训练中断恢复已核。",
+      "remaining": "真实 AutoDL 预检、正式资产与离机回执待运行。"
     }
   },
   "design_rationale": {
@@ -838,9 +837,9 @@
         "F10",
         "F11"
       ],
-      "status": "not_started_requires_explicit_implementation_request",
+      "status": "first_code_released_synthetic_checks_passed_real_cuda_pending",
       "title_zh": "实现模型并检查能否可靠运行",
-      "progress_zh": "待明确实施授权",
+      "progress_zh": "首批代码与本地合成验证已交付，目标设备结果待用户运行。",
       "deliverable_zh": "可从固定版本恢复的独立实验，以及 AutoDL CUDA 运行前检查记录。"
     },
     {
@@ -960,7 +959,7 @@
     }
   ],
   "current_plan": {
-    "status": "design_only_not_released",
+    "status": "first_batch_implementation_released_cuda_and_scientific_result_pending",
     "goal": "Causal reusable K-line state; compare explicit observable summaries plus learned detail against fully learned state at equal stored length; historical/current first.",
     "public_state": {
       "z_dim": 768,
@@ -1953,7 +1952,7 @@
         "additional_active_fits": 0
       }
     },
-    "implementation_authorized": false,
+    "implementation_authorized": true,
     "executed": false,
     "deployment_selection": "seed42 default deployment, seed43 stability check, fixed before holdout; ensemble would count extra state/compute and requires protocol change; deliver the specific frozen A-prime readout assessed by U for the selected representation, including its fitted transforms",
     "study_sources": [
@@ -2678,6 +2677,38 @@
       "ready_for_common_run_card": "按任务核实共同样本、源单位、价格锚与可见范围。完整回读、遮挡填空和全项描述均须有足够支持。在候选成绩出现前固定交付范围、绝对误差、保护项、独立时间支持和资源。无法支持核心问题时列明缺口并暂停。",
       "claim_specific_evidence": "窄范围内仍可回答的问题与未达到原定覆盖的用途分别报告。指数资料和相同摘要及描述下顺序相反的配对只影响对应结论。核心历史或完整描述缺证据时不能签发相应用途。",
       "result_actions": "按 current_plan.acceptance 处理可交付、替换、局部取舍、明确失败和证据不足。开发集符合 current_plan.history_evaluation.conditional 时至多一批同读头定位，结论单列。重开依据与成果备份执行 operating_principles.decision_unit 和实验独立目录规则。"
+    },
+    "implementation_release": {
+      "experiment_id": "20261127_state_allocation_v1",
+      "path": "experiments/20261127_state_allocation_v1",
+      "runbook": "experiments/20261127_state_allocation_v1/README.md",
+      "release": "experiments/20261127_state_allocation_v1/release.json",
+      "data_upload": [
+        "month_contracts/bars",
+        "main",
+        "mapping"
+      ],
+      "main_matrix": [
+        "P2-42",
+        "P3-42",
+        "P3-43",
+        "P2-43"
+      ],
+      "stage_order": [
+        "prepare and CUDA preflight",
+        "lock dated data scope, physical limits and budget before scores",
+        "matrix",
+        "frozen",
+        "independent confirmation open"
+      ],
+      "local_checks": "Synthetic neural and CPU source arithmetic only",
+      "formal_device_runs": 0,
+      "pending": [
+        "signed historical units/scope and use limits",
+        "target GPU preflight and measured resource budget",
+        "matched-pair attribution and simultaneous interval/conditional refit if triggered",
+        "V13 independent confirmation and off-machine weights"
+      ]
     }
   },
   "route_audit_20261126": {

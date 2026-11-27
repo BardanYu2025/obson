@@ -1,0 +1,63 @@
+{
+  "schema": "babel.experiment.v1",
+  "id": "20261127_state_allocation_v1",
+  "kind": "neural",
+  "status": "released",
+  "ready_for_execution": true,
+  "task_ids": [
+    "F01",
+    "F02",
+    "F04",
+    "F05",
+    "F10",
+    "F11"
+  ],
+  "predecessor": {
+    "commit": "62cb466cdd22a0d4fc042776c0834085ca6814a4",
+    "scope": "First implementation of the matched 768-dimensional shared-task comparison. No previous model or run is used."
+  },
+  "entrypoints": {
+    "prepare": "scripts/autodl.sh",
+    "preflight": "scripts/autodl.sh",
+    "train": "scripts/autodl.sh",
+    "evaluate": "scripts/autodl.sh",
+    "export": "scripts/autodl.sh",
+    "install": "scripts/install.sh"
+  },
+  "cli_subcommands": [
+    "prepare",
+    "preflight",
+    "lock",
+    "train",
+    "resume",
+    "matrix",
+    "evaluate",
+    "frozen",
+    "export",
+    "verify-package",
+    "restore"
+  ],
+  "source_files": [
+    "src/__init__.py",
+    "src/assets.py",
+    "src/calendar_rules.py",
+    "src/cli.py",
+    "src/common.py",
+    "src/dataset.py",
+    "src/frozen.py",
+    "src/metrics.py",
+    "src/model.py",
+    "src/objective.py",
+    "src/run.py",
+    "src/scales.py",
+    "src/scope.py",
+    "src/views.py"
+  ],
+  "data_manifests": [
+    "configs/snapshot.json.gz",
+    "configs/protocol.json"
+  ],
+  "execution": "User-operated AutoDL CUDA for all real weights. Raw uploads external. Real CUDA, signed use scope and scientific outcomes pending.",
+  "source_weights": [],
+  "copy_provenance": "configs/protocol.json"
+}

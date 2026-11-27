@@ -1,0 +1,16 @@
+{
+  "instructions": "字段示例。替换为拟交付时期已核实的证据后用于 --scope。空证据不会生成正式样本。",
+  "ranges": [
+    {
+      "product": "ag",
+      "first": "2020-01-01",
+      "last": "2026-09-12",
+      "volume_multiplier": 1,
+      "oi_multiplier": 1,
+      "calendar_evidence": "",
+      "volume_evidence": "",
+      "oi_evidence": "",
+      "contract_selection": ""
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schema": "babel.experiment.release.v1",
+  "id": "20261127_state_allocation_v1",
+  "files": {
+    "README.md": "4f282ae9112b80fc7e1eb708babfde7d6665c63ef6d7eb1d7bb03d1b6247fff1",
+    "configs/protocol.json": "a3af4e55b2dae81234838eec73bc49f70b1f690ab38e0cab37aef36179318872",
+    "configs/scope.example.json": "bdaee878803cf89e9a7acc0aa5aebbe148f2a2973f9b2a43c645dd226d9f0162",
+    "configs/snapshot.json.gz": "e7061af7eebd15934a6f3d2f7b842040a7a8d8dfba8f147c2cef9e06359d64de",
+    "experiment.json": "42c17480baeb467886b3076f066058bde3ecc9bb73480f59172c7ca7672d4961",
+    "requirements.lock": "984d617f9faa12993ce04739f55e5448a996cd4c4648acf29b97d4d6175ed828",
+    "scripts/autodl.sh": "54a8880194b85b621a8e00604cefef77e549f22af38fffa411849573e03396df",
+    "scripts/install.sh": "3884d50dbb7bd05c546e4ded0d221123a77bbb6a392543723e4ef368e4803d72",
+    "src/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "src/assets.py": "e33cf28ae3e6ec5c52be12a65f748dee220ad3194ad362f5df94a2a68eb5156a",
+    "src/calendar_rules.py": "e27c37dad637ebd7e8bd54512452e6926c4480b694b5ece936eb60578ee8c65d",
+    "src/cli.py": "f56dacebc11b68e2ca8af7ca00de89bc4aee3526abfffaa49c7aa49de761b662",
+    "src/common.py": "9954547b7b814dcb7985bcceb1e76201f67f1ba99cbba2e9b0473e91468babe6",
+    "src/dataset.py": "8ebed5b54e524ade976b8771cd49076607abf07c14233cdc795d34a199830be2",
+    "src/frozen.py": "f6bc9a397382527afba8bf0b61b74460a3127ae7839d1538d497ebcb3afc50d0",
+    "src/metrics.py": "56c2493b2b56a31c45055f407feebeafb404cfd41cbb7e6110f231d15f9af471",
+    "src/model.py": "f4b7eb924df44dd8931dd2817cd2a41c14737de417a020a79f46b7ac6db9d666",
+    "src/objective.py": "5fc7e23c3b8c9fb4524c22396babab9bb62d69a5648f866cece96e4b020bbf38",
+    "src/run.py": "707b8fb62e401d562d8768a921e0d6152d8d98a7b3e26d623313ffbf2af606fb",
+    "src/scales.py": "3d22f7551e5eb9886ca2e9a43a687f1977d7468ac03d2a01d46dafb4a94f5abe",
+    "src/scope.py": "4d90ac9824b4909d8ed06408121efd55cd2141a4513771b568dc4af51ad5d537",
+    "src/views.py": "fbb9399a6bbe79424680ef970e9f4310dcafa46b56ff85aa3344278f1755ad70",
+    "tests/test_batch.py": "a8015a93b4ef3c8b335922b17f722070121853476f3be29fc5bd6aa0ecaa7906"
+  },
+  "reports_at_release": {}
+}

@@ -1,0 +1,75 @@
+{
+  "id": "20261127_state_allocation_v1",
+  "arms": [
+    "P2",
+    "P3"
+  ],
+  "seeds": [
+    42,
+    43
+  ],
+  "task_examples": [
+    32,
+    16,
+    16
+  ],
+  "loss_weights": [
+    1,
+    0.25,
+    0.1
+  ],
+  "encoder": {
+    "width": 768,
+    "heads": 12,
+    "ffn": 3072,
+    "layers": 6,
+    "film_width": 256
+  },
+  "stats_endpoints": 1024,
+  "precision": "float32, TF32 off; FP64 physical coordinates and loss",
+  "microbatch": 1,
+  "physical_caps": {
+    "signed_log_price": 20,
+    "nonnegative_log_shapes": 20,
+    "log1p_quantity": 32
+  },
+  "study_defaults": {
+    "updates": 1000,
+    "validation_every": 100,
+    "validation_endpoints": 128,
+    "checkpoint_every": 25,
+    "gpu_hours_per_run": 12,
+    "run_disk_gib": 20,
+    "description_updates": 500,
+    "frozen_train_endpoints": 1024,
+    "frozen_gpu_hours": 8,
+    "frozen_disk_gib": 15
+  },
+  "scope": "Default data preparation and hardware preflight use source units. A formal matrix consumes one prospective dated scope, common physical use limits, common resource budget and the matching preflight receipt.",
+  "comparison": {
+    "primary": "last fixed update",
+    "best": "lowest validation R at scheduled complete checkpoints, supplemental only",
+    "development": "paired endpoints and masks with fixed task-specific seed, P2/P3 42/43",
+    "relative_R_gain": 0.05,
+    "R_perp_protection": 0.05,
+    "near16_and_current_body_protection": 0.05,
+    "U_protection": 0.05,
+    "individual_family_and_tail_protection": 0.1,
+    "final": "one held-out confirmation after development selection"
+  },
+  "provenance": {
+    "base": "62cb466cdd22a0d4fc042776c0834085ca6814a4",
+    "calendar_source": "experiments/20261127_history_qualification_v1/src/qualification.py",
+    "calendar_source_sha256": "192016d8798171f08671796fdfe229f075822cd65c65117e4421bdab1b7bd1c9",
+    "copied_definitions": [
+      "ages",
+      "boundaries",
+      "split_codes",
+      "session_spans"
+    ],
+    "inventory_source": "experiments/20261127_history_qualification_v1/reports/completed_months_20261127/source_index.json.gz",
+    "inventory_sha256": "cfb804704dcff8b8ef41a17ba9168dd173d1e97d5ee1e210320063a36e2e1b4f",
+    "qualification_protocol_sha256": "eeafe01ce50d00144b669aff5a472a26fa45aae492a3e7615c687b17ec4aaacd",
+    "other_model_and_training_code": "new in this experiment; no source weights"
+  }
+}
